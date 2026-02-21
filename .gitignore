@@ -1,9 +1,4 @@
-# Game engine and runtime binaries — not our content
-lib/
-*.jar
-*.exe
-
-# Game-generated data
+# Game-generated data (save files, derived data)
 raceData.json
 
 # Machine-local Claude settings
