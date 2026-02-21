@@ -1,0 +1,194 @@
+# Scene written by Secondarian
+#
+# Overview:
+# PC is at the quiet but infamous street waiting for customers.
+#
+# Key Paths:
+# - The PC rejects him.
+# - The PC has sex with the guy for money.
+# - The PC changes her mind.
+# 
+# Scene access:
+# Via special weekday/weekend action.
+#
+# Preconditions:
+# A male NPC ("m") for which the following is true:
+# - No random encounters.
+# - Not befriendable.
+#
+# The scene takes 1 male NPC and no female ones:
+# "m" is the customer.
+# Both should be wearing going out clothes. 
+# The scene takes place on a dark abandoned street.
+
+textFileName: spMain.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: GOING_OUT
+ maleNpcs:
+  - id: m
+    outfit: GOING_OUT
+ location:
+  wall: brick wall
+  floor: ground
+  hasBed: false
+  isOutside: true
+  
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($m) 
+  - effect: $scene.hideNpc($m) 
+## Setting this flag here because it's valid for all the different sex paths.
+  - effect: $scene.addFlag("ONLY_NPC_CUNNILINGUS") 
+ followUpActions:
+  proposition:
+
+returningSections:
+
+ - id: complied
+   textId: complied
+   finishScene: '$scene.hasFlag("SP_SATISFIED")'
+   followUpActions:
+    refused:
+
+actions:
+ - id: proposition
+   shortDesc: See what he wants
+   longDesc: What does he want from you?
+   textId: proposition
+   effects:
+    - effect: $scene.unHideNpc($m) 
+   followUpActions:
+    agree:
+    reject:
+
+ - id: agree
+   shortDesc: Agree
+   longDesc: Agree to his proposition.
+   textId: agree
+   followUpActions:
+    listen:
+
+ - id: reject
+   shortDesc: Reject
+   longDesc: Reject his proposition.
+   textId: reject
+   finishScene: true
+
+ - id: listen
+   shortDesc: Listen
+   longDesc: Listen to what he has in mind.
+   textId: listen
+   followUpActions:
+    comply:
+    refuse:
+
+
+ - id: agreedGetToKnees 
+   shortDesc: Get to your knees
+   longDesc: Drop to your knees.
+   textId: agreedGetToKnees
+   sceneTransition:
+    condition: true
+    type: ORAL_SEX 
+    maleNpcs:
+     - id: man
+       npc: m
+    transitionInfo:
+     position: STAND
+    returningId: complied
+    location:
+     useCurrentLocation: true
+     
+ - id: agreedGetOnAllFours 
+   shortDesc: Get on all fours
+   longDesc: Get on all fours and prepare your asshole for penetration.
+   textId: agreedGetOnAllFours
+   effects:
+    - effect: $m.setTrousersOpen(true)
+    - effect: $m.addArousalHuge()$m.addArousalHuge()
+      condition: "!$m.arousalComfort"
+   sceneTransition:
+    condition: true
+    type: ANAL_SEX
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: complied
+    location:
+     useCurrentLocation: true
+    transitionInfo:
+     inBed: false
+     lube: SOME
+
+ - id: agreedGetOnAllFoursMean
+   shortDesc: Get on all fours
+   longDesc: Get on all fours and prepare to have your asshole reamed.
+   textId: agreedGetOnAllFoursMean
+   effects:
+    - effect: $m.setTrousersOpen(true)
+    - effect: $m.addArousalHuge()$m.addArousalHuge()
+      condition: "!$m.arousalComfort"
+    - effect: $m.addWEnjoySmall() $w.addArousalMedium()
+      condition: $w.hasTrait("LIKES_ROUGH")
+    - effect: $m.reduceWEnjoyMedium() $w.reduceArousalMedium()
+      condition: '!$w.hasTrait("LIKES_ROUGH")'
+    - effect: $m.reduceWLikingSmall()
+      condition: '!$w.hasTrait("LIKES_ROUGH") && !$w.hasTrait("LOW_SELF_ESTEEM")'
+   sceneTransition:
+    condition: true
+    type: ANAL_SEX
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: complied
+    location:
+     useCurrentLocation: true
+    transitionInfo:
+     inBed: false
+     lube: NONE
+      
+ - id: agreedStartMo 
+   shortDesc: Let him have you
+   longDesc: Let him take you in his arms and have his way with you.
+   textId: agreedStartMo
+   effects:
+    - effect: $scene.addFlag("NO_ORAL") $scene.addFlag("BLOCK_ANAL")
+    - effect: $scene.addFlag("AGREED_INSEMINATION") $scene.addFlag("AGREED_BARE")
+      condition: $scene.hasFlag("SP_WANTS_INSEMINATE")
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: complied
+    location:
+     useCurrentLocation: true
+  
+ - id: refuse 
+   shortDesc: Refuse
+   longDesc: You won't do what he wants you to!
+   textId: refuse
+   finishScene: true
+
+ - id: comply
+   shortDesc: You comply
+   longDesc: 
+   textId: comply
+   effects:
+    - effect: $m.addEnjoySmall() $m.addArousalSmall()
+   followUpActions:
+    agreedGetToKnees: $scene.hasFlag("SP_WANTS_ORAL")
+    agreedGetOnAllFours: '$scene.hasFlag("SEX_WORK_ANAL") && $m.getBehaviourNoFaking() != "MEAN"' 
+    agreedGetOnAllFoursMean: '$scene.hasFlag("SEX_WORK_ANAL") && $m.getBehaviourNoFaking() == "MEAN"' 
+    agreedStartMo: '!$scene.hasFlag("SP_WANTS_ORAL") && !$scene.hasFlag("SEX_WORK_ANAL")' 
+    
+ - id: refused
+   textId: refused
+   shortDesc: What now?
+   longDesc: You didn't fulfill his wishes. What's he going to do?
+   finishScene: true

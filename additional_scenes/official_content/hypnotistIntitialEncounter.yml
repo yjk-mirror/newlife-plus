@@ -1,0 +1,53 @@
+# Scene written by splendidostrich
+#
+# Overview:
+# Initial scene where the PC finds out about the two hypnotists. Sets the CAN_HIRE_HYPNOTISTS flag that unlocks further encounters at the player's discretion.
+#
+# Scene access:
+# By random event, once per game.
+#
+# Preconditions:
+# The scene must not have fired before.
+# The two hypnotist characters must exist - special characters with the GOOD_HYPNOTIST and EVIL_HYPNOTIST trait.
+# The EVIL_HYPNOTIST must have the Jerk personality, while the good hypnotist must not.
+
+
+textFileName: hypnotistIntitialEncounter.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: goodHypno
+    outfit: CASUAL
+  - id: evilHypno
+    outfit: CASUAL
+ location: 
+  usePlayerHome: true
+
+intro:
+ textId: introText
+ effects:
+ # Hypnos are only in the scene so their names can be retrieved. They shouldn't appear in describe-characters.
+  - effect: $scene.hideNpc($goodHypno)
+  - effect: $scene.hideNpc($evilHypno)
+ followUpActions:
+  inspectPosters:  
+
+actions:
+
+ - id: inspectPosters 
+   shortDesc: Look closer
+   longDesc: Take a closer look.
+   textId: inspectPosters  
+   followUpActions:
+    noteNumbers: 
+   
+ - id: noteNumbers 
+   shortDesc: Note down their details
+   longDesc: Take a note of their contact numbers
+   effects:
+    - effect: $gd.setGameFlag("CAN_HIRE_HYPNOTISTS")
+   textId: noteNumbers  
+   finishScene: true

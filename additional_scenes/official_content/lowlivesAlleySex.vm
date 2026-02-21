@@ -1,0 +1,472 @@
+<sceneDescriptionText>
+#if($scene.hasFlag("ALLEY_SEX_WENT_INTO_ALLEY"))
+	You and $f.name have decided to take the lowlives up on their offer to have sex. You're now in a small alleyway with them.
+#else
+	You and $f.name have spent some time together and it has gotten late. Both of you are trying to get home now.
+#end
+</sceneDescriptionText>
+
+<introText>
+## Setup for later parts of the scene.
+#set($round = 0)##
+#set($choice = 0)##
+#set($isLowlivesAttracted = $m1.npcAttractionOk && (!$f.hasTrait("PLAIN") || $m2.hasTrait("LIKES_CUTE")))##
+#if($w.hasTrait("BABY_CRAZY") && $w.risky)
+	$scene.addFlag("ALLEY_SEX_BABY_CRAZY_OVERRIDE")##
+#end
+#macro(enjoyment $char)
+	#if($char.arousalClose)
+		very ##
+	#elseif($char.arousalEnjoy)
+		quite ##
+	#elseif($char.arousalComfort)
+		## empty
+	#else
+		a bit ##
+	#end
+#end
+#macro(buttDesc $char)
+	#if($char.figure == "SLIM")
+		small##
+	#elseif($char.figure == "TONED")
+		firm##
+	#elseif($char.figure == "WOMANLY")
+		curvy##
+	#else
+		$char.figure.toLowerCase()##
+	#end
+#end
+#macro(bodyDesc $char)
+	#if($char.figure == "SLIM")
+		svelte##
+	#elseif($char.figure == "TONED")
+		firm##
+	#elseif($char.figure == "WOMANLY")
+		curvy##
+	#else
+		$char.figure.toLowerCase()##
+	#end
+#end
+## Note that the List.add() method returns a boolean, which will be printed unless it is caught by a variable assignment.
+#macro(addItem $list $element)
+	#set($listBoolCatch = $list.add($element))##
+#end
+##
+##
+##
+## The actual intro scene text.
+You've been spending the evening with $f.name $scene.pickFromList(["going shopping", "watching a movie", "visiting an art exhibition in the museum"])#if($f.hasTrait("INNOCENT_SALES_COLLEAGUE")) while gossiping about work#end and ##
+#if(!$w.knownPregnant && !$f.pregnant && !$w.hasTrait("SHY"))
+	you've even been able to convince her to go to one of the more quiet bars with you to get some drinks. As a result you're both quite tipsy and it has gotten rather late.
+	$w.addAlcoholLarge()##
+	$f.addAlcoholLarge()##
+	$w.changeMoney(-20)##
+#else
+	it has gotten a bit late.
+#end
+
+Now you and $f.name want to get home, but your usual route would take quite a while. However, you could take a shortcut through a rather sketchy part of town. Normally $f.name wouldn't be up for something like that, but she says it's really quite late and the earlier she gets home the better, so she leaves it up to you to decide.
+</introText>
+
+<finishNoShortcutText>
+You decide it's not worth it and instead ##
+#if($w.money >= 20)
+	call a taxi and let it drive you home.
+	$w.changeMoney(-20)
+#else
+	bite the bullet and take the long way home.
+	$w.changeStress(5)
+#end
+You spent the way home talking with $f.name about this and that and wish her a good night once you part ways.
+</finishNoShortcutText>
+
+<introShortcutText>
+You decide to risk it and take the shortcut. After you're about halfway home, you notice two men near an entrance to a small alleyway. When you get closer you recognise them as belonging to the street gang you ran into at the canal back when you started your friendship with $f.name.
+
+Before you can change direction, they look up and notice you as well. They quickly stop what they were doing and move towards you.
+
+You look to your side and realise that $f.name has frozen up, just like she did the first time you both ran into these lowlives. You can't just take to your heels and leave her behind.
+</introShortcutText>
+
+<finishScaredOffText>
+#if($gd.hasGameFlag("SCARED_LOWLIVES"))
+	When the first lowlife comes close enough to properly see your face, he stops right in his tracks and the other does the same shortly after. You think you can actually see them start to sweat. After a short moment, the first one turns around and starts rapidly walking away. You overhear him telling his friend that this isn't worth the hassle, the other agrees and does the same.
+	
+	Looks like they did in fact recognise you. You can't help but be pleased with the whole situation.
+#else
+	## This text is a variation of the original SCARED_LOWLIVES event. I figured using it would be a good way to stay consistent with the general game universe.
+	Before the first lowlife gets even near you and $f.name, you start shouting expletives at them. Surprised by the turn of events they at first try to give a little tit for tat. Neither is a match for your outraged fury. You shout them into silence and give the two the ticking-off of a lifetime.
+	
+	Traumatised, they turn to flee, probably to go back home and cry to their mummies.
+	$gd.setGameFlag("SCARED_LOWLIVES")## This will be remembered if the PC encounters them again e.g while befriending a different innocent NPC.
+#end
+
+$f.name is thankful that you've been able to deal with these men so quickly and tells you that she doesn't know what she would do without you.
+
+The rest of your way home is rather uneventful and you wish $f.name a good night once you part ways.
+</finishScaredOffText>
+
+<finishScreamText>
+Before the lowlives get near you and $f.name, you start screaming as loud as you can. There's a clatter of opening windows as people look out onto the street to see what's happening. Not wanting to stay around to see what else will happen, the lowlives decide to make a quick escape.
+
+$f.name is thankful that you've been able to deal with these men so quickly and tells you that she doesn't know what she would do without you.
+
+The rest of your way home is rather uneventful and you wish $f.name a good night once you part ways.
+</finishScreamText>
+
+<menApproachText>
+#if($w.hasTrait("SHY"))
+	Your shy nature gets the better of you and you simply stand there and wait for the men to make a move. ##
+#else
+	You're trying to think about what you should do, but before you can make you decision, the men are standing before you. ##
+#end
+#if($isLowlivesAttracted)
+	Once they're close, they start grinning and mention that they know the two of you. They are really glad to have run into two such hot pieces again and say that maybe this time none of you will run away.
+	
+	You note that these lowlives seem far more mellow compared to the first time you ran into them. You wonder whether it's because there are only two of them around this time and thus they don't have to act all tough in front of the group.##
+#else
+	Once they're close, the lowlives give you and $f.name a quick look-over and then brusquely tell you to get the hell out of here before you start to get on their nerves.
+#end
+</menApproachText>
+
+<finishNotAttractiveText>
+You quickly walk on and don't look back. It doesn't seem like the lowlives have followed you though.
+
+$f.name says that that has been quite scary, but is thankful nothing happened.
+
+The rest of your way home is rather uneventful and you wish $f.name a good night once you part ways.
+</finishNotAttractiveText>
+
+<finishNotInterestedText>
+#if(!$w.hasTrait("BITCHY") && $w.hasTrait("SHY") || $w.hasTrait("NICE"))
+	You take a deep breath and finally decide to jump over your own shadow to tell the men you're not interested in spending any more time with them. They don't take it particularly well and start to get louder and more pushy. You repeat yourself, doing your best to raise your voice. Before things can get more out of control, the door of a nearby house opens and a couple people come out. The commotion you and the men are creating immediately catches their attention and they look in your direction. Not wanting to stay around to see what else will happen, the lowlives decide to make a quick escape.
+#else
+	You tell the men you're not interested in spending any more time with them. They don't take it particularly well and start to get louder and more pushy. Annoyed, you start scream at them to leave you alone. Before they can do anything, a couple of people open their windows to look out and see what is happening. Not wanting to stay around to see what else will happen, the lowlives decide to make a quick escape.
+#end
+
+$f.name is thankful that you have been able to deal with the situation and tells you that she doesn't know what she would do without you.
+
+The rest of your way home is rather uneventful and you wish $f.name a good night once you part ways.
+</finishNotInterestedText>
+
+<startTalkingText>
+They introduce themselves as $m1.name and $m2.name and ask you what you are doing in this part of town this late in the evening. You tell them you're just on your way home.
+
+Their eyes are darting over your and $scene.addPossessiveSuffix($f.name) bodies. ##
+#if($w.hasTrait("LOW_SELF_ESTEEM"))
+	You can't help but feel a prickle of excitement at the thought of someone willing to lust after your body.##
+	$w.addArousalTiny()##
+#elseif($w.hasTrait("REFINED"))
+	Their brazen display of lust is putting you a bit off.##
+	$w.reduceArousalTiny()##
+#end
+
+Sporting leering smiles, they ask why you want to go home so soon with the night still young. You realise you've caught the interest of $m1.name in particular, while $m2.name appears to be more interested in $f.name.
+</startTalkingText>
+
+<keepTalkingText>
+#set($round = $round + 1)##
+You talk for a little bit with $m1.getName()##
+#if($w.getSkill("CHARM") >= 60)
+	 and it's clear that he's delighted by your charms##
+#elseif($w.hasTrait("SHY"))
+	, but in all honesty it's more him talking and you listening##
+#end
+. He makes rather crude comments himself##
+#if($w.hasTrait("SULTRY") || $w.hasTrait("OVERACTIVE_IMAGINATION") || ($w.hasTrait("FLIRTY") && $w.arousalComfort) || $w.arousalEnjoy)
+	, but you find them oddly thrilling.
+	$w.addArousalSmall()##
+	#if($w.hasTrait("SULTRY") || $w.hasTrait("FLIRTY"))$w.addArousalTiny()#end
+	#if($w.hasTrait("OVERACTIVE_IMAGINATION"))$w.addArousalTiny()#end
+#elseif($w.hasTrait("LOW_SELF_ESTEEM"))
+	, but you feel they're exactly what you deserve.
+	$w.addArousalSmall()##
+#elseif($w.hasTrait("REFINED") || $w.hasTrait("ROMANTIC"))
+	 and you find his lack of tact is putting you off.
+	$w.reduceArousalTiny()##
+#elseif($m1.hasTrait("INTERESTING"))
+	, but at the same time he's interesting enough that you don't mind too much.
+#elseif($m1.hasTrait("DULL"))
+	 and he is so dull that he's boring you to tears.
+	$w.reduceArousalSmall()##
+#else
+	 by which you aren't particularly pleased.
+	$w.reduceArousalTiny()##
+#end
+#if(!$m1.npcAttractionOk)$w.reduceArousalSmall()#end
+#if(!$m1.npcAttractionUnattracted)$w.reduceArousalSmall()#end
+$m1.increaseKnowledge(1, 20)##
+##
+##
+## Random actions of m1 with the PC
+#set($choice = $scene.randomNumber(4))##
+#if($choice == 0)
+	
+	#set($isEnjoying = ($w.hasTrait("SULTRY") && $w.arousalEnjoy) || $w.arousalClose)##
+	#set($isWelcoming = ($w.hasTrait("SULTRY") && $w.arousalComfort) || $w.arousalEnjoy)##
+	#if($isEnjoying)
+		$m1.performMakeoutAction("WELCOME", ["TOUCH", "GROPE"], "FACE_TO_FACE", "STANDING", true, true, true)##
+	#elseif($isWelcoming)
+		$m1.performMakeoutAction("WELCOME", ["TOUCH"], "FACE_TO_FACE", "STANDING", true, true, true)##
+	#else
+		$m1.performMakeoutAction("ACCEPT", ["TOUCH"], "FACE_TO_FACE", "STANDING", true, true, true)##
+	#end
+	#if($isWelcoming)
+		$scene.pickFromList(["You can't help but lean into his touch.", "You can feel yourself flushing with excitement.", "There's a warmth building in your body.", "You find yourself breathing quickly, lips parted with desire."])
+	#else
+		## empty line
+		
+	#end
+	$m1.addArousalTiny()##
+	$w.addArousalTiny()##
+	#if($isWelcoming)$w.addArousalTiny()#end
+	#if($m1.hasTrait("MAGIC_FINGERS"))$w.addArousalSmall()#end
+	#if($w.hasTrait("SENSITIVE_BREASTS"))$w.addArousalTiny()#end
+	#if($w.hasTrait("LIKES_ROUGH"))$w.addArousalTiny()#end
+	#if(!$isWelcoming && ($w.hasTrait("REFINED") || $w.hasTrait("POSH")))$w.reduceArousalTiny()#end
+	#if($m1.npcAttractionUnattracted)$w.reduceArousalSmall()#end
+#elseif($choice <= 2)
+	#set($possibleLines = [])##
+	#if($w.arousalEnjoy)
+		#addItem($possibleLines "how he can see that you want him. It makes you blush, but you can't deny that there's some truth to his words.")##
+	#end
+	#if($m1.likesPlayersBreasts)
+		#addItem($possibleLines "that you have great tits.")##
+	#end
+	#if($m1.npcAttractionAttracted)
+		#addItem($possibleLines "how sexy you look.")##
+	#end
+	#if($m1.npcAttractionLust)
+		#addItem($possibleLines "how smoking hot you look.")##
+	#end
+	#if($w.breastsExposed || $w.pussyExposed)
+		#addItem($possibleLines "that you must have hoped to run into someone like him, given the state of your clothes.")##
+	#end
+	#if($m1.hasTrait("BOASTFUL") && $m1.hasTrait("THICK_COCK"))
+		#addItem($possibleLines "that he is packing something bigger than you have ever seen before, while motioning towards his crotch.")##
+	#end
+	#if($m1.hasTrait("LIKES_CASUAL") && $w.hasTrait("DOWN_TO_EARTH"))
+		#addItem($possibleLines "that he likes how you aren't some stuck-up bitch.")##
+	#end
+	#if($m1.hasTrait("LIKES_CUTE") && $w.hasTrait("CUTE"))
+		#addItem($possibleLines "that he likes how cute you are.")##
+	#end
+	#if($m1.hasTrait("LIKES_CUTE") && $w.hasTrait("SHY"))
+		#addItem($possibleLines "that he likes shy girls like you.")##
+	#end
+	#if($m1.hasTrait("LIKES_ELEGANT") && ($w.hasTrait("POSH") || $w.hasTrait("REFINED")))
+		#addItem($possibleLines "that he likes how elegant you are.")##
+	#end
+	#if($m1.hasTrait("LIKES_SEXY") && ($w.hasTrait("SULTRY") || $w.hasTrait("FLIRTY")))
+		#addItem($possibleLines "that he likes how sexy you are.")##
+	#end
+	#if($m1.hadSex && !$scene.hasFlag("ALLEY_SEX_BABY_CRAZY_OVERRIDE"))
+		#addItem($possibleLines "how he remembers having sex with you and that he is looking forward to doing it again.")##
+	#end
+	#if($m1.hadSex && $scene.hasFlag("ALLEY_SEX_BABY_CRAZY_OVERRIDE"))
+		#addItem($possibleLines "how he remembers having sex with you and that he is looking forward to doing it again. The thought of feeling $scene.addPossessiveSuffix($m1.name) bare cock pumping his seed into your fertile womb fills you with desire.")##
+	#end
+	#addItem($possibleLines "that he finds you attractive.")##
+	
+	$m1.name spends some time crudely telling you $scene.pickFromList($possibleLines)
+	#if(!$m1.npcAttractionUnattracted)
+		$w.reduceArousalSmall()##
+	#else
+		$w.addArousalTiny()##
+	#end
+	#if($w.hasTrait("SULTRY") || $w.hasTrait("FLIRTY") && $w.arousalComfort || $w.arousalEnjoy)$w.addArousalTiny()#end
+	#if($w.hasTrait("OVERACTIVE_IMAGINATION"))$w.addArousalTiny()#end
+	#if($w.hasTrait("LOW_SELF_ESTEEM"))$w.addArousalTiny()#end
+	#if($w.hasTrait("POSH"))$w.reduceArousalTiny()#end
+	#if($w.hasTrait("REFINED"))$w.reduceArousalTiny()#end
+#end
+##
+##
+## Random actions of m2 with the innocent friend
+#set($choice = $scene.randomNumber(4))##
+#if($choice == 0)
+	
+	You glance over and see $m2.name running his hands over $scene.addPossessiveSuffix($f.name) body, lightly caressing her $scene.pickFromList(["$f.breastsDesc through her $f.top.basicDesc", "#buttDesc($f) hips"]). While she is standing rather rigidly, ##
+	#if($f.arousalComfort)
+		she seems to be unconsciously leaning into his touch.
+	#else
+		the attention she is receiving seems to be not entirely unwelcome.
+	#end
+	$m2.addArousalTiny()##
+	$f.addArousalSmall()##
+	#if($m2.hasTrait("MAGIC_FINGERS"))$f.addArousalSmall()#end
+	## NPCs can't have the LIKES_ROUGH trait. VIGOROUS_LOVER means she likes more enthusiastic sex, so it's the most appropriate trait to check.
+	#if($f.hasTrait("VIGOROUS_LOVER"))$f.addArousalSmall()#end
+#elseif($choice == 1)
+	#set($possibleLines = [])##
+	#if($f.arousalComfort)
+		#addItem($possibleLines "that she might act all shy, but he can tell that she is into him.")##
+	#end
+	#if($m2.getLikesBreasts($f))
+		#addItem($possibleLines "that she has great tits.")##
+	#end
+	#if($f.breastsExposed || $f.pussyExposed)
+		#addItem($possibleLines "that even though she acts all shy, she must have hoped to run into someone like him, given the state of her clothes.")##
+	#end
+	#if($m2.hasTrait("BOASTFUL") && $m2.hasTrait("THICK_COCK"))
+		#addItem($possibleLines "that he has a big surprise waiting for her, while motioning towards his crotch.")##
+	#end
+	#if($m2.hasTrait("LIKES_CUTE"))
+		#addItem($possibleLines "that he likes how cute she is.")##
+		#addItem($possibleLines "that he's into shy girls like her.")##
+	#end
+	#addItem($possibleLines "how sexy she looks.")##
+	#addItem($possibleLines "that he finds her attractive.")##
+	
+	You overhear $m2.name crudely telling $f.name $scene.pickFromList($possibleLines) ##
+	#if($f.arousalComfort)
+		His words seem to make her blush.
+	#end
+	$f.addArousalSmall()##
+	#if($f.arousalComfort)$f.addArousalSmall()#end
+	#if($f.hasTrait("VIGOROUS_LOVER"))$f.addArousalSmall()#end
+#else
+	## You don't hear it, but it's still happening.
+	$f.addArousalSmall()##
+	#if($f.arousalComfort)$f.addArousalSmall()#end
+	#if($m2.hasTrait("MAGIC_FINGERS"))$f.addArousalSmall()#end
+	#if($f.hasTrait("VIGOROUS_LOVER"))$f.addArousalSmall()#end
+#end
+</keepTalkingText>
+
+<goIntoAlleyText>
+$m1.name says that talking is all well and good, but how about continuing with more physical "talking" in that small alleyway they have come out of. $m2.name wholeheartedly agrees, while $f.name doesn't seem to be completely sure whether to agree or not, ##
+#if($f.arousalComfort)
+	but you notice that her checks are slightly flushed, probably from excitement.
+#else
+	but she doesn't say anything against it.
+#end
+
+#if($m1.hadSex)
+	You remember having sex with $m1.name. You sense a#if($scene.hasFlag("ALLEY_SEX_BABY_CRAZY_OVERRIDE") || $w.hasTrait("LIKES_ROUGH") || $w.hasTrait("SULTRY")) strong#end feeling of desire well up within your body to do it again.
+	
+#end
+The men don't look like they are going to wait around until you answer. They, surprisingly gently, but firmly, try to steer you and $f.name into the small alleyway.
+</goIntoAlleyText>
+
+<gropingAndUndressingText>
+#if($scene.hasFlag("ALLEY_SEX_BABY_CRAZY_OVERRIDE"))
+	You are very eager to get into that alleyway and a bare cock into your pussy. Especially considering the stomach swelling consequences that might have. ##
+	#if($m1.hadChild)
+		In fact, $m1.name has proven his virility before by getting you pregnant. You really hope he'll manage to do it again.
+	#else
+		## empty line
+		
+	#end
+	
+#end
+Once you're in the alleyway, the men waste no time pairing off with the both of you. $m1.name with you and $m2.name with $f.name. $m1.name starts feeling you up and groping your $w.breastsDesc and your #buttDesc($w) butt. $m2.name seems to do the same with $f.name.
+
+After a while of this, $m1.name seems to want to move things along and starts to remove your clothes. Once he's done, he admires your #bodyDesc($w) body for a moment and then goes back to fondling you. ##
+#if($m1.hasTrait("MAGIC_FINGERS"))
+	$m1.name is rather adept at using his hands and you ##
+#else
+	You ##
+#end
+have to admit that you are getting #enjoyment($w)excited by all the attention you are getting.
+
+You glance over at $f.name to see how she is doing. While not naked like you, she is already in a state of undress and $m2.name is trying to remove more of her clothes while fondling her $f.breastsDesc and kissing her along the neck, although he doesn't seem to be in as much of a hurry as $m1.name. However, while you can tell that $f.name is already #enjoyment($f)flustered, she seems to be still quite stiff and not really sure of herself. Maybe you can sooth her worries and convince her to just go with the flow of the situation?
+</gropingAndUndressingText>
+
+<sootheFriendText>
+You tell $f.name that she should relax, it'll be far more fun for her if she does. You end up moaning out the last words, because $m1.name has started sucking on one of your $w.breastsDesc.
+
+It has helped your case though, because $f.name notices that you're not just saying that, but indeed following your own advice. She noticably relaxes her stance and although she doesn't say anything, you can see in her eyes that she seems to be far more approving of $scene.addPossessiveSuffix($m2.name) actions. He seems to notice this too and starts to remove the rest of her clothing.
+
+$scene.addPossessiveSuffix($m1.name) ministrations of your breasts makes it hard to focus, but you do hear $f.name uttering a moan when $m2.name starts rubbing her pussy while he is in the process of removing the last bit of her clothes.
+</sootheFriendText>
+
+<makeoutTransitionText>
+Looks like $m1.name is ready for more intense foreplay and to be honest, so are you. ##
+#if($w.hasTrait("SHY"))
+With a silent smile you indicate that he should grab you and pull you close, ##
+#else
+	#if($m1.jacketWorn)You grab him by his $m1.jacket and pull him towards you, ##
+	#{else}You grab him by his $m1.shirt and pull him towards you, ##
+	#end
+#end
+but not before stealing one last glance at $f.name to see that she is in the process of entwining her arms around $scene.addPossessiveSuffix($m2.name) neck. After that, the only thing you see and notice is your partner and your own passion.
+##
+##
+## This shouldn't normally happen, but just making sure the PC doesn't have an orgasm as the first action of the makeout scene.
+#if($w.arousalOrgasm)
+	$w.setArousalClose()##
+#end
+</makeoutTransitionText>
+
+<makeoutDoneText>
+#if($scene.hasFlag("CAME_INSIDE"))
+	You feel $scene.addPossessiveSuffix($m1.name) warm seed inside you##
+	#if($scene.hasFlag("ALLEY_SEX_BABY_CRAZY_OVERRIDE"))
+		 and you hope with all your might that his sperm will find an egg to fertilise.
+	#elseif($w.hasTrait("BABY_CRAZY") && $w.knownPregnant)
+		 and you start caressing your $w.stomachDesc, thinking back to when you managed to get knocked up.
+	#elseif($w.hasTrait("BABY_CRAZY") && !$w.safe)
+		 and while it's not a risky day, you hope his sperm will find an egg within you to fertilise anyway.
+	#elseif($w.risky)
+		 and you wonder whether this night will have more lasting consequences. ##
+		#if($w.hasTrait("MATERNAL"))
+			Despite your worries, you feel a prickle of excitement at the thought of being a mother.
+		#else
+			## empty line
+			
+		#end
+	#elseif($w.hasTrait("LIKES_BARE"))
+		 and it feels like the natural way to have sex.
+	#else
+		.
+	#end
+	
+#elseif($scene.hasFlag("CAME_INSIDE_ANAL"))
+	You feel $scene.addPossessiveSuffix($m1.name) warm seed inside you.
+	
+#end
+After you are done with your partner, the rest of the world comes back into focus. You look around and immediately see #if($f.hasTrait("VIGOROUS_LOVER"))and quite loudly hear #{end}$f.name getting it on with $m2.name.
+</makeoutDoneText>
+
+<watchFriendText>
+$scene.addPossessiveSuffix($f.name) partner has her pushed against the wall while pumping with his $m2.cockDesc into her at a#if($m2.hasTrait("VIGOROUS_LOVER")) breakneck#else fast#end pace. $f.name for her part is moaning#if($f.hasTrait("VIGOROUS_LOVER")) constantly and loudly#else quietly but constantly#end while alternating between having her arms encircle $scene.addPossessiveSuffix($m2.name) neck and running her hands over his back.
+
+Judging by their movement, they seem to be almost done. $scene.addPossessiveSuffix($f.name) eyes are closed and she is trying to meet every thrust of her partner with a sway of her own hips. The ecstatic smile she is wearing, while not betraying her passion in the slightest, looks quite adorable at the same time.
+</watchFriendText>
+
+<friendOrgasmsText>
+#set($isLikesBareSex = $f.hasTrait("HATES_CONDOMS") || $f.hasTrait("WANTS_KIDS"))##
+##
+$scene.addPossessiveSuffix($m2.name) movement seems to be getting more and more desperate and $scene.addPossessiveSuffix($f.name) moans grow louder and louder, when finally with one last push he buries himself in her as deep as possible. $f.name gasps#if(!$m2.wearingCondom && $isLikesBareSex) and moans with delight#end while ##
+#if($f.hasTrait("VIGOROUS_LOVER"))
+	having her arms encircle $scene.addPossessiveSuffix($m2.name) neck and wrapping her legs around his waist to pull him tightly into her. ##
+#elseif(!$m2.wearingCondom && $isLikesBareSex)
+	hugging $m2.name tightly and she raises and wraps one leg around his waist to pull him into her. ##
+#else
+	hugging $m2.name tightly. ##
+#end
+When $scene.addPossessiveSuffix($f.name) partner is done pumping his seed into#if($m2.wearingCondom) his condom#else her willing womb#end, they disentangle, but not before $f.name has given $m2.name a#if($f.hasTrait("VIGOROUS_LOVER")) passionate#end kiss.
+</friendOrgasmsText>
+
+<lowlivesDoneText>
+## If this event should ever make it possible to date the lowlives, this is the place to add it. m1 could take the PC's phone and get her number out of it.
+## Same for m2 and the innocent friend, once NPC-to-NPC relationships are added.
+While you and especially $f.name are both still quite out of it and need to catch your breath, the men are already getting dressed again. They seem quite pleased with themselves and tell you both as much.
+
+Before leaving you they comment that they would love for either of you to come around again sometime to relive some memories. With that the men walk away.
+</lowlivesDoneText>
+
+<finishLowlivesAlleySexText>
+## Should maybe reduce arousal of PC and friend, but it's not really necessary at this point.
+After a while you both have gotten your breath back and decide to get dressed and presentable again.
+
+When you start walking home again, $f.name mentions that she is surprised that she has been able to get off this strongly in such circumstances. She doesn't regret anything though, because it has felt far too good for that and she is thankful that you have been there for her. You take hold of her hand and smile reassuringly at her.
+
+The rest of your way home is rather uneventful and you wish $f.name a good night once you part ways.
+
+## Can't really tell whether the PC is engaged/married or not, so I'll refere to him as significant other.
+#if($m1.cheatedWith)
+	You realise that you have just cheated on your significant other.#if($w.hasTrait("BITCHY")) Oh well, too bad for him.#end
+#end
+</finishLowlivesAlleySexText>

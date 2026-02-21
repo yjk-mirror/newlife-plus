@@ -1,0 +1,7 @@
+<sceneDescriptionText>
+Divorce time!
+</sceneDescriptionText>
+
+<introText>
+Your relationship has fallen apart and you are now single (assuming $m.name was your partner beforehand)
+</introText>

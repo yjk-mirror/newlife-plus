@@ -1,0 +1,607 @@
+<sceneDescriptionText>
+You're looking through a slightly ajar door. Inside, $m.name and $f.name are having sex on a bed.
+</sceneDescriptionText>
+
+<introText>
+## foldStart @onlyForTesting
+#*
+## Just setup for testing various states. The actual scene should have this removed.
+$f.addArousalHuge()##
+$f.addArousalHuge()##
+$f.addArousalHuge()##
+$m.addArousalHuge()##
+$m.addArousalLarge()##
+$f.addAlcoholLarge()##
+$f.addAlcoholLarge()##
+$f.addAlcoholLarge()##
+$m.addAlcoholLarge()##
+$m.addAlcoholLarge()##
+##
+##
+## This should actually be done in the previous scene, but for testing purposes we're doing this here too.
+$m.stripNaked()##
+$f.stripNaked()##
+*#
+## foldEnd
+##
+## foldStart @setupCode
+## Actual required setup for later.
+#set($caughtModifier = 0)##
+#set($isMBadCharacter = $m.personality == "JERK" || $m.personality == "SELFISH")
+#set($isMGoodCharacter = $m.personality == "ROMANTIC" || $m.personality == "CARING")
+#set($tempo = "AVERAGE")##
+#if($m.arousalEnjoy && ($m.hasTrait("VIGOROUS_LOVER") || $isMBadCharacter))
+	#set($tempo = "FAST")##
+#elseif(!$m.arousalComfort || !$m.arousalClose && $isMGoodCharacter)
+	#set($tempo = "SLOW")##
+#end
+## foldEnd
+##
+##
+##
+#macro(gettingCaughtSetup)
+	#set($caught = false)##
+	##
+	#if($scene.hasFlag("SPY_SEX_ALLOW_BEING_CAUGHT"))
+		#set($caughtChance = 50 + $caughtModifier)##
+##		#if($w.hasTrait("PASSIONATE_LOVER")) #set($caughtChance = $caughtChance + 100)#end
+		#if($f.charType == "INNOCENT") #set($caughtChance = $caughtChance + 10)#end
+		#if($f.charType == "PARTY_GIRL") #set($caughtChance = $caughtChance - 10)#end
+		#if($m.hasTrait("LIKES_TO_SHARE")) #set($caughtChance = $caughtChance - 10)#end
+		#if($f.arousalEnjoy) #set($caughtChance = $caughtChance - 10)#end
+		#if($m.arousalEnjoy) #set($caughtChance = $caughtChance - 10)#end
+		#if($f.arousalClose) #set($caughtChance = $caughtChance - 10)#end
+		#if($m.arousalClose) #set($caughtChance = $caughtChance - 10)#end
+		#if($f.arousalOrgasm) #set($caughtChance = $caughtChance - 20)#end
+		#if($m.arousalOrgasm) #set($caughtChance = $caughtChance - 20)#end
+		#if($f.drunk) #set($caughtChance = $caughtChance - 10)#end
+		#if($m.drunk) #set($caughtChance = $caughtChance - 10)#end
+		#if($f.veryDrunk) #set($caughtChance = $caughtChance - 10)#end
+		#if($m.veryDrunk) #set($caughtChance = $caughtChance - 10)#end
+		#if($f.maxDrunk) #set($caughtChance = $caughtChance - 30)#end
+		#if($m.maxDrunk) #set($caughtChance = $caughtChance - 30)#end
+		##
+		#if($caughtChance > 100) #set($caughtChance = 100)##
+		#elseif($caughtChance < 0) #set($caughtChance = 0)##
+		#end
+		##
+		#set($caught = $scene.percent($caughtChance))##
+		#set($caughtModifier = 0)##
+	#end
+#end
+#gettingCaughtSetup()##
+##
+##
+##
+#macro(checkMLovesTempo)
+	#set($mLovesTempo = false)##
+	#if($tempo == "FAST" && ($m.arousalClose || $m.arousalEnjoy && ($m.hasTrait("VIGOROUS_LOVER") || $isMBadCharacter)))
+		#set($mLovesTempo = true)##
+	#elseif($tempo == "AVERAGE" && ($m.arousalComfort || $m.hasTrait("VIGOROUS_LOVER") || $isMBadCharacter))
+		#set($mLovesTempo = true)##
+	#elseif($tempo == "SLOW" && (!$m.arousalComfort || !$m.arousalEnjoy && $m.personality == "AVERAGE" || $isMGoodCharacter))
+		#set($mLovesTempo = true)##
+	#end
+#end
+#checkMLovesTempo()##
+##
+##
+##
+#macro(checkFLovesTempo)
+	#set($fLovesTempo = false)##
+	#if($tempo == "FAST" && ($f.arousalClose || $f.arousalComfort && $f.hasTrait("VIGOROUS_LOVER") || $f.arousalEnjoy && $f.charType == "PARTY_GIRL"))
+		#set($fLovesTempo = true)##
+	#elseif($tempo == "AVERAGE" && ($f.arousalComfort || $f.hasTrait("VIGOROUS_LOVER") || $f.charType == "PARTY_GIRL"))
+		#set($fLovesTempo = true)##
+	#elseif($tempo == "SLOW" && (!$f.arousalComfort || !$f.arousalEnjoy && !$f.hasTrait("VIGOROUS_LOVER") && $f.charType != "PARTY_GIRL" || !$f.arousalClose && (!$f.hasTrait("VIGOROUS_LOVER") || $f.charType == "INNOCENT")))
+		#set($fLovesTempo = true)##
+	#end
+#end
+#checkFLovesTempo()##
+##
+##
+##
+#macro(addStandardArousal)
+	$f.addArousalMedium()##
+	#if($mLovesTempo) $m.addArousalMedium()#else $m.addArousalSmall()#end##
+	#if($fLovesTempo) $f.addArousalSmall()#else $f.reduceArousalTiny()#end##
+	#if(($f.hasTrait("WANTS_KIDS") || $f.hasTrait("HATES_CONDOMS")) && !$m.wearingCondom) $f.addArousalSmall()#end##
+	#if($m.hasTrait("IMPREGNATOR") && !$m.wearingCondom) $m.addArousalSmall()#end##
+	#if($m.wearingCondom) $m.reduceArousalTiny()#end##
+	#if($m.figure == "SKINNY" || $m.figure == "PAUNCHY" || $m.figure == "FAT") $m.addArousalSmall()#end## Less stamina.
+#end
+##
+##
+##
+#macro(wAddArousalLimited)
+	#if(!$w.arousalEnjoy) $w.addArousalTiny()#end##
+#end
+##
+##
+##
+## Note that the List.add() method returns a boolean, which will be printed unless it is caught by a variable assignment.
+#macro(addItem $list $element)
+	#set($listBoolCatch = $list.add($element))##
+#end
+##
+##
+##
+## NPC actions only work for one NPC at a time, but we want both male and female to act, which is why we manually
+## choose the male's actions here and let the female's work through the internal npc action chooser.
+#macro(mAction)
+	## 2^6 = 64 -> Means we can have up to 6 divisors.
+	## Obviously, this can be done differently too, but this way we stay in the same frame of mind as internal npc actions choosing.
+	#set($stdVal = 64)##
+	#set($doubleChance = $stdVal * 2)##
+	$scene.addWeightedItem("CARESS", $doubleChance)##
+	$scene.addWeightedItem("THRUSTING", $doubleChance)##
+	#if(!$m.hasTrait("TACITURN")) $scene.addWeightedItem("TALK", $doubleChance)#end
+	#if(!$scene.hasFlag("SPY_SEX_LEGS_ON_SHOULDERS"))
+		#set($chance = $stdVal)##
+		##
+		## multipliers
+		#if($m.hasTrait("VIGOROUS_LOVER")) #set($chance = $chance * 2)#end
+		#if($isMBadCharacter) #set($chance = $chance * 2)#end
+		##
+		## divisors
+		#if(!$m.arousalClose) #set($chance = $chance / 2)#end
+		#if($isMGoodCharacter) #set($chance = $chance / 2)#end
+		#if($scene.hasFlag("SPY_SEX_LEGS_WRAPPED")) #set($chance = $chance / 2)#end
+		#if($scene.hasFlag("SPY_SEX_LEGS_WRAPPED")) #set($chance = $chance / 2)#end
+		#if($scene.hasFlag("SPY_SEX_LEGS_WRAPPED")) #set($chance = $chance / 2)#end
+		#if($scene.hasFlag("SPY_SEX_LEGS_WRAPPED")) #set($chance = $chance / 2)#end
+		##
+		$scene.addWeightedItem("PUT_LEGS_ON_SHOULDERS", $chance)##
+	#end
+	#if($tempo != "FAST")
+		#set($chance = $stdVal)##
+		##
+		## multipliers
+		#if($m.arousalClose) #set($chance = $chance * 2)#end
+		#if($m.arousalEnjoy && $m.hasTrait("VIGOROUS_LOVER")) #set($chance = $chance * 2)#end
+		#if($m.arousalEnjoy && $isMBadCharacter) #set($chance = $chance * 2)#end
+		##
+		## divisors
+		#if($mLovesTempo && $isMGoodCharacter) #set($chance = $chance / 2)#end
+		#if($mLovesTempo) #set($chance = $chance / 2)#end
+		##
+		$scene.addWeightedItem("CHANGE_PACE_FASTER", $chance)##
+	#end
+	#if($tempo != "SLOW")
+		#set($chance = $stdVal)##
+		##
+		## multipliers
+		#if($tempo == "FAST" && (!$mLovesTempo)) #set($chance = $chance * 2)#end
+		#if($tempo == "FAST" && (!$mLovesTempo)) #set($chance = $chance * 2)#end
+		#if($tempo == "FAST" && (!$mLovesTempo)) #set($chance = $chance * 2)#end
+		#if($tempo == "FAST" && (!$mLovesTempo)) #set($chance = $chance * 2)#end
+		##
+		## divisors
+		#if($mLovesTempo) #set($chance = $chance / 2)#end
+		#if($mLovesTempo) #set($chance = $chance / 2)#end
+		#if($mLovesTempo) #set($chance = $chance / 2)#end
+		#if($mLovesTempo) #set($chance = $chance / 2)#end
+		##
+		$scene.addWeightedItem("CHANGE_PACE_SLOWER", $chance)##
+	#end
+	
+	##
+	##
+	## actual actions
+	#set($choice = $scene.pickItemAndClearMap())##
+	#if($choice == "CARESS")
+		#set($possibleLines = [])##
+		#if($tempo == "FAST" && $m.hasTrait("VIGOROUS_LOVER"))
+			#addItem($possibleLines "$m.name grabs $scene.addPossessiveSuffix($f.name) bare $f.breastsDesc, squeezing them roughly as he pounds into her pussy.")##
+		#else
+			#addItem($possibleLines "$m.name#if($isMGoodCharacter) tenderly#end caresses $scene.addPossessiveSuffix($f.name) body, his $m.cockDesc hard inside her as his $m.handAdj hands run over her naked breasts.")##
+		#end
+		$scene.pickFromList($possibleLines)##
+		$f.addArousalTiny()##
+		#if($m.hasTrait("MAGIC_FINGERS")) $f.addArousalTiny()#end
+	#elseif($choice == "THRUSTING")
+		$m.name thrusts into $f.name over and over##
+		#if($f.arousalEnjoy)
+			, drawing#if($f.hasTrait("VIGOROUS_LOVER")) loud#end moans out of her##
+		#end
+		.##
+		$f.addArousalTiny()##
+	#elseif($choice == "TALK")
+		#set($possibleLines = [])##
+		#addItem($possibleLines "$m.name pauses between thrusts and compliments $f.name on her sexy body.")##
+		#if($m.getLikesBreasts($f))
+			#addItem($possibleLines "$m.name pauses between thrusts and compliments $f.name on her great tits.")##
+		#end
+		#if($m.arousalClose)
+			#addItem($possibleLines "$m.name grunts in $scene.addPossessiveSuffix($f.name) ear as he thrusts into her. He tells her that he is about to burst.")##
+		#end
+		#if($mLovesTempo)
+			#addItem($possibleLines "$m.name grunts in $scene.addPossessiveSuffix($f.name) ear as he thrusts into her. He tells her that he loves fucking her like this.")##
+		#end
+		#if($m.hasTrait("CRUDE"))
+			#addItem($possibleLines "$m.name grunts in $scene.addPossessiveSuffix($f.name) ear as he thrusts into her. He tells her how good her pussy feels around his cock.")##
+		#end
+		#if(!$m.wearingCondom && !$m.hasTrait("CONSCIENTIOUS"))
+			#addItem($possibleLines "$m.name grunts in $scene.addPossessiveSuffix($f.name) ear as he thrusts into her. He tells her how good it feels to be inside her unprotected.")##
+		#end
+		#if($scene.hasFlag("SPY_SEX_ASKED_COME_INSIDE"))
+			#addItem($possibleLines "$m.name pauses between thrusts and tells $f.name that he is going to fill her with his sperm.")##
+		#end
+		#if($scene.hasFlag("SPY_SEX_ASKED_COME_INSIDE") && $m.hasTrait("IMPREGNATOR") && !$f.pregnant)
+			#addItem($possibleLines "$m.name grins while thrusting and tells $f.name that he is going to make her fat with babies.")##
+		#end
+		$scene.pickFromList($possibleLines)##
+		$f.addArousalTiny()##
+	#elseif($choice == "PUT_LEGS_ON_SHOULDERS")
+		$scene.addFlag("SPY_SEX_LEGS_ON_SHOULDERS")##
+		$scene.addFlag("SPY_SEX_LEGS_MOVED")##
+		$scene.removeFlag("SPY_SEX_LEGS_WRAPPED")##
+		$m.name grabs $scene.addPossessiveSuffix($f.name) legs and bends them back, hooking them over his shoulders.##
+		#if($f.hasTrait("VIGOROUS_LOVER")) $f.addArousalTiny()#end
+	#elseif($choice == "CHANGE_PACE_FASTER")
+		#if($tempo == "SLOW")
+			$m.name begins to quicken his thrusts, now sliding slickly into $f.name with a rhythmic back and forth motion.##
+			#set($tempo = "AVERAGE")##
+		#else
+			$m.name grabs $scene.addPossessiveSuffix($f.name) hips and begins thrusting vigorously into her, making her gasp with every thrust.##
+			#set($tempo = "FAST")##
+		#end
+	#elseif($choice == "CHANGE_PACE_SLOWER")
+		#if($tempo == "FAST")
+			$m.name slows his thrusts, now sliding into $f.name with a rhythmic back and forth motion.##
+			#set($tempo = "AVERAGE")##
+		#else
+			$m.name slows his thrusts, now sliding gently into $scene.addPossessiveSuffix($f.name) body.##
+			#set($tempo = "SLOW")##
+		#end
+	#end
+#end
+##
+##
+##
+## Intro scene text
+Pressed beneath $scene.addPossessiveSuffix($m.name) male body, $f.name lets his hard erection enter her. ##
+#if($tempo == "FAST")
+	He thrusts powerfully into her pussy and begins to passionately have sex with her. ##
+#elseif($tempo == "AVERAGE")
+	He starts thrusting steadily into her pussy, sliding his full length inside. ##
+#else
+	#if($isMBadCharacter)
+		He starts thrusting at a very deliberate pace into her pussy##
+	#else
+		He starts thrusting almost romantically into her pussy##
+	#end
+	, slowly sliding his full length inside. ##
+#end
+#if($f.arousalComfort && $fLovesTempo)
+	$f.name gasps with pleasure with every thrusts of his $m.cockDesc inside her.
+#end
+</introText>
+
+<keepWatchingText>
+#addStandardArousal()##
+#wAddArousalLimited()##
+#checkMLovesTempo()##
+#checkFLovesTempo()##
+#gettingCaughtSetup()##
+#mAction()##
+</keepWatchingText>
+
+<touchYourselfText>
+#set($caughtModifier = 10)##
+#if($w.pussyExposed)
+	$scene.pickFromList(["You rub your fingers across your pussy", "You slide a finger between the lips of your pussy, and up to your clitoris", "You trace your finger around your labia"])##
+	#if($w.arousalClose)
+		, every touch bringing you closer to climax, your orgasm so close that you can feel your whole body starting to flush with its heat.
+		#if($w.hasTrait("PASSIONATE_LOVER"))
+			You have to cover your mouth to silence your cry of pleasure.
+			#set($caughtModifier = 20)
+		#else
+			You barely manage to keep quiet.
+		#end
+	#elseif($w.arousalEnjoy)
+		, the pleasure is so great you have a hard time keeping silent.
+	#elseif($w.arousalComfort)
+		.
+	#else
+		. Although you aren't currently wet, you doubt it will be long before you are.
+	#end
+	$w.addArousalSmall()##
+#else
+	#if($w.bottomStatus == "WORN" || $w.bottomStatus == "DISHEVELED")
+		#if(!$w.bottom.skirt)
+			You play with yourself through your $w.bottom.shortDesc.
+		#elseif($w.bottom.length != "THIGH")
+			You pull up your ${w.bottom.shortDesc}##
+			#if($w.pantiesStatus == "WORN")
+				 and move aside your $w.panties.shortDesc.
+				$w.setPantiesStatus("EXPOSED")##
+			#else
+				.
+			#end
+			You start to play with yourself.
+			$w.setBottomStatus("EXPOSED")##
+		#elseif($w.pantiesStatus == "WORN" || $w.pantiesStatus == "DISHEVELED")
+			You move aside your $w.panties.shortDesc and start to play with yourself.
+			$w.setPantiesStatus("EXPOSED")##
+		#else
+			You should never see this text.
+			If you do, please report it as a bug.
+		#end
+	#elseif($w.pantiesStatus == "WORN" || $w.pantiesStatus == "DISHEVELED")
+		You move aside your $w.panties.shortDesc.
+		You start to play with yourself.
+		$w.setPantiesStatus("EXPOSED")##
+	#else
+		You should never see this text.
+		If you do, please report it as a bug.
+	#end
+#end
+$w.addArousalMedium()##
+#if($w.hasTrait("SENSITIVE_PUSSY"))$w.addArousalSmall()#end##
+#if($w.hasTrait("CLEVER_HANDS"))$w.addArousalSmall()#end##
+#if($w.hasTrait("OVERACTIVE_IMAGINATION"))$w.addArousalSmall()#end##
+#addStandardArousal()##
+#checkMLovesTempo()##
+#checkFLovesTempo()##
+#gettingCaughtSetup()##
+#mAction()##
+</touchYourselfText>
+
+<comeYourselfText>
+The feeling between your legs reaches a peak and you ##
+#if($w.hasTrait("PASSIONATE_LOVER"))
+	have to clamp both your hands over your mouth to stop your moans from escaping ##
+	#set($caughtModifier = 50)##
+#else
+	can't help but let out an audible gasp ##
+	#set($caughtModifier = 25)##
+#end
+as waves of pleasure rush through you.
+#gettingCaughtSetup()##
+</comeYourselfText>
+
+<watchHerComeLd>
+$f.getName() is about to reach her climax.
+</watchHerComeLd>
+
+<watchHerComeText>
+#if($f.hasTrait("VIGOROUS_LOVER"))
+	$scene.addPossessiveSuffix($f.name) body responds with wild abandon as her orgasm hits. She bucks her hips frantically against $m.name, arching her body back into the mattress and clutching at him with her hands. Panting with effort $f.name rides the wave of pleasure, sweat beading her face, as she loses herself in sheer enjoyment.
+#elseif($f.charType == "INNOCENT")
+	$f.name clutches hold of $scene.addPossessiveSuffix($m.name) shoulders and lets out her breath in a soft, long and utterly satisfied release of pleasure.
+#else
+	$f.name frantically grasps hold of $scene.addPossessiveSuffix($m.name) shoulders and screams out loud as she orgasms, arching her back as every muscle reacts to the pleasure. ##
+	#if($scene.hasFlag("SPY_SEX_LEGS_WRAPPED"))
+		Her legs squeeze $m.name with passionate convulsions and her cries echo around the room until the writhing ebbs and with her face flushed she regains some measure of control.
+	#end
+#end
+#if(!$scene.hasFlag("SPY_SEX_LEGS_MOVED") && ($f.hasTrait("VIGOROUS_LOVER") || $scene.randomBoolean()))
+	
+	Lost in the euphoria of her climax, she unthinkingly wraps her legs around $m.name, holding him close to her.
+	$scene.addFlag("SPY_SEX_LEGS_MOVED")##
+	$scene.addFlag("SPY_SEX_LEGS_WRAPPED")##
+#end
+$scene.addFlag("SPY_SEX_WOMAN_HAD_ORGASM")##
+#wAddArousalLimited()##
+#gettingCaughtSetup()##
+</watchHerComeText>
+
+<watchHimComeText>
+#set($isWantPullOut = $scene.hasFlag("SPY_SEX_ASKED_PULL_OUT") && !$scene.hasFlag("SPY_SEX_ASKED_COME_INSIDE"))##
+#set($isChangedMind = $scene.hasFlag("SPY_SEX_ASKED_PULL_OUT") && $scene.hasFlag("SPY_SEX_ASKED_COME_INSIDE"))##
+#set($isLikesItInside = $f.hasTrait("WANTS_KIDS") || $f.hasTrait("HATES_CONDOMS"))##
+#if(!$isWantPullOut || $isMBadCharacter && ($m.hasTrait("IMPREGNATOR") || !$m.hasTrait("CONSCIENTIOUS") && $scene.randomBoolean()))
+	$m.name lets out a shout and thrusts deep inside $f.name. It's obvious that he's pumping his seed into ##
+	#if($m.wearingCondom)
+		his condom. ##
+		$scene.addFlag("SPY_SEX_CAME_IN_CONDOM")##
+	#else
+		her pussy. ##
+		$scene.addFlag("SPY_SEX_CAME_INSIDE")$scene.inseminateNpc($m,$f,0)##
+	#end
+#else
+	$m.name groans and you realise he's passed the point of no return. At the last moment, he pulls his $m.cockDesc out of $f.name. A first gush of sperm splatters over her tummy, the next few end up trickling down her $f.breastsDesc. ##
+	$scene.addFlag("SPY_SEX_CAME_OUTSIDE")
+#end
+$f.addArousalTiny()##
+#if($f.hasTrait("HATES_CONDOMS") && $scene.hasFlag("SPY_SEX_CAME_INSIDE"))$f.addArousalSmall()#end
+#if($f.hasTrait("WANTS_KIDS") && !$f.pregnant && $scene.hasFlag("SPY_SEX_CAME_INSIDE"))$f.addArousalSmall()#end
+#if($isChangedMind)$f.addArousalSmall()#end
+##
+##
+## Woman reaction
+#if(!$scene.hasFlag("SPY_SEX_CAME_OUTSIDE") && ($f.arousalOrgasm || $f.arousalClose && $scene.percent(20)))
+	The feeling of a man coming inside her apparently is enough to push $f.name over the edge herself. She writhes and moans with delight while clutching at $m.name as he stiffens on top of her##
+	#if($scene.hasFlag("SPY_SEX_LEGS_WRAPPED"))
+		, her legs hooked around his arse, pulling his stiff manhood deep into her most feminine parts##
+	#end
+	#if($isWantPullOut)
+		, completely forgetting about having asked him to pull out before. ##
+	#else
+		. ##
+	#end
+	#if($scene.hasFlag("SPY_SEX_CAME_INSIDE"))
+		She holds him tightly while he satisfies himself, spurt after spurt of his potent semen filling her#if(!$f.pregnant) fertile#end womb until every drop of it has been released into her innermost places.
+	#else
+		She holds him tight while he satisfies himself, spurt after spurt filling his condom inside of her.
+	#end
+	$f.haveOrgasm()##
+	$f.addEnjoyMedium()##
+	$scene.addFlag("SPY_SEX_WOMAN_HAD_ORGASM")##
+	$scene.addFlag("SPY_SEX_CAME_TOGETHER")##
+#elseif($scene.hasFlag("SPY_SEX_CAME_INSIDE"))
+	#if($scene.hasFlag("SPY_SEX_LEGS_WRAPPED"))
+		#if(!$scene.hasFlag("SPY_SEX_ASKED_PULL_OUT"))
+			$f.name squeezes him to her with her legs as spurt after spurt pulses into her body.
+		#elseif($isChangedMind)
+			$f.name clutches at him as he stiffens on top of her, her legs hooked around his arse, pulling his stiff manhood deep into her most feminine parts. She holds $m.name tight while he satisfies himself, spurt after spurt of his potent sperm send swimming into her pussy, until every drop of it has been released into her innermost places.
+			$f.addEnjoySmall()##
+		#elseif($scene.hasFlag("SPY_SEX_ASKED_PULL_OUT"))
+			#if($f.arousalClose && $f.veryDrunk && $isLikesItInside && $scene.randomBoolean())
+				Maybe it's the alcohol, but $f.name seems to have completely forgotten about telling $m.name to pull out. Instead she, seemingly lost in the passion of the moment, starts squeezing him to her with her legs as spurt after spurt pulses into her body.
+				$f.addEnjoyTiny()##
+			#elseif(($f.charType == "PARTY_GIRL" || $f.charType == "SOPHISTICATED") && $f.personality != "ROMANTIC" && $f.personality != "CARING")
+				$f.name angrily complains that he was supposed to pull out, but to no avail, as spurt after spurt pulses into her body.
+				$f.reduceEnjoySmall()##
+			#else
+				For a moment, $f.name doesn't look particularly pleased that $m.name ignored her request to pull out, but she doesn't voice her disapprovement.
+				$f.reduceEnjoySmall()##
+			#end
+		#end
+	#elseif($isChangedMind && $isLikesItInside)
+		$f.name has a blissful smile plastered on her face as she runs her hands over his back and##
+		#if($m.hasHair) through his hair.
+		#else caresses his head.
+		#end
+		$f.addEnjoySmall()##
+	#elseif($isWantPullOut && $f.arousalClose && $f.veryDrunk && $isLikesItInside && $scene.randomBoolean())
+		Maybe it is the alcohol, but $f.name seems to have completely forgotten about telling $m.name to pull out. Instead she, seemingly lost in the passion of the moment, holds him tight while he satisfies himself, spurt after spurt of his potent semen filling her#if(!$f.pregnant) fertile#end womb.
+		$f.addEnjoyTiny()##
+	#elseif($isWantPullOut)
+		#if(($f.charType == "PARTY_GIRL" || $f.charType == "SOPHISTICATED") && $f.personality != "ROMANTIC" && $f.personality != "CARING")
+			$f.name angrily complains that he was supposed to pull out, but to no avail, as spurt after spurt pulses into her body.
+			$f.reduceEnjoySmall()##
+		#else
+			For a moment, $f.name doesn't look particularly pleased that $m.name ignored her request to pull out, but she doesn't voice her disapprovement.
+			$f.reduceEnjoySmall()##
+		#end
+	#end
+#end
+#wAddArousalLimited()##
+</watchHimComeText>
+
+<watchThemComeText>
+#if($m.wearingCondom)
+	$scene.addFlag("SPY_SEX_CAME_IN_CONDOM")##
+#else
+	$scene.addFlag("SPY_SEX_CAME_INSIDE")$scene.inseminateNpc($m,$f,0)##
+#end
+$scene.addPossessiveSuffix($m.name) movement seems to be getting more and more desperate and $scene.addPossessiveSuffix($f.name) moans grow louder and louder, when finally with one last push he buries himself in her as deep as possible. $f.name gasps and moans with delight##
+#if($scene.hasFlag("SPY_SEX_CAME_INSIDE") && $scene.hasFlag("SPY_SEX_ASKED_PULL_OUT") && !$scene.hasFlag("SPY_SEX_ASKED_COME_INSIDE"))
+	, the passion of the moment making her completely forget about having asked him to pull out before##
+#end
+. ##
+#if($scene.hasFlag("SPY_SEX_LEGS_WRAPPED"))
+	She squeezes him to her with her legs as spurt after spurt pulses into her body. ##
+#end
+When $m.name is done pumping his seed into#if($scene.hasFlag("SPY_SEX_CAME_IN_CONDOM")) his condom#else her willing womb#end, they disentangle, but not before $f.name has given him a#if($f.hasTrait("VIGOROUS_LOVER")) passionate#end kiss.
+#wAddArousalLimited()##
+</watchThemComeText>
+
+<wrapLegsText>
+$f.name wraps her legs around $scene.addPossessiveSuffix($m.name) waist.
+$f.addArousalSmall()##
+$m.addArousalTiny()##
+#if(($f.hasTrait("WANTS_KIDS") || $f.hasTrait("HATES_CONDOMS")) && !$m.wearingCondom) $f.addArousalSmall()#end
+#if($m.hasTrait("IMPREGNATOR") && !$m.wearingCondom) $m.addArousalSmall()#end
+#if($isMGoodCharacter) $m.addArousalSmall()#end
+</wrapLegsText>
+
+<askComeInsideText>
+#if($scene.hasFlag("SPY_SEX_ASKED_PULL_OUT"))
+	$f.name says between moans that she changed her mind. $m.name shouldn't bother pulling out, because it feels far too good having him in her.
+	$f.addArousalMedium()##
+	$m.addArousalSmall()##
+#elseif(!$f.pregnant)
+	$f.name asks $m.name to come inside her no matter any possible risks.
+#else
+	$f.name tells $m.name that he doesn't need to bother pulling out since she is already pregnant.
+#end
+$f.addArousalSmall()##
+$m.addArousalSmall()##
+#if($f.hasTrait("WANTS_KIDS") && !$f.pregnant) $f.addArousalSmall()#end
+#if($f.hasTrait("HATES_CONDOMS")) $f.addArousalSmall()#end
+#if($m.hasTrait("IMPREGNATOR")) $m.addArousalSmall()#end
+</askComeInsideText>
+
+<askPullOutText>
+#if(!$f.pregnant)
+	$f.name reminds $m.name to pull out before he comes, since she doesn't want to get pregnant.
+#else
+	$f.name tells $m.name to pull out before he comes, because she wants to feel his hot sperm on her.
+#end
+</askPullOutText>
+
+<runHandsOverBackText>
+$f.name runs her hands over $scene.addPossessiveSuffix($m.name) back##
+#if($m.figure == "TONED" || $m.figure == "MUSCULAR")
+	, feeling his muscles move as he rides her.
+#else
+	.
+#end
+</runHandsOverBackText>
+
+<kissingChestText>
+$f.name lifts her head and kisses $scene.addPossessiveSuffix($m.name) chest##
+#if($f.arousalEnjoy)
+	 and starts running her hands over $scene.addPossessiveSuffix($m.name) back##
+	#if($m.figure == "TONED" || $m.figure == "MUSCULAR")
+		, feeling his muscles move as he rides her##
+	#end
+#end
+.
+</kissingChestText>
+
+<talkSexilyWomanText>
+#set($possibleLines = [])##
+#addItem($possibleLines "Each of his thrusts makes $f.name gasp with passion, but she manages to murmur that his cock feels really hard inside her.")##
+#if($f.arousalClose)
+	#addItem($possibleLines "Each of his thrusts makes $f.name gasp with passion and she's almost incoherent, but she manages to moan out that she is so close and he should try to make her come before he finishes.")##
+	#addItem($possibleLines "Each of his thrusts makes $f.name gasp with passion and she's almost incoherent, but she manages to moan out that she is almost there.")##
+	#addItem($possibleLines "Each of his thrusts makes $f.name gasp with passion and she's almost incoherent, but she manages to moan into his ear that it feels so good that she's about to lose control.")##
+#end
+#if($f.arousalEnjoy)
+	#addItem($possibleLines "Each of his thrusts makes $f.name gasp with passion, but she manages to murmur that having sex like this is making her feel really good.")##
+#end
+#if($fLovesTempo)
+	#addItem($possibleLines "$f.name tells $m.name that she loves how he fucks her.")##
+#end
+#if($scene.hasFlag("SPY_SEX_ASKED_COME_INSIDE"))
+	#addItem($possibleLines "$f.name tells $m.name that she looks forward to feel his hot sperm inside her.")##
+#elseif($scene.hasFlag("SPY_SEX_ASKED_PULL_OUT"))
+	#addItem($possibleLines "$f.name tells $m.name that she looks forward to feel him spraying his hot sperm on her.")##
+#end
+#if($scene.hasFlag("SPY_SEX_LEGS_WRAPPED") && $f.personality != "JERK")
+	#addItem($possibleLines "Each of his thrusts makes $f.name gasp with passion, but she manages to murmur that she loves feeling him so close to her.")##
+#end
+$f.name reaches up to $m.name and draws his head down to hers. She kisses along his jawline until she reaches his ear. $scene.pickFromList($possibleLines)
+</talkSexilyWomanText>
+
+<movingHipsText>
+$f.name is moving her hips in time with $scene.addPossessiveSuffix($m.name) thrusts. ##
+#if($f.arousalClose)
+	While doing so, she pulls his head down to#if($f.hasTrait("VIGOROUS_LOVER")) passionately#end kiss him.
+#else
+	## empty line
+	
+#end
+</movingHipsText>
+
+<pullGuyIntoHerText>
+Using her wrapped legs around $m.name, $f.name squeezes them towards her, pulling him deeper inside. ##
+#if($m.arousalClose)
+	$m.name groans as he drives deep into her, his body tensing as he gets close to satisfying himself on top of her.
+#else
+	## empty line
+	
+#end
+#if($tempo == "SLOW" && $scene.percent(75))
+	He kisses $scene.addPossessiveSuffix($f.name) neck, burying his face in her as he thrusts faster, driving into her at a quicker pace.
+	#set($tempo = "AVERAGE")##
+#elseif($tempo == "AVERAGE" && ($scene.percent(25) || $m.hasTrait("VIGOROUS_LOVER") && $scene.percent(33)))
+	He kisses $scene.addPossessiveSuffix($f.name) neck, burying his face in her as he thrusts faster, driving into her with an intense passion.
+	#set($tempo = "FAST")##
+#end
+</pullGuyIntoHerText>
+
+<finishText>
+#if($caught)
+	$m.name and $f.name stop what they are doing and look at you. You wonder how they will react.
+#elseif($m.hadOrgasm)
+	Looks like they are done. Now is the time to get away before they notice you.
+#else
+	As lovely as the view is, you decide it is time to get away before they notice you.
+#end
+#if($w.clothesDisarrayed)$w.fixClothing()#end
+</finishText>

@@ -1,0 +1,1010 @@
+<sceneDescriptionText>
+You're attending a cooking class, hoping to improve your skills. You and the other students are in a fairly large white room that has several stations big enough for two people to stand at comfortably. Each station is a waist-high, wooden cabinet containing pots, pans, and other such cooking gadgets. The stations all have black-tiled tops with portable heating devices resting on top. Various tools and utensils required for cooking hang from hooks connected to cabinets above the stations. 
+</sceneDescriptionText>
+
+<cookeryClassIntroText>
+##
+#macro(isPossiblePartner $maleNpc)
+	#if($maleNpc.isNpcAttractionAttracted() && $maleNpc.hasTrait("SLEAZY"))#set($possiblePartner=true)
+	#elseif($maleNpc.partner || $maleNpc.friend)#set($possiblePartner=true)
+	#elseif(!$maleNpc.NpcLikingNeutral && ($maleNpc.behaviour == "MEAN" || $maleNpc.behaviour == "COLD"))#set($possiblePartner=false)
+	#elseif($w.getSkill("COOKING") < 50 && $maleNpc.behaviour != "NICE" && $maleNpc.behaviour != "ROM")#set($possiblePartner=false)
+	#{else}#set($possiblePartner=true)
+	#end
+#end
+##
+##
+#set($forgotFood = $scene.randomNumber(10)<2 && $w.hasTrait("FORGETFUL"))##
+#if(!$gd.hasGameFlag("COMPLETED_COOKING_INTRO"))
+You stop to pick up your mail on the way in from work and notice an eye-catching flyer advertising a cooking class. Deciding it would be advantageous to improve your cooking skills-not just for your own benefit, but for your##
+	#if ($w.isMum()) child##
+	#elseif ($w.isKnownPregnant()) future child##
+	#elseif ($w.isMarried() && $scene.hasFlag("partnerIsMale")) husband##
+	#elseif ($w.isMarried()) wife## Not possible in 0.7.11, but maybe in the future?
+	#elseif (!$w.isSingle()&& $scene.hasFlag("partnerIsMale")) boyfriend##
+	#elseif (!$w.isSingle()) girlfriend##
+	#else future partner##
+	#end##
+ as well, you make a note in your phone reminding yourself to go.
+
+You show up for the class at the date and time displayed on the advert, unsure of exactly what it entails, but ready to learn nonetheless. 
+You remember the flyer mentioning a required fee which you pay before taking time to look around the room while waiting for everyone else to show up. You immediately notice that there are a number of stations set up around the room, each with various heating devices, utensils, and anything else you might need to prepare a meal. You also notice that there are no ingredients at any of the stations though, leading you to believe that no actual cooking will be done today.
+
+As more people arrive, you notice that there's going to be a pretty even split in the class between men and women. You didn't really have any preconceived ideas about the demographics of the class, so you don't find this particularly shocking or anything. At the very least, you'll have a pretty good selection of people to talk to, should that be part of the class.
+Eventually the instructor, a $cookingInstructor.getRace() man with #if($cookingInstructor.hasHair)$cookingInstructor.getHairColour() hair and#end $cookingInstructor.getEyeColour() eyes, introduces himself as $cookingInstructor.getName() and confirms your suspicions about the lack of cooking in today's session. Instead, today will be spent getting to know each other, since the cooking will be done with partners. 
+He then encourages each of you to introduce yourselves, sharing a bit about your cooking expertise and your reasons for wanting to improve your skills. 
+
+People begin answering and you don't necessarily pay attention to all of them, but you try to take note of a few students who caught your eye. When it gets to you, you start with your reasons for taking the class. You say that you want to improve for your##
+	#if ($w.isMum()) child##
+	#elseif ($w.isKnownPregnant()) future child##
+	#elseif ($w.isMarried() && $scene.hasFlag("partnerIsMale")) husband##
+	#elseif ($w.isMarried()) wife## Not possible in 0.7.11, but maybe in the future?
+	#elseif (!$w.isSingle()&& $scene.hasFlag("partnerIsMale")) boyfriend##
+	#elseif (!$w.isSingle()) girlfriend##
+	#else future partner##
+	#end##
+ before going into more detail on your cooking experience.
+#if($w.hasTrait("BABY_CRAZY"))
+	#if ($w.getSkill("COOKING") < 20)You tell everyone that you don't really have much cooking experience. You do, however, have an ever present need to have a bun in your oven. You pause, expecting some laughs, but you're met with puzzled looks instead. Embarrassed, you continue, telling the class that you aren't completely useless in the kitchen, but you don't really have the experience to cook professionally.
+	#elseif($w.getSkill("COOKING") < 50)You start with saying that you have a moderate amount of cooking experience, but more importantly than that, you have a strong desire to always have a bun in your oven. You had hoped that your joke would elicit some laughter, but you're instead met with puzzled looks and confused silence. Embarrassed, you clear your throat and continue. You state that you can find your way around a kitchen well enough, but you wouldn't feel comfortable cooking in any professional capacity.##
+	#{else}You let everyone know that you're actually very experienced when it comes to food, but your eternal need to have a bun in your oven exceeds even that. You hoped that your opening comment would get some laughs, but you're instead met with bewilderment and confusion. Face flush with embarrassment, you muscle through and continue discussing your expertise. You can easily handle cooking professionally, but you know you still have room to improve and you hope this class can help you accomplish that.##
+	#end##
+#elseif($w.hasTrait("SHY"))
+	#if ($w.getSkill("COOKING") < 20)Everyone's eyes on you make you nervous, so you stare at the floor as you mumble your answer. You tell them that you don't have much experience, but you're not completely useless in the kitchen. $cookingInstructor.getName() stops you partway through to encourage you to speak up, but it doesn't work and instead just makes you self-consciously rush through the rest of your answer.
+	#elseif($w.getSkill("COOKING") < 50)You're overcome with embarrassment at having so many people looking at you, so your eyes drop to the floor. You start mumbling about how you have some experience cooking, but you wouldn't feel comfortable doing it at a professional level. $cookingInstructor.getName() cuts you off to tell you that you're voice is too low for anyone to understand you. Rather than speaking louder, you quickly mumble an apology and then stop talking so someone else can take a turn.##
+	#{else}Your face turns red with embarrassment as everyone looks to you for your answers. Unable to handle the stares, you drop your gaze to the floor before mumbling your answer. You say that you actually have a fair bit of cooking experience and you can easily navigate a kitchen. You can definitely cook at a professional level, but you'd still like to be better. You glance up for a moment and know by the looks on everyone's faces that no one understood a word you said, which leaves you even more flush with embarrassment. You mutter an apology and then stop talking so someone else can take a turn.##
+	#end##
+#elseif($w.hasTrait("OUTGOING"))
+	#if ($w.getSkill("COOKING") < 20)Delighted to have everyone's attention, you begin regaling them all with your experience. Unfortunately, you don't really have that much experience, but that's not going to stop you from enjoying the attention. In reality, you can cook a bit and aren't completely helpless in the kitchen, but no one is going to expect a banquet or anything from you. But, caught up in the attention, you embellish your experience a little bit, leading everyone to believe you're better than you actually are.
+	#elseif($w.getSkill("COOKING") < 50)Ecstatic to be the center of attention, you start telling everyone about your experience. You have a moderate amount of experience, but you can't help but play it up a bit. You're comfortable enough in the kitchen, but you couldn't cook professionally. Based on your telling, however, you sound like an amazing chef who has no business attending a generalized cooking class.##
+	#{else}Loving the attention you're being given, you start telling everyone about your cooking experience. You're very experienced, so you don't have to embellish much to make it interesting. You can cook at a professional level, but you know you could do even better and you hope this class can help with that.##
+	#end##
+#elseif($w.hasTrait("LOW_SELF_ESTEEM"))
+	#if ($w.getSkill("COOKING") < 20)You don't think you're worth listening to since you're so worthless, but the instructor looks at you expectantly, so you start talking about your experience with cooking. You tell everyone that you don't have much, but you aren't completely useless in the kitchen. No one would trust you to prepare a banquet for them, but there's little risk of you burning down a building while trying to boil water.
+	#elseif($w.getSkill("COOKING") < 50)Knowing how worthless you are, you try to avoid answering since no one is going to care anyway. After more insistence by $cookingInstructor.getName(), you give in and start talking about your experience. You're not a novice, but you still have considerable room for improvement. You can find your way around a kitchen without too much trouble, but you wouldn't dream of trying to cook on a professional level.##
+	#{else}You know you aren't worth listening to and no one will care what you have to say, so you try to get out of talking. However, after some insistence by $cookingInstructor.getName(), you cave and start talking. You mention that you have a decent amount of cooking experience and would be comfortable cooking at a professional level. You still feel that you have room to improve though, and you're hoping this class can help with that.##
+	#end##
+#else
+	#if ($w.getSkill("COOKING") < 20)You don't really have much experience. You've done some minor amounts of cooking here and there, but never anything substantial enough to consider actual experience. You can make yourself a grilled cheese sandwich if you have to, but that's not going to win you any awards or anything.##
+	#elseif($w.getSkill("COOKING") < 50)You have a fair bit of experience. You're nowhere near professional level, but you can certainly throw a dish or two together in a pinch. You don't think you'll enter any contests any time soon, but you're not exactly incompetent.##
+	#{else}You have some experience cooking and you're fairly comfortable finding your way around a kitchen. However, despite your competence, you still have plenty of room to improve. You'd love to get your cooking to professional level, if you can.##
+	#end##
+#end
+
+Once everyone has had a turn, the instructor steps in to say that, since much of the class work is going to be handled in pairs, it's extremely beneficial to ensure that everyone has a good sense of each other's current experience level so that you can make an informed decision when choosing a partner.
+
+After all of the introductions are out of the way, he hands each of you a different simple recipe that he wants each of you to prepare for the next class and then he sends you on your way, with the knowledge that next time you will pick a partner from the people you met today.
+#else
+A couple of hours before this week's cooking class is to begin, you fish out the recipe that you were handed at the end of your previous class and start gathering the called for ingredients and cooking supplies. It's intended to be a simple recipe for beginners, so it doesn't take much time or effort.
+
+	#if ($forgotFood)Despite how easy this task should be, you get distracted partway through, only to have your smoke alarm to inform you of your mistake a little while later. As much as it shames you to admit, it looks like you'll be showing up empty handed this week. You briefly consider buying something to bring, but the thought doesn't last long as you're sure the instructor will know the difference between a home-made and a store-bought dish, especially since anything you buy would deviate from your recipe in some way.##
+	#elseif($w.getSkill("COOKING") < 20)You manage to produce the assigned food fairly easily, even if you also make a bit of a mess in the process. You didn't take very long either, so you fortunately still have enough time to clean up your mess, shower, and change clothes in preparation for class.##
+	#{else}You can practically make a dish this simple in your sleep at this point, so you have more than enough time after you finish to clean up any messes and then relax a bit before class.##
+	#end##
+	#if (!$forgotFood) $w.skillIncrease("COOKING", 1)
+	#end##
+#end
+</cookeryClassIntroText>
+
+<goHomeIntroText>## Description of heading back home.
+Recipe in hand, you figure it's time to head home for the night. You set a reminder for yourself to get the ingredients you need before the next class and then head out the door.
+</goHomeIntroText>
+
+<talkInstructorIntroText>## Description of talking to the instructor.
+You feel like you know quite a bit about your classmates now after all of the introductions, but you still don't know much about the person leading it. You figure it couldn't hurt to change that, so you walk up to $cookingInstructor.getName() and tell him you want to get to know him better.
+</talkInstructorIntroText>
+
+<talkInstructorFriendlyText>## Friendly towards the instructor.
+You strike up a friendly conversation with him, engaging in a bit of small talk.##
+	#if ($w.getSkill("COOKING") < 20) You can't really talk about his field of expertise, as you still don't know much about cooking, but there are still plenty of other things to discuss. You try talking about the weather, current events, and anything else you can think of until eventually, he really starts engaging with the conversation. The two of you talk for quite a while and you feel that you're really getting to know each other.
+	#elseif($w.getSkill("COOKING") < 50) You try to engage him in his field of expertise, but you're not quite as knowledgeable as you'd like to be, so you quickly move on to another topic. Despite your initial blunder, you try cycling through several more topics until you eventually find one that you are both interested in and can talk about comfortably. The two of you continue talking for a while and you feel that you're developing a genuine connection.##
+	#else Being extremely familiar with his field of expertise, you engage him on the topic of cooking for quite a while. He seems genuinely surprised by how knowledgeable you are on the subject and even goes so far as to ask if you should really be taking this class. You insist that he still has more to teach you and he eventually agrees. You're conversation continues for quite a while before eventually winding down.##
+	#end##
+</talkInstructorFriendlyText>
+
+<talkInstructorFriendlyEndText>
+Eventually you decide it's time to head home, so you bring the conversation to a close and tell $cookingInstructor.getName() you'll see him next time. You affirm that you have the recipe you were handed earlier and then set a reminder for yourself to get the ingredients you need before the next class. You bid $cookingInstructor.getName() good night one last time and then head out the door.
+</talkInstructorFriendlyEndText>
+
+
+<talkInstructorFlirtyText>## Flirty towards the instructor.
+You openly flirt with $cookingInstructor.getName(), giving many hints towards your intentions with him. Barely a sentence goes by where you don't playfully giggle at something he said or end a statement by putting a hand on his shoulder encouragingly. He##
+	#if ($cookingInstructor.isNpcAttractionOk()) flirts back, making it clear he's interested in you. The two of you continue to engage in flirtatious banter for a bit.##
+	#else dismisses your flirting, clearly disinterested in your advances. He tells you he doesn't get involved in romantic entanglements with his students. Embarrassed by his dismissal of you, you decide you should probably call it a night.##
+	#end##
+</talkInstructorFlirtyText>
+
+<talkInstructorFlirtyExhangeNumbersText>
+The two of you exchange phone numbers so you can meet up later.
+</talkInstructorFlirtyExhangeNumbersText>
+
+<talkInstructorFlirtyInviteHomeText>
+You ask $cookingInstructor.getName() if he wants to go back to your place and he eagerly takes you up on your offer and you head out together. You make sure that you still have the recipe you were given earlier and put a note for yourself in your phone so you don't forget to pick up the required ingredients before the next class. You then take $cookingInstructor.getName() by the hand and walk out the door.
+</talkInstructorFlirtyInviteHomeText>
+
+<talkInstructorFlirtyInviteHomeDeclinedText>
+$cookingInstructor.getName() declines your offer, stating he'd rather get to know you better first. With his dismissal of your request, you feel it's best to call it a night. Making sure you have the recipe you were assigned earlier, you make yourself a reminder to get the ingredients you need before the next class and then head out.
+</talkInstructorFlirtyInviteHomeDeclinedText>
+
+<talkInstructorFlirtyEndText>
+#if ($cookingInstructor.isNpcAttractionOk()) Deciding you've had enough conversation for one night, you bid him farewell and leave, letting him know you'll see him next time. You double check that you still have the recipe you were given earlier and then leave the classroom, making sure to put a reminder in your phone to pick up everything you need before the next class.##
+#elseif ($w.hasTrait("BITCHY")) You give him a few choice words, calling him an asshole and making it abundantly clear you are unsatisfied with his response. You then flip him the bird and walk out, not even turning to look at him as you leave. Once outside the room, you make sure you have the recipe you were handed, just in case you decide to come back, and then make a note reminding yourself to pick up the ingredients you need to make the dish for the next class.##
+#else In response to his dismissal, you timidly mumble something about having to go and then quickly walk out. Once outside, you check that you still have the recipe you were handed earlier and make a note so you don't forget to get the ingredients you need by the next class.##
+#end##
+</talkInstructorFlirtyEndText>
+
+
+<talkInstructorSexualText>## Sexual towards the instructor.
+You behave as much like a porn star as you can manage, to the point that someone might think porn was your only exposure to sexuality. You casually toss out sexual innuendos and occasionally even reach out to caress his chest in the most sexually suggestive way you can. $cookingInstructor.getName()##
+	#if ($cookingInstructor.isNpcAttractionOk()) shows clear interest in your advances, his erection now showing through his $cookingInstructor.getTrousers()##
+	. He begins following your example with sexual innuendos and groping of his own.
+	#else brushes you off, pushing away your hand that was reaching for his chest and telling you that he doesn't engage in that kind of behavior with his students.
+	#end
+</talkInstructorSexualText>
+
+<talkInstructorSexualExhangeNumbersText>
+The two of you exchange phone numbers, his eyes continuing to roam your body the whole time.
+</talkInstructorSexualExhangeNumbersText>
+
+<talkInstructorSexualInviteHomeText>
+$cookingInstructor.getName() eagerly takes you up on your offer and you head out together, your hands exploring each other's bodies the entire time. Before you leave, you stop feeling each other up just long enough for you to make sure you have the recipe you were handed earlier and to set a reminder for yourself to get the ingredients you need before the next class. With that accomplished, you resume your sexual advances and the two of you walk out together.
+</talkInstructorSexualInviteHomeText>
+
+<talkInstructorSexualInviteHomeDeclinedText>
+$cookingInstructor.getName() declines your offer, stating he'd rather get to know you better first. You try not to show the sting of rejection on your face in response to his rejection of your offer. His dismissal of your request does leave you feeling hurt though, so you decide it's best to call it a night. Still hiding the sting of rejection, you leave after making sure you have the recipe you were given earlier and setting a reminder for yourself to get the ingredients you need before the next class.
+</talkInstructorSexualInviteHomeDeclinedText>
+
+<talkInstructorSexualEndText>
+#if (!$cookingInstructor.isNpcAttractionOk()) Deciding you've had enough interaction for one night, you bid him farewell, telling him you'll see him next time. You then double check your belongins, making sure you tucked the recipe you received earlier in a place you won't forget. You then set a reminder for yourself to get the ingredients for the recipe and leave the room.##
+#elseif ($w.hasTrait("BITCHY")) Not taking rejection lightly, you throw some rough expletives in his direction before turning and walking out. However, in the event that you decide to come back, you make sure you have the recipe you were handed earlier and set a reminder for yourself to get the ingredients you need before the next class.##
+#else You sheepishly mutter something about needing to leave and quickly walk out without giving $cookingInstructor.getName() a second glance. Once outside, you check for the recipe you were given earlier and thankfully you had not forgotten it. You couldn't even fathom the shame of having to walk back in after your last exchange and ask for another copy. You then set a reminder for yourself to do everything you need to do in order to prepare for the next class and then you head off toward home.##
+#end##
+</talkInstructorSexualEndText>
+
+
+<talkInstructorRudeText>## Rude towards the instructor.
+He may be your instructor, but that's not going to stop you from putting him in his place. You tell him exactly what you think of him with no regard to his feelings, sparing no details. You make it clear that if you're going to take his class, you should be his priority and that no one else matters. ##
+	#if ($cookingInstructor.hasTrait("DOORMAT")) Your intimidation clearly works and you can tell $cookingInstructor.getName() is as afraid of you as you feel he should be. He tells you that he'll make sure your education comes first and he won't let anyone else get in your way. Mission accomplished, you call it a night. You make sure you have the recipe you were handed earlier and set a reminder for yourself to get the ingredients you need before the next class.##
+	#else Your intimidation attempt backfires horribly and after such a rude display, $cookingInstructor.getName() tells you that you aren't welcome back to class. You half-heartedly apologize and that seems to satisfy him somewhat. He tells you that you can come back next time, with the caveat that one more outburst like that would spell the end of your participation in the class. You agree, partly because you figure there'll probably be some way to get back on his good side later, so you aren't too worried about him holding any of this against you. You make sure you have the recipe you were handed earlier and set a reminder for yourself to get the ingredients you need before the next class.##
+	#end##
+</talkInstructorRudeText>
+
+<goToClassLongDescText>
+#if ($forgotFood) Head off to class empty handed, hoping you can make up for it somehow once you're there.##
+#else Head off to the cooking class, dish in hand.##
+#end##
+</goToClassLongDescText>
+
+<goToClassText>
+#if ($forgotFood) You walk in and have to explain to everyone why you showed up with nothing to offer. You hear a few chuckles and see some rolled eyes as you recount your kitchen disaster. Even the instructor seems annoyed with your forgetfulness. After your story, you pass by the table where the dishes from the other students are set and you see a wide variety of foods represented. Evidently, no two students got the same recipe, which makes the lack of your dish all the more disappointing.
+#else You bring your dish to class and set it with the assortment of other foods you see already on a table when you arrive. It appears no two people were given the same recipe, so there's a decent variety of foods represented on the table.
+#end##
+
+After everyone has officially settled in, the instructor encourages all of you to sample what the others have brought and give constructive feedback based on your thoughts. You sample a little bit of everything, making sure to give whatever helpful pointers you can.##
+#if ($w.getSkill("COOKING") < 20) As a complete amateur, you feel that your advice isn't particularly useful, but you still try to help where you can. You might not know the ins and outs of everything food related, but you can still tell when a dish has too much salt or something didn't cook long enough. You try to give at least one piece of helpful feedback to everyone before while sampling the assortment of food in front of you.
+#elseif($w.getSkill("COOKING") < 50) Since you're still relatively inexperienced though, your advice probably isn't that helpful. You can go a bit more in depth in your criticism than someone who's never cooked before, but no one is going to take your feedback as a sign that you should be teaching the class. Regardless, you still try to offer some advice you feel is helpful to everyone whose dishes you sample.##
+#else As you're probably one of the more experienced chefs here, your advice is likely some of the most trustworthy. In fact, some people actively seek out your advice upon hearing the feedback that you give to their peers. By the end of the sampling session, while you don't feel that you should be leading the class, you feel much more confident and knowledgeable about cooking than you did when you first entered the room.##
+#end##
+
+Once the sampling wraps up and everyone has received feedback on their food, you are encouraged to choose your partner.
+</goToClassText>
+
+<selectName1>
+$m1.getName()
+</selectName1>
+
+<selectName2>
+$m2.getName()
+</selectName2>
+
+<selectName3>
+$m3.getName()
+</selectName3>
+
+<selectNameFem>
+$fem.getName()
+</selectNameFem>
+
+<selectDescription1>
+You decide to choose $m1.getName() as your partner.
+</selectDescription1>
+
+<selectDescription2>
+You decide to choose $m2.getName() as your partner.
+</selectDescription2>
+
+<selectDescription3>
+You decide to choose $m3.getName() as your partner.
+</selectDescription3>
+
+<selectDescriptionFem>
+You decide to choose $fem.getName() as your partner.
+</selectDescriptionFem>
+
+<selectMaleStudentText>
+You decide that $activeMaleNpc.name would be a fine partner for an hour of cooking.
+</selectMaleStudentText>
+
+<offerToWorkWithManText>
+You approach $activeMaleNpc.name and ##
+#if($w.hasTrait("SHY"))nervously #end
+suggest partnering up for the class.
+
+## He always accepts if he intends to perv on her
+#if($activeMaleNpc.isNpcAttractionAttracted() && $activeMaleNpc.hasTrait("SLEAZY"))
+	He eagerly accepts, with a ##
+	#if($w.hasTrait("REFINED") || $w.hasTrait("SHY"))worryingly #end
+	lecherous glint in his eyes.
+## He'll refuse if he dislikes her, has a negative behaviour (i.e. isn't pretending to like her in order to get laid) and isn't her partner or friend.
+#elseif(!$activeMaleNpc.NpcLikingNeutral && ($activeMaleNpc.behaviour == "MEAN" || $activeMaleNpc.behaviour == "COLD") && !$activeMaleNpc.partner && !$activeMaleNpc.friend)
+	$activeMaleNpc.getName() turns down your offer to work together, his eyes clearly set on someone else. Someone whose company he could tolerate for an entire class.
+	$activeMaleNpc.reduceWLikingTiny()##
+	$scene.addFlag("COOKING_CLASS_REJECTED")
+## He can also refuse at higher liking levels if her cooking skill is bad.
+#elseif($w.getSkill("COOKING") < 50 && ($activeMaleNpc.behaviour == "COLD" || $activeMaleNpc.behaviour == "MEAN") && !$activeMaleNpc.partner && !$activeMaleNpc.friend)
+	He curtly shakes his head. Sure, it's a class and you're all here to learn but he explains that you have an awful lot of learning left to do before you'll be a worthy partner for him.
+	$activeMaleNpc.reduceWLikingTiny()##
+	$scene.addFlag("COOKING_CLASS_REJECTED")
+#else
+	He's fine with the idea of working together and##
+	#if($activeMaleNpc.hasTrait("TACITURN")) accepts with a silent nod.
+	#elseif($activeMaleNpc.hasTrait("CHARMING")) accepts with a gallant bow. Charming, if perhaps a little contrived.
+	#else agrees to be your partner.
+	#end
+#end
+</offerToWorkWithManText>
+
+
+<seeWhosLeftText>
+## The player ends up partnered with a random NPC other than the one who rejected her.
+## This doesn't check the usual accept/reject conditions - this is someone who's also left without a partner and they can't afford to be too picky.
+#if($activeMaleNpc != $m1) $scene.addWeightedItem("1",1)#end
+#if($activeMaleNpc != $m2) $scene.addWeightedItem("2",1)#end
+#if($activeMaleNpc != $m3) $scene.addWeightedItem("3",1)#end
+$scene.addWeightedItem("f",1)
+#set($chosenPartner = $scene.pickItemAndClearMap())
+#if($chosenPartner == "1")$scene.setActiveMaleNpc($m1)
+#elseif($chosenPartner == "2")$scene.setActiveMaleNpc($m2)
+#elseif($chosenPartner == "3")$scene.setActiveMaleNpc($m3)
+#{else}#set($cookingWithWoman = true)#end
+##
+Almost everyone else has already paired up.##
+#if($w.hasTrait("LOW_SELF_ESTEEM")) With tears in your eyes from the pain of rejection,##
+#else Shaking off the sting of rejection,##
+#end
+ you look for someone to cook with.
+ 
+#if($cookingWithWoman)
+	You find yourself partnered with $fem.name, one of the other women taking the class.
+#else
+	You end up partnered with $activeMaleNpc.getName(), one of the guys taking the class.
+#end
+</seeWhosLeftText>
+
+<startCookingWithManText>
+## Standard intro paragraph that applies to all paths.
+You and $activeMaleNpc.name head to a pre-set station where the necessary supplies for today's lesson have been laid out. Alongside the supplies sits a recipe intended to help you pick up a new cooking technique. 
+You and your partner start digging through the supplies laid out in front of you and you look around the room and see that the other pairs of students are all doing the same. As everyone starts working, the instructor circles around the various groups, making sure that everything is going alright and that there are no fires - literal or otherwise - that need dousing.
+
+## First, decide what outcome to have here. The variables are set here & reused in the followUpActions section as it's better to only have the logic in one place - SO
+## Sleazy acts inappropriately. Has a random check to allow a bit more variety for these characters.
+#if($activeMaleNpc.hasTrait("SLEAZY") && $activeMaleNpc.isNpcAttractionAttracted() && $scene.percent(66))
+	## Set the variable controlling the path to true. If the path isn't chosen then the variable doesn't get set at all.
+	## It would also be valid to set it to false. 
+	## This isn't necessary though because in velocity will treat a null value for $inappropriatePartner in #if($inappropriatePartner) as false.
+	#set($inappropriatePartner = true)
+## "spark" due to mutual attraction with someone she hasn't slept with. Always triggers when valid
+#elseif(!$activeMaleNpc.partner && !$activeMaleNpc.hadSex && !$activeMaleNpc.hadAnalSex && $activeMaleNpc.wAttractionAttracted && $activeMaleNpc.npcAttractionAttracted)
+	#set($spark = true)
+## The default is that they start cooking together normally. There's later sub-paths based on personality traits.
+#else
+	#set($normalCooking = true)
+#end
+##
+## Next, the actual text itself. This could have been combined into the above if-statement but I think it makes it easier to read if the text and logic is kept separate.
+#if($inappropriatePartner)
+
+	#if ($scene.randomBoolean())Before you can even really begin work, $activeMaleNpc.getName() starts actively ogling your body and throwing out the occasional inappropriate comment. His eyes never seem to drift above your neck and certainly not towards the food you're supposed to be working with. ##
+	#{else}You can't help but notice that, when he thinks you aren't looking, $activeMaleNpc.getName()'s eyes drift up and down your body. You don't think he ever actually looks toward the ingredients you're supposed to be working with, instead keeping his focus on your erogenous zones. ##
+	#end##
+	You can't just continue ignoring him all class. You have to take some kind of action, so you decide to handle this by...##
+#elseif($spark)
+		#if($w.getSkill("COOKING") < 50)
+			You cook together, not with the greatest of skill but with an underlying frisson that's more tantalising than the finest gourmet meal.
+		#else
+			You cook together, but there's a certain tantalising undercurrent that, despite your mutual culinary talent, feels more tantalising than even your most delicious confections.
+		#end
+		#if($scene.randomBoolean())
+			Partway through your hands touch while stirring a pot of sauce. The simple contact sense a sudden jolt through you and, judging from how $activeMaleNpc.name draws in his breath you think he's felt it too.
+		#else
+			You cook together, but your eyes keep getting drawn to your partners. His to yours as well. You really should be paying more attention to the food but for some reason you just can't focus.
+		#end
+		## Base effects from the spark path: increase love but not liking. Further increases may happen in the followups.
+		$activeMaleNpc.addWLoveMedium()##
+		$activeMaleNpc.addNpcLoveMedium()##
+#end
+## There's no need for extra text for the "normal cooking" path so no else-clause.
+</startCookingWithManText>
+
+<sparkFlusteredText>
+You came here to cook, not for... whatever this is! Even though nothing much has actually happened, you find yourself overwhelmed by embarrassment. Blushing deeply and stammering over your words, you have to ask $activeMaleNpc.name to give you a moment to collect yourself.
+#if(!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+	#if($w.virgin)
+		You're really a man, after all. A straight man. What are you doing feeling... strange things... about another guy? This isn't what's supposed to happen!
+	#else
+		Sure, you've had sex with men, but you're really a guy at heart, right? A straight guy who wants to be a man again? Not someone who gets all giddy just from cooking with a man they fancy. 
+		Although that isn't what you meant. It can't have been, because you don't fancy $activeMaleNpc.getName(), do you?
+	#end
+#end
+#if($activeMaleNpc.hasTrait("LIKES_CUTE"))
+	$activeMaleNpc.addNpcLoveMedium()##
+	$activeMaleNpc.addNpcLikingTiny()##
+#end
+</sparkFlusteredText>
+
+<sparkIgnoreText>
+This is nothing. Nothing! With your jaw set and a determined glint to your eyes, you throw yourself into the cooking, ignoring your partner as much as possible. 
+$activeMaleNpc.reduceWLoveTiny() ## Only partially remove the increase from the previous action.
+</sparkIgnoreText>
+
+<sparkConfidentText>
+You enjoy having a bit of a thrill like this, but it won't make you lose your cool. You smile at $activeMaleNpc.name and carry on cooking as if nothing's happening. But it is, and you smile again when his cheeks colour and his breathing quickens.
+
+Step by step the food takes shape, from raw ingredients to a finished meal. If there's something happening between you, then it isn't fully cooked yet, but you know just how to stir the pot.
+$activeMaleNpc.addNpcLoveLarge()
+$activeMaleNpc.addNpcLikingTiny()
+$activeMaleNpc.addWLoveSmall()
+</sparkConfidentText>
+
+<sparkFlirtText>
+You give him a teasing grin that playfully recognises the attraction between you without taking it too seriously. Happy and carefree, you flirt your way through the rest of the lesson, or at least those parts of it when you aren't pre-occupied with actual cooking. 
+
+#if($activeMaleNpc.hasTrait("TACITURN"))
+	Sadly, your taciturn partner isn't an especially quick-tongued conversationalist, and your initial joy slowly ebbs as you come to realise that he's largely incapable of flirting back.
+	$activeMaleNpc.reduceWLikingTiny()
+#elseif($activeMaleNpc.hasTrait("DULL"))
+	Unfortunately, your initial joy quickly ebbs when $activeMaleNpc.name tries to reciprocate and reveals himself to be a total bore. Your heart sinks beneath the force of his tedium and you do your best to turn your focus back to the food.
+	$activeMaleNpc.reduceWLikingSmall()
+#else
+## Standard gameplay effects
+	$activeMaleNpc.addWEnjoyMedium()
+	$activeMaleNpc.addEnjoyMedium()
+	$activeMaleNpc.addWLoveTiny() 
+	$activeMaleNpc.addNpcLoveTiny()
+#end
+</sparkFlirtText>
+
+<sparkShyText>
+You flush deeply and, with a repressed squeak, abruptly turn your back on him. 
+
+#if($activeMaleNpc.personality == "CARING")
+	$activeMaleNpc.name puts a reassuring hand on your##
+	#if($w.top.topType =="STRAPPY" || $w.top.topType =="HALTERTOP"  || $w.top.topType =="STRAPLESS") bare#end
+	 shoulder, perhaps wondering if your body is trembling due to fear, or anger, or perhaps indigestion.
+	 
+	You can't face him again, but it doesn't matter. Sensing your consternation he enfolds you in his##
+	#if($activeMaleNpc.figure == "MUSCULAR" || $activeMaleNpc.figure == "THICKSET") powerful##
+	#elseif($activeMaleNpc.figure =="TONED") strong##
+	## Not adding an adjective for other body-types because "he enfolds you in his flabby arms" rather ruins the feel of the paragraph!
+	#end
+	 arms, holding you from behind in a warmly reassuring hug.
+
+	Safely held, you're able to collect yourself and calm down enough to resume cooking. Although you're careful to avoid eye-contact. That'd be far too much for you to handle right now!
+	$activeMaleNpc.addWLoveMedium()
+	$activeMaleNpc.addNpcLoveSmall()
+	$activeMaleNpc.addWLikingSmall()
+#elseif($activeMaleNpc.behaviour == "MEAN")
+	Perhaps a part of you had hoped that $activeMaleNpc.name would understand and coax you back into cooking with him, but you've picked the wrong cooking partner for that. There might be a strange electricity between you, but it hasn't shocked him into being more compassionate.
+	With an angry scoff, he turns and walks away, leaving you to struggle through the last of the cooking on your own.
+	$activeMaleNpc.reduceWLoveSmall()
+	$activeMaleNpc.reduceWLikingMedium()
+	$activeMaleNpc.addBastard(5)
+	$activeMaleNpc.reduceNpcLikingSmall()
+	#set($learntBadly = true)
+	#set($finishCookingAlone = true)
+#else
+	Confused, $activeMaleNpc.name waits for you to collect yourself. Eventually your heartbeat slows back down and you're able to face him again. You've lost a fait bit of cooking time, but at least you can continue so long as you avoid eye-contact.
+	#set($learntBadly = true)
+#end
+</sparkShyText>
+
+<cookWithManText>
+## Check for opposing traits that allow for personality-clashes. The exact strings will all need to be checked later-on 
+$scene.clearMap()## Empty the map, just in case something had been added before and not removed
+#if($activeMaleNpc.hasTrait("LIKES_CUTE") && ($w.hasTrait("SULTRY") || $w.outfitSexy)) $scene.addWeightedItem("lcSultry",1)#end
+#if($activeMaleNpc.hasTrait("LIKES_SEXY") && ($w.hasTrait("CUTE") || $w.outfitCute)) $scene.addWeightedItem("lsCute",1)#end
+#if($activeMaleNpc.hasTrait("LIKES_ELEGANT") && ($w.hasTrait("DOWN_TO_EARTH") || $w.outfitCasual)) $scene.addWeightedItem("leDte",1)#end
+#if($activeMaleNpc.hasTrait("LIKES_CASUAL") && ($w.hasTrait("POSH") || $w.outfitElegant)) $scene.addWeightedItem("lcPosh",1)#end
+#if($activeMaleNpc.personality == "ROMANTIC" && $w.hasTrait("AROMANTIC")) $scene.addWeightedItem("romanticVsAromantic",1)#end
+#if($activeMaleNpc.hasTrait("COLD_HEARTED") && $w.hasTrait("ROMANTIC") && !$activeMaleNpc.hasTrait("CHARMING")) $scene.addWeightedItem("chRomantic",1)#end
+#if($activeMaleNpc.personality == "CARING" && $w.hasTrait("BITCHY")) $scene.addWeightedItem("caringBitchy",1)#end
+#if($activeMaleNpc.personality == "JERK" && $w.hasTrait("NICE")) $scene.addWeightedItem("jerkNice",1)#end
+#if($activeMaleNpc.hasTrait("CRUDE") && $w.hasTrait("REFINED")) $scene.addWeightedItem("crudeRefined",1)#end
+##
+## This first section of the if-clause is the positive branch of the action. It triggers it there are no personality clashes or on a % chance even if there are. This means that 
+## clashes won't always lead to conflict, but they will more often than not. If one of the characters already dislikes the other though, then they'll always clash if possible.
+##
+## One alternative implementation (for any would-be writers reading this) would be to add both clashes and compatibilities to the map together, perhaps even with varying weights 
+## for ones that are particularly rare, important or have especially interesting text. You'd then pick one and run either the clash or compatibility prelude depending on 
+## which type it was. This would give a situation where having lots of clashes/compatibilities made it more likely for one to be picked. I chose not to do this here because I 
+## think it's fitting for a pair of characters to be constantly bickering over the same few disagreements week after week.
+##
+#if($scene.weightedMapEmpty || (!$activeMaleNpc.wLikingNeutral && !$activeMaleNpc.npcLikingNeutral && $scene.percent(40)))
+	## Friendly cooking action. 2 sections: first, a standard cooking passage. Second, an optional "connection" section.
+	## The purpose of this is to allow the PC to naturally build a relationship with a compatible NPC just by spending time with him without the player having to 
+	## outright date him or choose an obvious "flirt" type action.
+	#if($activeMaleNpc.partner)
+		You take the class with your $activeMaleNpc.relationshipNpcDesc, chatting together as you work on your cooking skills.
+	#else
+		#set($cookingTextPath = $scene.randomNumber(3))
+		#if($cookingTextPath == 0)
+			The two of you cook together, sharing the odd moment of friendly chat when you aren't stopping pots from boiling over.
+		#elseif($cookingTextPath == 1)
+			## Ambitious/Relaxed/Neither path. I decided not to vary the liking levels or cooking-skill-increase on these traits as it'd feel too much like a nerf for relaxed characters
+			You and $activeMaleNpc.name cook together.
+			#if($w.hasTrait("AMBITIOUS")) You're eagle-focused on maximising your learning power, but even so you can't help but share the odd moment of conversation with your cooking partner. It isn't a bad way to get to know someone.
+			#elseif($w.hasTrait("RELAXED")) Learning to cook is nice, but you aren't one to take it too seriously. You spend quite a bit of the class chatting with your partner and getting to know him a bit better.
+			#else Your main focus, of course, is on learning, but you still find time to chat with your partner and get to know him a bit better.
+			#end
+		#else 
+			The two of you cook together, and although your main focus is preparing food it's also a good way to get to know somebody.
+		#end
+	#end
+
+	##
+	## 2nd section: "connections". This is based on having compatible traits etc. The idea is to pick a valid connection at random, or go down the "no connection" path if there
+	## are no valid ones. To implement this I'm using the weighted Map in $scene. 
+	$scene.clearMap()## Empty the map again.
+	## Each connection gets its own if statement: an if-elseif-else wouldn't be appropriate because I want every valid connection added to the map, not just the first one that's found.
+	#if($activeMaleNpc.hasTrait("INTERESTING")) $scene.addWeightedItem("Interesting",1)#end
+	#if($activeMaleNpc.personality == "ROMANTIC" && $w.hasTrait("ROMANTIC")) $scene.addWeightedItem("BothRomantic",1)#end
+	#if($activeMaleNpc.personality == "JERK" && $w.hasTrait("BITCHY")) $scene.addWeightedItem("BitchyJerk",1)#end
+	#if($activeMaleNpc.personality == "JERK" && $w.hasTrait("LOW_SELF_ESTEEM")) $scene.addWeightedItem("LSEJerk",1)#end
+	#if($activeMaleNpc.hasTrait("LIKES_CUTE") && !$w.hasTrait("SULTRY") && $w.outfitCute)$scene.addWeightedItem("LikesCuteOutfit",1)#end
+	#if($activeMaleNpc.hasTrait("LIKES_SEXY") && !$w.hasTrait("CUTE") && $w.outfitSexy)$scene.addWeightedItem("LikesSexyOutfit",1)#end
+	#if($activeMaleNpc.hasTrait("LIKES_ELEGANT") && !$w.hasTrait("DOWN_TO_EARTH") && $w.outfitElegant)$scene.addWeightedItem("LikesElegantOutfit",1)#end
+	#if($activeMaleNpc.hasTrait("LIKES_CASUAL") && !$w.hasTrait("POSH") && $w.outfitCasual)$scene.addWeightedItem("LikesCasualOutfit",1)#end
+	#if($activeMaleNpc.hasTrait("LIKES_CUTE") && !$w.hasTrait("SULTRY") && !$w.outfitSexy && $w.hasTrait("SHY") && !$activeMaleNpc.partner && !$activeMaleNpc.friend)$scene.addWeightedItem("LikesShy",1)#end
+	#if($activeMaleNpc.hasTrait("LIKES_SEXY") && $w.hasTrait("SULTRY") && !$w.outfitCute)$scene.addWeightedItem("LikesSultry",1)#end
+	#if($activeMaleNpc.hasTrait("LIKES_CUTE") && $w.hasTrait("CUTE") && !$w.outfitSexy)$scene.addWeightedItem("LikesCute",1)#end
+	#if($activeMaleNpc.hasTrait("LIKES_CASUAL") && $w.hasTrait("DOWN_TO_EARTH") && !$w.outfitElegant)$scene.addWeightedItem("LikesCasual",1)#end
+	#if($activeMaleNpc.hasTrait("LIKES_ELEGANT") && $w.hasTrait("POSH") && !$w.outfitCasual)$scene.addWeightedItem("LikesPosh",1)#end
+	#if($activeMaleNpc.personality == "CARING" && $w.hasTrait("NICE"))$scene.addWeightedItem("CaringNice",1)#end
+	
+	#if($scene.weightedMapEmpty)
+		## Nothing in the map - use the no connection path
+		$activeMaleNpc.addNpcLikingSmall()## All sub-paths get the same NPC liking increase, even when he's dull.
+		#if($activeMaleNpc.partner)
+				Even though you're in a relationship, you don't always find that you have much of a connection. ##
+				#if($activeMaleNpc.wLoveLove)
+					You love him, but##
+				#elseif($activeMaleNpc.wLoveCrush)
+					You have feelings for him, but##
+				#else
+					Sure, he's your $activeMaleNpc.relationshipNpcDesc, but##
+				#end
+				 at heart you're very different people.
+			#if($activeMaleNpc.hasTrait("DULL"))
+				To make things worse, he isn't even very interesting company and you find yourself bored out of your wits.
+				#if($activeMaleNpc.wLikingNeutral)$activeMaleNpc.reduceWLikingTiny()#end
+			#else
+				Still, it's always nice to spend friendly time with your special man.##
+				$activeMaleNpc.addWLikingSmall()##
+			#end
+		#elseif($activeMaleNpc.hasTrait("DULL"))
+			He isn't very interesting to talk to though, and you don't even have all that much in common. Your cooking skills have improved but you've had more enjoyable hours.
+			#if($activeMaleNpc.wLikingNeutral)$activeMaleNpc.reduceWLikingTiny()#end
+		#else
+			You find that you don't have very much in common.##
+			#if($w.hasTrait("SHY")) Still, while you aren't in love with the idea of socialising with someone, it's good to have another person there to help with the lesson.
+			#else Still, it's more enjoyable to cook with someone than to take a lesson alone.
+			#end
+			$activeMaleNpc.addWLikingSmall()##
+		#end
+	#else
+		## Map is populated, which means there's a connection. Run text for the appropriate section as well as a set of relationship-level changes that are common for all connections. 
+		#set($chosenConnection = $scene.pickItemAndClearMap())
+		#if($chosenConnection == "Interesting")##
+			He's really an interesting person, someone who really livens up the class. You could sit and talk with him all day, food or no food.
+		#elseif($chosenConnection == "BothRomantic")
+			The two of you have similar tastes in some things: he even shares your love of rom-coms and you're able to happily chat away about the best moments of your favourite films.
+		#elseif($chosenConnection == "BitchyJerk")
+			He's actually quite fun to be around. For example, when the flustered woman at the next table messes up her food he says some really choice words to her that almost make her cry.
+		#elseif($chosenConnection == "LSEJerk")
+			He's actually someone you can quite respect. In particular, when you're working a bit too slowly for his tastes he isn't shy about telling you how rubbish you are. He's right, of course, and you admire a man who speaks his mind like that.
+		#elseif($chosenConnection == "LikesCuteOutfit" || $chosenConnection == "LikesSexyOutfit" || $chosenConnection == "LikesElegantOutfit" || $chosenConnection == "LikesCasualOutfit")
+			You have fun talking to him, and he seems to really like your outfit. ##
+			#if($activeMaleNpc.hasTrait("FASHIONABLE"))
+				He's a really fashionable guy, so praise from him feels really meaningful. You're left feeling that you look##
+			#elseif($w.hasTrait("LOW_SELF_ESTEEM"))
+				You don't think it's all that great, but he tells you that you look##
+			#else
+				Being praised is always nice, and you do look##
+			#end
+			#if($chosenConnection == "LikesCuteOutfit") super-cute today#if($w.hasTrait("LOW_SELF_ESTEEM")).#{else}!#end
+			#elseif($chosenConnection == "LikesSexyOutfit") rather hot today.
+			#elseif($chosenConnection == "LikesElegantOutfit") very nice today.
+			#elseif($chosenConnection == "LikesCasualOutfit") pretty cool today.
+			#end
+		#elseif($chosenConnection == "LikesShy")
+			You're feeling a bit shy this evening - too shy to really talk much. $activeMaleNpc.name isn't concerned though. He gives you a comforting pat on the head, calls you cute, and gets merrily stuck into the cooking.
+		#elseif($chosenConnection == "LikesSultry")
+			#if($activeMaleNpc.hasTrait("SLEAZY"))
+				He makes an off-colour joke, you respond in kind. Soon the two of you are laughing together over a shared dirty wit and a mutual appreciation of the naughtier things in life.
+			#else
+				Cooking is full of so much opportunity for innuendo that you can't resist making a naughty comment. For a moment you wonder if you've made things weird, but then he laughs and compliments you on being in-touch with your sexuality. It's good to spend time with someone who appreciates you for who you are.
+			#end
+		#elseif($chosenConnection == "LikesCute")
+			You get on really well. It seems that he can really appreciate cooking alongside a sweet little ray of sunshine, and you enjoy spending time with a man who calls you cute and looks happy when you're innocently playful.
+		#elseif($chosenConnection == "LikesCasual")
+			#set($randomLineInt = $scene.randomNumber(3))## feel free to write in with suggestions for new lines of "ridiculous posh-boy antics"
+			The two of you connect by joking about the ridiculous habits of your supposed betters in the upper-classes. Apparently##
+			#if($randomLineInt == 0) parliament recently descended into fisticuffs because of a disagreement over top-hats ##
+			#elseif($randomLineInt == 1) the rivalry between two prestigious public schools has led to several incidents of custard-related vandalism ##
+			#else several minor nobles were minorly mauled in an attempt to imitate the monarch's decision to take a pet honey badger ##
+			#end##
+			and you both find their dumb antics riotously funny.
+		#elseif($chosenConnection == "LikesPosh")
+			He really admires your elegant upper-class manners. It's such a delight to speak with someone who understands the importance of going to the right public schools, how a true gentleman only ever gets his top-hat from a Savile-Row tailor and how it's the duty of any would-be pet-owner to first consider imitating the irreproachable choices of the Monarch when selecting an animal.
+		#elseif($chosenConnection == "CaringNice")
+			He just seems like a genuinely kind person. When one of your nearby classmates messes up their cooking and spills sauce across their table he goes over to help them out, even though it means putting his own work on hold. You, of course, are right there with him and you think that banding together to rescue a stranger's evening has really helped you bond.
+		#else
+			Unrecognised connection value: ${chosenConnection}. Please report this to the developer as a bug.
+		#end
+		## Stat effects for connection path - always the same regardless of the specific connection:
+		$activeMaleNpc.addWLikingLarge()##
+		$activeMaleNpc.addNpcLikingLarge()##
+		$activeMaleNpc.addWLoveSmall()##
+		$activeMaleNpc.addNpcLoveSmall()##
+		$activeMaleNpc.increaseKnowledge(1,35)##
+	#end
+#else
+	## Personality-clash path.
+	#set($cookingTextPath = $scene.randomNumber(3))
+	#if($cookingTextPath == 0)
+		The two of you cook together, taking the occasional moment to chat together, something which quickly proves to be a mistake.
+	#elseif($cookingTextPath == 1)
+		You and $activeMaleNpc.name cook together. You do your best to learn and improve, but it's so difficult with such an aggravating partner!
+	#else 
+		The two of you cook together, and although your main focus is preparing food it's also a good way to get to know somebody. Sometimes, of course, getting to know somebody isn't a good thing.
+	#end
+
+	## Pick one of the options that was added to the map at the start of this action.
+	#set($chosenClash = $scene.pickItemAndClearMap())
+	#if($chosenClash == "lcSultry")
+		#if($w.hasTrait("SULTRY"))
+			You're a sex-bomb. He knows it, you know it, everyone in the class knows it. You just want to be who you are but for some reason he keeps giving you judgmental looks. Does he think you're some kind of slut? Worse, does he think that would be a bad thing?
+		#else
+			Your clothing is perhaps a little provocative, a bit more revealing than how some of your classmates chose to dress. But so what? That doesn't mean you deserve those judgmental looks he keeps shooting you! Is he one of those guys that wants women to be modest, demure little things? You're a modern woman, and you'll dress how you want!
+		#end
+	#elseif($chosenClash == "lsCute")
+		#if($w.hasTrait("CUTE"))
+			You just want to learn to cook, but he just has to be a big meanie. You're doing your best in class and you can't help being super-cute, but $activeMaleNpc.name gets annoyed and tells you to grow up. Pouting, you stick your tongue out at him and ignore him for the rest of the lesson.
+		#else
+			You like the clothes you've chosen tonight - it's nice to look cute once in a while. $activeMaleNpc.name is unfairly critical though, and makes a rude comment about how you'd look better if you dressed differently. 
+		#end
+	#elseif($chosenClash == "leDte")
+		#if($w.hasTrait("DOWN_TO_EARTH"))
+			Is there something strange about how you're speaking? You're a normal, straightforward, down-to-earth kind of $w.girlOrWoman. Does he have a problem with that? He certainly seems to from the disdainful looks he keeps shooting you and the way he patronisingly corrects you when you talk like an ordinary person instead of a Jane Austen character.
+		#else
+			You're at a cooking class, not a formal ball! Nevertheless, $activeMaleNpc.name can't help but make some veiled criticisms of how you're dressed, the arrogant, condescending twat.
+		#end
+	#elseif($chosenClash == "lcPosh")
+		#if($w.hasTrait("POSH"))
+			$activeMaleNpc.name isn't happy to just cook with you. No, he has to mock your expensively-educated tones and refined manner of speech. That ignorant peasant! How dare he make fun of his social betters!
+		#else
+			$activeMaleNpc.name seems to think you're putting on airs with the clothes you've chosen. Really? What business is it of his how you dress!?
+		#end
+	#elseif($chosenClash == "romanticVsAromantic")
+		$activeMaleNpc.name tries to strike up a conversation about your interests. Fine, normally, but it turns out he's really into romance. Romance novels, romantic comedies, he even##
+		#set($romAromInt = $scene.randomNumber(4))
+		#if($romAromInt == 0) writes romantic fan-fiction on the internet!
+		#elseif($romAromInt == 1) gets soppy over his friends' weddings!
+		#elseif($romAromInt == 2) writes amateur love-poetry in his spare time!
+		#else has a secret journal where he records his thoughts and dreams!
+		#end
+		You speak your feelings about love and romance: specifically that romance is a sham to empty foolish punters pockets and love might not even be a real thing. You'd think he'd be glad to have his illusions dispelled by such illuminating rationality, but he somehow decides to take offence instead.
+	#elseif($chosenClash == "chRomantic")
+		You start off with what you'd thought was a bit of friendly chat where you touch on what's happened in a romcom you watched recently. Some people would be happy to engage with a light ice-breaker such as that, others would politely express disinterest. Not $activeMaleNpc.name though. He scoffs dismissively and makes an arch comment about how romcoms are frivolous stupidity and the people who like them are fools. How dare he!?
+	#elseif($chosenClash == "caringBitchy")
+		Things start off alright, but then the nice woman at the next table spills sauce all over her sleeve. With a mocking laugh, you step over to humiliate the stupid cow. 
+		
+		What does he do, your cooking partner? Does he have your back with an amusingly-cutting remark? Not at all! Instead he tells her it's alright, tries to make her feel better and steers her away from your barbed words. How dare that loathsome do-gooder spoil your entertainment!
+	#elseif($chosenClash == "jerkNice")
+		Things start off alright, but then the nice woman at the next table spills sauce all over her sleeve. You step over to assist and comfort her, but does ${activeMaleNpc.name}? Not at all! Instead, he makes fun of the poor sweetheart, mocking her mistake in front of everyone. What a bastard!
+		$activeMaleNpc.addBastard(10)##
+	#elseif($chosenClash == "crudeRefined")
+		You do your best to be friendly towards him, but he's just so embarrassing! It's like he's a brute animal, just grunting out whatever's on his mind without any decorum whatsoever!
+	#else
+		## I could have put some sort of generic piece of text here so players wouldn't realise something's wrong if a clash is missing its text section, 
+		## but I'd rather show an obvious error message so the problem can get reported and fixed.
+		Unrecognised clash value: ${chosenClash}. Please report this to the developer as a bug.
+	#end
+	## Stat effects for clash path - always the same regardless of the specific one:
+	$activeMaleNpc.reduceWLikingMedium()##
+	$activeMaleNpc.reduceNpcLikingMedium()##
+	$activeMaleNpc.reduceWLoveTiny()##
+	$activeMaleNpc.reduceNpcLoveTiny()##
+	$activeMaleNpc.increaseKnowledge(1,35)## clash & connection both increase knowledge, but the "nothing special" path does not
+#end
+</cookWithManText>
+
+<finishCookingWithManText>
+#if($learntBadly)
+	You finish your cooking work, although you haven't learnt as well as you might have this lesson. Indeed, the dish you end up with##
+	#if ($w.getSkill("COOKING") < 20) is a total mess.
+	#elseif($w.getSkill("COOKING") < 50) isn't something you'd be proud of serving up to a guest at home.
+	#else only ends up palatable due to your already-impressive skills in the kitchen.
+	#end##
+#else
+	You finish cooking with $activeMaleNpc.name, ending up with##
+	#if ($w.getSkill("COOKING") < 20) a dish that looks vaguely like the picture that accompanies the recipe.
+	#elseif($w.getSkill("COOKING") < 50) something pretty closely resembling what you were supposed to make.
+	#else a dish that looks nearly identical to the picture accompanying the recipe.
+	#end##
+#end
+
+The instructor comes around and, seeing that you've finished, gives you feedback on your work before giving you another recipe to prepare for the next lesson. The class is then finished, and all that remains is to say goodbye to $activeMaleNpc.name before heading home. 
+</finishCookingWithManText>
+
+<finishCookingAloneText>
+You finish your cooking work, although it's hard to manage all by yourself. In the end you end up with a dish that##
+#if ($w.getSkill("COOKING") < 20) is a total mess.
+#elseif($w.getSkill("COOKING") < 50) isn't something you'd be proud of serving up to a guest at home.
+#else only ends up palatable due to your already-impressive skills in the kitchen.
+#end##
+	
+The instructor comes around and, seeing that you've finished, gives you feedback on your work before giving you another recipe to prepare for the next lesson. ##
+#if($w.hasTrait("LOW_SELF_ESTEEM"))
+	## No relationship modifiers because he isn't *actually* judging her harshly for making mistakes in a cooking class where she's expected to still be learning.
+	He doesn't say anything about your food, but you're sure he's judging you. Once again all you've done is show how worthless you really are.
+	$w.changeStress(5)
+#elseif($w.hasTrait("BITCHY"))
+	## This is for the bitchy trait because she's going out of her way to insult the guy she was cooking with... but she isn't wrong here. 
+	## Bitchy is potentially useful here as it lets the PC take out her frustrations by blaming her partner so she won't get the stress if she's ambitious.
+	You make sure to point out that any failings in the food are entirely $scene.addPossessiveSuffix($activeMaleNpc.name) fault, that worthless quitter.
+#elseif($w.hasTrait("AMBITIOUS"))
+	Even though it wasn't your fault, it's really frustrating that the food didn't turn out so well. It might be just a class, but you still wanted your dish to be the best!
+	$w.changeStress(5)
+#end
+</finishCookingAloneText>
+
+<selectFemaleStudentText>
+You decide that, for this week at least, you'd rather try to make a female friend than put up with any potential sexual advances, so you pick $fem.getName() as your partner and she readily accepts.
+</selectFemaleStudentText>
+
+<startCookingWithWomanText>
+You and $fem.name go to your designated station and look through the provided supplies, sorting utensils and ingredients in accordance with the recipe that was also sitting at the station. The provided recipe is supposed to help you learn a new technique so you can improve your overall cooking skills.
+</startCookingWithWomanText>
+
+<selectNobodyText>
+## PC selects nobody, so one of the NPCs will approach her.
+##
+$scene.addWeightedItem("f",10)## Female NPC is always a valid cooking partner.
+#isPossiblePartner($m1) 
+#if($possiblePartner)$scene.addWeightedItem("1",1)#end
+#isPossiblePartner($m2) 
+#if($possiblePartner)$scene.addWeightedItem("2",1)#end
+#isPossiblePartner($m3) 
+#if($possiblePartner)$scene.addWeightedItem("3",1)#end
+#set($chosenNpc = $scene.pickItemAndClearMap())
+## 
+## Set active male NPC if the female NPC wasn't picked, otherwise set $cookingWithWoman to let the yml know which followup action to choose.
+#if($chosenNpc == "1")$scene.setActiveMaleNpc($m1)
+#elseif($chosenNpc == "2")$scene.setActiveMaleNpc($m2)
+#elseif($chosenNpc == "3")$scene.setActiveMaleNpc($m3)
+#else#set($cookingWithWoman=true)
+#end
+##
+## Text
+#if($cookingWithWoman)
+$fem.getName() calmly approaches you and offers to work together. You accept her invitation and the two of you get to work.
+
+You both approach your designated station and begin to look through the provided supplies. Alongside the supplies is a recipe that is supposed to help you practice a specific cooking technique. 
+#else
+	$activeMaleNpc.getName() approaches you to ask if you want to work together. The class is small enough that, regardless of whether the prospect fills you with joy or dread, you'd better accept or risk being stuck alone. 
+	
+	After agreeing to take the class with him, you and $activeMaleNpc.getName() go to a pre-set station where the necessary supplies for today's lesson have been laid out. Alongside the supplies sits a recipe intended to help you pick up a new cooking technique. 
+	
+	As everyone starts working, the instructor circles around the various groups, making sure that everything is going alright and that there are no fires-literal or otherwise-that need dousing.
+#end
+</selectNobodyText>
+
+<maleShowOffText>## Show off to male
+You stand in front of $activeMaleNpc.getName() and pretend to work with the ingredients and utensils in front of you, pretending to stir nothing. He is too busy staring at your body to even notice you aren't really doing anything. You interrupt your pantomime occasionally to look back and bite your lip as you shake your ass seductively. Your display leaves $activeMaleNpc.getName() unable to keep his hands to himself and you soon give up entirely on your charade.
+</maleShowOffText>
+
+<maleShowOffMaleLeadsText>
+As his hands explore your body, $activeMaleNpc.getName()'s lips find yours and passionate making out ensues. Eventually the instructor passes by and gives you a light warning to focus on your work before he passes on to the next group.
+</maleShowOffMaleLeadsText>
+
+<maleShowOffMaleLeadsBackToWorkText>
+Embarrassed, you pull away from $activeMaleNpc.getName() and go back to work, which helps you prevent a small food related disaster you'd been too pre-occupied to notice. $activeMaleNpc.getName() isn't thrilled about having to stop, but he seems to decide he'd rather not get on the instructor's bad side.
+</maleShowOffMaleLeadsBackToWorkText>
+
+<showOffKeepGoingLd>
+## Long desc shared by the maleShowOffMaleLeadsKeepGoing and maleShowOffPlayerLeadsKeepGoing actions.
+Ignore $scene.addPossessiveSuffix($cookingInstructor.getName()) warning and keep enjoying yourself.
+</showOffKeepGoingLd>
+
+<maleShowOffMaleLeadsKeepGoingText>
+#if($w.hasTrait("SHY"))
+Although you're mortified to be doing this in front of the whole class, you find yourself too shy to speak up. Taking this as assent, $activeMaleNpc.name eagerly continues exploring your body.
+#else
+Deciding you don't care what the instructor wants, you and $activeMaleNpc.getName() continue exploring each other's bodies. ##
+#end
+In the heat of passion, however, the pot in front of you is completely forgotten about and, before long, begins to boil over. The instructor quickly rushes over and gets the situation under control, before turning and telling you your cooking privileges for this lesson have been revoked. 
+</maleShowOffMaleLeadsKeepGoingText>
+
+<bannedFromCookingWithManText>
+Well, that's it for tonight's cooking. Still, you've had so much fun that you don't really care. You and $activeMaleNpc.name get your things, and prepare to leave class. 
+</bannedFromCookingWithManText>
+
+<maleShowOffPlayerLeadsText>
+You like where this is headed, but you're going to get there on your terms. You remove his hands from your waist and turn around to face him. You help $activeMaleNpc.getName()'s hands explore your body and passionately bring your lips to his. Eventually the instructor passes by and gives you a light warning to focus on your work before he passes on to the next group.
+</maleShowOffPlayerLeadsText>
+
+<maleShowOffPlayerLeadsBackToWorkText>
+Slightly flustered, you pull away from $activeMaleNpc.getName() and go back to work just in time to thwart a mini disaster that could easily have gotten out of hand. $activeMaleNpc.getName() is nonplussed about the sudden interruption of his fun, but he does what he has to in order to stay on the instructor's good side. 
+</maleShowOffPlayerLeadsBackToWorkText>
+
+<maleShowOffPlayerLeadsKeepGoingText>
+You aren't bothered by what the instructor wants, so you and $activeMaleNpc.getName() continue exploring each other's mouths at the expense of the dish that's slowly cooking behind you. The dish is forgotten in your passion and the pot in front of you starts boiling over, making an awful mess very quickly. The instructor, practicing proper kitchen safety, quickly gets the situation under control. He then firmly tells the two of you that your cooking privileges for the week have been revoked. 
+</maleShowOffPlayerLeadsKeepGoingText>
+
+<maleShowOffStopText>
+As his hands start exploring your body, you realize you'd rather just focus on cooking. You take his hands off of your waist and tell him to save it for later. $activeMaleNpc.getName() reacts by##
+#if($activeMaleNpc.getBehaviour()=="MEAN") calling you a bitch. He is clearly not accepting your request to stop and focus on the lesson... #set($maleShowOffDoesntStop = true)##
+#elseif($activeMaleNpc.getBehaviour()=="COLD") objecting. He is clearly not accepting your request to stop and focus on the lesson... #set($maleShowOffDoesntStop = true)##
+#else complying. He looks disappointed, but you quickly get him back to focusing on the lesson.
+#end
+</maleShowOffStopText>
+
+<maleShowOffStopMaleContinuesFirmStopText>
+He looks disappointed, but you quickly get him back to focusing on the lesson and manage to salvage the time you have left.
+</maleShowOffStopMaleContinuesFirmStopText>
+
+
+<maleAskToStopText>
+You politely ask him to stop and to please focus his attention on the task in front of you.##
+#if($activeMaleNpc.getBehaviour()=="MEAN" || $activeMaleNpc.getBehaviour()=="COLD")##
+ He is clearly not accepting your request to stop and focus on the lesson...
+#set($manDoesntStop=true)
+#else His disappointment is evident, but you manage to get him back to focusing on the lesson. 
+#end
+</maleAskToStopText>
+
+
+<maleSwitchPartnersText>
+Deciding you've had enough of his staring, you leave your station and approach your instructor to ask if it's too late to switch partners, since yours is making you so uncomfortable. He tells you that everyone is already paired up, so you can suck it up and handle it like an adult or you can leave.
+</maleSwitchPartnersText>
+
+<maleSwitchPartnersSuckUpText>
+You're not happy you're stuck with this guy for the remainder of the lesson, but you're here to learn about cooking, so that's what you're going to do. Your partner however, feeling called out, refuses to help. Despite this, the end result is##
+	#if ($w.getSkill("COOKING") < 20) a decently competent dish, but far from perfect.
+	#elseif($w.getSkill("COOKING") < 50) a dish that shows a competent understanding of the cooking process, but lacks a bit in the showmanship department.##
+	#else a dish that you wouldn't mind hanging a framed picture of on your wall.##
+	#end##
+	
+The instructor comes around and, seeing that you've finished, gives you feedback on your work before giving you another recipe to prepare for the next lesson and dismissing you.
+</maleSwitchPartnersSuckUpText>
+
+<maleSwitchPartnersLeaveText>
+You're not putting up with this for the rest of the night, so you storm out, leaving your former partner to work alone.
+</maleSwitchPartnersLeaveText>
+
+
+<maleEndureText>
+You're not happy with the situation, but you don't really want to cause a scene or anything. Instead, you just put up with his lecherous glances and continue to work on the food in front of you. Since your partner is so distracted, you end up doing most of the work yourself, and in the end it comes out##
+	#if ($w.getSkill("COOKING") < 20) passable.
+	#elseif($w.getSkill("COOKING") < 50) pretty good.
+	#else nearly perfect.
+	#end##
+	
+The instructor comes around and, seeing that you've finished, gives you feedback on your work before giving you another recipe to prepare for the next lesson and dismissing you.
+</maleEndureText>
+
+<maleEndureLeaveGoodbyeText>
+While you aren't happy that you had to do most of the work yourself, your choice in partner could have been much worse. You decide to end on a high note and wish your partner a good night, telling him you'll see him next time. You leave the class, picking up a new recipe to bring in next time, and head home alone.
+</maleEndureLeaveGoodbyeText>
+
+<maleEndureLeaveSilenceText>
+Your partner's performance leaves him undeserving of any acknowledgement from you, so you take your things and leave without even glancing in his direction. The instructor hands you another recipe to finish for next time on the way out.
+</maleEndureLeaveSilenceText>
+
+<maleEndureInviteHomeText>
+You made him wait throughout class, but you tell $activeMaleNpc.getName() that, if he wants, he can come back to your place.
+</maleEndureInviteHomeText>
+
+
+<maleScoldText>
+You decide to tell off $activeMaleNpc.getName(), making it known to him and the rest of the class that you aren't thrilled about his behavior. $cookingInstructor.getName(), not wanting that much overt hostility in his class, dismisses both of you for the week, telling you that you can come back next time only if you can agree to not cause trouble next time.
+</maleScoldText>
+
+
+<cookingMaleExchangeNumbersText>
+You've enjoyed spending time with him here, but perhaps you could become more than just classmates? You hint to $activeMaleNpc.name that he might take you out on a date sometime. 
+
+#if(!$activeMaleNpc.npcAttractionOk || (!$activeMaleNpc.npcAttractionAttracted && !$activeMaleNpc.npcLikingNeutral))
+	## refuses
+	#if($activeMaleNpc.behaviour == "MEAN")
+		He laughs in your face and replies that he's nowhere near desperate enough to go out with a $w.girlOrWoman like you.
+		$activeMaleNpc.reduceWLikingLarge()##
+		$activeMaleNpc.addBastard(10)##
+	#elseif($activeMaleNpc.behaviour == "COLD")
+		He coldly turns you down, replying that he isn't at all interested.
+		$activeMaleNpc.reduceWLikingSmall()##
+	#else
+		He replies that he likes cooking with you but he doesn't think you should do anything more serious.
+	#end
+	#set($npcRefusedNumberSwap = true)
+	$activeMaleNpc.reduceWLoveMedium()##
+#else
+	He's amenable to the idea and the two of you exchange phone numbers so you can meet up later.
+	$activeMaleNpc.setContactable()##
+#end
+</cookingMaleExchangeNumbersText>
+
+<cookingMaleGoHomeText>
+#if($scene.hasFlag("COOKING_CLASS_HAD_FUN")) You had fun, but it's probably enough fun for one day, so you bid your partner goodnight. You then leave the class, picking up a new recipe to bring in next time, and head home alone.##
+#else You leave the class, picking up a new recipe to bring in next time, and head home alone.
+#end##
+</cookingMaleGoHomeText>
+
+<cookingMaleinviteHomeText>
+#if($inappropriatePartner)
+	#if($scene.hasFlag("COOKING_CLASS_HAD_FUN")) While you had fun, there's no reason for it to end here. You invite $activeMaleNpc.getName() back to your place where you can really show him a good time. You grab the next recipe on the way out.
+	#else You had some fun earlier and now it's time to finish what you started. You made him wait throughout class, but now you tell $activeMaleNpc.getName() that he should come back to your place for some extracurricular entertainment.
+	#end
+#else
+	You've enjoyed spending time with $activeMaleNpc.name today, but things don't have to end here. You decide to invite him back to your $w.getFlatOrHouse().
+#end
+</cookingMaleinviteHomeText>
+
+
+
+<femaleWatchText>
+Deciding observation is important, you mostly just stand back and watch your partner do the work. She##
+#if ($fem.getCharType()=="INNOCENT") tries to get you involved by offering things for you to do.##
+#else seems frustrated by your lack of help, but continues working.##
+#end##
+</femaleWatchText>
+
+<femaleWatchHelpText>
+Sensing her frustration, you realize it's best to help out. While observation is important, so is hands on work, so you give her a hand. As you work, the two of you start idling chatting with each other about trivial things: guys in the class, your hobbies, work-whatever you can think of to pass the time. Eventually, the two of you finish the recipe and the instructor comes around to assess your work. After a mixture of critique and praise, the instructor gives you both new recipes to prepare for next time and dismisses you.
+</femaleWatchHelpText>
+
+<femaleWatchContinueWatchingText>
+Despite her frustrations, you decide to just keep watching. She seems to know what she's doing and you'll probably learn better by watching her. If she really wanted help, she'd ask. Before too long, she's finished and the instructor comes around to see the final product. He gives some critique on ways for your partner to improve. He then hands you both recipes to bring in for next time and then sends you on your way. $fem.getName(), still frustrated by your lack of help, leaves without another word to you.
+</femaleWatchContinueWatchingText>
+
+<femaleWatchHelpInnocentText>
+You accept her offer of things for you to do. You grab the spoon she's handing you and start stirring. As you work, the two of you start chatting about inconsequential things: guys in the class, the weather, your hobbies, etc. Eventually the two of you finish and the instructor comes around to give feedback. You take notes on his critique and he gives the two of you recipes to bring in for next time.
+</femaleWatchHelpInnocentText>
+
+<femaleWatchContinueWatchingInnocentText>
+You tell her you're just here to observe, so she should keep working. Stunned by your refusal to work, she just stares blankly at you for a bit. Eventually, however, she gets herself together and keeps working. Once she's finished, the instructor comes around and critiques her work. He gives her a few pointers and then hands you both recipes to prepare for the next class. Your partner then leaves without a word to you, likely because you refused to help her. Oh well. It's no big loss for you.
+</femaleWatchContinueWatchingInnocentText>
+
+<femaleWatchGoodbyeText>
+You tell $fem.getName() that you had fun and you hope to see her again next class. You then leave and head home.
+</femaleWatchGoodbyeText>
+
+<femaleWatchLeaveText>
+You don't have anything to say to your partner, so you just leave without a second glance.
+</femaleWatchLeaveText>
+
+<femaleWatchExitText>
+There's no reason for you to stay any longer, so after gathering your things and making sure you still have next class's recipe, you head home.
+</femaleWatchExitText>
+
+
+<femaleConverseText>
+#if ($fem.hasTrait("BOASTFUL"))You try to strike up a friendly conversation with $fem.getName(), but she immediately starts bragging about herself. You don't mind at first, but after a while of this, you want to be anywhere else. Just when you think you can't handle another second of her self-important droning, you finish the dish##
+#{else}You strike up friendly conversation while you work, talking about trivial things like which guys in the class you think are cute, your hobbies, what each of you does for work, etc. Before you even realize how much time has passed, the dish is finished##
+#end##
+ and the instructor comes around to give you feedback.
+
+#if ($w.getSkill("COOKING") < 20)The recipe turned out well, but there was definitely some room for improvement.
+#elseif($w.getSkill("COOKING") < 50)While not perfect, the two of you did well enough that there was little to critique.##
+#{else}The end result was so close to perfect that the instructor really struggled to find ways it could be improved.##
+#end##
+ 
+$cookingInstructor.getName() finishes his observations and gives each of you a recipe to prepare for next week.
+</femaleConverseText>
+
+<femaleConverseGoodbyeText>
+You tell $fem.getName() you enjoyed your time together. She smiles and returns the sentiment before you you part ways for the week.
+</femaleConverseGoodbyeText>
+
+
+
+<femaleHelpText>
+Your partner immediately takes control of the situation, so you offer to help in some way. You reach for a whisk and she##
+#if ($fem.behaviour =="COLD" || $fem.behaviour =="MEAN") brushes your hand away, determined to do it all herself. She tells you she's here to learn cooking and doesn't want you getting in the way.##
+#else picks it up and hands it to you, cheerfully pointing out the part of the recipe you can start with. You get to work and the two of you calmly chat as you work. You cover a variety of topics and before you even realize how much time has passed, the recipe is done.
+
+$cookingInstructor.getName() soon comes by after realizing you've finished and critiques your work. The dish turned out really well, largely due to your cooperation, but there is always room for improvement. Once he's helped you figure out ways to make it better next time, he gives you both recipes to prepare in advance of the next lesson and dismisses you both.##
+#end
+</femaleHelpText>
+
+<femaleHelpStandBackText>
+#if ($w.hasTrait("LOW_SELF_ESTEEM"))It seems all you do is get in the way. She's right to not want you to do anything. You stand back and let her do the work.##
+#{else}You do as she says, standing back and watching her work. You can still learn something this way and it's easier than trying to argue.##
+#end##
+</femaleHelpStandBackText>
+
+<femaleHelpPushInText>
+You're not going to let her deprive you of learning, no matter what she thinks. You push your way in and grab the utensil you were reaching for, letting her know in no uncertain terms that she's not in charge here.
+
+After a fair bit of awkward silence and hostility, the recipe is done. Despite the lack of teamwork, it still turned out fairly well and $cookingInstructor.getName() arrives to critique it. Once he's finished, he hands you both a recipe to prepare for next time and sends you on your way.
+</femaleHelpPushInText>
+
+<femaleHelpLeaveText>
+You have nothing else to do here and certainly don't have anything else to say to your partner, so you just pack up your things, tucking next class's recipe somewhere where you won't forget it and head home.
+</femaleHelpLeaveText>
+
+
+
+<femaleTakeChargeText>
+You're here to learn to cook after all, and how better to do that than with hands on experience. Your partner should just follow your example and learn from watching. You get to work with the recipe in front of you, not really giving your partner adequate room to do anything other than passively view your actions. She##
+#if ($fem.getCharType()=="INNOCENT") tries briefly to help, but after being brushed aside a few times gives up and just watches. You work in silence with no regard for what your partner is doing.##
+#else pushes her way back in and picks up a utensil, making it abundantly clear that you won't stop her from learning to cook.##
+#end##
+
+#if ($w.getSkill("COOKING") < 20)After a short while, you finish. The dish turns out fairly well.
+
+Seeing you've finished, $cookingInstructor.getName() comes around to critique before giving you the recipe he expects you to prepare for the next class.
+#elseif($w.getSkill("COOKING") < 50)You lose track of time given the complete silence surrounding you and your partner, but after some time you finish the recipe. Much to your delight, it resembles the picture accompanying the recipe with only a few minor differences.
+
+$cookingInstructor.getName() comes along upon realizing you've finished and gives you tips on how to improve this type of dish for next time. When he's done, he gives you the recipe he wants you to prepare for next time and then sends you on your way.##
+#else You focus entirely on preparing the dish you were assigned, paying no attention to anything around you, even your completely silent partner. Eventually though, you finish and the recipe turns out as close to perfect as you could get it.
+
+Once $cookingInstructor.getName() realizes you've finished, he walks over a takes a look at your dish. However, it's so good that he has a hard time finding any actual ways you could've improved it. He manages to find a few nitpicks and then gives you both the recipes to prepare for next time and then sends you both on your way.##
+#end##
+</femaleTakeChargeText>
+
+<femaleTakeChargeLeaveText>
+You don't care to say anything more to your partner, so you grab your things, tuck the recipe in a safe place, and head home.
+</femaleTakeChargeLeaveText>
+
+
+<femaleSwitchPartnersText>
+Now that you're actually at the station here with $fem.getName(), you realize you don't really want to work with her. She hasn't done anything wrong necessarily, but you'd still rather work with someone else. You leave your station and approach $cookingInstructor.getName(), asking if you can switch partners. He seems immediately annoyed and tells you that it's too late to pick anyone else and you can either suck it up and keep working with the parter you have or you can leave. The choice is yours.
+</femaleSwitchPartnersText>
+
+<femaleSwitchPartnersReturnToStationText>
+You walk back to your station and try to get to work on the recipe. Your partner, however, seems annoyed that you tried to brush her off.
+</femaleSwitchPartnersReturnToStationText>
+
+<femaleSwitchPartnersReturnToStationRefuseText>
+If your only options are continuing to work with $fem.name or leaving, then you're leaving. You don't want to work with her and nothing is going to make you. You gather your things and head home for the week.
+</femaleSwitchPartnersReturnToStationRefuseText>
+
+<femaleSwitchPartnersReturnToStationApologizeText>
+You apologise for trying to brush her off and suggest ways to make amends. She##
+#if ($fem.behaviour !="COLD" && $fem.behaviour !="MEAN") accepts your apology and the two of you get to work, first in silence, but before long you're chatting about inconsequential things as you prepare the provided ingredients. A short while later, you've finished the dish and##
+	#if ($w.getSkill("COOKING") < 20) it turns out well. Despite your rough start, you and $fem.getName() managed to find a good work dynamic and it shows in the final product. The instructor comes around to assess the end results. He gives you feedback and then hands you both the recipes to prepare in advance of next class.
+	#elseif($w.getSkill("COOKING") < 50) you're both extremely happy with how it turned out. Despite your rocky start, the two of you found a good work balance and in the end the dish turned out almost exactly like the picture that accompanied the recipe, with only a few minor differences. The instructor comes around to assess the end results. He gives you feedback and then hands you both the recipes to prepare in advance of next class.##
+	#else it's nearly perfect. You and $fem.getName() are both in disbelief at how well it turned out. Despite you're unpleasant start, the two of you eventually found a good rhythm to work in and it shows in the end result. The instructor comes around to assess the end results. He gives you feedback, struggling to find anything substantial to really point out, eventually settling on a few minor nitpicks, before handing you both the recipes to prepare in advance of next class.##
+	#end##
+#else refuses your apology, starting work without even addressing you. Understandably upset, she doesn't let you get involved and continues work, leaving you to observe what she's doing. After an awkward silence that feels like forever, she finishes the dish and $cookingInstructor.getName() comes around to asses the final results. He gives a fairly thorough critique and then gives each of you a recipe to prepare before the next lesson. Your partner leaves, not having anything more to say to you.##
+#end##
+</femaleSwitchPartnersReturnToStationApologizeText>
+
+<femaleSwitchPartnersReturnToStationApologizeGoodbyeText>
+You apologise once again for your behaviour in the beginning and tell her you enjoyed working together. She smiles and returns the sentiment, saying she hopes to see you again next class, and then you go your separate ways.
+</femaleSwitchPartnersReturnToStationApologizeGoodbyeText>
+
+<femaleSwitchPartnersReturnToStationKeepWorkingText>
+You figure it's probably better if you just don't say anything and continue working. The two of you work in excruciating silence until you've finished. Despite the complete lack of teamwork and communication between you, the dish turns out like it's supposed to and, seeing you've finished, $cookingInstructor.getName() comes around to assess your progress. He gives a fair amount of feedback on where you could improve and the assigns you both the recipes he wants you to prepare to bring in to the next lesson. As soon as the recipe has been handed out, your partner leaves without another glance in your direction.
+</femaleSwitchPartnersReturnToStationKeepWorkingText>
+
+<femaleSwitchPartnersLeaveText>
+With nothing more to do here, you grab your belongings, putting the recipe you were given somewhere safe, and head home.
+</femaleSwitchPartnersLeaveText>
+
+
+<femaleEndTalkInstructorText>
+You decide to stay to get to know $cookingInstructor.getName() better. After nearly everyone else has cleared out, you go to talk to him.
+</femaleEndTalkInstructorText>

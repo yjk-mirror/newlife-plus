@@ -1,0 +1,24 @@
+<introText>
+You meet with $bf.getName() at a park.
+
+The two of you sit on a bench, chatting while watching others stroll around.
+
+While you are telling him about your day, $bf.getName() suddenly gets up and stands on the bench. He cups his hands to his mouth and starts yelling with his loudest voice.
+
+"I am $bf.getName(). And I want everyone to know that I love $w.getName(). I love her!" he announces to the world.
+
+He sits back down on the bench beside you, grinning. ##
+#if($w.hasTrait("SHY"))You, however, are mortified and hide your face from all the strangers looking over to see what the noise is about. ##
+$bf.reduceWLikingSmall()##
+#else
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+#end
+
+</introText>
+
+
+
+<sceneDescriptionText>
+You are in a park with $bf.getName().
+</sceneDescriptionText>
+

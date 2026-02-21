@@ -1,0 +1,14 @@
+<introText>
+$bf.getName() tells you to meet him at a new cafe. When you get there, you see the cafe has pictures of cute cats all over the front window. It's a cat cafe.
+
+When you enter, you see that the cafe is crawling with cats. $bf.getName() hands you a silver tabby cat. You cradle it as it purrs in your arms. You are surrounded by cats of different breeds and colors. 
+
+Together with $bf.getName(), you play with the cats. You pet them and scratch their ears and let them rub against you. You even lie on the ground and let the cats crawl over you.
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are in a cat cafe with $bf.getName().
+</sceneDescriptionText>

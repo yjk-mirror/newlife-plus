@@ -1,0 +1,87 @@
+<introText>
+Your head is swimming in alcohol, and you can barely stand up straight. 
+
+You hear a man behind you call out to you, "Hey babe, you're looking mighty fine."
+
+You ignore him and keep on walking. All your limbs feel heavy and you feel like lying down and taking a nap. You strain to keep your eyes open.
+
+You feel an arm around your waist. You turn and see a man with his arm around you. He seems a little dangerous, like a gang member.
+
+"Babe, ##
+$scene.pickFromList([
+  "I'm going to keep you company, tonight",
+  "I'm going to show you a good time, tonight",
+  "I'm going to keep you warm, tonight"
+])##
+," the man says.  
+#set($debug = false)##
+#macro(pushAgainstWall)##
+He grabs your waist and pushes you against a wall. He places an arm on the wall beside your head and looms over you. ##
+#if ($w.hasTrait("CUTE"))Kabedon, you think to yourself. #end##
+He touches your his chin with his other hand. "##
+$scene.pickFromList([
+  "I think an ass like yours needs some loving,",
+  "I'm going to keep you up all night,",
+  "Don't be shy. I won't bite...much,",
+  "I know you're a little slut on the inside,",
+  "Do you think you're too good for me? You won't think that way once you feel my cock inside of you,"
+])##
+" he says. 
+
+$m.performMakeoutAction("REJECT", ["KISS"], "FACE_TO_FACE", "STANDING", true, false, false)
+#end##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are trying to make your way home through the dark streets of the city. You are so drunk that your head spins and you feel like vomiting.
+</sceneDescriptionText>
+
+<empty>
+</empty>
+
+<debugDrunk>
+$w.isDrunk()
+$w.isVeryDrunk()
+$w.isMaxDrunk()
+</debugDrunk>
+
+
+<refuse>
+"No thank you," you say.
+
+#pushAgainstWall()
+</refuse>
+
+<flirt>
+You shamelessly flirt with him. You drop sexual hints everywhere to work him up.
+
+#pushAgainstWall()
+</flirt>
+
+<plead>
+You plead with him to leave you alone.
+
+$m.performMakeoutAction("REJECT", ["TOUCH","GROPE","GRIND"], "FACE_TO_FACE", "STANDING", true, false, false)
+
+Feeling nauseous, you vomit a little bit onto his chest.
+
+Disgusted, the man pushes you away and leaves, swearing.
+</plead>
+
+<pushAway>
+You drunkenly push him off of you and stumble away.
+</pushAway>
+
+<scareAway>
+#if($w.hasTrait("BITCHY"))##
+You raise your voice and insult his manhood. You let loose a stream of profanities about how he's too lame to satisfy you.
+#else##
+You raise your voice and start yelling crazy things. 
+#end##
+
+Some people gather around to see what the commotion is. The man gets nervous and wanders away.
+</scareAway>
+
+

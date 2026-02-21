@@ -1,0 +1,22 @@
+<introText>
+You head home alone into the night.##
+#set($debug = false)##
+</introText>
+
+<sceneDescriptionText>
+You are walking down the streets of the city towards your home.
+</sceneDescriptionText>
+
+<empty>
+</empty>
+
+<walkHome>
+It is dark out with few people in the streets. You#if ($w.isVeryDrunk()) stumble #else walk #end##
+down the pavement towards your home.
+</walkHome>
+
+<debugDrunk>
+$w.isDrunk()
+$w.isVeryDrunk()
+$w.isMaxDrunk()
+</debugDrunk>

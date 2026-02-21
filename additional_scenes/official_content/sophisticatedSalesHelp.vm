@@ -1,0 +1,572 @@
+<introText>
+## Some setup stuff
+##
+## foldStart @macros
+## Many of these macros are taken from rigel's macroLib
+##
+#macro(possessive $char)
+	$scene.addPossessiveSuffix($char.name)##
+#end
+##
+##
+##
+#macro(addItem $list $element)
+	#set($listBoolCatch = $list.add($element))##
+#end
+##
+##
+##
+#macro(removeItem $list $element)
+	#set($listBoolCatch = $list.remove($element))##
+#end
+##
+##
+##
+#macro(mAction)##
+	#set($talkChance = 100)##
+	#set($flirtChance = 10)##
+	#set($sexualChance = 0)##
+	#if($m.hasTrait("CHARMING"))
+		#set($flirtChance=$flirtChance+30)
+	#end
+	#if($m.hasTrait("CRUDE"))
+		#set($flirtChance=$flirtChance+30)
+	#end
+	#if($m.hasTrait("SLEAZY"))
+		#set($flirtChance=$flirtChance+20)
+	#end
+	#if($f.hasTrait("BEAUTIFUL"))
+		#set($flirtChance=$flirtChance+30)
+	#end
+	#if($m.getLikesBreasts($f))
+		#set($flirtChance=$flirtChance+30)
+	#end
+	#if($m.maxDrunk)
+		#set($flirtChance=$flirtChance+40)
+	#elseif($m.veryDrunk)
+		#set($flirtChance=$flirtChance+30)
+	#elseif($m.drunk)
+		#set($flirtChance=$flirtChance+10)
+	#end
+	#if($m.arousalEnjoy)
+		#set($flirtChance=$flirtChance+30)
+	#elseif($m.arousalComfort)
+		#set($flirtChance=$flirtChance+10)
+	#end
+	#if($scene.hasFlag("SOPHISTICATED_SALES_SEXUAL"))##
+		#set($talkChance = 5)
+		#set($sexualChance = 10)##
+		#if($m.hasTrait("CHARMING"))
+			#set($sexualChance=$sexualChance+10)
+		#end
+		#if($m.hasTrait("CRUDE"))
+			#set($sexualChance=$sexualChance+10)
+		#end
+		#if($m.hasTrait("SLEAZY"))
+			#set($sexualChance=$sexualChance+50)
+		#end
+		#if($f.hasTrait("BEAUTIFUL"))
+			#set($sexualChance=$sexualChance+20)
+		#end
+		#if($m.maxDrunk)
+			#set($sexualChance=$sexualChance+40)
+		#elseif($m.veryDrunk)
+			#set($sexualChance=$sexualChance+30)
+		#elseif($m.drunk)
+			#set($sexualChance=$sexualChance+10)
+		#end
+		#if($f.maxDrunk)
+			#set($sexualChance=$sexualChance+40)
+		#elseif($f.veryDrunk)
+			#set($sexualChance=$sexualChance+30)
+		#elseif($f.drunk)
+			#set($sexualChance=$sexualChance+10)
+		#end
+		#if($m.arousalEnjoy)
+			#set($sexualChance=$sexualChance+50)
+		#elseif($m.arousalComfort)
+			#set($sexualChance=$sexualChance+10)
+		#end
+	#end
+	$scene.addWeightedItem("TALK", $talkChance)##
+	$scene.addWeightedItem("FLIRT", $flirtChance)##
+	$scene.addWeightedItem("SEXUAL", $sexualChance)##
+	#set($mChoice = $scene.pickItemAndClearMap())##
+	#if($mChoice == "TALK")##
+		#evaluate($scene.pickFromList($mTalkLines))##
+	#elseif($mChoice == "FLIRT")##
+		#evaluate($scene.pickFromList($mFlirtLines))##
+		#if(!$f.arousalEnjoy)
+			$f.addArousalTiny()##
+		#end
+		#if(!$m.arousalEnjoy)
+			$m.addArousalTiny()##
+		#end
+		#if(($w.hasTrait("OVERACTIVE_IMAGINATION")||$scene.randomBoolean())&&!$w.arousalEnjoy)
+			$w.addArousalTiny()##
+		#end
+	#else
+		#evaluate($scene.pickFromList($mSexualLines))##
+		#if(!$f.arousalEnjoy)
+			$f.addArousalSmall()##
+		#end
+		#if(!$m.arousalEnjoy)
+			$m.addArousalSmall()##
+		#end
+		$f.addEnjoyTiny()##
+		$m.addEnjoyTiny()##
+		#if($w.hasTrait("OVERACTIVE_IMAGINATION")&&!$w.arousalEnjoy)
+			$w.addArousalSmall()##
+		#elseif(!$w.arousalEnjoy)
+			$w.addArousalTiny()##
+		#end
+	#end
+#end
+##
+##
+#set($moveArousal = false)
+#macro(checkArousal)
+	$f.addArousalHuge()##
+	#set($moveArousal = $f.arousalComfort)##
+	$f.reduceArousalHuge()##
+#end
+## foldEnd
+##
+##
+## foldStart @setupLines
+#set($mFlirtLines=[])##
+	#addItem($mFlirtLines "$m.name flirts with $f.name.")##
+	#addItem($mFlirtLines "$m.name makes a flirtatious comment towards $f.name.")##
+	#if($m.hasTrait("INTERESTING"))
+		#addItem($mFlirtLines "$m.name makes a suggestive joke, and his delivery is so good that everyone bursts into laughter.")
+	#elseif($m.hasTrait("DULL"))
+		#addItem($mFlirtLines "$m.name makes a suggestive joke. Unfortunately it falls flat due to his lack of charm.")
+	#elseif($w.hasTrait("REFINED"))
+		#addItem($mFlirtLines "$m.name makes a suggestive joke. You find it incredibly inappropriate, but you notice $f.name chuckling.")
+	#else
+		#addItem($mFlirtLines "$m.name makes a suggestive joke. You and $f.name chuckle at it.")
+	#end
+	#addItem($mFlirtLines '$mAskForNumber')
+	#if($f.hasTrait("BEAUTIFUL"))
+		#addItem($mFlirtLines "$m.name complements #possessive($f) looks.")##
+	#end
+	#if($m.hasTrait("LIKES_SMALL_TITS")&&$m.getLikesBreasts($f))
+		#addItem($mFlirtLines "$m.name says he likes the small size of #possessive($f) breasts.")##
+		#addItem($mFlirtLines "$m.name says he's glad $f.name has such small breasts.")##
+	#elseif($m.hasTrait("LIKES_MED_TITS")&&$m.getLikesBreasts($f))
+		#addItem($mFlirtLines "$m.name says he thinks #possessive($f) breasts are just the right size.")##
+	#elseif($m.hasTrait("LIKES_BIG_TITS")&&$m.getLikesBreasts($f))
+		#addItem($mFlirtLines "$m.name says he likes how big #possessive($f) breasts are.")##
+		#addItem($mFlirtLines "$m.name says he likes the large size of #possessive($f) breasts.")##
+	#end
+#define($mAskForNumber)
+	$m.name asks $f.name for her phone number, so they could meet up later. She decides to give it to him after a moment of thought.
+	#removeItem($fFlirtLines '$fAskForNumber')##
+	#removeItem($mFlirtLines '$mAskForNumber')##
+#end
+#set($mTalkLines=[])##
+	#addItem($mTalkLines "$m.name talks to $f.name for a while, he doesn't seem to be focused on any in particular topic.")##
+	#addItem($mTalkLines "$m.name talks about recent scientific advancements. He muses that he doesn't think it will be that long before a cure for baldness is discovered.")##
+	#if($m.personality == $f.personality)
+		#addItem($mTalkLines "$m.name begins to talk about an upcoming film he is excited about. It turns out that $f.name has very similar interests, so the two of them talk about movies for a while.")##
+	#end
+	#if($m.personality == "CARING")
+		#addItem($mTalkLines "$m.name asks $f.name about herself. He seems genuinely interested	in her response and gives her helpful advice whenever he can.")
+	#elseif($m.personality == "ROMANTIC" || $m.hasTrait("CHARMING"))
+		#if($m.hasTrait("DIVORCED"))
+			#addItem($mTalkLines "$m.name asks $f.name about herself, and appears interested in what she has to say. When she reveals she is single, he states that he recently left a long term relationship and is looking for a new one.")
+		#else
+			#addItem($mTalkLines "$m.name asks $f.name about herself, and appears interested in what she has to say. When she reveals she is single, he mentions that, for all intents and purposes, so is he.")
+		#end
+	#elseif($m.hasTrait("CRUDE"))
+		#addItem($mTalkLines "$m.name asks $f.name about herself, but he is clearly paying more attention to her chest than to her response.")
+	#else
+		#addItem($mTalkLines "$m.name asks $f.name about herself, and appears interested in what she has to say.")
+	#end
+	#if(!$m.hasTrait("DIVORCED"))
+		#addItem($mTalkLines "$m.name talks about his failing marriage. Fortunately it appears as though there haven't been any problems recently, so it isn't affecting his mood.")##
+	#end
+#set($mSexualLines=[])##
+	#addItem($mSexualLines "$m.name acts in a sexual manner towards $f.name.")
+	#addItem($mSexualLines "$m.name kisses $f.name.")
+	#addItem($mSexualLines "$m.name caresses #possessive($f) thighs.")
+	#addItem($mSexualLines "$m.name mentions he can't wait to have sex with $f.name")
+	#if($m.getLikesBreasts($f))
+		#addItem($mSexualLines "$m.name says he can't wait to see #possessive($f) naked breasts.")##
+		#if($m.hasTrait("SLEAZY"))
+			#addItem($mSexualLines "$m.name says he can't wait to see #possessive($f) breasts bouncing around in bed.")
+			#addItem($mSexualLines '$gropeTop')
+		#end
+		#if($f.breasts=="SMALL")
+			#addItem($mSexualLines "$m.name mentions that his future sight allows him to see #possessive($f) small breasts naked in front of him.")## Shout out to the Admin
+		#end
+	#end
+	#if($m.hasTrait("SLEAZY") && $m.hadSex)
+		#addItem($mSexualLines "Says that after fucking you, it will be nice too fuck your friends")
+	#end
+#define($gropeTop)
+	#if($f.top.hasFlag("LOWCUT")||$f.topStatus=="EXPOSED")
+		$m.name gropes at #possessive($f) breasts.
+	#elseif($f.topStatus=="DISHEVELED")
+		$m.name pulls at #possessive($f) $f.top.basicDesc. $f.setTopStatus("EXPOSED")
+	#elseif($f.topStatus=="WORN")
+		$m.name pulls at #possessive($f) $f.top.basicDesc. $f.setTopStatus("DISHEVELED")
+	#end
+#end
+#set($fTalkLines=[])
+	#addItem($fTalkLines "$f.name talks to $m.name about recent events.")
+	#addItem($fTalkLines "$f.name talks about the weather.")
+#set($fFlirtLines=[])
+	#addItem($fFlirtLines "$f.name flirts with $m.name.")
+	#addItem($fFlirtLines "$f.name makes a flirtatious comment towards $m.name.")
+	#addItem($fFlirtLines "$f.name sneaks some innuendo into her conversation.")
+	#addItem($fFlirtLines '$fAskForNumber')
+	#if($m.hasTrait("HANDSOME"))
+		#addItem($fFlirtLines "$f.name complements #possessive($m) looks.")
+	#end
+#define($fAskForNumber)
+	$f.name asks for #possessive($m) phone number, so they could meet up later. He gives it to her without hesitation.
+	#removeItem($fFlirtLines '$fAskForNumber')##
+	#removeItem($mFlirtLines '$mAskForNumber')##
+#end
+#set($fSexualLines=[])
+	#addItem($fSexualLines "$f.name acts in a sexual manner towards $m.name.")
+	#addItem($fSexualLines "Almost every sentence that comes out of #possessive($f) mouth is laden with innuendo.")
+	#addItem($fSexualLines "$f.name plants a kiss on #possessive($m) cheek.")
+	#addItem($fSexualLines "$f.name asks $m.name if he's any good in bed.")
+	#addItem($fSexualLines "$f.name whispers something in #possessive($m) ear.")
+	#addItem($fSexualLines "$f.name rubs #possessive($m) crotch through his $m.trousersBasicDesc.")
+	#if($m.hasTrait("THICK_COCK"))
+		#addItem($fSexualLines "$f.name gazes at the large bulge in #possessive($m) $m.trousers.")
+	#else
+		#addItem($fSexualLines "$f.name gazes at the bulge in #possessive($m) $m.trousers.")
+	#end
+#set($fComplimentLines=[])
+	#addItem($fComplimentLines "$f.name tells an anecdote about how helpful you can be.")
+	#addItem($fComplimentLines "$f.name describes what a great friend you are.")
+	#addItem($fComplimentLines "$f.name talks about your various skills.")
+#set($waitLines=[])##
+	#addItem($waitLines "You stand around doing nothing.")##
+	#addItem($waitLines "You play around on your phone.")##
+	#addItem($waitLines "You read a book.")
+	#set($hasAnyStuff = false)
+	#if($w.hasStuff("TV")||$w.hasStuff("BIG_TV"))##
+		#set($hasAnyStuff = true)##
+		#addItem($waitLines "You watch some TV.")##
+	#end
+	#if($w.hasStuff("SOUND_SYSTEM"))##
+		#set($hasAnyStuff = true)##
+		#addItem($waitLines "You play some music on your sound system.")##
+	#end
+	#if($w.hasStuff("KETTLE"))##
+		#set($hasAnyStuff = true)##
+		#addItem($waitLines "You brew some tea for yourself.")##
+	#end
+	#if($w.hasStuff("POSTERS"))##
+		#set($hasAnyStuff = true)##
+		#addItem($waitLines "You admire your posters.")##
+	#end
+	#if($w.hasStuff("ELEGANT_ART")||$w.hasStuff("EROTIC_ART"))##
+		#set($hasAnyStuff = true)##
+		#addItem($waitLines "You look at the art around your house.")##
+	#end
+	#if($w.hasStuff("GIANT_TEDDY"))##
+		#set($hasAnyStuff = true)##
+		#addItem($waitLines "You snuggle up with your giant teddy.")##
+	#end
+	#if($w.hasStuff("PC"))##
+		#set($hasAnyStuff = true)##
+		#addItem($waitLines "You code some scenes for an erotic text game you play.")##
+		#addItem($waitLines "You play oldlife, a game that takes place in a terrible world containing such things as diseases spread through sex.")##
+		#addItem($waitLines "You play oldlife, a game that takes place in a terrible world containing such things as increasing your age over time.")##
+		#addItem($waitLines "You play oldlife, a game that is updated with remarkable regularity considering that it is both complex and free.")##
+		#addItem($waitLines "You play oldlife, a game where your character has nothing better to do than sit at a computer and play an erotic text game.")##
+		#addItem($waitLines "You play oldlife by Magnificent Emu.")##
+	#end
+	#if(!$hasAnyStuff)
+		#addItem($waitLines "Looking around your place makes you realize how little there is to do. Maybe you should buy some items for your home.")##
+	#end
+	#if($f.hasTrait("VIGOROUS_LOVER"))##
+		#addItem($waitLines "You hear $f.name moaning.")##
+	#end
+## foldEnd
+##
+##
+## This essentially tries to simulate what's going on while you're waiting
+#macro(waitSexSimmulate)##
+	#if($scene.hasFlag("SPY_SEX_CAUGHT"))
+		#set($fChance = 100)##
+		#set($mChance = 100)##
+	#else
+		#set($fChance = 50)##
+		#set($mChance = 50)##
+		#if($f.hasTrait("VIGOROUS_LOVER"))
+			#set($fChance = $fChance + 10)##
+		#end
+		#if($m.hasTrait("VIGOROUS_LOVER"))
+			#set($mChance = $mChance + 10)##
+		#end
+		#if($m.hasTrait("THICK_COCK"))
+			#set($fChance = $fChance + 10)##
+		#end
+		#if($m.hasTrait("MAGIC_FINGERS"))
+			#set($fChance = $fChance + 10)##
+		#end
+		#if($f.hasTrait("MAGIC_FINGERS"))
+			#set($mChance = $mChance + 10)##
+		#end
+	#end
+	#if($scene.percent($fChance))
+		$f.addArousalLarge()
+	#elseif($scene.percent($fChance))
+		$f.addArousalMedium()
+	#else
+		$f.addArousalSmall()
+	#end
+	#if($scene.percent($mChance))
+		$m.addArousalLarge()
+	#elseif($scene.percent($mChance))
+		$m.addArousalMedium()
+	#else
+		$m.addArousalSmall()
+	#end
+	#if($f.arousalOrgasm)
+		$f.haveOrgasm()
+	#end
+	#if($m.arousalOrgasm)
+		$m.haveOrgasm()
+		#if($m.hasTrait("IMPREGNATOR")||($m.hasTrait("WANTS_KIDS")&&$f.hasTrait("WANTS_KIDS"))||($scene.hasFlag("SPY_SEX_ASKED_COME_INSIDE") && (!$scene.hasFlag("SPY_SEX_ASKED_PULL_OUT")||$scene.randomBoolean())))
+			$scene.inseminateNpc($m,$f,0)
+		#end
+	#end
+#end
+##
+##
+##
+#if($scene.hasFlag("SOPHISTICATED_SALES_INTRO_DONE"))##
+	You and $f.name hang out in your #if($w.livingInFlat)apartment#{else}house#{end}, it's not long before $m.name arrives at the door.
+	After introductions the three of you sit down and start talking.
+	#set($timer = 0)##
+#else
+	You are hanging out at a pub #if(!$w.knownPregnant && !$f.pregnant)drinking #{end}with $f.name when she asks you how your job's going. You reply that you're currently a $gd.jobTitle, but it doesn't really matter to you.
+	#if($f.personality == "CARING")##
+		$f.name tells you that she thinks you're far too good for that position. ##
+		#if(!$w.hasTrait("LOW_SELF_ESTEEM"))$f.addWLikingSmall()#end
+	#elseif($f.personality == "JERK")##
+		$f.name tells you that's nothing to be proud of and that you're an idiot for letting your talents go to waste like that. ##
+		#if(!$w.hasTrait("LOW_SELF_ESTEEM"))$f.reduceWLikingTiny()#end
+	#else
+		$f.name expresses her belief that you deserve a promotion. ##
+		#if(!$w.hasTrait("LOW_SELF_ESTEEM"))$f.addWLikingTiny()#end
+	#end
+	Before you can respond, however, your phone vibrates.
+#end
+</introText>
+
+<sceneDescriptionText>
+#if($scene.hasFlag("SOPHISTICATED_SALES_INTRO_DONE"))
+	You are at your #if($w.livingInFlat)apartment#{else}house#{end} with $f.name and $m.name.
+#else
+	You are at a pub with $f.name.
+#end
+</sceneDescriptionText>
+
+<checkPhoneText>
+You take out your phone and notice that it's, coincidentally, a text from your boss asking if you would be open to meeting outside of work today.
+#if($w.hasTrait("SHY")||!$m.wLikingNeutral)##
+	You are about to say no, but##
+#else
+	You start to consider the idea, but before you can make up your mind##
+#end
+ $f.name grasps your hand and tells you this is the perfect opportunity.
+</checkPhoneText>
+
+<planListenText>
+$f.name says that if you ##
+#if($w.hasTrait("SHY"))##
+	are too shy ##
+#elseif($w.hasTrait("REFINED"))##
+	are too uptight ##
+#else
+	don't care enough ##
+#end
+to do anything to progress your career then she'll have to in your place.
+</planListenText>
+
+<planNoText>
+You tell $f.name that you don't want her help with this. 
+#if($f.personality=="CARING")##
+	She accepts your decision and you continue to have an enjoyable time together.
+	$f.addWLikingTiny()##
+#elseif($f.personality=="JERK")##
+	She sighs and claims that some people just can't be helped.
+	$f.reduceWLikingTiny()##
+#else
+	She drops the topic but was clearly thinking of it for the rest of the day.
+#end
+Eventually you call it a night and go home.
+</planNoText>
+
+<planYesText>
+You send $m.name a text saying to meet you at your #if($w.livingInFlat)apartment#{else}house#{end} and that you have a friend over. You then head there with $f.name. 
+</planYesText>
+
+<planRulesLongDesc>
+Tell $f.name you don't want things to go too far.
+</planRulesLongDesc>
+
+<planRulesText>
+You tell $f.name you don't want her to do anything crazy, like have sex with your boss. ##
+#if($scene.percent(75))##
+	She agrees to that.
+	$scene.addFlag("SOPHISTICATED_SALES_NO_SEX")##
+#else
+	But she tells you she can't make any promises.
+#end
+</planRulesText>
+
+<letThemTalkText>
+#set($timer = $timer + 1)##
+You sit and let $f.name do most of the talking.
+</letThemTalkText>
+
+<getDrinksText>
+#set($timer = $timer + 1)##
+You bring ##
+#if(!$f.pregnant)
+	$f.name and $m.name some drinks##
+#else
+	$m.name a drink##
+#end
+#if(!$w.knownPregnant)
+	 and drink one yourself.
+#else
+	.
+#end
+</getDrinksText>
+
+<interuptNoSexText>
+You clear your throat to indicate your displeasure. $f.name apologizes and gets back to her seat.
+</interuptNoSexText>
+
+<ignoreNoSexText>
+You decide not to get in #possessive($f) way. Though you do feel a bit hurt by her betrayal.
+</ignoreNoSexText>
+
+<sexStartText>
+They enter your room and you look around for something to do.##
+</sexStartText>
+
+<fMoveText>
+$f.name walks over to where $m.name is sitting and sits on his lap.
+#if($scene.hasFlag("SOPHISTICATED_SALES_NO_SEX"))
+	Clearly going against the promise she made to you.
+#end
+</fMoveText>
+
+<fTalkText>
+#evaluate($scene.pickFromList($fTalkLines))
+
+#mAction
+#checkArousal##
+</fTalkText>
+
+<fComplimentText>
+#evaluate($scene.pickFromList($fComplimentLines))
+
+#mAction
+#checkArousal##
+</fComplimentText>
+
+<fFlirtText>
+#evaluate($scene.pickFromList($fFlirtLines))
+
+#mAction
+#checkArousal##
+</fFlirtText>
+
+<fSexualText>
+#evaluate($scene.pickFromList($fSexualLines))
+
+#mAction
+</fSexualText>
+
+<fSexStartText>
+$f.name tells you she and $m.name are going to have to borrow your bed for a bit.
+</fSexStartText>
+
+<waitText>
+#evaluate($scene.pickFromList($waitLines))
+#waitSexSimmulate()
+</waitText>
+
+<endingText>
+#if($scene.hasFlag("SOPHISTICATED_SALES_SEX"))##
+	$f.fixClothing()##
+	$m.fixClothing()##
+	$scene.unHideNpc($m)
+	$scene.unHideNpc($f)
+	#set($clChance = 10)##
+	#if($f.maxDrunk)
+		#set($clChance = $clChance + 50)
+	#elseif($f.veryDrunk)
+		#set($clChance = $clChance + 25)
+	#elseif($f.drunk)
+		#set($clChance = $clChance + 15)
+	#end
+	#if($f.hasTrait("VIGOROUS_LOVER"))
+		#set($clChance = $clChance + 20)
+	#end
+	#if($f.hasTrait("VIGOROUS_LOVER"))
+		#set($clChance = $clChance + 20)
+	#end
+	#foreach($item in ["TopStatus","BottomStatus","PantiesStatus","BraStatus"])
+		#set($itemStatus= '$f.'+"$item")##
+		#if(("#evaluate($itemStatus)"=="WORN") && ($scene.percent($clChance)))##
+			#set($itemStatusSet='$f.set'+"$item"+'("DISHEVELED")')##
+			#evaluate($itemStatusSet)##
+		#end
+	#end
+	##
+	##
+	$m.name and $f.name finally leave your bedroom. ##
+	#if($scene.hasFlag("SPY_SEX_CAUGHT"))##
+		#if($m.hasTrait("SLEAZY"))##
+			$m.name asks if next time you could actually join them. $f.name rolls her eyes in response.
+		$gd.addJobPerformanceModifier(70)##
+		#else
+			Neither of them mention when they caught you staring.
+			$gd.addJobPerformanceModifier(50)##
+		#end
+	#elseif($scene.hasFlag("SOPHISTICATED_SALES_PEEK"))##
+		They are oblivious to the fact you were watching them.
+		$gd.addJobPerformanceModifier(70)##
+	#else
+		$gd.addJobPerformanceModifier(70)##
+	#end
+#else
+	You tell $f.name and $m.name that it's getting late and that they should go.
+	$gd.addJobPerformanceModifier(40)##
+#end
+$m.name tells you that he had a great experience and he'll keep this in mind when considering promotions. 
+</endingText>
+
+<peekText>
+You silently open the door to your bedroom and look inside.
+</peekText>
+
+<returnFromPeekingText>
+#if($scene.hasFlag("SPY_SEX_CAUGHT"))##
+	#if($m.hasTrait("SLEAZY"))##
+		$m.name looks happy you're here, but unfortunately for him ##
+		$m.addEnjoyMedium()##
+	#else
+		$m.name looks at you in surprise while ##
+		$m.reduceNpcLikingSmall()##
+	#end
+	$f.name gets up and closes the door.
+	$f.reduceNpcLikingTiny()##
+#else
+	You silently return to the front room. 
+#end
+</returnFromPeekingText>

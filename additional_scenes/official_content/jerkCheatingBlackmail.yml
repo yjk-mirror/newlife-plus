@@ -1,0 +1,721 @@
+# Scene written by splendidostrich
+#
+# Overview:
+# This is a scene where a jerk blackmails the PC into sleeping with him by threatening to tell her bf about things she's
+# done with him in the past.
+#
+# Key Paths:
+# - The PC submits to blackmail and sleeps with the jerk.
+# - The PC's boyfriend arrives and fights with the jerk. The PC may hook up with the winner or console the loser.
+# - Unbeknownst by the jerk, the bf is cool with the pc sleeping around. The PC and BF join forces to punish the jerk for his attempted blackmail.
+# - The jerk tells a doormat BF about cheating, and the PC mocks and humiliates him about it before sleeping with the jerk again.
+# 
+# Scene access:
+# By random event, weekday evening timeslot.
+#
+# Preconditions:
+# The PC has a partner.
+# A male NPC exists for whom all the following are true:
+#  - Is not the PC's partner.
+#  - Is not a restricted special NPC (i.e. does not have the no_random-appearance trait).
+#  - Has the Jerk personality.
+#  - Finds the PC attractive (at least at 'ok' level, or "attracted" if the just_friends flag is set).
+#  - Does not have max liking (close level) towards the PC
+#  - Has not been TROUNCED by the PC, and has not had a negative outcome from previous blackmail attempts.
+#  - The PC has cheated on her partner with this NPC, and that cheating has not been discovered or timed out.
+#
+# Any severity of cheating is valid (other than NONE, obviously), but the scene should perhaps be more common at higher severities.
+# 
+#
+# The scene takes 2 male NPCs and no female ones:
+# "bf" is the player's partner (who may be her boyfriend, fiance or husband - "bf" is just shorthand). 
+# "jerk" is the NPC defined in the preconditions above.
+# Both should be wearing casual clothes. 
+# The scene takes place in the pc's home. 
+
+textFileName: jerkCheatingBlackmail.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: jerk
+    outfit: CASUAL
+  - id: bf
+    outfit: CASUAL
+ location: 
+  usePlayerHome: true
+  
+# No option to not answer the door in the intro: The player should not get to "opt out" of the consequences of their cheating.
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($jerk) 
+  - effect: $scene.hideNpc($bf)
+ followUpActions:
+  letHimIn:
+
+# Satisfying him does not increase his liking, as he's really just taking advantage of her.
+returningSections:
+
+ - id: compliedWithBlackmail
+   textId: compliedWithBlackmail
+   effects: 
+    - effect: $jerk.fixClothing()
+   finishScene: '$scene.hasFlag("JERK_BLACKMAIL_SATISFIED")'
+   followUpActions:
+    # Will only by used if the scene doesn't finish (i.e. if the jerk isn't satisfied)
+    waitForBf:
+
+ - id: returnFromMockedDoormatJerkMakeout
+   textId: returnFromMockedDoormatJerkMakeout
+   finishScene: true
+       
+ - id: confrontationWithBf
+   textId: confrontationWithBf
+   sceneTransition:
+    condition: $jerk.hasRelationshipFlag("AGREED_SHARE_WITH_PARTNER")
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: jerk
+   followUpActions:
+    ltsPunishJerk: '$bf.hasRelationshipFlag("KNOWS_LIKES_TO_SHARE")'
+    ltsPostConfrontationStories: '$bf.hasRelationshipFlag("KNOWS_LIKES_TO_SHARE")' 
+    # The doormat actions don't check for KNOWS_LIKES_TO_SHARE because it shouldn't be possible to get it for a doormat character.
+    mockDoormat: '$bf.hasTrait("DOORMAT") && $bf.partner && !$w.hasTrait("NICE") && !$bf.wLoveCrush && (!$bf.wLikingNeutral || ($w.hasTrait("BITCHY") && !$bf.wLikingClose))'
+    sideWithDoormat: '$bf.hasTrait("DOORMAT") && $bf.partner'
+    bfLeaves: '!$bf.partner || $scene.hasFlag("BLACKMAIL_BF_LEAVES")' 
+    aloneWithBf: $scene.hasFlag("BLACKMAIL_BF_KICKED_JERK_OUT")
+    watchFight: $scene.hasFlag("BLACKMAIL_FIGHT")
+    givePermissionToFight:  $scene.hasFlag("BLACKMAIL_FIGHT_WITH_PC_PERMISSION")
+    refusePermissionToFight:  $scene.hasFlag("BLACKMAIL_FIGHT_WITH_PC_PERMISSION")
+    
+ - id: postBfLeavingFulfilJerksWishes
+   textId: postBfLeavingFulfilJerksWishes
+   effects:
+    - effect: $scene.removeFlag("NO_ORAL") $scene.removeFlag("BLOCK_ANAL")
+   finishScene: true
+   
+ - id: postFightBfMo
+   textId: postFightBfMo
+   effects: 
+    - effect: $scene.removeFlag("BLOCK_REJECTIONS")
+   finishScene: $scene.hasFlag("UNHAPPY_CHEATING_DISCOVERY_OUTCOME")
+   sceneTransition:
+    condition: true
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: bf
+    
+actions:
+ - id: letHimIn 
+   shortDesc: Invite him in
+   longDesc: He wants to talk? Okay, invite him in and hear what he has to say.
+   textId: letHimIn
+   followUpActions:
+    listen: 
+
+ - id: listen 
+   shortDesc: Listen
+   longDesc: Hear him out.
+   textId: listen
+   effects:
+    # self-respecting girls don't like being blackmailed!
+    - effect: $jerk.reduceWLikingMassive() $jerk.reduceWLoveVLargeUncapped()
+      condition: '!$w.hasTrait("LOW_SELF_ESTEEM")'
+    # Add the full 100 points, triggering the bastard-decision scene in the next week. I can't really see any justification to add
+    # less than 100 for such egregiously awful behaviour as trying to blackmail her into sex.
+    # This is added even if the player has LSE or chooses noNeedForBlackmail. They'll have the option to forgive him in the bastard scene. 
+    - effect: $jerk.addBastard(100)
+   followUpActions:
+     agreeMeekly: '$w.hasTrait("SHY")'
+     agreeAngrily: '!$w.hasTrait("SHY") && !$w.hasTrait("LOW_SELF_ESTEEM") && !$jerk.isWLoveCrush()'
+     agreeAndPlead: '!$w.hasTrait("SHY")'
+     friendsDontBlackmail: $jerk.friend
+     # Opposite conditions so the player always has one of the refuse options available.
+     refuse: '$jerk.getCheatingSeverity() != "LIGHT"' 
+     refuseLightSeverity: $jerk.getCheatingSeverity() == "LIGHT"
+     intimidate: '!$w.hasTrait("SHY") && (!$w.hasTrait("LOW_SELF_ESTEEM") || $w.hasTrait("BITCHY"))'
+     noNeedForBlackmail: $jerk.isWAttractionAttracted() || $jerk.isWLoveConfused()
+
+
+ - id: agreeMeekly 
+   shortDesc: Meekly comply
+   longDesc: Do as he asks.
+   textId: agreeMeekly
+   effects:
+    - effect: $jerk.addArousalMedium() $jerk.addEnjoySmall()
+      condition: $jerk.hasTrait("LIKES_CUTE")
+   followUpActions:
+    agreedGetToKnees: $scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL")
+    agreedGetOnAllFours: '$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL") && $jerk.getBehaviourNoFaking() != "MEAN"' 
+    agreedGetOnAllFoursMean: '$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL") && $jerk.getBehaviourNoFaking() == "MEAN"' 
+    agreedStartMo: '!$scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL") && !$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL")'
+        
+ - id: agreeAngrily 
+   shortDesc: Agree angrily
+   longDesc: You aren't happy about it, but you'll do as he asks.
+   textId: agreeAngrily
+   effects:
+   # Clearly she isn't pleased by this, so give additional liking reduction.
+    - effect: $jerk.reduceWLikingSmall() 
+   followUpActions:
+    agreedGetToKnees: $scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL")
+    agreedGetOnAllFours: '$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL") && $jerk.getBehaviourNoFaking() != "MEAN"' 
+    agreedGetOnAllFoursMean: '$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL") && $jerk.getBehaviourNoFaking() == "MEAN"' 
+    agreedStartMo: '!$scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL") && !$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL")' 
+
+ - id: agreedGetToKnees 
+   shortDesc: Get to your knees
+   longDesc: Drop to your knees.
+   textId: agreedGetToKnees
+   sceneTransition:
+    condition: true
+    type: ORAL_SEX 
+    maleNpcs:
+     - id: man
+       npc: jerk
+    transitionInfo:
+     position: STAND
+    returningId: compliedWithBlackmail
+    location:
+     useCurrentLocation: true
+     
+ - id: agreedGetOnAllFours 
+   shortDesc: Get on all fours
+   longDesc: Get on all fours and prepare your asshole for penetration
+   textId: agreedGetOnAllFours
+   effects:
+    - effect: $jerk.setTrousersOpen(true)
+    - effect: $jerk.addArousalHuge()$jerk.addArousalHuge()
+      condition: "!$jerk.arousalComfort"
+   sceneTransition:
+    condition: true
+    type: ANAL_SEX
+    maleNpcs:
+     - id: man
+       npc: jerk
+    returningId: compliedWithBlackmail
+    location:
+     useCurrentLocation: true
+    transitionInfo:
+     inBed: true
+     lube: SOME
+
+# TransitionInfo doesn't take conditions, so this is written as a separate action to allow for the mean variant to be on the floor with no lube.
+ - id: agreedGetOnAllFoursMean
+   shortDesc: Get on all fours
+   longDesc: Get on all fours and prepare to have your asshole reamed.
+   textId: agreedGetOnAllFoursMean
+   effects:
+    - effect: $jerk.setTrousersOpen(true)
+    - effect: $jerk.addArousalHuge()$jerk.addArousalHuge()
+      condition: "!$jerk.arousalComfort"
+    - effect: $jerk.addWEnjoySmall() $w.addArousalMedium()
+      condition: $w.hasTrait("LIKES_ROUGH")
+    - effect: $jerk.reduceWEnjoyMedium() $w.reduceArousalMedium()
+      condition: '!$w.hasTrait("LIKES_ROUGH")'
+    - effect: $jerk.reduceWLikingSmall()
+      condition: '!$w.hasTrait("LIKES_ROUGH") && !$w.hasTrait("LOW_SELF_ESTEEM")'
+   sceneTransition:
+    condition: true
+    type: ANAL_SEX
+    maleNpcs:
+     - id: man
+       npc: jerk
+    returningId: compliedWithBlackmail
+    location:
+     useCurrentLocation: true
+    transitionInfo:
+     inBed: false
+     lube: NONE
+      
+ - id: agreedStartMo 
+   shortDesc: Let him have you
+   longDesc: Let him take you in his arms and have his way with you.
+   textId: agreedStartMo
+   effects:
+    # Doesn't block rejections, but rejecting him in the MO will make him spill her secret.
+    # The results flags added here will disable certain actions in the makeout & sex scenes.
+    - effect: $scene.addFlag("NO_ORAL") $scene.addFlag("BLOCK_ANAL")
+    - effect: $scene.addFlag("AGREED_INSEMINATION") $scene.addFlag("AGREED_BARE")
+      condition: $scene.hasFlag("JERK_BLACKMAIL_WANTS_INSEMINATE")
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: jerk
+    returningId: compliedWithBlackmail
+    location:
+     useCurrentLocation: true
+  
+ - id: refuse 
+   shortDesc: Refuse
+   longDesc: You won't give in to blackmail!
+   textId: refuse
+   effects:
+   # Clearly she isn't pleased by this, so give additional liking reduction.
+    - effect: $jerk.reduceWLikingSmall() 
+   followUpActions:
+    waitForBf: 
+
+# Follow-up actions are only if this approach fails.     
+ - id: friendsDontBlackmail 
+   shortDesc: Friends don't blackmail
+   longDesc: "He's your friend! He shouldn't be trying to blackmail you!"
+   textId: friendsDontBlackmail
+   finishScene: $scene.hasFlag("AGREED_SHOULDNT_BLACKMAIL_FRIEND")
+   followUpActions:
+    agreeMeekly: '$w.hasTrait("SHY")'
+    agreeAngrily: '!$w.hasTrait("SHY") && !$w.hasTrait("LOW_SELF_ESTEEM") && !$jerk.isWLoveCrush()'
+    agreeAndPlead: '!$w.hasTrait("SHY")'
+    # Light severity refusal is disabled here, as she clearly doesn't consider it a trivial matter given her initial choice of actions.
+    refuse: 
+    intimidate: '!$w.hasTrait("SHY") && (!$w.hasTrait("LOW_SELF_ESTEEM") || $w.hasTrait("BITCHY"))'
+
+    
+# Doesn't get the additional liking reduction as it's more of a "wtf" response than a "fuck you" one.    
+ - id: refuseLightSeverity 
+   shortDesc: Trivial rubbish!
+   longDesc: "You've hardly done anything with him! Does he really think he can blackmail you with something so paltry?"
+   textId: refuseLightSeverity
+   # End scene if NPC agrees that it isn't worth going to bf with this. 
+   finishScene: $scene.hasFlag("JERK_BLACKMAIL_LIGHT_SEV_REFUSAL_WORKED")
+   followUpActions:
+    waitForBf: 
+     
+ - id: intimidate 
+   shortDesc: Intimidate him
+   longDesc: "How dare he! Teach the rat a lesson. He'll never dare blackmail you again! "
+   textId: intimidate
+   effects: 
+   # Succeed or fail, he dislikes being intimidated.
+    - effect: $jerk.reduceNpcLikingMedium() $jerk.reduceNpcLoveMedium() 
+    # Lower than his as she already got a large -ve to liking if not LSE
+    - effect: $jerk.reduceWLikingSmall() 
+   finishScene: $scene.hasFlag("JERK_BLACKMAIL_INTIMIDATE_WORKED")
+   followUpActions:
+    waitForBf: 
+
+ - id: noNeedForBlackmail 
+   shortDesc: No need for threats
+   longDesc: Blackmail? But why? If he wants you, he just has to reach out and take you.
+   textId: noNeedForBlackmail
+   effects:
+    - effect: $jerk.addEnjoySmall() $jerk.addArousalSmall()
+   followUpActions:
+    agreedGetToKnees: $scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL")
+    agreedGetOnAllFours: '$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL") && $jerk.getBehaviourNoFaking() != "MEAN"' 
+    agreedGetOnAllFoursMean: '$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL") && $jerk.getBehaviourNoFaking() == "MEAN"' 
+    agreedStartMo: '!$scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL") && !$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL")' 
+    
+ - id: agreeAndPlead 
+   shortDesc: Agree pleadingly
+   longDesc: Do what he says, while begging for him to keep your secret.
+   textId: agreeAndPlead
+   followUpActions:
+    agreedGetToKnees: $scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL")
+    agreedGetOnAllFours: '$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL") && $jerk.getBehaviourNoFaking() != "MEAN"' 
+    agreedGetOnAllFoursMean: '$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL") && $jerk.getBehaviourNoFaking() == "MEAN"' 
+    agreedStartMo: '!$scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL") && !$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL")' 
+
+ - id: waitForBf 
+   shortDesc: waitForBfShortDesc
+   longDesc: waitForBfLongDesc
+   textId: waitForBf
+   effects:
+    - effect: $scene.unHideNpc($bf)
+   followUpActions:
+    talkToBf:
+    
+ - id: talkToBf 
+   shortDesc: talkToBfShortDesc
+   longDesc: talkToBfLongDesc
+   textId: talkToBf
+   effects:
+    - effect: $scene.setActiveMaleNpc($bf)
+   # This experience brings the PC and her bf closer, giving both an increase to liking.
+   # The NPC also gets +enjoy & arousal because the PC is satisfying his sexual desires by cheating.
+   # This doesn't clear cheating in the effects because the jerk's cheating level is used in the text in some follow-up actions. However, it's important 
+   # that any actions on the path that doesn't transition to CHEATING_CONFRONTATION eventually call $jerk.clearCheating()
+    - effect: $bf.addWLikingMedium() $bf.addNpcLikingMedium() $bf.addArousalMedium() $bf.addEnjoyLarge()
+      condition: $bf.hasRelationshipFlag("KNOWS_LIKES_TO_SHARE")
+   sceneTransition:
+    condition: '!$bf.hasRelationshipFlag("KNOWS_LIKES_TO_SHARE")'
+    type: CHEATING_CONFRONTATION 
+    maleNpcs:
+     - id: bf
+       npc: bf
+     - id: discoveredCheatingMan
+       npc: jerk
+    transitionInfo:
+     allowLie: false
+     blockSexTransitions: true
+    returningId: confrontationWithBf
+    location:
+     useCurrentLocation: true
+   followUpActions:
+    # No need for KNOWS_LIKES_TO_SHARE conditions because the scene transition will take priority over these actions.
+    ltsTellBfStories:
+    ltsPunishJerk:
+    
+ - id: ltsTellBfStories 
+   shortDesc: ltsTellBfStoriesShortDesc
+   longDesc: ltsTellBfStoriesLongDesc
+   textId: ltsTellBfStories
+   effects:
+    # Does NOT call clearCheating in these effects: this is done in the .vm.
+    # This is because the cheatingSeverity is used in the text, and it won't work if it's been cleared. Instead, clearCheating is called
+    # at the end of the text section once it's no longer needed.
+    - effect: $scene.hideNpc($jerk) $jerk.reduceNpcLikingMedium() $scene.setActiveMaleNpc($bf)
+    - effect: $w.addArousalMedium()
+      condition: $w.hasTrait("OVERACTIVE_IMAGINATION")
+    - effect: $bf.addArousalLarge() $bf.addEnjoyMedium()
+      condition: '$jerk.cheatingSeverity != "LIGHT"'
+    - effect: $bf.addArousalMedium() $bf.addEnjoySmall()
+      condition: '$jerk.cheatingSeverity == "LIGHT"'
+   sceneTransition:
+    condition: true 
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: bf
+       
+ - id: ltsPostConfrontationStories 
+   shortDesc: ltsPostConfrontationStoriesShortDesc
+   longDesc: "He wants to hear about your cheating? You can oblige! Give your partner all the sexy little details of your infidelity."
+   textId: ltsPostConfrontationStories
+   effects:
+      # This one doesn't need to worry about clearCheating at all, as this is done in the cheating confrontation scene.
+    - effect: $scene.hideNpc($jerk) $jerk.reduceNpcLikingMedium() $scene.setActiveMaleNpc($bf)
+    - effect: $w.addArousalMedium()
+      condition: $w.hasTrait("OVERACTIVE_IMAGINATION")
+    - effect: $bf.addArousalLarge() $bf.addEnjoyMedium()
+      condition: '$jerk.cheatingSeverity != "LIGHT"'
+    - effect: $bf.addArousalMedium() $bf.addEnjoySmall()
+      condition: '$jerk.cheatingSeverity == "LIGHT"'
+   sceneTransition:
+    condition: true 
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: bf
+       
+ - id: ltsPunishJerk 
+   shortDesc: "Punish the blackmailer!"
+   longDesc: Blackmailing you isn't something you can just shrug off. Make him suffer!
+   textId: ltsPunishJerk
+   followUpActions:
+    punishmentMakeJerkStrip: 
+    
+ - id: punishmentMakeJerkStrip 
+   shortDesc: Tell him to strip
+   longDesc: The first step in your cunning plan is for the asshole to get naked.
+   textId: punishmentMakeJerkStrip   
+   effects:
+    - effect: $jerk.stripNaked()
+   followUpActions:
+    punishmentKickJerkOut:
+    
+ - id: punishmentKickJerkOut 
+   shortDesc: Kick him out!
+   longDesc: "Now that he's naked, kick him out onto the street!"
+   textId: punishmentKickJerkOut   
+   followUpActions:
+    punishmentBlackmailJerk:
+       
+ - id: punishmentBlackmailJerk 
+   shortDesc: Blackmail him
+   longDesc: Give him a taste of his own medicine
+   textId: punishmentBlackmailJerk   
+   effects:
+   # clearCheating is called here: this must be called on the path where the transition to CHEATING_CONFRONTATION doesn't happen to mark that the 
+   # bf now knows about it. 
+   # The alternative "tell stories" path calls it in the VM because it's used in the text. That isn't the case for this action so it can be in the effects section. 
+    - effect: $scene.hideNpc($jerk) $jerk.clearCheating() $jerk.reduceNpcLikingVLarge() $jerk.reduceNpcLoveLarge() $scene.setActiveMaleNpc($bf)
+   sceneTransition:
+    condition: true 
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: bf
+
+ - id: sideWithDoormat 
+   shortDesc: sideWithDoormatShortDesc
+   longDesc: sideWithDoormatLongDesc
+   textId: sideWithDoormat
+   effects:
+    - effect: $bf.addNpcLikingSmall() $bf.addNpcLoveTiny() $jerk.reduceNpcLikingSmall() $jerk.reduceWLikingSmall() $scene.setActiveMaleNpc($bf)
+   finishScene: $scene.hasFlag("UNHAPPY_CHEATING_DISCOVERY_OUTCOME")
+   sceneTransition:
+    condition: true 
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: bf
+
+ - id: mockDoormat 
+   shortDesc: Join in
+   longDesc: mockDoormatLongDesc
+   textId: mockDoormat
+   effects:
+    - effect: $bf.reduceNpcLikingLarge() $bf.reduceNpcLoveLarge() $jerk.addNpcLikingSmall()
+    - effect: $w.changeStress(-5) 
+      condition: $w.hasTrait("BITCHY")
+   followUpActions:
+    mockingDoormatJerkMakeout: $jerk.wAttractionOk || $w.hasTrait("LOW_SELF_ESTEEM")
+    mockedDoormatBothLeave: 
+ 
+# This doesn't count as cheating because the BF is already aware of it and his reaction is handled in this scene. Flagging it as cheating could lead to
+# the BF "discovering" it at a later date and acting as if it's news to him.
+ - id: mockingDoormatJerkMakeout 
+   shortDesc: mockingDoormatJerkMakeoutShortDesc
+   longDesc: mockingDoormatJerkMakeoutLongDesc
+   textId: mockingDoormatJerkMakeout
+   effects:
+    - effect: $jerk.addEnjoyMedium() $scene.hideNpc($bf) $bf.reduceNpcLikingVLargeUncapped() $bf.reduceNpcLoveVLargeUncapped() $scene.addFlag("NOT_CHEATING") $scene.setActiveMaleNpc($jerk)
+   sceneTransition:
+    condition: true
+    type: LYING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: jerk
+    returningId: returnFromMockedDoormatJerkMakeout
+    location:
+     useCurrentLocation: true
+
+ - id: mockedDoormatBothLeave 
+   shortDesc: Get rid of both
+   longDesc: mockedDoormatBothLeaveLongDesc
+   textId: mockedDoormatBothLeave
+   finishScene: true  
+
+ - id: bfLeaves 
+   shortDesc: Watch him leave
+   longDesc: Well, that's the end of that...
+   textId: bfLeaves
+   effects:
+    - effect: $scene.hideNpc($bf) $scene.setActiveMaleNpc($jerk)
+   followUpActions:
+    postBfLeavingAcceptJerkProposition: "!$jerk.hadOrgasm" 
+    postBfLeavingKickJerkOut: "!$jerk.hadOrgasm" 
+    postBfLeavingAllowLeave: $jerk.hadOrgasm
+    # Trouncing the jerk has no strength requirement to attempt, but a low strength might fail.
+    # Unlike the other followup actions, beating him up is available on both orgasm and non-orgasm paths.
+    # Blocked for REFINED as fighting isn't proper and ladylike. Allowed for NICE (as the jerk obviously has it coming: in real life he'd probably be arrested)
+    # for SHY (it's a non-verbal way of showing her displeasure) and for LOW_SELF_ESTEEM (LSE characters can still be aggressive, and its up to the player
+    # how they want to interpret the trait for their character)
+    postBfLeavingTrounceJerk: '!$jerk.wLikingLike && !$jerk.wLoveConfused && $w.pregnancyStage != "BIG" && $w.pregnancyStage != "HUGE" && !$w.hasTrait("REFINED")'
+   
+ - id: postBfLeavingKickJerkOut 
+   shortDesc: Kick him out
+   longDesc: Not going to happen. He's out of here!
+   effects:
+    - effect: $jerk.reduceWLikingSmall()
+   textId: postBfLeavingKickJerkOut
+   finishScene: true    
+
+ - id: postBfLeavingAllowLeave 
+   shortDesc: Let him go
+   longDesc: Do nothing and let him walk out.
+   textId: postBfLeavingAllowLeave
+   finishScene: true 
+   
+ - id: postBfLeavingTrounceJerk 
+   shortDesc: "Thump him!"
+   longDesc: "Give the bastard a good trouncing!"
+   effects:
+    - effect: $jerk.reduceWLikingMedium() $jerk.reduceNpcLikingSmall()
+   textId: postBfLeavingTrounceJerk
+   finishScene: true 
+   
+ - id: postBfLeavingAcceptJerkProposition 
+   shortDesc: Well... okay
+   longDesc: Give him what he wants.
+   effects:
+    - effect: $jerk.addEnjoyMedium()
+   textId: postBfLeavingAcceptJerkProposition
+   followUpActions:
+    postBfLeavingGetToKnees: $scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL")
+    postBfLeavingGetOnAllFours: $scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL") 
+    postBfLeavingStartMo: '!$scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL") && !$scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL")'
+    
+ - id: postBfLeavingGetToKnees 
+   shortDesc: Get to your knees
+   longDesc: Drop to your knees.
+   textId: postBfLeavingGetToKnees
+   sceneTransition:
+    condition: true
+    type: ORAL_SEX 
+    maleNpcs:
+     - id: man
+       npc: jerk
+    transitionInfo:
+     position: STAND
+    returningId: postBfLeavingFulfilJerksWishes
+    location:
+     useCurrentLocation: true
+     
+ - id: postBfLeavingGetOnAllFours 
+   shortDesc: Get on all fours
+   longDesc: Get on all fours and prepare your asshole for penetration
+   textId: postBfLeavingGetOnAllFours
+   effects:
+    - effect: $jerk.setTrousersOpen(true)
+    - effect: $jerk.addArousalHuge()$jerk.addArousalHuge()
+      condition: "!$jerk.arousalComfort"
+   sceneTransition:
+    condition: true
+    type: ANAL_SEX
+    maleNpcs:
+     - id: man
+       npc: jerk
+    returningId: postBfLeavingFulfilJerksWishes
+    location:
+     useCurrentLocation: true
+    transitionInfo:
+     inBed: true
+     lube: SOME
+   
+ - id: postBfLeavingStartMo 
+   shortDesc: Let him have you
+   longDesc: Let him take you in his arms and have his way with you.
+   # The text for the agreeStartMo action will work fine for this one too.
+   textId: agreedStartMo
+   effects:
+    - effect: $scene.addFlag("NO_ORAL") $scene.addFlag("BLOCK_ANAL")
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: jerk
+    returningId: postBfLeavingFulfilJerksWishes
+    location:
+     useCurrentLocation: true
+
+
+ - id: aloneWithBf 
+   shortDesc: Stay in with your partner
+   longDesc: Now that the blackmailer's gone you can spend a nice evening together with your partner.
+   textId: aloneWithBf
+   effects:
+    - effect: $scene.hideNpc($jerk)
+   sceneTransition:
+    condition: true
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: bf
+       
+ - id: givePermissionToFight 
+   shortDesc: Give him the nod
+   longDesc: givePermissionToFightLongDesc 
+   textId: givePermissionToFight
+   effects:
+    - effect: $jerk.reduceNpcLikingMedium() $scene.addFlag("BLACKMAIL_GAVE_PERMISSION_TO_FIGHT")
+   followUpActions:
+    watchFight: 
+    
+ - id: refusePermissionToFight 
+   shortDesc: "No fighting!"
+   longDesc: "This is your home. It's no place for brawling!"
+   textId: refusePermissionToFight
+   sceneTransition:
+    condition: true
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: bf
+
+ - id: watchFight 
+   shortDesc: Watch
+   longDesc: Take a moment to gather yourself and see what happens.
+   textId: watchFight
+   followUpActions:
+    withVictoriousBf: $scene.hasFlag("BLACKMAIL_JERK_RAN_FROM_FIGHT")
+    watchFightEnd: '!$scene.hasFlag("BLACKMAIL_JERK_RAN_FROM_FIGHT")'
+    stopFighting: '!$scene.hasFlag("BLACKMAIL_JERK_RAN_FROM_FIGHT") && !$scene.addFlag("BLACKMAIL_GAVE_PERMISSION_TO_FIGHT") && !$w.hasTrait("SHY")'
+
+ - id: stopFighting 
+   shortDesc: "Stop fighting!"
+   longDesc: "This is your home, not a fighting ring. Put a stop to this!"
+   textId: stopFighting
+   finishScene: true
+
+ - id: watchFightEnd 
+   shortDesc: Let them fight
+   longDesc: Let them fight it out.
+   textId: watchFightEnd
+   followUpActions:
+    withVictoriousBf: $scene.hasFlag("BLACKMAIL_BF_WINS_FIGHT")
+    postFightConsoleJerk: '$scene.hasFlag("BLACKMAIL_BF_WINS_FIGHT") && !$scene.hasFlag("BLACKMAIL_GAVE_PERMISSION_TO_FIGHT") && ($w.hasTrait("LOW_SELF_ESTEEM") || $jerk.wLikingNeutral)'
+    postFightConsoleBeatenBf: '!$scene.hasFlag("BLACKMAIL_BF_WINS_FIGHT")'
+    postFightGoToJerkWinner: '!$scene.hasFlag("BLACKMAIL_BF_WINS_FIGHT") && ($w.hasTrait("LOW_SELF_ESTEEM") || $jerk.wLikingNeutral)'
+    
+ - id: withVictoriousBf 
+   shortDesc: withVictoriousBfShortDesc
+   longDesc: withVictoriousBfLongDesc
+   textId: withVictoriousBf
+   effects:
+    - effect: $w.addArousalHuge() $bf.addArousalLarge() $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $bf.addWLoveSmall()
+      condition: '!$w.hasTrait("NICE") && !$w.hasTrait("REFINED")'
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: bf
+    returningId: postFightBfMo
+    location:
+     useCurrentLocation: true
+
+ - id: postFightConsoleBeatenBf 
+   shortDesc: postFightConsoleBeatenBfShortDesc
+   longDesc: postFightConsoleBeatenBfLongDesc
+   textId: postFightConsoleBeatenBf
+   effects:
+    - effect: $bf.addWLoveTiny() $bf.addNpcLoveSmall() $bf.addNpcLikingTiny()
+   sceneTransition:
+    condition: true
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: bf
+
+ - id: postFightConsoleJerk 
+   shortDesc: postFightConsoleJerkShortDesc
+   longDesc: postFightConsoleJerkLongDesc
+   textId: postFightConsoleJerk
+   effects:
+    - effect: $scene.setActiveMaleNpc($jerk) $scene.hideNpc($bf)
+    - effect: $bf.reduceWLoveSmall() $bf.reduceNpcLoveVLargeUncapped() $bf.reduceNpcLikingVLargeUncapped() $jerk.addEnjoyLarge()
+   sceneTransition:
+    condition: true
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: jerk
+
+ - id: postFightGoToJerkWinner 
+   shortDesc: Go to the winner
+   longDesc: Ok, so it was the blackmailing asshole who won. But, if you want, you can still go fall into his arms. Your partner will be very unhappy with this.
+   textId: postFightGoToJerkWinner
+   effects:
+    - effect: $scene.setActiveMaleNpc($jerk) $scene.hideNpc($bf)
+    - effect: $bf.reduceWLoveSmall() $bf.reduceNpcLoveVLargeUncapped() $bf.reduceNpcLikingVLargeUncapped() $jerk.addEnjoyLarge()
+   sceneTransition:
+    condition: true
+    type: HOME_DATE
+    maleNpcs:
+     - id: date
+       npc: jerk
+
+     
+     
+     

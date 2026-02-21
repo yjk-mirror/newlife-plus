@@ -1,0 +1,92 @@
+# Scene written by Secondarian
+#
+# Overview:
+# This is the intro scene for the hotel prostitution scene where a guy proposes you over the internet to have sex with him for money. 
+#
+# Key Paths:
+# - The PC accepts the proposal.
+# - The PC ignores the proposal.
+# - The PC refuses angrily.
+# 
+# Scene access:
+# By random event, weekday evening timeslot.
+#
+# Preconditions:
+# The PC owns a computer.
+# 
+#
+# The scene takes 1 male NPC and no female ones:
+# "jerk" is the guy messaging.
+# Both should be wearing casual clothes. 
+# The scene takes place at the player home. 
+
+textFileName: hpIntro.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: jerk
+    outfit: CASUAL
+ location:
+  usePlayerHome: true
+  
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($jerk) 
+  - effect: $scene.hideNpc($jerk)
+ followUpActions:
+  read:
+
+actions:
+ - id: read
+   shortDesc: Read the message
+   longDesc: You read the message by this total stranger. Maybe it'll be an interesting one?
+   textId: read
+   followUpActions:
+    butVirgin: '$w.virgin && !$jerk.believesVirgin'
+    accept:
+    ignore:
+    angryanswer: '$w.hasTrait("BITCHY")'
+
+ - id: accept 
+   shortDesc: Accept
+   longDesc: Maybe you're short of money or perhaps you're doing it for the kick, but you decide to accept the indecent proposal. 
+   textId: accept
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: jerk
+       npc: jerk
+    location:
+     wall: hotel-room wall
+     floor: hotel-room floor
+     hasBed: true
+     #isOutside: false
+    transitionInfo:
+     ymlFile: hotelProstitution.yml
+     
+ - id: butVirgin 
+   shortDesc: For your first time!?
+   longDesc: But you're a virgin... your first time can't be from prostituting yourself!
+   textId: butVirgin
+   effects:
+    - effect: $jerk.informVirgin() 
+   followUpActions:
+    accept:
+    ignore:
+   
+ - id: ignore 
+   shortDesc: Ignore
+   longDesc: You decide to ignore the annoying message. You're not going to whore yourself out. 
+   textId: ignore
+   finishScene: true
+     
+ - id: angryanswer  
+   shortDesc: Answer angrily
+   longDesc: Does this guy think you are a whore? You send him a caustic message and block him.
+   textId: angryanswer
+   finishScene: true 

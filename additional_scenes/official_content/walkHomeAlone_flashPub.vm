@@ -1,0 +1,166 @@
+<introText>
+Far up ahead, there's a pub with a crowd milling out on the patio. You can hear someone yell out, "show us your tits!" There's a silence, and then a loud cheer from the crowd.##
+#set($debug = false)##
+#set($canFlashBreasts = !$w.getTop().isAlsoLowerBody()     
+          || $w.getTop().hasFlag("LOWCUT")   
+          || $w.getTop().getTopType() == "HALTERTOP")##
+#set($canFlashBra = !$w.getTop().isAlsoLowerBody()     
+          || $w.getTop().hasFlag("LOWCUT"))##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are walking down the streets of the city towards your home.
+</sceneDescriptionText>
+
+<empty>
+</empty>
+
+<debugDrunk>
+$w.isDrunk()
+$w.isVeryDrunk()
+$w.isMaxDrunk()
+</debugDrunk>
+
+<keepWalking>
+As you pass by the pub, someone yells out at you, "show us your tits!"
+</keepWalking>
+
+<ignore>
+Those yobs can be so immature when they're drunk. You ignore them and continue on your way home. 
+</ignore>
+
+<flash>
+#if ($scene.randomBoolean()) You are feeling a little mischievous. #end##
+#if (!$w.getTop().isAlsoLowerBody())##
+You lift your $w.getTop().getBasicDesc() and flash your breasts at the crowd. ##
+#elseif ($w.getTop().hasFlag("LOWCUT"))##
+You pull down the top of your $w.getTop().getBasicDesc() and flash your breasts at the crowd. ##
+#elseif ($w.getTop().getTopType() == "HALTERTOP")##
+You grab the sides of your $w.getTop().getBasicDesc() and pull them together, flashing your breasts at the crowd on the patio. ##
+#else##
+You flash your breasts at the crowd on the patio. ##
+#end##
+
+The pub patrons erupt in a cheer. You quickly cover up your breasts again and hurry on home.
+</flash>
+
+<yell>
+You curse at the crowd and let loose a torrent of abuse about their personalities, their upbringing, and their mothers. ##
+$scene.pickFromList(["The jovial atmosphere of the pub dissipates, and the crowd falls into an awkward silence.", "The crowd becomes hostile and yells back at you."])
+
+You continue on your way home.
+</yell>
+
+<educate>
+#set($showBra = false)##
+#if ($w.isVeryDrunk())##
+You try to educate the pub patrons that they are objectifying women, but it all comes out as drunken rambling.
+#else##
+You politely explain to the pub patrons that calling out to women to show their tits is a form of sexual harassment and is not nice.
+#end##
+
+The crowd boos you. ##
+#if ($canFlashBra && !$gd.hasGameFlag("WALK_HOME_ALONE_FLASHED_BRA"))##
+	#set($showBra = true)##
+	$gd.setGameFlag("WALK_HOME_ALONE_FLASHED_BRA")##
+	$scene.unHideNpc($helper)##
+	$helper.addNpcLikingMedium()##
+	Someone yells out, "show us your tits!"
+
+	You try again to explain that some women aren't comfortable with nudity, so it's not nice to put them on the spot like that.
+
+	"Show us your bra!" someone yells out. A man steps out of the crowd and tries to calm them down, but they start chanting, "Show us your bra! Show us your bra!"
+##
+#elseif ($canFlashBra && $gd.hasGameFlag("WALK_HOME_ALONE_FLASHED_BRA"))##
+	#set($showBra = true)##
+	$scene.unHideNpc($helper)##
+	$helper.addNpcLikingMedium()##
+	"It's the bra chick!" someone yells out. A man steps out of the crowd and tries to calm them down, but they start chanting, "Show us your bra! Show us your bra!"
+##
+#else##
+	Someone yells out, "show us your tits!"
+
+	You try again to explain to them why what they are doing is wrong. They boo you harder.
+
+	A man steps out of the crowd and tries to calm them down. He shuffles you away from the patio, and the crowd quickly forgets about you.
+
+	"Sorry about them," he says. "The pub crowd can get rowdy after they get sloshed."
+
+	You briefly chat with $helper.getName(), thank him, and head home.
+	$scene.unHideNpc($helper)##
+	$scene.hideNpc($yeller)##
+	$helper.addNpcLikingMedium()##
+	$helper.addNpcLoveTiny()##
+	$helper.increaseKnowledge(1, 20)##
+	$helper.addTrait("WALK_HOME_ALONE_HELPER")##
+#end##
+</educate>
+
+<showBra>
+#if (!$w.getTop().isAlsoLowerBody())##
+You lift your $w.getTop().getBasicDesc() and let the crowd look at your $w.getBra().getBasicDesc(). ##
+#elseif ($w.getTop().hasFlag("LOWCUT"))##
+You pull down the top of your $w.getTop().getBasicDesc() and let the crowd look at your $w.getBra().getBasicDesc().
+#elseif ($w.getTop().getTopType() == "HALTERTOP")##
+You grab the sides of your $w.getTop().getBasicDesc() and pull them together, letting the crowd look at your $w.getBra().getBasicDesc().##
+#else##
+You flash your $w.getBra().getBasicDesc() at the crowd on the patio. ##
+#end##
+
+
+The pub patrons erupt in a cheer. You quickly cover up and hurry on home.
+</showBra>
+
+<noBra>
+You tell them that you aren't wearing a bra##
+#if($w.top.hasFlag("THIN")), although you decide not to mention that it's only the poor lighting that stops the cold night air making this very obvious.
+#{else}.
+#end
+
+"She's lying," someone yells. 
+
+"How do we know she's telling the truth?" someone else calls out.
+
+"Show us your tits, then we'll know," someone yells back.
+
+The crowd starts chanting, "show us your tits! Show us your tits!"
+
+You try to protest, but they accuse you of being a liar. 
+
+$helper.getName() yells out, "I can check." That seems to quiet the crowd.
+</noBra>
+
+<noBraCheck>
+$helper.getName() puts his hand on your back and starts running his fingers up and down the back of your $w.getTop().getShortDesc(). ##
+#if ($w.getBraStatus() == "OFF")##
+You breath nervously as you feel his fingers linger at the small of your back.
+
+Feeling no bra strap, he turns to the crowd. "She's not wearing a bra," he announces. The crowd grumbles but quiets down.
+#else##
+Your heart skips a beat when you feel his fingers catch on the straps of your bra. You wonder what he's going to do as his fingers linger over your bra strap.
+
+He turns to the crowd. "She's not wearing a bra," he announces. The crowd grumbles but quiets down.
+#end##
+
+You briefly chat with $helper.getName(), thank him, and head home.
+$scene.hideNpc($yeller)##
+$helper.addNpcLoveSmall()##
+$helper.increaseKnowledge(1, 20)##
+$helper.addTrait("WALK_HOME_ALONE_HELPER")##
+</noBraCheck>
+
+<noBraRunAway>
+Things are getting out of control. You decide to just walk away. You can hearing the crowd calling you a liar as you leave the patio.
+</noBraRunAway>
+
+<escape>
+You feel overwhelmed by the pub patrons. $helper.getName() yells at the crowd to leave you alone, and shuffles you away from the patio. The crowd quickly forgets about you.
+
+You briefly chat with $helper.getName(), thank him, and head home.
+$scene.hideNpc($yeller)##
+$helper.addNpcLoveTiny()##
+$helper.increaseKnowledge(1, 20)##
+$helper.addTrait("WALK_HOME_ALONE_HELPER")##
+</escape>

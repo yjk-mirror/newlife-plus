@@ -1,0 +1,117 @@
+<sceneDescriptionText>
+You're at home with $m.name, a professional hypnotist who's here to help you overcome your mind's inner demons. Or at least, that's what it says on his flyer.
+</sceneDescriptionText>
+
+<introText>
+$m.name arrives at your $w.getFlatOrHouse() and you usher him inside. ##
+#if($m.relationship == "STRANGER")
+He steps in, a $m.race $m.ageDesc with piercing $m.eyeColour eyes that seem to hint at an overpowering force of will.
+#end
+
+#if($m.personality == "JERK")
+You start to explain what you want to get out of the session, but he fixes you with a piercing gaze, tells you that you need not worry about such mundane things as explanations. Instead, you should concern yourself with his payment.
+#else
+He tells you that hypnosis can help with a variety of issues and asks what you're looking to get out of today's session.
+#end
+</introText>
+
+<wantToReduceStress>
+You explain that you're looking to shed some stress, and hope that hypnosis can help you with that.
+
+He replies that he thinks he can help, but first you should handle payment.
+</wantToReduceStress>
+
+<wantToBeMoreOutgoing>
+#if($w.hasTrait("SHY"))
+After a few stammered false starts, you manage to overcome your nerves and explain that you can be very shy. An explanation that, by that point, probably wasn't necessary. You continue by telling $m.name that you'd like to be more confident and outgoing in social situations.
+#else
+You tell $m.name that you'd like to be a bit more outgoing in social situations.
+#end
+
+He replies that he thinks he can help, but first you should handle payment.
+</wantToBeMoreOutgoing>
+
+<wantToEnjoySexMore>
+#if($w.hasTrait("HARD_TO_PLEASE"))
+You tell him that you've always had a hard time reaching orgasm. You'd like to be able to enjoy yourself during sex the way you've heard some other women can.
+#else
+You tell him that you want to enjoy sex more, want to be able to come really easily and have lots and lots of orgasms.
+#end
+
+He replies that he thinks he can help, but first you should handle payment.
+</wantToEnjoySexMore>
+
+<payHim>
+You pay $m.name for his time, a fee of £80. #if($w.money < 80)You're especially poor today, so you have to dip into your overdraft to pay the full amount. #end
+
+#if($m.personality == "JERK")
+$m.name takes the money without a word of thanks. He tells you to relax onto the sofa and yield yourself unto his will.
+#else
+$m.name thanks you. He says that he's confident he can help and asks you to relax on the sofa.
+#end
+</payHim>
+
+<getOnSofa>
+You relax back onto the sofa. $m.name pulls out an old-timey pocket-watch and swings it in front of your face. You focus on it and its regular movements and rhythmic ticking gently lull you into a hypnotic trance.
+</getOnSofa>
+
+<returnFromHypno>
+You recover from your hypnotic trance.
+#if($scene.hasFlag("BROKE_TRANCE"))
+	Your $w.eyeColour eyes glower with fury as you remember the liberties he tried to take while you were under his control. Furious, you send the scumbag packing.
+	$m.addBastard(40)
+	$m.reduceWLikingMassive()
+	$gd.removeGameFlag("UNDER_THRALL_OF_EVIL_HYPNO")## Remove any ongoing control effects
+#elseif($wasVirgin && !$w.virgin)
+	Memory flows back into you, and you remember giving up your virginity. You even remember begging $m.name to take it. How strange that something like that would happen. Perhaps hypnosis unlocked some deep, buried urges? Maybe?
+	#if($scene.hasFlag("CAME_INSIDE"))
+		You can even feel the warmth of his sperm inside you. ##
+		#if(!$w.safe && !$w.knownPregnant)
+			#if($w.hasTrait("BABY_CRAZY"))
+				Of course that explains why you were so desperate to have sex. There could be no better surprise than an unexpected baby!
+			#else
+				A sickening shock runs through you as you realise what this might mean. You've just risked becoming pregnant, spending months getting bigger and heavier as a baby grows inside you, suffering through the pains of childbirth and then years upon years mothering an unplanned child.
+				How could you have taken such a risk! Were you mad? You must have been!
+			#end
+		#end
+	#end
+#elseif($scene.hasFlag("CAME_INSIDE"))
+	You can't really remember what happened, but ##
+	#if($w.pantiesStatus == "WORN")
+		your $w.panties.basicDesc #if($w.panties.hasFlag("SINGULAR"))is#{else}are#end clinging to you. ##
+	#else
+		you seem strangely damp 'down below'. ##
+	#end
+	There seems to be a lot of wetness down there. Does hypnosis make you sweat a lot?
+	
+	Or... Did something else happen? Something... sexual? A faint memory trickles into your mind, of happily letting him have his way with you. You take your head in your hands, hoping it'll clear itself, but your memories remain blurred.
+#elseif($scene.hasFlag("COME_IN_MOUTH"))
+	There's a strange taste in your mouth. ##
+	#if($m.hasTrait("TASTY_SPERM"))
+	Then, with a sudden shock, you remember begging to be allowed to get on your knees for him. The taste, warm and delicious, is from the traces of semen still in your mouth.
+	#elseif($m.hasTrait("NASTY_SPERM"))
+	A strange and very unpleasant taste. You have vague memories of being on your knees, of begging to be allowed to suck his cock. Did you really do such a thing?
+	#else
+	Searching your memories, you seem to remember begging to be allowed to suck his cock. Is that his sperm you can taste, or was that all just a silly dream?
+	#end
+#end
+
+#if(!$scene.hasFlag("BROKE_TRANCE"))
+	#if($m.personality == "JERK")
+		$m.name goes to leave, looking smugly pleased with himself. On his way out he pats you on the bottom and says that you were a good subject and he looks forward to working with you again soon.
+		## This gameflag is removed if PC ever breaks trance. It's used to unlock "evil hypno" content in any general-purpose scenes where this exists
+		$gd.setGameFlag("UNDER_THRALL_OF_EVIL_HYPNO")
+	#else
+		$m.name says that he hopes that the session will prove helpful and heads off, perhaps to his next client.
+	#end
+#end
+$scene.clearPostSexFlags()
+</returnFromHypno>
+
+<enterTrance>
+You let yourself fall into the trance.
+</enterTrance>
+
+<submitEntirely>
+You submit to his control, fading into an entirely compliant state.
+</submitEntirely>

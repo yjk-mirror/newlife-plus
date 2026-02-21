@@ -1,0 +1,84 @@
+<introText>
+## Because different types of events have different intro texts, we must determine
+## the type of event first
+$scene.clearMap()##
+$scene.addWeightedItem("SOLO", 10)##
+#if($bf)$scene.addWeightedItem("BF", 50)#end##
+#if($gf)$scene.addWeightedItem("GF", 1)#end##
+#if($bf)#set($enableWeddingDressScenes=$bf.getRelationship() == "ENGAGED" && $w.hasOtherOutfitOfType("WEDDING"))##
+#elseif($gf)#set($enableWeddingDressScenes=$gf.getRelationship() == "ENGAGED" && $w.hasOtherOutfitOfType("WEDDING"))#{else}#set($enableWeddingDressScenes=false)#end##
+
+#if($maleFriend)
+	#if($enableWeddingDressScenes)$scene.addWeightedItem("MFRIEND", 20)##
+	#{else}$scene.addWeightedItem("MFRIEND", 1)#end##
+#end##
+#if($femaleFriend)
+	#if($enableWeddingDressScenes)$scene.addWeightedItem("FFRIEND", 20)##
+	#{else}$scene.addWeightedItem("FFRIEND", 1)#end##
+#end##
+#set($eventType=$scene.pickItemAndClearMap())##
+#if($eventType=="BF")##
+You receive a message on your phone from $bf.getName() asking if you want to get together and hang out.
+#elseif($eventType=="GF")##
+You receive a message on your phone from $gf.getName() asking if you want to get together and hang out.
+#elseif($eventType=="FFRIEND")##
+You receive a message on your phone from $femaleFriend.getName() asking if you want to get together and hang out.
+#elseif($eventType=="MFRIEND")##
+You receive a message on your phone from $maleFriend.getName() asking if you want to get together and hang out.
+#else##
+You have some free time in your schedule. You're feeling a little tired though. You can simply take a nap or find something more interesting to do.
+#end##
+</introText>
+
+
+
+<sceneDescriptionText>
+#if($eventType=="BF")##
+You received a message on your phone.
+#else##
+You have some free time and are considering what to do.
+#end##
+</sceneDescriptionText>
+
+<bfNoText>
+You tell $bf.getName() that you're too busy.
+</bfNoText>
+
+<bfYesText>
+You text back to say that you're free.
+</bfYesText>
+
+<gfNoText>
+You tell $gf.getName() that you're too busy.
+</gfNoText>
+
+<gfYesText>
+You text back to say that you're free.
+</gfYesText>
+
+<ffriendNoText>
+You tell $femaleFriend.getName() that you're too busy.
+</ffriendNoText>
+
+<ffriendYesText>
+You text back to say that you're free.
+</ffriendYesText>
+
+<mfriendNoText>
+You tell $maleFriend.getName() that you're too busy.
+</mfriendNoText>
+
+<mfriendYesText>
+You text back to say that you're free.
+</mfriendYesText>
+
+<soloNapText>
+With a little yawn, you crawl into your comfy bed and take a nap.
+</soloNapText>
+
+<soloEventText>
+You can't let your free time go to waste. You shake off your tiredness and resolve to do something.
+</soloEventText>
+
+<empty>
+</empty>

@@ -1,0 +1,328 @@
+# Scene written by rigel
+#
+# Overview:
+# This is a continuation of the innocent friend befriending event. The PC and her innocent friend meet some of the lowlives again and,
+# depending on circumstances, can end up having sex with them.
+#
+# Key Paths:
+# - PC decides to take a shortcut and meets the lowlives; if they are attracted to the PC and her friend they try to chat them up
+# - the lowlives chat up the PC and her friend; if they are able to turn the PC and her friend on enough, then they can decide to have sex with the lowlives
+# - at various points during the scene the PC can decide that she has had enough and force the lowlives to go away
+#
+# Scene access:
+# A random possibility of the "Spend time with friends" weekend activity, but only once per game per innocent friend.
+#
+# Preconditions:
+# The PC has a close friendship with an innocent friend.
+# The MET_LOWLIVES flag has been set.
+# The innocent friend isn't a virgin (anymore).
+# This event hasn't already taken place with the given innocent friend.
+# The friend has the ENCOUNTERED_LOWLIVES trait but not the INNOCENT_WITH_LOWLIFE_BF one.
+#
+# It probably makes sense to have the male that has sex with the PC be a lowlife character that already slept with the PC before,
+# if one exists. It's not necessary though.
+#
+#
+# The scene takes two male NPCs and one female NPC:
+# "f" is the innocent friend.
+# "m1" is the lowlife that can end up having sex with the PC.
+# "m2" is the lowlife that can end up having sex with the innocent friend.
+# Everyone should be wearing casual clothes.
+# The scene takes place outside, at first next to a street, then in an alleyway.
+#
+#
+# This specific event is a one-off thing, but one could probably spin off future events based on what happened here. (just an option for maybe other writers, this scene very much works on its own)
+
+textFileName: lowlivesAlleySex.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m1
+    outfit: CASUAL
+  - id: m2
+    outfit: CASUAL
+ femaleNpcs:
+  - id: f
+    outfit: CASUAL
+ location:
+  wall: brick wall
+  floor: alleyway ground
+  hasBed: false
+  isOutside: true
+
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($m1)
+  - effect: $scene.hideNpc($m1)
+  - effect: $scene.hideNpc($m2)
+  - effect: $w.changeMoney(-10)
+  - effect: $f.addTrait("DONE_LOWLIFE_ALLEY_SEX_SCENE")
+ followUpActions:
+  finishNoShortcut:
+  introShortcut:
+
+returningSections:
+ - id: makeoutDone
+   textId: makeoutDoneText
+   effects:
+    - effect: $m1.addWLoveTiny()
+      condition: $w.hasTrait("LOW_SELF_ESTEEM") && $w.hasTrait("LIKES_ROUGH")
+    - effect: $m2.stripNaked()
+    - effect: $m2.wearCondom()
+      condition: $m2.hasTrait("CONSCIENTIOUS")
+    - effect: $f.haveSexWith($m2)
+    - effect: $f.setArousalClose()
+    - effect: $m2.setArousalClose()
+   followUpActions:
+    watchFriend:
+
+actions:
+ - id: finishNoShortcut
+   shortDesc: Don't take the shortcut
+   longDesc: "That part of town looks far too sketchy. Better safe than sorry!"
+   textId: finishNoShortcutText
+   effects:
+    - effect: $f.addNpcLikingTiny()
+    - effect: $f.addWLikingTiny()
+   finishScene: true
+
+ - id: introShortcut
+   shortDesc: Take the shortcut
+   longDesc: "It might look sketchy, but it's also quick. It's late and you want to get home!"
+   textId: introShortcutText
+   effects:
+    - effect: $scene.unHideNpc($m1)
+    - effect: $scene.unHideNpc($m2)
+   followUpActions:
+    finishScaredOff: $gd.hasGameFlag("SCARED_LOWLIVES")
+    finishBitchy: (!$gd.hasGameFlag("SCARED_LOWLIVES")) && $w.hasTrait("BITCHY")
+    finishScream: (!$gd.hasGameFlag("SCARED_LOWLIVES"))
+    menApproach: (!$gd.hasGameFlag("SCARED_LOWLIVES")) && (!$w.hasTrait("BLOCK_ROUGH")) # Probably better to play it safe and don't allow BLOCK_ROUGH characters to proceed further than this.
+
+ - id: finishScaredOff
+   shortDesc: These idiots again
+   longDesc: You recognise them, but do they recognise you? Let's see how brave they are this time.
+   textId: finishScaredOffText
+   effects:
+    - effect: $f.addNpcLikingSmall()
+    - effect: $f.addWLikingSmall()
+    - effect: $w.changeStress(-5)
+   finishScene: true
+
+ - id: finishBitchy
+   shortDesc: Scare them off
+   longDesc: You don't feel like dealing with these idiots this time around.
+   textId: finishScaredOffText
+   effects:
+    - effect: $m1.reduceNpcLikingMedium()
+    - effect: $m1.reduceWLikingMedium()
+    - effect: $m2.reduceNpcLikingMedium()
+    - effect: $m2.reduceWLikingMedium()
+    - effect: $f.addNpcLikingSmall()
+    - effect: $f.addWLikingSmall()
+    - effect: $w.changeStress(-5)
+   finishScene: true
+
+ - id: finishScream
+   shortDesc: Start screaming for help
+   longDesc: You start to scream for help, maybe it'll drive these lowlives away.
+   textId: finishScreamText
+   effects:
+    - effect: $m1.reduceNpcLikingSmall()
+    - effect: $m1.reduceWLikingSmall()
+    - effect: $m2.reduceNpcLikingSmall()
+    - effect: $m2.reduceWLikingSmall()
+    - effect: $f.addNpcLikingSmall()
+    - effect: $f.addWLikingSmall()
+   finishScene: true
+   
+ - id: menApproach
+   shortDesc: See what happens
+   longDesc: You don't know what the right move is in this situation, so you decide to see what these lowlives want.
+   textId: menApproachText
+   followUpActions:
+    startTalking: $isLowlivesAttracted
+    finishNotInterested: $isLowlivesAttracted
+    finishNotAttractive: "!$isLowlivesAttracted"
+
+ - id: finishNotAttractive
+   shortDesc: Looks like you got lucky
+   longDesc: The lowlives don't appear to be interested in the both of you, better move on quick before they reconsider.
+   textId: finishNotAttractiveText
+   effects:
+    - effect: $f.addNpcLikingTiny()
+    - effect: $f.addWLikingTiny()
+   finishScene: true
+
+ - id: startTalking
+   shortDesc: See what they want
+   longDesc: Looks like they aren't particularly aggressive, let's see what they want.
+   textId: startTalkingText
+   effects:
+    - effect: $m1.addArousalSmall()
+    - effect: $m2.addArousalSmall()
+   followUpActions:
+    keepTalking:
+    finishNotInterested:
+
+ - id: keepTalking
+   shortDesc: Keep talking
+   longDesc: You keep talking with the men.
+   textId: keepTalkingText
+   followUpActions:
+    keepTalking: $round <= 4
+    goIntoAlley: $round > 4 || ($round <= 4 && $w.arousalEnjoy && $f.arousalComfort)
+    finishNotInterested: ((!$w.hasTrait("SHY")) && $m1.testWillHard(0)) || $m1.testWillHard(-20)
+
+ - id: goIntoAlley
+   shortDesc: Finish talking
+   longDesc: Looks like the men want to move on from talking.
+   textId: goIntoAlleyText
+   effects:
+    - effect: $w.addArousalTiny()
+    - effect: $w.addArousalTiny()
+      condition: $m1.hadSex && ($w.hasTrait("LIKES_ROUGH") || $w.hasTrait("SULTRY") || $w.hasTrait("LOW_SELF_ESTEEM"))
+    - effect: $f.addArousalTiny()
+   followUpActions:
+    babyCrazyGropingAndUndressing: $scene.hasFlag("ALLEY_SEX_BABY_CRAZY_OVERRIDE")
+    gropingAndUndressing: (!$scene.hasFlag("ALLEY_SEX_BABY_CRAZY_OVERRIDE")) && ($m1.wAttractionAttracted || ($m1.wAttractionOk && $w.arousalComfort) || $w.arousalEnjoy)
+    finishNotInterested: (!$scene.hasFlag("ALLEY_SEX_BABY_CRAZY_OVERRIDE")) || $w.hasTrait("IRON_WILL")
+    
+ - id: finishNotInterested
+   shortDesc: You are done with this
+   longDesc: You don't know where this is going and you don't want to know. Time to tell them you're not interested anymore.
+   textId: finishNotInterestedText
+   effects:
+    - effect: $m1.reduceNpcLikingMedium()
+    - effect: $m1.reduceWLikingMedium()
+    - effect: $m2.reduceNpcLikingMedium()
+    - effect: $m2.reduceWLikingMedium()
+    - effect: $f.addNpcLikingSmall()
+    - effect: $f.addWLikingSmall()
+   finishScene: true
+
+ - id: babyCrazyGropingAndUndressing
+   shortDesc: This is your chance to make a baby!
+   longDesc: "It's your fertile time of the month and you have been propositioned for sex. Why would you say no? You want a baby!"
+   textId: gropingAndUndressingText
+   effects:
+    - effect: $w.stripNaked()
+    - effect: $w.addArousalHuge()
+    - effect: $w.addArousalMedium()
+      condition: $m1.hadChild
+    - effect: $w.addArousalLarge()
+    - effect: $f.setTopStatus("EXPOSED")
+    - effect: $f.setBottomStatus("DISHEVELED")
+    - effect: $f.addArousalSmall()
+    - effect: $m1.addArousalSmall()
+    - effect: $m2.addArousalSmall()
+    - effect: $m1.addEnjoySmall()
+    - effect: $m2.addEnjoySmall() # Would also add the innocent friend being the source here, but that's not implemented.
+    - effect: $scene.addFlag("ALLEY_SEX_WENT_INTO_ALLEY")
+   followUpActions:
+    sootheFriend:
+
+ - id: gropingAndUndressing
+   shortDesc: Be led into the alleyway
+   longDesc: You're very much alright with something more physical. You let yourself be led into the alleyway.
+   textId: gropingAndUndressingText
+   effects:
+    - effect: $w.stripNaked()
+    - effect: $w.addArousalLarge()
+    - effect: $f.setTopStatus("EXPOSED")
+    - effect: $f.setBottomStatus("DISHEVELED")
+    - effect: $f.addArousalSmall()
+    - effect: $m1.addArousalSmall()
+    - effect: $m2.addArousalSmall()
+    - effect: $m1.addEnjoySmall()
+    - effect: $m2.addEnjoySmall() # Would also add the innocent friend being the source here, but that's not implemented.
+    - effect: $scene.addFlag("ALLEY_SEX_WENT_INTO_ALLEY")
+   followUpActions:
+    sootheFriend:
+
+ - id: sootheFriend
+   shortDesc: Try to help your friend relax
+   longDesc: You can tell your friend isn't relaxed enough yet to properly enjoy herself. With the right words you might help her not be so stiff.
+   textId: sootheFriendText
+   effects:
+    - effect: $f.stripNaked()
+    - effect: $f.addArousalMedium()
+    - effect: $w.addArousalMedium()
+    - effect: $m1.addArousalSmall()
+    - effect: $m2.addArousalSmall()
+   followUpActions:
+    makeoutTransition:
+
+ - id: makeoutTransition
+   shortDesc: Be pushed against the wall
+   longDesc: Looks like your guy wants to move to more intensive foreplay.
+   textId: makeoutTransitionText
+   effects:
+    - effect: $w.addArousalSmall()
+    - effect: $f.addArousalMedium()
+    - effect: $m1.addArousalSmall()
+    - effect: $m2.addArousalSmall()
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT
+    maleNpcs:
+     - id: man
+       npc: m1
+    returningId: makeoutDone
+    location:
+     useCurrentLocation: true
+
+ - id: watchFriend
+   shortDesc: Watch your friend getting it on
+   longDesc: Looks like you weren't the only one who got busy.
+   textId: watchFriendText
+   effects:
+    - effect: $f.setArousalOrgasm()
+    - effect: $m2.setArousalOrgasm()
+   followUpActions:
+    friendOrgasms:
+
+ - id: friendOrgasms
+   shortDesc: Watch them come
+   longDesc: They are almost there and their passion is quite a thing to behold.
+   textId: friendOrgasmsText
+   effects:
+    - effect: $f.haveOrgasm() $m2.haveOrgasm()
+    - effect: $f.addEnjoyLarge() # The PC isn't exactly the cause for her enjoyment, but NPC-to-NPC relations aren't a thing yet, so we make do.
+    - effect: $scene.inseminateNpc($m2,$f,0)
+      condition: "!$m2.wearingCondom"
+   followUpActions:
+    lowlivesDone:
+
+ - id: lowlivesDone
+   shortDesc: Catch your breath
+   longDesc: You both had quite the workout, time to get everything back under control.
+   textId: lowlivesDoneText
+   effects:
+    - effect: $m1.fixClothing()
+    - effect: $m2.fixClothing()
+    - effect: $m1.addNpcLikingTiny() # They are dicks, so I'm not sure I should even include this.
+    - effect: $m2.addNpcLikingTiny()
+    - effect: $m1.reduceWLikingTiny() # Again, they are dicks. :D
+    - effect: $m2.reduceWLikingTiny()
+   followUpActions:
+    finishLowlivesAlleySex:
+
+ - id: finishLowlivesAlleySex
+   shortDesc: Go home
+   longDesc: Get everything in order and go home.
+   textId: finishLowlivesAlleySexText
+   effects:
+    - effect: $scene.hideNpc($m1)
+    - effect: $scene.hideNpc($m2)
+    - effect: $w.fixClothing()
+    - effect: $w.changeStress(-5)
+    - effect: $f.fixClothing()
+    - effect: $f.addNpcLikingMedium()
+    - effect: $f.addWLikingMedium()
+   finishScene: true

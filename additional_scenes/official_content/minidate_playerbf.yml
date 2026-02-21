@@ -1,0 +1,29 @@
+# Preconditions for this scene:
+# Part of the minidate framework
+# $bf should be the boyfriend or husband
+
+textFileName: minidate_playerbf.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: bf
+    outfit: CASUAL
+
+ location:
+  wall: wall
+  floor: hardwood floor
+  hasBed: false
+  isOutside: false
+
+
+
+intro:
+ textId: introText
+ followUpActions:
+  done: false
+ finishScene: true
+
+

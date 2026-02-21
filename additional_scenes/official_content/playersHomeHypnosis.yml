@@ -1,0 +1,133 @@
+# Scene written by splendidostrich
+#
+# Overview:
+# A scene where the PC has invited a professional hypnotist to her home.
+# This is primarily intended to be a wrapper for the hypno scene. By keeping the "paid professional" stuff to this scene, it keeps the
+# door open for hypno.yml to be used in different contexts.
+# The scene assumes it's taking place in the player's home.
+#
+# Scene access:
+# This is itself intended to be a sub-scene, with the parent being one where the player chooses which hypnotist to contact: the good one who'll 
+# try to help her or the evil one who'll, well, pretend to be trying to help her. It's also called from the compelled hypnosis scene
+#
+# Preconditions:
+# This is a sub-scene and is not intended to be called directly (except for testing!)
+
+textFileName: playersHomeHypnosis.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+ location: 
+  usePlayerHome: true
+
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($m) 
+  - effect: '#set($wasVirgin = $w.virgin)'
+ followUpActions:
+  payHim: $m.personality == "JERK"
+  wantToReduceStress: '$m.personality != "JERK"'
+  wantToBeMoreOutgoing: '$m.personality != "JERK" && !$w.hasTrait("OUTGOING")'
+  wantToEnjoySexMore: '$m.personality != "JERK" && !$w.hasTrait("HAIR_TRIGGER")'
+  
+returningSections:
+ - id: returnFromHypno 
+   textId: returnFromHypno
+   effects:
+    - effect: $m.increaseKnowledge(2,10) ## Increase knowledge a bit (with a low cap) so he'll eventually stop being a stranger.
+    ## Unlock the hypnotist special characters for general appearances once they've been hired at least once. 
+    - effect: $m.removeTrait("NO_RANDOM_APPEARANCE")
+      condition: $m.hasTrait("EVIL_HYPNOTIST") || $m.hasTrait("GOOD_HYPNOTIST")
+   finishScene: true
+    
+
+actions:
+
+ - id: wantToReduceStress 
+   shortDesc: Help with stress
+   longDesc: You want him to help you feel less stressed.
+   textId: wantToReduceStress  
+   effects:
+    - effect: $scene.addFlag("HYPNO_STRESS_REDUCTION")
+   followUpActions:
+    payHim: 
+
+ - id: wantToBeMoreOutgoing 
+   shortDesc: Become more outgoing
+   longDesc: You want him to help you be more outgoing and confident in your dealings with other people.
+   textId: wantToBeMoreOutgoing  
+   effects:
+    - effect: $scene.addFlag("HYPNO_OUTGOING")
+   followUpActions:
+    payHim:
+
+ - id: wantToEnjoySexMore 
+   shortDesc: Enjoy sex more
+   longDesc: You want to be able to reach orgasm more easily.
+   textId: wantToEnjoySexMore  
+   effects:
+    - effect: $scene.addFlag("HYPNO_HAIR_TRIGGER")
+   followUpActions:
+    payHim:
+    
+ - id: payHim 
+   shortDesc: Pay him
+   longDesc: Pay him for the session.
+   effects:
+    - effect: $w.changeMoney(-80)
+   textId: payHim  
+   followUpActions:
+    getOnSofa: 
+    
+ - id: getOnSofa 
+   shortDesc: Do so
+   longDesc: Do as he suggests.
+   textId: getOnSofa  
+   followUpActions:
+    enterTrance: 
+    submitEntirely: 
+    
+ - id: enterTrance 
+   shortDesc: Fall into a trance
+   longDesc: Fall into a trance.
+   textId: enterTrance 
+   effects:
+   ## Clear any compelled session - the player voluntarily re-booking him should count towards this.
+   ## He may re-apply it at the end of the trance, of course.
+    - effect: $gd.setStat("COMPELLED_HYPNOSIS_SESSION",0) 
+      condition: $m.hasTrait("EVIL_HYPNOTIST")
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: hypno.yml
+    maleNpcs:
+     - id: m
+       npc: m
+    returningId: returnFromHypno 
+    location:
+     useCurrentLocation: true 
+    
+ - id: submitEntirely 
+   shortDesc: Submit to his will
+   longDesc: Submit entirely to his will. This will stop you from breaking out of the trance by yourself, no matter what happens. So be sure you consent to no-matter-what before selecting this!
+   textId: submitEntirely
+   effects:
+    - effect: $scene.addFlag("DISABLE_TRANCE_BREAKING")
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: hypno.yml
+    maleNpcs:
+     - id: m
+       npc: m
+    returningId: returnFromHypno
+    location:
+     useCurrentLocation: true 

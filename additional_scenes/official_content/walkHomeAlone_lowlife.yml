@@ -1,0 +1,134 @@
+# Preconditions for this scene:
+# Scene happens when PC walks home alone from the club and isMaxDrunk()
+# It is repeatable
+# $m should have the LOWLIFE trait
+
+textFileName: walkHomeAlone_lowlife.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: GOING_OUT
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+
+# Location info.
+ location:
+  wall: wall
+  floor: pavement
+  hasBed: false
+  isOutside: true
+
+
+
+intro:
+   textId: introText
+   followUpActions:
+    flirt:  $w.hasTrait("FLIRTY") || $w.hasTrait("BITCHY")
+    scareAway: $w.hasTrait("CUNNING") || $w.hasTrait("BITCHY")
+    refuse:
+    
+    debugDrunk: $debug
+    restartDebug: $debug
+    endDebug: $debug
+
+
+defaultActions:
+ restartDebug: true
+ endDebug: true
+
+
+
+
+actions:
+ - id: refuse
+   shortDesc: Refuse him
+   longDesc: Reject his advances and ask him to go away
+   textId: refuse
+   allowNpcActions: false
+   followUpActions:
+    pushAway:
+    plead:
+    scareAway: $w.hasTrait("CUNNING") || $w.hasTrait("BITCHY")
+    restartDebug: $debug
+    endDebug: $debug
+
+ - id: flirt
+   shortDesc: Flirt with him
+   longDesc: You have no intention of sleeping with him, but you can toy with him and give him some blue balls
+   textId: flirt
+   allowNpcActions: false
+   followUpActions:
+    pushAway:
+    plead:
+    scareAway: $w.hasTrait("CUNNING") || $w.hasTrait("BITCHY")
+    restartDebug: $debug
+    endDebug: $debug
+
+
+ - id: plead
+   shortDesc: Plead with him
+   longDesc: Plead with him to leave you alone
+   textId: plead
+   allowNpcActions: false
+   useDefaultActions: $debug
+   finishScene: (!$debug)
+
+ - id: pushAway
+   shortDesc: Push him away
+   longDesc: Get him off of you and get out of here.
+   textId: pushAway
+   allowNpcActions: false
+   useDefaultActions: $debug
+   finishScene: (!$debug)
+
+ - id: scareAway
+   shortDesc: Scare him away
+   longDesc: Raise your voice and scare him away
+   textId: scareAway
+   allowNpcActions: false
+   useDefaultActions: $debug
+   finishScene: (!$debug)
+
+
+   
+ 
+    
+   
+ - id: debugDrunk
+   shortDesc: Make drunk
+   textId: debugDrunk
+   effects:
+    - effect: $w.addAlcoholLarge()
+   followUpActions:
+    turnAndLook:
+    testIdeas:
+    debugDrunk:
+    endDebug:
+   
+
+ - id: restartDebug
+   shortDesc: Restart the scene
+   longDesc: For debugging
+   textId: empty
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: m
+    transitionInfo:
+     ymlFile: walkHomeAlone_lowlife.yml
+    location:
+     useCurrentLocation: true
+   
+ - id: endDebug
+   shortDesc: Force end of scene
+   longDesc: For debugging
+   textId: empty
+   finishScene: true
+
+
+   
+   

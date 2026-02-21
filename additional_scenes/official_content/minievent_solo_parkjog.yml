@@ -1,0 +1,24 @@
+# Preconditions for this scene:
+# Part of the minievent framework
+# the player should be athletic and attractive $w.getSkill("FITNESS") > 20 !$w.hasTrait("PLAIN")
+
+textFileName: minievent_solo_parkjog.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: wall
+  floor: ground
+  hasBed: false
+  isOutside: true
+
+
+intro:
+ textId: introText
+ followUpActions:
+  done: false
+ finishScene: true
+

@@ -1,0 +1,67 @@
+---
+# Nightclub lesbians. These were made into proper NPCs in version 0.7.16 which also included giving them more variation in things like
+# their names and so on. The characters in these files reflect versions as close to the pre-0.7.16 characters as possible.
+# Set enabled to TRUE to have these load into a new game
+type: FEMALE
+enabled: FALSE
+priority: 0
+
+name: Maki
+age: EARLY_TWENTIES
+nameListId: japanese
+race: east asian
+eye colour: dark brown
+hair colour: black
+skin colour: pale
+figure: SLIM
+personality: CARING
+character type: PARTY_GIRL
+# Clothing styles are fixed for these two
+clothing style: PROVOCATIVE
+breasts: SMALL
+# The cheerful/flirty character can be set to not be a virgin with men, the posh one is required to be.
+virgin: true
+lesbian virgin: false
+traits:
+ - FLIRTY_NIGHTCLUB_LESBIAN
+# Required traits for this character that the game would assign even if they weren't set here
+ - NO_BEFRIEND
+ - DONT_TAKE_PILL
+allow additional traits:
+blocked traits:
+friend effect:
+partner effect:
+boss partner effect:
+hairstyle:
+
+---
+type: FEMALE
+enabled: FALSE
+priority: 0
+
+name: Vanessa
+age: TWENTIES
+nameListId: general
+race: black
+eye colour: green
+hair colour: black
+skin colour: dark ebony
+figure: TONED
+personality: JERK
+character type: SOPHISTICATED
+clothing style: ELEGANT
+breasts: MEDIUM_SMALL
+virgin: true
+lesbian virgin: false
+traits:
+ - POSH_NIGHTCLUB_LESBIAN
+# Required traits for this character that the game would assign even if they weren't set here
+ - NO_BEFRIEND
+ - DONT_TAKE_PILL
+ - BEAUTIFUL
+allow additional traits:
+blocked traits:
+friend effect:
+partner effect:
+boss partner effect:
+hairstyle:

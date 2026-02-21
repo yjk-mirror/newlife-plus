@@ -1,0 +1,51 @@
+<introText>
+You meet $bf.getName() at your #if($w.livingInFlat)apartment#{else}house#{end}. You chat for a while, and you mention how you've been feeling anxious and stressed out lately.
+
+#if (!$bf.hasFlag("minidate_hypnosis/tried"))##
+He tells you about a relaxation app he has on his phone that uses hypnosis to really reduce stress levels.
+#else##
+He asks you if you want to use his relaxation app again.
+#end##
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+</introText>
+
+<hypnosis1>
+#if (!$bf.hasFlag("minidate_hypnosis/tried"))##
+You ask to try out the app.
+#else##
+You ask if you can use his relaxation app again.
+#end##
+$bf.setFlag("minidate_hypnosis/tried")##
+
+$bf.getName() starts up the app on his phone and places his phone down on the table in front of you. You sit down on a chair and gaze at the screen.
+
+The app makes a regular ticking sound, like a metronome. It tells you to stare at a spinning black and white spiral pattern. 
+</hypnosis1>
+
+<hypnosis2>
+You focus your eyes on the pattern. As you stare at it, the spiral seems to draw your eyes deeper and deeper in the center. The background seems to undulate with faint colours but in a way that's always just out of focus. You become less aware of your surroundings and focus your gaze solely on the screen.
+
+"Relax," the app tells you in a robotic yet soothing voice. "Listen to my voice and relax."
+</hypnosis2>
+
+<hypnosis3>
+You listen to the voice as it tells you to relax. It tells you to relax all your muscles and let all the tenseness flow out through your fingertips. You become so relaxed that your body goes limp. You feel so comfortable that you can't even move from the chair.
+
+The voice tells you to clear your mind. It tells you to empty yourself of all thoughts and concerns. The usual chattering in your head goes quiet. All your stress, all your cares, all your worries just melt away. Your mind becomes an empty glass just waiting to be filled. There is nothing there, except for the voice. 
+</hypnosis3>
+
+<hypnosis4>
+The voice tells you to rest. It tells you to let the tension and anxiety float out of your mind. It tells you to sit peacefully and enjoy the serenity.
+
+After several minutes pass, you slowly become aware of your surroundings again. You blink as your eyes come into focus. You muscles feel so relaxed that you have to will them to move again. You feel much calmer and less stressed.
+$w.clearStress() $w.changeAnxiety(-1) ## 
+</hypnosis4>
+
+<nohypnosis>
+You tell him you aren't interested.
+</nohypnosis>
+
+<sceneDescriptionText>
+You are hanging out with $bf.getName().
+</sceneDescriptionText>
+

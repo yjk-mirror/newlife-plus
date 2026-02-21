@@ -1,0 +1,210 @@
+<finishSceneLongDesc>
+This is the long description for the end scene action. It's defined in the XML. 
+
+This means that it can include variables like the PC's eye colour which is $w.eyeColour.
+
+It also makes it straightforward to have longer text that spreads over multiple lines. As such, long action descriptions will often be worth adding to this file.
+
+Incidentally, the End Scene action ends the scene. You know, in case it wasn't obvious from the short description.
+</finishSceneLongDesc>
+
+<transitionToDateShortDesc>
+Transition to Date
+</transitionToDateShortDesc>
+
+<kissActionSD>
+Be kissed by $m.name
+</kissActionSD>
+
+<npcActionSD>
+Let $m.name act
+</npcActionSD>
+
+<kissActionLD>
+Be kissed by $m.name. This is less an example of custom scene syntax and more one of how actual Newlife actions are written.
+</kissActionLD>
+
+<sceneDescriptionText>
+This is the scene description. It can contain variables, if statements and the like. However, you should not include any method calls that ##
+change the game's state here such as arousal changes or money increases. This is because this text is processed every time the "Describe Scene" ##
+button is pressed, so those method calls could get processed many times. 
+Of course this might be helpful for testing by e.g letting you gradually increase the PC's arousal or whatever, ##
+but final submitted content shouldn't have any game effects in the scene description.
+</sceneDescriptionText>
+
+<returnFromMakeoutText>
+You return from your makeout. Here we have an example of a simple if statement based on what happened in the sub-scene. 
+
+#if($scene.hasFlag("MO_REJECTION"))
+Seems that you gave him quite the painful rejection. Poor $m.name. 
+
+We'd better remove the flag so it isn't still set if you make out with him again and choose a different result.
+$scene.removeFlag("MO_REJECTION")
+#elseif ($m.hadOrgasm)
+Looks like $m.name had fun. Lucky him!
+#else
+Well, you didn't get $m.name off, but you didn't have to tell him to get lost. So there's that.
+#end
+</returnFromMakeoutText>
+
+<introText>
+Hi, this is an example scene written to demonstrate how to make custom scenes in Newlife. I'll be adding to it over time based on feedback from writers and as the custom scene options develop.
+
+This scene has 3 characters. The player character $w.name, a male NPC named $m.name and a female one named $f.name 
+</introText>
+
+<getStartedText>
+Hi! From here you can choose some actions, each doing different things. Have fun!
+</getStartedText>
+
+<actionWithEffectsText>
+This action increases the ACTS_OF_EVIL stat via an effects section in the YML.
+
+It's also possible to cause game effects by specifying them here in the XML text. 
+In both cases the effects are handled by passing them into Velocity and calling appropriate methods on context objects. 
+As such, the syntax is essentially the same, except that any effect strings that contain YML special characters will need to be escaped in the YAML by putting them in quotes, which is not necessary here in the XML.
+
+As an example, let's also increase the HEROES_REWARDED stat. If you repeatedly call this action then you can see the stat increase each time in the character screen.
+$gd.addStat("HEROES_REWARDED")
+</actionWithEffectsText>
+
+<finishSceneText>
+This is an action that ends the scene by setting the finishScene property in the yml with a condition that evaluates to true. 
+</finishSceneText>
+
+<transitionToDateText>
+This is an action that transitions to another scene. In this case to the home-date scene.
+
+This is a 1-way transition because the home-date will not try to return to a parent scene. As such, this is the end of this particular scene.
+
+The custom scene will handle any cleanup with NPCs that aren't passed to the next scene and then switch to it. It's important to not set a returning ID for 1-way scene transitions, as this will prevent some cleanup from happening.
+
+Most scene transitions will require a location to be defined. This isn't the case for the home-date as it always takes place at the player's home.
+</transitionToDateText>
+
+<returningTransitionText>
+This is a returning transition to the standing makeout scene.
+
+Returning transitions mean that this is a sub-scene that will return to this, the parent. It's essential to set an ID for a properly defined returning section in the YML.
+</returningTransitionText>
+
+<actionWithoutFollowupsText>
+This action uses a default action set rather than a set of action-specific followups.
+
+Broadly speaking, Newlife scenes can be divided into 2 categories based on which of these they principally use, although hybrids do exist.
+
+Some scenes principally use followUps. These scenes' structure can be sketched out as a Graph of connected nodes. 
+Typically the NPC's reactions at each stage would be written as part of the player-action, rather than in an NPC action section.
+This is often a simpler way of structuring a scene.
+
+Other scenes primarily use a set of default actions. 
+I usually refer to these as "turn-based" scenes because they usually have actions for both the PC and NPC and they take turns in acting.
+There needs to be some sort of internal variable to bring these scenes to an end. In the case of sex scenes, this is arousal.
+These are usually more complicated scenes with detailed conditions controlling which actions are available. 
+</actionWithoutFollowupsText>
+
+<kissActionText>
+#* 
+This is an example of a proper Newlife action, taking into account a range of traits and so on.
+Most actual Newlife text looks pretty much like this internally, though of course they're written in Java rather than Velocity.
+There are still some limitations here. For instance, this assumes the PC and NPC are both fully dressed. 
+That's fine if true, but in some scenes other clothing statuses need to be taken into account.
+There are probably more possible variable combinations that could be added - probably you can think of some yourself. In particular, I didn't
+vary the text much on the man's body type - if this was a serious erotic scene then I would probably want to do this. For example, have a section
+for a strong man and a slim/weak girl about how she feels helpless in his embrace, one for a fat man where she feels enveloped by his bulk, one
+for a strong pc and skinny man plus a passionate PC where she takes the initative and presses him against a wall (or whatever) to kiss him. 
+
+When writing the key is to ensure the text is "good enough" in that it makes sense for all combinations of traits, relationships etc that
+can be in effect. This doesn't mean that they all need their own path, but that the path they end up on must read OK for that situation. This
+is often possible by having separate elseif clauses for special or unique situations followed by a more generally worded else clause that 
+covers all other possibilities without being egregiously flawed for any of them.
+
+This is coded as a PC action, although in the writing it's really the NPC that's taking the initiative. Depending on your scene's structure 
+it's often ok for this to be the case: e.g you could have a section that mentions the NPC approaching the PC, the PC then chooses to accept this
+or reject him, and the kiss would be the response to her choosing the accept option.
+ 
+Newlife's makeout scenes use a standard helper package for kissing, touching and undressing NPC actions, so this particular text section might
+not be entirely necessary.
+I haven't exposed this helper package to custom scenes yet, but no doubt I will in time. That said, any content that relies on a specific situation
+can't use standard content, so there are many scenes that it won't be applicable for. 
+
+You'll also notice that Velocity templates can be a bit fiddly with newlines, especially when part of a sentence is derived from an if statement
+that's split over several lines for readability. One option is to do the entire if-elseif-else-end section on one line. Another is to 
+use comments (##) at the end of appropriate lines to "eat up" the unwanted extra newline chracters. 
+I hope this is a clear explanation (though I fear otherwise) and that some experimentation will make things clear to you.  
+
+To indent your text, you must use tabs. Tabs are removed before the text is shown to the player, but that won't happen if you use spaces instead.
+
+*# 
+
+$m.name steps towards you, his eyes flickering over your #if($w.figure == "WOMANLY")curvaceous#elseif($w.figure == "SLIM")slender#{else}toned#end body.
+#if ($m.isNpcAttractionOk() || $m.isPartner() || $m.isNpcLoveSome())
+	$m.addArousalTiny()## Putting a game effect here, as it's easier than replicating the condition in a YML effects section.
+	His $m.handAdj hands grip your waist and he pulls you close,##
+	#if ($w.pregnancyStage != "FLAT") your $w.stomachDesc against his warm male body, his#end##
+	#if ($m.behaviour == "MEAN") cruel $m.eyeColour eyes alight with desire.
+	#elseif($m.behaviour == "COLD") cold $m.eyeColour eyes lidded with desire.
+	#elseif($m.behaviour == "ROM") loving $m.eyeColour eyes gazing warmly into your $w.eyeAdj $w.eyeColour ones. 
+	#else $m.eyeColour eyes full of desire.
+	#end##
+	His lips meet yours,## 
+	#if($m.behaviour =="MEAN") pressing hard against your soft mouth, his tongue forcing its way inside.
+	#elseif($m.behaviour == "ROM") a gentle caress against your mouth, his heartbeat quickening against your $w.breastsDesc as he kisses you.
+	#else tongue darting into your mouth as he clutches you passionately against his $m.torsoDesc.
+	#end##
+
+	#if($m.wLoveCrush || ($m.wLoveConfused && $w.hasTrait("ROMANTIC")))##
+	$w.addArousalTiny()##
+	You return the kiss, eyes closed, full of happiness that this man, this oh-so-special man has chosen you to be the recipient of his kiss.##
+	Sure, it's just in a test scene, but it still means something.
+	#if($w.hasTrait("OVERACTIVE_IMAGINATION"))## 
+		$w.addArousalTiny()##
+		Your mind is set soaring on what could come next. Perhaps you'll see him again when you go clubbing, take him home with you, transition to a ##
+		makeout scene and then, oh all kinds of things could happen then! All kinds of wonderful things!#end
+	#elseif(!$m.wAttractionOk)
+		$w.reduceArousalTiny()##
+		You shudder inwardly as this #if(!$m.wAttractionUnattracted)disgusting#{else}unattractive#end man kisses you,##
+		#if ($w.virgin && $w.hasTrait("CUTE")) his horrid mouth sullying the innocent purity of your lips. But at least that's all he's sullying for now. His ##
+			repulsive erection isn't sullying your virginal body, sullying it over and over, deeper and deeper, until his loathsome seed taints your innermost places.
+		#else
+ 			the touch of his vile mouth carrying the implication of more intimate touches he no doubt lusts to perform upon your tender body. 
+		#end
+	#else
+		$w.addArousalTiny()##
+		You return the kiss, enjoying his closeness, this little intimacy that could grow into a closer, more sensual connection.
+	#end
+#else
+He comes to a decision. Apparently not one in your favour because he steps away, leaving you unkissed. ## NPC is not attracted enough to kiss the PC
+$m.reduceWEnjoyTiny() 
+#end##
+</kissActionText>
+
+<actionWithNpcActionsText>
+This action allows an NPC action to be taken. One will be chosen from the list of available ones based on its weight. In this scene you're ##
+more likely to see action 1 than action 2.
+</actionWithNpcActionsText>
+
+<returnToParentText>
+This action returns to the parent scene. This is an alternative to finishScene for sub-scenes that should go back to whatever scene called them, ##
+such as a date rather than ending the scene chain.
+
+Under normal circumstances you should not have both returnToParent and finishScene in the same scene. I'm doing it here because this is an example ##
+scene, but you should avoid it in your own writing.
+
+When calling this from the test scene, you'll be returned back to it. This lets you run the scene again for further testing. The YML and text file are ##
+re-loaded each time you start a scene, so you can make changes to them between test runs
+</returnToParentText>
+
+<behaviourChangeText>
+You change your behaviour. It's now $m.getPcBehaviour().
+</behaviourChangeText>
+<changeBehaviourActionText>
+	You decide to change how you're acting towards $m.getName(). How do you want to behave towards him?
+</changeBehaviourActionText>
+
+<testNpcAction1>
+This is the text for NPC action 1 being run by the NPC $npc.name
+</testNpcAction1>
+<testNpcAction2>
+This is the text for NPC action 2 being run by the NPC $npc.name
+</testNpcAction2>

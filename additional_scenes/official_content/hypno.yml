@@ -1,0 +1,1167 @@
+# Scene written by splendidostrich
+#
+# Overview:
+# Hypnosis scene: this is the actual trance.
+# Has 2 main paths: the "evil" path requires a hypnotist with the jerk personality, such as the special EVIL_HYPNOTIST character. 
+# The good path will fire for a hypnotist with any other personality, such as the GOOD_HYPNOTIST who is either average, romantic or caring.
+# The good path requires a particular scene flag to be set in advance to decide what the hypnotist is trying to accomplish. 
+# Evil hypnosis involves a variety of creepy acts, such as hypnotising the PC into gaining sexual traits or sleeping with the hypnotist.
+
+# Scene access:
+# This scene is intended to be accessed by other scenes which will set up the situation. 
+# Typically this will take place at the PC's home in casual clothing, but these are not absolute restrictions.
+# The scene assumes the PC is sitting on a sofa of some kind.
+#
+# Preconditions:
+# m is the male npc doing the hypnotising. He should typically have the HYPNOTIST trait, though the scene will not error if he does not.
+#
+
+textFileName: hypno.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+ location: 
+  usePlayerHome: true
+
+returningSections:
+
+ - id: virginityLoss
+   textId: virginityLoss
+   effects: 
+    - effect: $m.fixClothing()
+    - effect: $w.fixClothing()
+   followUpActions:
+    finalCommands:
+    
+ - id: firstTimeSex
+   textId: firstTimeSex
+   effects: 
+    - effect: $m.fixClothing()
+    - effect: $w.fixClothing()
+   followUpActions:
+    finalCommands:
+
+ - id: repeatSex
+   textId: repeatSex
+   effects: 
+    - effect: $m.fixClothing()
+    - effect: $w.fixClothing()
+   followUpActions:
+    finalCommands: 
+
+ - id: returnFromOral
+   textId: returnFromOral
+   effects: 
+    - effect: $m.fixClothing()
+    - effect: $w.fixClothing()
+   followUpActions:
+    finalCommands: 
+
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($m) 
+  - effect: '#set($startingScene=true)'
+  - effect: '#set($doTraitChange=false)'
+  - effect: '#set($doConclusion=false)'
+  - effect: '#set($doneFirstAction=false)'
+  - effect: '#set($completedEarlyActions=false)'
+  - effect: '#set($doneTraitChange = false)'
+  - effect: '#set($actionsTaken = [])'
+  - effect: '#set($currentRoute = "")'
+  - effect: '#set($allowBreakTrance = !$scene.hasFlag("DISABLE_TRANCE_BREAKING"))'
+  ## One of these flags should have been set when calling the scene with a non-jerk, but if it wasn't then default to stress reduction
+  - effect: '$scene.addFlag("HYPNO_STRESS_REDUCTION")'
+    condition: '$m.personality != "JERK" && !$scene.hasFlag("HYPNO_STRESS_REDUCTION") && !$scene.hasFlag("HYPNO_HAIR_TRIGGER") && !$scene.hasFlag("HYPNO_OUTGOING")'
+ followUpActions:
+  awaitHypnosis:
+
+actions:
+ - id: awaitHypnosis 
+   shortDesc: Relax and wait
+   longDesc: Relax and wait for any commands, questions or instructions that you may be given.
+   textId: awaitHypnosis
+   allowNpcActions: '!$leaveTrance'
+   # Followup actions are normally handled by the NPC action
+   # call awaitHypnosis again (and therefore run through the scene-control logic in the .vm again) if no followup action occurred from the npc action.
+   # That should be rare but could happen if e.g. a traitChange was called for but there were no possible ones.
+   followUpActions:
+    finalCommands: '$leaveTrance && $m.personality == "JERK"'
+    leaveTrance: '$leaveTrance && $m.personality != "JERK"'
+    awaitHypnosis: '!$leaveTrance'
+
+   
+ - id: acceptDeStress 
+   shortDesc: Relax
+   longDesc: Do as you're told and let your stress ebb away,
+   textId: acceptDeStress
+   effects:
+    - effect: $w.changeStress(-20) 
+   followUpActions:
+    leaveTrance: '$m.personality != "JERK"' 
+    awaitHypnosis: $m.personality == "JERK"
+    
+ - id: acceptOutgoing
+   shortDesc: Accept his words
+   longDesc: Accept the truth of his words.
+   textId: acceptOutgoing
+   effects:
+    - effect: '$w.addTempTrait("OUTGOING",12)'
+   followUpActions:
+   ## These checks are a bit unnecessary atm as these "good" paths are only available for non-jerks anyway.
+   ## They're here because at one point I did consider mixing in some good outcomes with the evil hypnotist's creepy stuff.
+   ## In theory, it would be possible for a custom scene to set a "good" scene flag when calling the scene with a jerk NPC, in which case the jerk will have a chance to pick that action as his early one. In this case, the options here would be relevant.
+    leaveTrance: '$m.personality != "JERK"' 
+    awaitHypnosis: $m.personality == "JERK"
+
+ - id: acceptHairTrigger
+   shortDesc: Accept it
+   longDesc: Let his voice sway you.
+   textId: acceptHairTrigger
+   effects:
+    - effect: '$w.addTempTrait("HAIR_TRIGGER",12)'
+   followUpActions:
+    leaveTrance: '$m.personality != "JERK"' 
+    awaitHypnosis: $m.personality == "JERK"
+
+
+ - id: peekTitsComply 
+   shortDesc: Comply
+   longDesc: Follow his commands
+   effects:
+    - effect: $m.addArousalSmall()
+    - effect: $m.addArousalSmall()
+      condition: $w.braStatus == "OFF" || $w.braStatus == "EXPOSED"       
+   textId: peekTitsComply
+   followUpActions:
+    awaitHypnosis:
+
+ - id: peekTitsRefuse 
+   shortDesc: Refuse
+   longDesc: You aren't doing that!
+   textId: peekTitsRefuse
+   followUpActions:
+    peekTitsComply:
+    breakTrance: $allowBreakTrance
+
+ - id: peekUnderSkirtComply 
+   shortDesc: Comply
+   longDesc: Follow his commands
+   effects:
+    - effect: $m.addArousalSmall()
+    - effect: $m.addArousalSmall()
+      condition: $w.PantiesStatus == "OFF" || $w.PantiesStatus == "EXPOSED"       
+   textId: peekUnderSkirtComply
+   followUpActions:
+    awaitHypnosis:
+
+ - id: peekUnderSkirtRefuse 
+   shortDesc: Refuse
+   longDesc: You aren't doing that!
+   textId: peekUnderSkirtRefuse
+   followUpActions:
+    peekUnderSkirtComply:
+    breakTrance: $allowBreakTrance
+
+ - id: barkLikeBitchRefuse
+   shortDesc: Refuse
+   longDesc: You're no dog!
+   textId: barkLikeBitchRefuse
+   followUpActions:
+    fetchBall:
+    breakTrance: $allowBreakTrance
+
+ - id: fetchBall 
+   shortDesc: Fetch!
+   longDesc: Fetch the ball!  
+   textId: fetchBall
+   followUpActions:
+    nameWoof:
+    nameYap:
+    nameWhine:
+
+ - id: barkLikeBitchComply 
+   shortDesc: Bark
+   longDesc: Bark, you bitch!     
+   textId: barkLikeBitchComply
+   followUpActions:
+    nameWoof:
+    nameYap:
+    nameWhine:
+    
+ - id: nameWoof 
+   shortDesc: Woof!
+   longDesc: Woof woof!    
+   textId: nameWoof
+   followUpActions:
+    speakNameAsHuman: 
+
+ - id: nameYap 
+   shortDesc: Yap!
+   longDesc: Yap yap!
+   textId: nameYap
+   followUpActions:
+    speakNameAsHuman: 
+
+ - id: nameWhine 
+   shortDesc: Whine
+   longDesc: Whine sadly.    
+   textId: nameWhine
+   followUpActions:
+    speakNameAsHuman: 
+
+ - id: speakNameAsHuman 
+   shortDesc: speakNameAsHumanSd
+   longDesc: Say your name. In words.
+   textId: speakNameAsHuman
+   followUpActions:
+    awaitHypnosis: 
+    
+ - id: leaveTrance 
+   shortDesc: Leave the trance
+   longDesc: Leave the trance
+   textId: leaveTrance
+   returnToParent: true
+
+ - id: finalCommands 
+   shortDesc: Is it over?
+   longDesc: Are you to be brought out of your trance?
+   textId: finalCommands
+   followUpActions:
+    leaveTrance:
+   
+ - id: breakTrance 
+   shortDesc: Break the trance
+   longDesc: This isn't okay! Break yourself out of the trance.
+   textId: breakTrance
+   effects:
+    - effect: $m.reduceNpcLikingMedium()
+    - effect: $scene.addFlag("BROKE_TRANCE")
+   returnToParent: true  
+
+ - id: virginityQuestionYes 
+   shortDesc: Yes
+   longDesc: virginityQuestionYesLd
+   textId: virginityQuestionYes
+   effects:
+    - effect: $m.informVirgin()
+   followUpActions:
+    readyToLoseVirginityNo: 
+    readyToLoseVirginityYes: 
+    
+ - id: readyToLoseVirginityNo 
+   shortDesc: Not yet
+   longDesc: You aren't yet ready for that sort of thing.
+   textId: readyToLoseVirginityNo
+   followUpActions:
+    readyToLoseVirginityYes: 
+    breakTrance: $allowBreakTrance
+    
+ - id: readyToLoseVirginityYes 
+   shortDesc: You are
+   longDesc: You feel that you are ready to take that step.
+   textId: readyToLoseVirginityYes
+   followUpActions:
+    stripTop: $specificCommand == "stripTop"
+    stripBtm: $specificCommand == "stripBtm"
+    stripPanties: $specificCommand == "stripPanties"
+    stripBra: $specificCommand == "stripBra"
+    cupTits: $specificCommand == "cupTits"
+    caressBody: $specificCommand == "caressBody"
+    refuseStrip:
+
+# specificCommand is not cleared before this action so it can be used here to figure out which command was used
+ - id: refuseStrip 
+   shortDesc: Refuse
+   longDesc: You've no intention of obeying such an order!
+   textId: refuseStrip
+   followUpActions:
+    stripTop: $specificCommand == "stripTop"
+    stripBtm: $specificCommand == "stripBtm"
+    stripPanties: $specificCommand == "stripPanties"
+    stripBra: $specificCommand == "stripBra"
+    cupTits: $specificCommand == "cupTits"
+    caressBody: $specificCommand == "caressBody"
+    breakTrance: $allowBreakTrance
+    
+ - id: stripTop 
+   shortDesc: stripTopSd
+   longDesc: stripTopLd
+   # The clothing status is being changed in the text, not in effects. That way the previous status can be checked when figuring out the text.
+   textId: stripTop
+   followUpActions:
+    postStrip:
+    
+ - id: stripBtm 
+   shortDesc: Do it
+   longDesc: Obey his command.
+   textId: stripBtm
+   followUpActions:
+    postStrip:    
+
+ - id: stripPanties
+   shortDesc: Undress
+   longDesc: Take off your underwear.
+   textId: stripPanties
+   followUpActions:
+    postStrip:
+
+ - id: stripBra
+   shortDesc: Get it off!
+   longDesc: Take off your bra!
+   textId: stripBra
+   followUpActions:
+    postStrip:
+
+ - id: cupTits 
+   shortDesc: Do it
+   longDesc: Obey his command.
+   effects:
+    - effect: $m.addArousalSmall()
+   textId: cupTits
+   followUpActions:
+    postStrip:
+
+ - id: caressBody 
+   shortDesc: Caress yourself
+   longDesc: Obey his command.
+   effects:
+    - effect: $m.addArousalSmall()
+    - effect: $w.addArousalSmall()
+   textId: caressBody
+   followUpActions:
+    postStrip:
+    
+ - id: postStrip 
+   shortDesc: What's next?
+   longDesc: You've done as ordered, but what will he ask of you next?
+   textId: postStrip
+   followUpActions:
+    awaitHypnosis: $currentRoute == "simpleUndress"
+    virginityLossToHimNo: $currentRoute == "virginity"
+    virginityLossToHimYes: $currentRoute == "virginity" 
+    virginityAcceptPosition: $currentRoute == "virginity2" 
+    virginityChangePosition: $currentRoute == "virginity2"
+    firstTimeFuck3: $currentRoute == "firstTimeFuck" 
+    repeatFuckFavouriteThingDontLikeIt: $currentRoute == "repeatFuck"
+    repeatFuckFavouriteThingPenetration: $currentRoute == "repeatFuck"
+    repeatFuckFavouriteThingComingInside: $currentRoute == "repeatFuck"
+    repeatFuckFavouriteThingYourPleasure: $currentRoute == "repeatFuck"
+    repeatFuckFavouriteThingSize: $currentRoute == "repeatFuck" && $m.hasTrait("THICK_COCK") && $w.hasTrait("LIKES_BIG")
+    repeatFuckVeryTurnedOn: $currentRoute == "repeatFuck2"
+    undressForRepeatSex: '$currentRoute == "repeatFuck3" && !$w.pussyExposed'
+    doggyStyleRepeatSex: $currentRoute == "repeatFuck3" && $w.pussyExposed && $sexPosition == "DOGGY"
+    missionaryRepeatSex: $currentRoute == "repeatFuck3" && $w.pussyExposed && $sexPosition == "MISSIONARY"
+    standingBehindRepeatSex: $currentRoute == "repeatFuck3" && $w.pussyExposed && $sexPosition == "STANDING_BEHIND"
+    sofaRepeatSex: $currentRoute == "repeatFuck3" && $w.pussyExposed && $sexPosition == "SOFA_SEX" 
+    breakTrance: '$allowBreakTrance && $currentRoute == "repeatFuck3" && $w.pussyExposed'
+    
+ 
+    
+ - id: virginityLossToHimNo 
+   shortDesc: No
+   longDesc: You'd rather not have your first time with him.
+   textId: virginityLossToHimNo
+   followUpActions:
+    virginityLossToHimYes: 
+    breakTrance: $allowBreakTrance
+    
+ - id: virginityLossToHimYes 
+   shortDesc: Yes
+   longDesc: You're ready to offer up your virginity to him.
+   effects:
+    - effect: '#set($currentRoute = "virginity2")'
+   textId: virginityLossToHimYes
+   followUpActions:
+    stripTop: $specificCommand == "stripTop"
+    stripBtm: $specificCommand == "stripBtm"
+    stripPanties: $specificCommand == "stripPanties"
+    stripBra: $specificCommand == "stripBra"
+    cupTits: $specificCommand == "cupTits"
+    caressBody: $specificCommand == "caressBody"
+    refuseStrip:
+    
+ # I'd considered letting the player choose the position, but it's more hypno-y if her choices are stripped away    
+ - id: virginityChangePosition 
+   shortDesc: Maybe some other way
+   longDesc: That's not how you'd quite imagined it...
+   textId: virginityChangePosition
+   followUpActions:
+    virginityAcceptPosition: 
+    breakTrance: $allowBreakTrance   
+
+ - id: virginityAcceptPosition 
+   shortDesc: Yes
+   longDesc: virginityAcceptPositionLd
+   textId: virginityAcceptPosition
+   effects:
+    - effect: $m.stripNaked()
+   followUpActions:
+    undressForFirstTimeSex: '!$w.pussyExposed'
+    doggyStyleVirginityLoss: $w.pussyExposed && $sexPosition == "DOGGY"
+    missionaryVirginityLoss: $w.pussyExposed && $sexPosition == "MISSIONARY"
+    standingBehindVirginityLoss: $w.pussyExposed && $sexPosition == "STANDING_BEHIND"
+    breakTrance: $allowBreakTrance 
+
+# No "effects" section for this action even though the point is to undress the PC: I want to be able to check her previous clothing 
+# status in the event text (which is processed after effects). Instead, the stripping effects are called from the text block.
+ - id: undressForFirstTimeSex 
+   shortDesc: Undress
+   longDesc: Undress, at least enough for him to fuck you.
+   textId: undressForFirstTimeSex
+   followUpActions:
+    doggyStyleVirginityLoss: $sexPosition == "DOGGY"
+    missionaryVirginityLoss: $sexPosition == "MISSIONARY"
+    standingBehindVirginityLoss: $sexPosition == "STANDING_BEHIND"
+    breakTrance: $allowBreakTrance 
+
+ - id: doggyStyleVirginityLoss
+   shortDesc: Get on all fours
+   longDesc: Get in bed and position yourself on all-fours, ready to be fucked.
+   textId: doggyStyleVirginityLoss
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO") 
+   sceneTransition:
+    condition: true
+    type: DOGGY_SEX
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: virginityLoss
+    location:
+     useCurrentLocation: true
+     
+ - id: missionaryVirginityLoss
+   shortDesc: Get into bed
+   longDesc: Get in bed and open your legs.
+   textId: missionaryVirginityLoss
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO")
+   sceneTransition:
+    condition: true
+    type: MISSIONARY_SEX
+    transitionInfo:
+     legsOpen: true
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: virginityLoss
+    location:
+     useCurrentLocation: true   
+     
+ - id: standingBehindVirginityLoss
+   shortDesc: Get against the wall
+   longDesc: Get against the nearest wall for your defloration.
+   textId: standingBehindVirginityLoss
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO") 
+   sceneTransition:
+    condition: true
+    type: STANDING_BEHIND_SEX
+    transitionInfo:
+     pressedAgainstWall: false
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: virginityLoss
+    location:
+     useCurrentLocation: true 
+
+ - id: acceptLSE1 
+   shortDesc: He's right
+   longDesc: He's right. How could he be anything else?
+   textId: acceptLSE1
+   followUpActions:
+    acceptLSE2: 
+    breakTrance: $allowBreakTrance
+     
+ - id: acceptLSE2 
+   shortDesc: It's true
+   longDesc: "Accept his words: you're a worthless person of no value whatsoever."
+   textId: acceptLSE2
+   effects: 
+    - effect: '$w.addTempTrait("LOW_SELF_ESTEEM",12)'
+   followUpActions:
+    awaitHypnosis:     
+
+ - id: firstTimeFuck2 
+   shortDesc: You feel warm
+   longDesc: You're getting turned on
+   effects:
+    - effect: $w.setArousalComfort()
+      condition: '!$w.arousalComfort'
+   textId: firstTimeFuck2
+   followUpActions:
+    stripTop: $specificCommand == "stripTop"
+    stripBtm: $specificCommand == "stripBtm"
+    stripPanties: $specificCommand == "stripPanties"
+    stripBra: $specificCommand == "stripBra"
+    cupTits: $specificCommand == "cupTits"
+    caressBody: $specificCommand == "caressBody"
+    refuseStrip:
+
+ - id: firstTimeFuck3 
+   shortDesc: Moan to be touched
+   longDesc: All you can think about is the urge to be fucked by him!
+   effects:
+    - effect: '#set($currentRoute = "firstTimeFuck2")'
+    - effect: $w.setArousalEnjoy()
+      condition: '!$w.arousalEnjoy'
+   textId: firstTimeFuck3
+   followUpActions:
+    # Using a special stripping action here so I can keep on with the "All you can think about is the urge to be fucked by him!" thing
+    firstTimeFuckStrip: '!$w.nakedExceptLegwear'
+    firstTimeFuckBegHimForSex: '$w.nakedExceptLegwear' 
+    breakTrance: $allowBreakTrance    
+
+ - id: firstTimeFuckStrip 
+   shortDesc: Undress
+   longDesc: All you can think about is the urge to be fucked by him!
+   textId: firstTimeFuckStrip
+   followUpActions:
+    firstTimeFuckBegHimForSex: 
+    breakTrance: $allowBreakTrance   
+
+ - id: firstTimeFuckBegHimForSex 
+   shortDesc: Beg for sex
+   longDesc: All you can think about is the urge to be fucked by him!
+   effects:
+    - effect: $m.stripNaked()
+   textId: firstTimeFuckBegHimForSex
+   followUpActions:
+    sofaFirstTimeSex: $sexPosition == "SOFA_SEX"
+    missionaryFirstTimeSex: $sexPosition == "MISSIONARY"
+    standingFrontFirstTimeSex: $sexPosition == "STANDING_FRONT"
+    standingBehindFirstTimeSex: $sexPosition == "STANDING_BEHIND"
+    breakTrance: $allowBreakTrance 
+
+ - id: missionaryFirstTimeSex
+   shortDesc: Obey
+   longDesc: All you can think about is the urge to be fucked by him! ## It's easy to write the longdescs on this route!
+   textId: missionaryFirstTimeSex
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO")
+   sceneTransition:
+    condition: true
+    type: MISSIONARY_SEX
+    transitionInfo:
+     legsOpen: true
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: firstTimeSex
+    location:
+     useCurrentLocation: true 
+
+ - id: sofaFirstTimeSex
+   shortDesc: Obey
+   longDesc: All you can think about is the urge to be fucked by him!
+   textId: sofaFirstTimeSex
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO") 
+   sceneTransition:
+    condition: true
+    type: FACE_DOWN_SOFA_SEX 
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: firstTimeSex
+    location:
+     useCurrentLocation: true 
+
+ - id: standingFrontFirstTimeSex
+   shortDesc: Obey
+   longDesc: All you can think about is the urge to be fucked by him!
+   textId: standingFrontFirstTimeSex
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO") 
+   sceneTransition:
+    condition: true
+    type: STANDING_FRONT_SEX 
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: firstTimeSex
+    location:
+     useCurrentLocation: true 
+
+ - id: standingBehindFirstTimeSex
+   shortDesc: Obey
+   longDesc: All you can think about is the urge to be fucked by him!
+   textId: standingBehindFirstTimeSex
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO") 
+   sceneTransition:
+    condition: true
+    type: STANDING_BEHIND_SEX 
+    transitionInfo:
+     pressedAgainstWall: false
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: firstTimeSex
+    location:
+     useCurrentLocation: true 
+     
+ - id: repeatFuck2 
+   shortDesc: You feel warm
+   longDesc: You're getting turned on.
+   effects:
+    - effect: $w.setArousalComfort()
+      condition: '!$w.arousalComfort'
+   textId: repeatFuck2
+   followUpActions:
+    stripTop: $specificCommand == "stripTop"
+    stripBtm: $specificCommand == "stripBtm"
+    stripPanties: $specificCommand == "stripPanties"
+    stripBra: $specificCommand == "stripBra"
+    cupTits: $specificCommand == "cupTits"
+    caressBody: $specificCommand == "caressBody"
+    refuseStrip:    
+
+ - id: repeatFuckFavouriteThingDontLikeIt 
+   shortDesc: You don't like it
+   longDesc: Your favourite thing about sex with him is... actually you don't have a favourite thing. You don't really like having sex with him all that much.
+   effects:
+    - effect: $m.reduceEnjoySmall()
+   textId: repeatFuckFavouriteThingDontLikeIt
+   followUpActions:
+    repeatFuckDontMissBeingFucked: 
+    repeatFuckMissBeingFucked:
+
+ - id: repeatFuckFavouriteThingPenetration 
+   shortDesc: When he enters you
+   longDesc: Your favourite thing about sex with him is when you feel him enter you.
+   effects:
+    - effect: $m.addEnjoySmall()
+   textId: repeatFuckFavouriteThingPenetration
+   followUpActions:
+    repeatFuckMissBeingFucked:
+    repeatFuckDontMissBeingFucked:
+
+ - id: repeatFuckFavouriteThingComingInside 
+   shortDesc: When he comes inside
+   longDesc: Your favourite thing about sex with him is when he ejaculates into you.
+   effects:
+    - effect: $m.addEnjoySmall()
+   textId: repeatFuckFavouriteThingComingInside
+   followUpActions:
+    repeatFuckMissBeingFucked:
+    repeatFuckDontMissBeingFucked:
+    
+ - id: repeatFuckFavouriteThingYourPleasure 
+   shortDesc: When it feels good
+   longDesc: Your favourite thing about sex with him is those moments when you start feeling good.
+   textId: repeatFuckFavouriteThingYourPleasure
+   followUpActions:
+    repeatFuckMissBeingFucked:
+    repeatFuckDontMissBeingFucked:
+
+
+ - id: repeatFuckFavouriteThingSize 
+   shortDesc: How big he is
+   longDesc: Your favourite thing about sleeping with him? It has to be the size of his cock!
+   effects:
+    - effect: $m.addEnjoyMedium()
+   textId: repeatFuckFavouriteThingSize 
+   followUpActions:
+    repeatFuckMissBeingFucked:
+    repeatFuckDontMissBeingFucked:    
+    
+
+ - id: repeatFuckMissBeingFucked 
+   shortDesc: Obey
+   longDesc: Obey his command 
+   effects:
+    - effect: '#set($currentRoute = "repeatFuck2")'
+   textId: repeatFuckMissBeingFucked
+   followUpActions:
+    stripTop: $specificCommand == "stripTop"
+    stripBtm: $specificCommand == "stripBtm"
+    stripPanties: $specificCommand == "stripPanties"
+    stripBra: $specificCommand == "stripBra"
+    cupTits: $specificCommand == "cupTits"
+    caressBody: $specificCommand == "caressBody"
+    refuseStrip:  
+
+ - id: repeatFuckDontMissBeingFucked 
+   shortDesc: You don't though
+   longDesc: It's not the truth, you don't miss sex with him.
+   textId: repeatFuckDontMissBeingFucked
+   followUpActions:
+    repeatFuckMissBeingFucked:
+    breakTrance: $allowBreakTrance
+
+ - id: repeatFuckVeryTurnedOn
+   shortDesc: You want sex!
+   longDesc: You're burning with desire!
+   effects:
+    - effect: '#set($currentRoute = "repeatFuck3")'
+    - effect: $w.setArousalEnjoy()
+      condition: '!$w.arousalEnjoy'
+    - effect: $m.stripNaked()
+   textId: repeatFuckVeryTurnedOn
+   followUpActions:
+    stripTop: '!$w.nakedExceptLegwear && $specificCommand == "stripTop"'
+    stripBtm: '!$w.nakedExceptLegwear && $specificCommand == "stripBtm"'
+    stripPanties: '!$w.nakedExceptLegwear && $specificCommand == "stripPanties"'
+    stripBra: '!$w.nakedExceptLegwear && $specificCommand == "stripBra"'
+    cupTits: '!$w.nakedExceptLegwear && $specificCommand == "cupTits"'
+    caressBody: '!$w.nakedExceptLegwear && $specificCommand == "caressBody"'
+    refuseStrip: '!$w.nakedExceptLegwear'
+    # Go directly to the fuck actions if pc is already undressed 
+    doggyStyleRepeatSex: $w.nakedExceptLegwear && $sexPosition == "DOGGY"
+    missionaryRepeatSex: $w.nakedExceptLegwear && $sexPosition == "MISSIONARY"
+    standingBehindRepeatSex: $w.nakedExceptLegwear && $sexPosition == "STANDING_BEHIND"
+    sofaRepeatSex: $w.nakedExceptLegwear && $sexPosition == "SOFA_SEX" 
+    breakTrance: $allowBreakTrance && $w.nakedExceptLegwear
+
+ - id: undressForRepeatSex 
+   shortDesc: Undress
+   longDesc: Undress yourself. 
+   textId: undressForRepeatSex
+   followUpActions:
+    doggyStyleRepeatSex: $sexPosition == "DOGGY"
+    missionaryRepeatSex: $sexPosition == "MISSIONARY"
+    standingBehindRepeatSex: $sexPosition == "STANDING_BEHIND"
+    sofaRepeatSex: $sexPosition == "SOFA_SEX" 
+    breakTrance: $allowBreakTrance 
+
+ - id: sofaRepeatSex
+   shortDesc: Obey
+   longDesc: Position yourself face-down on the sofa.
+   textId: sofaRepeatSex
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO") 
+   sceneTransition:
+    condition: true
+    type: FACE_DOWN_SOFA_SEX 
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: repeatSex
+    location:
+     useCurrentLocation: true 
+
+ - id: doggyStyleRepeatSex
+   shortDesc: Get into bed
+   longDesc: Get into bed and position yourself on all-fours.
+   textId: doggyStyleRepeatSex
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO") 
+   sceneTransition:
+    condition: true
+    type: DOGGY_SEX
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: repeatSex
+    location:
+     useCurrentLocation: true
+     
+ - id: missionaryRepeatSex
+   shortDesc: Get into bed
+   longDesc: Get into bed and open your legs.
+   textId: missionaryRepeatSex
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO")
+   sceneTransition:
+    condition: true
+    type: MISSIONARY_SEX
+    transitionInfo:
+     legsOpen: true
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: repeatSex
+    location:
+     useCurrentLocation: true   
+     
+ - id: standingBehindRepeatSex
+   shortDesc: Get against a wall
+   longDesc: Get up against a wall.
+   textId: standingBehindRepeatSex
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO") 
+   sceneTransition:
+    condition: true
+    type: STANDING_BEHIND_SEX
+    transitionInfo:
+     pressedAgainstWall: false
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: repeatSex
+    location:
+     useCurrentLocation: true 
+
+ - id: oralPathCockOpinionQuiteBig 
+   shortDesc: It's a big one
+   longDesc: It's quite a big one, not that you're obsessed with that sort of thing.
+   textId: oralPathCockOpinionQuiteBig
+   effects:
+    - effect: $m.addEnjoySmall()
+   followUpActions:
+    worshipCockSexual:
+    worshipCockReligious: 
+    breakTrance: $allowBreakTrance
+
+ - id: oralPathCockOpinionDecentEnough 
+   shortDesc: It's ok
+   longDesc: You suppose it's alright.
+   textId: oralPathCockOpinionDecentEnough
+   followUpActions:
+    worshipCockSexual:
+    worshipCockReligious: 
+    breakTrance: $allowBreakTrance
+
+ - id: oralPathCockOpinionUnimpressive 
+   shortDesc: Unimpressive
+   longDesc: You aren't impressed by him waving that piece of meat around
+   textId: oralPathCockOpinionUnimpressive
+   effects:
+    - effect: $m.reduceEnjoySmall()
+   followUpActions:
+    worshipCockSexual:
+    worshipCockReligious: 
+    breakTrance: $allowBreakTrance
+
+ - id: oralPathCockOpinionPathetic 
+   shortDesc: Pathetic!
+   longDesc: Isn't he ashamed to whip out something so small?
+   textId: oralPathCockOpinionPathetic
+   effects:
+    - effect: $m.reduceEnjoyMedium()
+   followUpActions:
+    worshipCockSexual:
+    worshipCockReligious: 
+    breakTrance: $allowBreakTrance
+
+ - id: oralPathCockOpinionCouldBeBigger 
+   shortDesc: Could be bigger
+   longDesc: You like a big one. His is just average.
+   textId: oralPathCockOpinionCouldBeBigger
+   effects:
+    - effect: $m.reduceEnjoySmall()
+   followUpActions:
+    worshipCockSexual:
+    worshipCockReligious: 
+    breakTrance: $allowBreakTrance
+
+ - id: oralPathCockOpinionNiceAndBig 
+   shortDesc: Wonderful!
+   longDesc: A nice big cock, just how you like them!
+   textId: oralPathCockOpinionNiceAndBig
+   effects:
+    - effect: $m.addEnjoyMedium()
+   followUpActions:
+    worshipCockSexual:
+    worshipCockReligious: 
+    breakTrance: $allowBreakTrance  
+
+ - id: worshipCockReligious 
+   shortDesc: Pray to his cock
+   longDesc: Worship his cock, like the divine entity it is.
+   textId: worshipCockReligious
+   effects:
+    - effect: $m.addEnjoyTiny()
+   followUpActions:
+    worshipCockSexual:
+
+ - id: worshipCockSexual 
+   shortDesc: Worship his cock
+   longDesc: Get to your knees, take his cock in your hand, and worship its meaty wonder.
+   textId: worshipCockSexual
+   followUpActions:
+    pleaseHimOral:
+    breakTrance: $allowBreakTrance     
+
+ - id: pleaseHimOral
+   shortDesc: Please him
+   longDesc: Please his cock
+   textId: pleaseHimOral
+   effects:
+    - effect: $scene.addFlag("BLOCK_REJECTIONS")
+    - effect: $scene.addFlag("HYPNO")
+   sceneTransition:
+    condition: true
+    type: ORAL_SEX
+    transitionInfo:
+     position: STAND
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: returnFromOral 
+ 
+ - id: bareSexQuestionVirginSoDontKnow 
+   shortDesc: You've no idea
+   longDesc: As a virgin, you don't have the experience needed to have much of an opinion.
+   textId: bareSexQuestionVirginSoDontKnow
+   effects:
+    - effect: $m.informVirgin()
+   followUpActions:
+    acceptLikesBare: 
+    breakTrance: $allowBreakTrance
+
+ - id: bareSexQuestionSafetyFirst 
+   shortDesc: Safety first!
+   longDesc: You aren't the sort to be careless when it comes to contraception!
+   textId: bareSexQuestionSafetyFirst
+   followUpActions:
+    acceptLikesBare: 
+    breakTrance: $allowBreakTrance
+    
+ - id: bareSexIsOk 
+   shortDesc: It could be ok
+   longDesc: You wouldn't mind having sex without a condom, once in a while.
+   textId: bareSexIsOk
+   followUpActions:
+    acceptLikesBare: 
+    breakTrance: $allowBreakTrance 
+
+ - id: acceptLikesBare 
+   shortDesc: You love bare sex
+   longDesc: You can feel it... the need for unprotected sex.
+   textId: acceptLikesBare
+   effects: 
+    - effect: '$w.addTempTrait("LIKES_BARE",12)'
+   followUpActions:
+    awaitHypnosis: 
+
+ - id: rejectLikesOral
+   shortDesc: Not really...
+   longDesc: Actually, you don't like blowjobs that much...
+   textId: rejectLikesOral
+   followUpActions:
+    acceptLikesOral:
+    breakTrance: $allowBreakTrance  
+    
+ - id: acceptLikesOral
+   shortDesc: You love blowjobs
+   longDesc: You love sucking cock.
+   textId: acceptLikesOral
+   effects: 
+    - effect: '$w.addTempTrait("LIKES_ORAL",12)'
+   followUpActions:
+   ## Always transition to oral here, because it'd be odd for m to compel her to like oral sex and then do something else.
+    pleaseHimOral:
+    breakTrance: $allowBreakTrance     
+    
+
+ - id: moreEroticBecomeSultry 
+   shortDesc: A sex-bomb
+   longDesc: You'll become a sultry seductress!
+   textId: moreEroticBecomeSultry
+   effects: 
+    - effect: '$w.addTempTrait("SULTRY",12)'
+   followUpActions:
+    awaitHypnosis: 
+
+ - id: moreEroticBecomeFlirty 
+   shortDesc: A flirt
+   longDesc: You'll become a fun flirt!
+   textId: moreEroticBecomeFlirty
+   effects: 
+    - effect: '$w.addTempTrait("FLIRTY",12)'
+   followUpActions:
+    awaitHypnosis: 
+
+ - id: moreEroticGetHairTrigger 
+   shortDesc: Someone who loves sex
+   longDesc: You'll become the sort of woman who can orgasm at the drop of a hat. Well, maybe not literally a hat, but at the drop of your panties at least.
+   textId: moreEroticGetHairTrigger
+   effects: 
+    - effect: '$w.addTempTrait("HAIR_TRIGGER",12)'
+   followUpActions:
+    awaitHypnosis: 
+
+ - id: moreEroticBecomeBabyCrazy 
+   shortDesc: A breeding babe
+   longDesc: You'll become the sort of woman who's eager and ready to be bred.
+   textId: moreEroticBecomeBabyCrazy
+   effects: 
+    - effect: '$w.addTempTrait("BABY_CRAZY",12)'
+   followUpActions:
+    awaitHypnosis: 
+
+    
+maleNpcActions:
+ - id: deStress
+   textId: deStress
+   effects:
+    - effect: $actionsTaken.add("deStress")
+    - effect: '#set($currentRoute = "deStress")'
+   condition: '!$actionsTaken.contains("deStress") && !$completedEarlyActions && $scene.hasFlag("HYPNO_STRESS_REDUCTION")'
+   followUpActions:
+    acceptDeStress:
+
+ - id: applyOutgoing
+   textId: applyOutgoing
+   effects:
+    - effect: $actionsTaken.add("applyOutgoing")
+   condition: '!$actionsTaken.contains("applyOutgoing") && !$completedEarlyActions && $scene.hasFlag("HYPNO_OUTGOING")'
+   followUpActions:
+    acceptOutgoing:
+    
+ - id: applyHairTrigger
+   textId: applyHairTrigger
+   effects:
+    - effect: $actionsTaken.add("applyHairTrigger")
+   condition: '!$actionsTaken.contains("applyHairTrigger") && !$completedEarlyActions && $scene.hasFlag("HYPNO_HAIR_TRIGGER")'
+   followUpActions:
+    acceptHairTrigger:
+
+ - id: simpleUndress
+   textId: simpleUndress
+   effects:
+    - effect: $actionsTaken.add("simpleUndress")
+    - effect: '#set($currentRoute = "simpleUndress")'
+   condition: '$m.personality == "JERK" && !$actionsTaken.contains("simpleUndress") && !$w.nakedExceptLegwear && !$completedEarlyActions'
+   followUpActions:
+    stripTop: $specificCommand == "stripTop"
+    stripBtm: $specificCommand == "stripBtm"
+    stripPanties: $specificCommand == "stripPanties"
+    stripBra: $specificCommand == "stripBra"
+    cupTits: $specificCommand == "cupTits"
+    caressBody: $specificCommand == "caressBody"
+    refuseStrip:
+
+ - id: peekTits
+   textId: peekTits
+   effects:
+    - effect: $actionsTaken.add("peekTits")
+   condition: '$m.personality == "JERK" && !$actionsTaken.contains("peekTits") && ($w.topStatus == "WORN" || $w.topStatus == "DISHEVELED") && $w.top.topType != "ZIP" && !$m.dislikesPlayersBreasts && !$completedEarlyActions'
+   followUpActions:
+    peekTitsComply:
+    peekTitsRefuse:
+ 
+ - id: peekUnderSkirt
+   textId: peekUnderSkirt
+   effects:
+    - effect: $actionsTaken.add("peekUnderSkirt")
+   condition: '$m.personality == "JERK" && !$actionsTaken.contains("peekUnderSkirt") && ($w.bottomStatus == "WORN" || $w.bottomStatus == "DISHEVELED") && $w.bottom.skirt && !$completedEarlyActions'
+   followUpActions:
+    peekUnderSkirtComply:
+    peekUnderSkirtRefuse:
+
+ - id: barkLikeBitch
+   textId: barkLikeBitch
+   effects:
+    - effect: $actionsTaken.add("barkLikeBitch")
+   condition: '$m.personality == "JERK" && !$actionsTaken.contains("barkLikeBitch") && !$completedEarlyActions'
+   followUpActions:
+    barkLikeBitchComply:
+    barkLikeBitchRefuse:
+   
+ - id: virginityQuestion
+   textId: virginityQuestion
+   effects:
+    - effect: $actionsTaken.add("virginityQuestion")
+    - effect: '#set($currentRoute = "virginity")'
+   condition: '$doConclusion && $m.personality == "JERK" && !$actionsTaken.contains("virginityQuestion") && $w.virgin'
+   followUpActions:
+   # There isn't a "no" option because this virginity route should only start if the PC actually is a virgin.
+   # This is because I feel that the alternative wouldn't be very interesting: "Are you a virgin?","No.","Oh well, onto something else."
+    virginityQuestionYes: $w.virgin
+    breakTrance: $allowBreakTrance
+    
+ - id: startFirstTimeFuckPath
+   textId: startFirstTimeFuckPath
+   effects:
+    - effect: $actionsTaken.add("startFirstTimeFuckPath")
+    - effect: '#set($currentRoute = "firstTimeFuck")'
+   condition: '$doConclusion && $m.personality == "JERK" && !$actionsTaken.contains("startFirstTimeFuckPath") && !$w.virgin && !$m.hadSex'
+   followUpActions:
+    firstTimeFuck2: 
+    breakTrance: $allowBreakTrance 
+
+ - id: startRepeatFuckPath
+   textId: startRepeatFuckPath
+   effects:
+    - effect: $actionsTaken.add("startRepeatFuckPath")
+    - effect: '#set($currentRoute = "repeatFuck")'
+   condition: '$doConclusion && $m.personality == "JERK" && !$actionsTaken.contains("startFirstTimeFuckPath") && !$w.virgin && $m.hadSex'
+   followUpActions:
+    repeatFuck2:
+    breakTrance: $allowBreakTrance    
+
+ - id: startOralPath
+   textId: startOralPath
+   effects:
+    - effect: $actionsTaken.add("startOralPath")
+   condition: '$doConclusion && $m.personality == "JERK" && !$actionsTaken.contains("startOralPath") && !$m.hasTrait("PREFERS_SEX")'
+   weightMultiplierConditions:
+    - $m.hasTrait("LIKES_ORAL")
+   followUpActions:
+    oralPathCockOpinionQuiteBig: '!$w.hasTrait("LIKES_BIG") && $m.hasTrait("THICK_COCK")'
+    oralPathCockOpinionDecentEnough: '!$w.hasTrait("LIKES_BIG")'
+    oralPathCockOpinionUnimpressive: '!$w.hasTrait("LIKES_BIG")'
+    oralPathCockOpinionPathetic: '$w.hasTrait("LIKES_BIG") && $m.hasTrait("SMALL_COCK")'
+    oralPathCockOpinionCouldBeBigger: '$w.hasTrait("LIKES_BIG") && !$m.hasTrait("SMALL_COCK") && !$m.hasTrait("THICK_COCK")'
+    oralPathCockOpinionNiceAndBig: '$w.hasTrait("LIKES_BIG") && $m.hasTrait("THICK_COCK")'
+
+ - id: applyLSE
+   textId: applyLSE
+   effects:
+    - effect: $actionsTaken.add("applyLSE")
+    - effect: '#set($doneTraitChange = true)'
+   condition: '$doTraitChange && $m.personality == "JERK" && !$doneTraitChange && !$actionsTaken.contains("applyLSE") && !$w.hasTrait("LOW_SELF_ESTEEM")'
+   followUpActions:
+    acceptLSE1: 
+    breakTrance: $allowBreakTrance
+    
+ - id: applyLikesBare
+   textId: applyLikesBare
+   effects:
+    - effect: $actionsTaken.add("applyLikesBare")
+    - effect: '#set($doneTraitChange = true)'
+   condition: '$doTraitChange && $m.personality == "JERK" && !$doneTraitChange && !$actionsTaken.contains("applyLikesBare") && !$w.hasTrait("LIKES_BARE") && ($m.hasTrait("HATES_CONDOMS")|| ($m.hasTrait("IMPREGNATOR")&&!$w.knownPregnant))'
+   followUpActions:
+   # Virgins can still take the general answers if they want.
+    bareSexQuestionVirginSoDontKnow: $w.virgin
+    bareSexQuestionSafetyFirst:
+    bareSexIsOk: 
+    breakTrance: $allowBreakTrance
+    
+   # m tells PC to be more erotic, allowing the player to choose which trait gets applied.
+ - id: applyEroticTraits
+   textId: applyEroticTraits
+   effects:
+    - effect: $actionsTaken.add("applyEroticTraits")
+    - effect: '#set($doneTraitChange = true)'
+   condition: '$doTraitChange && $m.personality == "JERK" && !$doneTraitChange && !$actionsTaken.contains("applyEroticTraits") && !$m.hasTrait("LIKES_CUTE") && (!$w.hasTrait("SULTRY") || !$w.hasTrait("HAIR_TRIGGER") || (!$w.knownPregnant && !$w.hasTrait("BABY_CRAZY")) || !$w.hasTrait("FLIRTY"))'
+   followUpActions:
+    moreEroticBecomeSultry: '!$w.hasTrait("SULTRY")'
+    moreEroticBecomeFlirty: '!$w.hasTrait("FLIRTY")'
+    moreEroticGetHairTrigger: '!$w.hasTrait("HAIR_TRIGGER")'
+    moreEroticBecomeBabyCrazy: '!$w.hasTrait("BABY_CRAZY") && !$w.knownPregnant'
+    breakTrance: $allowBreakTrance
+
+ - id: applyLikesOral
+   textId: applyLikesOral
+   effects:
+    - effect: $actionsTaken.add("applyLikesOral")
+    - effect: '#set($doneTraitChange = true)'
+   condition: '$doTraitChange && $m.personality == "JERK" && !$doneTraitChange && !$actionsTaken.contains("applyLikesOral") && !$w.hasTrait("LIKES_ORAL") && $m.hasTrait("LIKES_ORAL")'
+   followUpActions:
+    rejectLikesOral: 
+    acceptLikesOral: 
+    breakTrance: $allowBreakTrance    
+     
+     

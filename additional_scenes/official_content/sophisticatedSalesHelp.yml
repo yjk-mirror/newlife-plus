@@ -1,0 +1,320 @@
+# Scene written by ...?
+# Note from SO: "...?" is the author's handle and not an expression of uncertainty.
+# Requires spyOnSex.yml and spyOnSex.vm 
+#
+# Overview:
+# A sophisticated friend of the player decides to help a relaxed player get ahead at work.
+# This can involve sex which the player peeks in on using the spyOnSex scene.
+#
+# Paths:
+# - The PC's sophisticated friend asks if she can help get the PC a promotion.
+# - If the PC accepts, they meet the PC's boss at her home, where the friend will try to improve the boss's opinion of the PC.
+# - Most likely the friend and the boss will begin having sex, the PC can peek in on them which transitions to spyOnSex.
+#
+# Preconditions:
+# The PC has the RELAXED trait.
+# The sales boss is contactable.
+# The sales boss is not the PC's boyfriend.
+# The PC does not have the max job title.
+# The PC has a close friendship with a sophisticated friend (with friendship status of good or better).
+# The sophisticated friend isn't a virgin (anymore).
+# This event hasn't already taken place this game.
+#
+# The event is accessed by the "spend time with friends" activity.
+
+textFileName: sophisticatedSalesHelp.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+ femaleNpcs:
+  - id: f
+    outfit: CASUAL
+ location: 
+  wall: test location wall # String description of the location's wall
+  floor: test location floor # String description of the location's floor
+  hasBed: true # Whether the location has a bed. If true, this allows makeout sub-scenes to transition to bedroom sex ones
+  isOutside: false # Whether the location counts as being outside. Affects some text in sex scenes such as using "ground" instead of "floor".
+
+intro:
+ textId: introText
+ effects:
+  - effect: $f.addAlcoholSmall()
+    condition: (!$f.pregnant && !$scene.hasFlag("SOPHISTICATED_SALES_INTRO_DONE"))
+  - effect: $w.addAlcoholSmall()
+    condition: (!$w.knownPregnant && !$scene.hasFlag("SOPHISTICATED_SALES_INTRO_DONE"))
+  - effect: $scene.setActiveMaleNpc($m)
+  - effect: $scene.hideNpc($m)
+    condition: (!$scene.hasFlag("SOPHISTICATED_SALES_INTRO_DONE"))
+ followUpActions:
+  checkPhone: (!$scene.hasFlag("SOPHISTICATED_SALES_INTRO_DONE"))
+  letThemTalk: ($scene.hasFlag("SOPHISTICATED_SALES_INTRO_DONE"))
+
+returningSections:
+ - id: returnFromPeeking
+   textId: returnFromPeekingText
+   followUpActions:
+    wait: (!$m.hadOrgasm)
+    ending: $m.hadOrgasm
+
+actions:
+ - id: checkPhone
+   shortDesc: Check your phone
+   longDesc: See what the vibration means
+   textId: checkPhoneText
+   followUpActions:
+    planListen:
+   
+   
+ - id: planListen
+   shortDesc: What does she mean?
+   longDesc: She appears to have an idea, hear her out.
+   textId: planListenText
+   followUpActions:
+    planYes:
+    planNo:
+    planRules:
+   
+ - id: planYes
+   shortDesc: Agree
+   longDesc: You go along with her plan. 
+   textId: planYesText
+   effects:
+    - effect: $scene.addFlag("SOPHISTICATED_SALES_INTRO_DONE")
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: m
+    femaleNpcs:
+     - id: f
+       npc: f
+    location:
+     usePlayerHome: true
+    transitionInfo:
+     ymlFile: sophisticatedSalesHelp.yml
+    
+ - id: planNo
+   shortDesc: Deny
+   longDesc: Don't go along with her plan.
+   textId: planNoText
+   finishScene: true
+   
+ - id: planRules
+   shortDesc: Don't go too far
+   longDesc: planRulesLongDesc
+   textId: planRulesText
+   followUpActions:
+    planYes:
+    planNo: (!$scene.hasFlag("SOPHISTICATED_SALES_NO_SEX"))
+   
+     
+ - id: letThemTalk
+   shortDesc: Let them talk
+   longDesc: They're getting along well, why mess that up.
+   textId: letThemTalkText
+   allowNpcActions: true
+   useDefaultActions: true
+   
+ - id: getDrinks
+   shortDesc: Serve drinks
+   longDesc: Get some drinks for everybody.
+   textId: getDrinksText
+   effects:
+    - effect: $scene.addFlag("SOPHISTICATED_SALES_SEXUAL") $scene.removeFlag("SOPHISTICATED_SALES_SEXUAL_TEMP")
+      condition: $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL_TEMP")
+    - effect: $f.addAlcoholSmall()
+      condition: (!$f.pregnant)
+    - effect: $m.addAlcoholSmall()
+    - effect: $w.addAlcoholSmall()
+      condition: (!$w.knownPregnant)
+   allowNpcActions: true
+   useDefaultActions: true
+   
+ - id: interuptNoSex
+   shortDesc: Interupt
+   longDesc: Remind her of her promise.
+   textId: interuptNoSexText
+   effects:
+    - effect: $f.reduceNpcLikingTiny()
+    - effect: $m.reduceNpcLikingTiny()
+    - effect: $scene.addFlag("SOPHISTICATED_SALES_NO_SEX_REMIND")
+    - effect: $scene.removeFlag("SOPHISTICATED_SALES_SEXUAL")
+   allowNpcActions: true
+   useDefaultActions: true
+   
+ - id: ignoreNoSex
+   shortDesc: Say nothing
+   longDesc: Let her have her fun.
+   textId: ignoreNoSexText
+   effects:
+    - effect: $f.reduceWLikingTiny()
+   allowNpcActions: true
+   useDefaultActions: true
+     
+ - id: sexStart
+   shortDesc: Ok
+   longDesc: Let them use your room.
+   textId: sexStartText
+   effects:
+    - effect: $scene.addFlag("SPY_SEX_ALLOW_TOUCHING_YOURSELF")
+    - effect: $scene.addFlag("SPY_SEX_ALLOW_STOP_WATCHING")
+    - effect: $scene.addFlag("SPY_SEX_ALLOW_BEING_CAUGHT")
+      condition: (!$w.hasTrait("CUNNING"))
+    - effect: $scene.addFlag("SOPHISTICATED_SALES_SEX"))
+    - effect: $scene.hideNpc($f)
+    - effect: $scene.hideNpc($m)
+    - effect: $f.stripNaked()
+    - effect: $m.stripNaked()
+   followUpActions:
+    peek:
+    wait:
+   
+ - id: wait
+   shortDesc: Wait
+   longDesc: Wait for them to finish having sex.
+   textId: waitText
+   effects:
+    - effect: $w.addArousalMedium()
+      condition: $w.hasTrait("OVERACTIVE_IMAGINATION")
+   followUpActions: 
+    wait: (!$m.hadOrgasm) && ($scene.hasFlag("SPY_SEX_CAUGHT") || $w.testWillNormal(0))
+    peek: (!$scene.hasFlag("SPY_SEX_CAUGHT")) && (!$m.hadOrgasm)
+    ending: $m.hadOrgasm
+    
+ - id: peek
+   shortDesc: Peek in on them
+   longDesc: Peek in on the two, after all it's your room. 
+   textId: peekText
+   effects:
+    - effect: $scene.addFlag("SOPHISTICATED_SALES_PEEK")
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: m
+    femaleNpcs:
+     - id: f
+       npc: f
+    returningId: returnFromPeeking
+    location:
+     useCurrentLocation: true
+    transitionInfo:
+     ymlFile: spyOnSex.yml
+     
+ - id: late
+   shortDesc: It's getting late.
+   longDesc: Well unfortunatly it's time to say goodbye.
+   textId: endingText
+   finishScene: true
+   
+ - id: ending
+   shortDesc: They're done.
+   longDesc: Sounds like the two of them have finaly finished having sex.
+   textId: endingText
+   finishScene: true
+     
+defaultActions:
+ letThemTalk: $timer <= 30
+ getDrinks: $timer <= 30
+ late: ($timer > 30)
+ 
+femaleNpcActions:
+ - id: fTalk
+   textId: fTalkText
+   condition: true
+   weightDivisorConditions:
+    - $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")
+    - $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")
+    - $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")
+    - $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")
+    - $scene.hasFlag("SOPHISTICATED_SALES_FLIRT")
+   
+ - id: fFlirt
+   textId: fFlirtText
+   condition: true
+   effects:
+    - effect: $scene.addFlag("SOPHISTICATED_SALES_FLIRT")
+      condition: (!$scene.hasFlag("SOPHISTICATED_SALES_FLIRT"))
+    - effect: $f.addArousalTiny()
+      condition: (!$f.arousalEnjoy)
+    - effect: $m.addArousalTiny()
+      condition: (!$m.arousalEnjoy)
+    - effect: $w.addArousalTiny()
+      condition: ($w.hasTrait("OVERACTIVE_IMAGINATION") && !$w.arousalEnjoy)
+   weightMultiplierConditions:
+    - $m.hasTrait("HANDSOME")
+    - $m.hasTrait("CHARMING")
+    - $f.drunk
+   weightDivisorConditions:
+    - (!$scene.hasFlag("SOPHISTICATED_SALES_FLIRT"))
+    - $m.hasTrait("UGLY")
+    - $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")
+    - $scene.hasFlag("SOPHISTICATED_SALES_NO_SEX")
+    - $scene.hasFlag("SOPHISTICATED_SALES_NO_SEX_REMIND")
+    - $scene.hasFlag("SOPHISTICATED_SALES_NO_SEX_REMIND")
+    - $scene.hasFlag("SOPHISTICATED_SALES_NO_SEX_REMIND")
+   
+ - id: fCompliment
+   textId: fComplimentText
+   condition: true
+   effects:
+    - effect: $f.addWLikingTiny()
+    - effect: $m.addNpcLikingSmall()
+   weightDivisorConditions:
+    - $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")
+    - $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")
+    - $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")
+    - $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")
+    - $scene.hasFlag("SOPHISTICATED_SALES_FLIRT")
+   
+ - id: fMove
+   textId: fMoveText
+   condition: $scene.hasFlag("SOPHISTICATED_SALES_FLIRT") && $moveArousal && (!$scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")) && (!$scene.hasFlag("SOPHISTICATED_SALES_NO_SEX_REMIND"))
+   effects:
+    - effect: $scene.addFlag("SOPHISTICATED_SALES_SEXUAL")
+   weightMultiplierConditions:
+    - true
+    - true
+   weightDivisorConditions:
+    - $scene.hasFlag("SOPHISTICATED_SALES_NO_SEX")
+    - $scene.hasFlag("SOPHISTICATED_SALES_NO_SEX")
+   followUpActions:
+    interuptNoSex: $scene.hasFlag("SOPHISTICATED_SALES_NO_SEX")
+    ignoreNoSex: $scene.hasFlag("SOPHISTICATED_SALES_NO_SEX")
+   
+ - id: fSexual
+   textId: fSexualText
+   condition: $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL")
+   effects:
+    - effect: $f.addArousalSmall()
+      condition: (!$f.arousalEnjoy)
+    - effect: $f.addEnjoyTiny()
+    - effect: $m.addArousalSmall()
+      condition: (!$m.arousalEnjoy)
+    - effect: $m.addEnjoyTiny()
+    - effect: $w.addArousalSmall()
+      condition: ($w.hasTrait("OVERACTIVE_IMAGINATION") && !$w.arousalEnjoy)
+    - effect: $w.addArousalTiny()
+      condition: (!$w.hasTrait("OVERACTIVE_IMAGINATION") && !$w.arousalEnjoy)
+   weightMultiplierConditions:
+    - $f.drunk
+    - $f.drunk
+ 
+ - id: fSexStart
+   textId: fSexStartText
+   condition: $scene.hasFlag("SOPHISTICATED_SALES_SEXUAL") && $f.arousalComfort
+   weightMultiplierConditions:
+    - true
+    - $f.veryDrunk
+    - $f.veryDrunk
+    - $f.drunk
+    - $f.drunk
+   followUpActions:
+    sexStart:

@@ -1,0 +1,202 @@
+<introText>
+You decide to have a small get-together at your place with $bf.getName() and $guest.getName(). $bf.getName() leaves to pick up a pie from Tesco while you clean up the place.
+
+You hear a knock at the door. 
+$scene.setActiveMaleNpc($guest)##
+$scene.hideNpc($bf)##
+$scene.hideNpc($guest)##
+$guest.setArousalEnjoy()##
+</introText>
+
+<greet>
+It's $guest.getName(), and he's holding a bottle of whiskey. "A fine whiskey for a fine woman," he says. 
+
+You let him in.
+
+"Damn, you're looking beautiful in those clothes," he tells you. "Mind you, those they would look much better on the bedroom floor."
+
+$guest.getName() is always making off-colour jokes like that. You laugh it off. The two of you spend some time chatting and catching up, with $guest.getName() shamelessly flirting the whole time. It's always fun talking with him. He's always so engaging and agreeable that it's easy to open up to him. He has a certain manly charm, a certain swagger, that makes women want to open their legs to him as well. You have to admit that you aren't entirely immune to his charms either. 
+
+$bf.getName() finally comes back with the pie, and you all sit around the table. $guest.getName() pours some whiskey for everyone. 
+$scene.unHideNpc($bf)##
+$scene.unHideNpc($guest)##
+$w.addArousalSmall()##
+</greet>
+
+<drink1>
+$bf.getName() quickly knocks his whiskey back, and $guest.getName() has to refill it. You cut a slice of peach pie for everyone, and you all fall into a friendly conversation. 
+
+"The peaches in this pie are amazing. They're so sweet and moist," $guest.getName() remarks.
+
+"Let me cut you another slice," you say.
+
+"I can't wait to dig my tongue into these moist peaches of yours."
+
+You smile at his sexual innuendo. $bf.getName(), oblivious to the inside joke, mentions that Tesco had a good deal on the pie.
+$w.addArousalTiny()##
+</drink1>
+
+<drink2>
+$bf.getName() downs a few more glasses of whiskey. ##
+#if($bf.hasTrait("TACITURN"))##
+He becomes quiet and withdrawn. $guest.getName() takes over the conversation and entertains you with a humourous tale. 
+#elseif($bf.hasTrait("DULL"))##
+He tells a story about his day at work, but it goes on and on without coming to an end. You look over to $guest.getName(), and he jokingly shuts his eyes as if going to sleep when $bf.getName(). $bf.getName() does finally get to the end of his story, but it peters out without a punchline.
+#elseif($bf.hasTrait("BOASTFUL"))##
+He starts bragging about how he was really good at sports in school and how he could have made it to the Olympics but couldn't be bothered. When $bf.getName() isn't looking, $guest.getName() looks over to you and rolls his eyes at the story. You suppress a laugh.
+#elseif($bf.hasTrait("SLEAZY"))##
+He tells all of you a randy limerick involving a prostitute, a horse, and a priest. You blush in embarrassment, but $guest.getName() politely laughs at the joke.
+#else##
+He tells the story about his schoolboy days when he had to dress as a woman in a panto play. He's told the story a million times before, and actually already told the story earlier in the night. $guest.getName() looks at you knowingly as the two of you indulge your $bf.getRelationshipNpcDesc() by pretending to listen.
+#end##
+</drink2>
+
+<drink3>
+$bf.getName() is so drunk that he can barely stay awake. $guest.getName() and you end up mostly chatting alone. You enjoy laughing at his jokes and wild tales. During a lull in the conversation, you look over to him. He has a smouldering look in his eyes and a lustful gaze. A brief shiver of desire runs up your spine.
+
+You stand up and take the glasses and plates to the sink to wash up. $bf.getName() stays seated and drunkenly gets lost in his phone. $guest.getName() follows behind you to help you with the dishes.
+
+You rinse out the glasses and then hand them off to $guest.getName() to dry. As he takes one of them from you, he runs his finger across the sensitive skin on the back of your hand. He suggestively lets his finger linger, touching yours. 
+$w.addArousalMedium()##
+</drink3>
+
+<discourageFlirt>
+"This is wrong," you say, pulling your hand away and going back to washing dishes.
+
+$guest.getName() comes up behind you, gently resting his hands on your hips. He leans in close, you can feel his warm breath tickling your neck. With his lips almost touching your ear, he whispers, "I want to do wrong things with you all night long."
+$w.addArousalTiny()##
+</discourageFlirt>
+
+<ignoreFlirt>
+An air of wanton desire hangs over you and $guest.getName(), but you force yourself to go back to washing dishes. You focus on the washing, trying to ignore the overwhelming masculine presence standing beside you.
+
+You can't ignore it though, when you feel his fingers on your lower back. His fingers slowly wend their way up your spine, sending sparks of desire through your body. He uses his knuckle to gently massage the arch of your back. You freeze up, fearing that otherwise, your body will start sensually swaying with the hypnotic motions of his fingers. 
+$w.addArousalSmall()##
+</ignoreFlirt>
+
+
+<continueWashing>
+You try to go back to washing the dishes, but you feel his hand caress your butt. He gently squeezes it and rubs it. 
+
+His hand moves to the back of your thighs. His fingers start low but slowly drag their way towards your V. Your thighs quiver in anticipation.
+$w.addArousalLarge()##
+</continueWashing>
+
+<discourageHim2>
+"I'm flattered, $guest.getName()," you whisper to him. "But I have a $bf.getRelationshipNpcDesc()."
+
+"You look so sexy tonight. If $bf.getName() weren't here, I'd take you on the counter right now."
+
+You hear $bf.getName() stirring from the table.
+</discourageHim2>
+
+<letHim2>
+#if (!$w.getBottom().isSkirt())## pants
+As his fingers slide towards your inner thighs, you subconsciously spread your legs, giving him access to your womanhood. You stifle a moan as his fingers reach the forbidden fruit between your legs. You feel his fingers rubbing you through the fabric of your $w.getBottom().getBasicDesc().
+#elseif ($w.getBottom().getLength() != "ANKLES")## short skirt
+His fingers dip under your $w.getBottom().getBasicDesc(). You subconsciously spread your legs, giving him access to your womanhood. You stifle a moan as his fingers reach the forbidden fruit between your legs. ##
+$w.setBottomStatus("EXPOSED")##
+#if($w.isPussyExposed())##
+His fingers penetrate your moist canal. You grip the sink and gyrate your hips over his finger.
+#else##
+You feel his fingers rubbing against your damp panties. 
+#end##
+#else## long skirt
+You stifle a moan when you feel one of his hands reach around and grabs your breast. You lean back against his body, feeling his erection press against your ass. You feel enveloped by his body. He kneads your mounds as he lustfully kisses your neck.
+#end##
+
+You hear $bf.getName() stirring from the table.
+$w.addArousalHuge()##
+</letHim2>
+
+<bfstirs>
+You quickly adjust your clothing. ##
+$w.setBottomStatus("WORN")##
+By the time he pokes his head in, all he sees is you washing dishes at the sink with $guest.getName() drying some glasses beside you. $bf.getName() gives you a sloppy kiss on the cheek and tells you he's so drunk that he wants to sleep in the bedroom. $guest.getName() says that he's also pretty drunk and asks to crash on your sofa for the night. They both look at you expectantly, and you agree that it's okay.
+
+As you turn to watch $bf.getName() drunkenly stumble to the bedroom, $guest.getName() comes up behind you and mischeviously gropes your ass, outside of $bf.getName()'s view.
+$w.addArousalSmall()##
+
+When $bf.getName() finally gets into the bedroom, $guest.getName() whispers in your ear, "if you need a good fucking tonight, you know where to find me." He wanders over to the sofa and lies down.
+</bfstirs>
+
+<bedroom>
+It's getting late, so you head to the bedroom to check in on your $bf.getRelationshipNpcDesc() and prepare for bed.
+
+In the bedroom, you see $bf.getName() curled up and sleeping. He was so drunk that he didn't even change out of his clothes. 
+
+You feel distracted. You're buzzing with energy. Your mind keeps wandering to thoughts of $guest.getName(). He's so cocky, brazenly asking you for sex with your $bf.getRelationshipNpcDesc() so close. Yet all you can think about is what it would feel like to join him on the sofa and let his hardness slide into you. You are overwhelmed with arousal.
+$scene.hideNpc($guest)##
+$w.addArousalLarge()##
+</bedroom>
+
+<sleep1>
+You shake off the feeling and crawl into bed next to $bf.getName(). You slowly drift off to sleep.
+</sleep1>
+
+<sexbf1>
+You feel so horny that there's no way you can go to sleep like this. You go to the bed and shake $bf.getName() awake. His eyes drowsily drift open. You crawl into the bed beside him.
+$scene.setActiveMaleNpc($bf)##
+</sexbf1>
+
+<sofa>
+$scene.hideNpc($bf)##
+$scene.unHideNpc($guest)##
+#set($dummy = $guest.setJacketWorn(false))##
+#set($dummy = $guest.setTrousersWorn(false))##
+Your pussy is inflamed with desire. Your body feels so sensitive. Visions of you giving your body over to $guest.getName() keep flashing through your mind. It's like he has a spell over you.
+
+You find yourself opening the bedroom door, as if you have no control over your own body but are just watching it from afar. You take a quick glance back to see $bf.getName() snoring in a deep sleep on the bed before closing the bedroom door behind you.
+
+In the darkness, you see $guest.getName() casually reclining on the sofa. He's not wearing any pants, and his legs are spread apart so that his erection stands lewdly in front of him. He gives you a smouldering gaze.
+
+You can't believe you're doing this, but your legs tip toes towards him, directed by the wanton hunger of your loins. 
+
+As you approach, $guest.getName() whispers to you, "I knew you would come. I knew you wouldn't be able to resist this." His comment stings your pride, but you cannot deny the truth. You crawl onto the sofa with him.
+</sofa>
+
+<postSofa>
+You rise from the sofa. You immediate yearnings seems sated, but burning embers of desire still pulse through your body. ##
+##
+#if ($scene.hasFlag("CAME_INSIDE"))##
+As you march back to the bedroom, you feel his sticky seed between your legs.
+#elseif ($scene.hasFlag("CAME_INSIDE_ANAL"))##
+As you march back to the bedroom, you feel his sticky seed between your ass cheeks.
+#elseif ($scene.hasFlag("COME_IN_MOUTH"))##
+As you march back to the bedroom, you notice that you can still taste his semen in your mouth and on your lips.
+#else##
+You march back to the bedroom.
+#end##
+
+You see $bf.getName() still sleeping away in your bed
+</postSofa>
+
+<sleep2>
+You climb into bed and drift off to sleep.
+</sleep2>
+
+<sexbf2>
+A wicked thought crosses your mind. You shake $bf.getName()'s shoulder until you see his eyes drowsily drift open. 
+
+#if ($scene.hasFlag("CAME_INSIDE"))##
+With the wetness of $guest.getName()'s semen still in your sex, you climb into the bed with your $bf.getRelationshipNpcDesc().
+#elseif ($scene.hasFlag("CAME_INSIDE_ANAL"))##
+With the wetness of $guest.getName()'s semen still in your ass, you climb into the bed with your $bf.getRelationshipNpcDesc().
+#elseif ($scene.hasFlag("COME_IN_MOUTH"))##
+With the taste of $guest.getName()'s semen still in your mouth, you climb into the bed with your $bf.getRelationshipNpcDesc().
+#else##
+You climb into the bed with your $bf.getRelationshipNpcDesc().
+#end##
+$scene.setActiveMaleNpc($bf)##
+</sexbf2>
+
+<postsexbf>
+You lie down on your bed beside $bf.getName() and drift off to sleep.
+</postsexbf>
+
+
+
+<sceneDescriptionText>
+You're having a get-together at your place with $bf.getName() and $guest.getName().
+</sceneDescriptionText>
+

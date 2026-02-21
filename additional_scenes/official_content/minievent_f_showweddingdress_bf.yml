@@ -1,0 +1,156 @@
+# Preconditions for this scene:
+# Part of the minidate framework
+# $bf or $gf should be the partner who you are engaged to; the other should be null
+# $f should be a female friend
+# player should have a wedding dress
+
+textFileName: minievent_showweddingdress.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: bf
+    outfit: CASUAL
+ femaleNpcs:
+  - id: f
+    outfit: CASUAL
+  - id: gf
+    outfit: CASUAL
+    
+ location:
+  usePlayerHome: true
+
+
+
+intro:
+ textId: introText_bf_f
+ followUpActions:
+  changeIntoDress: true
+  refuseChangeIntoDress:
+ finishScene: false
+
+actions:
+ - id: changeIntoDress
+   shortDesc: Show your wedding dress
+   longDesc: Change into your wedding dress and show it off
+   textId: changeIntoDress
+   sceneTransition:
+    condition: true
+    type: OUTFIT_CHANGE
+    returningId: finishedChangeIntoDress
+    transitionInfo:
+     outfitType: WEDDING
+     forceChangeIfPossible: false
+    location:
+     # Not used
+     useCurrentLocation: true
+ - id: refuseChangeIntoDress
+   shortDesc: Don't show your wedding dress
+   longDesc: Refuse to show your wedding dress
+   textId: refuseChangeIntoDress
+   finishScene: true
+ - id: finishedChangeIntoDress
+   shortDesc: not seen
+   longDesc: not seen
+   textId: finishedChangeIntoDress
+   finishScene: (!$scene.hasFlag("SUCCESSFULLY_CHANGED_CLOTHES"))
+   followUpActions:
+    nakedResponse: $w.isNaked()
+    sleazyResponse: (!$w.isNaked() && $friend.hasTrait("LIKES_SEXY") && $friend.getCharType() == "PARTY_GIRL")
+    lastChanceResponse: (!$w.isNaked() && !($friend.hasTrait("LIKES_SEXY") && $friend.getCharType() == "PARTY_GIRL") && $friend.hasDoneSexualActivity("KISSING"))
+    regularResponse: (!$w.isNaked() && !($friend.hasTrait("LIKES_SEXY") && $friend.getCharType() == "PARTY_GIRL") && !$friend.hasDoneSexualActivity("KISSING"))
+ - id: regularResponse
+   shortDesc: Show off your wedding dress
+   longDesc: Find out what they think about your dress
+   textId: regularResponse
+   finishScene: true
+ - id: nakedResponse
+   shortDesc: Show off your wedding dress
+   longDesc: Find out what they think about your dress
+   textId: nakedResponse
+   finishScene: true
+ - id: lastChanceResponse
+   shortDesc: Show off your wedding dress
+   longDesc: Find out what they think about your dress
+   textId: lastChanceResponse
+   followUpActions:
+    lastChanceResponse2:
+ - id: lastChanceResponse2
+   shortDesc: Find out what's wrong
+   longDesc: Insist on that your friend tell you what's wrong
+   textId: lastChanceResponse2
+   followUpActions:
+    lastChanceResponseComfort:
+    lastChanceResponseKiss:
+ - id: lastChanceResponseComfort
+   shortDesc: Comfort them
+   longDesc: Reassure your friend that you won't forget about them
+   textId: lastChanceResponseComfort
+   finishScene: true
+ - id: lastChanceResponseKiss
+   shortDesc: Kiss them
+   longDesc: It just feels right
+   textId: lastChanceResponseKiss
+   sceneTransition:
+    condition: true
+    type: LESBIAN_STANDING_MAKEOUT
+    returningId: lastChanceResponseKissDone
+    femaleNpcs:
+     - id: npc
+       npc: friend
+    transitionInfo:
+     dominant: "PC_DOMINANT"
+    location:
+     useCurrentLocation: true
+ - id: lastChanceResponseKissDone
+   shortDesc: Not used for anything
+   longDesc: Not used for anything
+   textId: lastChanceResponseKissDone
+   finishScene: true
+ - id: sleazyResponse
+   shortDesc: Show off your wedding dress
+   longDesc: Find out what they think about your dress
+   textId: sleazyResponse
+   followUpActions:
+    lieDownPose:
+    lieDownRefuse:
+ - id: lieDownPose
+   shortDesc: Pose lying down
+   longDesc: Lie down on your bed to show off what your wedding dress looks like from that angle
+   textId: lieDownPose
+   followUpActions:
+    sexRefuse:
+    lieDownPoseSex:
+ - id: lieDownRefuse
+   shortDesc: Refuse
+   longDesc: Your friend's request is not appropriate
+   textId: lieDownRefuse
+   finishScene: true
+ - id: sexRefuse
+   shortDesc: Reject your friend's advances
+   longDesc: You are getting married soon. You aren't going to cheat on your partner.
+   textId: sexRefuse
+   finishScene: true
+ - id: lieDownPoseSex
+   shortDesc: Give in to temptation
+   longDesc: You aren't married yet. You're allowed to have some fun.
+   textId: lieDownPoseSex
+   sceneTransition:
+    condition: true
+    type: LESBIAN_LYING_MAKEOUT
+    returningId: lastChanceResponseKissDone
+    femaleNpcs:
+     - id: npc
+       npc: friend
+    transitionInfo:
+     dominant: "NPC_DOMINANT"
+    location:
+     useCurrentLocation: true
+ - id: done
+   shortDesc: Not used for anything
+   longDesc: Not used for anything
+   textId: empty
+   finishScene: true
+

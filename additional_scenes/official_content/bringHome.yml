@@ -1,0 +1,117 @@
+# Scene written by Secondarian
+#
+# Overview:
+# This is a scene in which a close friend of yours whom you told that you don't want to be physical with him, uses a chance when you are totally drunk to have his way with you.
+#
+# SO: I've changed this to trigger after the nightclub scene instead, along with a few relevant changes, so it no longer requires the NPC to be the PC's friend.
+# It also no longer requires to have told the guy you just want to be friends.
+#
+# Key Paths:
+# - The PC tells him to stop.
+# - The PC decides to let him do what he wants.
+# 
+# Scene access:
+# On nightclub end, when the (many) requirements are met
+#
+# Preconditions:
+# Reached the end of the nightclub scene in company with a man with all conditions met:
+# PC has max drunkenness (and not clear-headed). NPC does not
+# Block-Rough is not set
+# NPC has not orgasmed yet this scene-chain
+# PC and NPC are not living together
+# NPC personality is JERK
+# NPC behaviour with no faking is MEAN or COLD
+# NPC modified attraction to the PC is ATTRACTED or better
+# PC's behaviour is not RUDE or COLD.
+# PC does not have a husband waiting for her at home
+#
+# The scene takes 1 male NPC and no female ones:
+# "jerk" is the man with the PC
+# Both should be wearing going out clothes. 
+# The scene takes place in the player home.
+
+textFileName: bringHome.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: GOING_OUT
+ maleNpcs:
+  - id: jerk
+    outfit: GOING_OUT
+ location:
+  usePlayerHome: true
+  
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($jerk)
+ followUpActions:
+  goin:
+
+returningSections:
+
+ - id: complied
+   textId: complied
+   effects: 
+    - effect: $w.changeMoney(1)
+   finishScene: '$scene.hasFlag("BH_SATISFIED")'
+   followUpActions:
+    refused:
+
+actions:
+ - id: goin
+   shortDesc: Lie down
+   longDesc: You strip naked and lie down in your bed.
+   textId: goin
+   effects:
+    - effect: $w.stripNaked()
+   followUpActions:
+    listen: 
+
+ - id: listen 
+   shortDesc: Be brought to bed
+   longDesc: You are being brought to bed.
+   textId: listen
+   followUpActions:
+     refuse: 
+     comply:
+      
+ - id: agreedStartMo 
+   shortDesc: Let him do what he wants
+   longDesc: You don't stop him and let him do what he wants to do.
+   textId: agreedStartMo
+   effects:
+    - effect: $scene.addFlag("NO_ORAL") $scene.addFlag("BLOCK_ANAL") $scene.addFlag("DONT_UNDRESS") $jerk.setTrousersOpen(true)
+    - effect: $jerk.wearCondom()
+      condition: $jerk.hasTrait("CONSCIENTIOUS")
+   sceneTransition:
+    condition: true
+    type: MISSIONARY_SEX
+    maleNpcs:
+     - id: man
+       npc: jerk
+    returningId: complied
+    location:
+     useCurrentLocation: true
+  
+ - id: refuse 
+   shortDesc: Stop him
+   longDesc: You try to stop him from feeling you up.
+   textId: refuse
+   finishScene: true
+
+ - id: comply
+   shortDesc: Let him
+   longDesc: You let him do what he wants to. You are way too drunk to object.
+   textId: comply
+   effects:
+    - effect: $jerk.addEnjoySmall() $jerk.addArousalSmall()
+   followUpActions:
+    agreedStartMo:
+    
+ - id: refused
+   textId: refused
+   shortDesc: Watch him leave
+   longDesc: You didn't let him do it. What's he going to do?
+   finishScene: true

@@ -1,0 +1,53 @@
+<sceneDescriptionText>
+You're at home in the early afternoon, considering hiring a hypnotist.
+</sceneDescriptionText>
+
+<introText>
+#if($gd.hasGameFlag("HIRED_HYPNOTIST"))
+	You consider getting hypnotised once again. Hypnosis can help with various afflictions, you're sure, even though you can't remember all that well what happened when you were last under the influence.
+#else
+	You've heard that hypnosis can help with various day-to-day problems. Stress, for example. Perhaps booking a session with a hypnotist might be useful to you?
+#end
+You have flyers from a pair of potential hypnotists. There's the friendly, colourful, encouraging flyer from a hypnotist named $goodHypno.name, and the ominous looking one from $evilHypno.name. The latter is a less enouraging bit of marketing material, but its design pulls on your subconscious in odd ways. Could that perhaps mean that its practitioner is more capable?
+</introText>
+
+<hireEvilHypnoSd>
+Book $evilHypno.name
+</hireEvilHypnoSd>
+
+<hireEvilHypnoLd>
+Book a session with $evilHypno.name.
+</hireEvilHypnoLd>
+
+<hireEvilHypno>
+## It's perhaps a little unrealistic that the hypnotists are always available at the drop of a pin. I did consider having a time-jump with the next
+## scene taking place the day after. But the PC will be wearing the same clothes so I decided to just go with them being available at short-notice.
+## Perhaps hypnosis isn't very popular in the city where Newlife takes place. Perhaps people just don't trust hypnotists very much. I can't imagine why.
+You call and book a session with $evilHypno.name. By a stroke of luck he's free this very evening. You arrange a session and after an afternoon of this and that, hear the knock on the door that means he's arrived. 
+</hireEvilHypno>
+
+<hireGoodHypnoSd>
+Book $goodHypno.name
+</hireGoodHypnoSd>
+
+<hireGoodHypnoLd>
+Book a session with $goodHypno.name.
+</hireGoodHypnoLd>
+
+<hireGoodHypno>
+## Because evilHypno has the more "interesting" content, I want the player to be encouraged in that direction.
+## As part of this, there's a 50% chance that a goodHypno who doesn't have a strong relationship with the pc will be unavailable.
+## The same does not apply to evilHypno as the point is to see his content more often.
+#if($goodHypno.friend || $goodHypno.partner || $goodHypno.npcLikingLike || $scene.randomBoolean())
+	#set($goodHypnoAvailable=true)
+	You call and book a session with $goodHypno.name. By a stroke of luck he's free this very evening. You arrange a session and after an afternoon of this and that, hear the knock on the door that means he's arrived. 
+	$gd.setGameFlag("HIRED_HYPNOTIST") ## This has to be done here and not in effects, because goodHypnoAvailable won't have been set yet otherwise.
+#else
+	#set($goodHypnoAvailable=false)
+	You call to book a session with $goodHypno.name. Unfortunately he isn't free at the moment. You could book the other hypnotist, or just call it off until another week.
+#end
+</hireGoodHypno>
+
+<dontHireAnyone>
+You decide to not hire anyone in the end, and just spend the evening on your own.
+</dontHireAnyone>

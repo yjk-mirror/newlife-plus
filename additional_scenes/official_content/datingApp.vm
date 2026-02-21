@@ -1,0 +1,37 @@
+<sceneDescriptionText>
+You are at home looking over a dating site.
+</sceneDescriptionText>
+
+<introText>
+	You're sitting at home, scrolling through the people on an online dating site. You get a notification that you matched with someone.
+</introText>
+
+<read>
+	You look at his profile picture and can see $m.getName() is a##
+	#if($m.hairstyle == "BALD") bald##
+	#elseif($m.hairstyle == "SHAVEN_HEADED") shaven-headed##
+	#end
+	 $m.getRace() guy with##
+	#if($m.hasHair) $m.getHairColour() hair,#end $m.getEyeColour() eyes and a $m.torsoDesc.
+	#if($m.age == "LATE_TEENS")He looks very young, probably not even out of his teens. ##
+	#elseif($m.age == "EARLY_TWENTIES")He looks to be in his early twenties. ##
+	#elseif($m.age == "TWENTIES")He's probably in his mid- or late-twenties. ##
+	#elseif($m.age == "THIRTIES")He seems to be in his thirties. ##
+	#elseif($m.age == "FORTIES")He's in early middle-age, probably in his forties. ##	
+	#elseif($m.age == "FIFTIES")He's a middle-aged man, probably in his fifties. ##	
+	#{else}He's an older man, perhaps even old enough to have retired. ##
+	#end
+	#if($m.hasTrait("HANDSOME"))You find his face pic to be very attractive. He's just your type and you think he's really handsome.##
+	#elseif($m.hasTrait("UGLY"))His face pic doesn't interest you at all. In fact, you'd consider him to be outright ugly.##
+	#end
+	
+	Do you want to meet this guy? ##
+</read>
+
+<accept>
+You decide to meet this guy and just see what happens.##
+</accept>
+
+<ignore>
+You have no interest whatsoever in this guy. 
+</ignore>

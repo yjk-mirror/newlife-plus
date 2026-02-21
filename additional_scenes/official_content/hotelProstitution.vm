@@ -1,0 +1,222 @@
+<sceneDescriptionText>
+You are in a hotel room because you agreed to have sex for money. What have you gotten yourself into?
+</sceneDescriptionText>
+
+<introText>
+Shortly after, you arrive in the hotel room where you agreed to meet with a guy from the internet to have sex for money. ##
+You knock at the hotel room door, feeling##
+#if($w.hasTrait("SHY")) so nervous that you have to fight back the urge to vomit. Why did you agree to do that?##
+#elseif($w.hasTrait("SULTRY")) a little tingle of anticipation.##
+#elseif($w.hasTrait("REFINED")) humiliated for agreeing to prostitue yourself. Why did you agree to do that?##
+#else a little bit nervous about the prospect of having sex and getting money for it.##
+#end
+</introText>
+
+<goin>
+The guy you wrote with opens the door for you and lets you in, standing ##
+just next to the door so you're forced to brush past##
+#if($jerk.getFigure() == "FAT") his massive bulk##
+#elseif($jerk.getFigure() == "PAUNCHY") his soft gut##
+#else his masculine body##
+#end
+ as you enter the room.
+</goin>
+
+<listen>
+The guy announces that he's been thinking about what he wants to do with you ever since he saw your profile in the internet. ##
+He hasn't just come to drift away in his dreams though. He explains exactly what he wants you to do with him for the money he ##
+promised you. 
+
+## Set up the NPC's preferences
+$scene.addWeightedItem("SEX",10)##
+#if($gd.allowAnal)##
+	#if($jerk.hasTrait("LIKES_ANAL"))$scene.addWeightedItem("ANAL",20)##
+	#elseif(!$jerk.hasTrait("PREFERS_SEX"))$scene.addWeightedItem("ANAL",5)#end##
+#end##
+#if($jerk.hasTrait("LIKES_ORAL"))$scene.addWeightedItem("ORAL",20)##
+#elseif(!$jerk.hasTrait("PREFERS_SEX"))$scene.addWeightedItem("ORAL",5)##
+#end##
+#if($jerk.hasTrait("HATES_CONDOMS") || ($jerk.hasTrait("IMPREGNATOR") && !$w.knownPregnant && !$w.safe))$scene.addWeightedItem("UNPROTECTED",20)#end##
+#set($jerkRequest=$scene.pickItemAndClearMap())##
+#if($jerkRequest == "SEX")
+	$scene.addFlag("SEX_WORK_PIV")##
+	#if($jerk.believesVirgin)##
+		#if($w.hasTrait("CUTE"))
+			You're clearly an innocent little flower who's probably never let a man between her legs. He plans to change ##
+			that right now. 
+		#else
+			He says that he wants to take your virginity. If you want to have the money, then it's time to ##
+			say goodbye to your cherry.
+		#end
+	#elseif($jerk.hasDoneSexualActivity("SEX"))
+		He feels like sticking his cock in your ##
+		#if($w.hasTrait("SNUG_PUSSY"))tight #end##
+		pussy again.
+	#elseif ($jerk.hasDoneSexualActivity("ANAL"))
+		He's enjoyed having your ass, but this time he wants to try something new. He wants to go deep into your ##
+		#if ($jerk.hasTrait("CRUDE"))cunt.
+		#{else}pussy.
+		#end
+	#else
+		He dreamed to put his cock into your pussy for weeks and finally wants to feel your pussy squeezing his cock for real.
+	#end
+#elseif($jerkRequest == "ANAL")
+	$scene.addFlag("SEX_WORK_ANAL")##
+	#if($w.analVirgin)
+		#if($w.hasTrait("CUTE"))
+			He bets a sweet little cutie pie like you has never felt a man's cock deep in her ass. He wants to be the first to plumb its depths.
+		#else
+			He always dreamed about being the first in the ass of a girl like you. And now is the time to make his dream come true.
+		#end
+	#elseif($jerk.hasDoneSexualActivity("ANAL"))
+		He's found your butthole to be nice and tight, and he feels like stretching it out a bit with his ##
+		#if($jerk.hasTrait("THICK_COCK"))thick #end##
+		cock.
+	#elseif($jerk.hasDoneSexualActivity("SEX") && $w.hasTrait("SNUG_PUSSY"))
+		He's always wondered if your asshole is as tight as your##
+		#if($jerk.hasTrait("CRUDE")) cunt## 
+		#else pussy##
+		#end##
+		. You should get on all fours and let him find out.
+	#else
+		He always dreamed about putting his dick in between some##
+		#if($w.figure == "WOMANLY") luscious##
+		#elseif($w.figure == "TONED") firm##
+		#else little##
+		#end
+		#if($jerk.hasTrait("CRUDE")) arse-cheeks ##
+		#else buttocks ##
+		#end##
+		like yours. He wants to do it now. 
+	#end
+#elseif($jerkRequest == "ORAL")
+	$scene.addFlag("HP_WANTS_ORAL")##
+	#if($jerk.npcLoveCrush)
+	You should submit to a real man like him, on your knees, giving his cock some attention with##
+	#else
+	Seeing as you're a clearly a slut, he thinks you should spend more time on your knees, and that'll give you a chance to give his cock some good work with##
+	#end
+	#if($w.hasTrait("SKILLFUL_TONGUE")) that nifty little tongue of yours.
+	#else your tongue.#end
+#elseif($jerkRequest == "UNPROTECTED")
+	$scene.addFlag("SEX_WORK_PIV")##
+	$scene.addFlag("HP_WANTS_INSEMINATE")##
+		He wants to have sex, but it would be a shame to do it with a condom. He pays so he is calling the shots and that means you'll do it his way: unprotected.##
+#end
+</listen>
+
+<refuse>
+Absolutely not! You don't want to do what he requests.##
+#if($w.hasTrait("SHY"))## 
+	 You might not find confrontations easy, but you really don't want to fulfill his request. You have to draw a line here.
+#elseif($w.hasTrait("BITCHY")) You have no intention whatsoever to comply to the wishes of this idiot.
+#elseif($w.hasTrait("REFINED")) You changed your mind. You really don't want to prostitute yourself.
+#else You accepted his proposal, but that doesn't mean you can't change your mind about it. 
+#end
+You hastily leave the room and go home.
+$jerk.addRelationshipFlag("UNHAPPY_PROSTITUTION_CLIENT") ## prevents re-hiring
+</refuse>
+
+<comply>
+You agree to ##
+#if($scene.hasFlag("HP_WANTS_ORAL"))##
+	#if ($w.hasTrait("CUTE"))let him put his thing in your mouth.
+	#{else}suck his cock.
+	#end
+#elseif($scene.hasFlag("SEX_WORK_ANAL"))
+	#if ($w.hasTrait("CUTE"))let him have sex with your bottom.
+	#elseif($w.hasTrait("POSH") || $w.hasTrait("REFINED"))have anal sex with him.
+	#{else}let him fuck your ass.
+	#end
+#elseif($scene.hasFlag("HP_WANTS_INSEMINATE"))
+	#if($w.hasTrait("BABY_CRAZY") && !$w.safe && !$w.knownPregnant)
+		receive his seed, especially on a day like today when there's a chance you get to have a baby.
+	#else##
+		accept his sperm.
+	#end
+#else##
+	have sex with him.
+#end
+$scene.addFlag("SEX_WORK")##
+</comply>
+
+<agreedGetToKnees>
+You get to your knees in front of the guy and try to think about what you will do with the money.
+</agreedGetToKnees>
+
+<agreedGetOnAllFours>
+#if($w.pussyExposed)
+	You let the guy lead you to the bed and position yourself on all fours on the bed. ##
+	#if($w.bottomStatus == "WORN")$w.setBottomStatus("DISHEVELED")#end##
+#else
+	#if($w.bottomStatus != "OFF" && $w.bottomStatus != "EXPOSED")
+		#if($w.bottom.skirt)$w.setBottomStatus("EXPOSED")
+		#else $w.setBottomStatus("OFF")
+		#end
+	#end
+	#if($w.pantiesStatus != "OFF" && $w.pantiesStatus != "EXPOSED")$w.setPantiesStatus("EXPOSED")#end
+	You lead your customer to the bed, adjust your clothing the bare minimum needed to expose your bottom for his lusts, and position yourself on all fours ##
+	on the bed. ##
+#end
+
+He at least shows enough consideration to lube your asshole then, with a satisfied grunt, thrusts his $jerk.cockDesc powerfully into your anus. 
+</agreedGetOnAllFours>
+
+<agreedGetOnAllFoursMean>
+The guy eagerly shoves you down to the floor. ##
+#if($w.pussyExposed)##
+	#if($w.bottomStatus == "WORN")$w.setBottomStatus("DISHEVELED")#end##
+	You scramble to your hands and knees and give a yelp as he presses his $jerk.cockDesc between your buttocks and into your tender unlubricated asshole.
+#else
+	#if($w.bottomStatus != "OFF" && $w.bottomStatus != "EXPOSED")
+		#if($w.bottom.skirt)$w.setBottomStatus("EXPOSED")
+		#else $w.setBottomStatus("OFF")
+		#end
+	#end
+	#if($w.pantiesStatus != "OFF" && $w.pantiesStatus != "EXPOSED")$w.setPantiesStatus("EXPOSED")#end
+	His hands clutch frantically at your body, as you adjust your clothing, just enough to expose yourself for his lusts. You get to all fours, your asshole ## 
+	still bereft of lube, only to feel his $jerk.cockDesc press firmly between your buttocks and into your rectum. 
+#end
+</agreedGetOnAllFoursMean>
+
+<agreedStartMo>
+You step into your customer's eager arms and his hands begin to rove over your##
+#if($w.pregnancyStage == "BIG" || $w.pregnancyStage == "HUGE") gravid##
+#elseif($w.figure == "SLIM") slender##
+#elseif($w.figure == "TONED") toned##
+#elseif($w.figure == "WOMANLY") curvaceous##
+#end
+ body.
+</agreedStartMo>
+
+<complied>
+#set($jerkSatisfied = false)##
+#if($scene.hasFlag("HP_WANTS_INSEMINATE"))
+	#if($scene.hasFlag("CAME_INSIDE"))#set($jerkSatisfied = true)#end##
+#elseif($scene.hasFlag("SEX_WORK_ANAL"))
+	#if($scene.hasFlag("FINISHED_ANAL_SEX"))#set($jerkSatisfied = true)#end##
+#elseif($scene.hasFlag("HP_WANTS_ORAL"))
+	#if($jerk.hadOrgasm)#set($jerkSatisfied = true)#end##
+#else## 
+	#if($scene.hasFlag("FINISHED_SEX"))#set($jerkSatisfied = true)#end##
+#end##
+#if($jerkSatisfied)
+	$scene.addFlag("HP_SATISFIED")##
+	$jerk.addRelationshipFlag("PROSTITUTED_IN_HOTEL")## Allows repeat offers.
+	$gd.addStat("TIMES_PROSTITUTED")## Track PC prostitution across all such scenes
+	$jerk.addRelationshipFlag("HAS_BEEN_PROSTITUTION_CLIENT")## Flag this NPC as a former client
+	$gd.setGameFlag("PROSTITUTED_SELF_IN_HOTEL")## Flag that the PC has done this before, for future events
+	$w.addTrait("SEX_WORKER")## general-purpose trait that should be set whenever the PC agrees to work as a prostitute
+	The guy fastens his trousers, looking very pleased. Having got what he wanted, he hands you your money. As he leaves, you quickly count the money ##
+	put it in your purse and leave shortly after him. Was it really worth it?## 
+#else
+	Your customer frowns, unsatisfied. 
+#end##
+$scene.clearPostSexFlags() ##
+$scene.removeFlag("NO_ORAL") $scene.removeFlag("BLOCK_ANAL") ## 
+</complied>
+
+<refused>
+He is angry at you for wasting his time. Without paying he leaves the room and you follow shortly after him.
+$jerk.addRelationshipFlag("UNHAPPY_PROSTITUTION_CLIENT") ## prevents re-hiring
+</refused>

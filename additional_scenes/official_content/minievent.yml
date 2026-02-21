@@ -1,0 +1,600 @@
+# Scene written by Lost Trouting
+# Preconditions for this scene:
+#
+# $bf is the PC's partner (can be null)
+# $gf is the PC's partner (can be null). The PC can only have one partner, so $gf, $bf or both will always be null.
+# $exlover is someone that the PC has slept with before (can be null)
+# Specifically, they must have done oral, anal or PIV sex. He must not have the no-random-appearances, disabled or trounced traits. 
+# He must not be the PC's partner and their relationship cannot be Strangers either (as he then wouldn't remember her well enough to recognise)
+#
+# $maleFriend is a random male friend of the PC (can be null)
+# $femaleFriend is a random female friend of the PC (can be null)
+#
+# $randomMale is a random male character (should not be $bf or $maleFriend)
+# $randomFemale is a random female character (should not be $gf or $femaleFriend)
+
+
+# The two random characters cannot be the PC's partner, one of her friends or have the disabled or no-random-appearances traits. Otherwise they're chosen completely at random.
+# In the unlikely situation that no such character exists then the event will not fire.
+# -SO
+
+textFileName: minievent.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: bf
+    outfit: CASUAL
+  - id: exlover
+    outfit: CASUAL
+  - id: maleFriend
+    outfit: CASUAL
+  - id: randomMale
+    outfit: CASUAL
+ femaleNpcs:
+  - id: gf
+    outfit: CASUAL
+  - id: femaleFriend
+    outfit: CASUAL
+  - id: randomFemale
+    outfit: CASUAL
+
+
+ location:
+  usePlayerHome: true
+
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.hideNpc($bf)
+    condition: $bf
+  - effect: $scene.hideNpc($gf)
+    condition: $gf
+  - effect: $scene.hideNpc($exlover)
+    condition: $exlover
+  - effect: $scene.hideNpc($maleFriend)
+    condition: $maleFriend
+  - effect: $scene.hideNpc($femaleFriend)
+    condition: $femaleFriend
+  - effect: $scene.hideNpc($randomMale)
+    condition: $randomMale
+  - effect: $scene.hideNpc($randomFemale)
+    condition: $randomFemale
+ followUpActions:
+  sayYes: $eventType=="BF"
+  sayNo: $eventType=="BF"
+  sayYesGf: $eventType=="GF"
+  sayNoGf: $eventType=="GF"
+  sayYesFFriend: $eventType=="FFRIEND"
+  sayNoFFriend: $eventType=="FFRIEND"
+  sayYesMFriend: $eventType=="MFRIEND"
+  sayNoMFriend: $eventType=="MFRIEND"
+  soloEvent: $eventType=="SOLO"
+  soloNap: $eventType=="SOLO"
+
+
+actions:
+ - id: sayYes
+   shortDesc: Yes
+   longDesc: Agree to meet
+   textId: bfYesText
+   allowNpcActions: true
+   # Use the male NPC actions to choose a scene to transition to
+   
+ - id: sayNo
+   shortDesc: No
+   longDesc: You have other things that you need to do.
+   textId: bfNoText
+   finishScene: true
+
+ - id: sayYesGf
+   shortDesc: Yes
+   longDesc: Agree to meet
+   textId: gfYesText
+   allowNpcActions: true
+   # Use the male NPC actions to choose a scene to transition to
+   
+ - id: sayNoGf
+   shortDesc: No
+   longDesc: You have other things that you need to do.
+   textId: gfNoText
+   finishScene: true
+
+ - id: sayYesFFriend
+   shortDesc: Yes
+   longDesc: Agree to meet
+   textId: ffriendYesText
+   allowNpcActions: true
+   # Use the male NPC actions to choose a scene to transition to
+   
+ - id: sayNoFFriend
+   shortDesc: No
+   longDesc: You have other things that you need to do.
+   textId: ffriendNoText
+   finishScene: true
+
+ - id: sayYesMFriend
+   shortDesc: Yes
+   longDesc: Agree to meet
+   textId: mfriendYesText
+   allowNpcActions: true
+   # Use the male NPC actions to choose a scene to transition to
+   
+ - id: sayNoMFriend
+   shortDesc: No
+   longDesc: You have other things that you need to do.
+   textId: mfriendNoText
+   finishScene: true
+      
+ - id: soloEvent
+   shortDesc: Find something to do
+   longDesc: You should find something more interesting to do in your free time than just napping
+   textId: soloEventText
+   allowNpcActions: true
+   # Use the male NPC actions to choose a scene to transition to
+   
+ - id: soloNap
+   shortDesc: Take a nap
+   longDesc: You should use your free time to relax and rest up
+   textId: soloNapText
+   finishScene: true
+
+
+
+
+
+maleNpcActions:
+ # Choose a scene to transition to
+
+ # Below are solo events
+
+ - id: solo_parksmile
+   textId: empty
+   condition: $eventType=="SOLO"
+   # Uncomment the line below to boost the frequency of this event for testing
+   #weightMultiplierConditions: [true, true, true, true, true, true, true, true]
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_parksmile.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_discountgrocery
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_discountgrocery.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_parkjog
+   textId: empty
+   condition: '$eventType=="SOLO" && $w.getSkill("FITNESS") > 20 && !$w.hasTrait("PLAIN")'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_parkjog.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_sausageroll
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_sausageroll.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_toiletries
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_toiletries.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+
+ # Below are friend events with a male
+
+ - id: genericdate_mfriend
+   textId: empty
+   condition: $eventType=="MFRIEND"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: maleFriend
+    transitionInfo:
+     ymlFile: minievent_m_coffee.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: showwedddingdress_mfriend_bf
+   textId: empty
+   condition: '$eventType=="MFRIEND" && $enableWeddingDressScenes'
+   weightMultiplierConditions:
+    - true
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: maleFriend
+     - id: bf
+       npc: bf
+    femaleNpcs:
+     - id: gf
+       npc: gf
+    transitionInfo:
+     ymlFile: minievent_m_showweddingdress_bf.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ 
+ # Below are friend events with a female
+
+ - id: genericdate_ffriend
+   textId: empty
+   condition: $eventType=="FFRIEND"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    femaleNpcs:
+     - id: f
+       npc: femaleFriend
+    transitionInfo:
+     ymlFile: minievent_f_coffee.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: showwedddingdress_ffriend_bf
+   textId: empty
+   condition: '$eventType=="FFRIEND" && $enableWeddingDressScenes'
+   weightMultiplierConditions:
+    - true
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    femaleNpcs:
+     - id: f
+       npc: femaleFriend
+     - id: gf
+       npc: gf
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minievent_f_showweddingdress_bf.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ 
+ # Below are dating events with a female
+
+ - id: genericdate_gf
+   textId: empty
+   condition: $eventType=="GF"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    femaleNpcs:
+     - id: f
+       npc: gf
+    transitionInfo:
+     ymlFile: minievent_f_coffee.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+
+ # Below are dating events with a male
+
+ - id: genericdate
+   textId: empty
+   condition: $eventType=="BF"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: bf
+    transitionInfo:
+     ymlFile: minievent_m_coffee.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: romanticdate1
+   textId: empty
+   condition: '$eventType=="BF" && $bf.behaviour == "ROM" && ($bf.getPersonality() == "ROMANTIC" || ($w.hasTrait("ROMANTIC") && ($bf.getPersonality() == "CARING" || $bf.hasTrait("CHARMING"))))'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_romanticrosepetal.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: romanticdate2
+   textId: empty
+   condition: '$eventType=="BF" && $bf.behaviour == "ROM" && ($bf.getPersonality() == "ROMANTIC" || ($w.hasTrait("ROMANTIC") && ($bf.getPersonality() == "CARING" || $bf.hasTrait("CHARMING"))))'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_romanticsunset.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: romanticdate3
+   textId: empty
+   condition: '$eventType=="BF" && $bf.isNpcLoveCrush() && ($bf.getPersonality() == "ROMANTIC" || ($w.hasTrait("ROMANTIC") && ($bf.getPersonality() == "CARING" || $bf.hasTrait("CHARMING"))))'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_romanticiloveyou.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+     
+ - id: poshdate
+   textId: empty
+   condition: '$eventType=="BF" && ($bf.hasTrait("LIKES_ELEGANT") || ($w.hasTrait("POSH") && ($bf.getPersonality() == "CARING" || $bf.hasTrait("CHARMING"))))'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_poshshakespeare.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: cutedate
+   textId: empty
+   condition: '$eventType=="BF" && ($bf.hasTrait("LIKES_CUTE") || ($w.hasTrait("CUTE") && ($bf.getPersonality() == "CARING" || $bf.hasTrait("CHARMING"))))'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_cutecatcafe.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: downtoearthdate
+   textId: empty
+   condition: '$eventType=="BF" && ($bf.hasTrait("LIKES_CASUAL") || ($w.hasTrait("DOWN_TO_EARTH") && ($bf.getPersonality() == "CARING" || $bf.hasTrait("CHARMING"))))'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_pubfootball.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: sleazydate
+   textId: empty
+   # In its current form the sleazy date has the PC responding in a very sexual way by sending nudes back and so on, without the player getting a choice over what she does. 
+   # I've decided to limit this transition to sultry characters because of that. 
+   # Ideally it'd be extended to take several actions with choices appropriate to the PC's traits available at each stage (especially shy, refined, sultry, overactive imagination,
+   # and interactions between the likes-big trait and the bf's size).
+   # Any would-be writers reading this comment who enjoy the scene but aren't in a mood to start a full scene of their own could consider giving this a shot.  - SO
+   condition: '$eventType=="BF" && $w.hasTrait("SULTRY") && $bf.hasTrait("SLEAZY")'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_sleazysendnudes.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+# Particularly un-athletic men won't bring their partner biking.  
+ - id: bike
+   textId: empty
+   condition: '$eventType=="BF" && $bf.figure != "FAT" && $bf.figure != "PAUNCHY" && $bf.figure != "SKINNY"'
+   sceneTransition:
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_bike.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: bike_leftbehind
+   textId: empty
+   condition: '$eventType=="BF" && !$bf.hasTrait("CONSCIENTIOUS") && $bf.hasTrait("BOASTFUL") && $bf.figure != "FAT" && $bf.figure != "PAUNCHY" && $bf.figure != "SKINNY" && $bf.strength >= $w.strength'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_bike_leftbehind.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: carnival_game
+   textId: empty
+   condition: $eventType=="BF"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_carnival_game.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: carnival_game_boastful
+   textId: empty
+   condition: ($eventType=="BF" && $w.hasTrait("BITCHY") && $bf.hasTrait("BOASTFUL"))
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_carnival_game_boastful.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: stargazing
+   textId: empty
+   condition: ($eventType=="BF" && $bf.hasTrait("DULL"))
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_stargazing.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: dressingroom_sex
+   textId: empty
+   condition: '$eventType=="BF" && ($w.hasTrait("REFINED") || $w.hasTrait("SHY"))'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_shopping_dressingroom_sex.yml
+    location:
+     wall: wall
+     floor: hardwood floor
+     hasBed: false
+     isOutside: false
+
+ - id: player_boyfriend
+   textId: empty
+   condition: ($eventType=="BF" && $bf.hasTrait("CHEATER"))
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_playerbf.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: hypnosis
+   textId: empty
+   condition: ($eventType=="BF" && $w.isAnxious() && $bf.hasTrait("HYPNOTIST"))
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_hypnosis.yml
+    location:
+     usePlayerHome: true
+
+ - id: exlover
+   textId: empty
+   condition: '($eventType=="BF" && !$bf.hasRelationshipFlag("KNOWS_LIKES_TO_SHARE") && $exlover && $exlover.getPersonality() == "JERK" && ($exlover.hasDoneSexualActivity("SEX") || $exlover.hasDoneSexualActivity("ORAL") || $exlover.hasDoneSexualActivity("ANAL")) && $bf.hasDoneSexualActivity("SEX") && (!$exlover.hasTrait("GYM_JERK") || !$bf.hasTrait("IS_HORSE")) )'
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+     - id: ex
+       npc: exlover
+    transitionInfo:
+     ymlFile: minidate_exlover.yml
+    location:
+     wall: wall
+     floor: hardwood floor
+     hasBed: false
+     isOutside: false
+
+ - id: cheating_sleepover
+   textId: empty
+   condition: ($eventType=="BF" && $maleFriend && $maleFriend.hasTrait("CHARMING"))
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+     - id: guest
+       npc: maleFriend
+    transitionInfo:
+     ymlFile: minidate_cheating_sleepover.yml
+    location:
+     usePlayerHome: true
+     

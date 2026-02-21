@@ -1,0 +1,161 @@
+<sceneDescriptionText>
+You're standing in the $pcLocation at work.
+</sceneDescriptionText>
+
+<introText>
+$scene.clearMap()## # Make sure there's nothing in there
+$scene.addWeightedItem("break room", 20)##
+$scene.addWeightedItem("supply closet", 15)##
+$scene.addWeightedItem("copier room", 15)##
+$scene.addWeightedItem("conference room", 20)##
+$scene.addWeightedItem("human resources department", 10)##
+#set($pcLocation = $scene.pickItem())##
+#if($pcLocation == "break room")
+	#set($pcTaskWait = "the microwave to finish heating up your lunch")##
+	#set($bossPosition = "BEHIND")##
+#elseif($pcLocation == "supply closet")
+	#set($pcTaskWait = "the office assistant to bring you staples for your red Swingline stapler")##
+	#set($bossPosition = "FACE_TO_FACE")##
+#elseif($pcLocation == "copier room")
+	#set($pcTaskWait = "your print job to finish")##
+	#set($bossPosition = "BEHIND")##
+#elseif($pcLocation == "conference room")
+	#set($pcTaskWait = "the computer to log you in and finish setting up")##
+	#set($bossPosition = "FACE_TO_FACE")##
+#elseif($pcLocation == "human resources department")
+	#set($pcTaskWait = "waiting for someone to bring some paperwork you need to fill out")##
+	#set($bossPosition = "FACE_TO_FACE")##
+#end
+#set($moreGroping = false)##
+#set($isRough = true)##
+#set($bossActionList = ["TOUCH","GROPE"])##
+#set($pcResponse = "REJECT")##
+You are in the $pcLocation at work, waiting on $pcTaskWait.
+</introText>
+
+<keepWaitingText>
+A moment or two passes, and then your boss, $boss.name, walks into the room.
+$scene.unHideNpc($boss)##
+</keepWaitingText>
+
+<greetBossText>
+You greet your boss ##
+#if($boss.isWLikingLike())
+	#if($boss.isWAttractionAttracted())
+		#set($pcResponse = "WELCOME")##
+	#else
+		#set($pcResponse = "ACCEPT")##
+	#end
+	#if(!$boss.hasRelationshipFlag("ALWAYS_ROUGH"))
+		#set($isRough = false)##
+	#end
+	warmly, ##
+#elseif($boss.isWLikingNeutral() || $w.hasTrait("SHY"))
+	briefly, ##
+#else
+	coldly, ##
+#end
+and go back to waiting. $boss.name grins at you lecherously as he greets you and steps closer to you. 
+#if($w.isOutfitSexy())
+	He remarks that there are perks to being the boss and, after all, you wouldn't dress the way you do if you didn't want attention.
+#else
+	He tells you there are a few perks to being the boss.
+#end
+</greetBossText>
+	
+<shySmileText>
+#set($pcResponse = "ACCEPT")##
+$boss.name ignores your obvious discomfort and reaches towards you.
+$boss.performMakeoutAction($pcResponse,$bossActionList,$bossPosition,"STANDING",$isRough,false,false)
+$boss.reduceWLikingMedium()$boss.addBastard(10)$w.changeStress(10)$gd.addJobPerformanceModifier(10)##
+#if(!$w.isSingle() && !$boss.isPartner())
+	You wonder what your partner would think of this, and wish you had the courage to speak up and put a stop to it.
+	$w.changeStress(10)##
+#end
+#set($moreGroping = $scene.percent(30))##
+</shySmileText>
+
+<sexySmileText>
+#set($pcResponse = "WELCOME")##
+Your smile encourages $boss.name, and he tells you he's glad you know how you 'add value' to the organization.
+$boss.performMakeoutAction($pcResponse,$bossActionList,$bossPosition,"STANDING",$isRough,false,true)
+#if(!$w.isSingle() && !$boss.isPartner())
+	#if($w.hasTrait("BITCHY"))
+		Does this count as cheating? You aren't sure you really care either way.
+	#else
+		You wonder what your partner would think of this, and how you'd explain yourself.
+		$w.changeStress(10)##
+	#end
+#end
+$boss.addNpcLikingSmall()$w.changeStress(-15)$gd.addJobPerformanceModifier(20)##
+</sexySmileText>
+
+<uncertainLookText>
+$boss.name reaches towards you, telling you that this is one of his favorite perks.
+$boss.performMakeoutAction($pcResponse,$bossActionList,$bossPosition,"STANDING",$isRough,false,false)
+$boss.reduceWLikingSmall()$boss.addBastard(10)$w.changeStress(10)$gd.addJobPerformanceModifier(10)##
+#if(!$w.isSingle() && !$boss.isPartner())
+	These certainly aren't the kind of 'perks' you expected his job to come with, and you doubt your partner expected this either.
+	$w.changeStress(10)##
+#end
+#set($moreGroping = $scene.percent(30))##
+</uncertainLookText>
+
+<causticRetortText>
+#set($pcResponse = "REJECT")##
+#set($isRough = true)##
+$boss.name responds with an angry look, and tells you he needs to show you who's in charge around here.
+#set($bossActionList = ["GROPE"])##
+$boss.performMakeoutAction($pcResponse,$bossActionList,$bossPosition,"STANDING",$isRough,false,false)
+$boss.reduceWLikingMedium()$boss.reduceNpcLikingMedium()$boss.addBastard(10)$w.changeStress(15)$gd.addJobPerformanceModifier(-20)##
+#if(!$w.isSingle() && !$boss.isPartner())
+	Maybe you wouldn't mind as much if you were single, but you'd feel wrong if you just allowed $boss.name to just do whatever he wanted.
+	$w.changeStress(5)##
+#end
+#set($moreGroping = $scene.percent(90))##
+</causticRetortText>
+
+<stayProfessionalText>
+You stand there, still and quiet as $boss.name tells you that this is one of his favorite perks.
+$boss.performMakeoutAction($pcResponse,$bossActionList,$bossPosition,"STANDING",$isRough,false,false)
+$boss.reduceWLikingMedium()$boss.addBastard(10)$w.changeStress(15)$gd.addJobPerformanceModifier(10)##
+#if(!$w.isSingle() && !$boss.isPartner())
+	#if($w.hasTrait("BITCHY") || $w.hasTrait("AMBITIOUS"))
+		You didn't invite this and you're trying to stay professional, so your partner will just have to understand.
+	#else
+		While this definitely doesn't count as cheating, you don't feel entirely right just letting this happen. You aren't single, after all.
+	#end
+	$w.changeStress(10)##
+#end
+#set($moreGroping = $scene.percent(50))##
+</stayProfessionalText>
+
+<resignedSighText>
+#set($pcResponse = "ACCEPT")##
+You sigh audibly as your boss tells you that this is one of his favorite perks.
+$boss.performMakeoutAction($pcResponse,$bossActionList,$bossPosition,"STANDING",$isRough,false,false)
+$boss.reduceWLikingSmall()$boss.addBastard(5)$w.changeStress(10)$gd.addJobPerformanceModifier(10)##
+#if(!$w.isSingle() && !$boss.isPartner())
+	#if($w.hasTrait("AMBITIOUS"))
+		You've got your career to think about, so your partner will just have to understand.
+	#else
+		While this doesn't count as cheating, you don't feel right just letting this happen. You aren't single, after all.
+	#end
+	$w.changeStress(10)##
+#end
+#set($moreGroping = $scene.percent(65))##
+</resignedSighText>
+
+<lookShockedText>
+Just when you think it's over, $boss.name reaches towards you again.
+#set($bossActionList = ["UNDRESS","READY_SEX"])##
+$boss.performMakeoutAction($pcResponse,$bossActionList,$bossPosition,"STANDING",$isRough,false,false)
+#set($bossActionList = ["GROPE","GRIND"])##
+$boss.performMakeoutAction($pcResponse,$bossActionList,$bossPosition,"STANDING",$isRough,false,false)
+$boss.reduceWLikingMedium()$boss.addBastard(5)$w.changeStress(20)##
+</lookShockedText>
+
+<backToWorkText>
+$boss.name leaves the $pcLocation grinning, and you go back to waiting for $pcTaskWait.
+</backToWorkText>
+

@@ -1,0 +1,49 @@
+<sceneDescriptionText>
+You are at home, sitting at your computer doing social media stuff.
+</sceneDescriptionText>
+
+<introText>
+#if($jerk.hasRelationshipFlag("PROSTITUTED_IN_HOTEL"))
+	You're sitting at home at your computer when a message pops up. It's from $jerk.name, the man you sold yourself to in a hotel room. 
+#elseif($gd.hasGameFlag("PROSTITUTED_SELF_IN_HOTEL"))
+	You're sitting at home at your computer when a message pops up. It's from some guy apparently named $jerk.name. What does he want from you?
+#else
+	You're sitting at home at your computer, scrolling through your social media. A message from a guy you don't know appears. What does he want from you?
+#end
+</introText>
+
+<read>
+#if($jerk.hasRelationshipFlag("PROSTITUTED_IN_HOTEL"))
+	You read the message and, to your lack of surprise, he once more wants to pay for your intimate company.
+#elseif($gd.hasGameFlag("PROSTITUTED_SELF_IN_HOTEL"))
+	This guy writes that he's heard your body is available to rent. He wants you to come meet him in a hotel, cash-in-hand if you please him.
+#else
+	The guy writes that he found your social media profile by accident and that he is totally mesmerized with your ##
+	$w.eyeAdj $w.eyeColour eyes, your beautiful $w.skinColour skin and your deliciously $w.breastsDesc. ##
+	He writes that he'd pay you good money if you agree to meet him in a hotel right now and ##
+	#if($jerk.hasTrait("CRUDE"))fuck.
+	#{else}have sex.
+	#end
+#end
+
+</read>
+
+<butVirgin>
+You write back, expressing your shock and surprise that he'd make such a proposition to you, a pure and unsullied virgin.
+
+He replies, repeating his proposal, knowledge of your virginity in no way reducing his desire to pay for the use of your body.
+</butVirgin>
+
+<accept>
+After thinking about it for a few minutes, you decide to agree to his proposal. You write back and forth for a little bit ##
+and he tells you when and where to be and then ends the conversation. What have you gotten yourself into? ##
+</accept>
+
+<ignore>
+You have no interest whatsoever to prostitute yourself for some stranger on the internet. You decide to ignore the message. 
+</ignore>
+
+<angryanswer>
+Your anger swells. Does this guy think you're a whore? You write him a caustic and definitely not polite message back before you block him on your ##
+social media account.##
+</angryanswer>

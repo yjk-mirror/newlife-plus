@@ -1,0 +1,20 @@
+<introText>
+The two of you meet up outside. $bf.getName() notices a bike share nearby, so you decide to go for a ride. 
+
+You hop on and pedal away, feeling the breeze on your face and the sun on your skin. You follow him as he leads you through the streets of the city, passing by shops, cafes, parks and landmarks.
+
+$bf.getName() notices a path through a park, so you get to enjoy a peaceful ride through the trees while a cool wind blows#if($w.hasHair) through your hair#else over your head#end. ##
+You enjoy the sights and sounds of the city, feeling happy and carefree.
+#if($bf.isWLikingOk() && $bf.isNpcLikingOk())You smile at him and he smiles back, holding your hand for a moment when you stop at a red light. ##
+#if($bf.isWLoveCrush())You feel a surge of love for him and wonder where he will take you next time.#end
+#end
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+#if(($w.getSkill("FITNESS") < 25) && $scene.percent(50)) $w.skillIncrease("FITNESS",1) #end##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are taking a bike ride with $bf.getName().
+</sceneDescriptionText>
+

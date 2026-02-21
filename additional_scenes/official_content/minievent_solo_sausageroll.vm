@@ -1,0 +1,37 @@
+<introText>
+You decide to go on a stroll through town. While inspecting the window display of a jeweller, a pleasant smell of fresh baked goods catches your nose. You turn around and see a man walking past while eating a sausage roll. 
+You purposefully set out down the street, hunting for the source of this tasty treat. You come across a Greggs bakery around the corner. Perhaps time for a snack? 
+</introText>
+
+
+
+<sceneDescriptionText>
+#if($eating)
+	NOM NOM NOM!
+#else
+	You are taking a stroll through the neighbourhood.
+#end
+</sceneDescriptionText>
+
+<buySausageRollText>
+You pounce on your prey and soon emerge from the Greggs with a sausage roll and an Americano coffee. ##
+#if($w.hasTrait("CUTE"))Yummy!#end
+</buySausageRollText>
+
+<buyVeganSausageRollText>
+You pounce on your prey and soon emerge from the Greggs with a tasty vegan sausage roll. 
+</buyVeganSausageRollText>
+
+<buySteakBakeText>
+You emerge with a crispy steak bake. Biting carefully into it, you find that the filling is just the perfect temperature. In moments, the steak bake is no more and your stomach is pleasantly full.
+</buySteakBakeText>
+
+<buyNothingText>
+What kind of a $w.girlOrWoman would you be if you just grabbed baked goods on a whim!? Aside from the sort of $w.girlOrWoman who's eating a sausage roll, of course. 
+
+Rejecting the bakery's temptation, you continue on your way.
+</buyNothingText>
+
+<noMoneyText>
+You don't have a penny to your name, and can't afford even the simplest of snacks. How sad!
+</noMoneyText>

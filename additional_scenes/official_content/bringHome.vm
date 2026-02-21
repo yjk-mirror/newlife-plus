@@ -1,0 +1,57 @@
+<sceneDescriptionText>
+You are at your home with $jerk.name. 
+</sceneDescriptionText>
+
+<introText>
+You've had an awful lot to drink and are barely able to walk! Luckily $jerk.name ##
+is here to bring you back home. 
+</introText>
+
+<goin>
+Too drunk to care about decency, you let $jerk.name help you out of your clothes and collapse onto your bed.
+</goin>
+
+<listen>
+$jerk.name tucks you in and starts to softly stroke your #if($w.hasHair)hair#{else}head#end. You can feel##
+#if($jerk.getFigure() == "FAT") his massive bulk##
+#elseif($jerk.getFigure() == "PAUNCHY") his soft gut##
+#else his masculine body##
+#end
+ at your side and drunkenly close your eyes. Suddenly you feel a hand on your breasts. Is he trying to feel you up? 
+</listen>
+
+<refuse>
+You are drunk, you are tired and you don't want him do to anything with you. You tell him to leave you alone.
+</refuse>
+
+<comply>
+You are way too boozed-up to object to whatever he wants to do with you. You just close your eyes and let him do what he wants.##
+</comply>
+
+<agreedStartMo>
+$jerk.name slips next to you into your bed, opens his trousers to let his $jerk.getCockDesc() pop out and starts to have sex with you, while touching you all over your##
+#if($w.pregnancyStage == "BIG" || $w.pregnancyStage == "HUGE") pregnant##
+#elseif($w.figure == "SLIM") slender##
+#elseif($w.figure == "TONED") toned##
+#elseif($w.figure == "WOMANLY") curvaceous##
+#end
+ body.
+</agreedStartMo>
+
+<complied>
+#set($jerkSatisfied = false)##
+#if($scene.hasFlag("FINISHED_SEX"))#set($jerkSatisfied = true)
+#end
+#if($jerkSatisfied)
+	$scene.addFlag("BH_SATISFIED")##
+	$jerk.name brings his clothes back in order and strokes your #if($w.hasHair)hair#{else}face#end softly. Drunk and freshly fucked you drift into sleep while $jerk.name leaves.##
+#else
+	$jerk.name sighs frustrated and leaves while you fall drunkenly asleep. 
+#end
+$scene.clearPostSexFlags() ##
+$scene.removeFlag("NO_ORAL") $scene.removeFlag("BLOCK_ANAL") $scene.removeFlag("DONT_UNDRESS") ## 
+</complied>
+
+<refused>
+$jerk.name leaves frustrated while you drunkenly fall asleep.
+</refused>

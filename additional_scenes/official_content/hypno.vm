@@ -1,0 +1,1315 @@
+<sceneDescriptionText>
+You're being hypnotised by $m.name.
+</sceneDescriptionText>
+
+<introText>
+You follow $scene.addPossessiveSuffix($m.name) instructions as he tells you to sit back and relax, to let your eyes drift shut, to slowly fall into a trance...
+## Setup macros
+## Strip command. The NPC will order the PC to remove and item of clothing
+## This will set a variable $specificCommand. Actions that call this macro need to check for this variable.
+#macro(stripCommand)
+	## Using the weighted map even though all weights are 1 because the ArrayList add method returns a boolean which ends up in the output text.
+	## While it is possible to intercept this, I think using the map makes for a more readable file. 
+	#if($w.topStatus != "OFF")$scene.addWeightedItem("stripTop",1)#end
+	#if($w.bottomStatus != "OFF" && !$w.top.isAlsoLowerBody())$scene.addWeightedItem("stripBtm",1)#end
+	#if(($w.bottomStatus == "OFF" || $w.bottomStatus == "EXPOSED") && !$w.pussyExposed)$scene.addWeightedItem("stripPanties",1)#end
+	#if(($w.topStatus == "OFF" || $w.topStatus == "EXPOSED") && !$w.breastsExposed)$scene.addWeightedItem("stripBra",1)#end
+	#if($scene.isWeightedMapEmpty())
+		#if(!$m.dislikesPlayersBreasts)$scene.addWeightedItem("cupTits",1)#end
+		$scene.addWeightedItem("caressBody",1)
+	#end
+	#set($specificCommand = $scene.pickItemAndClearMap())
+	## Each action that calls is must have each possibility as a followup
+	#if($specificCommand == "stripTop")
+		$m.name tells you that it's hot in here, far too hot for you to wear so many clothes. You need to take off your $w.top.basicDesc.
+	#elseif($specificCommand == "stripBtm")
+		$m.name commands you to strip out of your $w.bottom.basicDesc.
+	#elseif($specificCommand == "stripPanties")
+		$m.name tells you that you can no longer abide having your pussy covered and you must strip out of your $w.panties.basicDesc.
+	#elseif($specificCommand == "stripBra")
+		$m.name tells you that your $w.bra.basicDesc is painfully constraining your breasts and you can no longer bear having it on. 
+	#elseif($specificCommand == "cupTits")
+		$m.name orders you to show off your tits to him.
+	#elseif($specificCommand == "caressBody")
+		$m.name orders you to stroke your naked body.
+	#else
+		Error: Unrecognosed strip action: $specificCommand
+	#end
+#end
+</introText>
+
+
+<awaitHypnosis>
+## This is the action used to start new paths. Each path that doesn't end the scene must lead back here eventually.
+## Scene control:
+#if($startingScene)
+	#set($startingScene=false)
+#else
+	#if($doConclusion)
+		## Shouldn't really happen as conclusion paths should end the scene directly.
+		## Set leaveTrance just in case some buggy future change results in a situation where there can be no possible
+		## conclusion paths.
+		#set($leaveTrance=true)
+	#elseif($doTraitChange)
+		#if($doneTraitChange && $scene.randomBoolean())
+			## Chance to end the scene directly after a trait-change
+			## Only do this if a change actually happened (i.e. doneTraitChange is true).
+			#set($leaveTrance=true)
+		#else
+			## Otherwise do a conclusion path (e.g sex)
+			#set($doConclusion=true)
+		#end
+		#set($doTraitChange=false)
+	#elseif($doneFirstAction || $scene.randomBoolean())
+		#set($doneFirstAction=true)
+		#set($completedEarlyActions=true)
+		## 50% chance for do a trait-change (which may lead to a conclusion itself). Otherwise go directly to the conclusion
+		#if($scene.randomBoolean())
+			#set($doTraitChange=true)
+		#else
+			#set($doConclusion=true)
+		#end
+	#else
+		#set($doneFirstAction=true)
+	#end
+#end
+You relax. Calm, passive, compliant, you simply wait, your thoughts a blank page ready to be written upon.
+</awaitHypnosis>
+
+<deStress>
+$m.name speaks in a slow, caming voice. He tells you that you should feel calm and relax. There's no need to worry about stress in your everyday life. ##
+#if($m.hasTrait("IMPREGNATOR") && !$w.mum && !$w.knownPregnant)
+One day soon you'll have a baby and then all your silly worries about work and dating will seem so unimportant.
+#elseif($m.personality == "JERK" && $w.single)
+One day you'll find a good strong husband to take you in hand, and then your silly woman's head won't need to be filled with worries about work or money.
+#elseif($m.personality == "ROMANTIC" && $m.npcLoveCrush && !$m.partner)
+One day you and him will be together and you'll be too happy in love to worry about anything.
+#end
+</deStress>
+
+<acceptDeStress>
+You feel a knot of stress leaving your tensed-up shoulders as the muscles gradually relax. ##
+#if($m.personality == "JERK")
+Still in the trance, you wait, your breathing slow and steady, some distant part of you wondering if $m.name will bring you out of it.
+#else
+
+His task complete, $m.name gradually starts to bring you back to proper wakefulness.
+#end
+</acceptDeStress>
+
+<applyOutgoing>
+$m.name speaks in slow, strong tones. A voice that could convince you of anything, at least in your current state. He tells you that you're going to be an outgoing, sociable person. Someone who likes company, spending time with others, even being in big groups of people. Even strangers. From now on, you'll relish that sort of situation instead of fearing it.
+</applyOutgoing>
+
+<acceptOutgoing>
+Even lost in the trance, you feel a wave of energy rising in you. You want to go out, to meet new people, to be loud and happy and seen, not hiding away in some corner!
+
+You can somehow feel that this won't last forever, that the hypnotist can't truly change your underlying personality, but for some months at least you'll be a sociable and outgoing #if(!$w.isOlderThan("THIRTIES"))young #{end}woman.
+</acceptOutgoing>
+
+<applyHairTrigger>
+$m.name speaks in a slow, measured voice of command. He tells you that any mental barriers between you and orgasm will crumble and fall. You'll be able to climax easily, not just once but again and again.
+</applyHairTrigger>
+
+<acceptHairTrigger>
+With your thoughts fogged by the trance, his words pass straight through your forebrain and deep into your subconscious. You feel them taking root, a faint, tickling warmth spreading in your lower belly. It won't last forever, but you feel like just a touch could set you moaning.
+</acceptHairTrigger>
+
+<leaveTrance>
+Full awareness returns as you leave the trance.
+</leaveTrance>
+
+<finalCommands>
+#if($scene.randomNumber(5)==0)
+	## This means he does not hypno her into having another session.
+	$m.name says that you've ##
+	#if($scene.randomBoolean())
+		done well## Couldn't decide which of these to use in the sentence, so having both
+	#else
+		been a good girl##
+	#end
+	. 
+#else
+	$m.name gives you a final, powerful command, focusing his will to an overwhelming force. He tells you that you'll soon feel the need to book another session with him and submit once again to his hypnosis.
+	#set($weeksBeforeRepeat = $scene.randomNumber(3) + 1)
+	$gd.setStat("COMPELLED_HYPNOSIS_SESSION",$weeksBeforeRepeat)
+#end
+He then snaps his fingers and tells you that you'll start to awaken from your trance, with a feeling that your time with him was very worthwhile.
+</finalCommands>
+
+<breakTrance>
+You snap yourself out of the trance, sitting up abruptly. Almost immediately, your memory about what was happening becomes hazy. Had $m.name said something inappropriate? You vaguely feel like you were uncomfortable with what was happening.
+
+In any case, you aren't hypnotised any more, and the shock of awakening has left you filled with too much adrenaline to go under again. It seems you're done with this for the time being.
+</breakTrance>
+
+<virginityQuestion>
+$m.name says he's going to ask you a question and you have to answer truthfully. Then, in his slow, measured voice, he asks if you're still a virgin.
+</virginityQuestion>
+
+<virginityQuestionYes>
+Lost in the trance, you hear yourself replying, telling him that ## 
+#if($w.lesbianVirgin && $w.analVirgin)
+you are still a virgin.
+#elseif(!$w.analVirgin)
+you're sort of a virgin, because you've let men use your ass but your pussy is untouched.
+#elseif(!$w.lesbianVirgin)
+you're still a virgin, at least with men.
+#end
+
+Reminding you once more that you need to be truthful, $m.name asks if you're ready to lose your cherry.
+</virginityQuestionYes>
+
+<virginityQuestionYesLd>
+#if($w.lesbianVirgin && $w.analVirgin)
+Yes, you are a virgin.
+#elseif(!$w.analVirgin)
+Yes, you are a virgin. Anal doesn't count, right?
+#elseif(!$w.lesbianVirgin)
+With men you are. With women, not so much.
+#end
+</virginityQuestionYesLd>
+
+<readyToLoseVirginityNo>
+You reply that you aren't quite ready to have sex with a man. ##
+#if($w.hasTrait("ROMANTIC"))
+You want to wait until it's true love, perhaps even on your wedding night.
+#elseif(!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY")<20)
+That might be too big a step towards becoming a woman.
+#elseif($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You have your daydreams, of course, but actually putting them into reality might be a step too far.
+#elseif($w.hasTrait("SULTRY"))
+You're still interested in erotic things, of course, and he shouldn't think that you aren't a naughty $w.girlOrWoman just for staying a virgin. Still, you'd prefer to limit yourself to those naughty things that leave your virginity intact for now.
+#end
+
+$m.name says that the answer you gave him wasn't the truth. He tells you that you are ready to give up your virginity.
+</readyToLoseVirginityNo>
+
+<readyToLoseVirginityYes>
+#if($w.hasTrait("SULTRY"))
+	You tell $m.name that you are ready to have your first good fucking.
+#elseif($w.hasTrait("LOW_SELF_ESTEEM"))
+	You tell $m.name that you are ready to have your first time, if there's a man that thinks you're good enough.
+#elseif($w.hasTrait("LIKES_BIG"))
+	You tell $m.name that you're ready to be filled for the first time ever.
+#else
+	You tell $m.name that you are ready to surrender your innocence to a man. 
+#end
+#stripCommand()
+</readyToLoseVirginityYes>
+
+<refuseStrip>
+#if($specificCommand =="cupTits" || $specificCommand == "caressBody")
+You manage to mumble that you don't want to do that.
+#else
+You vaguely mumble that your clothes will stay right where they are.
+#end
+
+$m.name sighs and repeats himself, more firmly. You make a faint attempt to struggle, but feel his will overpowering yours.
+</refuseStrip>
+
+<stripTopSd>
+Remove your $w.top.basicDesc
+</stripTopSd>
+
+<stripTopLd>
+Taking off your $w.top.basicDesc should help you cool down.
+</stripTopLd>
+
+<stripTop>
+## doesn't need a lot of text. Also, can assume that the top is at least somewhat worn - make sure that;s in the conditions somewhere
+You take off your $w.top.shortDesc, your fingers moving by themselves so that you're barely aware of what's happening until you feel a new coolness on your freshly-bared skin.
+#set($doBreastsSuffix = false)
+#if($w.top.isAlsoLowerBody())
+	## Text for whichever bits are newly uncovered
+	#if($w.topStatus == "EXPOSED" && $w.bottomStatus == "EXPOSED")
+		The $w.top.basicDesc hadn't been covering much in any case. You remain ##
+		#if($w.breastsExposed && $w.pussyExposed) 
+			fully exposed to $scene.addPossessiveSuffix($m.name) gaze.
+		#elseif($w.breastsExposed)
+			topless with just your $w.panties.basicDesc protecting what little remains of your modesty.
+		#elseif($w.pussyExposed)
+			with just your $w.bra.basicDesc covering what little remains of your modesty.
+		#else
+			in just your underwear.
+		#end
+	#elseif($w.topStatus == "EXPOSED")
+		#if($w.pantiesStatus == "WORN" || $w.pantiesStatus == "DISHEVELED")
+			Now only your $w.panties.shortDesc cover what little remains of your modesty.
+		#else
+			The bare cleft between your legs is uncovered, not a scrap of underwear to protect your modesty. You sit, dull-minded and relaxed, only faintly realising how much of your body you're showing off.
+		#end
+	#elseif($w.bottomStatus == "EXPOSED")
+		#if($w.braStatus == "WORN" || $w.braStatus == "DISHEVELED")
+			There's now just your $w.bra.shortDesc to shield your tits from his view, a little scrap of #if($w.bra.hasFlag("LACY"))lacy#end fabric to cover what remains of your modesty.
+		#else
+			#set($doBreastsSuffix = true)
+		#end
+	#else
+		#if(($w.pantiesStatus == "WORN" || $w.pantiesStatus == "DISHEVELED")  && ($w.braStatus == "WORN" || $w.braStatus == "DISHEVELED"))
+			You're left in just your underwear, a $w.bra.shortDesc and #if(!$w.panties.hasFlag("SINGULAR"))pair of #{end}$w.panties.shortDesc framing your $w.getStomachDesc().
+		#elseif($w.pantiesStatus == "WORN" || $w.pantiesStatus == "DISHEVELED")
+			You're left in just #if(!$w.panties.hasFlag("SINGULAR"))a pair of #{end}$w.panties.shortDesc#if($w.legwearWorn), and your $w.legwear.shortDesc, of course#end. 
+			#set($doBreastsSuffix = true)
+		#elseif($w.braStatus == "WORN" || $w.braStatus == "DISHEVELED")
+			You're left in just your $w.bra.shortDesc#if($w.legwearWorn) and $w.legwear.basicDesc#end, The cleft between your thighs bared for him.
+		#else
+			With your $w.top.basicDesc gone, you're#if($w.legwearWorn)entirely naked apart from your $w.legwear.basicDesc. #else entirely naked underneath. #end##
+			Your $w.breastsDesc, the cleft between your legs. Every inch of you is bared to his gaze.
+		#end
+	#end
+#elseif($w.topStatus == "EXPOSED")
+	#if($w.breastsExposed)
+	Your breasts had already been exposed, of course, and $scene.addPossessiveSuffix($m.name) eyes are glued to the way they move as you undress.
+	#else
+	Your $w.bra.shortDesc still covers your breasts, as it did before. With your $w.top.basicDesc completely gone, you might have been wondering if the $w.bra.basicDesc will be next, were your head not so full of fog.
+	#end
+#else
+	#if($w.braStatus == "OFF" || $w.braStatus == "EXPOSED")
+		#set($doBreastsSuffix = true)
+	#else
+		Your $w.bra.shortDesc is now the only thing covering your $w.breastsDesc. For a moment a question intrudes: is this normal for a hypnosis session? But your mind can't grasp hold of it and it slips away into the fog of the trance.
+	#end
+#end
+#if($doBreastsSuffix)
+	## Putting this in a separate section so it can be reused in several situations without having to copy-paste it.
+	Your $w.breastsDesc are bared, ##
+	#if($w.breasts == "LARGE")
+		weighty globes ## 
+	#elseif($w.breasts == "MEDIUM_LARGE")
+		a pair of yielding more-than-handfuls ##
+	#elseif($w.breasts == "MEDIUM_SMALL")
+		soft flesh standing proud, ##
+	#else
+		gentle little curves ##
+	#end
+	## The medium-small breasts description includes the word "pert", so it shouldn't be re-used in this sentence if that's the case.
+	tipped with a pair of #if($w.breasts == "MEDIUM_SMALL")perky#{else}pert#end nipples#if($w.arousalComfort) that are already stiff and erect from arousal#end.
+#end
+$w.setTopStatus("OFF")
+</stripTop>
+
+<stripBtm>
+You strip off your $w.bottom.shortDesc, sliding #if($w.bottom.hasFlag("SINGULAR"))it#{else}them#end down your smooth $w.skinColour legs and discarding #if($w.bottom.hasFlag("SINGULAR"))it#{else}them#end to one side.
+#if($w.bottomStatus != "EXPOSED")
+	#if($w.pantiesStatus == "EXPOSED" || $w.pantiesStatus == "OFF")
+		Your #if($w.virgin)virgin #{end}pussy is entirely exposed, but in your tranced state you don't feel the slightest bit self-conscious.
+	#else
+		Only your $w.panties.shortDesc are left covering your #if($w.virgin)inexperienced #elseif($w.hasTrait("SNUG_PUSSY"))tight #{end}pussy. $m.name looks at them with a hungry gaze, as if he has plans for them as well. You stare back blankly, not a thought going through your head. 
+	#end
+#end
+
+$w.setBottomStatus("OFF")
+</stripBtm>
+
+<stripPanties>
+You remove your $w.panties.shortDesc, clumsily sliding #if($w.panties.hasFlag("SINGULAR"))it #{else}them #{end}down your legs. With your mind fogged by hypnosis and your fingers working on autopilot it takes a few tries to get #if($w.panties.hasFlag("SINGULAR"))it #{else}them #{end}over your feet but you manage it in the end and your pussy is freshly bared, just as $m.name ordered.
+$w.setPantiesStatus("OFF")
+</stripPanties>
+
+<stripBra>
+You strip off your $w.bra.shortDesc with slow, robotic motions that leave you fumbling with the clasp. Eventually it yields and your breasts are bared, ##
+#if($w.breasts == "LARGE")
+	heavy, $w.skinColour globes resting on your ribcage as you relax back onto the sofa.
+#elseif($w.breasts == "MEDIUM_LARGE")
+	full, $w.skinColour mounds that rise and fall with your breathing as you relax back onto the sofa.
+#elseif($w.breasts == "MEDIUM_SMALL")
+	perky little mounds that rise and fall with your breathing as you relax back onto the sofa.
+#else
+	pert little curves that fit perfectly into the smooth lines of your body.
+#end
+$w.setBraStatus("OFF")
+</stripBra>
+
+<cupTits>
+## "Strip" action that can only be chosen if the PC is not able to remove any clothing.
+You take your ## using different descriptions from the usual, just for a bit of variety.
+#if($w.breasts == "LARGE")
+fat tits ##
+#elseif($w.breasts == "MEDIUM_LARGE")
+bouncy breasts ##
+#elseif($w.breasts == "MEDIUM_SMALL")
+slight tits ##
+#else
+petite breasts ##
+#end
+in both hands and show them off for $scene.addPossessiveSuffix($m.name) approval, leaning forward slightly to display to best effect#if($w.lactating), a droplet of milk falling seeping from one of your teats and dripping to the ground#end.
+</cupTits>
+
+<caressBody>
+You slowly run your hands over your naked body, feeling the warmth of your soft, smooth skin, over your $w.breastsDesc, down over the ##
+#if($w.pregnancyStage == "BIG" || $w.pregnancyStage == "HUGE")
+taut gravid bulge of your $w.StomachDesc ##
+#elseif($w.pregnancyStage == "BUMP")
+small bulge of your pregnancy ##
+#else
+the taut $w.skinColour skin of your flat stomach ##
+#end
+and past your #if($w.figure == "WOMANLY")broad #elseif($w.figure == "SLIM")slender #{end}hips to caress the sensitive flesh of your inner thighs.
+</caressBody>
+
+<postStrip>
+#if($currentRoute == "virginity")
+	$m.name asks if you want him to be the man to fuck away your virginity.
+#elseif($currentRoute == "virginity2")
+	#if(!$m.isArousalComfort())$m.setArousalComfort()#end ## Make sure m is turned on before fucking the pc.
+	$scene.addWeightedItem("STANDING_BEHIND",1)
+	#if($scene.hasBed)$scene.addWeightedItem("MISSIONARY",1)$scene.addWeightedItem("DOGGY",1)#end
+	#set($sexPosition = $scene.pickItemAndClearMap())
+	##
+	#if($sexPosition == "DOGGY")
+		$m.name tells you that there's nothing more exciting than the thought of getting on your hands and knees to be deflowered from behind.
+	#elseif($sexPosition == "MISSIONARY")
+		$m.name tells you that there's nothing more exciting than the thought of parting your legs for him in bed.
+	#elseif($sexPosition == "STANDING_BEHIND")
+		$m.name tells you that it excites you to imagine being pressed up against a wall for your first time.
+	#else
+		Error: no text for sex position $sexPosition. Please report this to the developer as a bug.
+	#end
+#elseif($currentRoute == "firstTimeFuck")
+	$m.name smiles to see you so obedient. He tells you that your reward for doing as he said is to feel even more turned on, that your body aches to be caressed, that you can barely keep from moaning out lout, that all you can think about is the urge to be fucked by him.
+#elseif($currentRoute == "repeatFuck")
+	$m.name tells you to honestly say what you like most about being fucked by him.
+#elseif($currentRoute == "repeatFuck2")
+	$m.name takes a moment to admire your body. Then he tells you that you're burning with desire, wet and ready for sex. But not just any sex. Only sex with him will do. He's the man you most want to be fucked by, more than anyone else in the world.
+#elseif($currentRoute == "repeatFuck3")
+	#if(!$m.isArousalComfort())$m.setArousalComfort()#end ## Make sure m is turned on before fucking the pc.
+	$scene.addWeightedItem("STANDING_BEHIND",1)
+	#if($scene.hasBed)$scene.addWeightedItem("MISSIONARY",1)$scene.addWeightedItem("DOGGY",1)#end
+	#if(!$scene.isOutside())$scene.addWeightedItem("SOFA_SEX",1)#end
+	#set($sexPosition = $scene.pickItemAndClearMap())
+	#if($sexPosition == "DOGGY")
+		$m.name orders you onto your hands and knees in bed.
+	#elseif($sexPosition == "MISSIONARY")
+		$m.name commands you to go lie in bed with your legs open.
+	#elseif($sexPosition == "STANDING_BEHIND")
+		$m.name orders you up against a wall to be fucked.
+	#elseif($sexPosition == "SOFA_SEX")
+		$m.name orders you face down on the sofa with your ass up and pussy exposed for fucking.
+	#else
+		Error: no text for sex position $sexPosition. Please report this to the developer as a bug.
+	#end
+#elseif($currentRoute=="simpleUndress")
+	$m.name nods approvingly at your obedience. He takes a long moment to run his eyes over your body before further exerting his mastery over you.
+#end
+</postStrip>
+
+<virginityLossToHimNo>
+With the blunt honesty of someone who's mentally only half-present, you tell him that you want your first time to be with ##
+#if($m.hasTrait("UGLY"))
+	a more handsome man. 
+#elseif(!$w.likesFigure($m.figure) && ($m.figure == "FAT" || $m.figure == "PAUNCHY"))
+	a man who isn't so overweight.
+#elseif(!$w.likesFigure($m.figure) && $m.figure == "SKINNY")
+	a man who isn't so scrawny.
+#else
+	someone else.
+#end
+
+$m.name shakes his head slightly. He speaks, his voice droning into your subconscious, telling you that you are hot for him, that your body burns for his touch, that you want him to drive his cock into you and take your first time.
+#if(!$w.arousalComfort)$w.setArousalComfort()#end
+$w.addArousalLarge()
+</virginityLossToHimNo>
+
+<virginityLossToHimYes>
+You reply, quiet and submissive, your voice weak and empty of emotion, telling him that yes, you do want him to be the one to take your virginity, to be the first man to ##
+#if($w.hasTrait("SULTRY"))
+fill you with his rock-hard cock and fuck you until you moan.
+#elseif($w.hasTrait("CUTE") || $w.hasTrait("REFINED"))
+let his penis enter you.
+#else
+thrust his cock into you.
+#end
+
+$m.name gives a lecherous chuckle. For a moment a strange thought pierces your brain fog. Isn't it strange that you were considering your darling $m.name to be lecherous, when he's the man your body is hot for, the man you want to give you your first time?
+Then your hear his voice once again and the strange thoughts dissipate. He's giving you commands, orders, and you will, of course, follow them without question.
+
+#stripCommand()
+</virginityLossToHimYes>
+
+<virginityAcceptPosition>
+In a calm, passive voice, you agree with him. ##
+#if($sexPosition == "DOGGY")
+There's nothing that excites you more than the thought of him taking your virginity from behind.
+#elseif($sexPosition == "MISSIONARY")
+You're ready to be taken to bed and to surrender your virginity to him there.
+#elseif($sexPosition == "STANDING_BEHIND")
+There's nothing that excites you more than the thought of letting him press you up against a wall and enter you.
+#end
+
+There's a rustle of clothing as $m.name takes off his clothes. You look at him with dull, incurious eyes as he strips, his $m.cockDesc revealed poking stiffly in your direction.
+#if($w.pussyExposed)
+	#if($sexPosition == "DOGGY")
+		Listening passively, you hear him order you to get onto the bed, on your hands and knees, and present yourself to be fucked.
+	#elseif($sexPosition == "MISSIONARY")
+		Listening passively, you hear him command you to get into bed and part your legs for him.
+	#elseif($sexPosition == "STANDING_BEHIND")
+		Listening passively, you hear him command you to get up and get ready to be fucked.
+	#end
+#else
+Listening passively, you hear him order you to undress so that you're ready to be fucked.
+#end
+</virginityAcceptPosition>
+
+<virginityAcceptPositionLd>
+#if($sexPosition == "DOGGY")
+You want to offer up your virginity on hands and knees.
+#elseif($sexPosition == "MISSIONARY")
+You ache to spread your legs to him and be deflowered in bed.
+#elseif($sexPosition == "STANDING_BEHIND")
+Your body burns to be deflowered against the nearest wall.
+#end
+</virginityAcceptPositionLd>
+
+<virginityChangePosition>
+You're ready to lose your virginity of course, just as you were told, but you have your own opinions on how it should happen.
+You start to speak, but $m.name hushes you. He gently reminds you that you just want to submit to him and so the best way to be fucked will be whatever way he wants. Chastened, you nod quietly. How silly of you to question his will!
+</virginityChangePosition>
+
+<doggyStyleVirginityLoss>
+You find yourself getting to your feet and going to bed, your movements awkward and clumsy, like a puppet being manipulated by a puppeteer who doesn't much care for verisimilitude. 
+You get to your hands and knees and wait. The bed creaks behind you as $m.name gets onto it, and you imagine his erection poking towards your exposed pussy. 
+
+#if($m.figure == "FAT")
+Then you don't have to imagine it any more. You feel the weight of his gut flop onto your lower back as he takes up position behind you. His chubby hands clutch at your waist and his hardness pushes against you, urgently seeking entrance. ##
+#else
+Then you don't have to imagine it any more. His hands hold your waist and his hardness pushes against you, urgently seeking entrance. ##
+#end
+
+#if($m.hasTrait("BIG_COCK_HEAD"))
+	The bulging head feels very big. Bigger than you'd expected. Too big, perhaps, to fit inside you. 
+	But you've come too far to go away without $scene.addPossessiveSuffix($m.name) cock getting inside you, ##
+	#if($w.hasTrait("SNUG_PUSSY"))
+	even if it takes vigorous thrusting on his part to force it into your achingly-tight pussy.
+	#else
+	even if it takes repeated, powerful thrusts on his part to drive it into your pussy. 
+	#end
+	Indeed, that's precisely what happens and before long you've gone from being shocked at how big it feels pressing against you to being shocked at how big it feels nestled into your lower belly.
+#elseif($m.hasTrait("THICK_COCK"))
+	His engorged shaft feels very thick. Thicker than you'd expected. Can such a monster really fit inside a first-timer like you? 
+	$m.name makes a vigorous attempt to push it into your body and, after a few attempts, is successful, his bulging meat battering its way into your vagina.
+#else
+	An entrance that your virgin body soon provides.
+#end
+</doggyStyleVirginityLoss>
+
+<missionaryVirginityLoss>
+You find yourself moving towards the bed and, after a moment's thought, realise that you're walking there yourself. You get into bed and part your legs, wide enough to make an easy docking place for $m.name when he joins you in bed.
+
+Lying on your back with your $w.eyeColour eyes gazing unfocused at the ceiling, you have a moment to wonder how you ended up here, in bed with your legs open, about to lose your virginity to... to... to your darling $m.name, the perfect man to share your first time with. 
+Were you feeling uncertain? How strange! You've never been so sure of anything in your life. There's nothing you want more than to let him inside you!
+
+The bed creaks as $m.name climbs onto it and mounts on top of you, between your parted thighs. His hands rove over your body, stroking and squeezing. You lie there and let him touch you, not that you can really consider any alternatives.
+Then he shifts himself into position. His $m.handAdj hands eagerly grip your hips and his hardness presses against you. You draw in your breath. This is it, you're about to feel a man entering you!
+#if($m.hasTrait("THICK_COCK"))
+Then he's pushing forwards, the hefty girth of his thick cock invading your body. You let out a trembling gasp to feel it inside, the firm male heat of it, pushing urgently into your most private place.
+#elseif($m.hasTrait("BIG_COCK_HEAD"))
+Then he's pushing forwards, the bulging head of his cock invading your vagina. You let out a sharp gasp as his erection drives deep into you, solid and warm and very, very male. 
+#elseif($m.hasTrait("SMALL_COCK"))
+	Then he's pushing forwards, his slender shaft invading your pussy. ##
+	#if($w.hasTrait("LIKES_BIG"))
+	Hard yes, but disappointingly small.
+	
+	But what are you thinking? Disappointingly? How could you be disappointed in $m.name!? This is what you want isn't it? Your first time with him. Isn't it?
+	#else
+	A firm rod prodding into you.
+	#end
+#else
+Then he's shoving himself forwards, his erection pushing into you, solid and firm, a man's hardness driving deep into your body.
+#end
+</missionaryVirginityLoss>
+
+<standingBehindVirginityLoss>
+Your body gets to its feet and stands against the nearest wall, your palms pressing against the hard surface as $m.name gets into position behind you. Through the hypnotic haze fogging your brain, ##
+#if($m.hasTrait("BIG_COCK_HEAD"))
+you feel the enormous bulge of his glans press against your pussy. Against, and then into. A gasp escapes your lips as he enters you, the head of his cock so big that it seems it can't possibly fit inside, until the moment that it does.
+#else
+you feel the head of his cock rub against your pussy, stiff and firm. He strokes it along your folds and then, a hand gripping your waist, thrusts into you.
+#end 
+This is it, your first time feeling a man enter your pussy. The moment you've been waiting for since... well... since not all that long ago actually.
+</standingBehindVirginityLoss>
+
+<undressForFirstTimeSex>
+How can you lose your virginity when your stupid clothes are in the way!? You're suddenly filled with an overpowering urge to bare your pussy to $scene.addPossessiveSuffix($m.name) lust.
+#if($w.bottomStatus =="OFF"||$w.bottomStatus == "EXPOSED")
+## Can assume panties are on, as this action should only be called if $w.pussyExposed is false.
+You strip off your $w.panties.shortDesc, getting #if($w.panties.hasFlag("SINGULAR"))it#{else}them#end out of the way as quickly as possible, ready for your body to be enjoyed by the#if($m.hasTrait("UGLY"))...ugly?#end man who's about to take your virginity.
+$w.setPantiesStatus("OFF")
+#else
+	#if($w.top.isAlsoLowerBody())
+		$w.setBottomStatus("EXPOSED")
+		You pull up your $w.bottom.shortDesc ##
+	#else
+		$w.setBottomStatus("OFF")
+		You take off your $w.bottom.shortDesc ##
+	#end
+	#if($w.pantiesStatus =="OFF"||$w.pantiesStatus == "EXPOSED")
+		as quickly as possible, hurrying to be fucked. You've kept your virginity for so long, but for some reason you feel that you can't wait a moment longer to let $m.name deflower you.
+	#else
+		and quickly remove your $w.panties.shortDesc, hurrying to be fucked. You've kept your virginity for so long, but for some reason you feel that you can't wait a moment longer to let $m.name deflower you.
+		$w.setPantiesStatus("OFF")
+	#end
+#end
+
+Having obeyed his command, you listen obediently as $m.name orders you to ##
+#if($sexPosition == "DOGGY")
+	get on all fours in bed.
+#elseif($sexPosition == "MISSIONARY")
+	get into bed and open your legs.
+#elseif($sexPosition == "STANDING_BEHIND")
+	get up against the nearest wall.
+#end
+</undressForFirstTimeSex>
+
+<virginityLoss>
+## Returning section for all the virginity routes. 
+#if($scene.hasFlag("CAME_INSIDE"))
+$m.name pulls his softening cock from your freshly-deflowered pussy and ##
+#else
+$m.name ##
+#end
+#if($sexPosition == "STANDING_BEHIND" || $sexPosition == "STANDING_FRONT")
+steps away##
+#else
+gets to his feet##
+#end
+, his interest in you fading now that he's emptied his balls#if($scene.hasFlag("CAME_INSIDE")) into you#end. 
+
+Had you imagined cuddling, romance, tenderness after your first time? The trance, which had receded somewhat during your defloration, returns in force, fogging your mind, and you find yourself ##
+#if($sexPosition == "STANDING_BEHIND")
+resting against the wall##
+#else
+lying there##
+#end
+ bereft of thoughts.
+
+$m.name starts to pull on his clothes and, casting a glance in your direction, tells you to get dressed again. You do so, compliant as always. Done with you for now, he tells you that when the time comes to leave the trance you'll do so with vague memories that you had sex after begging him for it.
+</virginityLoss>
+
+<applyLSE>
+You relax into the trance and listen to $scene.addPossessiveSuffix($m.name) trustworthy voice. You find your head mindlessly nodding in agreement as he tells you that you're worthless for anything aside from being used as a fuck-doll, that your body is the only thing of value about you.
+</applyLSE>
+
+<acceptLSE1>
+$m.name continues, telling you that you aren't deserving of respect: not his, and not your own.
+</acceptLSE1>
+
+<acceptLSE2>
+You accept everything he says without question, feeling doubts and insecurities build deep inside as you do so. He's moulding you into a self-loathing $w.girlOrWoman with no self-respect, and you're letting him do it. Just like the worthless junk-person you now believe yourself to be.
+</acceptLSE2>
+
+<startFirstTimeFuckPath>
+$m.name tells you that you're feeling aroused just from being near him, that his presence makes your body warm, that you want to be touched.
+</startFirstTimeFuckPath>
+
+<firstTimeFuck2>
+Your breath quickens as you feel your body grow warm, a desire for sexual contact rising inside you.
+
+#stripCommand()
+</firstTimeFuck2>
+
+<firstTimeFuck3>
+You lips part in a soft moan, your hips writhing in anticipation. You want sex so badly, sex with him, with $m.name! 
+
+#if($w.nakedExceptLegwear)
+	$m.name tells you to beg him to fuck you; that's an instruction that will be so, so easy to follow.
+#else
+	$m.name tells you to strip off your clothes, get yourself naked and ready for sex. ##
+	#if($w.legwearWorn)Except for your $w.legwear.basicDesc. You can keep them on.#end
+#end
+</firstTimeFuck3>
+
+<firstTimeFuckStrip>
+All you can think about is the urge to be fucked by him, but you somehow manage to get rid of what remains of your clothing, baring your smooth $w.skinColour body for him, your nipples standing stiff and proud, the cleft between your thighs glistening with moisture. You ache for sex, and can think of nothing but the urge to be fucked by $m.name.
+
+He gives you another command and, yet again, it's an easy one to follow: he tells you to beg him for sex.
+$w.stripExceptLegwear() 
+</firstTimeFuckStrip>
+
+<firstTimeFuckBegHimForSex>
+## Decide a sex position. Using different ones for the various routes to sex just to mix things up a bit.
+#if(!$m.isArousalComfort())$m.setArousalComfort()#end
+#if($w.pregnancyStage != "BIG" && $w.pregnancyStage != "HUGE")$scene.addWeightedItem("STANDING_FRONT",1)
+#else $scene.addWeightedItem("STANDING_BEHIND",1)
+#end
+#if($scene.hasBed)$scene.addWeightedItem("MISSIONARY",1)#end
+#if(!$scene.isOutside())$scene.addWeightedItem("SOFA_SEX",1)#end
+#set($sexPosition = $scene.pickItemAndClearMap())
+
+All you can think about is the urge to be fucked by him, and you find yourself giving voice to that desire, begging him plaintively to ##
+#if($w.hasTrait("CUTE"))
+	enter your cute little kitty. You want his thing inside you, right now, right here. It's all you can think about.
+	#if($m.hasTrait("LIKES_CUTE"))$m.addArousalMedium()$m.addEnjoySmall()#end
+#elseif($w.hasTrait("ROMANTIC"))
+	make love to you, to join his body with your so that you're one together. It's all you want, all you can think about, the only thing that fills your heart.
+#elseif($w.hasTrait("REFINED"))
+	have sex with you, to enter you and be inside you and make you feel good. It's all you want. It's all you can think about.
+#else
+	fuck you, to shove his hard cock into you, to fill you over and over and over. It's all you want. It's all you can think about.
+#end
+
+To your immense gratitude, $m.name grants your favour. He tells you ##
+#if($sexPosition == "STANDING_FRONT")
+	to get your #if($w.figure == "SLIM")tiny#elseif($w.figure == "WOMANLY")luscious#{else}sexy#{end} ass up against the wall and prepare to be fucked good and hard.
+#elseif($sexPosition == "STANDING_BEHIND")
+	to get face-first against the nearest wall and prepare to be fucked good and hard.
+#elseif($sexPosition == "MISSIONARY")
+	to get into bed and spread your legs for him.
+#elseif($sexPosition == "SOFA_SEX")
+	to get face-down on the sofa and prepare for a good hard fucking.
+#else
+	Error: no text for sex position $sexPosition. Please report this to the developer as a bug.
+#end
+$m.addWEnjoyMedium() ## Because she's so grateful to him
+</firstTimeFuckBegHimForSex>
+
+<missionaryFirstTimeSex>
+All you can think about is the urge to be fucked by him, and that urge leads you to bed. The mattress is soft beneath your bare bottom as you lie back, your#if($w.figure=="SLIM") slender#elseif($w.figure=="WOMANLY") curvy#else lean#end thighs parted.
+
+$m.name mounts on top of you#if($m.figure =="FAT"), his bloated gut pushing you into the bed,#end and presses his hardness against your vulva. You let out a little gasp as it finds its target. With the feeling of his rigid meat sliding into you, you can feel that your urge, the urge to be fucked by him, the only thing you were able to think about, is now being satisfied. 
+You can think about other things now, perhaps, but your mind is still fogged with the trance, and the insistent thrusts of the man on top of you make it rather hard to focus.
+</missionaryFirstTimeSex>
+
+<sofaFirstTimeSex>
+All you can think about is the urge to be fucked by him, but you don't need much thinking to flip yourself face-down on the sofa, your ass in the air, legs slightly parted, ready to receive his lust.
+
+And receive it you do. $m.name wastes little time in mounting on top of you, his hardness pushing into your offered pussy. You feel him enter you and let out a satisfied gasp, that overwhelming, overpowering urge satisfied at last. 
+You relax into the sofa, your face against a soft cushion, as the man on top of you starts to thrust urgently into your body.
+</sofaFirstTimeSex>
+
+<standingFrontFirstTimeSex>
+You get up and an instant later $m.name is pressing you against the nearest wall. You look up at his face##
+#if($m.hasTrait("UGLY")), an ugly face that you turn your eyes away from. ##
+#else 
+ and meet his lustful $m.eyeColour eyes. ##
+#end
+You can feel his hot breath, the warmth of his body pushing against yours, the hardness down below, a hardness that is working its way between your thighs. You feel like you should be having all kinds of thoughts, but all you can think about is the urge to be fucked by him.
+
+You wrap your arms around $scene.addPossessiveSuffix($m.name) neck. His cock is working its way between your pussy lips. His hands clutch at your body. All you can think about is the urge to be fucked by him.
+
+His hard, stiff meat is working its way into your body. You feel it enter and gasp, pushing your hips to help him slide into you. All you can think about is the urge to be fucked by him, but now you are being fucked by him. Maybe it's okay to think about other things now? 
+But thinking is so hard. There's a fog clouding your brain, and as $m.name grips your waist and drives a first deep thrust into your vagina you find it so hard to focus on anything at all.
+</standingFrontFirstTimeSex>
+
+<standingBehindFirstTimeSex>
+You take the position against the nearest wall, palms flat against it, bottom out##
+#if($w.pregnancyStage == "BIG" || $w.pregnancyStage == "HUGE"), your $w.stomachDesc bulging below you#end.
+
+$m.name comes up behind you, one hand holding your waist, the other reaching around to stroke your stomach. His hardness pushes against your offered pussy and then, with a stiff thrust, he's inside you.
+</standingBehindFirstTimeSex>
+
+<firstTimeSex>
+#if($scene.hasFlag("CAME_INSIDE"))
+	$m.name slips his cock out of you, softening now, its work done. You can feel a #if($m.hasTrait("BIG_BALLS"))thick, #{end}sticky warmth deep inside you. 
+	#if(!$w.onPill && !$w.isSafe() && !$w.knownPregnant && !$w.hasTrait("BABY_CRAZY"))
+	You faintly realise that there's a risk you might get pregnant from this, but the trance, which had weakened while you were being fucked, has returned in full force and your thoughts are too vague to feel emotions such as worry or alarm.
+	#end
+	He ##
+#else
+$m.name ##
+#end
+#if($sexPosition == "STANDING_BEHIND" || $sexPosition == "STANDING_FRONT")
+	steps away##
+#else
+	gets to his feet##
+#end
+, looking at you with an impersonal glance, as if you're simply an object, one that's served its purpose. Lost in the hypnotic trance, you wait there, awaiting further commands, as passive as if you were just an object after all.
+
+$m.name starts to pull on his clothes and, casting a glance in your direction, tells you to get dressed again. You do so, compliant as always. Done with you for now, he tells you that when you leave the trance you'll have vague memories that you were eager and willing to submit to him.
+</firstTimeSex>
+
+
+<applyLikesBare>
+$m.name says that he's going to ask you a question or two and that he'll then tell you some things you might not know about yourself. Whatever he asks, you must answer truthfully, and whatever he tells you is something you'll accept as truth about yourself.
+
+He then asks you how you feel about having sex bare, without a condom.
+</applyLikesBare>
+
+<bareSexQuestionVirginSoDontKnow>
+As commanded, you answer truthfully and that means telling him that you don't have the experience to answer his question.
+
+With an amiable chuckle, $m.name tells you that you actually want to have sex bare, that your fantasies will center around an unprotected cock plunging into you and that when it comes to your first time you'll be aching to end it with a thick load of cream pumped into your pussy.
+</bareSexQuestionVirginSoDontKnow>
+
+<bareSexQuestionSafetyFirst>
+Were you more awake, you might have had strong feelings about this answer. As it is, you reply in a calm, passive voice, telling $m.name that contraception is very important to you.
+
+$m.name lets out an annoyed grunt and shakes his head. He tells you that you're wrong, that this isn't really your true opinion. In fact, you crave bare sex, you want to feel a cock driving unprotected into you and you'd love to let a man spunk deep into your pussy.
+</bareSexQuestionSafetyFirst>
+
+<bareSexIsOk>
+You give a noncomittal answer. You aren't crazy about bare sex or anything, but you don't consider yourself to be especially strict when it comes to condoms either.
+
+$m.name nods, and tells you that your feelings are actually stronger than you might have thought. You want to have bare sex, crave it. Being fucked with a condom just can't measure up to letting an unprotected cock drive into your body.
+</bareSexIsOk>
+
+<acceptLikesBare>
+He's right. He must be right. After all, one thing you know for certain is that whatever he tells you is the truth about yourself.
+
+You hate condoms, those unpleasant slippery little things, ruining the wonderful feeling of bare, unprotected sex. ##
+#if($w.virgin)
+	#if($w.lesbianVirgin)
+		When the time comes for you to lose your virginity, you definitely want it to be without protection!
+	#else
+		Your sexual experience isn't of the sort that involves penises, but if you do end up letting a man inside you then you definitely want it to be without protection!
+	#end
+#else
+The very next time you have sex, you want it to be completely bare!
+#end
+</acceptLikesBare>
+
+<startRepeatFuckPath>
+$m.name tells you to cast your mind back to having sex with him, to hold that image in your mind. To think about being fucked and, as you remember, to feel your body growing warm, becoming excited for the next time.
+</startRepeatFuckPath>
+
+<repeatFuck2>
+You gasp with anticipation, your lips parted as you gaze at $m.name, the man whose cock you so desperately want inside you. ##
+#if($m.hasTrait("UGLY") && $m.figure == "FAT")
+	Sure, he's a hideous blob, but you'd rather feel him inside you than the handsomeest of hunks.
+#elseif($m.figure == "FAT")
+	His soft rolls of fat, the way his skin so easily slickens with sweat, the way he pants deeply when looking at your body. All things that, right now, apparently fuel your desire.
+#end
+
+#stripCommand()
+</repeatFuck2>
+
+<repeatFuckFavouriteThingDontLikeIt>
+You reply that you can't answer the question honestly, because there isn't really anything you like about being fucked by him. ##
+#if($w.hasTrait("LIKES_BIG") && $m.hasTrait("SMALL_COCK"))
+	You're especially turned off by his weedy little cock. Not something you like feeling inside you one bit!
+#elseif($m.hasTrait("INEPT_LOVER"))
+	He's just no good in bed, and you can't imagine enjoying having sex with him.
+#elseif($m.hasTrait("UGLY"))
+	He's just so ugly that you can't stand seeing him while you have sex. You try to keep your eyes closed or your face turned away, but sometimes you catch a glimpse of him and it's just horrid. 
+#elseif($w.dislikesFigure($m.figure))
+	#if($m.figure == "SKINNY")
+		He's so scrawny and weak. It's like having sex with a stick-insect.
+	#elseif($m.figure == "FAT")
+		He's so fat and gross, and you hate the way his sweat drips on you while you're having sex.
+	#elseif($m.figure == "PAUNCHY")
+		He's just so unattractive and out-of-shape. It's not appealing in the slightest.
+	#end 
+#end
+
+$m.name frowns, but ploughs ahead, commanding you to tell him you miss being fucked by him and want to let him use you again.
+</repeatFuckFavouriteThingDontLikeIt>
+
+<repeatFuckFavouriteThingPenetration>
+You reply that you like it when you feel his erection first penetrate you##
+#if($w.hasTrait("SNUG_PUSSY") && $m.hasTrait("THICK_COCK"))
+, its overwhelming girth spreading open your tight pussy.
+#else
+. 
+#end
+
+$m.name nods approvingly and commands you to tell him that you miss being fucked by him and want to feel him entering you once again.
+</repeatFuckFavouriteThingPenetration>
+
+<repeatFuckFavouriteThingComingInside>
+You reply that you like it best when you feel him coming inside you, the way his cock throbs in your pussy, the warmth of his sperm going into you, ##
+#if($m.hasTrait("BIG_BALLS"))
+the way his thick, white goo overflows from you afterwards and trickles down your thighs.
+#else
+the way you can feel his ejaculation oozing out from you afterwards.
+#end
+
+$m.name nods approvingly and commands you to tell him that you miss being fucked by him and want to feel him spurting into you once again.
+</repeatFuckFavouriteThingComingInside>
+
+<repeatFuckFavouriteThingYourPleasure>
+You reply that your favourite thing is when it feels good for you, especially if you're able to have an orgasm. The way it takes over all your thoughts, how your body moves by itself, feeling the joy rise with each thrust.
+
+$m.name shrugs, as if he hadn't imagined your enjoyment could be something worthy of consideration. He commands you to tell him that you miss being fucked by him, that nothing would make you feel better than to let him have the pleasure of your body.
+</repeatFuckFavouriteThingYourPleasure>
+
+<repeatFuckFavouriteThingSize>
+You reply that your favourite thing is how big he is, how large it feels inside you, the way it makes you feel so full when its full length at last fits into you.
+
+Flattered, $m.name smiles broadly rests a hand approvingly on your shoulder. He commands you to tell him that you miss being fucked by him and want to feel him entering you once again.
+</repeatFuckFavouriteThingSize>
+
+<repeatFuckMissBeingFucked>
+In a vague, absent voice, you obediently parrot his words back at him, telling him how you miss having sex with him. He sits there, listening, a smile on his face and ##
+#if($m.cockExposed)
+one hand stroking his cock.
+#else
+a hand idly stroking the #if($m.hasTrait("SMALL_COCK"))meagre #elseif($m.hasTrait("THICK_COCK"))hefty #{end}bulge in his $m.trousersBasicDesc.
+#end
+
+#stripCommand()
+</repeatFuckMissBeingFucked>
+
+<repeatFuckDontMissBeingFucked>
+Slowly, as if swimming in treacle, you shake your head from side to side. You tell $m.name that you don't really miss having sex with him. In fact, you wouldn't really mind at all if you never had sex with him again. Perhaps you'd prefer it, even.
+
+He sits forward, his $m.eyeColour gazing intently at you. In a slow, firm voice of command, he tells you that you're wrong, that you do miss having sex with him. Once again, he orders you to admit it.
+</repeatFuckDontMissBeingFucked>
+
+<repeatFuckVeryTurnedOn>
+You let out a low moan as the heat of arousal rises in your body. You feel your legs moving apart as if by themselves, your body readying itself to accept his hard, throbbing meat.
+
+$m.name removes his clothes, your eyes drawn to his body##
+#if($w.dislikesFigure($m.figure))
+. Normally you wouldn't be attracted to a man with such $scene.getArticle($m.torsoDesc) $m.torsoDesc, but for some reason right you're filled with an overwhelming desire.
+#else
+, an overwhelming desire rising inside you.
+#end
+
+#if($w.nakedExceptLegwear)
+	#if(!$m.isArousalComfort())$m.setArousalComfort()#end ## Make sure m is turned on before fucking the pc.
+	$scene.addWeightedItem("STANDING_BEHIND",1)
+	#if($scene.hasBed)$scene.addWeightedItem("MISSIONARY",1)$scene.addWeightedItem("DOGGY",1)#end
+	#if(!$scene.isOutside())$scene.addWeightedItem("SOFA_SEX",1)#end
+	#set($sexPosition = $scene.pickItemAndClearMap())
+	Recognising that you're as ready for sex as you'll ever be, ##
+	#if($sexPosition == "DOGGY")
+		$m.name orders you onto your hands and knees in bed.
+	#elseif($sexPosition == "MISSIONARY")
+		$m.name commands you to go lie in bed with your legs open.
+	#elseif($sexPosition == "STANDING_BEHIND")
+		$m.name orders you up against a wall to be fucked.
+	#elseif($sexPosition == "SOFA_SEX")
+		$m.name orders you face down on the sofa with your ass up and pussy exposed for fucking.
+	#else
+		Error: no text for sex position $sexPosition. Please report this to the developer as a bug.
+	#end
+#else
+	#stripCommand()
+#end
+</repeatFuckVeryTurnedOn>
+
+<undressForRepeatSex>
+With slow, dreamlike motions, you divest yourself of what remains of your clothing. ##
+#if($w.braStatus == "OFF" && $w.topStatus == "OFF" && $w.bottomStatus == "OFF")
+	Which is to say, that you slide off your $w.panties.shortDesc, #if($w.panties.hasFlag("SINGULAR"))it #{else}these #{end}being the only item of clothing left on your body. ##
+	#if($w.legwearWorn)
+		Aside from your $w.legwear.basicDesc of course, but they will be no impediment to sex and so you leave them on.
+	#end
+#elseif($w.legwearWorn)
+	Aside from your $w.legwear.basicDesc of course. They will be no impediment to sex and so you leave them on.
+#end
+
+$w.stripExceptLegwear()
+
+#if(!$m.isArousalComfort())$m.setArousalComfort()#end 
+$scene.addWeightedItem("STANDING_BEHIND",1)
+#if($scene.hasBed)$scene.addWeightedItem("MISSIONARY",1)$scene.addWeightedItem("DOGGY",1)#end
+#if(!$scene.isOutside())$scene.addWeightedItem("SOFA_SEX",1)#end
+#set($sexPosition = $scene.pickItemAndClearMap())
+#if($sexPosition == "DOGGY")
+	$m.name orders you onto your hands and knees in bed.
+#elseif($sexPosition == "MISSIONARY")
+	$m.name commands you to go lie in bed with your legs open.
+#elseif($sexPosition == "STANDING_BEHIND")
+	$m.name orders you up against a wall to be fucked.
+#elseif($sexPosition == "SOFA_SEX")
+	$m.name orders you face down on the sofa with your ass up and pussy exposed for fucking.
+#else
+	Error: no text for sex position $sexPosition. Please report this to the developer as a bug.
+#end
+</undressForRepeatSex>
+
+<doggyStyleRepeatSex>
+You find yourself on your hands and knees in bed. No doubt you brought yourself here, but in your hypnotic trance you can barely remember moving. All you know is that you're in position for sex, and that your body is full of an odd, almost artificial-seeming desire.
+
+The bed creaks as $m.name climbs up behind you. You feel a meaty firmness press against your pussy and the realisation flits through your fogged mind that you're about to have sex.
+
+With a pleased grunt, he clutches your waist and thrusts forward##
+#if($m.hasTrait("BIG_COCK_HEAD"))
+	, the massively-engorged head of his cock taking a few attempts to make it into your body, but in the end he manages it and you feel his rigid meat pummel into your vagina.
+#elseif($m.hasTrait("THICK_COCK"))
+	, his fat cock spreading your vagina open as he pummels into you.
+#elseif($m.hasTrait("BIG_BALLS"))
+	, his bulging testicles slapping against you as he drives his cock to its full length into your body.
+#elseif($m.hasTrait("SMALL_COCK"))
+	, his slender cock slipping into your body.
+#else
+	, driving his cock to its full length into your body.
+#end
+</doggyStyleRepeatSex>
+
+<missionaryRepeatSex>
+You walk dreamlike to the bed and take the appropriate position: on your back, your legs parted, $w.eyeColour eyes fixed vaguely upon the ceiling.
+
+The bed creaks as $m.name mounts onto it and, a moment later, onto you. ##
+#if($m.figure == "FAT")
+	Rolls of fat press you into the bed, smothering you beneath the masculine heat of his body. Soft, sweaty flesh pushes down on you, but there's a hardness somewhere down below, prodding against your stomach.
+#elseif($m.figure == "PAUNCHY")
+	His soft gut presses onto your stomach, flabby weight pushing you down into the bed. Below, a stiff hardness prods against your lower belly.
+#elseif($m.figure == "THICKSET")
+	His heavy weight presses you down into the bed, soft gut on your upper abdomen, thick arms holding your shoulders, bulky legs easing your thighs further apart. Then, against your stomach, you can feel it: a prodding male hardness poking against you.
+#else
+	You feel the masculine heat of his body upon you, and his male hardness prodding at your stomach.
+#end
+
+He shifts himself into position, satisfying himself that you're held helpless beneath him. Then his cock shifts lower, pushing against your pussy. A soft grunt as he thrusts, and you feel it enter you, his hard meat driving into your softness##
+#if($m.hasTrait("BIG_BALLS"))
+	, so deep that you can feel his bulging balls come to rest against your ass.
+#elseif($m.hasTrait("THICK_COCK"))
+	, its thick bulk spreading you open.
+#elseif($m.hasTrait("BIG_COCK_HEAD"))
+	, its massively engorged head coming to rest deep inside you.
+#else
+	.
+#end
+</missionaryRepeatSex>
+
+<standingBehindRepeatSex>
+You stagger to your feet, swaying slightly from the fog in your mind, and get against the $scene.wall, your palms pressed against the hard surface.
+
+$m.name gets up behind you, one ##
+#if($m.figure == "THICKSET")burly #elseif($m.figure == "FAT")plump #elseif($m.figure == "SKINNY")skinny #elseif($m.figure == "MUSCULAR")muscular #elseif($m.figure == "TONED")lean #end##
+arm around your waist, the other down below to guide himself into you.
+#if($m.hasTrait("BIG_COCK_HEAD"))
+The broad head of his cock pushes urgently against you, a bulky piece of meat to be entering #if($w.hasTrait("SNUG_PUSSY"))your tight pussy#{else}into you#end but with a bit of effort on his part, and a sharp gasp on yours, it manages to do so.
+#elseif ($m.hasTrait("THICK_COCK"))
+He hefty meat pushes, slowly, into your body. You let out your breath slowly as your body, thankfully already slippery from arousal, gradually accepts its bulky intrusion.
+#else
+His hardness slowly slides into you. Some part of your arousal doesn't seem to touch your heart and your thoughts are too fogged for genuine excitement. Nevertheless, your pussy is slippery with juices, ready to accept a man's intrusion. $m.name does just that, intruding deep into you until the male heat of his body presses against your back.
+#end 
+</standingBehindRepeatSex>
+
+<sofaRepeatSex>
+You obediently get yourself face-down on the sofa, your smooth cheek pressed against its fabric, ass raised in the air in an inviting position.
+
+$m.name takes full advantage of that invitation. He mounts on top of you##
+#if($m.figure == "FAT")
+, the formidable weight of his bloated gut pressing softly on your back.
+#elseif($m.figure =="THICKSET" || $m.figure == "MUSCULAR")
+, his powerful body pressing you into the sofa.
+#else
+, the male heat of his body pushing you into the sofa.
+#end
+You feel his cock push against you, seeking out your entrance. Then, a satisfied grunt from $m.name mingles with your ##
+#if($m.hasTrait("BIG_COCK_HEAD") || $m.hasTrait("THICK_COCK"))
+	#if($w.hasTrait("LIKES_BIG"))
+		excited gasp ##
+	#elseif($w.hasTrait("SNUG_PUSSY"))
+		pained gasp ##
+	#else
+		sharp gasp ##
+	#end
+#else 
+quiet sigh ##
+#end
+as he pushes into you, ##
+#if($m.hasTrait("BIG_COCK_HEAD"))
+	the massive head of his cock forcing you open.
+#elseif($m.hasTrait("THICK_COCK"))
+	his girthy meat forcing you open.
+#else
+	burying his erection in your welcoming vagina.
+#end
+</sofaRepeatSex>
+
+<repeatSex>
+Once again $m.name has taken his pleasure of your body. You gaze at him with dull, sleepy eyes, barely responsive to anything. 
+#if($scene.hasFlag("CAME_INSIDE"))
+	You can feel his sperm, warm inside you##
+	#if($m.hasTrait("BIG_BALLS"))
+	, some of his voluminous ejaculation trickling from your freshly-fucked vagina, a slow ooze of thick, potent whiteness that makes its way gradually down one $w.skinColour thigh.
+	#else
+	, a few droplets trickling from your freshly-fucked vagina.
+	#end
+	#if(!$w.onPill && !$w.isSafe() && !$w.knownPregnant && !$w.hasTrait("BABY_CRAZY"))
+		You faintly realise that you risk pregnancy, but you aren't capable of feeling strong emotions in this state so your reaction is simply a vague recognition.
+	#end
+	He ##
+#else
+	$m.name ##
+#end
+#if($sexPosition == "STANDING_BEHIND" || $sexPosition == "STANDING_FRONT")
+	steps away##
+#elseif($sexPosition == "MISSIONARY" || $sexPosition == "SOFA_SEX")
+	dismounts from you and gets to his feet##
+#else
+	gets to his feet##
+#end
+, glancing at you to confirm, accurately, that you're waiting there passive and compliant.
+
+$m.name tells you to get dressed again and starts to pull on his own clothing. He tells you that when you leave the trance you'll remember yourself as having happily submitted to him and welcomed him into your body.
+</repeatSex>
+
+<simpleUndress>
+$m.name looks you over with a faint smile, as if wondering what might be done with you.
+#stripCommand()
+</simpleUndress>
+
+<peekTits>
+$m.name tells you to ##
+#if($w.top.topType == "BUTTONS")
+open up your $w.top.basicDesc ##
+#elseif($w.top.topType == "SLEEVED")
+pull up your $w.top.basicDesc ##
+#else
+pull down your $w.top.basicDesc ##
+#end
+and give him a look at what's underneath.
+</peekTits>
+
+<peekTitsRefuse>
+Your thoughts are too vague to articulate a refusal, but you still manage to shake your head.
+
+$m.name does not accept this. Instead, he simply re-asserts his control, repeating his command in a slower, more forceful tone.
+</peekTitsRefuse>
+
+<peekTitsComply>
+You comply obediently, ##
+#if($w.top.topType == "BUTTONS")
+unbuttoning your $w.top.shortDesc and pulling it open.
+#elseif($w.top.topType == "SLEEVED")
+pulling your $w.top.shortDesc up to your shoulders.
+#elseif($w.top.topType == "HALTERTOP")
+unfastening your $w.top.shortDesc and tugging it to your waist.
+#else 
+pulling your $w.top.shortDesc down to your waist.
+#end 
+
+#if($w.braStatus == "WORN" || $w.braStatus == "DISHEVELED")
+His hopes of seeing bare breasts are to be dashed, however, as you're wearing a $w.bra.shortDesc underneath. You give him a good peek at it before covering yourself up once more.
+#else
+You give him a good peek at your $w.breastsDesc, bare underneath, before covering yourself up once more. 
+#end
+$w.setTopStatus("DISHEVELED")
+</peekTitsComply>
+
+<peekUnderSkirt>
+$m.name tells you to lift up your $w.bottom.basicDesc and give him a look at what's underneath.
+</peekUnderSkirt>
+
+<peekUnderSkirtComply>
+You lift up your $w.bottom.shortDesc, bringing it up to your waist so $m.name can get a peek at what's beneath. 
+#if($w.bottom.length != "THIGH")
+	#if($w.legwearWorn)
+		Your $w.legwear.shortDesc for a start, outlining your shapely legs and the smooth, bare, $w.skinColour skin of your thighs above them. And then your ##
+	#else
+		Your thighs, for a start, their smooth $w.skinColour skin bared to his sight. And then your ##
+	#end
+#else
+Your ##
+#end
+#if($w.pantiesStatus == "OFF" || $w.pantiesStatus == "EXPOSED")
+pussy, an inviting cleft nestled just below where you've lifted your $w.bottom.basicDesc. Bared for him to look at and, should he give the order, more than look at.
+#else
+$w.panties.shortDesc, tightly hugging the cleft below.
+#end
+
+Having obeyed his command by flashing him, you lower your $w.bottom.basicDesc. #if($w.hasTrait("SHY"))You'd normally be blushing with embarrassment at this, but such emotions are beyond you in your current state.#end
+$w.setBottomStatus("DISHEVELED")
+</peekUnderSkirtComply>
+
+<peekUnderSkirtRefuse>
+You've no intention of exposing yourself like that, if your intentions count for anything here. It takes a few attempts, but you manage to mumble a few words to that effect.
+
+$m.name gives your opinions no respect whatsoever. Instead, he simply repeats his command, slower, and more forceful.
+</peekUnderSkirtRefuse>
+
+<applyEroticTraits>
+$m.name says that you should become sexier, more erotic, more like the sort of $w.girlOrWoman that men want to take to bed. His voice bores into your thoughts, and you feel his command taking effect. 
+But, there's that bit of vagueness there. What sort of $w.girlOrWoman is he talking about? What sort of person is it that you must become?
+</applyEroticTraits>
+
+<moreEroticBecomeSultry>
+What sort of woman do men like? Someone who oozes sensuality from every pore. Someone who thinks about sex all the time and is always up for some naughty fun, or at least who talks as if she is. You can be that sort of $w.girlOrWoman. That's who'll you become!
+</moreEroticBecomeSultry>
+
+<moreEroticBecomeFlirty>
+Men like flirts surely. That's the whole point of flirting, after all! You aren't the most flirtatious of $w.girlOrWoman, but you've seen them out and about. You can become that sort of person.
+</moreEroticBecomeFlirty>
+
+<moreEroticGetHairTrigger>
+Men like seeing a woman enjoying herself, don't they? ##
+#if(!$w.hasTrait("ALWAYS_FEMALE"))At least, you liked it back when you were a man. #end
+You resolve to enjoy yourself more and, as you do so, feel some barriers crumbling deep in your subconscious. You feel as if you'll reach orgasm more easily. Perhaps a lot more easily.
+#if($w.hasTrait("HARD_TO_PLEASE"))No longer the unlucky $w.girlOrWoman who oh-so-rarely gets to moan with orgasm. You sense that there's a new realm of pleasure awaiting you.#end
+</moreEroticGetHairTrigger>
+
+<moreEroticBecomeBabyCrazy>
+Sex is all about making babies, right? And men want to be with someone who's good breeding material don't they? Sure, some will pretend they're afraid of fatherhood but deep down they really crave to fill a fertile womb.
+If men want a willing womb, then that's what you must become. A $w.girlOrWoman who wants babies, who won't worry or argue over practicalities but who'll open her legs at her most fertile times. A $w.girlOrWoman who wants nothing more than to become pregnant.
+No sooner has the thought passed through you mind, than you feel yourself changing, feel the deep ache inside you, a craving to be pregnant and feel a life growing inside you. A need to give birth, to bring a new life into the world and cradle your newborn in your arms. 
+
+#if($w.onPill)
+Immediately you decide to stop taking the pill. Why were you silly enough to use such a thing in the first place? Actually going out of your way to prevent pregnancy? Ridiculous!
+$w.setOnPill(false) ## Must be called here and not in effects so the onPill test for the text works ok.
+#end
+</moreEroticBecomeBabyCrazy>
+
+<barkLikeBitch>
+$m.name tells you that you're a dog. A bitch. You should get onto the floor and bark.
+</barkLikeBitch>
+
+<barkLikeBitchRefuse>
+You tell $m.name that you're no dog and won't bark like one.
+
+He does not fix you with a piercing gaze, or speak in a commanding voice. Instead he simply rummages in his pockets and brings out a small red ball. He holds it up, showing it to you, and then tosses it to the side of the room. "Fetch girl!", he calls out, "Fetch the ball!"
+</barkLikeBitchRefuse>
+
+<fetchBall>
+You pounce off the sofa and run to retrieve the ball, bringing it back to his feet in your mouth.
+
+$m.name leans back, looking smug, and asks you to tell him your name.
+</fetchBall>
+
+<barkLikeBitchComply>
+You get off the sofa and onto your hands and knees. Staring up at $m.name with wide $w.eyeColour eyes you bark like a bitch. Woof woof! Yap yap!
+
+$m.name leans back, looking smug, and asks you to tell him your name.
+</barkLikeBitchComply>
+
+<nameWoof>
+You answer him the only way you know how: with a volley of happy barks like a good little bitch.
+
+$m.name chuckles and with a snap of his fingers reminds you that you are in fact a human $w.girlOrWoman. An obedient $w.girlOrWoman who'll obey his every command. Then, again, he asks you to tell him your name.
+</nameWoof>
+
+<nameYap>
+You answer him with a series of eager little yaps, like a good little bitch.
+
+$m.name chuckles and with a snap of his fingers reminds you that you are in fact a human $w.girlOrWoman. An obedient $w.girlOrWoman who'll obey his every command. Then, again, he asks you to tell him your name.
+</nameYap>
+
+<nameWhine>
+You want to answer him, but you can't find the words. In fact, you can barely remember what words are. You're just a dog, and it's unfair to expect you to speak like a human! Instead, you stare at him with big, wide, puppy-dog eyes and whine pitifully.
+
+$m.name watches you whimper and whine for a long moment. Then, at last, takes pity on you and, with a snap of his fingers reminds you that you are in fact a human $w.girlOrWoman. An obedient $w.girlOrWoman who'll obey his every command. Then, again, he asks you to tell him your name.
+</nameWhine>
+
+<speakNameAsHumanSd>
+$w.name
+</speakNameAsHumanSd>
+
+<speakNameAsHuman>
+You speak your name, completely obedient, but obedient like a person this time, not a pet.
+
+$m.name nods approvingly at your compliance and the memories of dog-$w.getName() give you a rush of elation at pleasing your master. He orders you back onto the sofa and, happy to be human once again, you do as he says. 
+</speakNameAsHuman>
+
+<startOralPath>
+$m.name opens his fly and pops out his cock. It's already erect, a ##
+#if($m.hasTrait("SMALL_COCK"))
+slender $m.skinColour shaft of below-average size##
+#elseif($m.hasTrait("THICK_COCK"))
+bulky rod of firm $m.skinColour meat##
+#else
+rigid shaft of hard $m.skinColour flesh##
+#end
+#if($m.hasTrait("BIG_COCK_HEAD"))
+ with a bulging purple head.
+#else
+.
+#end
+
+He waggles it in your direction and commands you to tell him, with full honesty, what you think.
+$m.setTrousersOpen(true)
+</startOralPath>
+
+<oralPathCockOpinionQuiteBig>
+You tell him that it's quite big. The size and shape of a penis isn't really what matters, compared with what a man does with it. Still, you know some blokes really care about that sort of thing and his is definitely well above average.
+
+Looking pleased, $m.name commands you to get on your knees and worship his cock.
+</oralPathCockOpinionQuiteBig>
+
+<oralPathCockOpinionDecentEnough>
+You think it's decent enough. Of course, what really matters isn't the size or shape but what a man does with it.
+
+$m.name lets out a huffing noise at this only-moderate approval of his erection. He commands you to get on your knees and worship his cock.
+</oralPathCockOpinionDecentEnough>
+
+<oralPathCockOpinionUnimpressive>
+Frankly, you don't think his penis is any big deal. You're just... not impressed. And, compelled to honesty, you tell him so.
+
+$m.name lets out an annoyed grunt and, grumpily, commands you to get on your knees and worship his cock.
+</oralPathCockOpinionUnimpressive>
+
+<oralPathCockOpinionPathetic>
+You have to honestly tell him what you think, and that's exactly what you do. In fact, you only need one word for it: pathetic.
+
+$m.name frowns, mutters something angrily under his breath, and then commands you to get on your knees and worship his cock.
+</oralPathCockOpinionPathetic>
+
+<oralPathCockOpinionCouldBeBigger>
+You like a nice big cock. Something with some real heft and girth to it. His cock isn't bad, not below average anyway, but it isn't what you'd call impressive. To be honest - and you are so compelled - it could be bigger.
+
+$m.name lets out an annoyed grunt and, grumpily, commands you to get on your knees and worship his cock.
+</oralPathCockOpinionCouldBeBigger>
+
+<oralPathCockOpinionNiceAndBig>
+You take a moment to admire his cock. A nice big fat one, thick and girthy. Something with some real heft to it that can fill a $w.getGirlOrWoman()'s hand... or somewhere else.
+
+$m.name smiles approvingly and leans forward to pat you on the knee. With the air of someone offering a treat, he commands you to get on your knees and worship his cock.
+</oralPathCockOpinionNiceAndBig>
+
+<worshipCockReligious>
+Getting to your knees, you clasp your hands together and begin to pray
+
+Our cock, which art in trousers,
+hallowed by thy length and girth,
+thy insemination come,
+thy will be done,
+in bed as it is in the shower.
+#if($w.hasTrait("BABY_CRAZY"))
+Give us this day our daily breeding,
+#else
+Give us this day our daily load,
+#end
+and forgive us our orgasms,
+as we forgive those who orgasm into us;
+#if($w.hasTrait("BABY_CRAZY"))
+## Not a huge fan of this line... anyone with better ideas should let me know!
+and lead us not into contraception,
+#else
+and lead us not into unplanned pregnancy,
+#end
+but deliver us from boredom.
+For thine is the pleasure
+and the hardness and the semen, 
+for ever and ever.
+Amen
+
+
+$m.name listens with an amused patience. When you finish, he commands you to get to your knees and take the object of worship in your hand.
+</worshipCockReligious>
+
+<worshipCockSexual>
+You get down to your knees and wrap a #if($w.figure == "SLIM")small #{end}hand around his shaft, stroking down its length as you gaze admiringly at the head, poking just inches away from your lips.
+
+$m.name has clearly noticed this as well. He orders you to please his cock until he cums.
+</worshipCockSexual>
+
+<pleaseHimOral>
+You obediently busy yourself with his pleasure.
+</pleaseHimOral>
+
+<returnFromOral>
+You've brought $m.name to orgasm##
+#if($scene.hasFlag("COME_IN_MOUTH"))
+	#if($m.hasTrait("TASTY_SPERM"))
+	 and can still taste the rich flavour of his sperm.
+	#elseif($m.hasTrait("NASTY_SPERM"))
+	 and have been rewarded with a mouthful of vile-tasting cum.
+	#else
+	 and have a mouthful of cum to prove it.
+	#end
+#else
+. ##
+#end
+Having done as you were compelled, you remain on your knees while he puts his cock away. Glancing down at you, a pathetically compliant $w.girlOrWoman at his feet, $m.name curtly tells you to get yourself in order and go back to the sofa. When you leave the trance, he tells you, you'll have vague memories of what happened, with the recollection that you begged to be allowed to please him.
+</returnFromOral>
+
+<applyLikesOral>
+$m.name tells you that he can see deep inside you, understand you in a way you may not understand yourself. He tells you that he's going to reveal a truth about you which you will accept: that you love sucking cock.
+</applyLikesOral>
+
+<rejectLikesOral>
+His will is powerful, but something seems wrong. You reply, hesitantly, that you don't think you like oral sex all that much.
+
+He speaks over you, telling you that you love it, that being at a man's knees is what you crave. At the knees of a man like him.
+</rejectLikesOral>
+
+<acceptLikesOral>
+He's right. You crave giving blowjobs, the feel of a firm cock between your lips, the smooth heat of a man's glans beneath your tongue, the salty rush of semen into your mouth...
+
+$m.name, smiling, pops his trousers open and lets his $m.cockDesc pop out. He tells you to get onto your knees and please his meat.
+$m.setTrousersOpen(true)
+</acceptLikesOral>

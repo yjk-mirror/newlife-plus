@@ -1,0 +1,402 @@
+# This is a heavily-commented example of a user created male npc for Newlife by Splendid Ostrich Games. Lines beginning with # are comments. 
+# There is a separate file for female NPCs, as the valid entries and values are different for the two npc types.
+#
+# This is intended as a reference. If you plan to create files to share with other players, then 
+# it'll probably be easier for them to read if you use the un-commented base file that's linked from http://splendidostrich.blogspot.co.uk/p/custom-npcs.html.
+# This base file is also available in the Newlife zip under the custom_npc_guides folder.
+#
+# The custom npc feature was added in version 0.3.11. 
+# If you're using an  earlier version than 0.3.11 then your game won't be able to understand these .yml files and load custom npcs. 
+# All the text below assumes you're using an appropriate version.
+#
+# To get an npc loaded into the game, define it in a .yml file like this one and put it in newlife_gamedata/user_created_npcs. 
+# The game will automatically create an empty folder of this name when it runs, if the folder doesn't already exist.
+#
+# Invalid npcs will not load into the game. 
+# If you're using version 0.3.12 or higher then you can test whether your custom npcs are valid or not in Newlife by clicking the 'Test NPCs' button 
+# on the main menu. 
+#  
+# How custom npcs are loaded:
+# When a new game is created, a certain number of 'normal' npcs are created. For version 0.3.23 this is 12. The totals for male and female NPCs are 
+# handled separately and custom npcs of one type won't count towards the limit for the other. 
+# The number of normal NPCs can be modified in the game options before creating a game. The adjustment can be set to a negative number to reduce the NPC total.
+#
+# Newlife will look in the above folder for .yml files and parse them for valid, enabled npcs.  
+# It will then sort these npcs by priority and start adding them to the game until all have been added or it reaches the npc limit.
+# If npcs have the same priority, then it's random which will get added first. This means that if you have, say, 15 npcs at priority 0, then 
+# each game will have 12 chosen randomly. However, if you also had an npc with priority 2, then that one would always appear alongside 11 of the others.
+# If there are fewer than 12 custom npcs, then they'll all be added and the game will then add normal npcs to total 12.
+#
+# Some special npcs are created separately and cannot be replaced by user-generated ones. This will not change in future versions
+# because the game makes a lot of assumptions about what these npcs are like and it's important that these aren't overridden with custom values.
+# Other special NPCs can be replaced by custom ones. These NPCs are identified by a special trait: see below for the list. 
+# Special NPCs do not count towards the main NPC count.
+#
+# Some general tips on writing npcs:
+# Most values are optional unless their comment says otherwise. 
+# If you leave an optional entry with a blank value then the normal character creation algorithm will populate it based on the npc's other values.
+# The same will happen if an optional entry is completely missing.
+# An npc with every optional entry blank will be identical to the usual algorithmically-generated npcs that appear in the game.
+#
+# The comments for individual entries will say if they're case-sensitive. Usually they aren't.
+# Whitespace before or after a value will usually be removed. 
+# However, you shouldn't put whitespace at the start of a line before the entry name as this will make the npc loading fail.
+# The exception is list entries such as traits. These should be indented by exactly one space, as seen in this file. Do not use tabs for this, only spaces.
+#
+# If an unexpected or invalid value is found, then that npc will not be created at all. This is deliberate - it makes it easier to 
+# identify mistakes in npc creation or with the loading process. 
+# Issues that will make an npc invalid include entries that aren't recognised, values that aren't allowed, values that conflict with
+# each other (see individual entry comments for details), values that are the wrong type such as text instead of numbers.
+#
+# I hope that the instructions in this file will be sufficient to let you make your perfect date. Good luck, and have fun :)
+
+
+# The --- separates different entries. You can include more than one npc in the same .yml file by using this as a separator.
+# However, it's usually preferable to give each npc their own file. This is because if an invalid npc causes the parser to error  
+# then it'll stop any other npcs from the same file being loaded.
+---
+
+# Type is a REQUIRED field. It must always be present. There are two valid values: MALE and FEMALE. However, the entries that can appear in the file and 
+# their valid values are different for the two NPC types, and so guides for the two are separated into different files.  
+# This file explains how to create a MALE custom NPC. For female NPCs, see customFemaleNpcGuide.yml.
+type: MALE
+
+# Enabled: whether the npc should be enabled to appear in games. A disabled npc will never show up in new games.
+# This is case insensitive. It defaults to false if not present and any value apart from TRUE will disable the npc. 
+# The npc in this file is disabled as it's just intended as an example.
+# To enable an npc, the value should read TRUE 
+enabled: FALSE
+
+# Priority determines which npcs get loaded first. It's optional - if missing it defaults to 0.
+# If populated this must be a valid Java integer. Negative integers are ok.
+# If you have fewer enabled npcs than the maximum for a game then priority is meaningless - all will be loaded.
+# However, if you had twelve npcs at priority 0, one at priority 1 and one at priority -1 then the priority 1 npc would appear in 
+# every game, 11 of the 12 priority 0 ones would appear, chosen at random, and the priority -1 one would never show up. 
+priority: 0
+
+# Name. This is case-sensitive, so if you want it to be consistent with other Newlife npcs it should be a capitalised first name.
+# Newlife will try to have only one npc with a particular name and won't give other npcs of the same sex the same name as another in the game. 
+# However, it is possible to have a male and a female NPC with the same name.
+# Some names are reserved to certain npcs: currently these are Ivy and Horse. Npcs with these names are invalid. Additionally, an npc will not
+# be added to the game if he has the same name as the player character.
+# If you create two or more npcs with the same name, at most one of them will be loaded in any particular game. If they have different priorities, then 
+# the lower priority one will never show up. 
+# If given the same priority, the one that gets added will be random. You can use this to have different variants of an npc so you won't know 
+# which one has loaded.
+name: Bob
+
+# Age: this is the npc's age in the game. It influences his body type, although that won't matter if you've set body type yourself.
+# Age also has a small direct effect on attractiveness.
+# This must be one of the following values, case insensitive: LATE_TEENS, EARLY_TWENTIES, TWENTIES, THIRTIES, FORTIES, FIFTIES,	OLD
+age: THIRTIES
+
+# Namelist ID. The ID for the list of names from which this NPC's name will be generated if they aren't given a name in this file.
+# If both this and name are set then the name from this file will be used for the NPC themselves and the namelist will be used if you let the NPC name one of your children in-game.
+#
+# Namelists are defined in racedata.json. Default values are: general, scottish, irish, arabic, turkish, nigerian, swahili, indian, chinese and japanese. Others may be 
+# added as development proceeds, and players can edit the file to add their own. 
+# The value here is case-sensitive.
+# 
+# If left blank the value will be picked based off the race-id. For custom-race NPCs, the default namelist will be used.
+nameListId: nigerian
+
+# Race: the description of the npc's race. This can be any text string. It can appear in descriptive text but has no stat effects.
+# Case insensitive - it'll automatically be converted to lower-case.
+# This should fit into the sentence "he's a/an <race> man" e.g. "he's a black man" or "he's an elven man".
+#
+# Race definitions are set in the configuration file racedata.json and can be changed by players. 
+# If blank, the game will pick a race definition based on weightings in that file.
+# Assuming you're using the standard values, then they are black, white, east asian, south asian and middle-eastern. 
+#
+# If this is blank or one of the defined values then it's ok to leave the derived values (eye colour, hair colour, skin colour) blank 
+# as they will be generated using the standard algorithm.
+#
+# However, if you enter any value that isn't in that file, it'll be treated as a custom race.
+# In this case you MUST set all of the derived values in this file or the npc will be invalid and won't load into games.
+race: black
+
+# Eye colour: a text string. Case insensitive - it'll be converted to lower case when the npc is created.
+# Like race, this can appear in descriptive text but has no stat effects.
+# This can be blank or missing, but only if the race is not a custom value - see the race comment above.
+eye colour: blue
+
+# Hair colour: the same rules apply as for eye colour.
+hair colour: black
+
+# Skin colour: the same rules apply as for eye colour. I've entered "green" here just to highlight that the values you set here don't have to comply 
+# with the normal ones for npcs.
+skin colour: green
+
+# The man's body type. If blank this will be automatically chosen with probabilities based on his age. 
+# Setting this but not age will not have the opposite effect - in that case his age will be calculated without body type affecting it, and you could end 
+# up with a combination that wouldn't naturally appear in the game under normal circumstances, such as a muscular elderly man.
+# The following values are valid (case insensitive): AVERAGE, SKINNY, TONED, MUSCULAR, THICKSET, PAUNCHY, FAT 
+# Figure affects attractiveness, quite a lot of descriptive text, and some actions. Only muscular, toned and thickset men will go to the gym.
+figure: TONED
+
+# Personality. Allowable values are: JERK, SELFISH, AVERAGE, ROMANTIC, CARING. Case insensitive.
+# This has a significant effect on the npc's behaviour in game, and also on which traits are likely to be picked for him, although the latter only
+# applies if you're allowing additional traits to be added during character creation.
+personality: AVERAGE
+
+# Traits: this is a list, which means that if present it should be described as below. 
+# Specifically, the first line should read "traits:" with no whitespace at the start of the line.
+# Subsequent lines should have a space, followed by "- " and then the name of the trait. It is essential to have the space at the start of the line and again
+# after the "-".
+# The trait names are case insensitive.
+#
+# You can include as many traits as you like. However, every trait must be one of the allowable values below.
+# Additionally, you cannot include trait opposites together in the same npc. For example, an npc with both CONSCIENTIOUS and HATES_CONDOMS will be invalid.
+# Traits need to be specifically set up to work in custom npcs, so if you find a trait that's added to the game in a future version doesn't work here then
+# report it as a bug - assuming that it's a trait that makes sense for custom characters.
+#
+# Although an npc with trait opposites is invalid, it is ok to create one with traits that normally wouldn't appear because of their personality or other 
+# attributes. For example, you can have a character who is both MISANTHROPE and COLD_HEARTED even though these are usually restricted to the JERK and SELFISH
+# personalities respectively. This character would have hard caps on both liking and love.
+# However, you might get odd results in game for very unsuited combinations. For example, the IMPREGNATOR trait is usually restricted to 
+# jerks. If you add it to a CARING character, then you'll find that his callous and mocking impregnator-specific content won't match well with his normal 
+# caring behaviour. 
+# For the most part, unless they cause dramatic problems like crashes or scenes getting stuck in loops, I don't consider such issues to be bugs 
+# if they can only arise for custom npcs.
+#
+# It is valid for an npc to have no traits at all - there are no required traits. 
+#
+# Here's the full list of allowable npc traits, with opposites and a short comment on what they do. 
+# 
+# THICK_COCK : Opposed to SMALL_COCK. The main "big dick" trait, frequently referenced in sex scenes and liked by pcs who love well endowed men
+# SMALL_COCK : Opposed to THICK_COCK, but you can have a man who has a small dick with a large head to it by taking this and the below trait. 
+#              This trait means he has a small dick that less-pleasant PCs can mock him for and those who prefer larger men might be disappointed by.  
+# BIG_COCK_HEAD : No opposites. Another trait for well-endowed men.
+# BIG_BALLS : No opposites. Increases his fertility (I know this isn't realistic so please don't complain!) and is referenced in sex scenes
+# HATES_CONDOMS : Opposed to CONSCIENTIOUS. The npc will usually refuse to wear a condom and will be annoyed at players who request them. Can appear on almost 
+#                 any npc, but more common on jerk, selfish, impregnator and less likely for caring men and those who don't want kids.
+# CONSCIENTIOUS : Opposed to HATES_CONDOMS and IMPREGNATOR. Prefers to use condoms and is much more likely to put one on without the pc asking. 
+#                Will also respect her more for asking. More likely for men with nicer personalities or who don't want kids.
+# VIGOROUS_LOVER : No opposites. The man is much more enthusiastic during sex and can use the 'rough' pace even if he's a nice guy who likes the pc,  
+#                 although his favourite pace is passionate. Generally a good match for pcs with the passionate lover trait. 
+#                 At the moment this is equally likely for all npcs, although that might change in the future.
+# MAGIC_FINGERS : Opposed to INEPT_LOVER. NPC equivalent of the PC's Clever Hands trait. Has somewhat limited effects - it's mostly only relevant when he's
+#                 touching your pussy without clothing in the way. 
+# TALENTED_TONGUE : Opposed to INEPT_LOVER. Makes the NPC great at performing cunnilingus. 
+# INEPT_LOVER : Opposed to MAGIC_FINGERS, TALENTED_TONGUE, LIKES_GOING_DOWN and LONG_LASTING. Makes the NPC bad in bed.
+# QUICKSHOT: Opposed to LONG_LASTING, makes the NPC finish quicker when having sex.
+# LONG_LASTING: Opposed to QUICKSHOT, INEPT_LOVER. Makes the NPC usually take a bit longer when having sex.
+# HANDSOME : Opposed to UGLY. Significantly increases the npc's attractiveness.
+# UGLY : Opposed to HANDSOME. Significantly reduces the npc's attractiveness. This describes his face - it's possible for an ugly man to have a sexy body.
+# BALD : Deprecated. Use the BALD hairstyle instead.
+# SHAVEN_HEADED : Deprecated. Used the SHAVEN_HEADED hairstyle instead.
+# LIKES_CUTE : Opposed to LIKES_SEXY. He prefers cute characters, getting an attraction bonus based on your cuteness, and a penalty if you look naughty.
+#              Also finds it cute when shy girls have trouble holding up a conversation.
+# LIKES_SEXY : Opposed to LIKES_CUTE, TRADITIONAL. Prefers naughty characters, and finds cute ones annoying.
+# LIKES_ELEGANT : Opposed to LIKES_CASUAL. Prefers elegant characters, getting an attraction bonus based on elegance and penalty if you look casual.
+# LIKES_CASUAL : Opposed to LIKES_ELEGANT. More attracted to casual girls, less so to elegant ones.
+# DULL : Opposed to INTERESTING. He's boring to spend time with and you won't enjoy talking to him. Unless he's rocking your socks in bed, your character 
+#        will usually dislike a dull npc and this means it'll be especially hard to become non-sexual friends with one.
+#        Normal npcs will never be both dull and fashionable, but you can create custom ones with both traits.
+# INTERESTING : Opposed to DULL. Your character will like spending time with him.
+# SLEAZY : Opposed to CHARMING, TRADITIONAL. Also normally never shows up on romantic men, although this is ok for a custom npc. Sleazy npcs are a lot more sexual 
+#          in talk and habits. See http://splendidostrich.blogspot.co.uk/2015/08/sleazy-crude-and-boastful.html for a blog post about the trait.
+# CRUDE : Opposed to CHARMING. Like Sleazy this never shows up on romantic npcs, unless you set it for a custom one. Crude mostly affects npc's talk - they 
+#         swear much more and annoy refined girls. However, crude men also don't hide how they feel. If they dislike you or are jerks, then they won't 
+#         be able to fake being nice when they're trying to get you into bed.
+# CHARMING : Opposed to TACITURN, CRUDE and SLEAZY. Charming men can pretend to be romantic even when they aren't in love, and romantic girls will tend to like them a lot.
+# BOASTFUL : Opposed to TACITURN. Likes to boast a lot about himself, which can make him annoying unless he's also interesting. Because he's so self-absorbed, 
+#            he won't mind when a shy girl can't carry her end of the conversation.
+# TACITURN : Opposed to BOASTFUL and CHARMING. This trait never appears randomly in the game but the npc Horse has it. It's used to show he's the silent type, and disables
+#            several talking options. 
+# LIKES_BIG_TITS : Opposed to LIKES_MED_TITS and LIKES_SMALL_TITS. More attracted to girls with large or medium-large breasts and less to girls with 
+#                  smaller ones. Npcs with a breast liking trait will sometimes get special content if they like/dislike the pc's breasts. 
+#                  Npcs without any of these three traits get a small bonus to attraction towards every breast size and will never especially like or dislike
+#                  the player's bosom.
+# LIKES_MED_TITS : Opposed to LIKES_BIG_TITS and LIKES_SMALL_TITS. Similar to LIKES_BIG_TITS but for the two medium sizes.
+# LIKES_SMALL_TITS : Opposed to LIKES_BIG_TITS and LIKES_MED_TITS. Similar to LIKES_BIG_TITS but for the two smaller sizes. This trait is slightly less common
+#                    than the other two among normally-generated npcs.
+# COLD_HEARTED : No opposites. Normally restricted to SELFISH npcs but can be added to other custom ones. Prevents the character from ever gaining love points
+#                in any way. Love will always be fixed at 0 for this character.
+# MISANTHROPE : No opposites. Normally restricted to JERK npcs but can be added to other custom ones. Caps liking points at a fairly low value. It is impossible
+#               for a misanthrope to ever think better of you than as an ok person.
+# TASTY_SPERM : Opposed to NASTY_SPERM. Do I really need to explain what this one does? Yum Yum.
+# NASTY_SPERM : Opposed to TASTY_SPERM. Makes it very unpleasant if he finishes in your mouth. Following a player request early in development, this trait is
+#               rare among npcs who don't have one of the 'bad' personality types.
+# IMPREGNATOR : Opposed to LIKES_ORAL and CONSCIENTIOUS. An 'evil' trait that means he tries to get girls pregnant by underhand means. 
+#               His behaviour after depends a bit on other traits. For example, if he also doesn't want kids then he'll try to knock girls up and then run out on them.
+#               These npcs will also try to sabotage your contraception. Normally only appears on jerks
+# TRADITIONAL : Opposed to SLEAZY, LIKES_SEXY, LIKES_TO_SHARE. Will normally only appear on Jerks as it's an explicitly chauvinistic trait, but can be manually assigned to others.
+#               These men will ask the PC to commit to being a housewife when they get married, and they're always ok with her staying a virgin until marriage.
+# CHEATER :     No opposites, although doesn't appear by default on Caring or Romantic NPCs. You can still add it to custom ones though. 
+#               This trait makes it much more likely for him to cheat on you in a relationship and he might do so even if you haven't done anything
+#               to make him feel you're a bad wife. As of 0.4.23 the cheating content only appears when you're living together, so you'll need to 
+#               get married first.
+# WANTS_KIDS :  Shockingly, this is opposed to DOESNT_WANT_KIDS. The npc wants to have children and will probably be a good dad. he'll react positively
+#               to the pc getting pregnant with his kid. Most common for romantic npcs. 
+# DOESNT_WANT_KIDS : Opposed to WANTS_KIDS. The npcs doesn't want children and will not be happy if the player gets pregnant with his child. Or with someone else's.
+# LIKES_ORAL : Opposed to IMPREGNATOR, LIKES_ANAL and PREFERS_SEX. Enjoys oral sex more than the average npc and is more likely to initiate it.
+# PREFERS_SEX : Opposed to LIKES_ORAL and LIKES_ANAL. Is not so keen on oral sex and similar activities as an alternative to full sex, 
+#               although he doesn't outright hate it and you can still bring him off this way. This mainly affects the "oral" scene which covers titjobs and 
+#               masturbation as well. He's ok with this sort of thing as part of foreplay (i.e. in normal makeout scenes). These npcs are much more likely to 
+#               stop oral partway and return to normal makeouts
+# LIKES_ANAL : Opposed to IMPREGNATOR, PREFERS_SEX and LIKES_ORAL. Enjoys anal sex more and is more likely to initiate it. This trait will be removed
+#              from custom NPCs when they are loaded if anal sex is disabled in the game options.
+# LIKES_GOING_DOWN: Opposed to INEPT_LOVER. The NPC enjoys giving cunnilingus more and will sometimes initiate it without the PC asking.
+# GOOD_DANCER : Opposed to BAD_DANCER. He is better at dancing and can appear at the dance competition. All dance class npcs have this trait but it's rare among
+#               other ones.
+# BAD_DANCER : Opposed to GOOD_DANCER. He hates dancing and is terrible at it.
+# FASHIONABLE : No opposites. Normal NPCs will never have both this trait and dull, but custom ones can. Dresses in more fashionable clothes and enjoys it 
+#               more if you try to befriend him by taking him clothes shopping.
+# DOORMAT : Opposed to LIKES_TO_SHARE. NPCs with this trait don't like the PC cheating on them but they'll just complain about it without 
+#           actually breaking up with her.
+# LIKES_TO_SHARE: Opposed to DOORMAT, TRADITIONAL. These NPCs find it a turn-on if their partner sleeps with other men. Note that most NPCs have neither
+#                 this trait nor doormat. An NPC with neither will be upset if the PC cheats on them and may break up with her.
+# LIKES_COOKING: No opposites. Likes to cook and is good at it. These NPCs can appear as students in the cooking
+#                class as long as they aren't set to have no random appearances.
+# REPAIRMAN : Opposed to other special NPC traits. Allows the NPC to show up as the repairman if one of your appliances breaks. There can be more than one repairman and if so then
+#             One will be picked randomly when needed. If you don't create a custom repairman then the game will add exactly one.
+#             Non-custom NPC repairmen always have the Magic Fingers trait (because they're "good with their hands") but are otherwise the same as other 
+#             npcs and can show up in the nightclub and similar places before appearing to make repairs.
+#             Repairman was added in 0.3.13 and npcs with it won't be valid in earlier versions. 
+#             Other than letting him show up in the relevant scene, the repairman trait has no effects whatsoever.            
+# LOWLIFE : Opposed to other special NPC traits. These characters can appear in a certain event. Unlike repairmen, they will never appear otherwise - you'll never see them in 
+#                the club for example. The appropriate scene assumes that lowlives are Jerks who lack the Charming trait. Creating a custom lowlife who doesn't
+#                fit this definition is not recommended as it could lead to odd behaviour - switching between asshole and nice-guy attitudes depending on whether
+#                the scene in question includes support for other personality types. However, such NPCs are valid and will load, even if they act strangely in-game.
+#				 Newlife will ensure there are at least 3 lowlives, even if you don't create any. Default lowlives are always jerks of one of the 2 younger age categories
+#                without the Charming or Fashionable traits. Both custom and default lowlives cannot be befriended and will not show up in scenes unless specifically
+#                set to appear.   
+# SALES_BOSS :  Opposed to other special NPC traits. This custom NPC will replace the usual boss for the sales career. There can only be one sales boss in a game.
+#				The sales boss will not be randomly picked for scenes like the nightclub. It is possible for a boss to become dateable through events though.
+#				If you don't create a boss, one will be generated by the game. 
+# OFFICE_BOSS : Opposed to the other special NPCs. Similar to the sales boss, but for the office career. The 
+#               default sales boss is always selfish or a jerk, so picking a different personality may result in 
+#               odd behaviour during his special scenes.
+# OFFICE_HUNK : Opposed to other special NPC traits. A handsome colleague for the office career. Will always be given a CARING personality and the HANDSOME trait, overriding any 
+#               values set here. Will also never be dull although he is not guaranteed to be INTERESTING. His body-type can also be overridden if the PC doesn't like it.
+# SLEAZY_OFFICE_WORKER : Opposed to other special NPC traits. A jerk NPC that can appear in the office party. There are always 2 of these, normally the same age as each other
+#                        but this is not enforced if they are both custom NPCs. The game will ensure that these characters are sleazy jerks, overriding any conflicting values.
+# GYM_JERK : Opposed to other special NPC traits. This custom NPC can appear normally in nightclubs etc and is also the jerk that can lead the player-character
+#            into changing-room hanky-panky. There are a lot of special requirements for this NPC, and the game will override the relevant values if they aren't set.
+#            Specifically, he must have the Jerk personality, the Sleazy, Cold-hearted and Misanthrope traits and either Toned, Thickset or Muscular body type.
+#            The Charming trait is opposed to Sleazy, so it will be removed if set for this NPC. There can only be one gym jerk in a game, so if you create several then
+#            only the highest priority one will be used.
+# BOYFRIENDS_JERK_FRIEND: Opposed to the other 'special NPC' traits above. This NPC will be used for the jerk-friend storyline. They won't be present at 
+#                         the start but will be created if the NPC is needed. The jerk-friend NPC has a lot of fixed traits that will override any 
+#                         conflicting ones set here.
+# HOTEL_PROSTITUTION_CLIENT: Deprecated. If you add this trait to an NPC the game will give him the PROSTITUTION_CLIENT trait 
+#                            automatically. Otherwise it has no effect.                           
+# PROSTITUTION_CLIENT: Another special-NPC trait. This one may try to pay you for sex. He won't appear in the club or similar random encounters.
+#                      This NPC will always be SLEAZY (the game will add this if you don't). If his age is left blank then he'll tend to
+#                      be an older man, but if it's set then the game will use whatever you put in there.
+# DANCE_JUDGE: Special NPC trait. The judge for the dance competition. This NPC can appear randomly but will always 
+#              be chosen to judge dance contests. Always has the GOOD_DANCER trait (this will be added when the NPC 
+#              is loaded if you don't set it here). Default judges will be older men, but you can override this by 
+#              settng a younger age.
+# DANCE_TEACHER: Special NPC trait. Always has GOOD_DANCER, FASHIONABLE and the TONED body type: these will be set
+#                automatically and will override any conflicting values that you set. The teacher is hidden until you take a dance class and
+#                meet him for the first time.
+# DANCE_STUDENT: Special NPC trait for NPCs who attend dance classes. Always have the GOOD_DANCER trait. Will be 
+#                hidden until you take a dance class. You can create multiple students and all will be loaded 
+#                every time with no limits - very large numbers might cause issues in the game so don't go nuts. 
+#                The minimum is 3. The game will create students up to that number if there are fewer custom ones.
+#                All dance students will appear and be met in the first dance class. Thereafter the normal dance
+#                class event includes two, chosen at random.
+#                Like the dance teacher, students can appear in random events like the club, but only after meeting
+#                them in the first class.
+# COOKING_TEACHER: Special NPC trait for the man who teaches cooking classes. Opposed to other special NPC
+#                  traits but otherwise has no opposites. Should always have the LIKES_COOKING trait - the game
+#                  will add this if it isn't set.
+# PORN_ACTOR: Special NPC trait for a man who can appear as a co-star if the PC ends up performing in a porn video. 
+#             Opposed to other special NPC traits but otherwise has no opposites. There's no other restriction on these 
+#             NPCs but the game will prevent them from appearing in scenes other than their own special ones.
+# EVIL_HYPNOTIST: Special NPC trait, opposed to other special NPCs. Must have Jerk personality. 
+#                 Will be set to no-random-appearances until the PC has been hypnotised by him at least once. 
+# GOOD_HYPNOTIST: Special NPC trait, opposed to other special NPCs. Should have Average, Romantic or Caring personality.
+#                 Will be set to no-random-appearances until the PC has been hypnotised by him at least once. 
+# HYPNOTIST: Allows the NPC to appear in hypnosis-related scenes that aren't restricted to a special NPC. Only rarely used in main content. Does not mark the npc
+#            as a special NPC.
+# SLEAZY_LANDLORD: Special NPC trait, opposed to other special NPCs. This is the PC's sleazy landlord, the game will ensure he is a sleazy jerk, overriding conflicting 
+#                  values if you set them. 
+# SILVER_SPOON_LANDLORD: Special NPC trait, opposed to other special NPCs. This is the 'silver-spoon' landlord who comes from a wealthy family. 
+#                        This NPC will always have the ROMANTIC personality (the game will override any alternative choices). This NPC will not normally 
+#                        be generated older than TWENTIES, but if you set a custom one to older then it will be limited to THIRTIES instead.
+# PIMP_LANDLORD: Special NPC trait. This is the landlord for the redlight district. You should not assign him other landlord traits.
+#                The pimp will always have a selfish personality, the sleazy trait, and will never be traditional or taciturn. 
+# PLEASANT_HOME_LANDLORD: Only relevant one one of the landlord characters. If set, it will assign him to be the landlord for the pleasant neighbourhood.
+#                         A landlord with just one neighbourhood trait will be guaranteed to become landlord for that home, with the other landlord taking the second.
+#                         A landlord with both pleasant and cheap neighbourhood traits will be landlord for both (and the other landlord will not appear in the game).
+#                         If neither landlord has any neighbourhood traits then they'll get one each, chosen randomly.
+# CHEAP_HOME_LANDLORD:  Assigns a landlord character to the CHEAP neighbourhood where the PC has her first home at the start of the game.
+# NO_BEFRIEND : No opposites. A hidden trait that's usually used to limit special npcs. Most hidden traits would cause problems on custom npcs but this one 
+#               would be ok so I've allowed it. Npcs with this trait can never be befriended. They can still become your boyfriend though. 
+# INFERTILE : No opposites. A hidden trait that is only used for custom NPCs. Men with this trait will never get you pregnant. It doesn't change in-game
+#             text. There'll still be "pregnancy risk" dialogue and so on: presumably neither you nor him know about his infertility.
+# UNLOVABLE : No opposites. A hidden trait that is only used for custom NPCs. The PC will never fall in love with this NPC.
+# ODDLY_UNATTRACTIVE: No opposites. A hidden trait that is only used for custom NPCs. Caps PC's starting attraction to a low level regardless of other factors.
+# CUNNING: No opposites. The PC's partner will never discover cheating with this NPC on his own.
+# TESTING_TRAIT : No opposites. A trait used for testing of custom scenes that has no effects in the main game. It will show up in the 
+#                 character browser at any level of knowledge.
+traits:
+ - HATES_CONDOMS
+ - LIKES_BIG_TITS
+ - LIKES_CUTE
+
+# allow additional traits: TRUE or FALSE, case insensitive. Defaults to TRUE. If this is true then the normal npc creation algorithm might add additional
+# traits to the npc on creation. This will use the normal logic so it'll never add ones that are opposed to those you've added.
+# If this is false then the npc will only have the traits added using the trait entry. If no traits are specified there then the npc will have no traits at all. 
+allow additional traits: TRUE
+
+# blocked traits: This is a list of traits with the same rules as the traits entry above. Any value here will not be added by the npc creation algorithm.
+# If "allow additional traits" is FALSE then this entry has no effect as no extra traits are added anyway.
+# There's no need to block traits that would be prevented anyway because you've added their opposite. 
+# If a trait appears in both traits and blocked traits, then it will be added to the npc. 
+#
+# Unlike with the trait list above, it's fine to block a trait and its opposite as well.
+#
+# For example,  you could block LIKES_SEXY and LIKES_CUTE to get a character who doesn't care either way, or do the same for the breast preferences
+# You could block NASTY_SPERM if you don't want that trait on your future boyfriend, or CONSCIENTIOUS if you like the idea of accidental impregnation and 
+# don't want him to keep pulling out rubbers.
+#
+# The traits that turn the custom npc into a special one (such as REPAIRMAN, LOWLIFE & SALES_BOSS) will never be added by the creation algorithm, so there's no 
+# need to include them under blocked traits. Similarly, hidden traits aren't added by default so there's no benefit to blocking NO_BEFRIEND. 
+blocked traits:
+ - NASTY_SPERM
+ - TASTY_SPERM
+
+# Friendship effect: 
+# An effect that will apply every week if this character is befriended.
+# If not set one will be chosen based on the character's traits and personality.
+# The following values are appropriate for male NPCs:
+# NEEDY_FRIEND, PARTY_FRIEND, CALMING_FRIEND, DANCE_NUT, GENEROUS_FRIEND, FASHION_GURU, MOOCHER, EXPLOITATIVE_FRIEND,
+# WITTY_FRIEND, MISANTHROPIC_FRIEND.
+# This value only applies when the NPC is not the PC's boss. The current boss has a special value applied instead. 
+# This value (BOSS_FRIEND) can technically be applied here but is not recommended because it would then be used 
+# even if the PC quits her job or chooses a different career path.
+#
+# Some friend-effects - generally those associated with money - have variants at different wealth levels.
+# These will be updated at character creation to apply the correct variant, and then automatically updated
+# if their income later changes.
+friend effect: WITTY_FRIEND
+
+# Partner effect:
+# Functions similarly to the friendship effect, but only applies when the pc is in a relationship with this character.
+# Values:
+# CARING_PARTNER, FASCINATING_PARTNER, PEDANTIC_PARTNER, EXPLOITATIVE_PARTNER, ANGRY_PARTNER, COLD_PARTNER,
+# PLEASANT_PARTNER, AMBITIOUS_PARTNER, FEEBLE_PARTNER, CHAUVINISTIC_PARTNER.
+partner effect: CARING_PARTNER
+
+# Partner effect for when the character is the PC's boss. This used to be part of "partner effect" but is now
+# separate. Never used if the NPC is not the boss in a career track, so can be omitted for most characters.
+# While any partner effect will technically work, the expected boss values are: 
+# BOSS_PARTNER_SLAVEDRIVER, BOSS_PARTNER_UNPROFESSIONAL, BOSS_PARTNER_SUPPORTIVE, BOSS_PARTNER_GENEROUS.
+boss partner effect: BOSS_PARTNER_SUPPORTIVE
+
+# Hairstyle: the character's hairstyle. Use BALD or SHAVEN_HEADED instead of the (now deprecated) traits that were used in old versions. 
+# The following values are valid for all NPCs. I've separated them into male, female and unisex sections to reflect how they're used in-game, but 
+# the game will not error if you give a male NPC a typically-female hairstyle or vice-versa.
+# Men's styles: BALD, SHORT_HAIR, SHOULDER_LENGTH_MENS_HAIR, MAN_BUN, RECEDING
+# Women's styles: SHORT_BOB, PIXIE_CUT, BUN, SHOULDER_BOB, SHOULDER_STRAIGHT, WAVY_SHOULDER_LENGTH, PONYTAIL, PIGTAILS, LONG_PONYTAIL, LONG_HAIR, WAVY_LONG
+# Unisex styles: SHAVEN_HEADED, MULLET, AFRO
+hairstyle: SHORT_HAIR
+
+# Career: The character's career. Their job within this career will vary on various parameters, plus a random element. Special NPCs that require a certain job will override this value with their unique career.
+# Allowable values are: UNEMPLOYED, BUSINESS, ACCOUNTANT, CIVIL_SERVANT, WAREHOUSE, LIBRARY, SUPERMARKET_STAFF, BARSTAFF.
+career: BUSINESS
+

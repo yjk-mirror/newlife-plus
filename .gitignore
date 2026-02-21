@@ -1,0 +1,14 @@
+# Game engine and runtime binaries — not our content
+lib/
+*.jar
+*.exe
+
+# Game-generated data
+raceData.json
+
+# Machine-local Claude settings
+.claude/settings.local.json
+
+# OS noise
+.DS_Store
+Thumbs.db

@@ -1,0 +1,15 @@
+<introText>
+You meet with $bf.getName() at a pub.
+
+There's a giant screen showing the football match. The pub is crowded with fans. $bf.getName() is saving a table for the two of you. The two of you share a pitcher of beer and a bowl of chips as you watch the match together. It is a real nail-biter at the end, but the match ends with a tie, 0-0.
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are in a pub with $bf.getName().
+</sceneDescriptionText>
+
+<empty>
+</empty>

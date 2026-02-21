@@ -1,0 +1,26 @@
+# This is a quick yml scene I did following an online request for a custom scene to end the PC's marriage.
+# It should work as an example/template of how you can use such a scene to make specific simple changes
+# such as updating relationships, adding or removing traits and so on.
+# To divorce, move this to the user_custom_scenes folder and trigger it using the "test custom scenes" activity, selecting your husband as the NPC.
+textFileName: divorce.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+ location: 
+  usePlayerHome: true
+
+intro:
+ textId: introText
+ effects:
+ # Ends the marriage.
+  - effect: $m.changeRelationshipStatus("ACQUAINTANCE") 
+ finishScene: true
+
+    
+
+  

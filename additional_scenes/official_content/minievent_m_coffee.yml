@@ -1,0 +1,34 @@
+# Preconditions for this scene:
+# Part of the minidate framework
+# $m should be a male friend or boyfriend or husband
+
+textFileName: minievent_coffee.vm
+
+sceneDescriptionTextId: sceneDescriptionText_m
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+
+ location:
+  wall: wall
+  floor: hardwood floor
+  hasBed: false
+  isOutside: false
+
+
+
+intro:
+ textId: introText_m
+ followUpActions:
+  done: false
+ finishScene: true
+
+actions:
+ - id: done
+   shortDesc: Not used for anything
+   longDesc: Not used for anything
+   textId: empty
+

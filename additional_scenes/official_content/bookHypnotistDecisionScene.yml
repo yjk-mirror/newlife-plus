@@ -1,0 +1,80 @@
+# Scene written by splendidostrich
+#
+# Overview:
+# This is the decision scene where the player decides which hypnotist to hire. 
+#
+# Scene access:
+# Triggered by the PC choosing to book a hypnotist.
+#
+# Preconditions:
+# The player must have unlocked the ability to hire a hypnotist
+# Goodhypno and evilHypno are the good and evil hypnotist special characters.
+
+
+textFileName: bookHypnotistDecisionScene.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: goodHypno
+    outfit: CASUAL
+  - id: evilHypno
+    outfit: CASUAL
+ location: 
+  usePlayerHome: true
+
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.hideNpc($goodHypno)
+  - effect: $scene.hideNpc($evilHypno)
+ followUpActions:
+  ## hireEvil goes first to tempt players into his vile clutches.
+  hireEvilHypno: 
+  hireGoodHypno: 
+  dontHireAnyone:    
+
+actions:
+ - id: dontHireAnyone 
+   shortDesc: Don't call anyone.
+   longDesc: Change your mind and don't hire a hypnotist after all
+   textId: dontHireAnyone  
+   finishScene: true
+    
+ - id: hireEvilHypno 
+   shortDesc: hireEvilHypnoSd
+   longDesc: hireEvilHypnoLd
+   textId: hireEvilHypno 
+   effects:
+    - effect: $gd.setGameFlag("HIRED_HYPNOTIST")
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: playersHomeHypnosis.yml
+    maleNpcs:
+     - id: m
+       npc: evilHypno
+    location:
+     useCurrentLocation: true 
+
+ - id: hireGoodHypno 
+   shortDesc: hireGoodHypnoSd
+   longDesc: hireGoodHypnoLd
+   textId: hireGoodHypno 
+   sceneTransition:
+    condition: $goodHypnoAvailable
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: playersHomeHypnosis.yml
+    maleNpcs:
+     - id: m
+       npc: goodHypno
+    location:
+     useCurrentLocation: true 
+   followUpActions:
+    hireEvilHypno: 
+    dontHireAnyone:  
+   

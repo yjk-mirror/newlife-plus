@@ -1,0 +1,1304 @@
+<sceneDescriptionText>
+You're in your $w.getFlatOrHouse() with $jerk.getName()##
+#if(!$scene.isNpcHidden($bf)) and $bf.name##
+#end.
+</sceneDescriptionText>
+
+<introText>
+It's the evening. You finished work a few hours ago. Since then, you've gone home, taken a shower, changed into some more relaxed clothes ##
+and now you're putting your feet up##
+#if($w.hasStuff("KETTLE")) with a cup of tea.
+#else and wishing you had a cup of tea.
+#end
+#if($w.livingWithPartner)Your $bf.relationshipNpcDesc is still out, working late at his office.
+#end
+
+There's a knock on your door. You get up, wondering##
+#if($w.livingWithPartner) if $bf.name is back early. Answering the door you instead ##
+#else if it's a surprise visit from $bf.name, and hurry to answer. Instead, you ##
+#end
+find yourself looking at $jerk.name, standing there smiling smugly. Stepping##
+#if($jerk.hasTrait("BOASTFUL")) arrogantly##
+#elseif($jerk.hasTrait("CRUDE")) rudely## ## What's that? This adjective doesn't make sense? Well neither does your face!
+#else brashly##
+#end
+ past into your home, he tells you that the two of you need to talk.
+</introText>
+
+<letHimIn>
+You belatedly invite $jerk.name in and unnecessarily tell him to make himself at home. He heads to the living room, leaning against the wall ##
+just next to the door so you're forced to brush past##
+#if($jerk.getFigure() == "FAT") his massive bulk##
+#elseif($jerk.getFigure() == "PAUNCHY") his soft gut##
+#else his masculine body##
+#end
+ as you enter the room.
+</letHimIn>
+
+<listen>
+$jerk.name announces that he's been thinking about what you did together##
+## Cheating activities, in an approximate priority order
+## First: losing her virginity to him
+#if($jerk.hasDoneCheatingActivity("LOST_VIRGINITY"))
+, how your ##
+	#if($w.hasTrait("CUTE"))cute little #end
+face looked when he took your cherry.
+## Anal virginity is 2nd
+#elseif($jerk.hasDoneCheatingActivity("LOST_ANAL_VIRGINITY"))
+, how tight your ring was when his ##
+	#if($jerk.hasTrait("THICK_COCK"))fat #end
+cock took your anal virginity.
+## Penetrative sex. Also handles the CAME_INSIDE activity. 
+#elseif($jerk.hasDoneCheatingActivity("SEX"))
+	#if($w.hasTrait("SNUG_PUSSY"))##
+		, how tightly your sweet pussy gripped his ##
+		#if ($jerk.hasTrait("THICK_COCK"))fat #end##
+		cock##
+		#if($jerk.hasTrait("CRUDE")) when he was porking you#end##
+	#else##
+		#if($jerk.hasTrait("CRUDE"))##
+			, how great it felt to give you a ##
+			#if($jerk.hasTrait("VIGOROUS_LOVER"))hard##
+			#{else}good#end##
+			porking##
+		#else
+			, how you had sex together, his ##
+			#if ($jerk.hasTrait("THICK_COCK"))fat #end##
+			cock in your sweet pussy##
+		#end##
+	#end##
+	#if($jerk.hasDoneCheatingActivity("CAME_INSIDE"))##
+		, how you let him ##
+		#if($jerk.hasTrait("CRUDE"))shoot his spunk inside.
+		#{else}come deep inside you.
+		#end	
+	#{else}.	
+	#end
+## Anal
+#elseif($jerk.hasDoneCheatingActivity("ANAL"))
+, how your asshole squeezed his ##
+	#if($jerk.hasTrait("THICK_COCK"))fat #end
+cock until## 
+	#if ($jerk.hasDoneCheatingActivity("CAME_INSIDE_ANAL")) he flooded your rectum with cum.
+	#else you made him cum.
+	#end
+#elseif($jerk.hasDoneCheatingActivity("ORAL"))
+	#if($jerk.hasTrait("LIKES_ORAL"))
+		, how wonderful your##
+	#else
+		, how your##
+	#end
+	#if ($w.hasTrait("CUTE") && !$jerk.hasTrait("LIKES_SEXY")) sweet##
+	#elseif ($w.hasTrait("SULTRY") && !$jerk.hasTrait("LIKES_CUTE")) sexy##
+	#elseif ($w.hasTrait("POSH") && !$jerk.hasTrait("LIKES_CASUAL")) posh##
+	#end
+	 mouth felt around his ##
+	#if($jerk.hasTrait("THICK_COCK"))##
+		#if($jerk.hasTrait("BOASTFUL"))massive ##
+		#{else}fat #end##
+	#end
+	cock##
+	#if($jerk.hasDoneCheatingActivity("CAME_IN_MOUTH")), how good it was to unload his cum down your throat.
+	#{else}.
+	#end
+## Medium-severity stuff: titjob comes first: a somewhat arbitrary pick.
+#elseif($jerk.hasDoneCheatingActivity("TITJOB"))
+	#if ($w.getBreasts() == "SMALL"), how you rubbed those small titties all over his hard cock.
+	#elseif ($w.getBreasts() == "MEDIUM_SMALL"), how those pert tits of yours felt against his hard cock.
+	#elseif ($w.getBreasts() == "MEDIUM_LARGE"), how he got his hard cock right between##	
+		#if ($jerk.likesPlayersBreasts) those lovely big tits of yours.
+		#else your tits.
+		#end
+	#elseif ($w.getBreasts() == "LARGE"), how you wrapped those massive tits around his hard cock.
+	#end
+## Handjobs
+#elseif($jerk.hasDoneCheatingActivity("HANDS_ORGASM"))
+	#if($w.hasTrait("CLEVER_HANDS")), how you were able to make him cum like a geyser with just a touch of your hands. 
+	#{else}, how you ended up with his spunk all over your hands.
+	#end
+## PC orgasm is last - he focuses more on his enjoyment than hers
+#elseif($jerk.hasDoneCheatingActivity("PC_ORGASM"))
+## Maybe separating the words on the crude trait is OTT, especially as they're homophones... 
+	#if($jerk.hasTrait("CRUDE"))#set($cumCome = "cum")##
+	#else #set($cumCome = "come")##
+	#end
+## The game doesn't store details about which orgasm choice the player took, so I'm using the passionate-lover trait to 
+## make a guess about loud vs quiet orgasms. This should usually be good-enough for the scene. 
+## Another limitation is that the hidden orgasm still sets the cheating flag, so 
+## from the pov of this scene the player's attempt to hide her climax was always unsuccessful.
+	#if($w.hasTrait("PASSIONATE_LOVER")), especially the way you cried out when he made you $cumCome.
+	#{else}, especially the noises you make when you $cumCome.
+	#end
+## Low severity. Touch cock is first as it focuses on his pleasure most.
+#elseif($jerk.hasDoneCheatingActivity("TOUCH_COCK"))
+## As with most of these sections, his reminiscing won't always match 100% what actually happened with the PC
+## For example, she may have used the "tentative touch" action, rather than "wrapping her hands around his cock".
+## I chalk this up to the jerk being an unreliable narrator who's exaggerating what happened.
+, especially how you wrapped your##
+	#if ($w.getFigure() == "SLIM") dainty##
+	#elseif($w.hasTrait("CLEVER_HANDS")) nimble##
+	#end
+	 hands around his throbbing cock. That was fun, but it left him wanting more. A lot more.
+## Feel pussy, logically feels like it should be before breasts. A bit of a shame as the breasts section is IMO better...
+#elseif($jerk.hasDoneCheatingActivity("FEEL_PUSSY"))
+, how warm##
+	#if ($w.hasTrait("WET_PUSSY")) and wet#end##
+ your pussy felt when he fingered you.
+## Grope breasts. This far down the list it's probably quite rare - a shame as this is a nice sentence.
+#elseif($jerk.hasDoneCheatingActivity("GROPE_BREASTS"))
+	#if($jerk.likesPlayersBreasts)
+	, remembering how##
+		#if ($w.getBreasts() == "SMALL") your lovely little breasts felt in his hands.
+		#elseif ($w.getBreasts() == "MEDIUM_SMALL") much he liked having your perky tits in his hands.
+		#elseif($w.getBreasts() == "MEDIUM_LARGE") your gorgeous tits bounced when he was playing with them.
+		#else it felt to knead your spectacular tits. 
+		#end
+	#elseif($jerk.dislikesPlayersBreasts)
+		, how you let him feel your tits, even though## 
+		#if ($w.getBreasts() == "SMALL" || $w.getBreasts() == "MEDIUM_SMALL") they're far too small.
+		#else they're too big to really be attractive.
+		#end
+	#else
+		, remembering how you let him play with your $w.getBreastsDesc().
+	#end
+## Just kissing... doubtful it'll show up much at all: only if it's literally the only cheating thing she's done
+#elseif($jerk.hasDoneCheatingActivity("KISSING"))
+	, how soft your lips felt when he was kissing you.
+## Default option in case something's been forgotten or gets added in the future.
+#else##
+. 
+#end
+
+He hasn't just come to reminisce though. $jerk.name explains that he knows you have a $bf.relationshipNpcDesc, even has the poor guy's name and ##
+number. He certainly enjoys looking back at the fun you had together, but he doubts your bloke will feel the same way. 
+
+#if ($jerk.npcLoveCrush)##
+	He's disappointed you're with this other guy when the two of you would be so much better together. It's tempting for him to phone your ##
+	$bf.relationshipNpcDesc up and tell him everything. In fact, he might to that right now if you can't do something to change his mind. 
+#else##
+	As an honest person, he feels obliged to tell your $bf.relationshipNpcDesc, $bf.name about what you've been doing. He might change his mind though, ##
+	if you found a way to distract him.
+#end
+## Set up the NPC's preferences
+$scene.addWeightedItem("SEX",10)## Always a possible request, but will have lower weight than a more specific one.
+#if($jerk.hasTrait("LIKES_ANAL"))$scene.addWeightedItem("ANAL",20)#end##
+#if($jerk.hasTrait("LIKES_ORAL"))$scene.addWeightedItem("ORAL",20)#end##
+#if($jerk.hasTrait("HATES_CONDOMS") || ($jerk.hasTrait("IMPREGNATOR") && !$w.knownPregnant && !$w.safe))$scene.addWeightedItem("UNPROTECTED",20)#end##
+## Pick one of the possible items. It's then used as a key to decide which text to output and which flag to set for checking whether the
+## jerk's request is satisfied later.
+## Scene flags will still be set in any sub-scenes or future transitions. I've given these flags very scene-specific names (e.g. "JERK_BLACKMAIL_WANTS_ANAL" 
+## instead of just "WANTS_ANAL) to stop them interfering with any internal flags that a possible future sub-scene might set.
+## There wouldn't be any conflicts in the current version, but this helps avoid having to worry about checking for them when new scene flags get
+## added to other scenes in the future.
+#set($jerkRequest=$scene.pickItemAndClearMap())##
+#if($jerkRequest == "SEX")
+## The SEX request will only be satisfied if the PC agrees, proceeds to a makeout scene and from there to a sex one. Getting the man off
+## via oral etc will fail the demand.
+## A scene flag isn't set here as this is treated as the default option that's assumed to have been chosen if none of the other flags are set.
+	#if($jerk.believesVirgin)##
+		#if($w.hasTrait("CUTE"))
+			$scene.capitalise($bf.relationshipNpcDesc) or not, you're clearly an innocent who's never opened her legs for a man. It's time for that ##
+			to change. 
+		#elseif($w.hasTrait("SULTRY"))
+			A woman like you shouldn't be so inexperienced. Your $bf.relationshipNpcDesc is failing his duties, but he's willing to ##
+			step up and help you dispose of your virginity.
+		#else
+			You need to choose between your virginity and your $bf.relationshipNpcDesc. If you want your cheating to stay secret, then it's time to ##
+			say goodbye to your cherry.
+		#end
+	#elseif($jerk.hasDoneSexualActivity("SEX"))
+		He feels like sticking his cock somewhere nice and warm, and your ##
+		#if($w.hasTrait("SNUG_PUSSY"))tight #end##
+		pussy seems ideal.
+	#elseif ($jerk.hasDoneSexualActivity("ANAL"))
+		He's enjoyed having your ass, but this time he wants to try something new, wants to go deep into your ##
+		#if ($jerk.hasTrait("CRUDE"))cunt.
+		#{else}pussy.
+		#end
+	#else
+		He wants to go further this time, wants to go balls-deep into you and feel your pussy squeezing his cock.
+	#end
+#elseif($jerkRequest == "ANAL")
+$scene.addFlag("JERK_BLACKMAIL_WANTS_ANAL")##
+	#if($w.analVirgin)
+		#if($w.hasTrait("CUTE"))
+			He bets a sweet little thing like you has never felt a man's rod deep in her asshole. Perhaps its time to change that.
+		#else
+			He reckons you should open up your puckered little asshole and let a real man plough you where the sun doesn't shine.
+		#end
+	#elseif($jerk.hasDoneSexualActivity("ANAL"))
+		He's always found your butthole to be nice and tight, and he feels like stretching it out a bit with his ##
+		#if($jerk.hasTrait("THICK_COCK"))thick #end##
+		cock.
+	#elseif($jerk.hasDoneSexualActivity("SEX") && $w.hasTrait("SNUG_PUSSY"))
+		He's always wondered if your asshole is as tight as your##
+		#if($jerk.hasTrait("CRUDE")) cunt## 
+		#else pussy##
+		#end##
+		. You should get on all fours and let him find out.
+	#else
+		It's a real shame he's never got to squeeze his cock between those##
+		#if($w.figure == "WOMANLY") luscious##
+		#elseif($w.figure == "TONED") firm##
+		#else little##
+		#end
+		#if($jerk.hasTrait("CRUDE")) arse-cheeks ##
+		#else buttocks ##
+		#end##
+		of yours. It feels like now would be a good time for that. 
+	#end
+#elseif($jerkRequest == "ORAL")
+	$scene.addFlag("JERK_BLACKMAIL_WANTS_ORAL")##
+	#if($jerk.npcLoveCrush)
+	You should submit to a real man, on your knees, giving his cock some attention with##
+	#else
+	Seeing as you're a cheating bitch, he thinks you should spend more time on your knees, and that'll give you a chance to give his knob a good polishing with##
+	#end
+	#if($w.hasTrait("SKILLFUL_TONGUE")) that nimble little tongue of yours.
+	#else your tongue.#end
+#elseif($jerkRequest == "UNPROTECTED")
+	$scene.addFlag("JERK_BLACKMAIL_WANTS_INSEMINATE")##
+	#if($jerk.hasTrait("IMPREGNATOR") && !$w.safe && !$w.knownPregnant)##
+		#if($w.risky)
+			#if($w.figure == "WOMANLY")##
+				He's always liked your broad child-bearing hips, perfect for carrying his babies. If you don't want $bf.name to discover your cheating then ## 
+				it's time for your body to fulfill its biological purpose.
+			#else
+				He feels like unloading his spunk deep into a##
+				#if($w.hasTrait("CUTE") && $jerk.hasTrait("LIKES_CUTE")) cute##
+				#elseif($w.hasTrait("PLAIN")) healthy##
+				#else pretty##
+				#end##
+				## I decided that girlOrWoman didn't read well for this sentence ("cute woman" sounds odd and "pretty woman" is a film title)
+				## so I'm just using "girl" for all PCs instead.
+				 girl, and he reckons you'll be ovulating around now so this is the perfect time.
+			#end
+		#else
+			He came here knowing that his cum belongs inside you. If you want him to keep your secret then you'll let him plant his seed in your womb.## 
+		#end
+	#else
+	## Likes-bare path
+		He wants to have sex, but not with a condom. He's calling the shots and that means you'll do it his way: unprotected.##
+	#end
+#end
+</listen>
+
+<agreeMeekly>
+You say nothing, eyes downcast, a flush colouring your cheeks. A little nod signals your acquiescence. $jerk.name grins with anticipation and ##
+steps towards you. 
+</agreeMeekly>
+
+<agreeAngrily>
+You furiously spit out some insults at the blackmailing bastard. He stands there, unfazed, his grin gradually widening as you ## 
+gradually realise that you have no real choice. Finally, your anger spent, your invective trails to a halt and you reluctantly acquiesce to his will.
+</agreeAngrily>
+
+<agreeAndPlead>
+Anything to keep your secret! You desperately plead with $jerk.name not to tell your $bf.relationshipNpcDesc, promising to do whatever he wants as long as ##
+he doesn't wreck your relationship.
+</agreeAndPlead>
+
+<refuse>
+Absolutely not!##
+#if ($bf.wLoveCrush) You love $bf.name, and you won't make your mistake worse by cheating again.
+#elseif($w.hasTrait("LOW_SELF_ESTEEM")) You don't deserve a man's love anyway, so you're willing to risk being dumped by $bf.name. It'd only be what you deserve.
+#elseif($w.hasTrait("AMBITIOUS") && !$w.hasTrait("LOW_SELF_ESTEEM"))## 
+	 You're a strong independent woman, and you won't let any man boss you around. You'd rather risk being dumped.
+#elseif(!$bf.wLikingNeutral)## 
+	 $bf.name is ##
+	#if($w.hasTrait("DOWN_TO_EARTH"))a cunt##
+	#{else}rubbish## Ideally would have cute/posh insults too, but I couldn't think of any good ones...
+	#end ##
+	anyway, so who cares if he finds out?
+#elseif($w.hasTrait("SHY"))## 
+	 You might not find confrontations easy, but there comes a point where even someone like you has to stand up for herself. Blackmail is where you draw the line.
+#elseif($w.hasTrait("BITCHY")) He clearly doesn't know you very well, or he'd never dare blackmail you.
+#else You cheated with him, but that doesn't mean he can blackmail you about it. 
+#end
+</refuse>
+
+<refuseLightSeverity>
+With a roll of your eyes, you remind him that all you did was##
+#if($jerk.hasDoneCheatingActivity("TOUCH_COCK")) put a hand on his cock##
+#elseif($jerk.hasDoneCheatingActivity("FEEL_PUSSY")) get felt up a little##
+#elseif($jerk.hasDoneCheatingActivity("GROPE_BREASTS")) let him feel your tits##
+#elseif($jerk.hasDoneCheatingActivity("KISSING")) kiss##
+#else## 
+	Error: in light severity action but can't find a relevant cheating activity. Could be due to the scene not being updated when new ones were added.
+	Please report this as a bug.
+#end
+, so it's hardly all that big a deal. Does he really think that $bf.name will go nuts over something so small?
+
+#set($successChance = $w.getSkill("CHARM") + 20)## A more charming PC is more persuasive. Charm 80 will normally always succeed.
+#if($jerk.hasTrait("BOASTFUL"))#set($successChance = $successChance - 30)#end## A proud NPC is less likely to back down
+#if($scene.percent($successChance))
+	$scene.addFlag("JERK_BLACKMAIL_LIGHT_SEV_REFUSAL_WORKED")##
+	$jerk.name reluctantly agrees. He turns to leave, but before he goes he promises that next time he'll go a lot further. Next time your $bf.relationshipNpcDesc ##
+	will really have something to worry about.
+#else
+	Unfortunately, it seems that $jerk.name thinks exactly that. Pulling out his phone, he calls your bluff with a message calling $bf.name to come hear your ## 
+	secret.
+#end
+</refuseLightSeverity>
+
+<intimidate>
+#set($successChance = 50)## Base success chance as a percent
+#if($w.hasTrait("SHY"))#set($successChance = $successChance - 30)#end## Shy girls dislike confrontation, and are less intimidating.
+#if($w.hasTrait("LOW_SELF_ESTEEM") && !$w.hasTrait("BITCHY"))#set($successChance = $successChance - 10)#end## He expects LSE non-bitchy to let herself be exploited.
+#if($w.hasTrait("BITCHY"))#set($successChance = $successChance + 30)#end## Bitchy characters are much better at intimidating people.
+#if($w.strength >= $jerk.strength)#set($successChance = $successChance + 30)#end## A strong PC is more intimidating.
+#if($w.getSkill("CHARM") >= 50)#set($successChance = $successChance + 10)#end## A charming PC is better at getting what she wants socially.
+#if($w.hasTrait("BITCHY"))##
+	Has $jerk.name ever even met you? He certainly hasn't been paying attention if he thinks it's a good idea to come to your home with blackmail##
+	 in mind. You turn on him with a glare that could strip the self-esteem from a rock-star and a voice that could flay the composure from a zen monk.##
+#else
+	You won't put up with this! You furiously turn on $jerk.name, your voice raised as you threaten dire consequences if he spills the beans.
+#end
+
+#if($scene.percent($successChance))
+	$scene.addFlag("JERK_BLACKMAIL_INTIMIDATE_WORKED")##
+	$jerk.addRelationshipFlag("BLOCK_BLACKMAIL")
+	$jerk.name takes a panicked step back, horrified at how badly his ploy has backfired. He tries to babble out a terrified excuse, but you aren't listening.
+	You drive him from your home. He flees, clearly too frightened to dare blab to your $bf.relationshipNpcDesc.
+#else
+	$jerk.name simply laughs, mocking your attempt to stand up to him. Taking out his phone, he sends a text message, summoning your $bf.relationshipNpcDesc ##
+	to come and hear your secret.
+#end
+</intimidate>
+
+<noNeedForBlackmail>
+#if($w.hasTrait("LOW_SELF_ESTEEM"))
+	You aren't good for anything more than pleasing men, so there's no need for threats. You'd be happy to ##
+#else
+	What's with the threats? You were already quite happy to ##
+#end
+#if($scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL"))## Perhaps the cute text is a bit OTT?
+	#if ($w.hasTrait("CUTE"))let him put his thing in your mouth.
+	#{else}suck his cock.
+	#end
+#elseif($scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL"))
+	#if ($w.hasTrait("CUTE"))let him have sex with your bottom.
+	#elseif($w.hasTrait("POSH") || $w.hasTrait("REFINED"))enjoy anal sex with him.
+	#{else}let him fuck your ass.
+	#end
+#elseif($scene.hasFlag("JERK_BLACKMAIL_WANTS_INSEMINATE"))
+	#if($w.hasTrait("BABY_CRAZY") && !$w.safe && !$w.knownPregnant)
+		receive his seed, especially on a day like today when there's a chance you get to have a baby.
+	#else##
+		accept his sperm.
+	#end
+#else##
+	have sex with him.
+#end
+</noNeedForBlackmail>
+
+<friendsDontBlackmail>
+Blackmail? But he's your friend. Friends don't do that sort of thing. 
+You say as much to $jerk.getName()##
+## Note that max liking towards the PC doesn't need to be considered here, as it's forbidden in the scene pre-conditions.
+#set($successChance = 50)##
+#if($jerk.npcLikingLike)#set($successChance = $successChance + 30)
+#elseif($jerk.npcLikingOk)#set($successChance = $successChance + 10)
+#elseif(!$jerk.npcLikingNeutral)#set($successChance = $successChance - 40)## Playing the friend card at disliked liking level? A bold move...
+#end
+##
+#if($scene.percent($successChance))
+	$scene.addFlag("AGREED_SHOULDNT_BLACKMAIL_FRIEND")##
+	$jerk.addRelationshipFlag("BLOCK_BLACKMAIL")## This flag will block any re-occurrence of blackmail.
+	 and he looks appropriately chastened. He mumbles something about his##
+	#if ($jerk.hasTrait("CRUDE")) cock #else penis #end##
+	doing the thinking for him, apologises, thanks for you being his friend, and turns to leave.
+#else
+	$jerk.endFriendship()##
+	$jerk.reduceWLikingVLargeUncapped()##
+	$jerk.reduceWLoveVLargeUncapped()##
+	, but he only sneers at you. He mockingly explains that if your so-called friendship is going to interfere with him getting his dick wet then ##
+	he guesses you aren't really friends after all.	 
+#end
+</friendsDontBlackmail>
+
+<agreedGetToKnees>
+You get to your knees in front of $jerk.name. At least you have a reason for this moment of infidelity, although you doubt it's one $bf.name would be ##
+pleased with. 
+</agreedGetToKnees>
+
+<agreedGetOnAllFours>
+#if($w.pussyExposed)## This condition is also sufficient for anal penetration.
+	With a sigh, you lead $jerk.name to the bedroom and position yourself on all fours on the bed. ##
+	#if($w.bottomStatus == "WORN")$w.setBottomStatus("DISHEVELED")#end##
+#else
+	#if($w.bottomStatus != "OFF" && $w.bottomStatus != "EXPOSED")
+		#if($w.bottom.skirt)$w.setBottomStatus("EXPOSED")
+		#else $w.setBottomStatus("OFF")
+		#end
+	#end
+	#if($w.pantiesStatus != "OFF" && $w.pantiesStatus != "EXPOSED")$w.setPantiesStatus("EXPOSED")#end
+	You lead $jerk.name to the bedroom, adjust your clothing the bare minimum needed to expose your bottom for his lusts, and position yourself on all fours ##
+	on the bed. ##
+#end
+
+He at least shows enough consideration to lube your asshole then, with a satisfied grunt, thrusts his $jerk.cockDesc powerfully into your anus. 
+</agreedGetOnAllFours>
+
+<agreedGetOnAllFoursMean>
+$jerk.name eagerly shoves you down to the floor. ##
+#if($w.pussyExposed)## This condition is also sufficient for anal penetration.
+	#if($w.bottomStatus == "WORN")$w.setBottomStatus("DISHEVELED")#end##
+	You scramble to your hands and knees as he presses his $jerk.cockDesc between your buttocks and into your tender unlubricated asshole.
+#else
+	#if($w.bottomStatus != "OFF" && $w.bottomStatus != "EXPOSED")
+		#if($w.bottom.skirt)$w.setBottomStatus("EXPOSED")
+		#else $w.setBottomStatus("OFF")
+		#end
+	#end
+	#if($w.pantiesStatus != "OFF" && $w.pantiesStatus != "EXPOSED")$w.setPantiesStatus("EXPOSED")#end
+	His hands clutch frantically at your body, as you adjust your clothing, just enough to expose yourself for his lusts. You get to all fours, your asshole ## 
+	still bereft of lube, only to feel his $jerk.cockDesc press firmly between your buttocks and into your rectum. 
+#end
+</agreedGetOnAllFoursMean>
+
+<agreedStartMo>
+You step into $scene.addPossessiveSuffix($jerk.name) eager arms and his hands begin to rove over your##
+#if($w.pregnancyStage == "BIG" || $w.pregnancyStage == "HUGE") gravid##
+#elseif($w.figure == "SLIM") slender##
+#elseif($w.figure == "TONED") toned##
+#elseif($w.figure == "WOMANLY") curvaceous##
+#end
+ body.
+</agreedStartMo>
+
+<compliedWithBlackmail>
+#set($jerkSatisfied = false)##
+#if($scene.hasFlag("JERK_BLACKMAIL_WANTS_INSEMINATE"))
+	#if($scene.hasFlag("CAME_INSIDE"))#set($jerkSatisfied = true)#end##
+#elseif($scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL"))
+## Could also just check $jerk.hadOrgasm, as the wants_anal path goes directly to anal sex.
+	#if($scene.hasFlag("FINISHED_ANAL_SEX"))#set($jerkSatisfied = true)#end##
+#elseif($scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL"))
+## This section uses hadOrgasm because any orgasm in the oral scene is good enough to satisfy him (handjobs and titjobs too).
+	#if($jerk.hadOrgasm)#set($jerkSatisfied = true)#end##
+#else## Sex is the default choice if no flags are set
+	#if($scene.hasFlag("FINISHED_SEX"))#set($jerkSatisfied = true)#end##
+#end##
+#if($jerkSatisfied)
+	$scene.addFlag("JERK_BLACKMAIL_SATISFIED")##
+	$jerk.name fastens his trousers, looking pleased as punch. Having got what he wanted, he heads to the door. As he leaves, you call after him, reminding ##
+	him to keep your secret. You can only hope he was listening and that keeping this hold over you is more important to him than ruining your relationship.## 
+#else
+	$jerk.name frowns, unsatisfied. With a shake of his head, he pulls out a phone and sends a text to summon your $bf.relationshipNpcDesc.
+	#if ($w.clothesDisarrayed)##
+		A sinking feeling in your heart, you rush to get your clothes back in order before he can arrive.
+		## PC#s Fix clothing is done here because it should only be done if the jerk is unsatisfied. If he is satisfied then he leaves and the PC remains
+		## partially undressed if the player clicks "describe characters" before the scene ends.
+		## An effect in the yml can't be used for this because the JERK_BLACKMAIL_SATISFIED flag is only set in the vm, and yml effects are processed 
+		## before the vm text gets worked out.
+		$w.fixClothing()## 
+	#end##
+#end##
+$scene.clearPostSexFlags() ## Must be done at the end, as it'll remove flags like CAME_INSIDE.
+$scene.removeFlag("NO_ORAL") $scene.removeFlag("BLOCK_ANAL") ## Don't need these any-more, and don't want them to still be set in later date transitions
+</compliedWithBlackmail>
+
+<waitForBfShortDesc>
+Wait for $bf.name
+</waitForBfShortDesc>
+
+<waitForBfLongDesc>
+Wait for your $bf.relationshipNpcDesc to arrive.
+</waitForBfLongDesc>
+
+<waitForBf>
+It doesn't take long for $bf.name to arrive. Seems that $jerk.name planned this confrontation well, and your $bf.relationshipNpcDesc was already in the neighborhood.
+
+$jerk.name takes him aside and tells him everything.##
+</waitForBf>
+
+<talkToBfShortDesc>
+Talk with $bf.name
+</talkToBfShortDesc>
+
+<talkToBfLongDesc>
+#if($bf.hasRelationshipFlag("KNOWS_LIKES_TO_SHARE"))
+	Your secret has been revealed... but this is news that $bf.name will love to hear. 
+#else
+	Your secret has been revealed... time to face the music!
+#end
+</talkToBfLongDesc>
+
+<talkToBf>
+#if($bf.hasRelationshipFlag("KNOWS_LIKES_TO_SHARE"))
+	$bf.name walks gruffly up to you. With fake anger, he demands to know if what $jerk.name has been saying is true.
+	Muffling a smile, you admit that it is, doing your best to put a frightened quiver into your voice. $jerk.name steps closer, eagerly awaiting##
+	#if($bf.relationship == "MARRIED") some marital strife.
+	#else $scene.addPossessiveSuffix($bf.name) anger and your tears.
+	#end
+	He is to be disappointed. The question is: how?
+#else
+	## This part doesn't imply the jerk is listening in because the cheating confrontation scene has only 1 npc and won't mention him at all.
+	$jerk.name steps aside to let you and $bf.name speak, no doubt expecting your conversation to go badly. He might be right.
+#end
+</talkToBf>
+
+<ltsPunishJerk>
+$jerk.addRelationshipFlag("BLOCK_BLACKMAIL") ## He won't be trying again after this!
+$jerk.name needs to be punished##
+#if ($w.hasTrait("BITCHY")). Not to stop him doing it again - you have no fundamental issues with blackmail, but to show him that you are not someone to be messed with.
+#else, both as revenge and to stop him trying this sort of thing on any other women. 
+#end
+#if ($w.getSkill("FITNESS") >= 80 && $w.strength > $jerk.strength)
+Of course you could use your physical strength to beat him into a moaning heap of pain, but that seems rather unimaginative, not to mention the hassle of getting his blood out of your carpets.
+#elseif($bf.figure == "MUSCULAR" && $bf.strength > $jerk.strength)
+Of course $bf.name could just use his enormous muscles to crush his bones into a powder, but that seems awfully unimaginative. And messy.
+#end
+In a flash, it comes to you, the perfect way of making him suffer. Catching $scene.addPossessiveSuffix($bf.name) eye, you give him a formidable shove, yelling that he deserved to be cheated on and that ##
+you'd rather hook up with $jerk.name instead.
+</ltsPunishJerk>
+
+<punishmentMakeJerkStrip>
+## This would normally increase his enjoyment, but given what's to come I'm going to omit that!
+#if ($w.hasTrait("FLIRTY"))With a coquettish smile, you tell $jerk.name to remove his clothes. ##
+#elseif($w.hasTrait("BITCHY"))You rudely demand that $jerk.name take off his clothes. ##
+#elseif($w.hasTrait("SHY"))Eyes averted, you whisper that you'd like $jerk.name to remove his clothes. ##
+#{else}You ask $jerk.name to undress. ##
+#end
+He complies without hesitation, this being the whole reason why he came to your house.
+</punishmentMakeJerkStrip>
+
+<punishmentKickJerkOut>
+$jerk.name stands in front of you, naked and erect. Instead of something sexual though, you grab ##
+$scene.addPossessiveSuffix($jerk.name) clothes off the floor and, opening the window, hurl them out into the street.
+As he stands there dumbfounded you fling the door wide open and call for $bf.name. Together, you and your $bf.relationshipNpcDesc ## 
+combine forces to get the naked douchebag out of your $w.getFlatOrHouse().
+
+Looking out of the window, you see him run naked onto the street to search for his clothing, some of which is soaking in a muddy puddle by the side of the road.
+Laughing, you and $bf.name take photo after photo on your mobile phones.
+</punishmentKickJerkOut>
+
+<punishmentBlackmailJerk>
+$jerk.name walks away out of sight, muddy and miserable. His punishment isn't over though. Not yet. Calling his phone, you tell him about the pictures you took,## 
+how they don't exactly show him in a flattering light, not to mention the risk he could get hauled in by the bobbies for indecent exposure.
+
+You tell him that he'd better curb his blackmailing ways, or those pictures might find a wider audience. Then, as he splutters with incoherent rage, you hang ##
+up the phone. Putting the bastard out of your mind, you turn to your $bf.relationshipNpcDesc with a smile.
+</punishmentBlackmailJerk>
+
+<ltsTellBfStoriesShortDesc>
+Give $bf.name the details 
+</ltsTellBfStoriesShortDesc>
+
+<ltsTellBfStoriesLongDesc>
+Tell $bf.name all about how you've been unfaithful. 
+</ltsTellBfStoriesLongDesc>
+
+<ltsTellBfStories>
+$jerk.addRelationshipFlag("BLOCK_BLACKMAIL") ## This annoying experience will put him off blackmailing the PC again.
+You step close to $bf.name, moving your##
+#if($w.pregnancyStage == "HUGE") massively pregnant##
+#elseif($w.pregnancyStage == "BIG") heavily pregnant##
+#elseif($w.figure == "SLIM") svelte##
+#elseif($w.figure == "TONED") firm##
+#elseif($w.figure == "WOMANLY") curvy##
+#end
+ body erotically against him. 
+#if($w.hasTrait("SHY"))
+	Arms around his##
+	#if($bf.figure == "THICKSET") beefy##
+	#elseif($bf.figure == "MUSCULAR") strong##
+	#elseif($bf.figure == "SKINNY") skinny##
+	#elseif($bf.figure == "FAT") pudgy##
+	#end
+	 neck, you stand on##
+	#if($w.hasTrait("CUTE")) tippy-toes ##
+	#else tip-toes ##
+	#end
+	to whisper into his ear, telling him about what you did with $jerk.getName()##
+	#if($jerk.cheatingSeverity == "LIGHT"), embellishing the rather tame story to make it as racy and exciting as possible.
+	#else, going into intimate detail.
+	#end
+	You feel $bf.name harden against your $w.StomachDesc, his $bf.handAdj hands caressing your lower back.  
+#elseif($jerk.cheatingSeverity == "LIGHT")
+	You start to tell him what happened with $jerk.name, embellishing the story so it sounds an awful lot more intimate than your actual fairly mild infidelity, a ##
+	#if($w.figure == "SLIM")slender #end##
+	hand drifting down to feel your $scene.addPossessiveSuffix($bf.relationshipNpcDesc) hardness growing in his $bf.trousers. 
+#else
+	You start to tell him all about what you got up to with $jerk.name, going into intimate detail, one hand drifting down to feel ##
+	a growing hardness in his $bf.trousers.
+#end
+$jerk.name looks on aghast, stunned that he's only managing to bring you and your $bf.relationshipNpcDesc closer together. As your caresses get more and more ##
+intimate, his annoyance grows until it boils over. With an inarticulate yell, he storms out, slamming the door behind him.
+
+But you don't really care. You and $bf.name are enjoying yourselves, and you anticipate a good deal more enjoyment to come.
+$jerk.clearCheating() ## Call this here and NOT in the yaml effects section, because the jerk's cheating severity is needed in this text section.
+</ltsTellBfStories>
+
+<ltsPostConfrontationStoriesShortDesc>
+Tell $bf.name more!
+</ltsPostConfrontationStoriesShortDesc>
+
+<ltsPostConfrontationStories>
+## Post-confrontation version of the tell-stories action.
+## This one can't access cheating severity as the confrontation clears it.
+$jerk.addRelationshipFlag("BLOCK_BLACKMAIL") ## This annoying experience will put him off blackmailing the PC again.
+You let $bf.name take your##
+#if($w.pregnancyStage == "HUGE") massively pregnant##
+#elseif($w.pregnancyStage == "BIG") heavily pregnant##
+#elseif($w.figure == "SLIM") svelte##
+#elseif($w.figure == "TONED") firm##
+#elseif($w.figure == "WOMANLY") curvy##
+#end
+ body in his ##
+#if($bf.figure == "THICKSET")beefy ##
+#elseif($bf.figure == "MUSCULAR")powerful ##
+#elseif($bf.figure == "SKINNY")skinny ##
+#elseif($bf.figure == "FAT")pudgy ##
+#elseif($bf.figure == "TONED")strong ##
+#end
+arms. Moving erotically against him, you start to recount the details of what happened, feeling his hardness growing against you as he imagines you cheating. 
+
+$jerk.name grinds his teeth in anger, frustrated that his attempt to drive a wedge between you has only brought you ##
+and your $bf.relationshipNpcDesc closer together. 
+$bf.name ends the story with a kiss, your eyes closing as his lips press against yours. A crash from the doorway breaks your embrace: the sound of ##
+$jerk.name slamming the door on his furious way out.   
+
+You smile at $bf.name and he smiles back. $jerk.name doesn't matter anymore. It's just you and your $bf.relationshipNpcDesc together now##
+#if($bf.wLoveSome) as it should be.
+#elseif(!$bf.wLikingNeutral)
+ and perhaps this will mark a thawing in your relationship. 
+#else
+.
+#end
+$bf.addSexualActivity("KISSING",false)
+</ltsPostConfrontationStories>
+
+<confrontationWithBf>
+## Returning section post-confrontation.
+#if(!$bf.partner)
+	After your breakup, $bf.name has no interest in sticking around. He turns to leave.
+#elseif($jerk.hasRelationshipFlag("AGREED_SHARE_WITH_PARTNER"))
+	## This path results in transitioning to a home-date with the jerk.
+	He may have agreed to share you, but $bf.name doesn't want to stay around and watch you get cosy with $jerk.name. He leaves. $jerk.name ##
+	triumphantly settles into your $w.getFlatOrHouse(), clearly intent on capitalising on his new status by spending the evening with you. 
+#elseif($bf.hasTrait("DOORMAT"))
+	$jerk.name has let you have your moment alone to talk with your $bf.relationshipNpcDesc, but now that your conversation's over he's aching to stick his oar ##
+	in. 
+	He gives your ##
+	#if($w.figure == "SLIM")tiny arse##
+	#elseif($w.figure == "WOMANLY")full bum##
+	#elseif($w.figure == "TONED")firm arse##
+	#end
+	 a resounding smack and tells $bf.name that he should get used to his woman sleeping around. ##
+	#if($jerk.hasTrait("BOASTFUL"))
+		It's normal that you'd cheat when given a chance at a stud like him. Any woman would. He's a pretty pathetic excuse for a $bf.getRelationshipNpcDesc() ##
+		too and now you've got a taste for a better man's cock he's sure you'll be off behind his back again soon.
+	#else
+		He's clearly too pathetic to keep a woman interested, and no doubt you'll be spreading your legs behind his back again soon.
+	#end
+#elseif($bf.hasRelationshipFlag("KNOWS_LIKES_TO_SHARE"))
+	You sigh with relief. You'd have thought $bf.name would be upset or even furious about your cheating, but it turns out he's not only accepting of it ##
+	but actively likes you being with other men! It's hard to imagine how this could possibly have gone better. 
+#else
+	#set($chanceFight=50)
+	#if($jerk.strength > $bf.strength + 50)#set($chanceFight= $chanceFight - 100)
+	#elseif($jerk.strength > $bf.strength + 30)#set($chanceFight= $chanceFight - 30)
+	#elseif($jerk.strength > $bf.strength)#set($chanceFight= $chanceFight - 20)
+	#elseif($bf.strength > $jerk.strength + 30)#set($chanceFight= $chanceFight + 30)
+	#elseif($bf.strength > $jerk.strength)#set($chanceFight= $chanceFight + 20)
+	#end
+	#if($bf.personality == "JERK")#set($chanceFight= $chanceFight + 10)
+	#elseif($bf.personality == "CARING")#set($chanceFight= $chanceFight - 10)
+	#end
+	 
+	#if($scene.percent($chanceFight)) 
+		#if($scene.hasFlag("UNHAPPY_CHEATING_DISCOVERY_OUTCOME"))
+			$scene.addFlag("BLACKMAIL_FIGHT")
+			$bf.name is furious, not just at you, but also with $jerk.name. Especially with $jerk.name. He launches himself at##
+			#if($bf.isOlderThan($jerk.age)) the younger man##
+			#elseif($jerk.isOlderThan($bf.age)) the older man##
+			#else him#end
+			 and they begin to fight!  
+		#else
+			$scene.addFlag("BLACKMAIL_FIGHT_WITH_PC_PERMISSION")
+			$bf.name may have forgiven you, but he's furious at $jerk.name. Rolling up his sleeves, he glances at##
+			#if($bf.isOlderThan($jerk.age)) the younger man ##
+			#elseif($jerk.isOlderThan($bf.age)) the older man ##
+			#else the blackmailing scumbag #end##
+			with violence in his eyes, wordlessly asking your permission to##
+			#if($bf.hasTrait("CRUDE")) thump the cunt.
+			#else dish out a thrashing.
+			#end
+		#end
+	#else
+		#if($scene.hasFlag("UNHAPPY_CHEATING_DISCOVERY_OUTCOME"))
+			$scene.addFlag("BLACKMAIL_BF_LEAVES")
+			Angry and upset, $bf.name turns to leave.
+		#else
+			$scene.addFlag("BLACKMAIL_BF_KICKED_JERK_OUT")
+			$bf.name might have forgiven you, but he is far from pleased with $jerk.name. ##
+			#if($bf.hasTrait("CRUDE"))He tells the blackmailer to fuck off. 
+			#{else}He orders the blackmailer out of your $w.getFlatOrHouse().
+			#end
+			$jerk.name complies, perhaps concerned that your $bf.relationshipNpcDesc might seek retribution if he sticks around.
+		#end
+	#end
+#end
+</confrontationWithBf>
+
+<sideWithDoormatShortDesc>
+Side with $bf.name
+</sideWithDoormatShortDesc>
+
+<sideWithDoormatLongDesc>
+Stick up for your $bf.getRelationshipNpcDesc().
+</sideWithDoormatLongDesc>
+
+<sideWithDoormat>
+How dare he! ##
+#if($bf.wLoveCrush)
+	#if($w.hasTrait("LOW_SELF_ESTEEM"))
+		You'd understand if it was you he was insulting, but you won't stand here and listen to your darling $bf.name being mocked.
+	#else
+		$bf.name is your special man and you won't hear that sort of nasty talk about him!
+	#end
+#elseif($w.hasTrait("BITCHY"))
+	$bf.name might be a spineless worm fit only to scrape off the bottom of your shoe, but he's your spineless worm and it isn't ##
+	$scene.addPossessiveSuffix($jerk.name) place to have a go at him. 
+#else
+	$bf.name is your $bf.relationshipNpcDesc and you won't see him insulted like that.  
+#end
+Overcome with anger, you say as much to $jerk.name and chuck him out of your $w.getFlatOrHouse().##
+#if($scene.hasFlag("UNHAPPY_CHEATING_DISCOVERY_OUTCOME"))
+ $bf.name also leaves, having had an thoroughly unpleasant evening despite you siding with him at the end.
+#else
+ Closing the door behind him, you turn back to $bf.name. You're alone together now, and perhaps you can think of a way to earn back his trust...
+#end
+</sideWithDoormat>
+
+<mockDoormatLongDesc>
+Join in and humiliate your $bf.getRelationshipNpcDesc().
+</mockDoormatLongDesc>
+
+<mockDoormat>
+With a sneer, you agree with the jerk. $bf.name is rubbish and he deserved to be cheated on. 
+
+The two of you join forces to belittle your downtrodden $bf.relationshipNpcDesc, your hands gradually getting closer as you berate the pathetic worm until your ##
+fingers are entwined with the blackmailing scumbag's.
+</mockDoormat>
+
+<mockedDoormatBothLeaveLongDesc>
+Send both of them on their way. ##
+#if($w.hasTrait("BITCHY"))
+You've had your fun, but now your playthings are boring you.
+#end
+</mockedDoormatBothLeaveLongDesc>
+
+<mockedDoormatBothLeave>
+Enough is enough. You send both of them packing, $jerk.name proud in his malice; $bf.name slumped and miserable.
+</mockedDoormatBothLeave>
+
+<mockingDoormatJerkMakeoutShortDesc>
+Sleep with $jerk.name
+</mockingDoormatJerkMakeoutShortDesc>
+
+<mockingDoormatJerkMakeoutLongDesc>
+What better way to humiliate your $bf.relationshipNpcDesc than by getting sexual with another man right under his nose.
+</mockingDoormatJerkMakeoutLongDesc>
+
+<mockingDoormatJerkMakeout>
+## Makeout action stage 1: the PC tells the jerk to come over to her
+#if(!$bf.wLikingNeutral)
+	#if($jerk.wLoveCrush)
+		$jerk.name might be a blackmailing scumbag but he makes your heart flutter in a way your $bf.relationshipNpcDesc doesn't. ## 
+		In fact, you don't even like $bf.name, let alone love him. Time to show him how much better another man can be. 
+		#if($w.hasTrait("SHY"))
+			You meet $scene.addPossessiveSuffix($jerk.name) eyes, giving him the signal to come over##
+		#else
+			You beckon $jerk.name over## 
+		#end
+		, your excitement mounting as you imagine being together.
+	#elseif($jerk.wLikingNeutral)
+		$jerk.name might be a blackmailing scumbag, but you somehow still find him more pleasant than your actual $bf.relationshipNpcDesc.##
+		#if($jerk.wAttractionAttracted) 
+			 Besides, he does give you that special tingle. 
+		#end
+		#if($w.hasTrait("SHY"))
+			You meet his eyes, giving him the signal to come over, your excitement growing at the thought of humiliating the despised man you've somehow ##
+			ended up in a relationship with. 
+		#else
+			You beckon him over, excitement mounting at the prospect of humiliating the despised man you've somehow ##
+			ended up in a relationship with. 
+		#end
+	#else
+		As far as you're concerned, $jerk.name and $bf.name are both as bad as each other. ##
+		#if($jerk.wAttractionAttracted)
+			$scene.addPossessiveSuffix($jerk.name) certainly easy on the eye though. You##
+		#else
+			You'll turn the tables on $jerk.name another time. For now though you##
+		#end
+		#if($w.hasTrait("SHY")) meet his eyes##
+		#else beckon him over##
+		#end
+		, excitement mounting as you anticipate using one bastard to humiliate the other. 
+	#end
+#else
+	#if($w.hasTrait("SHY"))
+		You quietly give $jerk.name the nod to approach##
+	#else
+		You beckon $jerk.name over##
+	#end
+	, just to drive home to $bf.name how little he means to you. ##
+	#if($jerk.wAttractionAttracted)
+		Besides, $jerk.name might be a blackmailing bastard but he still gives you that special tingle. 
+	#end
+#end
+
+## MO stage 2: they start getting it on.
+$scene.addWeightedItem("GROPE_BUM",10)##
+#if(!$jerk.dislikesPlayersBreasts)##
+	#if($jerk.likesPlayersBreasts)#set($feelTitsWeight = 20)#else#set($feelTitsWeight = 10)#end
+	#if($w.getTop().hasFlag("LOWCUT"))$scene.addWeightedItem("GROPE_CHEST_LOWCUT",$feelTitsWeight)##
+	#{else}$scene.addWeightedItem("GROPE_CHEST",$feelTitsWeight)##
+	#end
+#end
+#if($w.getBottom().skirt && $w.getBottom().length == "THIGH")$scene.addWeightedItem("UPSKIRT",20)#end
+#set($moActivity=$scene.pickItemAndClearMap())
+#if($moActivity == "GROPE_BUM")
+	#if($w.bottom.skirt && $w.bottom.getLength() == "THIGH")
+		$jerk.addArousalSmall()$w.addArousalTiny()##
+		#if($w.figure == "SLIM")#set($bumDesc="tiny bum")##
+		#elseif($w.figure == "WOMANLY")#set($bumDesc="luscious bottom")##
+		#else#set($bumDesc="firm butt")##
+		#end##
+		$jerk.name takes hold of you, one $jerk.handAdj hand cradling your bottom. It slides beneath your short $w.bottom.basicDesc to caress##
+		#if($w.pantiesStatus == "OFF" || $w.pantiesStatus == "EXPOSED" || $w.panties.hasFlag("SHOWS_BUM"))
+			the bare cheeks of your $bumDesc.##
+		#else
+			your $bumDesc through your 
+			#if($w.panties.hasFlag("THIN"))thin #end##
+			$w.panties.basicDesc.
+		#end
+	#else
+		$jerk.addArousalTiny()##
+		One $jerk.handAdj hand cradling your bottom, squeezing your##
+		#if($w.figure == "SLIM") tiny rump##
+		#elseif($w.figure == "WOMANLY") luscious flesh##
+		#else firm buns##
+		#end##
+		 as he pulls you tight against him. You reciprocate, running your palms over his $jerk.torsoDesc, your tongue darting out to tickle his earlobe.
+	#end
+#elseif($moActivity == "GROPE_CHEST_LOWCUT")
+	## Does not count as cheating because the BF is there to see it and reacts in this scene: it wouldn't make sense for the PC to "confess" this to him later.
+	$jerk.addSexualActivity("GROPE_BREASTS",false)## 
+	#if($jerk.likesPlayersBreasts)$jerk.addArousalMedium()#else$jerk.addArousalSmall()#end##
+	#if($w.hasTrait("SENSITIVE_BREASTS"))$w.addArousalMedium()#else$w.addArousalSmall()#end##
+	$jerk.name takes hold of you, one of his $jerk.handAdj hands slipping into your low-cut $w.getTop().getBasicDesc(). You do your best to assist, your##
+	#if($w.figure == "SLIM") svelte ##
+	#elseif($w.figure == "WOMANLY") curvy ##
+	#else toned ##
+	#end
+	body moving against him as you help help him find his way inside. 
+	Then he's caressing your ##
+	#if($w.braStatus =="OFF" || $w.braStatus == "EXPOSED")
+		bare breast, warm female flesh beneath his palm, the nipple stiffening under his attentions.
+	#else
+		$w.breastsDesc, groping at them through your $w.bra.shortDesc##
+		#if($jerk.likesPlayersBreasts)
+			, showing every sign of being enamoured with your##
+			#if(!$w.isOlderThan("TWENTIES") && $jerk.isOlderThan("FORTIES")) youthful tits.
+			#else
+				#if($w.breasts == "SMALL") tiny breasts.
+				#elseif($w.breasts == "MEDIUM_SMALL") modest breasts.
+				#else softly-yielding tits.
+				#end
+			#end
+		#else
+			.
+		#end 
+	#end
+#elseif($moActivity == "GROPE_CHEST")
+	$jerk.addSexualActivity("GROPE_BREASTS",false)## 
+	#if($jerk.likesPlayersBreasts)$jerk.addArousalSmall()#else$jerk.addArousalTiny()#end##
+	#if($w.hasTrait("SENSITIVE_BREASTS"))$w.addArousalSmall()#else$w.addArousalTiny()#end##
+	$jerk.name takes hold of you, his hands going to your breasts. As $bf.name looks on you smile and stick out your chest, pushing them forward so $jerk.name can feel them at their best. ##
+	He caresses them through your $w.top.basicDesc, breath warm on your cheek as he gropes your yielding female flesh.
+#elseif($moActivity == "UPSKIRT")
+	$jerk.addSexualActivity("KISSING",false)$jerk.addSexualActivity("FEEL_PUSSY",false)## 
+	$jerk.name takes hold of you, one $jerk.handAdj hand slipping down to your thighs, caressing the bare $w.skinColour skin ##
+	#if($w.legwearWorn)
+		between your $w.bottom.basicDesc and $w.legwear.basicDesc.
+	#else
+		beneath your $w.bottom.shortDesc. 
+	#end
+	You kiss him as it moves higher, then higher still, under your $w.bottom.basicDesc, his tongue slipping between your lips as ##
+	#if($w.pantiesStatus == "OFF" || $w.pantiesStatus == "EXPOSED")
+		a finger parts your lower ones.
+		$jerk.addArousalMedium()##
+		#if($jerk.hasTrait("LIKES_SEXY"))$jerk.addEnjoySmall()#end## Loves to discover that she went without underwear
+		#if($w.hasTrait("SENSITIVE_PUSSY"))$w.addArousalLarge()$jerk.addWEnjoySmall()#else$w.addArousalSmall()#end
+	#else
+		his fingers explore your warmth lower down.
+		$jerk.addArousalSmall()##
+		#if($w.hasTrait("SENSITIVE_PUSSY"))$w.addArousalMedium()$jerk.addWEnjoyTiny()#else$w.addArousalTiny()#end
+	#end
+#else
+	Error: unrecognised makeout activity $moActivity. Please report this as a bug.
+#end
+## MO stage 3: the BF reacts
+$bf.name watches aghast, his mouth opening and closing soundlessly, like a fish in a tank. Much like the fish, he does nothing to stop you. ## 
+Just watches in speechless horror.
+## MO stage 4: move it to the bedroom
+#if($w.hasTrait("SHY"))
+	$jerk.name nods towards the bedroom. You smile in response, and in an instant ##
+	#if($w.pregnancyStage != "BIG" && $w.pregnancyStage != "HUGE" && ($jerk.figure == "TONED" || $jerk.figure == "MUSCULAR" || $jerk.figure == "THICKSET"))
+		he's lifted you off your feet and you're being taken to bed.
+	#else
+		you're on the way to bed.
+	#end
+#else
+	You take $scene.addPossessiveSuffix($jerk.name) hand and lead him to bed.
+#end
+$bf.name stands watching the two of you disappear into the bedroom, swallowing desperately as he tries to come up with something to say. ##
+He's still trying as the bedroom door closes, him on the outside, his $bf.relationshipWDesc in there with another man.
+</mockingDoormatJerkMakeout>
+
+<returnFromMockedDoormatJerkMakeout>
+#if($scene.hasFlag("MO_REJECTION") || $scene.hasFlag("STOPPED_SEX"))
+	$bf.addNpcLikingSmall()$bf.addNpcLoveSmall()## Slightly counteract the negatives she took in following this path.
+	$jerk.fixClothing()##
+	You come out of the bedroom, but not with $jerk.name looking triumphant and satisfied as $bf.name was no doubt expecting. Sullen from your rejection, ##
+	he mutters a few insults and leaves. Your $bf.relationshipNpcDesc doesn't stay much longer: while his nightmare of listening to his $bf.relationshipWDesc ##
+	get fucked in the next room didn't transpire he still isn't exactly in a romantic mood.
+#else
+	## First line is shared with all these sections e.g. ("You leave the bedroom, breasts bouncing free and bare, still flushed from your orgasm.")
+	You leave the bedroom##
+	#if($w.breastsExposed)
+		#if($w.breasts != "SMALL"), breasts bouncing free and bare##
+		#{else}, your small breasts entirely naked##
+		#end
+	#end
+	#if($w.orgasms > 0), still flushed from your orgasm#end##
+	.
+	## End of intro line: go through the various possible outcoms and give each its own text.
+	#if($scene.hasFlag("FINISHED_SEX"))
+		$jerk.name follows, giving $bf.name a chance to see the#if($jerk.hasTrait("THICK_COCK")) fat#elseif($jerk.hasTrait("SMALL_COCK")) little#end cock that was so recently filling your vagina.
+		Your $bf.relationshipNpcDesc looks at you, ##
+		#if($scene.hasFlag("CAME_INSIDE"))
+			$bf.reduceNpcLikingSmall()$bf.reduceNpcLoveSmall()## Just a small reduction as there's already been a large one in taking this path
+			the trickle of $scene.addPossessiveSuffix($jerk.name) seed running down one##
+			#if($w.figure == "SLIM") slender##
+			#elseif($w.figure == "TONED") firm##
+			#elseif($w.figure == "WOMANLY") tantalisingly-curved##
+			#end
+			 $w.skinColour thigh proof that your#if($w.risky) fertile#end pussy has just welcomed a #if($jerk.hasTrait("BIG_BALLS"))thick#end load of sperm.
+		#elseif($w.orgasms > 0)
+			#if($w.hasHair)your mussed hair and #{end}the sweat beading on your face proving what he no-doubt heard from the other room: that you've been freshly fucked and brought ##
+			to climax by another man.
+		#else
+			your disarrayed clothing#if($w.hasHair) and mussed hair#end proof of what he heard from the other room: that you've just been ##
+			#if($jerk.hasTrait("BIG_BALLS"))vigorously#end fucked by another man.
+		#end
+		Stifling a sob, he turns to leave. $jerk.name, proud and satisfied, heads for the door as well.
+	#elseif($scene.hasFlag("FINISHED_ANAL_SEX"))
+		You walk out unsteadily, your freshly-fucked asshole sore#if($w.orgasms > 0) but happy#end##
+		#if($scene.hasFlag("CAME_INSIDE_ANAL"))
+			, his sticky seed warm in your anus##
+		#end
+		. $jerk.name pats your ass and winks at $bf.name who, with a stifled sob, turns to leave. 
+		The blackmailing bastard saunters out after him, delighted at what he's achieved here today.
+	#elseif($scene.hasFlag("COME_IN_MOUTH"))
+		You lick your lips, the ##
+		#if($jerk.hasTrait("TASTY_SPERM"))delicious ##
+		#elseif($jerk.hasTrait("TASTY_SPERM"))disgusting ##
+		#end
+		taste of $scene.addPossessiveSuffix($jerk.name) sperm still on them. 
+		$jerk.name follows, miming what happened to $bf.name. ##
+		Stifling a sob, your $bf.relationshipNpcDesc turns to leave. 
+		Satisfied and cruelly proud of what he's done, the blackmailing bastard heads for the door as well.
+	#elseif($jerk.hadOrgasm)
+		$jerk.name follows, a wide smile plastered across his face. 
+		With one look at his expression $bf.name lets out a traumatised sob and turns to leave. ##
+		$jerk.name gives you a satisfied pat on the ass and heads for the door as well.
+	#elseif($w.orgasms > 0)
+		One look at #if($w.hasHair)your mussed hair and #{end}the sweat beading on your face tells $bf.name that this other man has just brought his $bf.relationshipWDesc to climax. 
+		Horrified, he rushes out of your #if($w.livingInFlat)apartment#{else}house#{end}. $jerk.name smiles cruelly to see him suffer and, ## 
+		judging he's done as much as he can today, heads for the door as well.
+	#else
+		$bf.addNpcLikingTiny()$bf.addNpcLoveTiny()## Very small effect to slightly counteract the massive negatives from earlier
+		## No orgasms, no sex flag, no harsh rejection. This will be a "soft" rejection such as by the "end makeout" action.
+		$jerk.name follows. $bf.name looks at both of you and is immediately heartened to see the disappointment on ##
+		$scene.addPossessiveSuffix($jerk.name) ##
+		#if($jerk.hasTrait("UGLY"))ugly ##
+		#elseif($jerk.hasTrait("HANDSOME"))handsome ##
+		#end
+		face. ##
+		#if($w.clothesDisarrayed)Your mussed clothing is less pleasing to him though, but he can take comfort in assuming that you clearly didn't comply with ##
+			$scene.addPossessiveSuffix($jerk.name) every perverse desire.
+		#end
+		
+		Both men leave, neither especially happy with how the evening went. ##
+		#if ($w.hasTrait("BITCHY"))Which, for you, is a rather satisfying outcome.
+		#{else}You let them go and look forward to spending an evening on your own, free of men and their jealousies.
+		#end
+	#end
+#end
+</returnFromMockedDoormatJerkMakeout>
+
+<bfLeaves>
+	$bf.name walks out of the door, and $jerk.name turns to you. ##
+	#if($jerk.hadOrgasm)
+		With a mocking grin he tells you that he had a lot of fun and## 
+		#if(!$bf.partner) you should call him next time you have a boyfriend. ##
+		#else you should do this again sometime. ##
+		#end 
+		Nonchalantly waving goodbye, he saunters to the door.
+	#else
+		#if(!$bf.partner)Now that you're single again he recommends changing your mind about ##
+		#{else}Now you're alone again he recommends changing your mind about ##
+		#end
+		#if($scene.hasFlag("JERK_BLACKMAIL_WANTS_ANAL"))letting him fuck your ass.
+		#elseif($scene.hasFlag("JERK_BLACKMAIL_WANTS_ORAL"))sucking his cock.
+		#elseif($scene.hasFlag("JERK_BLACKMAIL_WANTS_INSEMINATE"))letting him empty his balls into you.
+		#{else}letting him fuck you.
+		#end
+	#end
+</bfLeaves>
+
+<postBfLeavingKickJerkOut>
+The gall of the man! There's no way you'll agree to that, and no way you'll tolerate him here any longer. Putting your foot down, you order him out of your $w.getFlatOrHouse().
+</postBfLeavingKickJerkOut>
+
+<postBfLeavingAllowLeave>
+$jerk.name walks out, and that's the end of quite an eventful evening.
+</postBfLeavingAllowLeave>
+
+<postBfLeavingTrounceJerk>
+#set($chanceWin = 50 + $w.strength - $jerk.strength)
+	$jerk.name is such a smug bastard. Time to wipe that smile off of his face! 
+#if($scene.percent($chanceWin))
+	## Technically don't need to set the relationship flag as TROUNCED will already block repeat blackmailing. Can't hurt to have it there in case 
+	## it becomes relevant in future scenes though.
+	$jerk.addTrait("TROUNCED") $jerk.addRelationshipFlag("BLOCK_BLACKMAIL") $gd.addStat("BEATINGS_GIVEN")
+
+	You ball your ##
+	#if($w.figure == "SLIM")tiny #end##
+	hands into fists and do just that, sending him packing with enough bruises that he'll think twice before trying something like this again. In fact, as ##
+	he's fleeing for the door you decide to make that three times and dish out yet another round of well-deserved punishment.
+#else
+	You ball your #if($w.figure == "SLIM")tiny #end##
+	hands into fists and attempt to do just that. ##
+	#if($jerk.strength > $w.strength)
+		He's too strong for you though. Your blows just bounce off harmlessly. He laughs mockingly and strides out, leaving you seething with frustration.
+	#else
+		On another day you might have beaten him, but he makes a lucky grab and catches you by the wrists. Laughing mockingly at your futile attempts to ##
+		humble him, he makes his way un-thumped from your $w.getFlatOrHouse().  
+	#end
+	$w.changeStress(5)	
+#end 
+</postBfLeavingTrounceJerk>
+
+<postBfLeavingAcceptJerkProposition>
+Very well. ##
+#if($bf.partner)
+$bf.name left, and when the cat's away...
+#else
+You're a single girl now. You can do whatever, or whoever, you want.
+#end
+</postBfLeavingAcceptJerkProposition>
+
+<postBfLeavingGetToKnees>
+You get to your knees in front of $jerk.name.
+</postBfLeavingGetToKnees>
+
+<postBfLeavingGetOnAllFours>
+#if($w.pussyExposed)## This condition is also sufficient for anal penetration.
+	You lead $jerk.name to the bedroom and position yourself on all fours on the bed. ##
+	#if($w.bottomStatus == "WORN")$w.setBottomStatus("DISHEVELED")#end##
+#else
+	#if($w.bottomStatus != "OFF" && $w.bottomStatus != "EXPOSED")
+		#if($w.bottom.skirt)$w.setBottomStatus("EXPOSED")
+		#else $w.setBottomStatus("OFF")
+		#end
+	#end
+	#if($w.pantiesStatus != "OFF" && $w.pantiesStatus != "EXPOSED")$w.setPantiesStatus("EXPOSED")#end
+	You lead $jerk.name to the bedroom, adjust your clothing the bare minimum needed to expose your bottom for his lusts, and position yourself on all fours ##
+	on the bed. ##
+#end
+
+He slickens your puckered asshole with a glob of lube and then, with a satisfied grunt, thrusts his $jerk.cockDesc powerfully into your anus. 
+</postBfLeavingGetOnAllFours>
+
+<postBfLeavingFulfilJerksWishes>
+#if($jerk.hadOrgasm)
+	#if($jerk.npcLoveCrush)
+		Smiling broadly, $jerk.name stays a little while, cuddling you and stroking your#if($w.hasHair) soft $w.hairColour hair#else smooth head#end. On his way out he tells you that this was ##
+		a lot more fun than you'd have had with $bf.name, and he hopes to do it again soon.
+	#else
+		Satisfied with his orgasm, $jerk.name makes no pretence of wanting to stick around and spend time with you. He heads for the door, leaving you ##
+		alone again.
+	#end 
+#else
+	$jerk.name still isn't satisfied, but that was his last chance, at least for this evening. You hint that he should leave and he does, but not before ##
+	dropping a hint that he expects much more to come in the future.  
+#end
+</postBfLeavingFulfilJerksWishes>
+
+
+<givePermissionToFightLongDesc>
+$jerk.name is a bad person. Of course you don't condone violence but you do, in fact, condone violence.
+</givePermissionToFightLongDesc>
+
+<givePermissionToFight>
+You give $bf.name a quick nod of approval and he launches himself at $jerk.name.
+</givePermissionToFight>
+
+<refusePermissionToFight>
+There'll be no fighting here! You give $bf.name an admonishing shake of your head and tell $jerk.name to leave. He makes a quick exit, leaving you ##
+alone with your $bf.relationshipNpcDesc. 
+</refusePermissionToFight>
+
+<aloneWithBf>
+You smile at $bf.name. It's just the two of you now, and you arent sorry to see that blackmailing scum go.
+</aloneWithBf>
+
+<watchFight>
+#set($chanceFlee = 0)
+#set($strengthDiff = $jerk.strength - $bf.strength)
+#if($strengthDiff < -50)#set($chanceFlee = $chanceFlee + 80)
+#elseif($strengthDiff < -30)#set($chanceFlee = $chanceFlee + 50)
+#elseif($strengthDiff<0)#set($chanceFlee = $chanceFlee + 10)
+#end
+
+#if(!$jerk.hasTrait("BOASTFUL") && $scene.percent($chanceFlee))
+	$scene.hideNpc($jerk)
+	$scene.addFlag("BLACKMAIL_JERK_RAN_FROM_FIGHT")
+	$scene.setActiveMaleNpc($bf)
+	$jerk.name has no stomach for this sort of thing! He turns tail and flees from your $w.getFlatOrHouse()##
+	#if($jerk.figure == "FAT") with a surprising turn of speed for such a large man. 
+	#{else}.
+	#end
+#else
+	The two men start to grapple with each other##
+	#if($jerk.strength > $bf.strength + 10), $jerk.name clearly the stronger.
+	#elseif($bf.strength > $jerk.strength + 10), $bf.name clearly the stronger.
+	#{else}.
+	#end
+	Each tries to find an advantage, staggering around the room together like a pair of drunken dancers.
+#end
+</watchFight>
+
+<stopFighting>
+Enough is enough! You put the fighting to a halt with an ear-piercing scream. The men stop what they were doing, staring at you stunned. You take the opportunity ##
+to chuck both of them out of your $w.getFlatOrHouse(). 
+</stopFighting>
+
+<watchFightEnd>
+#set($chanceBfWin = 50 + ($bf.strength/2) - ($jerk.strength/2))
+#if($scene.percent($chanceBfWin))
+	$scene.addFlag("BLACKMAIL_BF_WINS_FIGHT")
+	#if($chanceBfWin < 40)
+		$jerk.name seems like the stronger man, but $scene.addPossessiveSuffix($bf.name) righteous fury drives him to victory, ##
+		leaving the blackmailing jerk in a moaning heap on the floor. 
+	#else
+		$bf.name, powered by righteous fury, dishes out a thorough thrashing to the blackmailing jerk, leaving him in a moaning heap on the floor.
+	#end
+#else
+	Unfortunately for $bf.name, the odious $jerk.name proves to be the better fighter. Your $bf.relationshipNpcDesc collapses onto the floor, bruised and ##
+	groaning. 
+	$jerk.name stands over him##
+	#if($jerk.hasTrait("HANDSOME"))
+		, his handsome face marred by a mocking grin.
+	#elseif($jerk.hasTrait("UGLY"))
+		, his ugly face made even less pleasant by a cruelly mocking grin.
+	#else
+		, sneering mockingly at his defeated opponent.
+	#end
+#end
+</watchFightEnd>
+
+<withVictoriousBfShortDesc>
+Go to $bf.name
+</withVictoriousBfShortDesc>
+
+<withVictoriousBfLongDesc>
+Go to your victorious $bf.relationshipNpcDesc.
+</withVictoriousBfLongDesc>
+
+<withVictoriousBf>
+#if(!$scene.hasFlag("BLACKMAIL_JERK_RAN_FROM_FIGHT"))
+	$jerk.name limps from your $w.getFlatOrHouse(), but you no longer have eyes for him. 
+#end
+You look up at $bf.name wide-eyed, your heart beating fast, a sudden heat rising in you as you admire the victorious combatant.
+His eyes meet yours, and you instantly know that he can sense your arousal. With an animalistic growl he steps forward and takes you in his arms.
+</withVictoriousBf>
+
+<postFightBfMo>
+#if($scene.hasFlag("UNHAPPY_CHEATING_DISCOVERY_OUTCOME"))
+	You collapse onto your bed, gasping for breath##
+	#if($w.orgasms > 0), your body still tingling from the orgasm#end##
+	. $bf.name looks down at you, his#if($bf.hasTrait("THICK_COCK")) fat#elseif($bf.hasTrait("SMALL_COCK")) skinny#end cock still dripping with##
+	#if($scene.hasFlag("CAME_INSIDE"))
+		the sperm he unloaded into your pussy.
+	#elseif($scene.hasFlag("CAME_INSIDE_ANAL"))
+		the sperm he shot into your asshole.
+	#else
+		spunk.
+	#end 
+	He zips up his $bf.trousers and walks out.
+	$bf.fixClothing()
+#else
+	Breathing hard, you and $bf.name disentangle from each other.
+#end 
+</postFightBfMo>
+
+<postFightConsoleBeatenBfShortDesc>
+Console your $bf.relationshipNpcDesc
+</postFightConsoleBeatenBfShortDesc>
+
+<postFightConsoleBeatenBfLongDesc>
+#if($bf.wLoveCrush)
+	He's lost the fight, but won your heart.
+#else
+	Comfort your beaten $bf.relationshipNpcDesc.
+#end
+</postFightConsoleBeatenBfLongDesc>
+
+<postFightConsoleBeatenBf>
+You rush to $scene.addPossessiveSuffix($bf.name) side and do your best to care for his injuries, ignoring $jerk.name completely. Miffed, he stalks out of ##
+your $w.getFlatOrHouse().
+</postFightConsoleBeatenBf>
+
+<postFightConsoleJerkShortDesc>
+Console $jerk.name
+</postFightConsoleJerkShortDesc>
+
+<postFightConsoleJerkLongDesc>
+Comfort the beaten asshole. Your $bf.relationshipNpcDesc will not be pleased at all.
+</postFightConsoleJerkLongDesc>
+
+<postFightConsoleJerk>
+Ignoring your $bf.relationshipNpcDesc, you rush to $scene.addPossessiveSuffix($jerk.name) and do your best to tend to his wounds.
+
+$bf.name looks on aghast##
+#if($bf.relationship == "MARRIED")
+	## At some point there should be consequences for doing things like this, but that can wait for more marriage content to be done.
+	, stunned that his $bf.relationshipWDesc would care more for the blackmailing scumbag than for him. Enraged, he storms out.
+#else
+	, stunned that his $bf.relationshipWDesc would do such a thing. He curtly informs you that your relationship is over before storming out of your flat, ##
+	perhaps forever.
+	$bf.breakup(true)
+#end
+</postFightConsoleJerk>
+
+<postFightGoToJerkWinner>
+Ignoring your defeated $bf.relationshipNpcDesc, you rush into $scene.addPossessiveSuffix($jerk.name) arms, heart beating with excitement at witnessing ##
+his brutal victory.
+
+$bf.name looks on aghast##
+#if($bf.relationship == "MARRIED")
+	## At some point there should be consequences for doing things like this, but that can wait for more marriage content to be done.
+	, stunned that his $bf.relationshipWDesc would care more for the blackmailing scumbag than for him. Groaning incoherently, he limps out of the flat.
+#else
+	, stunned that his $bf.relationshipWDesc would do such a thing. Through the pain of bruises and heartbreak, he groans that your relationship is over before ##
+	crawling out of your $w.getFlatOrHouse().
+	$bf.breakup(true)
+#end
+</postFightGoToJerkWinner>

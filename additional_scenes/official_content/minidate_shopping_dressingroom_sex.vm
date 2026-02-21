@@ -1,0 +1,65 @@
+<introText>
+#set($numObjections = 0)##
+#set($numPushAway = 0)##
+#set($numGropes = 0)## This gets increased but AFAICT is never checked. I'm leaving it here in case people want to use it for extensions to the scene -- SO
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+You meet with $bf.getName() at the mall to do a little shopping. When you see a nice pair of jeans being sold in one of the shops, $bf.getName() insists that you go try them out. You grab a pair from the rack and go to the changing rooms. One is available, and you head on in, $bf.getName() tries to enter the changing room with you. You are moritified when a saleswoman yells out at you from across the shop, comes over, and warns you that the changing rooms are for one person at a time. $bf.getName() leaves, you enter the changing room alone, and you close the door.
+
+As you're removing the jeans from the hangar, you hear a faint knock at the door. You open the door a crack and see $bf.getName() standing outside. He quickly barges in, and closes the door behind him. He silences you with a finger to the lips and whispers in your ears that the saleswoman was distracted by a customer, so he was able to sneak in without her noticing. Before you're able to ask him what he's doing here, he pushes you up against a wall. $bf.performMakeoutAction("ACCEPT", ["KISS"], "FACE_TO_FACE", "STANDING", false, true, true)
+</introText>
+
+<pushAway>
+You're afraid of getting caught, so you quietly push $bf.getName()'s hands away.
+
+$bf.performMakeoutAction("ACCEPT", ["TOUCH", "GROPE", "GRIND", "UNDRESS"], "FACE_TO_FACE", "STANDING", false, true, true)
+#set($numPushAway = $numPushAway + 1)##
+#set($numGropes = $numGropes + 1)##
+</pushAway>
+
+<pushAwayKiss>
+You gently push $bf.getName() away, but he interprets it as you being playful.
+
+He gives you a naughty smile. You can't believe he wants to fool around in the changing room. 
+
+$bf.performMakeoutAction("ACCEPT", ["TOUCH", "GROPE", "GRIND", "UNDRESS"], "FACE_TO_FACE", "STANDING", false, true, true)
+#set($numPushAway = $numPushAway + 1)##
+#set($numGropes = $numGropes + 1)##
+</pushAwayKiss>
+
+<pushAwayEnd>
+You gently push $bf.getName() away. He realizes that aren't feeling frisky. He sneaks out of the changing room.
+
+You decide that you aren't interested in the jeans after all, and leave as well.
+</pushAwayEnd>
+
+<firstObject>
+You tell him to stop, but the saleswoman can hear your talking and she calls out, "what's going on over there? There should only be one person in each changing room!" You quickly go silent. 
+
+He whispers into your ear that you shouldn't worry because you won't get caught.
+
+$bf.performMakeoutAction("ACCEPT", ["TOUCH", "GROPE", "GRIND", "UNDRESS"], "FACE_TO_FACE", "STANDING", false, true, true)
+#set($numObjections = $numObjections + 1)##
+#set($numGropes = $numGropes + 1)##
+</firstObject>
+
+<object>
+This is so inappropriate. You face $bf.getName() and tell him that you don't want to fool around and that he should go.
+
+There's a knock at the door. The saleswoman yells at you through the door that she can hear the two of you in there. She says the store doesn't tolerate any misbehaviour in the changing rooms and demands that you leave immediately. 
+
+You have to shamefully walk out of the store with everyone staring at you. 
+</object>
+
+<foolAround>
+You decide that it's safe to have some fun.
+</foolAround>
+
+<finishSex>
+After fixing up your clothing, you open the door to the changing room and peek outside. The coast is clear. You casually stroll out.
+
+$bf.getName() sneaks out a few seconds later.
+</finishSex>
+
+<sceneDescriptionText>
+You are shopping with $bf.getName().
+</sceneDescriptionText>

@@ -1,0 +1,250 @@
+# Preconditions for this scene:
+# Part of the minidate framework
+# $bf should be the boyfriend or husband
+# $guest should be a charming friend but the scene might work better with a boss or friend of the boyfriend
+
+textFileName: minidate_cheating_sleepover.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: bf
+    outfit: CASUAL
+  - id: guest
+    outfit: CASUAL
+
+ location:
+  usePlayerHome: true
+
+
+
+intro:
+ textId: introText
+ followUpActions:
+  greet:
+
+
+actions:
+
+ - id: greet
+   shortDesc: Open the door
+   longDesc: Find out who is at the door
+   textId: greet
+   followUpActions:
+    drinklots1: '(!$w.isKnownPregnant())'
+    drinkmoderate1: '(!$w.isKnownPregnant())'
+    drinknone1:
+
+ - id: drinklots1
+   shortDesc: Indulge in the whiskey
+   longDesc: It's time to get drunk!
+   textId: drink1
+   effects:
+    - effect: $w.addAlcoholLarge()
+   followUpActions:
+    drinklots2: '(!$w.isKnownPregnant())'
+    drinkmoderate2: '(!$w.isKnownPregnant())'
+    drinknone2:
+
+ - id: drinkmoderate1
+   shortDesc: Drink moderately
+   longDesc: Having a glass or two is fine
+   textId: drink1
+   effects:
+    - effect: $w.addAlcoholMedium()
+   followUpActions:
+    drinklots2: '(!$w.isKnownPregnant())'
+    drinkmoderate2: '(!$w.isKnownPregnant())'
+    drinknone2:
+
+ - id: drinknone1
+   shortDesc: No whiskey for me
+   longDesc: You can have a fun time without alcohol
+   textId: drink1
+   followUpActions:
+    drinklots2: '(!$w.isKnownPregnant())'
+    drinkmoderate2: '(!$w.isKnownPregnant())'
+    drinknone2:
+
+ - id: drinklots2
+   shortDesc: Indulge in the whiskey
+   longDesc: It's time to get drunk!
+   textId: drink2
+   effects:
+    - effect: $w.addAlcoholLarge()
+   followUpActions:
+    drinklots3: '(!$w.isKnownPregnant())'
+    drinkmoderate3: '(!$w.isKnownPregnant())'
+    drinknone3:
+
+ - id: drinkmoderate2
+   shortDesc: Drink moderately
+   longDesc: Having a glass or two is fine
+   textId: drink2
+   effects:
+    - effect: $w.addAlcoholMedium()
+   followUpActions:
+    drinklots3: '(!$w.isKnownPregnant())'
+    drinkmoderate3: '(!$w.isKnownPregnant())'
+    drinknone3:
+
+ - id: drinknone2
+   shortDesc: No whiskey for me
+   longDesc: You can have a fun time without alcohol
+   textId: drink2
+   followUpActions:
+    drinklots3: '(!$w.isKnownPregnant())'
+    drinkmoderate3: '(!$w.isKnownPregnant())'
+    drinknone3:
+
+ - id: drinklots3
+   shortDesc: Indulge in the whiskey
+   longDesc: It's time to get drunk!
+   textId: drink3
+   effects:
+    - effect: $w.addAlcoholLarge()
+   followUpActions:
+    discourageFlirt:
+    ignoreFlirt:
+
+ - id: drinkmoderate3
+   shortDesc: Drink moderately
+   longDesc: Having a glass or two is fine
+   textId: drink3
+   effects:
+    - effect: $w.addAlcoholMedium()
+   followUpActions:
+    discourageFlirt:
+    ignoreFlirt:
+
+ - id: drinknone3
+   shortDesc: No whiskey for me
+   longDesc: You can have a fun time without alcohol
+   textId: drink3
+   followUpActions:
+    discourageFlirt:
+    ignoreFlirt:
+
+ - id: discourageFlirt
+   shortDesc: Discourage him
+   longDesc: It's wrong to flirt with others when your partner is right there
+   textId: discourageFlirt
+   followUpActions:
+    continueWashing:
+
+ - id: ignoreFlirt
+   shortDesc: Ignore it
+   longDesc: There's no need to make a scene for some cheeky flirting
+   textId: ignoreFlirt
+   followUpActions:
+    continueWashing:
+
+ - id: continueWashing
+   shortDesc: Continue washing
+   longDesc: You still have dishes that need cleaning
+   textId: continueWashing
+   followUpActions:
+    discourageHim2:
+    letHim2:
+
+ - id: discourageHim2
+   shortDesc: Discourage him
+   longDesc: Things are going too far
+   textId: discourageHim2
+   followUpActions:
+    bfstirs:
+
+ - id: letHim2
+   shortDesc: Let him continue
+   longDesc: Your partner is so drunk, he won't notice what's going on
+   textId: letHim2
+   followUpActions:
+    bfstirs:
+
+ - id: bfstirs
+   shortDesc: Go back to washing
+   longDesc: Don't let your partner become suspicious
+   textId: bfstirs
+   followUpActions:
+    bedroom:
+
+ - id: bedroom
+   shortDesc: Call it a night
+   longDesc: It's getting late. Everyone should go to sleep
+   textId: bedroom
+   followUpActions:
+    sleep1:
+    sexbf1:
+    sofa:
+
+ - id: sleep1
+   shortDesc: Go to sleep
+   longDesc: Ignore your lustful thoughts and try to go to sleep
+   textId: sleep1
+   finishScene: true
+
+ - id: sexbf1
+   shortDesc: Have fun with your partner
+   longDesc: Fulfill your desires with the help of your partner
+   textId: sexbf1
+   sceneTransition:
+    condition: true
+    type: LYING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: bf
+    returningId: postsexbf
+    location:
+     usePlayerHome: true
+
+ - id: sofa
+   shortDesc: Go to the sofa
+   longDesc: You can't deny your desires
+   textId: sofa
+   effects:
+    - effect: $scene.addFlag("BLOCK_SITTING_MO_TRANSITION_TO_OTHER_MAKEOUTS")
+   sceneTransition:
+    condition: true
+    type: SITTING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: guest
+    returningId: postSofa
+    location:
+     usePlayerHome: true
+
+ - id: postSofa
+   shortDesc: After the sofa
+   longDesc: not used
+   textId: postSofa
+   followUpActions:
+    sleep2:
+    sexbf2:
+
+ - id: sleep2
+   shortDesc: Go to sleep too
+   longDesc: Your desires are sated, so you can go to sleep
+   textId: sleep2
+   finishScene: true
+
+ - id: sexbf2
+   shortDesc: Have some more fun
+   longDesc: Why can't you sleep with two men in one night?
+   textId: sexbf2
+   sceneTransition:
+    condition: true
+    type: LYING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: bf
+    returningId: postsexbf
+    location:
+     usePlayerHome: true
+
+ - id: postsexbf
+   shortDesc: After sex with the bf
+   longDesc: not used
+   textId: postsexbf
+   finishScene: true

@@ -1,0 +1,110 @@
+# Preconditions for this scene:
+# Scene happens when PC walks home alone from the club
+# Base chance is 25% at weight 100.
+# All NPCs below must exist and must not have been in the club the PC is leaving:
+#
+# $m1 must have the LOWLIFE trait
+# $m2 must have either a JERK or SELFISH personality or have the CRUDE or SLEAZY trait
+# $m3 must have a CARING personality or the CHARMING trait and does not dislike the PC. 
+# $m3 should always be the same person if the scene is repeated
+
+textFileName: walkHomeAlone.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: GOING_OUT
+ maleNpcs:
+  - id: m1
+    outfit: CASUAL
+  - id: m2
+    outfit: CASUAL
+  - id: m3
+    outfit: CASUAL
+
+# Location info.
+ location:
+  wall: wall
+  floor: pavement
+  hasBed: false
+  isOutside: true
+
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.hideNpc($m1)
+  - effect: $scene.hideNpc($m2)
+  - effect: $scene.hideNpc($m3)
+# useDefaultActions: true
+ followUpActions:
+  walkHome:
+  debugDrunk: $debug
+  endDebug: $debug
+
+
+
+actions:
+ - id: walkHome
+   shortDesc: Walk home
+   longDesc: Walk home through the dark streets
+   textId: walkHome
+   allowNpcActions: true  
+   # Use the male NPC actions to choose a scene to transition to
+   
+   
+   
+ - id: endDebug
+   shortDesc: Force end of scene
+   longDesc: For debugging
+   textId: endSceneTesting
+   finishScene: true
+   
+ - id: debugDrunk
+   shortDesc: Make drunk
+   textId: debugDrunk
+   effects:
+    - effect: $w.addAlcoholLarge()
+   followUpActions:
+    walkHome:
+    debugDrunk:
+    endDebug:
+   
+
+
+
+
+
+maleNpcActions:
+ # Choose a scene to transition to
+ - id: custom
+   textId: empty
+   condition: $w.isMaxDrunk() && $m1
+   weightDivisorConditions: [true, true]
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: m1
+    transitionInfo:
+     ymlFile: walkHomeAlone_lowlife.yml
+    location:
+     useCurrentLocation: true
+     
+ - id: sex
+   textId: empty
+   condition: $m2 && $m3
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: yeller
+       npc: m2
+     - id: helper
+       npc: m3
+    transitionInfo:
+     ymlFile: walkHomeAlone_flashPub.yml
+    location:
+     useCurrentLocation: true

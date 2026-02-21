@@ -1,0 +1,21 @@
+<introText>
+You agree to meet with $bf.getName() at a pub.
+
+When you enter it, you find it really busy inside with people everywhere. You wander through the room looking for him.
+
+You finally spot $bf.getName() chatting with some woman. He's sitting really close to her, with a hand casually touching her elbow. As you approach, he sees you, excuses himself from the woman, and stands up to greet you. 
+
+When you get there, the woman stands up and says she has to leave too. She turns to $bf.getName() and asks for his phone number. He enters his contact information into her phone, and she walks off.
+
+Did he just get a woman's phone number right in front of you? 
+
+You ask him about it, but he just waves it off, explaining that she was new in town and wanted some advice about the local restaurants.
+
+$bf.addNpcLikingTiny() $bf.reduceWLikingMedium()##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are in a pub with $bf.getName().
+</sceneDescriptionText>

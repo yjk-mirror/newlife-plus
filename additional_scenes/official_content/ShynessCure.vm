@@ -1,0 +1,2896 @@
+<introText>
+$f.name calls you up at home. She tells you how she's noticed how shy you are, and says she can help with that. She suggests that you meet her at a local coffee shop to chat. 
+$f.setPantiesStatus("OFF") ##
+#set($temp = 0)
+#if($w.hasTrait("LOW_SELF_ESTEEM"))
+	#set($temp = -10)
+#end
+#set($zeromoney = 0 - $w.getMoney())
+#set($mouthtest = 0)
+#if($w.hasTrait("LOW_SELF_ESTEEM"))
+	#set($mouthtest = $mouthtest - 5)
+#end
+#if($w.hasTrait("LIKES_ROUGH"))
+	#set($mouthtest = $mouthtest - 5)
+#end
+#if($w.hasTrait("LIKES_ORAL"))
+	#set($mouthtest = $mouthtest - 5)
+#end
+#if($w.getPregnancyStage() != "FLAT" || $f.isPregnant())
+	$scene.addFlag($scene.pickFromList(["Carnival","Mall"]))##
+#else
+	$scene.addFlag($scene.pickFromList(["Carnival","IceSkate","Mall"]))##
+#end
+#set($scenedesc = "START")
+</introText>
+
+<meetHerShort>
+Meet $f.name for coffee
+</meetHerShort>
+
+<meetHerText>
+$f.name arranges to meet you at a quiet local coffee shop. When you get there she's already waiting for you at a booth. She waves you over, and you chat. ##
+##
+#if($f.hasTrait("BOASTFUL"))
+	She spends a long time talking about herself, and bragging about exciting parties she's attended##
+	#if($f.isVirgin())
+		. ##
+	#else
+		, and the guys she's banged. ##
+	#end
+#elseif($f.hasTrait("DULL"))
+	She spends a long time talking about herself and her week--mostly the parties she's been going to. The story goes on and on for some time, and you find yourself zoning out. ##
+#elseif($f.hasTrait("INTERESTING"))
+	She tells you several fascinating stories about her recent exploits, and the parties she's gone to. Apparently they've been off the hook. ##
+#else
+	You spend some time catching up on your recent events and swapping stories. ##
+#end
+##
+#if($f.getPersonality() == "SELFISH")
+	Somehow, she's managed to forget her wallet, forcing you to pay for the coffee. $f.reduceWLikingTiny() $w.changeMoney(-2)##
+#elseif($f.getPersonality() == "JERK" && $w.hasTrait("BITCHY"))
+	You and $f.name have fun mocking the other patrons of the coffee shop, insulting their hair, their clothing, their voices, and so on. The remarks get pretty cutting by the end, as you work to out-do each other. Neither of you particularly cares if you are overheard. $f.addNpcLikingTiny()$f.addWLikingTiny()## Bonding over bitchiness. 
+#elseif($f.getPersonality() == "JERK")
+	Somehow, she's managed to forget her wallet, forcing you to pay for the coffee. $f.reduceWLikingTiny() $w.changeMoney(-2)##
+#end
+
+
+Eventually she gets to the point. She thinks she has a way to break you out of your shell, if you're willing to put your trust in her. Looking intently into your eyes, ##
+she asks if you have faith in her. ##
+#set($scenedesc = "COFFEE")
+</meetHerText>
+
+<refuseToMeet>
+You make a feeble excuse and beg out of the meeting. Whatever plan she's concocting, you don't want any part of it. 
+</refuseToMeet>
+
+<trustHer>
+When you tell her you trust her, $f.name leans in conspiratorially. She tells you that she's sure she can break you out of your shell, so long as you're willing to do what she tells you. She's certain, she says, that what you need is to do something that will take you out of your comfort zone.
+
+She then tells you to go into the bathroom and take off your panties, and spend the rest of the evening without them.
+</trustHer>
+
+<TrustHerNo>
+You try to decline politely, but the rest of your conversation for the day is somewhat stilted and awkward. Eventually you two make your separate excuses to part ways for the day. $f.reduceNpcLikingSmall() ## This should harm the relationship. 
+</TrustHerNo>
+
+<GivePantiesYesShort>
+Give her your $w.getPanties().getBasicDesc()
+</GivePantiesYesShort>
+
+<GivePantiesYesLong>
+Go into the bathroom and take off your $w.getPanties().getShortDesc().
+</GivePantiesYesLong>
+
+<GivePantiesYesText>
+You slip into a bathroom stall and remove your $w.getPanties().getShortDesc(). When you get back, $f.name insists that you hand $w.getPanties().getItThem() over to her for safekeeping, which you reluctantly do. She tucks $w.getPanties().getItThem() into her purse, promising she'll return $w.getPanties().getItThem() to you later. $w.setPantiesStatus("OFF")##
+$scene.addFlag("gavepanties")
+</GivePantiesYesText>
+
+<GivePantiesNoShort>
+Refuse
+</GivePantiesNoShort>
+
+<GivePantiesNoLong>
+Refuse to go along with her plan. You're not comfortable with this.
+</GivePantiesNoLong>
+
+<GivePantiesNoText>
+You tell her you're not comfortable doing that, and she argues that is the whole point of doing it. There's a bit of a back and forth, but you stand firm and she relents fairly quickly. It does make conversation after that a little awkward, and eventually you two part ways for the evening. $f.reduceNpcLikingTiny()## Relationship hit.
+</GivePantiesNoText>
+
+<GivePantiesCannotShort>
+Not wearing any
+</GivePantiesCannotShort>
+
+<GivePantiesCannotLong>
+Let her know you're already commando.
+</GivePantiesCannotLong>
+
+<GivePantiesCannotText>
+You explain to $f.name that you can't do what she asks... because you're already not wearing any panties. $f.name calls you a minx, winks at you, and then gestures for you to follow her out of the coffee shop. $f.addNpcLikingTiny()
+</GivePantiesCannotText>
+
+<GivePantiesLieShort>
+Lie
+</GivePantiesLieShort>
+
+<GivePantiesLieLong>
+Lie and tell her that you're not wearing any.
+</GivePantiesLieLong>
+
+<GivePantiesLieText>
+You explain to $f.name that you can't do what she asks... because you're already not wearing any panties. $f.name calls you a minx, winks at you, and then gestures for you to follow her out of the coffee shop. She doesn't appear to doubt your word on this one. $f.addNpcLikingTiny()
+</GivePantiesLieText>
+
+<GoWithShort>
+Go with $f.name
+</GoWithShort>
+
+<GoWithLong>
+Follow $f.name out of the coffee shop for the next phase of her plan.
+</GoWithLong>
+
+<GoWithText>
+$f.name leads you out of the coffee shop and down the street at a brisk pace. ## 
+#if($w.getPantiesStatus() == "OFF")##
+	#if($w.getBottom().getLength() == "THIGH")
+		You rapidly find yourself cursing your decision to wear such a short $w.getBottom().getBasicDesc(), as you are worried that it might inadvertently give a glimpse that reveals your lack of underwear. $w.changeStress(5)##
+		#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+			You find yourself imagining that people can see up your $w.getBottom().getBasicDesc(), or even just see through it and realize that your pussy is bare. It's a bit of a turn-on, though also fairly nerve-wracking at the same time. $w.changeStress(5)$w.addArousalTiny()##
+		#end
+	#elseif($w.getBottom().getLength() == "KNEES")
+		Thankfully, your skirt is long enough that it probably prevents accidental glimpses underneath. That doesn't stop you from feeling the need to constantly check to ensure that it's not riding up or getting snagged. It's probably not necessary, but you do it anyway##
+		#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+			, as you imagine everyone around you discovering your secret by catching view of your bare pussy. You picture the humiliation you'd feel, and the shocked or aroused reactions of bystanders. It's a bit of a turn-on, though also fairly nerve-wracking at the same time. ##
+		#else
+			.
+		#end
+	#elseif($w.getBottom().getLength() == "ANKLES")
+		Being without underwear isn't so bad, because at least your $w.getBottom().getBasicDesc() covers you well, reaching down to your ankles. ##
+		#if($w.getBottom().hasFlag("THIN") || $w.getBottom().hasFlag("CLINGY"))
+			However, the fabric is thin enough that there might be a risk of someone noticing your lack of underwear through it.
+		#else
+			However, there's still the worry that they'll notice the lack of a panty line through the fabric, and just the feeling that people can somehow tell. ##
+		#end
+		#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+			You find yourself imagining that everyone you pass can tell that your pussy is bare under your $w.getBottom().getBasicDesc(), that they can see or even just smell you despite the fabric. It's a bit of a turn-on, though also fairly nerve-wracking at the same time. $w.changeStress(5)$w.addArousalTiny()##
+		#end
+	#else
+		This message should never be seen, except in the event of a bug. Please report this to the developer.
+	#end
+#elseif($w.getPantiesStatus() != "OFF")
+	#if($w.getBottom().getLength() == "THIGH")
+		$f.name planned for you to be hiding a secret as you walked. However, you have a different secret than she anticipated. Your concern as you walk isn't that your short $w.bottom.basicDesc will reveal a flash of bare skin, but instead that it might reveal to $f.name that you lied to her. $w.changeStress(5)##
+		#if($w.hasTrait("BITCHY"))
+			Not because you're worried about her feelings, of course. You're just worried about getting caught. ##
+		#end
+	#elseif($w.getBottom().getLength() == "KNEES")
+		#if($w.getBottom().hasFlag("THIN") || $w.getBottom().hasFlag("CLINGY"))
+			The $w.getBottom().getBasicDesc() you're wearing is sufficiently thin to make you concerned that $f.name might catch on that you've lied to her. So, you are careful to try to walk behind her, and stay out of her notice. ##
+		#else
+			You walk with $f.name, feeling glad that your little white lie has gone unnoticed, as it would have been pretty humiliating to be without underwear. Of course, instead there's the vague worry that she might spot your lie. ##
+		#end
+	#elseif($w.getBottom().getLength() == "ANKLES")
+		#if($w.getBottom().hasFlag("THIN") || $w.getBottom().hasFlag("CLINGY"))
+			The $w.getBottom().getBasicDesc() you're wearing is sufficiently thin to make you concerned that $f.name might catch on that you've lied to her. So, you are careful to try to walk behind her, and stay out of her notice. ##
+		#else
+			You walk with $f.name, feeling glad that your little white lie has gone unnoticed, as it would have been pretty humiliating to be without underwear. Of course, instead there's the vague worry that she might spot your lie. That said, the ankle length $w.getBottom().getBasicDesc() you're wearing ##
+			#if($w.getBottom().hasFlag("SINGULAR"))
+				leaves little chance of that. ##
+			#else
+				leave little chance of that. ##
+			#end
+		#end
+	#else
+		This message should never be seen, except in the event of a bug. Please report this to the developer.
+	#end
+#else
+	It should not be possible to see this message. If you are seeing it, please report this to the developer.
+#end
+
+
+#if($scene.hasFlag("Carnival"))
+	$f.name leads you along for a while, until you reach the grounds of a carnival. #set($scenedesc = "CARNIVAL")
+#elseif($scene.hasFlag("IceSkate"))
+	$f.name takes you on a short walk, which eventually brings you to an ice skating rink. #set($scenedesc = "ICESKATE")
+#elseif($scene.hasFlag("Mall"))
+	$f.name takes you on a short walk, eventually bringing you to the mall. #set($scenedesc = "MALL")
+#end
+</GoWithText>
+
+<IceSkateLong>
+Go ice skating with $f.name. Seems fairly innocent. ##
+</IceSkateLong>
+
+<IceSkateText>
+$f.name brings you into the ice skating rink and ##
+#if($f.getPersonality() == "SELFISH" || $f.getPersonality() == "JERK")
+	manages to get you to pay for admission for both of you, including skate rentals. $w.changeMoney(-5)##
+#else
+	pays for admission for the both of you, including skate rentals. ##
+#end
+You're thankful that it happens to be a day set aside for adults to skate. $f.name probably planned this out, in fact. ##
+
+
+There's a changing room and showers, but $f.name leads you over to a set of long wooden benches near the entry to the ice rink proper. This is where most people who are just putting on skates do it, but most of them aren't in your particular situation. Still, when she starts putting her skates on, it leaves you little option but to do the same, or else call a lot of attention to yourself. So you sit down on one of the benches as well to put on your skates, as $f.name does the same.$w.addArousalSmall()
+
+#if($w.getBottom().getLength() == "ANKLES")
+	Thankfully, your $w.getBottom().getBasicDesc() is long enough to hide your crotch from view as you do so. ##
+#elseif($w.getBottom().getLength() == "KNEES")
+	It's hard to get your skates on and laced up while doing your best to ensure that you never flash $f.name, but you manage it, even if it requires some awkward poses. ##
+#elseif($w.getBottom().getLength() == "THIGH")
+	Although you try your hardest to get your skates on without flashing $f.name, you can't quite manage it in your very short $w.getBottom().getBasicDesc(). ##
+	#if($w.getPantiesStatus() == "OFF")
+		She flashes you a quick grin that lets you know she's seen the glimpse of your bare pussy, but doesn't comment beyond that. It's still more than enough to make you blush. ##
+	#else
+		When she spots your $w.getPanties().getShortDesc() she gets up angrily. There's other people around, so she can't make too much of a scene, but she does call you a liar in a hissing voice. She demands that you slip them off and hand them to her--right here, right now. $f.reduceNpcLikingSmall()##
+	#end
+#end
+
+
+#if(!$f.getBottom().getLength() == "ANKLES" && $w.getPantiesStatus() == "OFF")
+	As $f.name gets into her own skates and laces them up, you catch a brief glance under her $f.getBottom().getBasicDesc(), and it's clear she's not wearing any underwear on this outing either.
+#end
+</IceSkateText>
+
+<SkatePantiesYesShort>
+Give $f.name your $w.getPanties().getBasicDesc()
+</SkatePantiesYesShort>
+
+<SkatePantiesYesLong>
+Hand over your $w.getPanties().getShortDesc() to $f.name. Hopefully she'll return them later, but it will mean that you are without them until then. 
+</SkatePantiesYesLong>
+
+<SkatePantiesYesText>
+In the face of $scene.addPossessiveSuffix($f.name) anger, you reluctantly agree to give her your $w.getPanties().getBasicDesc(). Waiting for a moment when no one is directly watching you and so you have a chance of pulling it off unnoticed, you reach up under your $w.getBottom().getBasicDesc() and pull your $w.getPanties().getShortDesc() down. You have to lift your hips to get them out from under you, and then you pull them down your $w.addArousalMedium()##
+#if($w.getFigure() == "SLIM")
+	slender legs, ##
+#elseif($w.getFigure() == "WOMANLY")
+	curvaceous legs, ##
+#else
+	toned legs, ##
+#end
+and off your body. You hand them over to $f.name, who tucks them away into her purse, which gets put into a locker before you hit the ice. $w.setPantiesStatus("OFF")$f.addNpcLikingTiny()
+#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+	You are sure that everyone around you caught what you were doing, and are trying to keep that hidden from you, but you're sure you see it in every passing glance your way. It could just be your imagination, though. $w.changeStress(5) ##
+#else
+	Thankfully, no one appears to have noticed. Or if they did, they're hiding it well. ##
+#end
+</SkatePantiesYesText>
+
+<SkatePantiesNoShort>
+Refuse
+</SkatePantiesNoShort>
+
+<SkatePantiesNoLong>
+Tell $f.name that you aren't willing to give her your $w.getPanties().getBasicDesc(). She probably won't be thrilled with that. 
+</SkatePantiesNoLong>
+
+<SkatePantiesNoText>
+#if($w.hasTrait("BITCHY"))
+	You tell $f.name that unlike her, you're not the kind of slut who goes out on the town without underwear, and that she was a stupid whore for ever believing that you would. She is furious, and storms out as soon as she's back in her own shoes. $f.reduceNpcLikingMedium()$f.reduceWLikingSmall()$w.changeStress(-10)##
+#else
+	You apologize to $f.name for lying to her, but tell her that you are just not comfortable going out without panties. She is a little hurt by the lie, but tells you that she understands, and is sorry for trying to push you. Still, she makes up an excuse to have to leave shortly thereafter, and departs without ever making it onto the ice. $f.reduceNpcLikingSmall()##
+#end
+</SkatePantiesNoText>
+
+<SkateShort>
+Go skating
+</SkateShort>
+
+<SkateLong>
+Go skating with $f.name. 
+</SkateLong>
+
+<SkateText>
+Once you and $f.name have your skates on, you head out onto the ice. Almost immediately you feel cool air coming up under your $w.getBottom().getBasicDesc()$w.addArousalMedium()##
+#if($w.getPantiesStatus() == "OFF")
+	, making it impossible to forget that you're going commando. ##
+#else
+	#if($w.getPanties().hasFlag("THIN"))
+		, your $w.getPanties().getBasicDesc() not doing much to protect you, though they are still better than nothing. ##
+	#else
+		, though thankfully your $w.getPanties().getBasicDesc() provide your pussy a little insulation. ##
+	#end
+#end
+#if($w.getSkill("FITNESS") > $w.getSkill("DANCE"))
+	#if($w.getSkill("FITNESS") < 5)
+		It rapidly becomes apparent that you're unable to stand up on the ice without holding onto the boards for dear life. The best you can manage is to inch your way along the ice precariously. ##
+		#if($f.getPersonality() == "JERK" || $f.getPersonality() == "SELFISH")
+			$f.name rapidly tires of being stuck beside you and starts skating laps, occasionally stopping to check in on you. ##
+		#else
+			$f.name stays with you, clearly the better skater, but she doesn't want to abandon you. She attempts to coax you out away from the boards. ##
+		#end
+		It's fairly humiliating being possibly the worst skater on the ice. $w.changeStress(5)##
+	#elseif($w.getSkill("FITNESS") < 15)
+		You are only barely able to manage the basics, including staying up and moving forward. Just about everyone on the ice can skate circles around you, so this is fairly embarassing. $w.changeStress(2)##
+	#elseif($w.getSkill("FITNESS") < 30)
+		You're able to skate, though you're still very much a novice. But you can make slow circles around the rink and aren't holding up the people behind you. ##
+	#elseif($w.getSkill("FITNESS") < 50)
+		As it turns out, you're a pretty solid skater, and although you start out slowly, you could easily start putting on a fair bit more speed. 
+	#elseif($w.getSkill("FITNESS") < 80)
+		It's not much more difficult to skate than to walk or run, and you handle yourself with ease on the ice. It's not much of a challenge for you, and you could pull off a number of tricks if you wanted to. ##
+	#else
+		You are an amazing skater, and have to rein yourself in if you don't want too many eyes on you. Regardless, you're one of the best on the ice right now. Perhaps even the best outright. ##
+		#if($w.getBottom().getLength() == "ANKLES")
+			Your biggest limitation at the moment is your long $w.getBottom().getBasicDesc(), which limits your range of motion. ##
+		#else
+			Your biggest limitation at the moment is your $w.getBottom().getBasicDesc(), which creates a risk of flashing someone if you move too quickly. ##
+		#end
+	#end	
+#else
+	#if($w.getSkill("DANCE") < 5)
+		It rapidly becomes apparent that you're unable to stand up on the ice without holding onto the boards for dear life. The best you can manage is to inch your way along the ice precariously. ##
+		#if($f.getPersonality() == "JERK" || $f.getPersonality() == "SELFISH")
+			$f.name rapidly tires of being stuck beside you and starts skating laps, occasionally stopping to check in on you. ##
+		#else
+			$f.name stays with you, though she's clearly a better skater than you, but doesn't want to abandon you. She attempts to coax you out away from the boards. ##
+		#end
+		It's fairly humiliating being possibly the worst skater on the ice. $w.changeStress(5)##
+	#elseif($w.getSkill("DANCE") < 15)
+		You are only barely able to manage the basics, including staying up and moving forward. Just about everyone on the ice can skate circles around you, so this is fairly embarassing. $w.changeStress(2)##
+	#elseif($w.getSkill("DANCE") < 30)
+		You're able to skate, though you're still very much a novice. But you can make slow circles around the rink and aren't holding up the people behind you. ##
+	#elseif($w.getSkill("DANCE") < 50)
+		As it turns out, you're a pretty solid skater, and although you start out slowly, you could easily start putting on a fair bit more speed. 
+	#elseif($w.getSkill("DANCE") < 80)
+		Your dancing skills turn out to be pretty transferrable to skating, and you handle yourself with ease on the ice. It's not much of a challenge for you, and you could pull off a number of tricks if you wanted to. ##
+	#else
+		You are an amazing skater, and have to rein yourself in if you don't want too many eyes on you. Regardless, you're one of the best on the ice right now if not the best. ##
+		#if($w.getBottom().getLength() == "ANKLES")
+			Your biggest limitation at the moment is your long $w.getBottom().getBasicDesc(), which limits your range of motion. ##
+		#else
+			Your biggest limitation at the moment is your $w.getBottom().getBasicDesc(), which creates a risk of flashing someone if you move too quickly. ##
+		#end
+	#end	
+#end
+</SkateText>
+
+<SkateCarefulText>
+#if($w.getSkill("FITNESS") > $w.getSkill("DANCE"))
+	#set($skating = $w.getSkill("FITNESS"))
+	#if($w.getSkill("FITNESS") > 50)
+		#set($actualskate = $w.getSkill("FITNESS"))
+	#else
+		#set($actualskate = 50)
+	#end
+#else
+	#set($skating = $w.getSkill("DANCE"))
+	#if($w.getSkill("DANCE") > 50)
+		#set($actualskate = $w.getSkill("DANCE"))
+	#else
+		#set($actualskate = 50)
+	#end
+#end
+#if($scene.percent($actualskate))
+	#if($skating < 20)
+		You spend your time hugging the board, despite $scene.addPossessiveSuffix($f.name) cajoling to stretch yourself, venturing away only for very careful, tentative steps. The important thing, however, is that you manage to stay on your feet the entire time, without any embarassing spills. $f.name is clearly disappointed, though it's not clear if this is because she was hoping you'd push yourself, or just because she might have been hoping you'd fall. Still, she can't really fault you, given that your inexperience is obvious.
+	#elseif($skating < 50)
+		You are able to venture out onto the ice, but your skating is obviously cautious as you just skate around the rink in simple circles, never going particularly fast or attempting anything challenging. $f.name looks a little frustrated, but you achieve your goal of ensuring that you don't take any embarassing tumbles or spills.  $f.reduceNpcLikingTiny()
+	#else
+		Even playing it cautiously, you're good enough to show off a little. That said, there's a limit to it, because you don't want to go too fast or do any sort of leaps or twirls, ##
+		#if($w.getBottom().getLength() == "ANKLES")
+			even though your $w.getBottom().getBasicDesc() is probably long enough to make them safe. Better to be safe than sorry. ##
+		#else
+			because otherwise you risk your $w.getBottom().getBasicDesc() revealing more than you're comfortable with. ##
+		#end
+		$f.name looks a little frustrated, as her goal was probably to get you to show off a bit and thus have to deal with that risk. $f.reduceNpcLikingTiny()##
+	#end
+#else
+	Although you try to play it carefully, ##
+	#if($skating < 40)
+		your inexperience ##
+	#else
+		bad luck ##
+	#end
+	catches up with you, and you end up falling onto the ice. It's not a gentle fall, either, but a full on out of control face plant that has you roughly hitting the rink surface. ##
+	#if($w.getBottom().getLength() == "ANKLES")
+		Thankfully, your $w.getBottom().getBasicDesc() is long enough that you remain covered, ##
+		#if($w.getPantiesStatus() == "OFF")
+			preventing anyone from getting a view of your bare pussy. ##
+		#else
+			preventing $f.name from spotting that you're still wearing your $w.getPanties().getBasicDesc(). ##
+		#end
+	#elseif($w.getBottom().getLength() == "KNEES")
+		You're sure that you end up flashing a few people as your $w.getBottom().getBasicDesc() flips up during your fall. $w.addArousalTiny()$w.changeStress(5)##
+		#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+			You can almost hear them mocking you, and imagine what they must be thinking. How many of them must think you're a slut, and how many of them might want to fuck you. $w.addArousalTiny()##
+		#end
+		#if($w.getPantiesStatus() == "OFF")
+			As you are without underwear, there's not a scrap of fabric hiding your pussy from view of anyone who might have caught your fall. Once you're actually on the ice, however, your $w.getBottom().getBasicDesc() again hides you from view, so it's only during the fall itself that you're on display. ##
+		#else
+			Unfortunately, one of the people who spots you is $f.name, and she immediately notices that you're still wearing your $w.getPanties().getBasicDesc(). She calls you a bitch for lying to her, and skates off the ice without helping you up, clearly angry. $f.reduceNpcLikingSmall()$scene.addFlag("stormoff")##
+		#end
+	#elseif($w.getBottom().getLength() == "THIGH")
+		Your $w.getBottom().getBasicDesc() is short enough that it provides a pretty good view to anyone who sees you fall or sees you after you've landed, at least, so long as they are coming up from behind you. You turn bright red, as there's obviously quite a few people who see $w.changeStress(10)$w.addArousalTiny()##
+		#if($w.getPantiesStatus() == "OFF")
+			your bare pussy. ##
+			#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+				You can almost hear them mocking you, and imagine what they must be thinking. How many of them must think you're a slut, and how many of them might want to fuck you. $w.addArousalTiny()##
+			#end
+		#else
+			your $w.getPanties().getBasicDesc(). Unfortunately, $f.name is one of them, and she calls you a bitch for lying to her and skates off the ice without helping you up, clearly angry. $f.reduceNpcLikingSmall()$scene.addFlag("stormoff")##
+		#end
+	#else
+		If you are seeing this, this is a bug. Report it so it can be deported. ##
+	#end
+	You leave the ice after your fall, still smarting from the impact. ##
+#end
+</SkateCarefulText>
+
+<SkateRiskyText>
+#if($w.getSkill("FITNESS") > $w.getSkill("DANCE"))
+	#set($skating = $w.getSkill("FITNESS"))
+#else
+	#set($skating = $w.getSkill("DANCE"))
+#end
+#if($scene.percent($skating))
+	#if($skating < 20)
+		Notwithstanding your serious lack of ability, you venture out onto the ice and away from the boards, trying to keep to your feet. Although it is very much touch and go at many points, you manage to keep your skates firmly on the ice and actually make some progress navigating in slow circles around the rink. When you finish your skate and head off the ice, $f.name has to admit that she's impressed that you managed it, given how much you were struggling. $w.skillIncrease("FITNESS",1)$f.addNpcLikingTiny()##
+	#elseif($skating < 50)
+		You venture out onto the ice, pushing yourself to try to keep up with the more experienced skaters. Although you're still learning, you manage to avoid taking any nasty spills or tumbles, and learn quite a bit as you go. You skate fairly quickly, and get a decent workout from it as you and $f.name circle around the rink. When you finish you're both smiling and a little tired. $f.addNpcLikingTiny()$f.addWLikingTiny()##
+	#elseif($w.getBottom().getLength() != "ANKLES" && ($w.hasTrait("AMBITIOUS") || $scene.percent(15)))
+		You're good enough that you have no problem putting on a bit of a show, skating at speed, backwards, doing a couple flips. Unfortunately, you put on too much of a show, $w.skillIncrease("FITNESS",1)##
+		#if($w.hasTrait("AMBITIOUS"))
+			out of an eagerness to show off. ##
+		#else
+			losing yourself a little in the moment. ##
+		#end
+		During a particularly vigorous twirl your $w.getBottom().getBasicDesc() rides up and flashes your ##
+		#if($w.getPantiesStatus() == "OFF")
+			bare pussy ##
+		#else
+			$w.getPanties().getBasicDesc() ##
+		#end
+		to those around you. You're certain that plenty of people saw more than you'd like. ##
+		#if($w.getPantiesStatus() == "OFF")
+			You immediately turn bright red, and skate off the ice. $f.name follows shortly thereafter, and the two of you leave the rink. ##
+		#else
+			Unfortunately, that also includes $f.name, who now knows you lied to her. She shoots you an angry look and skates off, leaving you alone on the ice as she storms off in a rage. $scene.addFlag("stormoff")$f.reduceNpcLikingSmall()##
+		#end
+	#elseif($w.getBottom().getLength() == "ANKLES")
+		You are more than skilled enough to put on a bit of a show on the ice, outpacing most of the others out there. Thankfully, your dress is long enough that it hides you from view, even during some of the more exuberant movements, although it does also limit your range of motion and what you can do on the ice. After your skate, you and $f.name turn in your skates and head home. $f.addNpcLikingTiny()$f.addWLikingTiny()$w.skillIncrease("FITNESS",1)##
+	#else
+		You are more than skilled enough to put on a bit of a show on the ice, though you have to limit what you do in order to avoid inadvertently flashing anyone. So, you have to restrain yourself from any overly enthusiastic spins or twirls or leaps, but you can still bob and weave around the other skaters. $f.name is not really able to keep up, even with you limiting yourself, ##
+		#if($f.getPersonality() == "SELFISH")
+			and looks more than a little annoyed at being upstaged. $f.reduceNpcLikingTiny()##
+		#else
+			but takes it in good stride. $f.addNpcLikingTiny()##
+		#end
+		Afterwards, you and $f.name turn in your skates and head home. ##
+	#end
+#else
+	You push yourself, trying to skate closer to your limits, and ##
+	#if($skating < 40)
+		your inexperience ##
+	#else
+		bad luck ##
+	#end
+	catches up with you. You take a fall onto the ice, and it's not a gentle fall, either, but a full on out of control face plant that has you roughly hitting the rink surface. ##
+	#if($w.getBottom().getLength() == "ANKLES")
+		Thankfully, your $w.getBottom().getBasicDesc() is long enough that you remain covered, ##
+		#if($w.getPantiesStatus() == "OFF")
+			preventing anyone from getting a view of your bare pussy. ##
+		#else
+			preventing $f.name from spotting that you're still wearing your $w.getPanties().getBasicDesc(). ##
+		#end
+	#elseif($w.getBottom().getLength() == "KNEES")
+		You're sure that you end up flashing a few people as your $w.getBottom().getBasicDesc() flips up during your fall. $w.addArousalTiny()$w.changeStress(5)##
+		#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+			You can almost hear them mocking you, and imagine what they must be thinking. How many of them must think you're a slut, and how many of them might want to fuck you. $w.addArousalTiny()##
+		#end
+		#if($w.getPantiesStatus() == "OFF")
+			As you are without underwear, there's not a scrap of fabric hiding your pussy from view of anyone who might have caught your fall. Once you're actually on the ice, however, your $w.getBottom().getBasicDesc() again hides you from view, so it's only during the fall itself that you're on display. ##
+		#else
+			Unfortunately, one of the people who spots you is $f.name, and she immediately notices that you're still wearing your $w.getPanties().getBasicDesc(). She calls you a bitch for lying to her, and skates off the ice without helping you up, clearly angry. $f.reduceNpcLikingSmall()$scene.addFlag("stormoff")##
+		#end
+	#elseif($w.getBottom().getLength() == "THIGH")
+		Your $w.getBottom().getBasicDesc() is short enough that it provides a pretty good view to anyone who sees you fall or sees you after you've landed, at least, so long as they are coming up from behind you. You turn bright red, as there's obviously quite a few people who see $w.changeStress(10)$w.addArousalTiny()##
+		#if($w.getPantiesStatus() == "OFF")
+			your bare pussy. ##
+			#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+				You can almost hear them mocking you, and imagine what they must be thinking. How many of them must think you're a slut, and how many of them might want to fuck you. $w.addArousalTiny()##
+			#end
+		#else
+			your $w.getPanties().getBasicDesc(). Unfortunately, $f.name is one of them, and she calls you a bitch for lying to her and skates off the ice without helping you up, clearly angry. $f.reduceNpcLikingSmall()$scene.addFlag("stormoff")##
+		#end
+	#else
+		If you are seeing this, this is a bug. Report it so it can be deported. ##
+	#end
+	After your fall, you leave the ice, still smarting from the impact. ##
+#end
+</SkateRiskyText>
+
+<TripHerText>
+#if($w.getSkill("FITNESS") > 30 || $w.getSkill("DANCE") > 30)
+	You wait for a good moment when $f.name isn't paying full attention, and nudge one of her skates, causing her to stumble and fall. $f.reduceNpcLikingMedium()$w.changeStress(-10)##
+	#if($f.getBottom().getLength() == "ANKLES")
+		Her long $f.getBottom().getBasicDesc() manages to prevent her from being exposed as she goes down, but she still takes an unpleasant spill onto the ice and gets a nasty bruise. You mutter a fake apology to her and claim it was an accident, and although she doesn't outright call you a liar, it's also clear that she doesn't entirely believe you either. Nevertheless, she heads off the ice to nurse her wounds, and heads home shortly thereafter. ##
+		#if($scene.hasFlag("gavepanties"))
+			Later, you realize that she hasn't returned your panties, and given the circumstances, you suspect she isn't going to. It ends up costing you a fair bit to replace them. $w.changeMoney(-5)##
+		#end
+	#elseif($f.getBottom().getLength() == "KNEES")
+		In the process her $f.getBottom().getBasicDesc() gives at least a few people a glimpse of her bare pussy, though once she lands on the ground it manages to cover her. You mutter a fake apology to her and claim it was an accident, and although she doesn't outright call you a liar, it's also clear that she doesn't entirely believe you either. Nevertheless, she heads off the ice to nurse her wounds, and heads home shortly thereafter. ##
+		#if($scene.hasFlag("gavepanties"))
+			Later, you realize that she hasn't returned your panties, and given the circumstances, you suspect she isn't going to. It ends up costing you a fair bit to replace them. $w.changeMoney(-5)##
+		#end
+	#elseif($f.getBottom().getLength() == "THIGH")
+		When $f.name lands sprawled out on the ice, her $f.getBottom().getBasicDesc() doesn't have enough material to hide her pussy from view of those behind her. Quite a few people stop up short behind her, and they've definitely noticed. A few of them laugh, and there's some muttering about what a slut she must be. $f.name doesn't stick around to listen to your explanation, but instead turns bright red and hurries off the ice, and then home. ##
+		#if($scene.hasFlag("gavepanties"))
+			Later, you realize that she hasn't returned your panties, and given the circumstances, you suspect she isn't going to. It ends up costing you a fair bit to replace them. $w.changeMoney(-5)##
+		#end
+	#end
+#else
+	Not being steady enough on your feet to successfully trip $f.name in the normal fashion, you arrange to teeter and fall, grabbing onto $f.name and dragging her down with you. You and $f.name both go down into a heap, but you knew it was coming, which enables you to better aim to protect yourself from exposure. $f.reduceNpcLikingSmall()##
+	#if($w.getBottom().getLength() == "ANKLES")
+		Your $w.getBottom().getBasicDesc() is long enough that you don't have to worry about it too much, and you can tangle your $w.getBottom().getBasicDesc() around your legs, hiding your sex from view. $w.changeStress(-10)##
+	#elseif($w.getBottom().getLength() == "KNEES")
+		Your $w.getBottom().getBasicDesc() would flash people if you fell forward, so you arrange to drop yourself onto your ass into a sit. Of course, once you do your ##
+		#if($w.getPantiesStatus() == "OFF")
+			bare pussy ##
+		#else
+			pussy, protected only by your $w.getPanties().getBasicDesc() ##
+		#end
+		rests directly onto the ice, sending a shiver through you. Your pussy rests on the ice for about ten seconds before you can pick yourself up carefully. ##
+		#if($w.hasTrait("SENSITIVE_PUSSY") && $w.hasTrait("HAIR_TRIGGER") && $w.getPantiesStatus() == "OFF")
+			The sensation is unexpectedly arousing, and you've always been easy to set off. The feeling of the impact of the fall, combined with the shock of the ice directly on your unprotected pussy, is enough to make it happen. ##
+			#if($w.hasTrait("PASSIONATE_LOVER"))
+				You've also never been able to hold back your moans during an orgasm, and now is no different, unfortunately for you. Your loud moans and trembling takes all of the attention off of $f.name, who looks just as surprised as everyone else. $w.changeStress(20)##
+				#if($f.getPersonality() == "JERK")
+					She takes advantage of the opportunity to point you out, though, drawing attention and telling everyone that you just came right here in front of everyone. $w.changeStress(5)##
+				#end
+			#else
+				You do your best to suppress the orgasm, but you still tremble and let out a muted moan or two. $w.changeStress(15)
+				#if($f.getPersonality() == "JERK")
+					$f.name definitely notices, and she takes advantage by announcing it loudly to the other skaters, telling them what a slut you are. $w.changeStress(10)##
+				#else
+					You can't be sure if the people who gather are just there to see if you're okay, or to spot a glimpse up someone's skirt, or if they've noticed your orgasm. ##
+				#end
+			#end
+			
+			
+			You flee the ice as quickly as you can, turn in your skates, and go directly home without $f.name. ##
+			#if($scene.hasFlag("gavepanties"))
+				
+				
+				You find your $w.getPanties().getShortDesc() in your mailbox a few days later. ##
+			#end
+		#elseif($w.hasTrait("SENSITIVE_PUSSY"))
+			The sensation is arousing, and you hope no one notices you blushing as you get up. $w.changeStress(-10)##
+		#else
+			$w.changeStress(-10)##
+		#end
+	#elseif($w.getBottom().getLength() == "THIGH")
+		Unfortunately, your $w.getBottom().getBasicDesc() are too short to make that entirely successful, and your $w.changeStress(-10)##
+		#if($w.getPantiesStatus() == "OFF")
+			bare pussy ends up being flashed to everyone behind you. Plenty of people see it before you're able to get covered up again. ##
+		#else
+			$w.getPanties().getBasicDesc() are flashed to everyone behind you. Plenty of people see $w.getPanties().getItThem() before you're able to get covered up again. It could be worse, of course. You could be without them. ##
+		#end
+	#else
+		This message should not be possible. Please report the bug.
+	#end
+	
+	
+	#if($w.getBottom().getLength() == "KNEES" && $w.getPantiesStatus() == "OFF" && $w.hasTrait("HAIR_TRIGGER") && $w.hasTrait("SENSITIVE_PUSSY") && $w.getSkill("FITNESS") < 31 && $w.getSkill("DANCE") < 31)
+		##
+	#elseif($f.getBottom().getLength() == "ANKLES")
+		$scene.addPossessiveSuffix($f.name) $f.getBottom().getBasicDesc() is too long to expose her to any of the other skaters, and so the only real injury is when she hits the ice. ##
+			#if($w.getPantiesStatus() != "OFF" && $w.getBottom().getLength() != "ANKLES")
+				But, when she notices that you are still wearing your $w.getPanties().getBasicDesc(), she gets up and storms off, but not before calling you a bitch. $f.reduceNpcLikingSmall()$scene.addFlag("stormoff")##
+			#else
+				She leaves the ice in order to recover, and shortly thereafter ##
+				#if($scene.hasFlag("gavepanties"))
+					she returns your panties and heads home. ##
+				#else
+					you and she part ways and head to your respective homes. ##
+				#end
+			#end
+	#elseif($f.getBottom().getLength() == "KNEES")
+		$scene.addPossessiveSuffix($f.name) $f.getBottom().getBasicDesc() is short enough reveals at least a brief flash of her bare ass and pussy to those behind her as she goes down, though thankfully for her the material covers her once she's on the ground. Still, it's pretty humiliating for her, and she is upset##
+		#if($w.getPantiesStatus() != "OFF" && $w.getBottom().getLength() != "ANKLES")
+			, particularly when she notices that you are still wearing your $w.getPanties().getBasicDesc(). She gets up and storms off, but not before calling you a bitch. $scene.addFlag("stormoff")$f.reduceNpcLikingSmall() ##
+		#else
+			 enough to turn in her skates and leave. ##
+		#end
+	#elseif($f.getBottom().getLength() == "THIGH")
+		$scene.addPossessiveSuffix($f.name) $f.getBottom().getBasicDesc() is too short to hide her at all as she falls, giving a lengthy view of her bare ass and pussy to the other skaters, many of whom stop to check this out. ##
+			#if($w.getPantiesStatus() != "OFF" && $w.getBottom().getLength() != "ANKLES")
+				She has apparently noticed that you still have your $w.getPanties().getBasicDesc() on, and she storms off, but not before calling you a bitch. $scene.addFlag("stormoff")$f.reduceNpcLikingSmall()##
+			#else
+				When she gets back to her feet, she turns in her skates and leaves. ##
+			#end
+	#else
+		This should not be visible. Report the bug. ##
+	#end
+#end
+</TripHerText>
+
+<chaseHerText>
+You chase after $f.name to apologize, and manage to catch up with her on the street, though you're a little out of breath when it happens. You apologize profusely for everything, but she looks skeptical. Finally, she interrupts you, asking you to prove you're really sorry by making it up to her... and she knows just how you can do it.
+</chaseHerText>
+
+<EatOutText>
+This is a placeholder for when lesbian content becomes a little easier to do. 
+</EatOutText>
+
+<SellPantiesShort>
+Go with $f.name
+</SellPantiesShort>
+
+<SellPantiesLong>
+Go with $f.name and find out what she has in mind for how you can make this up to her. You may not like it. 
+</SellPantiesLong>
+
+<SellPantiesText>
+$scene.unHideNpc($m)##
+$f.name leads you along and down the street, apparently looking out for anyone she knows. Eventually she comes across $m.name, who ##
+#if($m.getRelationship() == "STRANGER")
+	is a stranger to you, but apparently $f.name recognizes him. ##
+#elseif($m.getRelationship() == "ACQUAINTANCE")
+	is an acquaintance of yours, who $f.name also recognizes. ##
+#elseif($m.getRelationship() == "DATE")
+	you've dated, but it's not serious. ##
+#end
+As she leads you towards him, she tells you that if you want to make it up to her, you're going to sell him your underwear, right off your body. ##
+</SellPantiesText>
+
+<spYesShort>
+Sell $m.name your $w.getPanties().getBasicDesc()
+</spYesShort>
+
+<spYesLong>
+Try to sell $m.name your $w.getPanties().getShortDesc(), right here on the street. 
+</spYesLong>
+
+<spYesText>
+You and $f.name approach $m.name, and she coyly tells him that you have something you want to ask him. When $m.name looks over at you questioningly, you muster up the courage to ask him if he wants to buy your underwear. After checking that this isn't a joke, $w.addArousalSmall()##
+#if($m.isNpcAttractionOk() || $m.hasTrait("SLEAZY"))
+	he tells you that he'll need you to pull your $w.getBottom().getBasicDesc() up so that he can see what he's buying.
+#elseif($m.getBehaviour() == "MEAN")
+	he tells you that you're a disgusting whore, and that you'd probably have more luck selling what's under it, assuming you find someone with lower standards than him. $m.reduceNpcLikingSmall()$m.reduceWLikingSmall()$m.addBastard(10)
+	
+	$f.name recognizes that at least you tried, and the two of you part ways for the evening and head to your respective homes. $f.addNpcLikingTiny()##
+#elseif($m.getBehaviour() == "COLD")
+	he tells you that he doesn't need to buy sex on the street, and keeps walking. $m.reduceNpcLikingTiny()$m.reduceWLikingTiny()
+	
+	$f.name recognizes that at least you tried, and the two of you part ways for the evening and head to your respective homes. $f.addNpcLikingTiny()##
+#else
+	he tells flatly that he's not interested, and keeps walking. 
+	
+	$f.name recognizes that at least you tried, and the two of you part ways for the evening and head to your respective homes. $f.addNpcLikingTiny()##
+#end
+</spYesText>
+
+<spFlashYesShort>
+Show $m.name your $w.getPanties().getBasicDesc()
+</spFlashYesShort>
+
+<spFlashYesLong>
+Lift up your $w.getBottom().getBasicDesc() in order to show $m.name your $w.getPanties().getBasicDesc().
+</spFlashYesLong>
+
+<spFlashYesText>
+You lift up your $w.getBottom().getBasicDesc(), hoisting it up to your waist, leaving you mostly exposed here on the street. $m.name makes a big show of examining your $w.getPanties().getShortDesc() while they're still on your body. $f.name watches you from the side, apparently amused with your reaction and seeing if this is as much of a thrill for you as it would be for her. $w.setBottomStatus("EXPOSED")$w.addArousalSmall()
+
+#if($w.isArousalEnjoy() || ($w.isArousalComfort() && $w.hasTrait("WET_PUSSY")))
+	$m.name immediately spots the wetness on the front of your $w.getPanties().getBasicDesc(), ##
+	#if($m.getBehaviour() == "MEAN")
+		and tells you how it means that you're a slut and a whore##
+		#if($m.hasTrait("SLEAZY"))
+			, and that he looks forward to when you start selling your cunt directly. ##
+		#elseif($m.hasTrait("LIKES_CUTE"))
+			, and that he prefers a girl who can touch her knees together. ##
+		#else
+			, and that you should be ashamed of yourself. ##
+		#end
+		$m.addBastard(10)##
+	#elseif($m.getBehaviour() == "COLD")
+		and tells you that he clearly won't be paying full price if it's getting you this juiced up. ##
+	#elseif($m.getBehaviour() == "ROM")
+		and tells you that he takes it as a compliment. ##
+	#else
+		and gives you a knowing wink. ##
+	#end
+#end
+
+Eventually, though, he agrees to buy your $w.getPanties().getBasicDesc() from you, assuming you're actually willing to sell them. 
+</spFlashYesText>
+
+<spFlashNoShort>
+Refuse
+</spFlashNoShort>
+
+<spFlashNoLong>
+Refuse to lift your $w.getBottom().getBasicDesc() and show your $w.getPanties().getBasicDesc().
+</spFlashNoLong>
+
+<spFlashNoText>
+You refuse to show your $w.getPanties().getBasicDesc() to $m.name. He attempts to cajole you, but when it's clear that you won't be doing it, he loses interest and leaves. $f.name calls you a wet blanket, and she heads home as well. 
+</spFlashNoText>
+
+<spNoLong>
+As much as you might want to smooth things out with $f.name, you're not selling your $w.getPanties().getBasicDesc() on the street to do it.
+</spNoLong>
+
+<spNoText>
+You shake your head, and tell $f.name that this is too embarassing, ##
+#if($w.hasTrait("BITCHY"))
+	and that her friendship is just not worth it. If anything, this has likely made the situation worse, but the look on her face was priceless. $f.reduceNpcLikingSmall()$w.changeStress(-5)
+#else
+	and that you're not up to it. This doesn't appease her, and she abandons you and keeps walking, leaving you to find your own way home.
+#end
+</spNoText>
+
+<NeverMindText>
+You've changed your mind. You don't actually care if she's upset. You let her go on her way angry, and you head home. ##
+</NeverMindText>
+
+<letItGoText>
+You let $f.name go home angry, and eventually recover your shoes and head home yourself. ##
+</letItGoText>
+
+<SellThemLong>
+Sell $m.name your $w.getPanties().getShortDesc().
+</SellThemLong>
+
+<SellThemText>
+You indicate your willingness to sell them, and begin haggling on price. ##
+#if($f.getPersonality() == "JERK" || $f.getPersonality() == "SELFISH")
+	$f.name steps in to help you negotiate, and actually manages to help bargain him up to a higher price. She then takes the money from him and splits it, giving you half, which leaves you with just enough money to actually replace the $w.getPanties().getBasicDesc(). ##
+	#if($w.hasTrait("LOW_SELF_ESTEEM"))
+		You're glad that she gave you half the money--after all, this was her idea. $f.addWLikingTiny()##
+	#else
+		$f.reduceWLikingTiny()##
+	#end
+#elseif($f.getPersonality() == "AVG")
+	$f.name stands aside, letting you do the negotiation while she watches the interaction. ##
+	#if($w.getSkill("CHARM") < 25)
+		You give it your best, but ultimately only manage to talk him into paying what you originally paid for them. ##
+	#elseif($w.getSkill("CHARM") < 50)
+		You manage to talk him into paying a little more than you paid for them, and come ahead with a slight profit. $w.changeMoney(5)##
+	#else
+		You manage to talk him into paying a fair bit for them, and come away with a fair bit of spending money. $w.changeMoney(15)##
+	#end
+#else
+	$f.name helps you negotiate with $m.name, and actually manages to help bargain him up to a higher price. Between the two of you, he's eventually forced to hand over enough to replace them and have spending money left over. $w.changeMoney(15)##
+#end
+
+
+#if(($m.hasTrait("IMPREGNATOR") && $w.getPregnancyStage() == "FLAT") || ($m.hasTrait("SLEAZY") && $m.getBehaviour() == "MEAN"))
+	After $m.name pays, and when you start to lower your $w.getPanties().getBasicDesc(), he stops you. He tells you that he's bought your underwear, and it's now his to do with as he likes, and what he is planning to do with it is send you home wearing it, but only after he's filled it with cum. $scene.addFlag("cumpanties")##
+	#if($w.hasTrait("BABY_CRAZY"))
+		#if($w.isKnownPregnant())
+			It's a shame you're already pregnant, and can't get knocked up again until you give birth. ##
+		#elseif($w.isOnPill())
+			You wish you weren't on the pill, and wonder why you ever went on it. ##
+		#elseif($w.isSafe())
+			You curse the fact that this is the time of the month you're least likely to get pregnant. Still, can't hurt to try. ##
+		#elseif($w.isRisky())
+			Unbeknownst to him, this is the perfect time for you to get knocked up, and you don't much care if this is how. ##
+		#else
+			It's not quite as good as having him shoot directly into you, but it's a close second. ##
+		#end
+	#elseif($w.isOnPill())
+		#if($w.hasTrait("FORGETFUL"))
+			Although this isn't as risky as penetrative sex, you realize you can't quite remember if you took your pill this morning or not. ##
+		#else
+			Thankfully, you're on the pill, so you're unlikely to get pregnant if you do. ##
+		#end
+	#elseif($w.isSafe())
+		The risk of getting pregnant is probably pretty low, as it's a safe day and it's not as risky as if he came inside you. Still, there's always a chance. ##
+	#elseif($w.isRisky())
+		This would have less risk of getting you pregnant than if he came inside you, but you're keenly aware of the fact that you're ovulating. ##
+	#else
+		There's less risk from this than if he came inside you, but it's still a possible risk. ##
+	#end
+	
+	
+	#if($f.getBehaviour() == "MEAN")
+		$f.name tells you that you should do it, downplaying any possible concern about risk, telling you that there's nothing to worry about. ##
+	#elseif($f.getBehaviour() != "COLD")
+		$f.name gives you a worried look, as if to say that she thinks this might be getting out of hand. Her facial expression suggests that she thinks this is a bad idea. Of course, the decision is yours. ##
+	#end
+#else
+	$m.name hands over the money and watches you lower your $w.getPanties().getBasicDesc() down to your ankles, and step out of them. In the process, your pussy is exposed to him, and potentially to anyone on the street, until you lower your $w.getBottom().getBasicDesc() afterwards. $w.setBottomStatus("WORN")##
+	#if($m.isNpcAttractionAttracted() && !$m.isContactable())
+		After you do, he produces a small marker from one of his pockets, and asks you to write your phone number on your $w.getPanties().getBasicDesc(). $scene.addFlag("givenumber")##
+	#else
+		After collecting your $w.getPanties().getShortDesc(), he gives you a leer and then $f.name beckons you along, leaving him with his prize. She giggles a little, eager to have dragged you out of your shell for a little bit, and eventually drops you off back at your house. ##
+	#end
+#end
+</SellThemText>
+
+<ChickenOutText>
+At the last moment, you change your mind, and tell $m.name that it's no sale. He ##
+#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+	calls you a bitch for teasing him ##
+#else
+	nods, and then heads on his way, leaving you and $f.name. It's clear she's a little disappointed, but only a little, and you two walk back to your house together, though she doesn't come in. $f.reduceNpcLikingTiny()##
+#end
+</ChickenOutText>
+
+<GiveNumber>
+You take the marker and write your number on your $w.getPanties().getShortDesc(), before handing both over to him. He tells you he'll call you, and then heads off, your underwear tucked safely into a pocket. Later, you return home after you part ways with $f.name. $m.setContactable()
+</GiveNumber>
+
+<GiveNumberNo>
+You tell him that your phone number wasn't part of the deal. He looks disappointed, but accepts it readily enough. He still takes your underwear with him when he leaves. Later, after you and $f.name split up for the evening, you end up back at your home. 
+</GiveNumberNo>
+
+<CumPantiesNo>
+You tell $m.name that cumming in your underwear wasn't part of the deal, and then pull your $w.getPanties().getBasicDesc() down off your legs and hand them over to him, before smoothing out your $w.getBottom().getBasicDesc(). You and $f.name then keep walking, and eventually she drops you off at your home. 
+</CumPantiesNo>
+
+<CumPantiesShort>
+Let him cum in your $w.getPanties().getBasicDesc()
+</CumPantiesShort>
+
+<CumPantiesLong>
+Let him cum in your $w.getPanties().getBasicDesc(). He'll then expect you to walk home in them.
+</CumPantiesLong>
+
+<CumPantiesText>
+#if($f.getBehaviour() == "MEAN")
+	With $f.name's encouragement, you ##
+#else
+	You
+#end
+agree to let $m.name cum into your $w.getPanties().getBasicDesc(). Moving to a fairly secluded area on the street behind someone's shed, he has you hold your $w.getPanties().getBasicDesc() out while still wearing them, as he pulls his cock out of his pants. ##
+#if($m.hasTrait("THICK_COCK"))
+	It is large in his hand as he begins stroking himself, ##
+#else
+	He then begins stroking himself, ##
+#end
+working intently to try to bring himself to orgasm quickly, in order to avoid getting caught like this on the street. It rapidly becomes apparent that he's not going to take long, as apparently the particular situation is helping his arousal along substantially. His pace steadily quickens, and you can tell he's nearly ready to spurt into your underwear. $w.addArousalSmall()##
+#if($m.hasTrait("IMPREGNATOR") && $scene.percent(85))
+	
+	As he gets close, his $scene.addFlag("cumpantiesupgrade")$m.addBastard(30)##
+	#if($m.hasTrait("BIG_BALLS"))
+		massive ##
+	#end
+	testicles drawing up close to his shaft as they get ready to spray their contents into your underwear, ##
+	he angles his cock up to press against your labia, preparing to enter you, apparently having changed his mind and decided to deposit his sperm into your ##
+	#if(!$w.isKnownPregnant() && !$w.isOnPill())
+		#if($w.isRisky())
+			extremely ##
+		#end
+		fertile womb. ##
+	#else
+		pussy. ##
+	#end
+#elseif($f.getBehaviour() == "MEAN" && $scene.percent(25))
+	
+	As he gets close, his ##
+	#if($m.hasTrait("BIG_BALLS"))
+		massive ##
+	#end
+	testicles drawing up close to his shaft as they get ready to spray their contents into your underwear, $f.name reaches out between you and takes his cock into her hand, and then attempts to guide it into your pussy. $scene.addFlag("cumpantiesfupgrade")$f.addBastard(30)##
+#elseif($scene.percent(25))
+	
+	As he gets close, his ##
+	#if($m.hasTrait("BIG_BALLS"))
+		massive ##
+	#end
+	testicles drawing up close to his shaft as they get ready to spray their contents into your underwear, ##
+	he angles his cock up to press against your labia, preparing to enter you, apparently having changed his mind and decided to deposit his sperm into your ##
+	#if(!$w.isKnownPregnant() && !$w.isOnPill())
+		#if($w.isRisky())
+			extremely ##
+		#end
+		fertile womb. ##
+	#else
+		pussy. ##
+	#end
+	$scene.addFlag("cumpantiesupgrade")$m.addBastard(30)##
+#else
+	If you don't stop him, he's about to spurt into your panties. 
+#end
+</CumPantiesText>
+
+<CPSpurtShort>
+Let it happen
+</CPSpurtShort>
+
+<CPSpurtLong>
+Let $m.name finish inside you.
+</CPSpurtLong>
+
+<CPSpurtText>
+#if($scene.hasFlag("cumpantiesfupgrade"))
+	#set($atfault = $f)
+#else
+	#set($atfault = $m)
+#end
+#if($scene.hasFlag("cumpantiesfupgrade"))
+	$f.name guides $scene.addPossessiveSuffix($m.name) cock into you, pushing the two of you together until he's nearly bottomed out into you. With him having been almost there to start with, he cums almost immediately thereafter, directly and deeply into your pussy. ##
+#elseif($scene.hasFlag("cumpantiesupgrade"))
+	$m.name presses his cock into you, before using his hands to pull your hips to his, nearly bottoming himself out into you. With him being almost there beforehand, he cums almost immediately thereafter, directly and deeply into your pussy. ##
+#else
+	If you see this message, there has been a bug. Kindly report it to the authorities. ##
+#end
+
+
+#if($w.hasTrait("BABY_CRAZY"))
+	#if($w.isKnownPregnant())
+		Of course, you're already expecting a baby, so it's not likely to do you much good. ##
+	#elseif($w.isOnPill())
+		It's only unfortunate that you're on the pill. ##
+	#elseif($w.isSafe())
+		It's a shame that this is probably one of the worst days for getting pregnant. Still, can't hurt to try. ##
+	#elseif($w.isRisky())
+		You're ovulating right now, so there's a good chance that this will knock you up. Hopefully. $f.addWLikingMedium()##
+	#else
+		You find yourself hoping that you're getting pregnant right this moment, not caring about the circumstances. ##
+	#end
+#elseif($w.isKnownPregnant())
+	Thankfully, you're already pregnant, and so you can forgive $atfault.name for this. $atfault.reduceWLikingTiny()##
+#elseif($w.isOnPill())
+	Thankfully you're on the pill, and so you can forgive $atfault.name for this. $atfault.reduceWLikingTiny()##
+	#if($w.hasTrait("FORGETFUL"))
+		You hope you remembered to take it this morning. ##
+	#end
+#elseif($w.isSafe())
+	It's a relatively safe month, so hopefully you'll be okay. Still, you are pretty angry with $atfault.name for this one. $atfault.reduceWLikingSmall()##
+#elseif($w.isRisky())
+	This is pretty much the worst possible time for this, and you're pretty sure that $scene.addPossessiveSuffix($m.name) sperm are finding their way towards your womb and a waiting egg right now. You're furious with $atfault.name for this. $atfault.reduceNpcLikingLarge()##
+#else
+	You hope that the semen now inside you hasn't knocked you up, but you know that it's a real possibility. You're angry with $atfault.name for this, though there's nothing to be done about it now. ##
+#end
+
+
+Once's he's ejaculated inside you, $m.name withdraws, and his semen drips down into your $w.getPanties().getBasicDesc(). He doesn't stick around after that, putting his cock away and quickly heading on down the sidewalk. ##
+#if($scene.hasFlag("cumpantiesfupgrade"))
+	#if($w.hasTrait("BABY_CRAZY"))
+		You give $f.name a hug, whispering a thank you to her, before heading home. She looks a little confused, but doesn't object. ##
+	#else
+		You shoot $f.name a glare, and then head off yourself, your panties wet with semen against your pussy. 
+	#end
+#else
+	$f.name looks a little shocked, though she's also clearly not upset about the lie you told earlier any more. She tells you that she's surprised that such a shy girl could be so wild underneath, ##
+	#if($w.getPregnancyStage() != "FLAT")
+		and that now she knows how you got knocked up. ##
+	#else
+		and that she hopes you're on the pill. ##
+	#end
+	She walks you home, and then leaves for the evening. ##
+#end
+$m.inseminatePlayer(0)$m.addSexualActivity("CAME_INSIDE",true)$m.addSexualActivity("SEX",true)
+</CPSpurtText>
+
+<WetFinish>
+$m.name rapidly reaches orgasm, and begins spurting wet globs of semen into your underwear, with a couple of strands landing directly onto your labia. Wiping the tip off on your $w.getPanties().getBasicDesc(), he then pulls them back up onto your body, bringing the cum directly up against your pussy. He then runs his hand down the front of your crotch, pressing your $w.getPanties().getBasicDesc() (and his semen) into your pussy. $m.inseminatePlayer(-5)$m.addSexualActivity("TOUCH_COCK",true)
+
+Once that is done, he turns to leave you with his sperm slowly drying in you##
+#if(!$w.isKnownPregnant() && !$w.isOnPill())
+	#if($w.hasTrait("BABY_CRAZY"))
+		as you hope that some of it finds its way into you to knock you up. ##
+	#else
+		as you hope that it isn't finding its way to your womb. ##
+	#end
+#else
+	. ##
+#end
+
+$f.name is clearly mollified about your earlier decision to lie about wearing underwear, and she and you chat as she walks you back to your house. $f.addNpcLikingSmall()$f.addWLikingTiny()##
+</WetFinish>
+
+<CPSpurtNoShort>
+Stop this
+</CPSpurtNoShort>
+
+<CPSpurtNoLong>
+Stop this. Otherwise you're likely to get a dose of semen right where it counts most.
+#if($w.isVirgin())
+	This probably isn't how you dreamed of losing your virginity. ##
+#end
+</CPSpurtNoLong>
+
+<CPSpurtNoText>
+#if($scene.hasFlag("cumpantiesupgrade"))
+	You reach down and block $m.name from being able to enter you, much to his disappointment. ##
+#elseif($scene.hasFlag("cumpantiesfupgrade"))
+	You reach down and block $m.name from being able to enter you, giving $f.name a glare in the process sufficient to get her to back off from her interference and go back to watching. ##
+#else
+	This should not be ever seen. Kindly report this as the filthy little bug it is.
+#end
+After you block off access to your pussy, $m.name reaches his orgasm and spurts into your $w.getPanties().getBasicDesc(), leaving them coated in his wet, sticky spunk. $m.inseminatePlayer(-5)$m.addSexualActivity("TOUCH_COCK",true)
+
+Once he's done, ##
+#if($scene.hasFlag("cumpantiesfupgrade"))
+	$f.name takes your hand, moving it away from your pussy, and then pulls your panties up snugly to pull $scene.addPossessiveSuffix($m.name) semen up against you. ##
+#else
+	$m.name takes your hand, moving it away from your pussy, and then pulls your panties up snugly to ensure that his semen is smeared onto your labia. He gives the front of your pussy a press with his hand, further smearing his semen into you. $m.addSexualActivity("FEEL_PUSSY",true)##
+#end
+
+$m.name doesn't stick around after that, leaving you with your wet $w.getPanties().getBasicDesc(). $f.name seems satisfied that this is sufficient to make up for your earlier lie, and she and you walk back together until she drops you off at home. $f.addNpcLikingSmall()$f.addWLikingTiny()##
+</CPSpurtNoText>
+
+<CarnivalShort>
+Go to the carnival
+</CarnivalShort>
+
+<CarnivalLong>
+Go to the carnival with $f.name. It could even be fun.
+</CarnivalLong>
+
+<CarnivalText>
+$f.name takes you to the carnival, and initially you and her spend some time wandering around the grounds, eating carnival foods and playing a few carnival games. ##
+#if($f.getPersonality() == "SELFISH")
+	$f.name briefly flirts with another carnival-goer, talking him into winning her a teddy bear before ditching him. ##
+#elseif($f.getPersonality() == "JERK")
+	$f.name takes a particular glee in watching people lose at the carnival games, and manages to nudge a guy just as he's about to throw a dart at some balloons, causing him to miss wildly. ##
+#end
+#if($w.getPantiesStatus() == "OFF")
+	It's a fairly pleasant way to spend an evening, and you find yourself almost forgetting about the fact that you're not wearing any underwear. In a crowd of people. ##
+#elseif($w.getPantiesStatus() != "OFF")
+	It's a fairly pleasant way to spend an evening, and there are plenty of distractions to keep $f.name occupied so that she can't notice your panty line and figure out that you lied to her. ##
+#end
+
+
+After a while, however, she leads you over to the Ferris wheel, paying for tickets for both of you. It isn't until you're in the seat that you figure out why. The old-time wheel has basket seats, and that means it'll be hard to keep from flashing the crowd. But, before you can freak out, you're already leaving the ground. ##
+#if($w.getBottom().getLength() == "ANKLES")
+	Thankfully, your long dress will probably conceal everything important from view. ##
+#end
+</CarnivalText>
+
+<UpwardsText>
+#if($w.getBottom().getLength() == "ANKLES")
+	Your $w.getBottom().getBasicDesc() is long enough that it still manages to hide under your legs, and so the only real danger of anyone noticing anything is from your imagination. ##
+	#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+		Unfortunately, you have quite the imagination, leading you to picture all the people on the ground being able, somehow, to catch a good view of your $w.addArousalTiny()$w.changeStress(5)##
+		#if($w.getPantiesStatus() == "OFF")
+			bare pussy. You think of how many carnival goers have cameras, how many of them might be taking pictures of you right now... ##
+		#else
+			crotch, which makes you thankful that you lied to $f.name. ##
+		#end
+	#end
+#else
+	The Ferris wheel creeps slowly upwards, and your ##
+	#if($w.getBottom().getLength() == "KNEES")
+		#if($w.getPantiesStatus() == "OFF")
+			$w.getBottom().getBasicDesc() does not do a very good job of hiding your pussy from view, if someone were looking up and at the right angle. The seats sway each time the wheel moves, meaning that someone looking up could potentially see right up your $w.getBottom().getBasicDesc() to your bare pussy. $w.addArousalTiny()$w.changeStress(5) ##
+		#else
+			$w.getBottom().getBasicDesc() does not do a good job of hiding your crotch from view, if someone were looking up and at the right angle. The seats sway each time the wheel moves, meaning that someone could potentially see right up your $w.getBottom().getBasicDesc() and your $w.getPanties().getBasicDesc(). $w.addArousalTiny()$w.changeStress(5) ##
+		#end
+	#elseif($w.getBottom().getLength() == "THIGH")
+		#if($w.getPantiesStatus() == "OFF")
+			tiny $w.getBottom().getBasicDesc() barely hides your pussy at all from this angle, and there's not enough fabric to use to cover yourself. Anyone on the ground who happened to look up could fairly easily spot your pussy as they got a decent view up your $w.getBottom().getBasicDesc(). $w.addArousalSmall()$w.changeStress(5)##
+		#else
+			tiny $w.getBottom().getBasicDesc() barely hides your $w.getPanties().getBasicDesc() from view. There's not enough fabric to cover yourself. Anyone on the ground who happened to look up could fairly easily spot your $w.getPanties().getBasicDesc(). Of course, that's embarassing, but you're also worried about $f.name discovering that you lied to her. $w.changeStress(5)##
+		#end
+	#end
+	#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+		There are so many people with cameras down there, and your imagination is running wild, imagining that every one of them is being used to capture a shot up your skirt. You're picturing men masturbating to those pictures later, sharing them with their friends... $w.addArousalTiny()$w.changeStress(5) ##
+	#end
+#end
+
+
+#if($w.getBottom().getLength() == "ANKLES")
+	$f.name turns to you as your chair gets near the top of the wheel, and comments about how your long $w.getBottom().getBasicDesc() is killing most of the fun. She then tells you to hike it up to your waist and spread your legs. When you start to protest, she hikes up her $f.getBottom().getBasicDesc(), revealing that she's not wearing any panties, and in the process flashing anyone on the ground who happens to be looking up. $f.setBottomStatus("EXPOSED")She clearly expects you to do the same. ##
+#elseif($w.getBottom().getLength() == "KNEES")
+	$f.name turns to you as your chair gets near the top of the wheel, and tells you that now it is time to really stretch yourself and do something wild. She tells you to hike your $w.getBottom().getBasicDesc() up to your waist, and spread your legs. When you start to protest, she pulls up her $f.getBottom().getBasicDesc(), revealing that she's not wearing any panties, and in the process flashing anyone on the ground who happens to be looking up. $f.setBottomStatus("EXPOSED")She clearly expects you to do the same. ##
+#elseif($w.getBottom().getLength() == "THIGH")
+	$f.name turns to you as your chair gets near the top of the wheel, and tells you that now it is time to really stretch yourself and do something wild. She tells you to hike your $w.getBottom().getBasicDesc() up to your waist, and spread your legs. When you start to protest, she pulls up her $f.getBottom().getBasicDesc(), revealing that she's not wearing any panties, and in the process flashing anyone on the ground who happens to be looking up. $f.setBottomStatus("EXPOSED")She clearly expects you to do the same. ##
+#else
+	If you are seeing this, something has gone wrong. Please send in a bug report.
+#end
+#if($w.getPantiesStatus() != "OFF")
+	Of course, if you do, $f.name will immediately be able to tell that you're still wearing your $w.getPanties().getShortDesc(). ##
+#end
+</UpwardsText>
+
+<SpreadTruthLong>
+Hike your $w.getBottom().getBasicDesc() up and spread your legs, flashing your pussy to the crowd.
+</SpreadTruthLong>
+
+<SpreadTruthText>
+You reluctantly pull your $w.getBottom().getBasicDesc() up to your waist and spread your legs wide, your knee pressing up against $scene.addPossessiveSuffix($f.name).$w.addArousalSmall() ##
+#if($w.isArousalOrgasm())
+	As you do, the excitement of the situation overtakes you and you have an orgasm,
+	#if($w.hasTrait("PASSIONATE_LOVER"))
+		and you're unable to stifle yourself. Your loud moan attracts the attention of a number of other people riding the wheel, who take notice and get a good view of you and $f.name before you're able to get your $w.getBottom().getBasicDesc() back in place. Thankfully the man running the wheel doesn't appear to have noticed. While you don't get kicked out of the carnival, this is still one of the most humiliating days of your life. $w.changeStress(25)$w.haveOrgasmNoNpc()##
+	#else
+		which has you gritting your teeth to stifle a moan. You manage to keep everyone other than $f.name from noticing, but she gives you a wink and tells you she knew you'd enjoy it. $w.haveOrgasmNoNpc()##
+	#end
+#elseif($w.isArousalClose() || ($w.isArousalEnjoy() && $w.hasTrait("WET_PUSSY")))
+	Your pussy is soaking wet, practically dripping down your thigh. ##
+#elseif($w.isArousalEnjoy() || ($w.isArousalComfort() && $w.hasTrait("WET_PUSSY")))
+	Although you hate to admit it, your pussy is wet from arousal from this situation. ##
+#elseif($w.isArousalComfort())
+	Your pussy is beginning to get damp from this situation, despite your embarassment. Or perhaps because of it. ##
+#end
+#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+	You're practically certain that everyone below you can see what you're doing, knows how much of a slut you are to be up here showing your pussy to the crowd. $w.addArousalTiny()$w.changeStress(15)##
+#else
+	While it's unlikely that anyone is looking up this high, you can't say for certain one way or another whether you've been seen or not. Or recognized, for that matter. $w.changeStress(10)##
+#end
+
+You and $f.name both make sure that your clothes are back in order before the Ferris wheel gets anywhere near the bottom. While it was a little exhilarating, the experience was also humiliating and stressful. $f.name looks like she's enjoyed it a lot more than you. $f.addNpcLikingTiny()$f.fixClothing()$f.setPantiesStatus("OFF")##
+</SpreadTruthText>
+
+<SpreadLieLong>
+Hike your $w.getBottom().getBasicDesc() up and spread your legs, flashing your $w.getPanties().getBasicDesc() to the crowd. $f.name will know you lied to her, though.
+</SpreadLieLong>
+
+<SpreadLieText>
+You reluctantly pull your $w.getBottom().getBasicDesc() up to your waist, revealing your $w.getPanties().getShortDesc(). It does not take long for $f.name to notice that you're wearing $w.getPanties().getItThem(), and she gets angry, calling you a bitch and a liar. She demands that you take your $w.getPanties().getBasicDesc() off and give them to her right now. $f.reduceNpcLikingMedium()$w.setBottomStatus("EXPOSED")
+</SpreadLieText>
+
+<SpreadRefuseLong>
+Tell her that there's no way you're flashing the crowd.
+</SpreadRefuseLong>
+
+<SpreadRefuseText>
+You refuse to do it, and $f.name pressures you a bit, but eventually gives in. She recognizes that you've made progress in getting this far at all, although she is disappointed. She straightens out her clothing, and rides with you to the bottom of the wheel. After that, she and you head out, and eventually part ways for the evening. ##
+#if($scene.hasFlag("gavepanties"))
+	As the two of you part, she returns your $w.getPanties().getBasicDesc().
+#end
+$f.fixClothing()$f.setPantiesStatus("OFF")
+</SpreadRefuseText>
+
+<SpreadHumiliateLong>
+This is the perfect opportunity to humiliate $f.name. She won't like it, but it'd probably make your whole week. ##
+</SpreadHumiliateLong>
+
+<SpreadHumiliateText>
+After $f.name spreads her legs and flashes her pussy, you call out and attract attention. Dozens of fairgoers manage to spot what she's doing before she can hurriedly cover herself up, and people are pointing and taking pictures. $f.name is clearly mortified and bright red with shame and anger, not having expected you to betray her like that. When your chair reaches the bottom she gets banned from the carnival, and storms off without looking back. ##
+$f.fixClothing()$f.reduceNpcLikingLarge()$w.addEnjoyMedNoNpc() ##
+#if($scene.hasFlag("gavepanties"))
+	You never do get your $w.getPanties().getBasicDesc() back, which puts you out the money to replace them. $w.changeMoney(-5)##
+#end
+</SpreadHumiliateText>
+
+<SpreadLieStripLong>
+Take off your $w.getPanties().getShortDesc() and give them to $f.name. 
+</SpreadLieStripLong>
+
+<SpreadLieStripText>
+Seeing $f.name's anger, you slide your $w.getPanties().getShortDesc() off and hand them over to $f.name. She promptly flings them off the side of the Ferris wheel, and you don't manage to spot where they land. Not only does that mean you're going to be without them for the duration of your outing, they'll be expensive to replace. But, it does partially mollify $f.name, though she does say that she doesn't consider it even and will expect you to make it up to her later. 
+
+She then directs you to spread your legs, flashing your pussy. ##
+#if($w.isArousalOrgasm())
+	As you do, the excitement of the situation overtakes you and you have an orgasm,
+	#if($w.hasTrait("PASSIONATE_LOVER"))
+		and you're unable to stifle yourself. Your loud moan attracts the attention of a number of other people riding the wheel, who take notice and get a good view of you and $f.name before you're able to get your $w.getBottom().getBasicDesc() back in place. Thankfully the man running the wheel doesn't appear to have noticed. While you don't get kicked out of the carnival, this is still one of the most humiliating days of your life. $w.changeStress(25)$w.haveOrgasmNoNpc()##
+	#else
+		which has you gritting your teeth to stifle a moan. You manage to keep everyone other than $f.name from noticing, but she gives you a wink and tells you she knew you'd enjoy it. $w.haveOrgasmNoNpc()##
+	#end
+#elseif($w.isArousalClose() || ($w.isArousalEnjoy() && $w.hasTrait("WET_PUSSY")))
+	Your pussy is soaking wet, practically dripping down your thigh. ##
+#elseif($w.isArousalEnjoy() || ($w.isArousalComfort() && $w.hasTrait("WET_PUSSY")))
+	Although you hate to admit it, your pussy is wet from arousal from this situation. ##
+#elseif($w.isArousalComfort())
+	Your pussy is beginning to get damp from this situation, despite your embarassment. Or perhaps because of it. ##
+#end
+#if($w.hasTrait("OVERACTIVE_IMAGINATION"))
+	You're practically certain that everyone below you can see what you're doing, knows how much of a slut you are to be up here showing your pussy to the crowd. $w.addArousalTiny()$w.changeStress(15)##
+#else
+	While it's unlikely that anyone is looking up this high, you can't say for certain one way or another whether you've been seen or not. Or recognized, for that matter. $w.changeStress(10)##
+#end
+You and $f.name both make sure that your clothes are back in order before the Ferris wheel gets anywhere near the bottom. While it was a little exhilirating, the experience was also humiliating and stressful. $f.name looks like she's enjoyed it a lot more than you. $w.fixClothing()$w.setPantiesStatus("OFF")$w.changeMoney(-5)$f.addNpcLikingTiny()$f.fixClothing()$f.setPantiesStatus("OFF")##
+</SpreadLieStripText>
+
+<GoHomeLong>
+Walk with $f.name on your way towards home.
+</GoHomeLong>
+
+<GoHomeText>
+You and $f.name decide you've had enough of ##
+#if($scene.hasFlag("Carnival"))
+	the carnival##
+#elseif($scene.hasFlag("IceSkate"))
+	ice skating##
+#else
+	If you are seeing this, a bug has occured.  Notify your friendly neighbourhood scene creator. ##
+#end
+, and head home. As you are walking on a relatively quiet stretch of road you run into $m.name on the street. $scene.unHideNpc($m)##
+#if($m.getRelationship() == "STRANGER")
+	He is a stranger to you, but apparently $f.name knows him from somewhere. She insists that you stop to talk to him. ##
+#elseif($m.getRelationship() == "ACQUAINTANCE")
+	He's an acquaintance of yours, and $f.name insists that you stop to talk when she sees that you recognize him. ##
+#elseif($m.getRelationship() == "DATE")	
+	You and he have dated, though you're not serious. When $f.name sees that you recognize him, she insists that you stop to talk to him.##
+#end
+
+After everyone has been introduced, $f.name casually drops the fact that you're not wearing any panties. She doesn't mention that she isn't either. And then she suggests to him that he reach under your $w.getBottom().getBasicDesc() and check. ##
+#if($m.hasTrait("LIKES_CUTE"))
+	He looks a little disapproving of this--and of you. He doesn't seem to appreciate the blatant display of sexuality. $m.reduceNpcLoveSmall()$m.reduceNpcLikingTiny()##
+		#if($m.isNpcAttractionOk())
+			Not that this will stop him from taking advantage of the opportunity. ##
+		#end
+#elseif($m.hasTrait("LIKES_SEXY") && $m.isNpcAttractionOk())
+	This appears to pique his interest, and he raises his eyebrows. $m.addNpcLoveTiny()$m.addArousalTiny()##
+#elseif(!$m.isNpcAttractionUnattracted())
+	$m.name looks at you with disgust, and ##
+	#if($m.getBehaviourNoFaking() == "MEAN")
+		calls you a disgusting whore, and tells you that if you're that desperate there's probably a homeless person who'd be willing to touch you. He tells you he's not willing to risk whatever diseases he's sure you have, and then pushes past you to continue on his way. $m.reduceNpcLikingSmall()$m.reduceNpcLoveSmall()$m.reduceWLikingSmall()$m.reduceWLoveSmall()##
+	#elseif($m.getBehaviourNoFaking() == "COLD")
+		brushes past you with a dismissive comment and a condescending sneer. $m.reduceNpcLikingSmall()$m.reduceNpcLoveSmall()$m.reduceWLikingSmall()$m.reduceWLoveSmall()##
+	#else
+		excuses himself and continues on his way. ##
+	#end
+#elseif(!$m.isNpcAttractionOk())
+	#if($m.getBehaviourNoFaking() == "MEAN")
+		$m.name replies that he's not surprised that a slut like you is going without underwear, because you're so unattractive that if you didn't make it easy you'd never get laid. $m.reduceNpcLikingSmall()$m.reduceNpcLoveSmall()$m.reduceWLikingSmall()$m.reduceWLoveSmall()##
+	#elseif($m.getBehaviourNoFaking() == "COLD")
+		$m.name replies that he couldn't care less, and continues on his way. $m.reduceNpcLikingTiny()$m.reduceNpcLoveTiny()$m.reduceWLikingTiny()$m.reduceWLoveTiny()##
+	#else
+		He excuses himself and continues on his way. ##
+	#end
+#else
+	#if($m.hasTrait("SLEAZY"))
+		$m.name steps forward eagerly, clearly keen to take advantage of the opportunity. $m.addArousalTiny()##
+		#if($m.getBehaviour() == "MEAN")
+			He tells you that it's good to run into a slut that knows that her purpose is to be a readily available hole. $m.addNpcLoveTiny()$m.addNpcLikingTiny()##
+			#if($w.hasTrait("LOW_SELF_ESTEEM"))
+				Deep down, you know he's right. That's all you're good for. ##
+			#end
+		#elseif($m.getBehaviour() == "COLD")
+			He doesn't even look at your face, clearly only interested in you for your pussy. ##
+		#elseif($m.getBehaviour() == "ROM")
+			He tells you how he finds this incredibly sexy, and comments that he thinks he may be in love. ##
+		#else
+			He tells you that you're a hot fucking slut (which he clearly intends as a sincere compliment). ##
+		#end
+	#else
+		$m.name looks inclined to do so, if you don't stop him. ##
+	#end
+#end
+</GoHomeText>
+
+<ObjectLong>
+Make it clear that you don't want $m.name touching you. ##
+#if($m.getRelationship() == "STRANGER")
+	After all, not only are you in public, but you don't know him at all. ##
+#elseif($m.getRelationship() == "ACQUAINTANCE")
+	After all, you barely know him, and you're in public. ##
+#else
+	After all, you're not about to let a stranger touch your pussy in public.
+#end
+</ObjectLong>
+
+<ObjectText>
+You make it clear to both $m.name and $f.name that you're not going to let him just feel you up like this. ##
+#if($m.hasTrait("LIKES_CUTE"))
+	$m.name gives you a nod, and glares a little at $f.name. $m.addNpcLoveTiny()$m.addNpcLikingTiny()## This reduces (but does not eliminate) the relationship impact of your friend telling the cute-liking guy that you're panty-less.
+#elseif($m.hasTrait("LIKES_SEXY") || $m.hasTrait("SLEAZY"))
+	$m.name looks disappointed, but accepts your refusal in apparently good spirits. $m.reduceNpcLoveTiny()##
+#else
+	$m.name looks disappointed, but accepts your refusal in apparently good spirits. ##
+#end
+He continues on his way, and you and $f.name eventually split up to head back to your respective homes. ##
+#if($scene.hasFlag("gavepanties"))
+	She returns your $w.getPanties().getBasicDesc() to you before you part ways. ##
+#end
+</ObjectText>
+
+<RejectedLong>
+After $m.name says he's not interested, you go home.
+</RejectedLong>
+
+<RejectedText>
+$scene.hideNpc($m)##
+After $m.name rejects even the opportunity for a free grope, you and $f.name part ways##
+#if($scene.hasFlag("gavepanties"))
+	, although only after she returns your $w.getPanties().getBasicDesc(). ##
+#else
+	. 
+#end
+The rejection stings, no matter the context. $w.changeStress(5)##
+</RejectedText>
+
+<AllowTouchLong>
+Encourage $m.name to touch you.
+</AllowTouchLong>
+
+<AllowTouchFirstLiarLong>
+Encourage $m.name to touch you.
+</AllowTouchFirstLiarLong>
+
+<AllowTouchFirstLiarText>
+When $m.name approaches, you indicate your willingness. You're turned on enough that your shyness is a secondary consideration to your desire to be touched. $m.addArousalTiny()$w.addArousalSmall()$m.addSexualActivity("FEEL_PUSSY",true)
+
+#if($w.getBottom().getLength() == "ANKLES")
+	$m.name pulls up your $w.getBottom().getBasicDesc(), not enough to expose you but enough to allow him to slip a hand under it. ##
+#else
+	$m.name reaches his hand under your $w.getBottom().getBasicDesc() in order to touch you. ##
+#end
+Of course, he discovers that you're still wearing your $w.getPanties().getBasicDesc() as soon as his fingertips reach your crotch. 
+
+#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+	$m.name is initially a little surprised, and almost blurts something out that would give you away. However, after a glance towards $f.name he figures out your lie. He leans in close to your ear and whispers that if you don't want him to tell your friend about your lie, you'll have to do what he says. ##
+	#if($m.hasTrait("SLEAZY"))
+		He tells you that you're going to follow him into the alley and ##
+		#if($m.hasTrait("LIKES_ORAL"))
+			suck his cock. $scene.addFlag("blackmailbj")##
+		#else
+			let him have his way with you. $scene.addFlag("blackmailsex")##
+		#end
+	#else
+		He tells you that you're going to take him home with you and he's going to fuck your brains out. $scene.addFlag("blackmailhome")##
+	#end
+	$m.addBastard(50)##
+#elseif($m.getBehaviour() == "AVG")
+	$m.name is initially a little surprised when his fingers touch fabric, but he manages not to give away your secret. A quick glance over to $f.name, and it is clear that he's figured out your lie. He leans in close to your ear and whispers that he can get you out of your little lie, but that you're going to have to provide a distraction for him. So, he tells you to kiss your friend, and to make sure it counts. $scene.addFlag("distractkiss")$w.addArousalTiny()##
+#else
+	$m.name is initially a little surprised when his fingers touch fabric, but he manages not to give away your secret. However, after a glance towards $f.name he realizes that she doesn't know, and so he gives you a little wink and rubs his fingertip along your $w.getPanties().getBasicDesc(), caressing you through them. After making a show of this for $scene.addPossessiveSuffix($f.name) benefit - although it certainly has an effect on you as well), he asks if you'd like to continue this somewhere more private. $scene.addFlag("politehome") $w.addArousalSmall()##
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		$w.addArousalSmall()##
+	#end
+#end
+</AllowTouchFirstLiarText>
+
+<DoNothingFirstLiarText>
+You remain silent and do nothing, and $m.name takes that and $scene.addPossessiveSuffix($f.name) encouragement as sufficient to go ahead. $m.addArousalTiny()$m.addSexualActivity("FEEL_PUSSY",true)$w.addArousalSmall()
+
+#if($w.getBottom().getLength() == "ANKLES")
+	$m.name pulls up your $w.getBottom().getBasicDesc(), not enough to expose you but enough to allow him to slip a hand under it. ##
+#else
+	$m.name reaches his hand under your $w.getBottom().getBasicDesc() in order to touch you. ##
+#end
+Of course, he discovers that you're still wearing your $w.getPanties().getBasicDesc() as soon as his fingertips reach your crotch. 
+
+#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+	$m.name is initially a little surprised, and almost blurts something out that would give you away. However, after a glance towards $f.name he figures out your lie. He leans in close to your ear and whispers that if you don't want him to tell your friend about your lie, you'll have to do what he says. ##
+	#if($m.hasTrait("SLEAZY"))
+		He tells you that you're going to follow him into the alley and ##
+		#if($m.hasTrait("LIKES_ORAL"))
+			suck his cock. $scene.addFlag("blackmailbj")##
+		#else
+			let him have his way with you. $scene.addFlag("blackmailsex")##
+		#end
+	#else
+		He tells you that you're going to take him home with you and he's going to fuck your brains out. $scene.addFlag("blackmailhome")##
+	#end
+	$m.addBastard(50)##
+#elseif($m.getBehaviour() == "AVG")
+	$m.name is initially a little surprised when his fingers touch fabric, but he manages not to give away your secret. A quick glance over to $f.name, and it is clear that he's figured out your lie. He leans in close to your ear and whispers that he can get you out of your little lie, but that you're going to have to provide a distraction for him. So, he tells you to kiss your friend, and to make sure it counts. $scene.addFlag("distractkiss")$w.addArousalTiny()##
+#else
+	$m.name is initially a little surprised when his fingers touch fabric, but he manages not to give away your secret. However, after a glance towards $f.name he realizes that she doesn't know, and so he gives you a little wink and rubs his fingertip along your $w.getPanties().getBasicDesc(), caressing you through them. After making a show of this for $scene.addPossessiveSuffix($f.name) benefit, he asks if you'd like to continue this somewhere more private. $scene.addFlag("politehome") $w.addArousalSmall()##
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		$w.addArousalSmall()##
+	#end
+#end
+</DoNothingFirstLiarText>
+
+<AlleyBJLong>
+Go into the alley with $m.name.
+</AlleyBJLong>
+
+<AlleyBJText>
+$m.name leads you into an alleyway, where you're at least partially hidden from the road. $f.name ##
+#if($f.getBehaviour() == "MEAN")
+	tells you that she always knew you were a little slut, deep down, and that she's glad you're letting that out. ##
+#elseif($f.getBehaviour() == "COLD")
+	watches you go with a little smirk on her lips. ##
+#else
+	watches you go with a little bit of concern on her face, given the apparently uncharacteristic behaviour, but you certainly look like you want it. ##
+#end
+Once he has you up against the wall, he pushes you down, guiding you to your knees as he stands in front of you. 
+</AlleyBJText>
+
+<returnFromAlleyBJText>
+#if($m.getHadOrgasm())
+	#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+		Once he's done, $m.name gets dressed again and leaves you to clean yourself up, without sparing you a second glance. $m.reduceWLikingSmall()##
+	#else
+		Once he's done, $m.name gets dressed again, offering his hand to help you back up to your feet and helping you to get cleaned off. $m.addWLikingSmall()##
+	#end
+	When you get dressed again and head out, $f.name gives you a wink. She walks with you for awhile before you separate and head to your respective homes. 
+#else
+	#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+		$m.name, unhappy that you haven't kept your side of the bargain, promptly leaves the alley and tells $f.name that you lied to her. When you make it out, $m.name is already walking away and $f.name lays into you for lying to her this whole time. She calls you all sorts of names, and then storms off, leaving you to walk home alone. $f.reduceNpcLikingLarge()$f.reduceWLikingMedium()$m.reduceNpcLikingMedium()$m.reduceWLikingMedium()##
+	#else
+		$m.name is not happy that you didn't let him finish, and promptly leaves the alley. To your relief, he doesn't tell $f.name that you lied to her, or any of the details, leaving her to think you just finished the deed. Afterwards, she walks with you for awhile before you separate and head to your respective homes. ##
+	#end
+#end
+</returnFromAlleyBJText>
+
+<AlleySexLong>
+Go into the alley with $m.name.
+</AlleySexLong>
+
+<AlleySexText>
+$m.name leads you over to an alleyway, where you're at least partially hidden from the road. $f.name ##
+#if($f.getBehaviour() == "MEAN")
+	tells you that she always knew you were a little slut, deep down, and that she's glad you're letting that out. ##
+#elseif($f.getBehaviour() == "COLD")
+	watches you go with a little smirk on her lips. ##
+#else
+	watches you go with a little bit of concern on her face, given the apparently uncharacteristic behaviour, but you certainly look like you want it. ##
+#end
+He pushes you back up against the wall, leaning in close. 
+</AlleySexText>
+
+<returnFromAlleySexText>
+#if($m.getHadOrgasm())
+	#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+		Once he's done, $m.name gets dressed again and leaves you to clean yourself up, without sparing you a second glance. $m.reduceWLikingSmall()##
+	#else
+		Once he's done, $m.name gets dressed again, offering his hand to help you back up to your feet and helping you to get cleaned off. $m.addWLikingSmall()##
+	#end
+	When you get dressed again and head out, $f.name gives you a wink. She walks with you for awhile before you separate and head to your respective homes. 
+#else
+	#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+		$m.name, unhappy that you haven't kept your side of the bargain, promptly leaves the alley and tells $f.name that you lied to her. When you make it out, $m.name is already walking away and $f.name lays into you for lying to her this whole time. She calls you all sorts of names, and then storms off, leaving you to walk home alone. $f.reduceNpcLikingLarge()$f.reduceWLikingMedium()$m.reduceNpcLikingMedium()$m.reduceWLikingMedium()##
+	#else
+		$m.name is not happy that you didn't let him finish, and promptly leaves the alley. To your relief, he doesn't tell $f.name that you lied to her, or any of the details, leaving her to think you just finished the deed. Afterwards, she walks with you for awhile before you separate and head to your respective homes. ##
+	#end
+#end
+</returnFromAlleySexText>
+
+<KissHerLong>
+Kiss $f.name to provide a distraction so that $m.name can pull off his plan.
+</KissHerLong>
+
+<KissHerText>
+You step forward and surprise $f.name by abruptly kissing her, your $w.getStomachDesc() and $w.getBreastsDesc() pressing up against her body. It's tentative at first, your lips brushing hers, but you're forced to get a little more in depth when you realize that $scene.addPossessiveSuffix($m.name) plan is to slip your panties off while you're distracted. Of course, you only realize this once you feel his hands ##
+#if($w.getBottom().getLength() != "THIGH")
+	gathering your $w.getBottom().getBasicDesc() up to almost expose you, and then slipping up inside it to slide your $w.getPanties().getBasicDesc() down your legs, getting you to step out of $w.getPanties().getItThem(). ##
+#else
+	slipping up inside your $w.getBottom().getBasicDesc() to slide your $w.getPanties().getBasicDesc() down your legs, getting you to step out of $w.getPanties().getItThem(). ##
+#end
+He tucks them away in a pocket, which means that $f.name won't discover your lie, but you're also out the underwear, which has apparently become a souvenir for $m.name. In order to keep $f.name distracted enough during this process that she doesn't notice, you have to go all out on the kiss, your tongue exploring her mouth. It's not clear whether she enjoys this or is just putting on a show for $m.name (or letting you put on a show), but she returns the kiss with equal enthusiasm, her tongue caressing yours. And, more imporantly, she closes her eyes for a moment.
+
+Once he's successfully separated you from your underwear, $m.name suggests that you and he go back to your place.
+$f.addArousalMedium()$w.addArousalMedium()$m.addArousalMedium()$w.changeMoney(-5)$w.setPantiesStatus("OFF")##
+</KissHerText>
+
+<PostKissHomeDateShort>
+Go home with $m.name
+</PostKissHomeDateShort>
+
+<PostKissHomeDateLong>
+Go home with $m.name, and see where the night takes you.
+</PostKissHomeDateLong>
+
+<PostKissHomeDateText>
+You and $m.name excuse yourself from $f.name, who looks more than a little pleased with herself to see you hooking up. Before long, you two end up back at your home. 
+</PostKissHomeDateText>
+
+<PostKissHomeAloneLong>
+Say goodbye to $m.name and $f.name and go home on your own.
+</PostKissHomeAloneLong>
+
+<PostKissHomeAloneText>
+You bid $m.name and $f.name a good evening and excuse yourself to go home on your own. They stick around to talk to each other for awhile after you leave, but $f.name doesn't give you any details later. 
+</PostKissHomeAloneText>
+
+<LiarRefuseText>
+#if($scene.hasFlag("distractkiss"))
+	When you refuse to play along, $m.name pulls away, giving you and $f.name a smile before excusing himself and leaving you to sort things out yourself. By that point, however, it's getting late enough that you take your leave as well, returning home alone. ##
+#else
+	When you refuse his demands, $m.name pulls your $w.getBottom().getBasicDesc() up to your waist, showing $f.name that you've been wearing underwear this whole time. She starts yelling at you about how you've been lying to her, and $m.name gives you a smirk before leaving. $m.reduceWLikingMedium()$m.reduceNpcLikingMedium()$f.reduceNpcLikingMedium()##
+	#if($w.hasTrait("BITCHY"))##
+		You decide this is a good time to tell her what you really think of her plan, and of her. This doesn't help, but you certainly enjoy it. $f.reduceNpcLikingSmall()$w.addEnjoyMedNoNpc##
+	#else
+		Although you try to smooth things over, she's not listening. You and she part angry, and you head home alone. ##
+	#end
+#end
+</LiarRefuseText>
+
+<AllowTouchFirstText>
+When $m.name approaches, you indicate your willingness. You're turned on enough that your shyness is a secondary consideration to your desire to be touched. $m.addArousalTiny()$w.addArousalMedium()
+
+#if($w.getBottom().getLength() == "ANKLES")
+	$m.name pulls up your $w.getBottom().getBasicDesc(), not enough to expose you but enough to allow him to slip a hand under it. ##
+#else
+	$m.name reaches his hand under your $w.getBottom().getBasicDesc() in order to touch you. ##
+#end
+#if($m.getBehaviour() == "MEAN" && !$w.hasTrait("BLOCK_ROUGH"))
+	He roughly grabs your ##
+	#if($w.isArousalEnjoy() || ($w.hasTrait("WET_PUSSY") && $w.isArousalComfort()))
+		wet ##
+	#end
+	pussy, roughly squeezing it as he looks directly into your eyes, watching you flinch. ##
+	#if($w.hasTrait("LIKES_ROUGH"))
+		Though he probably doesn't realize that this is exactly what turns you on most. $w.addArousalTiny()##
+	#end
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		Your sensitive flesh responds instantly to his touch, sending a frisson through your body. $w.addArousalTiny()##
+	#end
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		Despite the rough touch, he knows just how to touch you to turn you on. $w.addArousalTiny()##
+	#end
+#elseif($m.getBehaviour() == "COLD" || ($m.getBehaviour() == "MEAN" && $w.hasTrait("BLOCK_ROUGH")))
+	He cups your pussy with his hand, running his fingertips over it in a cold, clinical fashion, as if trying to mentally map it out. There's no passion to it, just him treating you like a piece of meat. ##
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		Your sensitive flesh responds instantly to his touch, sending a frisson through your body. $w.addArousalTiny()##
+	#end
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		Nevertheless, his fingers naturally find your most sensitive places. He's clearly quite gifted with his hands. $w.addArousalTiny()##
+	#end
+#elseif($m.getBehaviour() == "ROM" || $m.getBehaviour() == "NICE")
+	He touches your pussy gingerly, his fingers lightly exploring outside your labia, a gentle touch designed to titillate. ##
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		Your sensitive flesh responds instantly to his touch, sending a frisson through your body. $w.addArousalTiny()##
+	#end
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		He's clearly quite gifted with his hands, his fingertips naturally finding your most sensitive places and driving you wild. $w.addArousalTiny()##
+	#end
+#else
+	He runs his fingertips along your labia, verifying for himself that you aren't wearing any underwear, before giving another firmer caress. ##
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		Your sensitive flesh responds instantly to his touch, sending a frisson through your body. $w.addArousalTiny()##
+	#end
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		He's clearly quite gifted with his hands, his fingertips naturally finding your most sensitive places and driving you wild. $w.addArousalTiny()##
+	#end
+#end
+$m.addSexualActivity("FEEL_PUSSY",true)
+</AllowTouchFirstText>
+
+<DoNothingFirstText>
+You remain silent and do nothing, and $m.name takes that and $scene.addPossessiveSuffix($f.name) encouragement as sufficient to go ahead. $m.addArousalTiny()$m.addSexualActivity("FEEL_PUSSY",true)
+
+#if($w.getBottom().getLength() == "ANKLES")
+	$m.name pulls up your $w.getBottom().getBasicDesc(), not enough to expose you but enough to allow him to slip a hand under it. ##
+#else
+	$m.name reaches his hand under your $w.getBottom().getBasicDesc() in order to touch you. ##
+#end
+#if($m.getBehaviour() == "MEAN" && !$w.hasTrait("BLOCK_ROUGH"))
+	He roughly grabs your ##
+	#if($w.isArousalEnjoy() || ($w.hasTrait("WET_PUSSY") && $w.isArousalComfort()))
+		wet ##
+	#end
+	pussy, roughly squeezing it as he looks directly into your eyes, watching you flinch. $w.addArousalTiny()##
+	#if($w.hasTrait("LIKES_ROUGH"))
+		Though he probably doesn't realize that this is exactly what turns you on most. $w.addArousalTiny()##
+	#end
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		Your sensitive flesh responds instantly to his touch, sending a frisson through your body. $w.addArousalTiny()##
+	#end
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		Despite the rough touch, he knows just how to touch you to turn you on. $w.addArousalTiny()##
+	#end
+#elseif($m.getBehaviour() == "COLD" || ($m.getBehaviour() == "MEAN" && $w.hasTrait("BLOCK_ROUGH")))
+	He cups your pussy with his hand, running his fingertips over it in a cold, clinical fashion, as if trying to mentally map it out. There's no passion to it, just him treating you like a piece of meat. ##
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		Your sensitive flesh responds instantly to his touch, sending a frisson through your body. $w.addArousalTiny()##
+	#end
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		Nevertheless, his fingers naturally find your most sensitive places. He's clearly quite gifted with his hands.$w.addArousalTiny()##
+	#end
+#elseif($m.getBehaviour() == "ROM" || $m.getBehaviour() == "NICE")
+	He touches your pussy gingerly, his fingers lightly exploring outside your labia, a gentle touch designed to titillate. ##
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		Your sensitive flesh responds instantly to his touch, sending a frisson through your body. $w.addArousalTiny()##
+	#end
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		He's clearly quite gifted with his hands, his fingertips naturally finding your most sensitive places and driving you wild.##
+	#end
+#else
+	He runs his fingertips along your labia, verifying for himself that you aren't wearing any underwear, before giving another firmer caress. ##
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		Your sensitive flesh responds instantly to his touch, sending a frisson through your body. $w.addArousalTiny()##
+	#end
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		He's clearly quite gifted with his hands, his fingertips naturally finding your most sensitive places and driving you wild. $w.addArousalTiny()##
+	#end
+#end
+</DoNothingFirstText>
+
+<AllowTouchText>
+You make it clear with your body language that you're encouraging $m.name to touch you. You're turned on enough that your shyness is a secondary consideration to your desire to be touched. $m.addArousalTiny()
+</AllowTouchText>
+
+<DoNothingText>
+You remain silent and do nothing, and $m.name takes that and $scene.addPossessiveSuffix($f.name) encouragement as sufficient to go ahead. $m.addArousalTiny()
+</DoNothingText>
+
+<SpitLube>
+$m.name notices that you're still dry, and removes his hand from your pussy for a moment in order to spit on his fingers. He then reaches back under your $w.getBottom().getBasicDesc() in order to rub that saliva in between your labia. $scene.addFlag("spitlubed")$w.addArousalMedium()$m.addArousalTiny()##
+#if($w.hasTrait("SENSITIVE_PUSSY"))
+	Of course, your sensitive pussy readily responds to this touch. $w.addArousalTiny()##
+#end
+#if($m.hasTrait("MAGIC_FINGERS"))
+	His skilled fingers work it in between your labia, and he delicately circles your clit with his fingertip. $w.addArousalTiny()##
+#end
+$m.addSexualActivity("FEEL_PUSSY",true)
+</SpitLube>
+
+<SpitLubeFollowup>
+$m.name notices that you're still dry, and he takes the hand from your pussy and holds it up in front of your lips. He tells you to open your mouth and suck his fingers. ##
+</SpitLubeFollowup>
+
+<SpitLubeFollowupYesLong>
+Open your mouth and suck his fingers. ##
+#if($w.hasTrait("LOW_SELF_ESTEEM"))
+	It's degrading, but really he's just treating you like you deserve. ##
+#end
+</SpitLubeFollowupYesLong>
+
+<SpitLubeFollowupYesText>
+#if($m.getBehaviour() == "MEAN")
+	You open your mouth and he shoves two fingers in, pushing them deeply into your mouth and swirling them against your tongue. Even though you're not wet yet, you can still taste yourself faintly on them. He finger-fucks your mouth for a moment##
+	#if($w.hasTrait("LIKES_ORAL"))
+		, and even though he pushes them in deeply you don't gag. ##
+	#else
+		, nearly making you gag as he pushes them in deeply. ##
+	#end
+#elseif($m.getBehaviour() == "COLD")
+	You open your mouth and he slides two fingers in, rolling them over your tongue in order to thoroughly coat them. Even though you're not wet yet, you can still taste yourself faintly on them. He's not finger-fucking your mouth, but instead just using you like a damp rag to moisten his fingers. ##
+#else
+	It should not be possible to see this text. Please send in a bug report.
+#end
+
+
+When he is done with your mouth he brings his hand back up between your legs, smearing your saliva over your pussy as lube. ##
+#if($w.hasTrait("LIKES_ROUGH"))
+	$w.addArousalTiny()
+#end
+#if($w.hasTrait("LIKES_ORAL"))
+	$w.addArousalTiny()
+#end
+$w.addArousalMedium()
+$scene.addFlag("spitlubed")
+$m.addSexualActivity("FEEL_PUSSY",true)
+</SpitLubeFollowupYesText>
+
+<SpitLubeFollowupNoLong>
+Refuse to open your mouth for him.
+</SpitLubeFollowupNoLong>
+
+<SpitLubeFollowupNoText>
+You refuse to open your mouth for $m.name, and he nudges his fingers against your lips a couple of times before giving up. He puts the fingers in his own mouth, a long slow gesture as he stares into your eyes, and then brings them back up between your legs to smear his saliva over your pussy as lube. ##
+#if($w.hasTrait("LIKES_ROUGH"))
+	$w.addArousalTiny()
+#end
+$scene.addFlag("spitlubed")
+</SpitLubeFollowupNoText>
+
+<SpreadLabia>
+#if($m.getBehaviour() == "MEAN" && !$w.hasTrait("BLOCK_ROUGH"))
+	$m.name roughly spreads your labia apart with his fingertips, making no effort to be gentle. You can feel the cool air on your tender inner flesh as he does so, and he rubs the heel of his hand against your mound and your clit. ##
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		$w.addArousalTiny()
+	#end
+	#if($w.hasTrait("LIKES_ROUGH"))
+		You're glad he's not being too gentle with you. $w.addArousalTiny()##
+	#end
+#elseif($m.getBehaviour() == "COLD")
+	$m.name experimentally spreads your labia apart with his fingertips, watching to see how you react to the feeling of cool air on your tender inner flesh. He uses the heel of his palm to massage your mound as he does so. ##
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		$w.addArousalTiny()
+	#end
+#elseif($m.getBehaviour() == "AVG")
+	$m.name uses his fingers to spread your labia apart, before running his fingertips along the exposed flesh. You can feel the cool air on your inner labia, and his fingers brush lightly over your clit and hood. ##
+		#if($w.hasTrait("SENSITIVE_PUSSY"))
+			$w.addArousalTiny()
+		#end
+#else
+	$m.name tenderly spreads your labia apart, allowing you to feel the cool air on the newly exposed flesh. He gently strokes your ##
+		#if($w.isArousalComfort())
+			wet ##
+		#end
+		inner labia, and slowly runs his fingers over your clit, staring deeply into your eyes as he does so. ##
+#end
+$w.addArousalMedium()$m.addArousalTiny()$m.addSexualActivity("FEEL_PUSSY",true)
+</SpreadLabia>
+
+<StopThisLong>
+Get rid of $m.name and go home alone.
+</StopThisLong>
+
+<StopThisText>
+You extricate yourself as politely as you can from $m.name and continue on your way home##
+#if($scene.hasFlag("gavepanties"))
+	 after getting your $w.getPanties().getBasicDesc() back from $f.name##
+#end
+.
+</StopThisText>
+
+<HaveOrgasmLong>
+The fingering is too much for you, and you're about to have an orgasm right here on the street. ##
+</HaveOrgasmLong>
+
+<HaveOrgasmText>
+What sort of orgasm are you going to have?
+</HaveOrgasmText>
+
+<QuietOrgasmText>
+As you feel yourself pass the point of no return and being overtaken by an orgasm, you try to bite down on your lip in order to keep yourself from moaning. You only partially manage it, as you have to lean against $m.name and hold onto his shoulders in order to keep from collapsing against him as his hand works between your legs. ##
+#if($w.hasTrait("WET_PUSSY"))
+	Your juices run down your leg, and cover $scene.addPossessiveSuffix($m.name) fingers. ##
+#end
+#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+	He wipes his hand off on the front of your $w.getTop().getBasicDesc(), leaving a sticky smear. $m.reduceWLikingTiny()##
+#end
+$m.causePlayerOrgasm()$scene.addFlag("fingerorgasm")
+</QuietOrgasmText>
+
+<LoudOrgasmText>
+You are unable to stifle your cries, and have a loud, moaning orgasm right here on the street. While there aren't a huge number of people out right now, you certainly do turn some heads, and more than a couple of people see you here cumming on $scene.addPossessiveSuffix($m.name) hand. ##
+#if($w.hasTrait("WET_PUSSY"))
+	Your juices run down your leg, and cover $scene.addPossessiveSuffix($m.name) fingers. ##
+#end
+#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+	He wipes his hand off on the front of your $w.getTop().getBasicDesc(), leaving a sticky smear. $m.reduceWLikingTiny()##
+#end
+$m.causePlayerOrgasm()$scene.addFlag("fingerorgasm")
+</LoudOrgasmText>
+
+<FightItOrgasmText>
+You do your best to resist the orgasm building inside you, but to no avail, as $scene.addPossessiveSuffix($m.name) fingers are relentless between your legs. When that attempt fails you lean against $m.name, trembling as the orgasm washes over you. ##
+#if($w.hasTrait("WET_PUSSY"))
+	Your juices run down your leg, and cover $scene.addPossessiveSuffix($m.name) fingers. ##
+#end
+#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+	He wipes his hand off on the front of your $w.getTop().getBasicDesc(), leaving a sticky smear. $m.reduceWLikingTiny()##
+#end
+$m.causePlayerOrgasm()$scene.addFlag("fingerorgasm")
+</FightItOrgasmText>
+ 
+<GrabBreast>
+#if($m.hasTrait("MAGIC_FINGERS"))
+	$w.addArousalTiny()##
+#end
+#if($m.getBehaviour() == "MEAN" && !$w.hasTrait("BLOCK_ROUGH"))
+	$m.name uses his free hand to roughly squeeze one of your $w.getBreastsDesc(), gripping and kneading the ##
+	#if($w.hasTrait("SENSITIVE_BREASTS"))
+		very sensitive $w.addArousalTiny()##
+	#else
+		tender ##
+	#end
+	orbs ##
+	#if($w.isBreastsExposed())
+		that are unprotected by any clothing at all, open to the air and the view of onlookers. He grips your nipple between his thumb and forefinger, cruelly squeezing it and ##
+		#if($w.hasTrait("LIKES_ROUGH"))
+			sending a further thrill down your spine. $w.addArousalTiny()##
+		#elseif(!$w.hasTrait("LOW_SELF_ESTEEM") && !$w.isArousalEnjoy())
+			making you grit your teeth in pain and anger. $w.reduceArousalTiny()$m.addArousalTiny()$m.reduceWLoveTiny()$m.reduceWLikingTiny()##
+		#elseif($w.isArousalEnjoy())
+			You're turned on enough that even this rough treatment is welcome, and ##
+			#if($w.hasTrait("LOW_SELF_ESTEEM"))
+				besides, deep down you know it's probably what you deserve. ##
+			#else
+				every bit of stimulation is bringing you closer to orgasm. ##
+			#end
+		#end
+	#elseif($w.getTopStatus() == "EXPOSED" || $w.getTopStatus() == "OFF")
+		#if($w.getBraStatus() == "WORN" || $w.getBraStatus == "DISHEVELED")
+			through your $w.getBra().getBasicDesc(). $w.setBraStatus("DISHEVELED")##
+			#if($w.hasTrait("LIKES_ROUGH"))
+				The pain sends a thrill down your spine, making you squirm. $w.addArousalTiny()##
+			#elseif(!$w.hasTrait("LOW_SELF_ESTEEM") && !$w.isArousalEnjoy())
+				The pain makes you grit your teeth in pain and anger. $w.reduceArousalTiny()$m.addArousalTiny()$m.reduceWLoveTiny()$m.reduceWLikingTiny()##
+			#elseif($w.isArousalEnjoy())
+				You're turned on enough that even this rough treatment is welcome, and ##
+				#if($w.hasTrait("LOW_SELF_ESTEEM"))
+					besides, deep down you know it's probably what you deserve. ##
+				#else
+					every bit of stimulation is bringing you closer to orgasm. ##
+				#end
+			#end
+		#else
+			It should not be possible to see this message. Please send in a bug report. Please say that you saw this code: 43598459.
+		#end
+	#elseif($w.getTopStatus() == "WORN" || $w.getTopStatus() == "DISHEVELED")
+		through your $w.getTop().getBasicDesc()##
+		#if($w.getBraStatus() == "WORN" || $w.getBraStatus() == "DISHEVELED")
+			 and your $w.getBra().getBasicDesc(). $w.setBraStatus("DISHEVELED")##
+		#else
+			. ##
+			#if($w.getTop().hasFlag("THIN"))
+				The thin fabric of your $w.getTop().getBasicDesc() allows him to cruelly pinch and squeeze your nipples through the fabric. ##
+				#if($w.hasTrait("LIKES_ROUGH"))
+					The pain sends a thrill down your spine, making you squirm. $w.addArousalTiny()##
+				#elseif(!$w.hasTrait("LOW_SELF_ESTEEM") && !$w.isArousalEnjoy())
+					The pain makes you grit your teeth in pain and anger. $w.reduceArousalTiny()$m.addArousalTiny()$m.reduceWLoveTiny()$m.reduceWLikingTiny()##
+				#elseif($w.isArousalEnjoy())
+					You're turned on enough that even this rough treatment is welcome, and ##
+					#if($w.hasTrait("LOW_SELF_ESTEEM"))
+						besides, deep down you know it's probably what you deserve. ##
+					#else
+						every bit of stimulation is bringing you closer to orgasm. ##
+					#end
+				#end
+			#end
+		#end
+	#end
+#elseif($m.getBehaviour() == "COLD" || ($m.getBehaviour() == "MEAN" && $w.hasTrait("BLOCK_ROUGH")))
+	$m.name uses his free hand to grab your breast, casually taking advantage of the chance to ##
+	#if($w.isBreastsExposed())
+		grope your $w.getBreastsDesc() now that they are open to the air. ## 
+	#elseif($w.getTopStatus() == "WORN"|| $w.getTopStatus() == "DISHEVELED")
+		#if($w.getTop().hasFlag("LOWCUT"))
+			#if($w.getBraStatus() == "WORN" || $w.getBraStatus() == "DISHEVELED")
+				reach into your low-cut $w.getTop().getBasicDesc() and grope your $w.getBreastsDesc(). ##
+			#else
+				reach into your low-cut $w.getTop().getBasicDesc() and grope your $w.getBreastsDesc(). With no bra covering your breasts, he's able to reach your bare skin directly. ##
+			#end
+		#elseif($w.getTop().hasFlag("THIN"))
+			#if($w.getBraStatus() == "WORN" || $w.getBraStatus() == "DISHEVELED")
+				grope your breast through your $w.getTop().getBasicDesc() and your $w.getBra().getBasicDesc(). ##
+			#else
+				grope your breast through your $w.getTop().getBasicDesc(). The fabric is thin enough that you can feel his fingertips against your ##
+				#if($w.isArousalComfort())
+					erect ##
+				#end
+				nipple. Your $w.getTop().getBasicDesc() offers little more protection than nothing at all. ##
+			#end
+		#else
+			#if($w.getBraStatus() == "WORN" || $w.getBraStatus() == "DISHEVELED")
+				grope your breast through your $w.getTop().getBasicDesc() and your $w.getBra().getBasicDesc(). ##
+			#else
+				grope your breast through your $w.getTop().getBasicDesc(). ##
+				#if($w.isArousalComfort())
+					Your erect nipple protrudes through the fabric and into his hand. ##
+				#end
+			#end
+		#end
+	#else
+		#if($w.getBraStatus() == "WORN" || $w.getBraStatus() == "DISHEVELED")
+			grope your $w.getBreastsDesc() through your bra, now that your $w.getTop().getBasicDesc() is out of the way. ##
+		#else
+			No dress, no bra, tits not exposed. Should not be possible. Please report this bug.
+		#end
+	#end
+	He squeezes it like he was testing the ripeness of fruit, making no effort to pleasure you. Instead, it's clear that he's doing this solely because it pleases him. ##
+#else
+	$m.name uses his free hand to ##
+	#if($w.isBreastsExposed())
+		stroke one of your bared breasts, running his hand over your $w.getSkinColour() skin. He brushes his palm over your nipple, gently rubbing it. ## 
+	#elseif($w.getTopStatus() == "WORN"|| $w.getTopStatus() == "DISHEVELED")
+		#if($w.getTop().hasFlag("LOWCUT"))
+			#if($w.getBraStatus() == "WORN" || $w.getBraStatus() == "DISHEVELED")
+				reach into your low-cut $w.getTop().getBasicDesc() and run his hand over your ##
+				#if($w.getBreasts() == "SMALL")
+					small but perky tit ##
+				#elseif($w.getBreasts() == "MEDIUM_SMALL")
+					pert tit ##
+				#elseif($w.getBreasts() == "MEDIUM_LARGE")
+					full breast ##
+				#elseif($w.getBreasts() == "LARGE")
+					heavy breast ##
+				#else
+					ERROR: This should not be possible. Please report this bug. ##
+				#end
+				through your $w.getBra().getBasicDesc(). ##
+			#else
+				reach into your low-cut $w.getTop().getBasicDesc() and run his hand over your ##
+				#if($w.getBreasts() == "SMALL")
+					small but perky tit. ##
+				#elseif($w.getBreasts() == "MEDIUM_SMALL")
+					pert tit. ##
+				#elseif($w.getBreasts() == "MEDIUM_LARGE")
+					full breast. ##
+				#elseif($w.getBreasts() == "LARGE")
+					heavy breast. ##
+				#else
+					ERROR: This should not be possible. Please report this bug. ##
+				#end
+				He brushes his palm over your nipple, gently rubbing it. ##
+			#end
+		#elseif($w.getTop().hasFlag("THIN"))
+			#if($w.getBraStatus() == "WORN" || $w.getBraStatus() == "DISHEVELED")
+				run his hand over your breast through your $w.getTop().getBasicDesc() and your $w.getBra().getBasicDesc(). ##
+			#else
+				run his hand over your breast through your $w.getTop().getBasicDesc(). The fabric is thin enough that you can feel his fingertips against your ##
+				#if($w.isArousalComfort())
+					erect ##
+				#end
+				nipple. Your $w.getTop().getBasicDesc() offers little more protection than nothing at all. ##
+			#end
+		#else
+			#if($w.getBraStatus() == "WORN" || $w.getBraStatus() == "DISHEVELED")
+				run his hand over your breast through your $w.getTop().getBasicDesc() and your $w.getBra().getBasicDesc(). ##
+			#else
+				run his hand over your breast through your $w.getTop().getBasicDesc(). ##
+				#if($w.isArousalComfort())
+					Your erect nipple protrudes through the fabric and into his hand. ##
+				#end
+			#end
+		#end
+	#else
+		#if($w.getBraStatus() == "WORN" || $w.getBraStatus() == "DISHEVELED")
+			run his hand over your $w.getBreastsDesc() through your bra, now that your $w.getTop().getBasicDesc() is out of the way. ##
+		#else
+			No dress, no bra, tits not exposed. Should not be possible. Please report this bug.
+		#end
+	#end
+	#if(!$m.isWAttractionUnattracted())
+		The thought of this disgusting man touching you is repellent. ##
+	#elseif($m.isWAttractionLust())
+		As much as the setting is not one that you'd choose, $m.name is so hot that you find yourself wishing he was doing more than he is. ##
+	#end
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		He is clearly very skilled with his hands, able to use them to great effect. ##
+	#end
+	#if($m.getRelationship() == "ROM")
+		He leans in as he does so, giving you a quick but tender kiss on the lips. ##
+	#end
+#end
+$w.addArousalMedium()$m.addSexualActivity("GROPE_BREASTS",true)
+</GrabBreast>
+
+<LiftSkirt>
+$m.name evidently has gotten tired of your $w.getBottom().getBasicDesc() being in the way##
+#if($w.getBottom().getLength() == "ANKLES")
+	. ##
+#else
+	, however minimally that may be. ##
+#end
+He lifts it up, gathering it up at your waist. This leaves your crotch and ass completely exposed##
+#if($w.hasTrait("LOW_SELF_ESTEEM"))
+	, revealing to any bystanders just how much of a cheap whore you are. ##
+#else
+	, which would also be fairly obvious to bystanders. ##
+#end
+$w.changeStress(5)$w.setBottomStatus("EXPOSED")
+</LiftSkirt>
+
+<TakeHome>
+#if($m.getBehaviour() == "MEAN")
+	$m.name tells you that as much fun as it is finger-fucking you here on the street, where everyone can see how much of a whore you are, he thinks it's time for you to take him home and ##
+	#if($m.hasTrait("LIKES_ORAL"))
+		suck his cock. ##
+	#else
+		spread your legs for him.
+	#end
+	$m.addBastard(10)
+#elseif($m.getBehaviour() == "COLD")
+	$m.name tells you that ##
+	#if($m.hasTrait("LIKES_ORAL"))
+		you're going to suck his cock, ##
+	#else
+		he's going to fuck you, ##
+	#end
+	but not here on the street. He tells you to lead him to your #if($w.livingInFlat)apartment#{else}house#{end}. ##
+#elseif($m.getBehaviour() == "AVG" || $m.getBehaviour() == "NICE")
+	$m.name suggests that you take him back to your place so that you and he can continue this in private. ##
+#elseif($m.getBehaviour() == "ROM")
+	$m.name leans in close to your ear to whisper that he'd love to take this back to a more intimate setting in order to continue. ##
+#else
+	Error. Please report this as a bug. 
+#end
+</TakeHome>
+
+<returnFromMakeoutText>
+#if($m.getBehaviour() == "MEAN")
+	#if($m.getHadOrgasm())
+		After you finish, $m.name dresses himself and lets himself out. Later, you find that he left £20 on a table$m.reduceNpcLikingSmall()$m.reduceNpcLoveSmall()$w.changeMoney(20)##
+		#if($w.hasTrait("LOW_SELF_ESTEEM"))
+			, confirming that he thinks of you as nothing more than a cheap whore. $m.reduceWLikingTiny()$m.reduceWLoveTiny()##
+		#else
+			, most likely as a parting insult. $m.reduceWLikingSmall()$m.reduceWLoveSmall()##
+		#end
+	#else
+		$m.name, clearly frustrated and annoyed, calls you a cock-tease and several other choice epithets as he leaves. $m.reduceNpcLikingSmall()$m.reduceNpcLoveSmall()##
+	#end
+#elseif($m.getBehaviour() == "COLD")
+	#if($m.getHadOrgasm())
+		After you finish, $m.name dresses himself and lets himself out, barely acknowledging your presence on the way. ##
+	#else
+		$m.name is clearly unhappy with this turn of events, but he leaves without incident. In fact, he barely speaks to you on his way out. $m.reduceNpcLikingSmall()$m.reduceNpcLoveSmall()##
+	#end
+#else
+	#if($m.getHadOrgasm())
+		#if($m.hasTrait("LIKES_SEXY"))
+			#if($m.hasTrait("SLEAZY"))
+				After you finish, $m.name tells you that he loves dirty sluts like you, and that this was one of the sexiest things to ever happen to him. $m.addNpcLoveMedium()$m.addNpcLikingSmall()##
+			#else
+				After you finish, $m.name tells you that you're incredibly sexy, and that he would love to do this again some time. $m.addNpcLoveSmall()$m.addNpcLikingSmall()##
+			#end
+		#elseif($m.hasTrait("LIKES_CUTE"))
+			$m.name tells you that he had fun, but that he hopes you're not always this wild, and that he usually prefers more demure women. ##
+		#else
+			After you finish, $m.name thanks you for a fun time, and tells you that he has to get to work early tomorrow and therefore can't spend the night. ##
+		#end
+	#else
+		After you put a stop to things, $m.name makes up a fairly transparent excuse and leaves. ##
+	#end
+#end
+
+
+#if($scene.hasFlag("gavepanties"))
+	A few days later, you find your $w.getPanties().getBasicDesc() in your mailbox, apparently dropped off by $f.name. ##
+#end
+</returnFromMakeoutText>
+
+<GoHomeYesText>
+You agree to take $m.name home with you, and rearrange your clothing for the walk home. $f.name gives you a wink and a cheerful wave, and tells you she'll catch up with you later.
+
+It's not a long walk, $w.fixClothing()$w.setPantiesStatus("OFF")##
+#if($m.getBehaviour() == "MEAN")
+	and he spends the entire time calling you a filthy slut. ##
+#elseif($m.getBehaviour() == "COLD")
+	and he walks with you in silence, hurrying you along every time you try to talk to him. He's apparently only interested in getting you in bed as quickly as possible. ##
+#elseif($m.getBehaviour() == "AVG" || $m.getBehaviour() == "NICE")
+	and he walks alongside you, making small-talk, even though it's clear he's eager to get you home. ##
+#elseif($m.getBehaviour() == "ROM")
+	and he takes your hand as he walks with you, eager to take you home. ##
+#else
+	If you're seeing this message, there's been a bug. Please report it. ##
+#end
+
+Eventually you arrive home, and let him in. You barely get the door closed before ##
+#if($m.getBehaviour() == "MEAN" && !$w.hasTrait("BLOCK_ROUGH"))
+	he grabs you and slams you up against the wall, pressing his body against yours. ##
+	#if($w.hasTrait("LIKES_ROUGH"))
+		$w.addArousalTiny()
+	#end
+#elseif($m.getBehaviour() == "COLD" || ($m.getBehaviour() == "MEAN" && $w.hasTrait("BLOCK_ROUGH")))
+	he presses you up against the wall, clearly hoping to pick up where he left off before. ##
+#elseif($m.getBehaviour() == "ROM")
+	he gives you a deep kiss, his hands fumbling with your $w.getBottom().getBasicDesc() in his passion. ##
+#else
+	he takes you into his arms, pressing himself up against you. ##
+#end
+</GoHomeYesText>
+
+<GoHomeNoText>
+You tell $m.name that you'd rather stay here and keep playing for now. ##
+</GoHomeNoText>
+
+<GoHomeAloneText>
+You tell $m.name that you've had fun, but you're going home--alone. ##
+#if($scene.hasFlag("gavepanties"))
+	After collecting your $w.getPanties().getBasicDesc() from $f.name, you head home.
+#else
+	You say your goodbyes to $f.name, and head home.
+#end
+</GoHomeAloneText>
+
+<RubClit>
+$w.addArousalMedium()##
+#if(!$m.isArousalEnjoy())
+	$m.addArousalSmall()##
+#end
+#if($m.getBehaviour() == "MEAN" && !$w.hasTrait("BLOCK_ROUGH"))
+	$m.name grinds his thumb into your clit harshly, before making quick circles as you ##
+	#if($w.hasTrait("LIKES_ROUGH"))
+		let out a soft moan. $w.addArousalTiny()##
+	#elseif($w.isArousalEnjoy())
+		let out a moan as pain mixes with pleasure. You're so turned on you hardly mind the cruel treatment. ##
+	#else
+		let out a groan of pain. $w.reduceArousalSmall()##
+	#end
+#elseif($m.getBehaviour() == "COLD" || ($m.getBehaviour() == "MEAN" && $w.hasTrait("BLOCK_ROUGH")))
+	$m.name brings his thumb to your clit and rubs in slow circles, apparently trying to make you squirm. ##
+#else
+	$m.name uses his thumb to rub your clit in slow circles, his touch gently but insistently trying to bring you closer. ##
+#end
+#if($m.hasTrait("MAGIC_FINGERS"))
+	$w.addArousalTiny()##
+	#if($m.getBehaviour() == "MEAN" && !$w.hasTrait("BLOCK_ROUGH"))
+		His skilled hands help him achieve both of his objectives--the pleasure and the pain. ##
+	#else
+		His skilled hands know just how to touch you to drive you wild, and so this direct contact with your clit is incredibly intense. $w.addArousalTiny()##
+	#end
+#end
+#if($w.hasTrait("SENSITIVE_PUSSY"))
+	You've always been especially sensitive, and so this is even more arousing. ##
+#end
+#if($w.hasTrait("WET_PUSSY") && $w.isArousalComfort())
+	Your pussy is wet and slippery under his touch, coating $scene.addPossessiveSuffix($m.name) fingers. ##
+#end
+</RubClit>
+
+<StrokePussy>
+$w.addArousalMedium()##
+#if(!$m.isArousalEnjoy())
+	$m.addArousalSmall()##
+#end
+#if($w.hasTrait("SENSITIVE_PUSSY"))
+	$w.addArousalTiny()##
+#end
+#if($m.hasTrait("MAGIC_FINGERS"))
+	$w.addArousalTiny()
+#end
+#if($m.getBehaviour() == "MEAN")
+	$m.name presses his fingers against your labia, rubbing hard against them as he feels you up. ##
+#elseif($m.getBehaviour() == "COLD")
+	$m.name cups your pussy with his hand, his fingers rubbing intently without penetrating you. ##
+#else
+	$m.name strokes his fingers along your pussy, gently massaging it in order to further stimulate you. ##
+#end
+</StrokePussy>
+
+<SlapPussy>
+$m.name briefly removes his hand from your ##
+#if($w.isArousalComfort())
+	damp ##
+#elseif($w.isArousalEnjoy())
+	wet ##
+#end
+pussy, before giving it a sharp little slap that sends a wave of pain through your body. ##
+#if($w.hasTrait("LIKES_ROUGH"))
+	It makes you a little weak in the knees, and you press your pussy into his waiting hand afterwards. $w.addArousalMedium()$f.addWLoveTiny()##
+#else
+	It's not a terribly hard slap, but it still hurts a lot$w.addArousalTiny()$m.reduceWLikingTiny()##
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		, especially because you are so sensitive. ##
+	#else
+	 and makes you reel a little. ##
+	#end
+#end
+</SlapPussy>
+
+<InsertFinger>
+#if(!$w.isArousalComfort())
+	#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+		$m.name tries to slip two fingers into you, but finds you dry. This doesn't stop him, though, and he just pushes them in harder, eventually working them into your dry pussy. $scene.addFlag("penetrated")##
+		#if($w.hasTrait("LIKES_ROUGH"))
+			$w.addArousalTiny()
+		#else
+			$w.reduceArousalTiny()
+		#end
+	#else
+		$m.name tries to slip two fingers into your pussy, but finds you dry. He gives up after a moment and goes back to other foreplay. $scene.addFlag("insertblock")##
+	#end
+#elseif($w.isArousalComfort())
+	$w.addArousalLarge()##
+	$scene.addFlag("penetrated")##
+	#if($m.getBehaviour() == "COLD")
+		$m.name, apparently no longer content to just fondle, pushes two fingers into your pussy right here on the street. ##
+	#else
+		$m.name slowly pushes two fingers into your pussy, easing them in until he's deep inside you. ##
+	#end
+	#if($m.hasTrait("MAGIC_FINGERS"))
+		The way he touches you makes clear that he's had a lot of practice. $w.addArousalTiny()##
+	#end
+	#if($w.hasTrait("SENSITIVE_PUSSY"))
+		$w.addArousalTiny()##
+	#end
+#else
+	This should not be possible to see. Please report the bug. ##
+#end
+</InsertFinger>
+
+<Piston>
+$w.addArousalLarge()##
+#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+	$m.name pistons his fingers into and out of you, driving deeply, bottoming out his fingers. He's not remotely gentle, ##
+	#if(!$w.isArousalComfort())
+		even though you're still dry. ##
+	#else
+		just grinding his hand into your labia. ##
+	#end
+#else
+	$m.name pushes his fingers into you deeply, before pulling them back out and repeating the process a few times, mimicking a slow thrusting pattern. ##
+#end
+#if($m.hasTrait("MAGIC_FINGERS"))
+	He manages to hit all the right spots, driving you wild. ##
+#end
+#if($w.hasTrait("SENSITIVE_PUSSY"))
+	$w.addArousalTiny()##
+#end
+</Piston>
+
+<FingerCurl>
+$w.addArousalLarge()##
+#if($m.getBehaviour() == "MEAN" && !$w.hasTrait("BLOCK_ROUGH"))
+	$m.name curls his fingers into a rough pinch, gripping you from the inside as he presses his thumb in against your clit. ##
+#else
+	$m.name curls his fingers inside you, rubbing you from the inside, stoking new fires within you. ##
+#end
+#if($m.hasTrait("MAGIC_FINGERS"))
+	You're pretty sure he's managed to find your G-spot. The feeling is amazing, and it wouldn't take much of that to bring you to orgasm. $w.addArousalMedium()##
+#end
+#if($w.hasTrait("SENSITIVE_PUSSY"))
+	$w.addArousalTiny()##
+#end
+</FingerCurl>
+
+<MallLong>
+Go to the mall with $f.name. 
+</MallLong>
+
+<MallText>
+$f.name brings you to the local mall, and proceeds to lead you around window shopping. She keeps you out of clothing stores, perhaps worried that you might snag yourself a fresh pair of underwear. ##
+#if($w.getPantiesStatus() != "OFF")
+	Not that you'd have to, of course, as you never played along with her little game. ##
+#end
+
+
+Eventually she brings you to a photo booth. It's a small, squarish enclosure, just big enough for two people if they squeeze in a bit, with a long curtain to provide some privacy. She guides you in, and then slides in with you. ##
+#if($f.getPersonality() == "JERK" || $f.getPersonality() == "SELFISH")
+	She makes you get out your credit card to pay, which starts a timer for the booth to take pictures. $w.changeMoney(-2)##
+#else
+	She pulls out her credit card, sliding it into the machine to pay, which starts a timer for the booth to take pictures. ##
+#end
+
+
+As the timer counts down, she hikes up her $f.getBottom().getBasicDesc(), flashing her pussy to the camera, and directs you to do the same. 
+</MallText>
+
+<FCShort>
+Flash the camera
+</FCShort>
+
+<FCLong>
+Lift your $w.getBottom().getBasicDesc() and show the camera your pussy.
+</FCLong>
+
+<FCText>
+At $scene.addPossessiveSuffix($f.name) urging, you lift up your $w.getBottom().getBasicDesc() in order to show your pussy to the camera. It clicks, capturing an image of you and $f.name, each exposed to the camera. 
+
+$f.name then slides in behind you, taking ahold of one of your wrists and guiding it down between your legs. Her intention is obvious. ##
+$w.setBottomStatus("EXPOSED") $f.setBottomStatus("EXPOSED") ##
+</FCText>
+
+<RefuseMasturbateText>
+When $f.name brings your hand in between your legs, you move it away, making it clear through your body language that this proposal is a non-starter. She doesn't push it further, but does make sure that the camera gets some good pictures of you with your legs spread and fully exposed. After a moment (and a few camera clicks), she rearranges her clothing and lets you do the same. She gives you the pictures, and tells you she hopes that it has helped you break out of your shell a little. You and her then go your separate ways, and you end up at home. 
+</RefuseMasturbateText>
+
+<PMText>
+At $scene.addPossessiveSuffix($f.name) urging, you begin masturbating. ##
+#if($f.getBehaviour() == "COLD" || $f.getBehaviour() == "MEAN")
+	$f.name doesn't join in, but encourages you to keep going. After a moment she gets up, ostensibly to get a better view by leaning against the wall next to the camera, but this takes her out of the frame of any pictures, meaning that the shots are of you touching yourself on your own. But, she also encourages you to keep going. ##
+#else
+	$f.name joins in, and looks like she is genuinely letting herself go a little. She is leading by example, quickly getting herself wet and doesn't seem shy at all about letting the camera get a good view. In doing so, she encourages you to follow along. ##
+#end
+You find it slightly awkward to masturbate in this setting, but eventually manage to get into your groove. As your fingers work between your legs you feel your arousal building, and you're certain that the pictures are capturing an unmistakeably genuine image of your arousal. 
+##
+#if($f.getBehaviour() == "COLD" || $f.getBehaviour() == "MEAN")
+	As you near your orgasm, $f.name starts telling you how she's always known how much of a slut you are deep down, and how you can beat your shyness by just letting it out. She tells you that you just need to give yourself permission and let yourself live out your fantasies, and next time she's sure you'll be sucking a dick in here. 
+	#if($w.hasTrait("LOW_SELF_ESTEEM"))
+		The words sting a bit, mostly because you're worried it might be true. ##
+	#else
+		You're not sure if her words are meant to turn you on or humiliate you, though they're better at the latter than the former. ##
+	#end
+#else
+	As you are nearing your orgasm, $f.name encourages you, telling you that she is proud of how hard you're pushing yourself to break out of your shell. It's clear she's getting close to her own orgasm, and might be holding back to follow along with you. ##
+#end
+#if(!$w.isArousalClose())
+	$w.setArousalClose()
+#end
+</PMText>
+
+<PMOrgasmLong>
+Keep going and finish yourself off. ##
+#if($w.hasTrait("PASSIONATE_LOVER"))
+	Although you'll do your best to stifle yourself, you know you're always loud.##
+#else
+	You'll have to do your best to be quiet. ##
+#end
+</PMOrgasmLong>
+
+<PMOrgasmText>
+You keep fingering yourself, ##
+#if($f.getBehaviour() == "MEAN" || $f.getBehaviour() == "COLD")
+	as $f.name watches and gives you humiliating encouragement. ##
+	#if($w.hasTrait("REFINED"))
+		She tells you that even though you always act stuck up, she knew that deep down you were the sort of slut who might finger herself in a photobooth. ##
+	#elseif($w.hasTrait("CUTE"))
+		She tells you that she knows that your cute and innocent demeanor has always just been a facade, which is how she knew you'd be the sort of freak who might finger herself in a photobooth. ##
+	#elseif($w.hasTrait("BITCHY"))
+		She tells you that she's sure the reason you're such a bitch to everyone else is because you're not getting properly fucked, because it's clear that you're an insatiable slut. ##
+	#else
+		She tells you she always knew you were the sort of slut who would do something like this, and now there's photographic proof. ##
+	#end
+	#if($w.hasTrait("PASSIONATE_LOVER"))
+		When you come it is loud, despite your best efforts. This gets a smirk from $f.name and a comment suggesting that you seem like you want to get caught like this. Your back arches, your body trembles, and your legs press together onto your hand as the rush of pleasure washes over you. ##
+	#else
+		When you come, you manage to keep it quiet, making it unlikely you'll be heard unless someone were standing right outside the photobooth. Your back arches, your body trembles, and your legs press together onto your hand as the rush of pleasure washes over you. ##
+	#end
+	While you're recovering and getting your clothing back in order, $f.name slips out of the photobooth. When you follow her, she's already gone, and she's taken the photographs with her. At that point there's little to do except head home. ##
+#else
+	as $f.name does the same. ##
+	#if($w.hasTrait("HARD_TO_PLEASE"))
+		$f.name reaches her orgasm first. She arches her back, her fingers working frantically against her clit. Her movements take on a frantic urgency before she has to use her free hand to cover her mouth to keep from moaning. After she's done she has enough time to get herself tidied up and watch you. Your orgasm takes a little longer, as is common for you. ##
+		#if($w.hasTrait("PASSIONATE_LOVER"))
+			Despite your best efforts to remain quiet, you let out a fairly loud moan that you are worried might be heard outside the photobooth. You writhe on the seat, and $f.name gives you a wry smile because it is very clear that you have enjoyed yourself. ##
+		#else
+			You do your best to stifle your moans, and so it is unlikely that you'll be heard unless someone were right next to the photobooth. Your fingers bring you over the crest, and you arch your back as you come. $f.name tells you that it's obvious you enjoyed yourself. ##
+		#end
+	#elseif($w.hasTrait("HAIR_TRIGGER"))
+		You come before $f.name, your body responding quickly to your touch. ##
+		#if($w.hasTrait("PASSIONATE_LOVER"))
+			Despite your best efforts to remain quiet, you let out a fairly loud moan that you are worried might be heard outside the photobooth. You writhe on the seat, your body trembling until finally the rush of pleasure ends. $f.name has her own orgasm not long thereafter, and apparently decides it's okay to let out a little noise herself now that you have. ##
+		#else
+			You do your best to stifle your moans, and so it is unlikely that you'll be heard unless someone were right next to the photobooth. Your fingers bring you over the crest, and you arch your back as you come. $f.name has her own orgasm not long thereafter, keeping her moans stifled as well, though you can tell from the arching of her back and the frantic motions of her fingers as the orgasm hits that she enjoyed herself. ##
+		#end
+	#else
+		You and $f.name come almost together--you apparently beat her to it by seconds, and then she either allows herself to go over that edge or else is set off by your own orgasm. ##
+		#if($w.hasTrait("PASSIONATE_LOVER"))
+			Despite your best efforts to remain quiet, you let out a fairly loud moan that you are worried might be heard outside the photobooth. $f.name, hearing your moans, decides to let herself be heard too, and the two of you writhe and moan next to each other as your orgasms wash over you, the camera capturing the moment perfectly. ##
+		#else
+			You do your best to stifle your moans, as does $f.name, and so it is unlikely that you'll be heard unless someone were right next to the photobooth. The two of you each have your own orgasm, your bodies writhing next to each other, and although you aren't touching it is still a shared moment of intimacy. The camera captures the moment, each of you rapt with your own pleasure. ##
+		#end
+	#end
+	Once you and $f.name have gotten yourself tidied up and presentable again, you both leave the photobooth. She splits the photographs with you, each of you coming away with souvenirs of the moment. You then head home, ending the evening. ##
+#end
+$w.haveOrgasmNoNpc()
+</PMOrgasmText>
+
+<PMStopOrgasmText>
+With some reluctance, you remove your hand from between your legs. Your body wants more, but you aren't willing to do it here in the photobooth for the camera. 
+#if($f.getBehaviour() == "MEAN" || $f.getBehaviour() == "COLD")
+	When $f.name sees that you've stopped and realizes you won't go any further, she gives you a sneer before immediately heading out of the photobooth, leaving you to scramble to close the curtain again behind her. By the time you've cleaned yourself up and exited the booth she is gone, and she's taken the pictures with her.
+#else
+	$f.name encourages you to keep going, but when you insist on stopping she decides to keep going. It isn't long before her back is arching and her body trembling as she comes. She does her best to stifle herself, but a weak moaned cry still escapes her lips, unlikely to be heard unless someone happened to be right next to the booth. When she's done she leans over, kisses you, and then starts sliding downwards...
+#end
+</PMStopOrgasmText>
+
+<StopOralText>
+You lightly guide $scene.addPossessiveSuffix($f.name) back up and away from between your legs. She gives you a rueful smile, and another brief kiss before smoothing your clothes out for you. Once that is done she helps you up off the seat, and leads you out of the photobooth, giving you the pictures as a souvenir. Shortly thereafter you each go your separate ways. ##
+</StopOralText>
+
+<AllowOralText>
+When you don't protest, $f.name continues downwards until she is kneeling between your legs. She initially takes a deep breath of your scent before gently exhaling on your wet labia. She leans in, the tip of her tongue teasing along your folds, running up and down the length before bringing herself in closer and pressing her lips against you. She licks inside you for a moment before directing her attention to your clit, her tongue running over it. It's not clear if she's had practice, is a natural talent, or just that you're already so close, but it takes very little time before the orgasm hits you. ##
+#if($w.hasTrait("PASSIONATE_LOVER"))
+	Although you try your best, you are only minimally able to stifle your cries, and you are halfway sure that someone must have heard them. Your thighs press tight against $scene.addPossessiveSuffix($f.name) head, and you grind your hips into her face, wracked in the throes of your orgasm. When you finally settle down, $f.name stands up to give you a sudden salty kiss before wiping her face off and getting her clothing back in order. Thankfully, when the two of you exit the booth, no one is watching. She lets you keep the pictures, apparently as a memento of the moment. The shots of your orgasm are striking, with $scene.addPossessiveSuffix($f.name)#if($f.hasHair) $f.getHairColour() hair#else smooth $f.skinColour head#end clearly between your legs.
+#else
+	You do your best to stifle your cries, and manage to get them down to a level where you doubt you'd be heard unless someone happened to be standing right next to the booth. Your hips rock in place as your orgasm hits, and $f.name follows along, her tongue continuing to work until the point when the pleasure almost becomes too much for you to take. When you finally settle down from your orgasm she helps you clean yourself off and get your clothing back in order before exiting the booth with you. She lets you keep the pictures, including the ones that clearly show her#if($f.hasHair) $f.getHairColour() hair#else $f.skinColour head#end buried between your legs as you are arched back in orgasm.
+#end
+$w.haveOrgasmNoNpc()
+</AllowOralText>
+
+<FCLPShort>
+Flash the camera
+</FCLPShort>
+
+<FCLPLong>
+Flash the camera. It's nearly certain that $f.name will discover that you lied to her. There may be consequences.
+</FCLPLong>
+
+<FCLPText>
+At $scene.addPossessiveSuffix($f.name) urging, you lift up your $w.getBottom().getBasicDesc() in order to show your pussy to the camera. Of course, you're still wearing your panties, which $f.name notices after a quick glance. The camera captures an image with $scene.addPossessiveSuffix($f.name) pussy bare and yours covered, to her evident annoyance. 
+
+She calls you a liar and a bitch, and demands that you take them off immediately. She then thinks better of it, and tells you to take everything off, not just your panties. $w.setBottomStatus("EXPOSED")
+</FCLPText>
+
+<FCStripText>
+#if($w.getTop().isAlsoLowerBody())
+	You remove your $w.getTop().getBasicDesc(), handing it over to $f.name to hold onto, as you don't want to get it dirty. ##
+#else
+	You first strip off your $w.getTop().getBasicDesc(), handing it over to $f.name to hold onto, as you don't want it to get dirty. Your $w.getBottom().getBasicDesc() follows thereafter, and $f.name holds onto that as well. ##	
+#end
+#if($w.getBraStatus() != "OFF")
+	Next, you remove your $w.getBra().getBasicDesc(), leaving your $w.getBreastsDesc() ##
+	#if($w.getBreasts() == "MEDIUM_LARGE" || $w.getBreasts() == "LARGE")
+		to hang freely in the open air. ##
+	#else
+		exposed to the open air. ##
+	#end
+#end
+Last, you remove your $w.getPanties().getBasicDesc()##
+#if($w.legwearWorn)
+	 and even your $w.legwear.basicDesc. ##
+#else
+	, and ##
+#end
+$f.name collects your underwear with the rest of your clothing. That leaves you completely naked in the photobooth. Once you're naked, $f.name abruptly steps out of the photobooth, taking your clothes with her. Of course, you're unable to follow in your naked state, leaving you trapped here by your nakedness. ##
+$f.reduceNpcLikingTiny() ##
+$w.stripNaked() ##
+</FCStripText>
+
+<WaitText>
+#if($f.getBehaviour() == "MEAN")
+	$scene.unHideNpc($m)$f.addBastard(20)
+	$f.name eventually returns. The only problem is that she's not alone. She's brought $m.name, ##
+	#if($m.getRelationship() == "STRANGER")
+		who is a stranger to you. ##
+	#elseif($m.getRelationship() == "ACQUAINTANCE")
+		an acquaintance of yours. ##
+	#elseif($m.getRelationship() == "DATE")
+		who you have dated before. ##
+	#end
+	$f.name hands him a shopping bag that seems to contain your clothing, whispers into his ear, and then leaves again. $m.name walks towards the photobooth where you're hiding, so it seems that now you have an entirely different problem. $f.reduceNpcLikingLarge() $w.changeStress(5)
+#elseif($f.getBehaviour() == "COLD")
+	You wait... and wait... and it eventually becomes pretty clear that neither $f.name nor your clothing will be returning. You're stuck with the fact that you're going to have to figure this problem out on your own. $scene.addFlag("WAITFAIL") $f.reduceNpcLikingLarge() $w.changeStress(5)
+	$f.addBastard(20)
+#elseif($f.getBehaviour() == "AVG")
+	$f.name eventually returns. She has your clothing in a shopping bag, but is also carrying another shopping bag. It's that second shopping bag that she pushes through the curtain of the photobooth, leaving it for you. Inside you find a coat that is long enough to reach your knees, and can be closed in front with buttons. It's enough to hide you, but you'll be terribly self-conscious about the fact that you're naked underneath. 
+	
+	$f.name is gone again by the time you manage to get the coat on. It's a long trip home, and every time someone glances your way you're sure they can tell. There are a few longer, lingering looks that you are sure are the other people trying to spot some other piece of clothing to show that you're not naked under the coat. However, you eventually do make it home, and when you do your clothes are in the shopping bag outside your door. $f.reduceNpcLikingMedium() $w.changeStress(10)
+#else
+	$f.name eventually returns, looking like she is feeling guilty. She apologizes for storming off and leaving you stranded, and that even though she was angry she shouldn't have done that. She returns your clothing, or at least most of it. She hangs on to your bra and panties for the moment, making you walk home without them, but then returns them to you at the door. $f.reduceNpcLikingTiny() $w.changeStress(5)
+#end
+</WaitText>
+
+<OhFuckShort>
+Negotiate with $m.name
+</OhFuckShort>
+
+<OhFuckLong>
+$m.name is probably going to want something in exchange for your clothes. 
+</OhFuckLong>
+
+<OhFuckText>
+#if($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+	$m.addBastard(20)##
+	#if($m.isNpcAttractionOk())
+		$m.name seems to be both amused and pretty pleased at your current condition, and says that he'd be happy to help you out, on one little condition... ##
+		#if($m.hasTrait("LIKES_ORAL"))
+			that you suck his cock first. $scene.addFlag("OHFUCK_ORAL")##
+		#elseif($m.hasTrait("LIKES_ANAL"))
+			that you let him fuck you up the ass first. $scene.addFlag("OHFUCK_ANAL")##
+		#elseif($m.hasTrait("IMPREGNATOR") || $m.hasTrait("HATES_CONDOMS"))
+			that you let him fuck you without a condom first. $scene.addFlag("OHFUCK_IMPREG")##
+		#else
+			that you fuck him first. $scene.addFlag("OHFUCK_FUCK")##
+		#end
+		#if(!$w.hasTrait("BLOCK_ROUGH") && $m.getPersonality() == "JERK")
+			He warns you that he doesn't plan on being gentle, either. $scene.addFlag("AGREED_ROUGH")##
+		#end
+	#else
+		You hear $m.name flip through your photos, and make a sound of disgust. He hits the stop button, and drops the pictures into the garbage, before telling you that as much as it would be a public service to keep anyone else from having to see you naked, he expects you to pay up to make it happen. Thankfully you still have your purse. ##
+		#if($w.getMoney() > 25)
+			You hand over £25 to $m.name, which satisfies him. He tosses you the bag of your clothes, but doesn't stick around to wait for you to get dressed. By the time you've got your clothing on he's gone, leaving you to go home on your own. $m.reduceNpcLikingLarge() $w.changeMoney(-25) $scene.addFlag("OHFUCK_END")
+		#elseif($w.getMoney() < 0)
+			As it turns out, though, you have no money on you. Upon hearing that, $m.name sarcastically wishes you good luck, before leaving with your clothing. $m.reduceNpcLikingLarge() $scene.addFlag("OHFUCK_NOMONEY")
+		#elseif($w.getMoney() < 15)
+			$m.name takes the money, before telling you that it's not quite enough. ##
+			#if($w.getTop().isAlsoLowerBody())
+				He leaves for a moment, and there's little you can do to stop him, but he does come back. When he does he's acquired a pair of scissors, which he uses to make some 'modifications' to your $w.getTop().getBasicDesc(). Your underwear is destroyed and discarded into a trash can. He continues by cutting your $w.getTop().getBasicDesc(), slitting it up the back so that it'd expose the bottom of your ass--or far worse if you were to bend over. $m.name also cuts along the cleavage, in order to expose far more of your breasts. The net result is humiliating to wear, but better than nothing. He tosses it to you with the explanation that if you can't cover the full cost, he'll have to take a little back. He doesn't stick around to see you try it on, though, and is gone by the time you emerge. This leaves you to go home in this embarassingly revealing outfit. $m.reduceNpcLikingMedium() $w.changeMoney($zeromoney) $w.changeStress(5) $scene.addFlag("OHFUCK_END")##
+			#else
+				He gives you back your $w.getTop().getBasicDesc() and your $w.getPanties().getBasicDesc(), but tells you that he's keeping the rest of your clothing as additional 'compensation' for 'helping' you. $m.reduceNpcLikingMedium() $w.changeMoney($zeromoney)##
+				#if($w.getTop().hasFlag("SHOWS_TUMMY"))
+					Your shirt doesn't come down far enough to provide you with much cover, and thus the fact that you are just wearing $w.getPanties().getBasicDesc() as shorts is fairly obvious. ##
+					#if($w.getPanties().hasFlag("THIN"))
+						The thin fabric also pretty clearly outlines your pussy, making it feel like almost no cover at all. ##
+					#end
+					#if($w.getPanties().hasFlag("LACY"))
+						It doesn't help that these are some of your 'fancier' underwear, making this more of a show for onlookers. ##
+					#end
+				#else
+					Thankfully, your shirt is long enough to provide a bit of cover, though that equally makes it hard for others to tell if you're wearing anything underneath it. ##
+					#if($w.getPanties().hasFlag("THIN"))
+						When your shirt rides up enough for them to be seen, your thin panties barely provide any cover, as they neatly outline your pussy through the fabric. ##
+					#end
+					#if($w.getPanties().hasFlag("LACY"))
+						You find yourself wishing you weren't wearing your lacier underwear today, as they can't really be mistaken for anything else. ##
+					#end
+				#end
+				He doesn't stick around as you get dressed, leaving you to go home in this outfit. It's barely enough to avoid getting arrested, but you certainly do get stared at, even as you try to avoid people as much as possible. $w.changeStress(5) $scene.addFlag("OHFUCK_END")##
+			#end
+		#else
+			You dig through your purse, coming up with only £$w.getMoney(). $m.name insists on looking through your purse to make sure that's all you have, before finally agreeing that it'll do. He takes all the cash, returning your purse and your clothing. He's gone by the time you get dressed, at which point you head home alone. $m.reduceNpcLikingMedium() $scene.addFlag("OHFUCK_END")
+		#end
+	#end
+#elseif($m.getBehaviour() == "ROM")
+	$m.name tells you that he's sorry that your friend is such a horrible person, and that he promised her that he'd mess with you, but he really just feels bad. He pushes the clothing through the curtain without trying to catch a peek, and waits patiently while you get dressed. When you emerge, he reminds you to take the photographs, letting you do it so that he doesn't peek at them either. $m.name then drives you home, to ensure you make it back safely. $m.addWLikingMedium()##
+	#if(!$m.isContactable() && $m.isNpcAttractionAttracted())
+		#if($m.getPersonality() == "SELFISH")
+			He tells you that after helping you out, you probably owe him your phone number. ##
+		#else
+			He does, however, ask for your phone number before you head into your home. ##
+		#end
+		$scene.addFlag("OHFUCK_PHONE")
+	#else
+		He wishes you a good night before you go inside. $scene.addFlag("OHFUCK_END")
+	#end
+#elseif($m.getBehaviour() == "NICE")
+	$m.name tells you that your friend told him he should do something mean to you, but that he really is sorry that this happened. He hands you your clothing through the curtain, without trying to sneak a look. Once you're done getting dressed, he reminds you to take the pictures. They're still in the receptacle, which suggests he hasn't looked at them. He hopes the rest of your day goes better, and checks to make sure that you're okay to get home. You assure him that you're okay and head home. $scene.addFlag("OHFUCK_END") $m.addWLikingMedium()
+#elseif($m.getBehaviour() == "AVG")
+	#if($m.isNpcAttractionOk())
+		You can hear $m.name take the pictures out of the slot and flip through them. He tells you that you can have your clothing back if he can keep the pictures. He doesn't actually wait for your answer, knowing that he has you over the proverbial barrel. He tosses your clothing in through the curtain, and leaves with the naked pictures of you. He's gone by the time you get dressed, leaving you to go home alone. $scene.addFlag("OHFUCK_END") $m.addWLikingMedium()
+	#else
+		You can hear $m.name take the pictures out of the slot and flip through them. He makes a sound of displeasure, and you hear him dump them into a trash can. He throws your clothing in to you, apparently no longer interested in this situation one way or another. He's gone by the time you get dressed, and you go home alone. $scene.addFlag("OHFUCK_END")
+	#end
+#end
+</OhFuckText>
+
+<SneakOutText>
+Having been left without a lot of options (and all of them bad), you manage to disconnect the curtain from the photobooth and wrap it around yourself in a very poor substitute for a dress. It's stiff and plasticky, but it allows you to slip into a store and buy a cheap dress that you'll never wear again. You definitely get a look from the store clerk as you buy the dress, because she has to scan the tag from your shoulder and it's clear you're not carrying any other clothing. You're too shy to risk stealing, and too embarrassed to ring up a set of underwear that you're clearly wearing, which means that you go home wearing just the dress. $w.changeMoney(-25) $w.changeStress(10)
+</SneakOutText>
+
+<CallHelpText>
+You try to get someone's attention by peeking out of the photobooth and trying to wave or call people over. You're trying to catch the attention of one of the female shoppers. Unfortunately, the person who actually spots you signalling and comes over to investigate is a man##
+#if($m.getRelationship() == "STRANGER")
+	, and one who is a stranger to you. ##
+#else
+	, who you recognize as $m.name. ##
+#end
+You try to explain your predicament through the curtain and are having some difficulty until suddenly he seems to understand. A shuffling of paper reveals why--the photobooth has been continuing to take pictures, and he's looking through the pictures of you naked. ##
+#if($m.getBehaviour() == "COLD" || $m.getBehaviour() == "MEAN")
+	He seems to find this hilarious, and calls you a dumb slut. $w.changeStress(5)##
+	#if($m.isNpcAttractionOk())
+		But, he says he's willing to help you out, if you're willing to ##
+		#if($m.hasTrait("LIKES_ORAL"))
+			suck his cock first. $scene.addFlag("PHOTO_ORAL")##
+		#elseif($m.hasTrait("LIKES_ANAL"))
+			let him fuck you up the ass first. $scene.addFlag("PHOTO_ANAL")##
+		#elseif($m.hasTrait("IMPREGNATOR") || $m.hasTrait("HATES_CONDOMS"))
+			let him fuck you without a condom first. $scene.addFlag("PHOTO_IMPREG")##
+		#else
+			fuck him first. $scene.addFlag("PHOTO_FUCK")##
+		#end
+		#if(!$w.hasTrait("BLOCK_ROUGH") && $m.getPersonality() == "JERK")
+			He warns you that he doesn't plan on being gentle, either. $scene.addFlag("PHOTO_REQUEST_ROUGH")##
+		#end
+	#elseif($m.getBehaviour() == "COLD")
+		He tells you that you got yourself into this predicament, and you can get yourself out. He leaves, keeping the photos that have printed thus far. $scene.addFlag("CALLHELPFAIL") $scene.addFlag("PHOTO_NOHELP")$w.changeStress(5)##
+	#elseif($m.getBehaviour() == "MEAN")
+		He tells you that he'll help you out, but you're going to have to really show him how much you want his help first. $scene.addFlag("PHOTO_HUMILIATE")##
+	#end
+#else
+	He looks a little shocked at your predicament, and tells you to wait right there. ##
+	#if($m.hasTrait("SLEAZY"))
+		When he returns, he has a long coat for you. It's not much, but it'll cover you as you go home, even if it'll be a little humiliating. ##
+	#elseif($m.hasTrait("FASHIONABLE"))
+		When he returns he's picked out a dress, as well as a matching bra and panty set. They even fit fairly well, which is pretty impressive considering that he's only seen you in photos. Very revealing photos. ##
+	#else
+		When he returns he's picked out a dress, as well as a white bra and panty set that was probably the cheapest available. They don't fit terribly well, but it's a lot better than wearing nothing. ##
+	#end
+	He helps you get home safe, walking with you as far as your door. ##
+	#if(!$m.isContactable() && $m.isNpcAttractionAttracted())
+		On arrival he tells you that it would be nice to see you again, and asks for your number. $scene.addFlag("PHOTO_NUMBER")##
+	#else
+		When you arrive home he wishes you a good evening, and heads on his way. $scene.addFlag("PHOTO_END")##
+	#end
+#end
+</CallHelpText>
+
+<Photo_GiveNumberText>
+You and $m.name trade numbers, as it is really the least you could do for rescuing you from a bad situation. Once that is done he wishes you a good night, and the two of you part ways. $m.setContactable()##
+</Photo_GiveNumberText>
+
+<Photo_NoNumberText>
+#if($w.hasTrait("BITCHY"))
+	You tell $m.name that just because he helped you out doesn't mean you want to go on a date with him or fuck him, and tell him not to be such an entitled asshole. He looks taken aback, and abruptly leaves. ##
+#else
+	You refuse as politely as you can manage, and $m.name does his best to conceal his disappointment. He bids you a good evening, and the two of you part ways. ##
+#end
+</Photo_NoNumberText>
+
+<Photo_RefuseText>
+You tell $m.name that there's no way you'll be doing that. $m.name shrugs, and then walks away, taking your pictures with him. Of course, this means you're still stuck here, naked. $scene.addFlag("CALLHELPFAIL")
+</Photo_RefuseText>
+
+<Photo_OralText>
+You agree, and $m.name steps into the photobooth with you. After taking a moment to look over your naked body, he positions himself to be standing directly in front of the camera, making you kneel down in front of him. ##
+#if($scene.hasFlag("PHOTO_REQUEST_ROUGH"))
+	$scene.addFlag("AGREED_ROUGH")
+#end
+</Photo_OralText>
+
+<OHFUCK_REFUSE_TEXT>
+You tell $m.name that there's no way you'll be doing that. $m.name shrugs, and then walks away, taking your clothing with him. Of course, this means you're still stuck here, naked. 
+</OHFUCK_REFUSE_TEXT>
+
+<OHFUCK_ORAL_TEXT>
+You agree, and $m.name steps into the photobooth with you. After taking a moment to look over your naked body, he positions himself to be standing directly in front of the camera, making you kneel down in front of him. ##
+</OHFUCK_ORAL_TEXT>
+
+<OHFUCK_PHONEYES_TEXT>
+You and $m.name exchange numbers, and then you head on into your home to wind down after a pretty stressful day.
+</OHFUCK_PHONEYES_TEXT>
+
+<OHFUCK_PHONENO_TEXT>
+You apologetically decline, and head into your home. ##
+#if($m.getPersonality() == "SELFISH" || $m.getPersonality() == "JERK")
+	He seems pretty annoyed, and suggests you're being ungrateful as you leave. $m.reduceWLikingSmall()##
+#else
+	He takes that in fairly good humour, recognizing that maybe it wasn't the best time to ask. ##
+#end
+</OHFUCK_PHONENO_TEXT>
+
+<Photo_AnalText>
+You agree, and $m.name steps into the photobooth with you. He takes a moment to look over your naked body, before getting you down on all fours in front of the camera, on the photobooth floor. ##
+#if($scene.hasFlag("PHOTO_REQUEST_ROUGH"))
+	$scene.addFlag("AGREED_ROUGH")
+#end
+</Photo_AnalText>
+
+<OHFUCK_ANAL_TEXT>
+You agree, and $m.name steps into the photobooth with you. He takes a moment to look over your naked body, before getting you down on all fours in front of the camera, on the photobooth floor. ##
+</OHFUCK_ANAL_TEXT>
+
+<Photo_ImpregText>
+You agree, and $m.name steps into the photobooth with you. He takes a moment to look over your naked body, before guiding you up against the wall of the photobooth. He undoes his pants, pulling out his cock. He barely hesitates before pushing himself inside you.$scene.addFlag("AGREED_BARE")##
+#if($scene.hasFlag("PHOTO_REQUEST_ROUGH"))
+	$scene.addFlag("AGREED_ROUGH")
+#end
+</Photo_ImpregText>
+
+<OHFUCK_IMPREG_TEXT>
+You agree, and $m.name steps into the photobooth with you. He takes a moment to look over your naked body, before guiding you up against the wall of the photobooth. He undoes his pants, pulling out his cock. He barely hesitates before pushing himself inside you.$scene.addFlag("AGREED_BARE")##
+</OHFUCK_IMPREG_TEXT>
+
+<OHFUCK_FUCK_TEXT>
+You agree, and $m.name steps into the photobooth with you. He takes a moment to look over your naked body, before guiding you up against the wall of the photobooth, pressing himself up against you. ##
+</OHFUCK_FUCK_TEXT>
+
+<Photo_FuckText> 
+You agree, and $m.name steps into the photobooth with you. He takes a moment to look over your naked body, before guiding you up against the wall of the photobooth, pressing himself up against you. ##
+#if($scene.hasFlag("PHOTO_REQUEST_ROUGH"))
+	$scene.addFlag("AGREED_ROUGH")
+#end
+</Photo_FuckText>
+
+<Photo_HumiliateText>
+$m.name doesn't come into the photobooth, but instead starts telling you what he wants you to do from outside, while observing via the pictures that the booth is spitting out. He starts out with simple directions, making you face the camera, making you cover yourself and then uncover yourself. He then gets more explicit, making you adopt a variety of poses in the photobooth--on your knees with your mouth open and your legs spread, on all fours with your ass up in the air, bent over with your legs wide, and so on. Pretty soon he's making you cup your breasts and rub your nipples to ensure they're properly hard, spread your labia out for the camera, spread your ass cheeks, and so forth. ##
+#if($w.hasTrait("LOW_SELF_ESTEEM"))
+	You don't mind terribly, as it's nothing more than you deserve for letting yourself get into this situation. $w.changeStress(-5)##
+#end
+
+
+#if($m.getPersonality() == "JERK")
+	Eventually he appears satisfied, and he collects the pictures and laughs at them, telling you you really are a shameless slut. He then leaves, and it takes awhile before you conclude that he isn't coming back, and that you've humiliated yourself for nothing. $w.changeStress(15)##
+#else
+	Eventually he appears satisfied, and he collects the pictures and laughs at them, telling you you really are a shameless slut. But, he does uphold his end of the bargain, returning with a long coat that at least allows you to cover yourself up enough to get home. $w.changeStress(10)##
+#end
+</Photo_HumiliateText>
+
+<WhoredText>
+#if($m.getHadOrgasm())
+	#if($m.getPersonality() == "JERK")
+		$m.name finishes with you, and then abruptly leaves the photobooth. While you initially think he's heading out to find you some clothing, as he goes he laughs and calls you a stupid whore. He's also taken the pictures, leaving him with photos showing your humiliation and you with nothing to show for it. $w.changeStress(15) $m.reduceWLikingMassive() $m.addBastard(20)##
+		#if($w.hasTrait("BITCHY"))
+			If you weren't so angry, you'd have to be impressed. ##
+		#end
+	#else
+		$m.name finishes with you, and then slips out of the photobooth. He returns shortly thereafter with a long coat for you to wear. It's enough for you to get home, at any rate, though it's still pretty embarassing to walk home in that with nothing underneath it, while worrying that people might notice the signs of your recent encounter. By the time you get it on, you realize that he's also taken the pictures with him. $scene.addFlag("WHOREDEND")
+	#end
+#else
+	$m.name, clearly unhappy, decides to leave--and you're pretty sure he's not coming back to help you out. This leaves you exactly where you were beforehand. 
+#end
+</WhoredText>
+
+<OWhoredText>
+#if($m.getHadOrgasm())
+	#if($m.getPersonality() == "JERK")
+		$m.name finishes with you, and then abruptly leaves the photobooth while you're still recovering. He calls you a stupid whore, and you realize that he's taken your clothing with him. He's also taken the pictures, leaving him with photos showing your humiliation and you with nothing to show for it. $w.changeStress(15) $m.reduceWLikingMassive()##
+		#if($w.hasTrait("BITCHY"))
+			If you weren't so angry, you'd have to be impressed. ##
+		#end
+	#else
+		$m.name finishes with you, and then slips out of the photobooth. He does, however, return your clothing. You get dressed, and he is gone by the time you've finished. This leaves you to finish a particularly embarassing walk of shame home. $scene.addFlag("WHOREDEND")
+	#end
+#else
+	$m.name, clearly unhappy, decides to leave--and you're pretty sure he's not coming back to help you out. This leaves you exactly where you were beforehand. 
+#end
+</OWhoredText>
+
+<FCRefuseText>
+You tell $f.name that you're not getting naked in the photobooth. This does nothing to alleviate her anger, and she stares at you for a moment before storming out of the photobooth. When you get your clothing in order and leave the photobooth it turns out that she's taken the pictures with her. $f.reduceNpcLikingLarge()
+</FCRefuseText>
+
+<RFLong>
+Refuse to flash the camera. You have no idea what might happen to those pictures.
+</RFLong>
+
+<RFText>
+You refuse to flash the camera with $f.name. She tries to persuade you, but eventually realizes that you're not going to give in. When she does, she gets up and leaves the photo booth, leaving you sitting there alone. When you get out, she's taken the pictures, and you are left to go home on your own.  
+</RFText>
+
+<FTLong>
+Flash your breasts to the camera instead. 
+</FTLong>
+
+<FTText>
+#if($w.getTop().getTopType() == "STRAPPY")
+	You slip the straps of your $w.getTop().getBasicDesc() off your shoulders and ##
+#elseif($w.getTop().getTopType() == "ZIP")
+	You unzip your $w.getTop().getBasicDesc() and ##
+#elseif($w.getTop().getTopType() == "BUTTONS")
+	You unbutton your $w.getTop().getBasicDesc() and ##
+#elseif($w.getTop().getTopType() == "HALTERTOP")
+	You untie your $w.getTop().getBasicDesc() and ##
+#elseif($w.getTop().getTopType() == "SLEEVED")
+	You lift your $w.getTop().getBasicDesc(), ##
+#else
+	You pull down your $w.getTop().getBasicDesc(), ##
+#end
+## This bit of the text won't work if a SLEEVED or STRAPLESS top has exposeRemoves set. But, that isn't an issue in the current version as it only appears for ZIP.
+#if ($w.top.exposeRemoves)
+	take it off, ##
+#else
+	#if($w.top.topType == "BUTTONS")
+		open it, ##
+	#elseif($w.top.topType == "ZIP" || $w.top.topType == "HALTERTOP" || $w.top.topType == "STRAPPY")
+		lower it, ##
+	#end
+#end
+#if($w.getBraStatus() == "OFF")
+	your $w.getBreastsDesc() bare and exposed to the camera lens. The camera clicks, capturing a shot of your naked breasts. $f.name turns to you, and it looks like she has more in mind. 
+#else
+	your $w.getBra().getBasicDesc() is exposed to the camera lens. You hear the click as it captures a shot. But then you feel $f.name reaching over to remove your bra.
+#end
+$w.setTopStatus("EXPOSED") ##
+</FTText>
+
+<BraRemovalShort>
+Let her
+</BraRemovalShort>
+
+<BraRemovalLong>
+Let $f.name take off your bra, which will expose your bare breasts to the camera.
+</BraRemovalLong>
+
+<BraRemovalText>
+$scene.addPossessiveSuffix($f.name) fingers unhook your bra, and she deftly removes it, tossing it onto the ground. Now your $w.getBreastsDesc() are exposed to the camera's view, and $f.name cups them to better position them for a picture. $w.setBraStatus("OFF")##
+</BraRemovalText>
+
+<BreastFondleShort>
+Sit there
+</BreastFondleShort>
+
+<BreastFondleLong>
+Let $f.name do what she wants. 
+</BreastFondleLong>
+
+<BreastFondleText>
+$f.name slides up close next to you, her hands ##
+#if($w.getBreasts() == "SMALL")
+	running over your flattish breasts, beginning to tease your nipples. ##
+#else
+	cupping your ##
+	#if($w.getBreasts() == "MEDIUM_SMALL")
+		small ##
+	#else
+		large ##
+	#end
+	breasts, beginning to tease your nipples. ##
+#end
+It does not take long before they are standing erect, showing your arousal in a way that the camera can easily capture and record. ##
+#if($w.isLactating())
+	Small droplets of milk bead on your nipples as a result of this attention. ##
+#end
+
+$f.name then pulls her hands away, taking your arms and pulling your wrists together so that she can hold them with one hand. It's not a strong enough hold to prevent you from pulling away if you wanted, and serves more as a signal to keep them there. Her other hand reaches down to start pulling up your $w.getBottom().getBasicDesc().
+#if(!$w.isArousalComfort())
+	$w.setArousalComfort()
+#end
+</BreastFondleText>
+
+<StopCameraShort>
+Stop her
+</StopCameraShort>
+
+<StopCameraLong>
+Put a stop to this.
+</StopCameraLong>
+
+<StopCameraText>
+You insist that this has gone far enough, and extricate yourself from $f.name, putting your clothing back on in the process. You step out of the photo booth first, making sure to grab the pictures, and head home. $w.fixClothing() ##
+</StopCameraText>
+
+<BeFingeredShort>
+Let $f.name under your $w.getBottom().getBasicDesc()
+</BeFingeredShort>
+
+<BeFingeredLong>
+Let $f.name under your $w.getBottom().getBasicDesc() and see where this goes. Of course, she's going to notice you're still wearing your $w.getPanties().getBasicDesc().
+</BeFingeredLong>
+
+<BeFingeredText>
+$scene.addPossessiveSuffix($f.name) fingers lift up your $w.getBottom().getBasicDesc() and her hands steal downwards. When her fingertips touch your $w.getPanties().getBasicDesc() she freezes for a second, and then hisses in your ear. She is clearly furious about being lied to. She tells you that there's really no way she can help you if you're not willing to step outside your comfort zone##
+#if($f.getBehaviour() == "MEAN" || $f.getBehaviour() == "COLD")
+	, and she is determined to make sure that you do. She lifts one leg, placing it on the back of the bench of the photobooth. She lifts her $f.getBottom().getBasicDesc() all the way up to her hips to expose her shaved pussy, just inches from your face, and positioned so the photobooth camera will get a great shot of the action. She then places a hand on your head, beginning to guide your face in between her legs. She tells you to kiss her, and it's clear from the context that she doesn't mean on the mouth. ##
+	$f.setBottomStatus("EXPOSED")
+#else
+	. She rearranges her clothes, and then curtly leaves the photobooth, collecting the pictures on her way out. ##
+#end
+$f.reduceNpcLikingLarge() $w.setBottomStatus("EXPOSED")##
+</BeFingeredText>
+
+<StormOutLong>
+Tell $f.name that you're not about to eat her out, and storm out of the photobooth. ##
+</StormOutLong>
+
+<StormOutText>
+#if($w.hasTrait("BITCHY"))
+	You tell $f.name that she's disgusting, and accuse her of arranging this whole thing in order to get you to sleep with her. You tell her that you're not surprised no one will touch her without trickery. You get up and storm out, making sure to take the pictures. $f.name looks shocked as you do, and you feel a bit of satisfaction from her reaction. Afterwards, you return home.##
+	$w.addEnjoyMedNoNpc()
+#else
+	You quickly pull away from $scene.addPossessiveSuffix($f.name) bare pussy, and after quickly making sure your clothing covers you you slip out of the photobooth. Making sure to grab the pictures, you quickly head home. ##
+#end
+</StormOutText>
+
+<KissPussyLong>
+Kiss $scene.addPossessiveSuffix($f.name) pussy.
+</KissPussyLong>
+
+<KissPussyText>
+$f.name pulls you a little closer, so that your lips are touching her pussy. She doesn't pull you in any closer than that, but holds your head there long enough to ensure that the camera snaps a shot. 
+
+This close, her faint smell is in your nostrils. She then tells you that because you've been such a lying bitch, you're going to have to make it up to her. She tells you that she's pretty sure you know what to do, and she pulls your face in closer so that you're now nuzzling up between her labia.
+</KissPussyText>
+
+<EatPussyShort>
+Eat $scene.addPossessiveSuffix($f.name) pussy
+</EatPussyShort>
+
+<EatPussyLong>
+You've come this far, might as well go all the way.
+</EatPussyLong>
+
+<EatPussyText>
+$f.name holds your head until she feels you beginning to lick. Only then does she remove her hand, letting you keep going. She's only a little damp at first, but she rapidly gets wetter as your tongue works. Her juices end up smeared over your face. You work your way up from licking between her labia towards focusing on her clit. The angle of her legs allows the camera a pretty solid view of your face buried into her pussy, eating $f.name out. It doesn't take long before she is stifling a moan and placing her hand on the back of your head again.  
+
+$f.name rather roughly rides your face for a moment or two longer before shuddering, and releasing your head once again. 
+
+Once she's done she readjusts her clothes and lets you do the same, and lets you keep the pictures from the booth as a reminder. You two quickly part ways, and you head home. 
+$w.fixClothing()
+</EatPussyText>
+
+<BeFingeredNPShort>
+Let $f.name under your $w.getBottom().getBasicDesc()
+</BeFingeredNPShort>
+
+<BeFingeredNPLong>
+Let $f.name under your $w.getBottom().getBasicDesc() and see where this goes.
+</BeFingeredNPLong>
+
+<BeFingeredNPText>
+$scene.addPossessiveSuffix($f.name) fingers lift up your $w.getBottom().getBasicDesc() and her hands steal downwards. She traces around the perimeter of your sex, mapping it out with her fingertips. Her fingers slowly spread your labia, putting you more lewdly on display for the camera before her other hand begins rubbing your clit. ##
+#if($w.isArousalComfort())
+	She finds you already wet, and rubs insistently, as she tells you to keep looking into the camera. ##
+#else
+	She finds you dry, and lifts her hand up, abruptly pushing her finger in between your lips to wet it against your tongue. She then goes back to rubbing your clit, telling you to keep looking into the camera. ##
+#end
+$w.addArousalLarge() $w.setBottomStatus("EXPOSED")##
+</BeFingeredNPText>
+
+<AbortLong>
+Put a stop to this. You're not willing to let $f.name finger you... any further.
+</AbortLong>
+
+<AbortText>
+You take $scene.addPossessiveSuffix($f.name) hands away from your crotch, and extricate yourself from her arms. ##
+#if($w.hasTrait("BITCHY"))
+	You tell her off for pushing things way too far, and tell her that you'll be keeping the pictures, and that she had better not tell anyone about this if she doesn't want you sharing her shots around. You storm out, grabbing the pictures on your way out, and head home. $f.reduceNpcLikingMedium() ##
+#else
+	You explain that this has gone too far, and you're not comfortable with the direction things have gone. You step away and out of the photo booth, making sure to grab the pictures on your way out and on your way home. ##
+#end
+</AbortText>
+
+<KeepFingeredShort>
+Let $f.name keep going
+</KeepFingeredShort>
+
+<KeepFingeredLong>
+$f.name seems intent on bringing you to orgasm in this photobooth.
+</KeepFingeredLong>
+
+<KeepFingeredText>
+$f.name keeps working away between your legs, one hand working your clit as the fingers of her other hand begin to push into you. ##
+#if($w.hasTrait("ALWAYS_FEMALE"))
+	She touches you with evident skill, or perhaps just as if she were touching herself. ##
+#else
+	Unlike yourself, she's been able to practice on herself for years, and is putting that skill to work. ##
+#end
+She keeps telling you to look ahead, having you stare into your own eyes as she slowly builds your arousal. ##
+#if($w.isBreastsExposed())
+	You can see your nipples grow hard from your $w.getBreastsDesc().
+#else
+	#if($w.getBraStatus() == "OFF")
+		#if($w.getTop().hasFlag("THIN") || $w.getTop().hasFlag("SEE_THROUGH"))
+			You can see your nipples getting hard through your $w.getTop().getBasicDesc(), which clearly outlines them. ##
+		#else
+			Your $w.getTop().getBasicDesc() is dimpled as your nipples get hard. ##
+		#end
+	You can feel your nipples getting hard, pressing up into your $w.getBra().getBasicDesc(). ##
+	#end
+#end
+#if($w.hasTrait("WET_PUSSY"))
+	It is not long before you are juicing all over $scene.addPossessiveSuffix($f.name) fingers, leaving a wet spot on the seat. ##
+#end
+#if($w.hasTrait("HAIR_TRIGGER") || $w.hasTrait("SENSITIVE_PUSSY"))
+	It does not take long at all before you're nearing your orgasm. ##
+#elseif($w.hasTrait("HARD_TO_PLEASE"))
+	It takes some time, and you get the sense that $f.name is continuing through cramping fingers, but eventually you are nearing your orgasm. ##
+#else
+	Slowly you build towards your orgasm. ## 
+#end
+#if($w.hasTrait("PASSIONATE_LOVER"))
+	Although the circumstances call for being silent, and you do your best to stifle yourself, you only partially manage it. You're pretty sure someone outside must have heard, though they are tasteful enough not to barge in. ##
+#else
+	You have to stifle your urge to moan out when it hits, and so you bite your lip, groaning softly. ##
+#end
+
+And, of course, the camera is there to capture the image of you as you come, your expression unmistakable. $f.name lets you get up and clean yourself off and get put back together as she rearranges her clothing. As you leave the booth, she gives you the pictures, so that you can remind yourself that you enjoyed letting things loose. She gives you a wink, and then leaves you to make your own way home from the mall. $w.haveOrgasmNoNpc() ##
+</KeepFingeredText>
+
+<sceneDescriptionText>
+#if($scenedesc == "START")
+	You're at home, speaking to your friend $f.name on the phone.
+#elseif($scenedesc == "COFFEE")
+	You and $f.name are at a quiet local coffee shop. You know, the sort of place that is big on talking about how it is not one of the major chains, and everything is fair trade and GMO free and gluten free and... they sell coffee. The two of you are in a booth toward the back, in a fairly private spot.
+#elseif($scenedesc == "CARNIVAL")
+	$f.name has brought you to a local carnival. It's a fairly busy place, with plenty of people all around, and a variety of attractions and rides available. 
+#elseif($scenedesc == "MALL")
+	You and $f.name are at the mall. She's brought you into a small photobooth, with a camera taking pictures on a timer as you sit on a plastic bench across from it. The curtain goes almost all the way to the floor, providing a fair bit of privacy, at least from view. 
+#elseif($scenedesc == "ICESKATE")
+	You and $f.name are at an ice rink. There's a fair number of people around, relatively speaking, though it isn't super crowded. 
+#else
+	If you are seeing this, something has gone terribly, nay, catastrophically wrong. Kindly contact your local codemonkey for repairs.
+#end
+</sceneDescriptionText>

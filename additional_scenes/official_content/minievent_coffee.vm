@@ -1,0 +1,50 @@
+<introText_m>
+You meet with $m.getName() at a cafe to get some coffee.
+
+It is quite busy, and the two of you have to stand for a few minutes before you are able to get some seats. The two of you end up crammed together at a tiny, wobbly table.
+
+#if ($w.hasTrait("SHY") && $m.hasTrait("TACITURN"))##
+The two of you sit quietly together with your drinks, appreciating each other's company.
+#elseif ($w.hasTrait("SHY") && !$m.hasTrait("TACITURN"))##
+$m.getName() tells you about his day and you listen quietly, sipping your drink.
+#elseif (!$w.hasTrait("SHY") && $m.hasTrait("TACITURN"))##
+You tell $m.getName() all about your day. He nods quietly. He's such a good listener.
+#else##
+The two of you chat about your day.
+#end##
+$m.addEnjoyTiny() $m.addNpcLikingTiny() $m.addWLikingTiny()##
+</introText_m>
+
+<sceneDescriptionText_m>
+You are in a cafe with $m.getName().
+</sceneDescriptionText_m>
+
+<introText_f>
+#if ($f.getCharType() == "INNOCENT")##
+$f.getName() invites you to get some tea.
+
+When you arrive at the tearoom she suggested, $f.getName() is already there with a teapot and some scones. She pours you a cup as you seat yourself. The two of you quietly chat about your day.
+#elseif ($f.getCharType() == "SOPHISTICATED")##
+$f.getName() invites you to get some coffee.
+
+You meet her at a small Italian cafe. You chat together while sipping from tiny espresso cups and nibbling on some biscotti.
+#elseif ($f.getCharType() == "PARTY_GIRL")##
+You meet with $f.getName() at a cafe to get some coffee.
+
+It is quite busy there, so it's decided that you'll search for a table while $f.getName() gets the coffee. You're able to grab a table from a leaving customer, and $f.getName() soon arrives with two giant oat milk iced coffees with vanilla syrup and whipped cream. The two of you sit back and chat about your day.
+#else##
+##Should never get here
+You meet with $f.getName() at a cafe to get some coffee.
+
+The two of you chat about your day.
+#end##
+$f.addEnjoyTiny() $f.addNpcLikingTiny() $f.addWLikingTiny()##
+</introText_f>
+
+<sceneDescriptionText_f>
+You are in a cafe with $f.getName().
+</sceneDescriptionText_f>
+
+
+<empty>
+</empty>

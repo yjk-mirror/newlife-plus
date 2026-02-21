@@ -1,0 +1,28 @@
+# Preconditions for this scene:
+# Part of the minidate framework
+# $bf should be the boyfriend or husband
+
+textFileName: minidate_sleazysendnudes.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: bf
+    outfit: CASUAL
+
+ location:
+  usePlayerHome: true
+
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.hideNpc($bf)
+ followUpActions:
+  done: false
+ finishScene: true
+
+

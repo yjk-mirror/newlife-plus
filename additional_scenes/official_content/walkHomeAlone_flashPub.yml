@@ -1,0 +1,178 @@
+# Preconditions for this scene:
+# Scene happens when PC walks home alone from the club. 
+# It is repeatable
+# $yeller should have either a JERK or SELFISH personality or have the CRUDE or SLEAZY trait
+# $helper should have a CARING personality or have the CONSCIENTIOUS or CHARMING trait. 
+# $helper should always be the same person if the scene is repeated
+
+textFileName: walkHomeAlone_flashPub.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: GOING_OUT
+ maleNpcs:
+  - id: yeller
+    outfit: CASUAL
+  - id: helper
+    outfit: CASUAL
+
+# Location info.
+ location:
+  wall: wall
+  floor: pavement
+  hasBed: false
+  isOutside: true
+
+
+
+intro:
+   textId: introText
+   effects:
+    - effect: $scene.hideNpc($helper)
+   followUpActions:
+    keepWalking:
+    debugDrunk: $debug
+    restartDebug: $debug
+    endDebug: $debug
+
+
+defaultActions:
+ restartDebug: true
+ endDebug: true
+
+
+
+
+actions:
+ - id: keepWalking
+   shortDesc: Keep walking
+   longDesc: Continue on your way home
+   textId: keepWalking
+   allowNpcActions: false
+   followUpActions:
+    flash: ( 
+         ($w.hasTrait("DOWN_TO_EARTH") || $w.hasTrait("SULTRY") || $w.hasTrait("FLIRTY") 
+          || ($w.hasTrait("OUTGOING") && $w.isDrunk())  
+          || (!$w.hasTrait("REFINED") && !$w.hasTrait("SHY") && $w.isDrunk()) 
+          || $w.isVeryDrunk()) 
+         && $canFlashBreasts) 
+    yell: ($w.hasTrait("BITCHY")
+          || (!$w.hasTrait("REFINED") && !$w.hasTrait("SHY") && !$w.hasTrait("NICE") && $w.isVeryDrunk())
+          || $w.isMaxDrunk())
+    educate: $w.hasTrait("NICE")
+    ignore:
+    debugDrunk: $debug
+    restartDebug: $debug
+    endDebug: $debug
+
+ - id: flash
+   shortDesc: Flash them
+   longDesc: Flash your breasts at the crowd
+   textId: flash
+   allowNpcActions: false
+   finishScene: true
+
+ - id: yell
+   shortDesc: Yell at them
+   longDesc: Chew them out for harassing passing women
+   textId: yell
+   allowNpcActions: false
+   finishScene: true
+
+ - id: ignore
+   shortDesc: Ignore them
+   longDesc: Just ignore them and continue on your way.
+   textId: ignore
+   allowNpcActions: false
+   finishScene: true
+
+ - id: educate
+   shortDesc: Tell them that wasn't nice
+   longDesc: Politely explain to them that it's not nice to treat women this way
+   textId: educate
+   allowNpcActions: false
+   followUpActions:
+    showBra: $showBra && $w.getBraStatus() != "OFF"
+    noBra: $showBra && $w.getBraStatus() == "OFF"
+    lieBra: $showBra && $w.getBraStatus() != "OFF" && $w.hasTrait("CUNNING")
+    escape: $showBra
+   finishScene: (!$showBra)
+
+ - id: showBra
+   shortDesc: Show them your bra
+   longDesc: Flash your bra at the crowd
+   textId: showBra
+   finishScene: true
+
+ - id: lieBra
+   shortDesc: Lie and tell them that you have no bra
+   longDesc: You shouldn't have to show them anything. You're wearing a bra, but they don't need to know that. 
+   textId: noBra
+   followUpActions:
+    noBraCheck: 
+    noBraRunAway: 
+   
+ - id: noBra
+   shortDesc: Tell them that you have no bra
+   longDesc: Tell the crowd that you aren't wearing a bra
+   textId: noBra
+   followUpActions:
+    noBraCheck: 
+    noBraRunAway: 
+
+ - id: noBraCheck
+   shortDesc: Let him check
+   longDesc: Trust him to check if you are wearing a bra
+   textId: noBraCheck
+   finishScene: true
+
+ - id: noBraRunAway
+   shortDesc: Run away
+   longDesc: The situation is getting out of control. It's best to leave.
+   textId: noBraRunAway
+   finishScene: true
+
+ - id: escape
+   shortDesc: Leave
+   longDesc: The situation is getting out of control. It's best to leave.
+   textId: escape
+   finishScene: true
+   
+   
+ - id: debugDrunk
+   shortDesc: Make drunk
+   textId: debugDrunk
+   effects:
+    - effect: $w.addAlcoholLarge()
+   followUpActions:
+    keepWalking:
+    debugDrunk:
+    endDebug:
+   
+
+ - id: restartDebug
+   shortDesc: Restart the scene
+   longDesc: For debugging
+   textId: empty
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: yeller
+       npc: yeller
+     - id: helper
+       npc: helper
+    transitionInfo:
+     ymlFile: walkHomeAlone_flashPub.yml
+    location:
+     useCurrentLocation: true
+   
+ - id: endDebug
+   shortDesc: Force end of scene
+   longDesc: For debugging
+   textId: endSceneTesting
+   finishScene: true
+
+
+

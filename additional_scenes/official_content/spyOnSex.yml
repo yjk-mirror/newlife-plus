@@ -1,0 +1,255 @@
+# Scene written by rigel and ...?
+#
+# Implementation of a sex scene between a male and a female NPC in the missionary position on a bed.
+# The PC is watching them through a slightly ajar door without their knowledge.
+#
+# Unless the PC is caught spying, the scene will either finish with the male NPC's orgasm or a simultaneous
+# orgasm of both male and female NPCs.
+#
+# If the flag that allows to be caught is set, there is a chance that PC is caught every time she has an orgasm.
+# The actual percentage chance to be caught depends on various stats, among them the alcohol and arousal levels
+# of the NPCs.
+#
+# This scene expects both NPCs to be naked and the PC to be clothed.
+#
+# There are a couple of scene flags that can be used to change how the scene handles:
+# SPY_SEX_ALLOW_TOUCHING_YOURSELF - If set, the PC can touch herself while watching.
+# SPY_SEX_ALLOW_STOP_WATCHING - If set, the PC can decide to stop watching the action.
+# SPY_SEX_ALLOW_BEING_CAUGHT - If set, the PC can be caught spying by the NPCs.
+#
+# There are also a couple of result flags that show in what state the scene finished in:
+# SPY_SEX_CAUGHT - True if the PC has been caught by the NPCs.
+# SPY_SEX_WOMAN_HAD_ORGASM - True if the female NPC had at least one orgasm during the scene.
+# SPY_SEX_CAME_TOGETHER - True if the scene finished with a simultaneous orgasm of both NPCs.
+# SPY_SEX_CAME_INSIDE - True if the male NPC came inside the female NPC.
+# SPY_SEX_CAME_IN_CONDOM - True if the male NPC came inside a condom.
+# SPY_SEX_CAME_OUTSIDE - True if the male NPC pulled out before he came.
+# SPY_SEX_ASKED_PULL_OUT - True if the female NPC asked the male NPC to pull out before he comes.
+# SPY_SEX_ASKED_COME_INSIDE - True if the female NPC asked the male NPC to finish inside of her.
+#
+# A note regarding the SPY_SEX_ASKED_PULL_OUT and SPY_SEX_ASKED_COME_INSIDE flags:
+# The scene allows for the female NPC to change her mind mid-sex from asking the male NPC to pull out to telling
+# him to come inside her, in which case both flags will be true. Scene writers will have to check for these cases,
+# if they want to refer to these results.
+
+textFileName: spyOnSex.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: NIGHTWEAR
+ femaleNpcs:
+  - id: f
+    outfit: NIGHTWEAR
+ location:
+  usePlayerHome: true
+
+intro:
+ textId: introText
+ effects:
+  - effect: $f.haveSexWith($m)
+ useDefaultActions: true
+
+actions:
+ - id: keepWatching
+   shortDesc: Keep watching
+   longDesc: Watch them having sex.
+   textId: keepWatchingText
+   effects:
+    - effect: $scene.addFlag("SPY_SEX_CAUGHT")
+      condition: $caught
+   allowNpcActions: true
+   useDefaultActions: (!$caught)
+   followUpActions:
+    finishBeingCaught:
+
+ - id: touchYourself
+   shortDesc: Play with yourself
+   longDesc: What you're seeing is turning you on, you just can't help touching yourself.
+   textId: touchYourselfText
+   effects:
+    - effect: $scene.addFlag("SPY_SEX_CAUGHT")
+      condition: $caught
+   allowNpcActions: true
+   useDefaultActions: (!$caught)
+   followUpActions:
+    finishBeingCaught:
+
+ - id: comeYourself
+   shortDesc: Have an orgasm
+   longDesc: This is all too much, you are going to come!
+   textId: comeYourselfText
+   effects:
+    - effect: $w.haveOrgasmNoNpc()
+    - effect: $scene.addFlag("SPY_SEX_CAUGHT")
+      condition: $caught
+   useDefaultActions: (!$caught)
+   followUpActions:
+    finishBeingCaught:
+
+ - id: watchHerCome
+   shortDesc: Watch her come
+   longDesc: watchHerComeLd
+   textId: watchHerComeText
+   effects:
+    - effect: $f.haveOrgasm()
+    - effect: $f.addEnjoyMedium()
+    - effect: $m.addArousalMedium()
+   useDefaultActions: true
+
+ - id: watchHimCome
+   shortDesc: Watch him come
+   longDesc: He is about to get off.
+   textId: watchHimComeText
+   effects:
+    - effect: $m.haveOrgasm()
+    - effect: $m.addEnjoyMedium()
+   followUpActions:
+    finishSpyingOnSex:
+
+ - id: watchThemCome
+   shortDesc: Watch them come
+   longDesc: Watch them enjoy their climax together.
+   textId: watchThemComeText
+   effects:
+    - effect: $f.haveOrgasm()
+    - effect: $m.haveOrgasm()
+    - effect: $f.addEnjoyMedium()
+    - effect: $m.addEnjoyMedium()
+    - effect: $scene.addFlag("SPY_SEX_WOMAN_HAD_ORGASM")
+    - effect: $scene.addFlag("SPY_SEX_CAME_TOGETHER")
+   followUpActions:
+    finishSpyingOnSex:
+
+ - id: finishStopWatching
+   shortDesc: Stop watching
+   longDesc: You have seen enough.
+   textId: finishText
+   returnToParent: true
+
+ - id: finishBeingCaught
+   shortDesc: They noticed you!
+   longDesc: Oh dear, looks like you weren't careful enough.
+   textId: finishText
+   effects:
+    - effect: $scene.addFlag("SPY_SEX_CAUGHT") #It was not always being set otherwise.
+   returnToParent: true
+
+ - id: finishSpyingOnSex
+   shortDesc: Finish
+   longDesc: Looks like they are done.
+   textId: finishText
+   returnToParent: true
+
+defaultActions:
+ touchYourself: $scene.hasFlag("SPY_SEX_ALLOW_TOUCHING_YOURSELF") && (!$m.arousalOrgasm) && (!$f.arousalOrgasm) && (!$w.arousalOrgasm)
+ keepWatching: (!$m.arousalOrgasm) && (!$f.arousalOrgasm) && (!$w.arousalOrgasm)
+ finishStopWatching: $scene.hasFlag("SPY_SEX_ALLOW_STOP_WATCHING") && (!$m.arousalOrgasm) && (!$f.arousalOrgasm) && (!$w.arousalOrgasm)
+ watchThemCome: $m.arousalOrgasm && $f.arousalOrgasm && (!$w.arousalOrgasm)
+ watchHimCome: $m.arousalOrgasm && (!$f.arousalOrgasm) && (!$w.arousalOrgasm)
+ watchHerCome: (!$m.arousalOrgasm) && $f.arousalOrgasm && (!$w.arousalOrgasm)
+ comeYourself: $w.arousalOrgasm
+
+femaleNpcActions:
+ - id: wrapLegs
+   textId: wrapLegsText
+   effects:
+    - effect: $scene.addFlag("SPY_SEX_LEGS_WRAPPED")
+    - effect: $scene.addFlag("SPY_SEX_LEGS_MOVED")
+   condition: (!$scene.hasFlag("SPY_SEX_LEGS_MOVED"))
+   weightMultiplierConditions:
+    - ($f.hasTrait("WANTS_KIDS") || $f.hasTrait("HATES_CONDOMS")) && (!$m.wearingCondom)
+    - $f.arousalClose
+   weightDivisorConditions:
+    - ($f.hasTrait("WANTS_KIDS") || $f.hasTrait("HATES_CONDOMS")) && $m.wearingCondom
+    - $f.hasTrait("DOESNT_WANT_KIDS") && (!$m.wearingCondom)
+
+ - id: askComeInside
+   textId: askComeInsideText
+   effects:
+    - effect: $scene.addFlag("SPY_SEX_ASKED_COME_INSIDE")
+   condition: $f.arousalEnjoy && (!$scene.hasFlag("SPY_SEX_ASKED_COME_INSIDE")) && (!$m.wearingCondom)
+   weightMultiplierConditions:
+    - $f.hasTrait("WANTS_KIDS") || $f.hasTrait("HATES_CONDOMS")
+    - $f.arousalClose && (!$f.hasTrait("DOESNT_WANT_KIDS"))
+    - $f.drunk && $f.arousalClose && ($f.hasTrait("WANTS_KIDS") || $f.hasTrait("HATES_CONDOMS"))
+    - $f.veryDrunk && ($f.hasTrait("WANTS_KIDS") || $f.hasTrait("HATES_CONDOMS"))
+   weightDivisorConditions:
+    - $f.hasTrait("DOESNT_WANT_KIDS") && (!$f.hasTrait("HATES_CONDOMS"))
+    - $f.hasTrait("DOESNT_WANT_KIDS")
+    - $f.hasTrait("DOESNT_WANT_KIDS")
+    - $scene.hasFlag("SPY_SEX_ASKED_PULL_OUT")
+    - $scene.hasFlag("SPY_SEX_ASKED_PULL_OUT")
+    - $scene.hasFlag("SPY_SEX_ASKED_PULL_OUT")
+    - (!$scene.hasFlag("SPY_SEX_WOMAN_HAD_ORGASM"))
+    - (!$scene.hasFlag("SPY_SEX_WOMAN_HAD_ORGASM"))
+
+ - id: askPullOut
+   textId: askPullOutText
+   effects:
+    - effect: $scene.addFlag("SPY_SEX_ASKED_PULL_OUT")
+   condition: (!$scene.hasFlag("SPY_SEX_ASKED_PULL_OUT")) && (!$scene.hasFlag("SPY_SEX_ASKED_COME_INSIDE")) && (!$m.wearingCondom)
+   weightMultiplierConditions:
+    - $f.hasTrait("DOESNT_WANT_KIDS") && (!$f.pregnant)
+    - (!$f.arousalClose)
+   weightDivisorConditions:
+    - $f.hasTrait("WANTS_KIDS") || $f.hasTrait("HATES_CONDOMS")
+    - $f.charType == "INNOCENT"
+    - $f.arousalEnjoy
+    - $f.arousalClose
+    - $f.veryDrunk
+    - $f.maxDrunk
+    - $f.pregnant
+
+ - id: runHandsOverBack
+   textId: runHandsOverBackText
+   effects:
+    - effect: $m.addArousalTiny()
+   condition: true
+   weightMultiplierConditions:
+    - true
+
+ - id: kissingChest
+   textId: kissingChestText
+   effects:
+    - effect: $f.addArousalTiny()
+    - effect: $m.addArousalTiny()
+   condition: true
+
+ - id: talkSexilyWoman
+   textId: talkSexilyWomanText
+   effects:
+    - effect: $m.addArousalTiny()
+   condition: true
+   weightMultiplierConditions:
+    - $f.charType == "PARTY_GIRL"
+    - $f.arousalClose
+    - true
+   weightDivisorConditions:
+    - $f.charType == "INNOCENT"
+
+ - id: movingHips
+   textId: movingHipsText
+   effects:
+    - effect: $f.addArousalSmall()
+    - effect: $m.addArousalTiny()
+   condition: true
+   weightMultiplierConditions:
+    - true
+
+ - id: pullGuyIntoHer
+   textId: pullGuyIntoHerText
+   effects:
+    - effect: $f.addArousalSmall()
+    - effect: $m.addArousalTiny()
+   condition: $scene.hasFlag("SPY_SEX_LEGS_WRAPPED")
+   weightMultiplierConditions:
+    - $tempo == "SLOW" && (!$fLovesTempo)
+    - $tempo == "SLOW" && (!$fLovesTempo)
+    - $tempo == "SLOW" && (!$fLovesTempo)
+    - $tempo == "SLOW" && (!$fLovesTempo)
+   weightDivisorConditions:
+    - $fLovesTempo

@@ -1,0 +1,827 @@
+# Scene written by lovelesspoison
+# Link to the cooking vm file
+textFileName: cookingClass.vm
+
+# Cooking scene description
+sceneDescriptionTextId: sceneDescriptionText
+
+# Testing Info. Used to setup the scene for testing in-game. To test a scene make sure to enable custom scene testing in the game options.
+# Then choosen the appropriate action on the weekday evening timeslot in any game.
+testingInfo:
+# Player outfit type. Must be a valid outfit type.
+ playerOutfit: CASUAL
+ # Male NPCs.
+ maleNpcs:
+  - id: cookingInstructor
+    outfit: CASUAL
+  - id: m1
+    outfit: CASUAL
+  - id: m2
+    outfit: CASUAL
+  - id: m3
+    outfit: CASUAL
+ # Female NPCs.
+ femaleNpcs:
+  - id: fem
+    outfit: CASUAL
+# Location info.
+ location: 
+  wall: tiled kitchen wall
+  floor: tiled kitchen floor
+  hasBed: false
+  isOutside: false
+
+# Intro section
+intro:
+ textId: cookeryClassIntroText
+ effects:
+  - effect: $scene.setActiveMaleNpc($cookingInstructor)
+  # No check to see if the PC has enough money. As a weekday-evening activity this will trigger immediately after her work processes and she 
+  # gets paid, so it's very unlikely she wouldn't be able to afford it. At the time of writing, I'm not even sure it's possible at all. 
+  # Writing an alternative path for a completely broke PC therefore doesn't seem worthwhile - SO
+  - effect: $w.changeMoney(-10)
+ followUpActions:
+ # These two actions are for the initial discovery event:
+  goHomeIntro: "!$gd.hasGameFlag('COMPLETED_COOKING_INTRO')"
+  talkInstructorIntro: "!$gd.hasGameFlag('COMPLETED_COOKING_INTRO')"
+  # These actions are for repeat cooker class events:
+  goToClass: "$gd.hasGameFlag('COMPLETED_COOKING_INTRO')"
+
+# Called when the scene exits. Increases skill by 0/2/3/4 depending on the player's choices with +3 being the default.
+# learntWell, learntBadly, and failedToLearn are boolean velocity variables that are only in-scope for this scene.
+sceneEndProcessing: '#if($learntWell)$w.skillIncrease("COOKING",4)#elseif($learntBadly)$w.skillIncrease("COOKING",2)#elseif(!$failedToLearn)$w.skillIncrease("COOKING",3)#end'
+  
+# Actions:
+actions:
+ - id: goHomeIntro
+   shortDesc: Head home
+   longDesc: Recipe in hand, you figure it's time to head home for the night. You set a reminder for yourself to get the ingredients you need before the next class.
+   textId: goHomeIntroText
+   effects: 
+    - effect: $gd.setGameFlag("COMPLETED_COOKING_INTRO") 
+    - effect: '#set($failedToLearn = true)'
+   finishScene: true
+   
+   # Staying behind to talk to instructor
+ - id: talkInstructorIntro 
+   shortDesc: Stay to talk with the instructor
+   longDesc: Getting to know the guy teaching the class a little better certainly couldn't hurt.
+   textId: talkInstructorIntroText
+   effects: 
+    - effect: $gd.setGameFlag("COMPLETED_COOKING_INTRO")
+      condition: true
+    # No skill gain on the first visit.
+    - effect: '#set($failedToLearn = true)'
+    - effect: $cookingInstructor.increaseKnowledge(1,10)
+   followUpActions:
+    talkInstructorFriendly:
+    talkInstructorFlirty: $w.hasTrait("FLIRTY")
+    talkInstructorSexual: $w.hasTrait("SULTRY")
+    talkInstructorRude: $w.hasTrait("BITCHY")
+
+   # Friendly towards instructor
+ - id: talkInstructorFriendly 
+   shortDesc: Act friendly
+   longDesc: Behave in a friendly, non-sexual manner.
+   textId: talkInstructorFriendlyText
+   effects:
+    - effect: $cookingInstructor.addNpcLikingMedium()
+   followUpActions:
+    talkInstructorFriendlyEnd:
+
+ - id: talkInstructorFriendlyEnd
+   shortDesc: Head home
+   longDesc: Eventually the conversation comes to an end, and it's time for you to leave.
+   textId: talkInstructorFriendlyEndText
+   finishScene: true
+   
+   # Flirty towards instructor
+ - id: talkInstructorFlirty 
+   shortDesc: Act flirty
+   longDesc: Behave in a way that is flirty and enticing.
+   textId: talkInstructorFlirtyText
+   effects: 
+    - effect: $w.addArousalTiny()
+    - effect: $cookingInstructor.addArousalTiny()
+    - effect: $cookingInstructor.reduceNpcLikingTiny()
+      condition: "!$cookingInstructor.isNpcAttractionOk()"
+    - effect: $cookingInstructor.addNpcLikingMedium() $cookingInstructor.addNpcLoveSmall()
+      condition: $cookingInstructor.isNpcAttractionOk()
+   followUpActions:
+    talkInstructorFlirtyExhangeNumbers: "$cookingInstructor.isNpcAttractionOk() && !$cookingInstructor.isContactable()"
+#Instructor will only go home with player if they are not romantic or have at least some affection towards the player:
+    talkInstructorFlirtyInviteHome: "$cookingInstructor.getPersonality()!=\"ROMANTIC\" || $cookingInstructor.isNpcLoveSome()"
+    talkInstructorFlirtyInviteHomeDeclined: "$cookingInstructor.getPersonality()==\"ROMANTIC\" && !$cookingInstructor.isNpcLoveSome()"
+    talkInstructorFlirtyEnd:
+
+ - id: talkInstructorFlirtyExhangeNumbers
+   shortDesc: Exchange numbers
+   longDesc: Give him your phone number and receive his in exchange.
+   textId: talkInstructorFlirtyExhangeNumbersText
+   effects: 
+    - effect: $cookingInstructor.setContactable()
+      condition: true
+   followUpActions:
+    talkInstructorFlirtyInviteHome: $cookingInstructor.isNpcAttractionOk()
+    talkInstructorFlirtyInviteHomeDeclined: "!$cookingInstructor.isNpcAttractionOk()"
+    talkInstructorFlirtyEnd:
+    
+ - id: talkInstructorFlirtyInviteHome
+   shortDesc: Invite him home
+   longDesc: Ask if he wants to go back to your place where things can get a bit more personal.
+   textId: talkInstructorFlirtyInviteHomeText
+   sceneTransition:
+    condition: true
+    type: HOME_DATE
+    maleNpcs:
+     - id: date 
+       npc: cookingInstructor 
+    
+ - id: talkInstructorFlirtyInviteHomeDeclined
+   shortDesc: Invite him home 
+   longDesc: Ask if he wants to go back to your place where things can get a bit more personal.
+   textId: talkInstructorFlirtyInviteHomeDeclinedText
+   finishScene: true
+   
+ - id: talkInstructorFlirtyEnd
+   shortDesc: Leave 
+   longDesc: End the conversation and go home for the night.
+   textId: talkInstructorFlirtyEndText
+   finishScene: true
+   
+   # Sexual towards instructor - Uses actions from flirty
+ - id: talkInstructorSexual 
+   shortDesc: Act sexual
+   longDesc: Act extremely sexually, licking your lips, tossing out overt sexual innuendos and using clearly enticing body language.
+   textId: talkInstructorSexualText
+   effects: 
+    - effect: $w.addArousalTiny()
+    - effect: $cookingInstructor.addArousalTiny()
+    - effect: $cookingInstructor.reduceNpcLoveSmall()
+      condition: $cookingInstructor.hasTrait("LIKES_CUTE")
+    - effect: $cookingInstructor.addNpcLoveSmall() $cookingInstructor.addNpcLikingTiny()
+      condition: $cookingInstructor.hasTrait("LIKES_SEXY")
+   followUpActions:
+    talkInstructorSexualExhangeNumbers: '!$cookingInstructor.isContactable()'
+    talkInstructorSexualInviteHome: $cookingInstructor.isNpcAttractionOk()
+    talkInstructorSexualInviteHomeDeclined: "!$cookingInstructor.isNpcAttractionOk()"
+    talkInstructorSexualEnd:
+
+ - id: talkInstructorSexualExhangeNumbers
+   shortDesc: Exchange numbers
+   longDesc: Give him your phone number and receive his in exchange.
+   textId: talkInstructorSexualExhangeNumbersText
+   effects: 
+    - effect: $cookingInstructor.setContactable()
+      condition: true
+   followUpActions:
+    talkInstructorSexualInviteHome: $cookingInstructor.isNpcAttractionOk()
+    talkInstructorSexualInviteHomeDeclined: "!$cookingInstructor.isNpcAttractionOk()"
+    talkInstructorSexualEnd:
+    
+ - id: talkInstructorSexualInviteHome
+   shortDesc: Invite him home
+   longDesc: Ask if he wants to go back to your place where things can get a bit more personal.
+   textId: talkInstructorSexualInviteHomeText
+   sceneTransition:
+    condition: true
+    type: HOME_DATE
+    maleNpcs:
+     - id: date 
+       npc: cookingInstructor 
+    
+ - id: talkInstructorSexualInviteHomeDeclined
+   shortDesc: Invite him home 
+   longDesc: Ask if he wants to go back to your place where things can get a bit more personal.
+   textId: talkInstructorSexualInviteHomeDeclinedText
+   finishScene: true
+   
+ - id: talkInstructorSexualEnd
+   shortDesc: Leave 
+   longDesc: End the conversation and go home for the night.
+   textId: talkInstructorSexualEndText
+   finishScene: true
+    
+   # Rude towards instructor
+ - id: talkInstructorRude 
+   shortDesc: Act rude
+   longDesc: Act in a way that is condescending and demeaning, letting him know how much better than him you think you are.
+   textId: talkInstructorRudeText
+   effects:
+    - effect: $cookingInstructor.reduceNpcLikingMedium()
+    - effect: $cookingInstructor.addNpcLoveSmall()
+      condition: $cookingInstructor.hasTrait("DOORMAT")
+   finishScene: true
+   
+   # Repeat cooking scene
+ - id: goToClass 
+   shortDesc: Go to class
+   longDesc: goToClassLongDescText
+   textId: goToClassText
+   followUpActions:
+    selectMaleStudent1:
+    selectMaleStudent2:
+    selectMaleStudent3:
+    selectFemaleStudent:
+    selectNobody:
+    
+   # Selection actions
+ - id: selectMaleStudent1
+   shortDesc: selectName1
+   longDesc: selectDescription1
+   textId: selectMaleStudentText
+   effects: 
+    - effect: $scene.setActiveMaleNpc($m1)
+      condition: true
+   followUpActions:
+    offerToWorkWithMan: 
+    
+ - id: selectMaleStudent2
+   shortDesc: selectName2
+   longDesc: selectDescription2
+   textId: selectMaleStudentText
+   effects: 
+    - effect: $scene.setActiveMaleNpc($m2)
+      condition: true
+   followUpActions:
+    offerToWorkWithMan:
+    
+ - id: selectMaleStudent3
+   shortDesc: selectName3
+   longDesc: selectDescription3
+   textId: selectMaleStudentText
+   effects: 
+    - effect: $scene.setActiveMaleNpc($m3)
+      condition: true
+   followUpActions:
+    offerToWorkWithMan:
+
+ - id: offerToWorkWithMan
+   shortDesc: Speak to him
+   longDesc: Go talk to your chosen partner
+   textId: offerToWorkWithManText
+   followUpActions:
+    seeWhosLeft: $scene.hasFlag("COOKING_CLASS_REJECTED")
+    startCookingWithMan: '!$scene.hasFlag("COOKING_CLASS_REJECTED")'
+
+ - id: seeWhosLeft
+   shortDesc: See who's left
+   longDesc: Having been rejected by your first choice, you'll have to just cook with whoever's left without a partner.
+   textId: seeWhosLeftText
+   followUpActions:
+    startCookingWithMan: "!$cookingWithWoman"
+    startCookingWithWoman: $cookingWithWoman
+
+ - id: startCookingWithMan
+   shortDesc: Start cooking!
+   longDesc: You have a partner, let's get cooking!
+   textId: startCookingWithManText
+   effects:
+    - effect: $activeMaleNpc.increaseKnowledge(2,25)
+   followUpActions:
+    # Sleazy path, controlled by $inappropriatePartner
+    maleShowOff: "$inappropriatePartner && ($w.hasTrait(\"FLIRTY\") || $w.hasTrait(\"SULTRY\")) && !$w.hasTrait(\"REFINED\")"
+    maleAskToStop: $inappropriatePartner
+    maleSwitchPartners: $inappropriatePartner
+    maleEndure: $inappropriatePartner
+    maleScold: $inappropriatePartner && $w.hasTrait("BITCHY")
+    ## "Spark" path: for mutual attraction
+    sparkConfident: "$spark && !$w.hasTrait(\"LOW_SELF_ESTEEM\") && !$w.hasTrait(\"SHY\")"
+    sparkFlirt: $spark && $w.hasTrait("FLIRTY")
+    ## Shy's special action is her variant of "flustered" so it's blocked for her. there isn't a "confident" trait so this is an allowable choice for all other PCs.
+    sparkFlustered: "$spark && !$w.hasTrait(\"SHY\")"
+    sparkShy: $spark && $w.hasTrait("SHY")
+    sparkIgnore: $spark
+    ## Normal cooking, for when none of the special situations applies: this has compatibility and personality-clash paths that are handled in the followup
+    cookWithMan: $normalCooking
+ 
+ - id: sparkConfident
+   shortDesc: Smile at him
+   longDesc: An unexpected thrill, but you can handle it with confidence and aplomb.
+   textId: sparkConfidentText
+   followUpActions:
+    finishCookingWithMan:
+
+ - id: sparkFlirt
+   shortDesc: Flirt with him
+   longDesc: A great chance for some flirty fun!
+   textId: sparkFlirtText
+   followUpActions:
+    finishCookingWithMan:
+
+ - id: sparkFlustered
+   shortDesc: Be flustered
+   longDesc: What's happening!
+   textId: sparkFlusteredText
+   followUpActions:
+    finishCookingWithMan:
+    
+ - id: sparkIgnore
+   shortDesc: It's nothing!
+   longDesc: What's that? A sudden spark of undeniable attraction? It can't be, because you can deny it. You will deny it.
+   textId: sparkIgnoreText
+   followUpActions:
+    finishCookingWithMan:
+
+ - id: sparkShy
+   shortDesc: Blush and look away
+   longDesc: What... what's going on here?
+   textId: sparkShyText
+   followUpActions:
+    finishCookingAlone: $cookingAlone
+    finishCookingWithMan: "!$cookingAlone"
+    
+ - id: cookWithMan
+   shortDesc: Cook together
+   longDesc: Cook together and enjoy the class
+   textId: cookWithManText
+   followUpActions:
+    finishCookingWithMan:
+
+ # Standard end to most male-cooking paths.
+ - id: finishCookingWithMan
+   shortDesc: Finish cooking
+   longDesc: Finish the lesson
+   textId: finishCookingWithManText
+   followUpActions:
+    cookingMaleExchangeNumbers: "!$activeMaleNpc.isContactable()"
+    cookingMaleGoHome:
+    cookingMaleInviteHome: '!$w.hasTrait("SHY") || $activeMaleNpc.partner'
+   
+ - id: finishCookingAlone
+   shortDesc: Finish cooking
+   longDesc: Finish the lesson
+   textId: finishCookingAloneText
+   followUpActions:
+   ## The text for this action doesn't actually mention the man, so it's ok to re-use it for the 'alone' path.
+    cookingMaleGoHome:
+    
+   # Alternative end to male-cooking paths where the cooking gets messed up. Same followups as above but different text and the instructor is a bit annoyed at the PC.
+ - id: bannedFromCookingWithMan
+   shortDesc: Get ready to leave
+   longDesc: Well, that's it for the class. Time to be going.
+   textId: bannedFromCookingWithManText
+   effects:
+    - effect: $cookingInstructor.reduceNpcLikingSmall()
+   followUpActions:
+    cookingMaleExchangeNumbers: "!$activeMaleNpc.isContactable()"
+    cookingMaleGoHome:
+    cookingMaleInviteHome: '!$w.hasTrait("SHY") || $activeMaleNpc.partner'
+    
+ - id: selectFemaleStudent
+   shortDesc: selectNameFem
+   longDesc: selectDescriptionFem
+   textId: selectFemaleStudentText
+   followUpActions:
+    startCookingWithWoman:
+   
+ - id: selectNobody
+   shortDesc: Wait
+   longDesc: Why should you have to pick? Let them come to you.
+   textId: selectNobodyText
+   followUpActions:
+    startCookingWithMan: "!$cookingWithWoman"
+    startCookingWithWoman: $cookingWithWoman
+   
+   # Male scene actions
+ - id: maleShowOff 
+   shortDesc: Showing off
+   longDesc: If he wants to look, why not help him? You make some seductive poses and bend over enticingly for his enjoyment.
+   textId: maleShowOffText
+   effects: 
+    - effect: $w.addArousalTiny()
+    - effect: $activeMaleNpc.addArousalTiny()
+   followUpActions:
+    maleShowOffMaleLeads:
+    maleShowOffPlayerLeads: $w.testWillHard(0)
+    maleShowOffStop: $w.testWillNormal(0)
+   
+   # Letting the NPC lead
+ - id: maleShowOffMaleLeads
+   shortDesc: Let him do what he wants
+   longDesc: Let your partner decide what to do next.
+   textId: maleShowOffMaleLeadsText
+   effects: 
+    - effect: $w.addArousalSmall()
+    - effect: $activeMaleNpc.addArousalSmall()
+   followUpActions:
+    maleShowOffMaleLeadsBackToWork:
+    maleShowOffMaleLeadsKeepGoing:
+   
+ - id: maleShowOffMaleLeadsBackToWork
+   shortDesc: Get back to work
+   longDesc: Decide to take your instructor's advice and disentangle from your partner.
+   textId: maleShowOffMaleLeadsBackToWorkText
+   followUpActions:
+    finishCookingWithMan:
+   
+ - id: maleShowOffMaleLeadsKeepGoing
+   shortDesc: Keep going
+   longDesc: showOffKeepGoingLd
+   textId: maleShowOffMaleLeadsKeepGoingText
+   effects:
+    - effect: '#set($learntBadly = true)'
+    - effect: $scene.addFlag("COOKING_CLASS_HAD_FUN") 
+    - effect: $w.addArousalSmall()
+    - effect: $activeMaleNpc.addArousalSmall()
+   followUpActions:
+    bannedFromCookingWithMan:
+   
+   # The player leads
+ - id: maleShowOffPlayerLeads
+   shortDesc: Take charge
+   longDesc: Make him follow your lead.
+   textId: maleShowOffPlayerLeadsText
+   effects: 
+    - effect: $w.addArousalSmall()
+    - effect: $activeMaleNpc.addArousalSmall()
+   followUpActions:
+    maleShowOffPlayerLeadsBackToWork:
+    maleShowOffPlayerLeadsKeepGoing:
+   
+ - id: maleShowOffPlayerLeadsBackToWork
+   shortDesc: Get back to work
+   longDesc: Decide to take your instructor's advice and disentangle from your partner.
+   textId: maleShowOffPlayerLeadsBackToWorkText
+   followUpActions:
+    finishCookingWithMan:
+   
+ - id: maleShowOffPlayerLeadsKeepGoing
+   shortDesc: Keep going
+   longDesc: showOffKeepGoingLd
+   textId: maleShowOffPlayerLeadsKeepGoingText
+   effects:
+    - effect: '#set($learntBadly = true)'
+    - effect: $scene.addFlag("COOKING_CLASS_HAD_FUN") 
+    - effect: $w.addArousalSmall()
+    - effect: $activeMaleNpc.addArousalSmall()
+   followUpActions:
+    bannedFromCookingWithMan:
+   
+   # Attempt to put a stop to it
+ - id: maleShowOffStop
+   shortDesc: Decide you've had enough
+   longDesc: Change your mind and get back to cooking. Or at least try to.
+   textId: maleShowOffStopText
+   followUpActions:
+    maleShowOffStopMaleContinuesLetHimContinue: $maleShowOffDoesntStop
+    maleShowOffStopMaleContinuesFirmStop: $maleShowOffDoesntStop && $w.testWillNormal(0)
+    finishCookingWithMan: "!$maleShowOffDoesntStop"
+
+ - id: maleShowOffStopMaleContinuesLetHimContinue
+   shortDesc: Let him do what he wants
+   longDesc: You don't have the willpower to stop him, so you let him continue exploring your body.
+   textId: maleShowOffMaleLeadsKeepGoingText
+   effects:
+    - effect: '#set($learntBadly = true)'
+    - effect: $scene.addFlag("COOKING_CLASS_HAD_FUN") 
+    - effect: $w.addArousalSmall()
+    - effect: $activeMaleNpc.addArousalSmall()
+   followUpActions:
+    bannedFromCookingWithMan:
+
+ - id: maleShowOffStopMaleContinuesFirmStop
+   shortDesc: Firmly tell him to stop
+   longDesc: Let him know as authoritatively as possible that you're putting an end to this.
+   textId: maleShowOffStopMaleContinuesFirmStopText
+   followUpActions:
+    finishCookingWithMan:
+    
+ - id: maleAskToStop 
+   shortDesc: Asking him to stop
+   longDesc: Politely let him know he's making you uncomfortable and you want him to stop.
+   textId: maleAskToStopText
+   followUpActions:
+    maleShowOffStopMaleContinuesLetHimContinue: $manDoesntStop
+    maleShowOffStopMaleContinuesFirmStop: $manDoesntStop && $w.testWillNormal(0)
+    finishCookingWithMan:
+   
+ - id: maleSwitchPartners 
+   shortDesc: Suggesting switching partners
+   longDesc: You should see if someone else is available to work with. Someone who won't be this obnoxious.
+   textId: maleSwitchPartnersText
+   followUpActions:
+    maleSwitchPartnersSuckUp:
+    maleSwitchPartnersLeave:
+   
+ - id: maleSwitchPartnersSuckUp
+   shortDesc: Suck it up
+   longDesc: Decide to stick with it and stay through the lesson.
+   textId: maleSwitchPartnersSuckUpText
+   finishScene: true
+   
+ - id: maleSwitchPartnersLeave
+   shortDesc: Leave
+   longDesc: Walk out of class and end your part of the lesson early.
+   textId: maleSwitchPartnersLeaveText
+   effects:
+    - effect: '#set($failedToLearn = true)'
+   finishScene: true
+   
+ - id: maleEndure 
+   shortDesc: Letting it happen
+   longDesc: Just let him keep looking. You don't want to encourage him, but you aren't going to stop him either.
+   textId: maleEndureText
+   followUpActions:
+    maleEndureLeaveGoodbye:
+    maleEndureLeaveSilence:
+    maleEndureInviteHome: $w.hasTrait("LOW_SELF_ESTEEM")
+   
+ - id: maleEndureLeaveGoodbye
+   shortDesc: Tell your partner you'll see him next time
+   longDesc: Politely let your partner know your business with him is finished for the night.
+   textId: maleEndureLeaveGoodbyeText
+   finishScene: true
+   
+ - id: maleEndureLeaveSilence
+   shortDesc: Leave without saying anything
+   longDesc: Walk out without even bothering to acknowledge your partner.
+   textId: maleEndureLeaveSilenceText
+   finishScene: true
+   
+ - id: maleEndureInviteHome
+   shortDesc: Invite him back to your place
+   longDesc: Ask your partner if he wants to come with you back to your house. Sure he made you do all the work while being a creep, but that's his right, isn't it? You exist to be used by others and this is no different. If he wants to use you more, you might as well let him.
+   textId: maleEndureInviteHomeText
+   sceneTransition:
+    condition: true
+    type: HOME_DATE
+    maleNpcs:
+     - id: date 
+       npc: activeMaleNpc 
+    
+ - id: maleScold 
+   shortDesc: Tell him off
+   longDesc: Put an end to his behavior in the rudest way you can.
+   textId: maleScoldText
+   effects:
+    - effect: '#set($failedToLearn = true)'
+   finishScene: true
+   
+   # Exchange numbers: the actual change to isContactable happens in the vm for the path where he accepts.
+ - id: cookingMaleExchangeNumbers
+   shortDesc: Exchange numbers
+   longDesc: Give him your phone number and receive his in exchange.
+   textId: cookingMaleExchangeNumbersText
+   followUpActions:
+    cookingMaleGoHome:
+    cookingMaleInviteHome: '!$npcRefusedNumberSwap && !$w.hasTrait("SHY")'
+    
+   # Go home
+ - id: cookingMaleGoHome
+   shortDesc: Go home
+   longDesc: Leave the class for the week.
+   textId: cookingMaleGoHomeText
+   finishScene: true
+
+   # Invite home
+ - id: cookingMaleInviteHome
+   shortDesc: Invite him home
+   longDesc: Ask if your partner wants to go come with you back to your place.
+   textId: cookingMaleinviteHomeText
+   sceneTransition:
+    condition: true
+    type: HOME_DATE
+    maleNpcs:
+     - id: date 
+       npc: activeMaleNpc 
+   
+   
+   # Female actions
+ - id: startCookingWithWoman
+   shortDesc: Start cooking
+   longDesc: You have a partner, time to start cooking!
+   textId: startCookingWithWomanText
+   effects:
+    - effect: $fem.increaseKnowledge(2,25)
+   followUpActions:
+    femaleWatch:
+    femaleConverse:
+    femaleHelp: $w.hasTrait("NICE")
+    femaleTakeCharge: $w.hasTrait("BITCHY")
+    femaleSwitchPartners:
+    
+ - id: femaleWatch
+   shortDesc: Watch her do it
+   longDesc: See how she does it. It should be a great learning experience.
+   textId: femaleWatchText
+   followUpActions:
+    femaleWatchHelp: "$fem.getCharType()!=\"INNOCENT\""
+    femaleWatchContinueWatching: "$fem.getCharType()!=\"INNOCENT\""
+    femaleWatchHelpInnocent: $fem.getCharType()=="INNOCENT"
+    femaleWatchContinueWatchingInnocent: $fem.getCharType()=="INNOCENT"
+   
+ - id: femaleWatchHelp
+   shortDesc: Start helping
+   longDesc: You sympathize with her frustration and start doing your part.
+   textId: femaleWatchHelpText
+   effects:
+    - effect: $fem.addNpcLikingLarge() $fem.addWLikingLarge()
+   followUpActions:
+    femaleWatchGoodbye:
+    femaleWatchLeave:
+    femaleEndTalkInstructor:
+   
+ - id: femaleWatchContinueWatching
+   shortDesc: Keep watching
+   longDesc: Just keep watching. She seems like she can do it.
+   textId: femaleWatchContinueWatchingText
+   effects:
+    - effect: '#set($learntBadly = true)'
+    - effect: $fem.reduceNpcLikingTiny()
+   followUpActions:
+    femaleWatchExit:
+    femaleEndTalkInstructor:
+   
+ - id: femaleWatchHelpInnocent
+   shortDesc: Accept
+   longDesc: Do what she wants. She clearly just wants to get you involved.
+   textId: femaleWatchHelpInnocentText
+   effects:
+    - effect: $fem.addNpcLikingLarge() $fem.addWLikingVLarge()
+   followUpActions:
+    femaleWatchGoodbye:
+    femaleWatchLeave:
+    femaleEndTalkInstructor:
+   
+ - id: femaleWatchContinueWatchingInnocent
+   shortDesc: Refuse and keep watching
+   longDesc: Don't do what she wants. Your education is more important than her feelings.
+   textId: femaleWatchContinueWatchingInnocentText
+   effects:
+    - effect: '#set($learntBadly = true)'
+    - effect: $fem.reduceNpcLikingTiny()
+   followUpActions:
+    femaleWatchExit:
+    femaleEndTalkInstructor:
+   
+ - id: femaleWatchGoodbye
+   shortDesc: Say goodbye
+   longDesc: Bid your partner farewell for the week.
+   textId: femaleWatchGoodbyeText
+   finishScene: true
+   
+ - id: femaleWatchLeave
+   shortDesc: Leave without saying anything
+   longDesc: Walk out without talking to your partner.
+   textId: femaleWatchLeaveText
+   finishScene: true
+   
+ - id: femaleWatchExit
+   shortDesc: Leave
+   longDesc: Exit the class for the week.
+   textId: femaleWatchExitText
+   finishScene: true
+
+# Conversing
+ - id: femaleConverse 
+   shortDesc: Make conversation
+   longDesc: Pass friendly small talk between you while you work.
+   textId: femaleConverseText
+   # Making a big change to liking here because it can be slow to develop friendships with female NPCs.
+   effects:
+    - effect: $fem.addNpcLikingVLarge() $fem.addWLikingLarge()
+   followUpActions:
+    femaleConverseGoodbye:
+    femaleEndTalkInstructor:
+
+ - id: femaleConverseGoodbye
+   shortDesc: Say goodbye
+   longDesc: Bid your partner goodnight and tell her you hope to see her next class.
+   textId: femaleConverseGoodbyeText
+   finishScene: true
+   
+# Helping
+ - id: femaleHelp 
+   shortDesc: Offer help
+   longDesc: Let her know you're willing to do your part so she isn't doing everything.
+   textId: femaleHelpText
+   effects:
+    - effect: $fem.reduceWLikingSmall()
+      condition: $fem.behaviour =="COLD" || $fem.behaviour =="MEAN"
+    - effect: '#set($learntWell = true)'
+      condition: '$fem.behaviour !="COLD" && $fem.behaviour !="MEAN"'  
+    - effect: $fem.addNpcLikingVLarge() $fem.addWLikingLarge()
+      condition: "$fem.behaviour !=\"COLD\" && $fem.behaviour !=\"MEAN\""
+   followUpActions:
+    femaleHelpStandBack: $fem.behaviour =="COLD" || $fem.behaviour =="MEAN"
+    femaleHelpPushIn: $fem.behaviour =="COLD" || $fem.behaviour =="MEAN"
+    femaleWatchGoodbye: "$fem.behaviour !=\"COLD\" && $fem.behaviour !=\"MEAN\""
+    femaleWatchLeave: "$fem.behaviour !=\"COLD\" && $fem.behaviour !=\"MEAN\""
+    femaleEndTalkInstructor: "$fem.behaviour !=\"COLD\" && $fem.behaviour !=\"MEAN\""
+
+ - id: femaleHelpStandBack 
+   shortDesc: Stand back
+   longDesc: Just stay out of her way and watch.
+   textId: femaleHelpStandBackText
+   effects:
+    - effect: '#set($learntBadly = true)'
+   followUpActions:
+    femaleHelpLeave:
+    femaleEndTalkInstructor:
+   
+ - id: femaleHelpPushIn 
+   shortDesc: Push yourself in
+   longDesc: Ignore her and start working anyway.
+   textId: femaleHelpPushInText
+   effects:
+    - effect: $fem.reduceNpcLikingSmall()
+   followUpActions:
+    femaleHelpLeave:
+    femaleEndTalkInstructor:
+
+ - id: femaleHelpLeave
+   shortDesc: Leave
+   longDesc: Leave class for the week.
+   textId: femaleHelpLeaveText
+   finishScene: true
+   
+# Taking charge
+ - id: femaleTakeCharge 
+   shortDesc: Try to take charge
+   longDesc: Hands on experience is the best way to learn and she'd just get in your way. It's better if you do it all yourself.
+   textId: femaleTakeChargeText
+   effects:
+    - effect: $fem.reduceNpcLikingSmall()
+   followUpActions:
+    femaleHelpLeave:
+    femaleEndTalkInstructor:
+   
+ - id: femaleTakeChargeLeave 
+   shortDesc: Leave
+   longDesc: Leave the class for the week.
+   textId: femaleTakeChargeLeaveText
+   finishScene: true
+   
+# Wanting to switch
+ - id: femaleSwitchPartners 
+   shortDesc: Ask to switch partners
+   longDesc: You've changed your mind about wanting to work with her. Maybe there's someone else available.
+   textId: femaleSwitchPartnersText
+   followUpActions:
+    femaleSwitchPartnersReturnToStation:
+    femaleSwitchPartnersReturnToStationRefuse:
+   
+ - id: femaleSwitchPartnersReturnToStation
+   shortDesc: Go back to your station
+   longDesc: Given your options, you've decided it's best to keep working with her.
+   textId: femaleSwitchPartnersReturnToStationText
+   followUpActions:
+    femaleSwitchPartnersReturnToStationApologize:
+    femaleSwitchPartnersReturnToStationKeepWorking:
+   
+ - id: femaleSwitchPartnersReturnToStationRefuse
+   shortDesc: Leave
+   longDesc: Leave class for the week.
+   textId: femaleSwitchPartnersReturnToStationRefuseText
+   effects:
+    - effect: '#set($failedToLearn = true)'
+   finishScene: true
+   
+ - id: femaleSwitchPartnersReturnToStationApologize 
+   shortDesc: Talk to her
+   longDesc: Apologize for trying to trade her off.
+   textId: femaleSwitchPartnersReturnToStationApologizeText
+   effects:
+    - effect: '#set($learntBadly = true)'
+      condition: "$fem.behaviour !=\"COLD\" && $fem.behaviour !=\"MEAN\""
+   followUpActions:
+    femaleSwitchPartnersReturnToStationApologizeGoodbye: "$fem.behaviour !=\"COLD\" && $fem.behaviour !=\"MEAN\""
+    femaleSwitchPartnersLeave: "$fem.behaviour !=\"COLD\" && $fem.behaviour !=\"MEAN\""
+    femaleEndTalkInstructor:
+   
+ - id: femaleSwitchPartnersReturnToStationApologizeGoodbye
+   shortDesc: Say goodbye
+   longDesc: Bid your partner farewell.
+   textId: femaleSwitchPartnersReturnToStationApologizeGoodbyeText
+   finishScene: true
+   
+ - id: femaleSwitchPartnersReturnToStationKeepWorking
+   shortDesc: Just keep working
+   longDesc: Ignore her annoyance and just keep working.
+   effects:
+    - effect: $fem.reduceNpcLikingSmall()
+    - effect: '#set($learntBadly = true)'
+   textId: femaleSwitchPartnersReturnToStationKeepWorkingText
+   followUpActions:
+    femaleSwitchPartnersLeave:
+   
+ - id: femaleSwitchPartnersLeave
+   shortDesc: Leave
+   longDesc: Leave class for the week.
+   textId: femaleSwitchPartnersLeaveText
+   finishScene: true
+   
+   
+   
+ - id: femaleEndTalkInstructor 
+   shortDesc: Stay after to talk more with the instructor
+   longDesc: Spend more time with the person who teaches the class.
+   textId: femaleEndTalkInstructorText
+   effects:
+    - effect: $cookingInstructor.increaseKnowledge(1,10)
+   followUpActions:
+    talkInstructorFriendly:
+    talkInstructorFlirty: $w.hasTrait("FLIRTY")
+    talkInstructorSexual: $w.hasTrait("FLIRTY") || $w.hasTrait("SULTRY")
+    talkInstructorRude: $w.hasTrait("BITCHY")

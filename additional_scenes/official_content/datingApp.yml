@@ -1,0 +1,72 @@
+# Scene written by Secondarian
+#
+# Overview:
+# This is a scene in which the PC gets a match with a guy on her dating app and she can decide whether she wants to meet him or not.
+#
+# Key Paths:
+# - The PC chooses to meet the guy.
+# - The PC chooses not to meet the guy.
+# 
+# Scene access:
+# By random event, weekday evening timeslot.
+#
+# Preconditions:
+# PC must be single and have a the PC item.
+# 
+#
+# The scene takes 1 male NPC and no female ones:
+# "m" is the guy you matched with.
+# The scene takes place at the player home.
+# Depending on the choices there is a transition to the town date. 
+#
+# The NPC is a new one created for the event. If the PC chooses to meet him he will be added to the normal set of encounterable NPCs. Otherwise he's removed.
+
+textFileName: datingApp.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+ location:
+  usePlayerHome: true
+  
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($m) $scene.hideNpc($m)
+ followUpActions:
+  read:
+
+actions:
+ - id: read
+   shortDesc: Look at his profile
+   longDesc: You decide to look at his profile.
+   textId: read
+   followUpActions:
+    accept:
+    ignore:
+
+ - id: accept 
+   effects:
+    - effect: $scene.addFlag("SAVE_NPC")
+   shortDesc: Meet him
+   longDesc: You decide to meet the guy, let's see how it turns out!
+   textId: accept
+   sceneTransition:
+    condition: true
+    type: TOWN_DATE
+    transitionInfo:
+     getReadyForDate: true
+    maleNpcs:
+     - id: date
+       npc: m
+
+ - id: ignore 
+   shortDesc: Ignore
+   longDesc: You are not interested and decide to ignore him.
+   textId: ignore
+   finishScene: true
+   

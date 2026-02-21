@@ -1,0 +1,512 @@
+<introText>
+You go to the pub with $bf.getName() to grab a drink. It's a live music night, with a band playing some slower pop tunes in the corner with a few couples dancing along in front. You manage to find a spot at the bar off to the side where it's quiet enough that you can have a conversation with $bf.getName(). 
+
+You are having a fun time, but then you notice $ex.getName() is in the crowd. You don't think he's noticed you, and you want to keep it that way. You've slept with him before, and it would be awkward to have to introduce him to your boyfriend.
+
+You try looking the other way and hiding your face with your hands, hoping $ex.getName() won't see you. You are dismayed when you see him coming over.
+
+"$w.getName()!" $ex.getName() says. He comes over to the table and puts his arm around your shoulder. "Fancy meeting you here."
+
+#set($disgusted=false)##
+#set($flattered=false)##
+#set($angry=false)##
+#set($excited=false)##
+#set($vulnerable=false)##
+#set($longskirt=($w.getBottom().isSkirt() && $w.getBottom().getLength() == "ANKLES"))##
+#set($pants=!$w.getBottom().isSkirt())##
+#set($shortpants=(!$w.getBottom().isSkirt() && $w.getBottom().getLength() == "THIGH"))##
+##(he'll get the message and leave)
+##(act friendly)
+##(act cold)
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+</introText>
+
+<introduce>
+You try to act nonchalant.
+
+"It's great to see you, $ex.getName()! Have you met my *$bf.getRelationshipNpcDesc()* $bf.getName()?" You put extra emphasis on the $bf.getRelationshipNpcDesc(), hoping that $ex.getName() catches the hint to not cause you any trouble.
+
+$ex.getName() and $bf.getName() shake hands and exchange some pleasantries.
+
+"So, how do you know $w.getName()?" $bf.getName() asks $ex.getName().
+
+You quickly insert yourself into the conversation. "He's just a friend."
+</introduce>
+
+<smalltalk>
+The three of you have a polite conversation about the weather and the local sports team. $bf.getName() and you tell the story about how you met. $ex.getName() talks about his job.
+
+#if($ex.hasTrait("BOASTFUL"))##
+There is a long pause in the conversation. You stare at $ex.getName(), wondering if he'll leave.
+
+The band switches to a new song, a slowed down cover of a pop song. "I love this song!" $ex.getName() says. He reaches out his hand to you. "Want to dance?"
+
+You can't believe he would ask you to dance right in front of your $bf.getRelationshipNpcDesc(). 
+#else##
+You feel relief when $ex.getName() finally makes some excuses and leaves.
+#end##
+</smalltalk>
+
+<ghost>
+#You pretend that you don't know him
+</ghost>
+
+
+<greetJerk>
+You act nonchalant and greet $ex.getName(). 
+
+He points to $bf.getName(). "Is this the guy you're currently sleeping with?"
+
+"He's my $bf.getRelationshipNpcDesc()," you say.
+
+"How are you finding her in the sack?" he asks $bf.getName().
+
+You feel embarrassed.
+
+#if($bf.hasDoneSexualActivity("SEX") && ($bf.hasTrait("CRUDE") || $bf.hasTrait("SLEAZY") ))##
+"She's got a nice twat," $bf.getName() says.
+#else##
+"I'm more than satisfied," $bf.getName() says.
+#end##
+
+#set($sexComment = [])##
+#set($temp=$sexComment.add("I've fucked her a few times. I'm very familiar with that pussy."))##
+#if($ex.hasDoneSexualActivity("TOUCH_COCK"))##
+  #set($temp=$sexComment.add("I loved the feel of her hands on my cock."))#end##
+#if($ex.hasDoneSexualActivity("SEX") && $w.hasTrait("PASSIONATE_LOVER"))##
+  #set($temp=$sexComment.add("She's a wild one in bed. All that screaming and moaning."))#end##
+#if($ex.hasDoneSexualActivity("SEX") && $w.hasTrait("SNUG_PUSSY"))##
+  #set($temp=$sexComment.add("That pussy of hers is so tight, it's like fucking a virgin."))#end##
+#if($ex.hasDoneSexualActivity("ORAL"))##
+  #set($temp=$sexComment.add("Has she sucked you off yet? That mouth of hers is amazing."))#end##
+#if($ex.hasDoneSexualActivity("ANAL"))##
+  #set($temp=$sexComment.add("She's got a nice tight ass. It felt nice and tight around my cock when I had it."))#end##
+#if($w.getBreasts() == "LARGE" || $w.getBreasts() == "MEDIUM_LARGE")##
+  #set($temp=$sexComment.add("I loved those tits of hers. Those melons feel great in the hands."))#end##
+#if($ex.hasDoneSexualActivity("SEX") && $w.hasTrait("WET_PUSSY"))##
+  #set($temp=$sexComment.add("Her pussy was so slick and wet, I could just slide right in there."))#end##
+#if($ex.hasDoneSexualActivity("SEX"))##
+  #set($temp=$sexComment.add("I loved ramming my cock in her pussy."))#end##
+$ex.getName() laughs. "She's a good lay. $scene.pickFromList($sexComment)"
+
+Oh, no. You worry about what $bf.getName() is going to think of you.
+##Get angry
+</greetJerk>
+
+<angryJerk>
+You get angry and demand that $ex.getName() leave. He goes away and doesn't bother you again.
+
+#if($w.hasTrait("SULTRY"))
+$bf.getName() seems a little confused for a moment, but he soon recovers his composure. He doesn't ask about $ex.name, but he can hardly have imagined his overtly-sexual $bf.relationshipWDesc was some chaste little innocent.
+#else
+$bf.getName() seems confused and eyes you strangely for rest of the night, as if he doesn't really know you, but he doesn't ask about $ex.getName().
+#end
+</angryJerk>
+
+<bfangry>
+$bf.getName() gets angry and tells him to leave. $ex.getName() goes away and doesn't bother you again, but $bf.getName() is sullen and more quiet than normal for the rest of the night. $bf.getName() doesn't want to talk about it.
+</bfangry>
+
+<response>
+#if($bf.hasTrait("DOORMAT"))##
+$bf.getName() goes quiet and simply nods in response. $ex.getName() takes that as a cue to continue. He describes the intimate details of one of your times together. $bf.getName() listens quietly.
+#elseif($bf.hasTrait("LIKES_TO_SHARE"))##
+$bf.getName() is very interested. He asks $ex.getName() for more details, and $ex.getName() eagerly describes every intimate aspect of one of your times together. $bf.getName() want to know more and eggs him on.
+#end##
+
+#if($ex.hasTrait("BOASTFUL"))##
+There is a long pause in the conversation. You stare at $ex.getName(), wondering if he'll leave.
+
+The band switches to a new song, a slowed down cover of a pop song. "I love this song!" $ex.getName() says. He reaches out his hand to you. "Want to dance?"
+
+You can't believe he would ask you to dance right in front of your $bf.getRelationshipNpcDesc(). 
+#else##
+Eventually, $ex.getName() tires of talking about your sexual past, and he leaves. 
+#end##
+</response>
+
+<flatteredDesc>
+You are flattered by $ex.getName()'s attention. He is obviously so taken by you that he's forgotten that your $bf.getRelationshipNpcDesc() is right there!
+</flatteredDesc>
+
+<disgustedDesc>
+$ex.getName() is being an asshole, asking you out in front of your $bf.getRelationshipNpcDesc().
+</disgustedDesc>
+
+<howYouFeelAboutEx>
+#if($flattered)##
+You're flattered by $ex.getName()'s attention. You have the looks to attract men's desires. If you were single, you might indulge in some flirty fun and maybe even invite him home afterwards. But your $bf.getRelationshipNpcDesc() is right beside you.
+#else## $disgusted
+$ex.getName() is a pig. You can't believe he would embarrass you and your $bf.getRelationshipNpcDesc() by putting the moves on you in front of him. You can't believe you slept with such a smug snake like him. 
+#end##
+
+Instinctively, you turn your head to your $bf.getRelationshipNpcDesc() to see his reaction.
+
+#if($bf.hasTrait("DOORMAT"))##
+$bf.getName() is staring at the floor, averting his eyes. He doesn't know what to do and is just burying his head in the sand, leaving you to deal with the situation on your own.
+#elseif($bf.hasTrait("LIKES_TO_SHARE"))##
+$bf.getName() has a pleased smile on his face. "Go ahead and dance. I want to stay here and finish my drink," he tells you.
+#else##
+"She would love to dance," $bf.getName() says. He offers his hand to you. You take it, and he leads you to the dance floor. You happily dance the rest of the night away with your $bf.getRelationshipNpcDesc(), and you don't pay a second thought to $ex.getName().
+#end##
+</howYouFeelAboutEx>
+
+<excitedDesc>
+The idea of going dancing with someone else while your $bf.getRelationshipNpcDesc() watches seems thrilling and exciting. 
+</excitedDesc>
+
+<vulnerableDesc>
+You feel helpless as you are pushed into an overwhelming situation.
+</vulnerableDesc>
+
+<angryDesc>
+You're disappointed and frustrated in $bf.getName() for not coming to your defence against $ex.getName(). 
+</angryDesc>
+
+<excited>
+#if($flattered)##
+It's so strange. You're here with your $bf.getRelationshipNpcDesc(), but you're giddy with excitement from the idea of dancing with an old lover. The idea of being desired by these two men stirs something inside of you. Thoughts of feeling $ex.getName() inside of you again comes unbidden to your mind.
+
+You turn to face $ex.getName(). He's waiting for your answer.
+#else##
+You turn to face $ex.getName(). You find his behaviour repugnant. You can see the lecherous thirst in his eyes. But the thrill of being pursued, of being desired stirs some primitive feelings inside of you. Thoughts of being single again and being free to indulge in care-free sex flash through your mind. Should you dance with him?
+#end##
+</excited>
+
+<vulnerable>
+"Come on. It's just a dance. Just come have some fun," $ex.getName() tells you, pushing you to come dance with him.
+
+You feel overwhelmed, like you're stuck all alone having to deal with $ex.getName(). How did you get trapped in this situation? 
+</vulnerable>
+
+<angry>
+#if($bf.hasTrait("DOORMAT"))##
+$bf.getName() is pathetic. He won't even say a single word to stick up for you. Are you not even worth fighting for? You feel angry at his inaction.
+
+You turn to face $ex.getName(). He's waiting for your answer.
+#else##  $bf.hasTrait("LIKES_TO_SHARE")
+You feel angry at $bf.getName(). He's tossing you to the wolves, and he's smiling the whole time. A normal $bf.getRelationshipNpcDesc() would be more possessive of you, keeping you close and protecting you. Instead, he's acting like he doesn't even care what happens between you and $ex.getName(). Does $bf.getName() even really love you?
+
+You turn to face $ex.getName(). He's waiting for your answer.
+#end##
+</angry>
+
+<yesDance>
+#if($excited)##
+The song is fire, and your head is already bopping to the beat. You want to dance. You eagerly stand up and head off with $ex.getName() to the dance floor. ##
+#if($bf.hasTrait("DOORMAT"))##
+You look back to see $bf.getName() staring blankly at the table, ignoring what's happening.
+#else##  $bf.hasTrait("LIKES_TO_SHARE")
+You look back to see $bf.getName() watching you go with a happy smile on his face.
+#end##
+#elseif($angry)##
+You angrily stand up and head off with $ex.getName() to the dance floor. If $bf.getName() doesn't care enough about you to make a fuss, then why shouldn't you have some fun dancing with $ex.getName()? 
+#else##if($vulnerable)
+It's awkward saying no, so you reluctantly agree to dance. $ex.getName() takes your hand and leads you to the dance floor.
+#end##
+
+You and $ex.getName() disappear into the boisterous crowd of undulating bodies. ##
+#if($vulnerable)##
+Although you are hesitant at first, once you start dancing, you begin to relax and enjoy yourself. ##
+#end##
+You sway your hips in time to the beat, letting the catchy rhythm of the song flow through your body.
+
+You feel $ex.getName()'s hands on your hips, drawing you close to him.
+</yesDance>
+
+<noDance>
+#if($excited)##
+You suppress the randy thoughts filling your brain and politely tell $ex.getName() that you don't want to dance. He gets the hint and leaves.
+#elseif($angry)##
+You swallow the anger filling your gut and firmly tell $ex.getName() that you don't want to dance. He gets the hint and leaves.
+#elseif($vulnerable)##
+You gather together your nerve and timidly tell $ex.getName() that you don't want to dance. He gets the hint and leaves.
+#else## not possible
+You politely tell $ex.getName() that you don't want to dance. He gets the hint and wanders away.
+#end##
+
+You're here with $bf.getName(), and he's the only man you need right now. You take his hand in yours, and the two of you enjoy the rest of the night.
+</noDance>
+
+<stayDistant>
+#if($disgusted)##
+You brush away $ex.getName()'s wandering hands. Why does he have to make everything awkward? You continue dancing at an appropriate distance.
+#else##
+You just want to have some fun dancing without any awkward sexual advances. You push $ex.getName()'s hands off your hips, and you continue dancing at an appropriate distance.
+#end##
+</stayDistant>
+
+<danceCloserDesc>
+There's nothing wrong with dancing closer to $ex.getName().
+</danceCloserDesc>
+
+<danceCloser>
+#if($excited && $flattered)##
+You sway your hips as you step in closer to $ex.getName(). Your bodies are almost touching. You are so close that you can stare deeply into his eyes, and you can see a lustful hunger there. There's something so exciting about being desired and wanted. His hands slip down off of your swinging hips, until they come to rest on your ass. Your heart skips a beat, remembering the other places on your body his fingers have touched.
+#elseif($excited && $disgusted)##
+$ex.getName()'s lecherous hands pull you in closer to him until your bodies are almost touching. He's like a horny teenager. His octopus-like fingers slip down off of your swinging hips, until they come to rest on your ass. Your heart skips a beat, remembering the other places on your body his fingers have touched.
+#elseif($angry && $flattered)##
+You let $ex.getName() pull you in closer until your bodies are almost touching. You begin to look back at $bf.getName() to see his response, but then you realize you don't care. ##
+#if($bf.hasTrait("DOORMAT"))##
+If he didn't want you to dance with $ex.getName(), he should have put a stop to it. ##
+#else##  LIKES_TO_SHARE
+Isn't this what he wanted? Didn't he want you to dance with $ex.getName()? ##
+#end##
+You defiantly turn your head back to $ex.getName() and stare fiercely into his eyes. His hands slip down off of your swinging hips, until they come to rest on your ass. 
+#elseif($angry && $disgusted)##
+$ex.getName()'s lecherous hands pull you in closer to him until your bodies are almost touching. He's like a horny teenager. You begin to look back at $bf.getName() to see his response, but then you realize you don't care. ##
+#if($bf.hasTrait("DOORMAT"))##
+If he didn't want you to dance with $ex.getName(), he should have put a stop to it. ##
+#else##  LIKES_TO_SHARE
+Isn't this what he wanted? Didn't he want you to dance with $ex.getName()? ##
+#end##
+You defiantly turn your head back to $ex.getName() and stare fiercely into his eyes. His octopus-like fingers slip down off of your swinging hips, until they come to rest on your ass. 
+#elseif($vulnerable && $flattered)##
+You meekly let $ex.getName() pull you in closer. You are so close that your bodies are almost touching but you tell yourself that there's nothing to worry about, that you're just dancing. You look back at $bf.getName().
+#if($bf.hasTrait("DOORMAT"))##
+He's looking downward at the table and avoiding your gaze. ##
+#else##  LIKES_TO_SHARE
+He is staring at you with a big smile on his face. He gives you a thumbs up of encouragement. ##
+#end##
+You are so close that you can stare deeply into his eyes. It just feels too intimate. You experience a moment of panic when you feel his hands slip down off of your swinging hips, until they come to rest on your ass.
+#elseif($vulnerable && $disgusted)##
+$ex.getName()'s lecherous hands pull you in closer to him.
+You are so close that your bodies are almost touching but you tell yourself that there's nothing to worry about, that you're just dancing. You look back at $bf.getName().
+#if($bf.hasTrait("DOORMAT"))##
+He's looking downward at the table and avoiding your gaze. ##
+#else##  LIKES_TO_SHARE
+He is staring at you with a big smile on his face. He gives you a thumbs up of encouragement. ##
+#end##
+You are so close that you can stare deeply into his eyes. It just feels too intimate. You experience a moment of panic when you feel his wandering hands slip down off of your swinging hips, until they come to rest on your ass.
+#else##
+You let $ex.getName() pull you in closer until your bodies are almost touching. You are so close that you can stare deeply into his eyes. His hands slip down off of your swinging hips, until they come to rest on your ass. 
+#end##
+</danceCloser>
+
+<assGrope>
+#if($excited && $flattered)##
+You smile back at $ex.getName() and continue dancing, teasingly shaking your ass as he gropes it's yielding flesh. ##
+#elseif($excited && $disgusted)##
+You are shocked by $ex.getName()'s audacity. But feeling his randy fingers groping your ass sends a thrill through your body. ##
+#elseif($angry)##
+You continue dancing with $ex.getName(). You let his hands grope the yielding flesh of your ass. ##
+#elseif($vulnerable)##
+You freeze up and continue dancing with $ex.getName(). You try to ignore his hands groping the yielding flesh of your ass. ##
+#else##
+You smile back at $ex.getName() and continue dancing, teasingly shaking your ass as he gropes it's yielding flesh. ##
+#end##
+#if($flattered)##
+He pulls you yet closer, until your hips are touching, and you can feel his potent member against your stomach. ##
+#elseif($disgusted)##
+He annoyingly pulls you yet closer, until your hips are touching, and you can feel his icky member against your stomach. ##
+#else##
+He pulls you yet closer, until your hips are touching, and you can feel his swollen member against your stomach. ##
+#end##
+#if($excited)##
+You instinctively press your crotch against his, and you rock back and forth in unison in time to the music.
+#elseif($angry && $bf.hasTrait("DOORMAT"))##
+You can't help but compare his virile sword to $bf.getName()'s pathetic manhood. With your crotches pressed together, you rock back and forth in unison in time to the music.
+#elseif($angry && $bf.hasTrait("LIKES_TO_SHARE"))##
+You angrily press your crotch against his, rocking backing and forth in unison in time to the music. You wonder if $bf.getName() is feeling any jealousy at all over what $ex.getName() is doing with you.
+#elseif($vulnerable)##
+You squirm a little bit, but your crotches are firmly pressed together. Your hips rock back and forth in unison in time to the music.
+#else##
+With your crotches pressed together, you rock back and forth in unison in time to the music.
+#end##
+
+The music changes to a heavy throbbing beat. You look around and see that people are starting to get sweaty and raunchy on the dance floor. ##
+#if($flattered)##
+$ex.getName() slides away only to slip behind you. You can feel his hands on your hips and his crotch press forward against your ass.
+#elseif($disgusted)##
+$ex.getName() slides away only to sneakily slip behind you. He shamelessly grabs your hips and guides your ass back until it pressed against his crotch.
+#else##
+$ex.getName() slides away only to slip behind you. You can feel his hands on your hips and his crotch press forward against your ass.
+#end##
+</assGrope>
+
+<noAssGrope>
+You dance away from $ex.getName() until he's too far away to reach your body. You aren't going to let his hands ruin your time on the dance floor.
+</noAssGrope>
+
+<danceBeforeGrind>
+The music changes to a heavy throbbing beat. You look around and see that people are starting to get sweaty and raunchy on the dance floor. ##
+#if($flattered)##
+$ex.getName() slides away only to slip behind you. You can feel his hands on your hips and his crotch press forward against your ass.
+#elseif($disgusted)##
+$ex.getName() slides away only to sneakily slip behind you. He shamelessly grabs your hips and guides your ass back until it pressed against his crotch.
+#else##
+$ex.getName() slides away only to slip behind you. You can feel his hands on your hips and his crotch press forward against your ass.
+#end##
+</danceBeforeGrind>
+
+<noGrind>
+You turn around to face $ex.getName(), escaping his attempt at grinding. You go back to enjoying the music. The pounding of the bass reverberates over your whole body. You rock your hips back and forth in time to the throbbing beat of the song. Temporarily chastened, $ex.getName() gives you some space as he dances in front of you.
+</noGrind>
+
+<grind>
+#if($excited)##
+Feeling flirty and daring, you continue dancing, waving your hands above your head and rocking your hips back and forth as $ex.getName() grinds his crotch against your ass. A thrill courses through your veins when you realize you can feel his obvious arousal as he pumps his member up and down with the music as if he were thrusting into you. ##
+#elseif($angry && $bf.hasTrait("DOORMAT"))##
+Indignant at your pitiful excuse for a $bf.getRelationshipNpcDesc(), you wave your hands above your head and rock your hips back and forth, letting $ex.getName() grind his crotch against your ass. You can feel his obvious arousal as he pumps his member up and down with the music as if he were thrusting into you. ##
+#elseif($angry && $bf.hasTrait("LIKES_TO_SHARE"))##
+Indignant at your trash excuse for a $bf.getRelationshipNpcDesc(), you wave your hands above your head and rock your hips back and forth, letting $ex.getName() grind his crotch against your ass. You can feel his obvious arousal as he pumps his member up and down with the music as if he were thrusting into you. ## #elseif($vulnerable)##
+Lost as to what to do, you simply continue dancing, waving your hands above your head and rocking your hips back and forth. Why won't $bf.getName() put a stop to this? $ex.getName() grinds his crotch against your ass. You can feel his obvious arousal as he pumps his member up and down with the music. You become flustered as you realize that his motions feel almost like he were thrusting into you. ##
+#else##
+You continue dancing waving your hands above your head and rocking your hips back and forth. $ex.getName() grinds his crotch against your ass. You can feel his obvious arousal as he pumps his member up and down with the music as if he were thrusting into you. ##
+#end##
+The pounding of the bass reverberates over your whole body. He runs his hands teasingly up and down your sides as you sway in time to the throbbing beat of the song.
+#if($flattered)##
+Your desire feels like it has been let loose, free to indulge in whatever appetites it craves.
+#elseif($disgusted)##
+You feel manhandled, like you're a piece of meat.
+#else##
+#end##
+
+#if($longskirt)##
+One of his hands slides over your stomach and cups your breast.
+#elseif($shortpants)##
+One of his hands drops off and wraps around your leg. You feel it gliding up the smooth skin of your inner thigh towards your pelvis.
+#elseif($pants)##
+One of his hands drops off and wraps around your leg. You feel it gliding up the inside leg of your $w.getBottom().getBasicDesc() towards your pelvis.
+#else##
+One of his hands drops off and wraps around your leg. You feel it gliding up the smooth skin of your inner thigh towards your pelvis.
+#end##
+</grind>
+
+<heavyGrind>
+#if($excited)##
+The thought of being touched by someone other than your $bf.getRelationshipNpcDesc() causes your body to ache with desire. You spread your legs apart and lean forward. With your crotch openly accessible to $ex.getName(), you push your hips back against his. ##
+#elseif($angry && $bf.hasTrait("DOORMAT"))##
+Furious at your pitiful excuse for a $bf.getRelationshipNpcDesc(), you spread your legs apart and lean forward. If $bf.getName() isn't man enough to protect you, then maybe you should find a different man. With your crotch openly accessible to $ex.getName(), you push your hips back against his. ##
+#elseif($angry && $bf.hasTrait("LIKES_TO_SHARE"))##
+Furious at your trash excuse for a $bf.getRelationshipNpcDesc(), you spread your legs apart and lean forward. If $bf.getName() doesn't want you, then maybe you should find a different man. With your crotch openly accessible to $ex.getName(), you push your hips back against his. ##
+#elseif($vulnerable)##
+Your senses are overwhelmed by all the music and the touching. You hardly react as $ex.getName() nudges a knee between your legs and pushes your legs apart. Your breathe gets caught in your throat as he leans you forward and you realize that your crotch will be openly accessible to him. Your mound quivers in anticipation as your hips reflexively push back against his. ##
+#else##
+You spread your legs apart and lean forward. With your crotch openly accessible to $ex.getName(), you push your hips back against his. ##
+#end##
+You can feel his rock hard erection brushing against your genitals. You grind back against him, churning your genitals in circles against his engorged member. He grabs your hips and pulls you back more tightly against his crotch as he pumps his member up and down against your taint. ##
+#if($flattered)##
+Your desire feels like it has been let loose, free to indulge in whatever appetites it craves.
+#elseif($disgusted)##
+You feel manhandled, like you're a piece of meat.
+#else##
+#end##
+
+#if($longskirt)##
+He pulls you back up and presses his whole body against yours. His arms wrap around your stomach. You feel his lips nuzzling against your neck.
+#elseif($shortpants)##
+One of his hands drops off and wraps around your leg. You feel it gliding up the smooth skin of your inner thigh towards your pelvis.
+#elseif($pants)##
+One of his hands drops off and wraps around your leg. You feel it gliding up the inside leg of your $w.getBottom().getBasicDesc() towards your pelvis.
+#else##
+One of his hands drops off and wraps around your leg. You feel it gliding up the smooth skin of your inner thigh towards your pelvis.
+#end##
+</heavyGrind>
+
+<grindTouch>
+#if($longskirt)##
+You continue gyrating your body in time to the hypnotic beats of the music as $ex.getName() grinds his crotch against you. He now wraps both of his arms around you and grabs your breasts. Your back instinctively arches, pushing your breasts against his fingers.
+
+He fondles and gropes your breasts through the fabric of your $w.getTop().getBasicDesc(). Your nipples harden in arousal as he strokes them. You feel completely exposed as he openly caresses your body on the dance floor. He grinds his engorged cock grinding against you, with the same driving rhythm of your undulating hips, with the same driving rhythm as the throbbing pleasure building in your crotch.
+#elseif($pants)##
+You continue gyrating your body in time to the hypnotic beats of the music as $ex.getName() grinds his crotch against you. His hand slides up between your legs, snaking up towards your mound. As his fingers nears the heated V between your legs, you instinctively spread your legs apart for him. 
+
+His hands grab your crotch, sending a jolt through your body. Your legs hesitate, and your body falls back against his waiting crotch. He strokes you through your $w.getBottom().getBasicDesc() with the same driving rhythm as the music, with the same driving rhythm of his engorged cock grinding against you, with the same driving rhythm of your undulating hips, with the same driving rhythm as the throbbing pleasure building in your crotch.
+#else##
+You continue gyrating your body in time to the hypnotic beats of the music as $ex.getName() grinds his crotch against you. His hand slips under your skirt, snaking up towards your mound. As his fingers nears the heated V between your legs, you instinctively spread your legs apart for him. 
+
+The feel of his fingers against the front of your panties sends a jolt through your body. Your legs hesitate, and your body falls back against his waiting crotch. He strokes you through your panties with the same driving rhythm as the music, with the same driving rhythm of his engorged cock grinding against you, with the same driving rhythm of your undulating hips, with the same driving rhythm as the throbbing pleasure building in your crotch.
+#end##
+</grindTouch>
+
+<heavyGrindTouch>
+#if($longskirt)##
+As you continue to gyrate your body in time to the hypnotic beats of the music, you leave your body completely undefended to $ex.getName()'s incursions. One of his hands roams across your legs and mound while he grinds his crotch against your ass from behind. His other hand snakes over your breasts. Your back instinctively arches, pushing your breasts against his fingers.
+
+He fondles and gropes your breasts through the fabric of your $w.getTop().getBasicDesc(). Your nipples harden in arousal as he strokes them. You feel completely exposed as he openly caresses your body on the dance floor. He grinds his engorged cock grinding against you, with the same driving rhythm of your undulating hips, with the same driving rhythm as the throbbing pleasure building in your crotch.
+#elseif($pants)##
+You continue swirling your hips against $ex.getName()'s crotch in time to the hypnotic beats of the music. You can feel his member throbbing through the fabric of his pants. His hand slips under the waistband of your pants, snaking down towards your mound. 
+
+The feel of his fingers against the front of your panties sends a jolt through your body. Your legs hesitate, and your body falls back against his waiting crotch. He strokes you through your panties with the same driving rhythm as the music, with the same driving rhythm of his engorged cock grinding against you, with the same driving rhythm of your undulating hips, with the same driving rhythm as the throbbing pleasure building in your crotch.
+#else##
+You continue swirling your hips against $ex.getName()'s crotch in time to the hypnotic beats of the music. You can feel his member throbbing through the fabric of his pants. His hand slips under your skirt, snaking up towards your mound. 
+
+The feel of his fingers against the front of your panties sends a jolt through your body. Your legs hesitate, and your body falls back against his waiting crotch. He strokes you through your panties with the same driving rhythm as the music, with the same driving rhythm of his engorged cock grinding against you, with the same driving rhythm of your undulating hips, with the same driving rhythm as the throbbing pleasure building in your crotch.
+#end##
+</heavyGrindTouch>
+
+<grindNoTouch>
+You push his hand away and go back to gyrating your body in time to the hypnotic beats of the music as $ex.getName() grinds his crotch against you. He leans in close. You can feel his chest brushing against your back. 
+
+"You're the hottest thing in this pub tonight," he whispers into your ear. He thrusts his erection firmly against your rear. "I would love to make you the wettest thing in this pub tonight."
+</grindNoTouch>
+
+<heavyGrindNoTouch>
+You push his hand away and go back to swirling your hips against $ex.getName()'s crotch in time to the hypnotic beats of the music. You can feel his member throbbing through the fabric of his pants. He runs his hands eagerly up and down your sides and your back. He undulates his hips as if he were thrusting his cock inside of you. Only some thin pieces of fabric prevent his straining excitement from plundering into your fertile caverns.
+</heavyGrindNoTouch>
+
+<musicEnds>
+And then the song ends. The band announces that they're taking a break, and the crowd claps and cheers in appreciation. $ex.getName() untangles his body from yours and steps back from you. He tells you that he's had enough dancing and that he has to go to the loo. As he walks past, he leans in and whispers in your ear that he'll be in the last stall if you need to relieve yourself too. He slaps your ass, and you watch him walk away towards the toilets. You return to your table where $bf.getName() waits for you.
+
+$bf.getName() sees you approaching and asks how the dance went. ##
+#if($excited)##
+Your thoughts are distracted by $ex.getName()'s offer.
+#elseif($angry && $bf.hasTrait("DOORMAT"))##
+You still feel angry at your loser $bf.getRelationshipNpcDesc(). You are dissatisfied by the thought of going back to his limp dick when $ex.getName()'s lusty cock is available.
+#elseif($angry && $bf.hasTrait("LIKES_TO_SHARE"))##
+You still feel angry at your $bf.getRelationshipNpcDesc() for treating you like a piece of meat. If he doesn't care if other men hit on you, maybe you shouldn't care about what he thinks either.
+#elseif($vulnerable)##
+Your emotions are a jumble. Being around $ex.getName() again has dislodged wanton memories about the times you've been with him. Looking at $bf.getName(), you feel so much shame about it, that you feel like running away.
+#else##
+
+#end##
+</musicEnds>
+
+<toilets>
+You tell $bf.getName() that you have to go to the toilets. 
+
+As you walk towards the lavatory, you can feel the dampness between your legs and the fluster of arousal in your cheeks. Driven by desire, you ignore the looks of others as you march into the men's room. You can hear the beating of your heart in your ears, but your animal needs keep you focused. You see the last stall at the end. You walk over and push it open.
+
+$ex.getName() is standing inside with his pants down and erection hanging out. You step into the stall, and he locks the stall door behind you.
+</toilets>
+
+<afterToilets>
+You again wander back to your table with $bf.getName(). 
+</afterToilets>
+
+<sitDownDesc>
+Take a seat at the table and rejoin your $bf.getRelationshipNpcDesc().
+</sitDownDesc>
+
+<sitDown>
+#if($bf.hasTrait("DOORMAT"))##
+You take a seat at the table. $bf.getName() looks a little sullen but you act as if nothing has happened. You avoid telling him anything about $ex.getName() or the dance. It's a little strained, but you go back to enjoying your date with $bf.getName().
+#else##elseif($bf.hasTrait("LIKES_TO_SHARE"))##
+$bf.getName() looks at you with a naughty smile on his face as you sit down. "Did you find the dance...enjoyable?" he asks. You answer non-committally.
+
+He places a hand suggestively over your knee. He says that maybe you're both feeling too hot from being in the pub and that you should both go out behind the pub to cool off.
+#end##
+</sitDown>
+
+<nobfsex>
+You turn down $bf.getName()'s suggestion. It's a little strained, but you go back to enjoying your date with him.
+</nobfsex>
+
+<alleywayDesc>
+Go outside with your $bf.getRelationshipNpcDesc() to makeout.
+</alleywayDesc>
+
+<alleyway>
+You nod in agreement. He takes your hand and leads you out back to an alleyway behind the pub.
+</alleyway>
+
+<afterAlleyway>
+After your interlude in the alleyway, you and $bf.getName() enjoy the rest of your date despite a lack of further interruptions from ex-lovers.
+</afterAlleyway>
+
+
+<sceneDescriptionText>
+You're grabbing a drink with $bf.getName() at the pub.
+</sceneDescriptionText>
+

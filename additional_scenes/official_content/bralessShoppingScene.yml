@@ -1,0 +1,494 @@
+# Scene written by Elizabeth King.
+#
+# Scene access:
+# By random event, weekend daytime timeslot.
+#
+# Preconditions:
+# The PC is wearing a casual outfit for that timeslot.
+# The PC's chosen outfit does not include a bra.
+
+# A male NPC exists for whom all the following are true:
+#  - Is a stranger to the PC.
+#  - Is not a restricted special NPC.
+#  - Has the Jerk personality.
+#  - Has the Sleazy trait.
+#  - Finds the PC attractive.
+#  - Likes the PC's breasts
+#
+# The scene takes 1 male NPC and no female ones:
+# "m" is the NPC defined in the preconditions above.
+#
+# The scene is not repeatable and can only happen once-per-game.
+
+textFileName: bralessShoppingScene.vm
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+ # Location isn't likely to be used in this scene, but setting placeholder values just in case.
+ location: 
+  wall: grimy alley wall
+  floor: dirty alleyway floor
+  hasBed: false
+  isOutside: true
+
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($m)
+  - effect: $scene.hideNpc($m)
+  - effect: $gd.setGameFlag("DONE_BRALESS_SHOPPING_SCENE")
+ followUpActions:
+  rideBus: 
+
+actions:
+ - id: rideBus
+   shortDesc: Ride the bus
+   longDesc: Ride the bus into town
+   textId: rideBusText
+   followUpActions:
+    conquerFears:
+    
+ - id: conquerFears
+   shortDesc: Conquer your fears
+   longDesc: You can't stay like this all day! Conquer your fears and do some shopping
+   textId: conquerFearsText
+   followUpActions:
+    doShopping:
+    
+ - id: doShopping
+   shortDesc: Do your shopping
+   longDesc: Go to the shops
+   textId: doShoppingText
+   followUpActions:
+    finishShop:
+    
+ - id: finishShop
+   effects:
+    - effect: $scene.unHideNpc($m)
+    - effect: $m.addBastard(20)
+   shortDesc: Finish shopping
+   longDesc: All done, time to head back!
+   textId: finishShopText
+   followUpActions:
+    keepWalking:
+    stopAndStare:
+    confront: '!$w.hasTrait("SHY")'
+
+ - id: keepWalking
+   effects:
+    - effect: $m.reduceWLikingLarge()
+   shortDesc: Keep walking
+   longDesc: Pay him no mind, keep walking!
+   textId: keepWalkingText
+   finishScene: true
+
+ - id: confront
+   effects:
+    - effect: $m.reduceWLikingLarge()
+   shortDesc: Confront him
+   longDesc: He can't just do that! Confront him!
+   textId: confrontText
+   followUpActions:
+    notice:
+
+ - id: notice
+   shortDesc: Notice him
+   longDesc: You notice he isn't stopping.
+   textId: noticeText
+   followUpActions:
+    humiliatehim:
+    slaphim:
+
+ - id: humiliatehim
+   shortDesc: Humiliate him
+   longDesc: Keep humiliating him!
+   textId: humiliatehimText
+   followUpActions:
+    humiliatehim2:
+
+ - id: humiliatehim2
+   effects:
+    - effect: $m.haveOrgasmFromPc()
+   shortDesc: Humiliate him
+   longDesc: Keep humiliating him!
+   textId: humiliatehim2Text
+   followUpActions:
+    humiliatehim3:
+
+ - id: humiliatehim3
+   effects:
+    - effect: $w.changeStress(-5)
+    # Medium w liking gain to partially counteract the penalty earlier in confront.
+    - effect: $m.addWLikingMedium()
+    - effect: $m.addNpcLikingSmall()
+    - effect: $m.addNpcLoveSmall()
+   shortDesc: Humiliate him
+   longDesc: The final humiliation!
+   textId: humiliatehim3Text
+   finishScene: true
+
+ - id: slaphim
+   effects:
+    - effect: $m.reduceWLikingVLarge()
+    - effect: $m.reduceNpcLikingLarge()
+   shortDesc: Slap him
+   longDesc: How dare he! Slap him!
+   textId: slaphimText
+   finishScene: true
+
+ - id: stopAndStare
+   shortDesc: Stop and stare
+   longDesc: Stop, uncertainly staring at him.
+   textId: stopAndStareText
+   followUpActions:
+    acceptinvite:
+    slaphim2: '!$w.hasTrait("SHY")'
+    runaway:
+
+ - id: acceptinvite
+   shortDesc: Accept invite
+   longDesc: Accept his invitation!
+   textId: acceptinviteText
+   followUpActions:
+    acceptinvite2:
+
+ - id: acceptinvite2
+   shortDesc: See what he does
+   longDesc: You're here. Now what?
+   textId: acceptinvite2Text
+   followUpActions:
+    acceptinvite3:
+
+ - id: acceptinvite3
+   effects:
+    - effect: $w.setTopStatus("EXPOSED")
+   shortDesc: Let him touch you
+   longDesc: Let him touch you.
+   textId: acceptinvite3Text
+   followUpActions:
+    acceptinvite4:
+
+ - id: acceptinvite4
+   effects:
+    - effect: $m.setTrousersOpen(true)
+   shortDesc: See what he's got
+   longDesc: You've shown him yours, and now...
+   textId: acceptinvite4Text
+   followUpActions:
+    acceptinvite5:
+
+ - id: acceptinvite5
+   shortDesc: Touch it
+   longDesc: Touch his cock.
+   textId: acceptinvite5Text
+   followUpActions:
+    acceptinvite6:
+
+ - id: acceptinvite6
+   shortDesc: Be groped
+   longDesc: Let him feel you up.
+   textId: acceptinvite6Text
+   followUpActions:
+    follow:
+    cantdothis:
+    righthere: '!$w.hasTrait("SHY")'
+
+ - id: slaphim2
+   effects:
+    - effect: $m.reduceWLikingVLarge()
+    - effect: $m.reduceNpcLikingLarge()
+   shortDesc: Slap him
+   longDesc: How dare he! Slap him!
+   textId: slaphim2Text
+   followUpActions:
+    slaphim3:
+
+ - id: slaphim3
+   shortDesc: Let that be a lesson!
+   longDesc: A painful lesson, but one he has to learn.
+   textId: slaphim3Text
+   finishScene: true
+
+ - id: runaway
+   effects:
+    - effect: $m.reduceWLikingLarge()
+   shortDesc: Run away
+   longDesc: Get away from this creep!
+   textId: runawayText
+   followUpActions:
+    runaway2:
+
+ - id: runaway2
+   effects:
+    - effect: $w.changeStress(5)
+    - effect: $scene.hideNpc($m)
+   shortDesc: Keep running!
+   longDesc: Run for it!
+   textId: runaway2Text
+   finishScene: true
+
+ - id: follow
+   effects:
+    - effect: $m.setTrousersWorn(false)
+   shortDesc: Follow him
+   longDesc: Follow him deeper into the alley
+   textId: followText
+   followUpActions:
+    follow2:
+
+ - id: follow2
+   shortDesc: Do it
+   longDesc: Go and play, just as he asks
+   textId: follow2Text
+   followUpActions:
+    blowhim:
+    takecontrol: '!$w.hasTrait("SHY")'
+    dontwantto:
+
+ - id: cantdothis
+   shortDesc: Can't do this
+   longDesc: You can't do this... you don't want to blow him!
+   textId: cantdothisText
+   followUpActions:
+    fingering:
+
+ - id: fingering
+   shortDesc: Fingering
+   longDesc: Let him finger you instead
+   textId: fingeringText
+   followUpActions:
+    fingering2:
+
+ - id: fingering2
+   effects:
+    - effect: $m.causePlayerOrgasm()
+   shortDesc: It's so good!
+   longDesc: Being touched like this just feels so good
+   textId: fingering2Text
+   followUpActions:
+    fingering3:
+
+ - id: fingering3
+   shortDesc: Catch your breath
+   longDesc: Catch your breath after that orgasm
+   textId: fingering3Text
+   followUpActions:
+    fingering4:
+
+ - id: fingering4
+   effects:
+    - effect: $w.fixClothing()
+   shortDesc: Leave the alleyway
+   longDesc: Phew, that was quite something...
+   textId: fingering4Text
+   finishScene: true
+
+ - id: righthere
+   shortDesc: Right here
+   longDesc: Keep going right here
+   textId: righthereText
+   followUpActions:
+    righthere2:
+
+ - id: righthere2
+   shortDesc: Keep going
+   longDesc: Keep going right here
+   textId: righthere2Text
+   followUpActions:
+    caught:
+
+ - id: caught
+   shortDesc: Caught
+   longDesc: Oh no! Security has caught you!
+   textId: caughtText
+   followUpActions:
+    caught2:
+
+## $w.fixClothing()  is not called here because the putTopBackOn macro in the vm handles that.
+ - id: caught2
+   effects: 
+    - effect: $w.changeStress(15)
+      condition: $w.hasTrait("SHY") || $w.hasTrait("REFINED")
+    - effect: $m.fixClothing()
+   shortDesc: Apologise
+   longDesc: Apologise to the security guard.
+   textId: caught2Text
+   finishScene: true
+
+ - id: blowhim
+   effects: 
+    - effect: $m.addEnjoyMedium()
+      condition: $m.hasTrait("LIKES_ORAL")
+   shortDesc: Blow him
+   longDesc: Agree to suck his dick
+   textId: blowhimText
+   followUpActions:
+    blowhim2:
+
+ - id: blowhim2
+   shortDesc: Take him in your mouth
+   longDesc: Take his cock into your mouth.
+   textId: blowhim2Text
+   followUpActions:
+    blowhim3:
+
+ - id: blowhim3
+   effects:
+    - effect: $m.haveOrgasmFromPc()
+   shortDesc: Keep sucking
+   longDesc: Suck his cock.
+   textId: blowhim3Text
+   followUpActions:
+    swallow:
+    spit:
+    tits:
+
+ - id: takecontrol
+   effects: 
+    - effect: $m.addEnjoyMedium()
+      condition: $m.hasTrait("LIKES_ORAL")
+   shortDesc: Take control
+   longDesc: Agree to suck his dick... but on your own terms! Take control!
+   textId: takecontrolText
+   followUpActions:
+    takecontrol2:
+
+ - id: takecontrol2
+   shortDesc: Get started
+   longDesc: Start to enjoy yourself with his cock.
+   textId: takecontrol2Text
+   followUpActions:
+    takecontrol3:
+
+ - id: takecontrol3
+   effects:
+    - effect: $m.haveOrgasmFromPc()
+   shortDesc: Suck his cock
+   longDesc: Suck on your new toy.
+   textId: takecontrol3Text
+   followUpActions:
+    cuminmouth:
+    cumontits:
+
+ - id: cuminmouth
+   shortDesc: Cum in mouth
+   longDesc: Tell him you want him to cum in your mouth!
+   textId: cuminmouthText
+   followUpActions:
+    cuminmouth2:
+
+ - id: cuminmouth2
+   effects:
+    - effect: $w.fixClothing()
+   shortDesc: You're done
+   longDesc: You got what you wanted. Swallow his spunk and head off. 
+   textId: cuminmouth2Text
+   finishScene: true
+
+ - id: cumontits
+   shortDesc: Cum on tits
+   longDesc: Tell him you want him to cum on your tits!
+   textId: cumontitsText
+   followUpActions:
+    cumontits2:
+
+ - id: cumontits2
+   shortDesc: Get him off
+   longDesc: Get him off, all over your breasts.
+   textId: cumontits2Text
+   followUpActions:
+    cumontits3:
+
+ - id: cumontits3
+   shortDesc: You're done
+   longDesc: You got what you wanted, now leave.
+   textId: cumontits3Text
+   finishScene: true
+
+ - id: dontwantto
+   shortDesc: Don't want to
+   longDesc: You change your mind... you don't actually want to do this!
+   textId: dontwanttoText
+   followUpActions:
+    dontwantto2:
+
+ - id: dontwantto2
+   effects:
+    - effect: $m.reduceWLikingVLarge()
+    - effect: $m.addBastard(30)
+    - effect: $w.changeMoney(-20)
+    - effect: $scene.hideNpc($m)
+   shortDesc: Leave the alley
+   longDesc: Get out of here.
+   textId: dontwantto2Text
+   finishScene: true
+
+ - id: swallow
+   shortDesc: Swallow
+   longDesc: You want to swallow his load!
+   textId: swallowText
+   followUpActions:
+    swallow2:
+
+ - id: swallow2
+   effects:
+    - effect: $m.reduceWLikingVLarge()
+    - effect: $m.addBastard(30)
+    - effect: $w.changeMoney(-20)
+    - effect: $scene.hideNpc($m)
+   shortDesc: Leave
+   longDesc: Leave the alleyway.
+   textId: swallow2Text
+   finishScene: true
+
+ - id: spit
+   shortDesc: Spit
+   longDesc: You don't think you can swallow... you'll spit it instead!
+   textId: spitText
+   followUpActions:
+    spit2:
+
+ - id: spit2
+   shortDesc: Spit it out
+   longDesc: Let him cum in your mouth, and spit it out.
+   textId: spit2Text
+   followUpActions:
+    spit3:
+
+ - id: spit3
+   effects:
+    - effect: $m.reduceWLikingVLarge()
+    - effect: $m.addBastard(30)
+    - effect: $w.changeMoney(-20)
+    - effect: $scene.hideNpc($m)
+   shortDesc: Leave
+   longDesc: Leave the alleyway
+   textId: spit3Text
+   finishScene: true
+
+ - id: tits
+   shortDesc: Tits
+   longDesc: Tell him you want him to cum on your tits!
+   textId: titsText
+   followUpActions:
+    tits2:
+
+ - id: tits2
+   shortDesc: Get him off
+   longDesc: Get him off, all over your tits.
+   textId: tits2Text
+   followUpActions:
+    tits3:
+
+ - id: tits3
+   effects:
+    - effect: $m.fixClothing()
+   shortDesc: Leave
+   longDesc: Leave the alleyway.
+   textId: tits3Text
+   finishScene: true
+ 

@@ -1,0 +1,184 @@
+# Scene written by Secondarian
+#
+# Overview:
+# This is a follow up scene where you meet with a guy who proposed you over the internet to have sex with him for money. 
+#
+# Key Paths:
+# - The PC has sex with the customer.
+# - The PC changes her mind.
+# 
+# Scene access:
+# Via hpIntro.yml.
+#
+# Preconditions:
+# A male NPC ("jerk") for which the following is true:
+# - "Sleazy" trait.
+# - No random encounters.
+# - Not befriendable. 
+#
+# The scene takes 1 male NPC and no female ones:
+# "jerk" is the customer.
+# Both should be wearing going out clothes. 
+# The scene takes place in a hotel room. 
+#
+# Following the addition of the street-prostitution scene in 0.5.5, the prostitution clients for both scenes are combined
+# and are not guaranteed to have the "jerk" personality type, despite the NPC's id in this scene.
+
+textFileName: hotelProstitution.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: GOING_OUT
+ maleNpcs:
+  - id: jerk
+    outfit: GOING_OUT
+ location:
+  wall: room wall
+  floor: room floor
+  hasBed: true
+  isOutside: false
+  
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($jerk) 
+  - effect: $scene.hideNpc($jerk) 
+## Setting this flag here because it's valid for all the different sex paths.
+  - effect: $scene.addFlag("ONLY_NPC_CUNNILINGUS") 
+ followUpActions:
+  goin:
+
+sceneEndProcessing: '#if($scene.hasFlag("HP_SATISFIED"))$w.changeMoney(200)#end'
+
+returningSections:
+
+ - id: complied
+   textId: complied
+   finishScene: '$scene.hasFlag("HP_SATISFIED")'
+   followUpActions:
+    refused:
+
+actions:
+ - id: goin
+   shortDesc: Go into the hotel room
+   longDesc: You go into the hotel room, preparing yourself for what is about to happen.
+   textId: goin
+   effects:
+    - effect: $scene.unHideNpc($jerk) 
+   followUpActions:
+    listen: 
+
+ - id: listen 
+   shortDesc: Listen
+   longDesc: Hear what he wants you to do.
+   textId: listen
+   followUpActions:
+     comply:
+     refuse: 
+
+ - id: agreedGetToKnees 
+   shortDesc: Get to your knees
+   longDesc: Drop to your knees.
+   textId: agreedGetToKnees
+   sceneTransition:
+    condition: true
+    type: ORAL_SEX 
+    maleNpcs:
+     - id: man
+       npc: jerk
+    transitionInfo:
+     position: STAND
+    returningId: complied
+    location:
+     useCurrentLocation: true
+     
+ - id: agreedGetOnAllFours 
+   shortDesc: Get on all fours
+   longDesc: Get on all fours and prepare your asshole for penetration.
+   textId: agreedGetOnAllFours
+   effects:
+    - effect: $jerk.setTrousersOpen(true)
+    - effect: $jerk.addArousalHuge()$jerk.addArousalHuge()
+      condition: "!$jerk.arousalComfort"
+   sceneTransition:
+    condition: true
+    type: ANAL_SEX
+    maleNpcs:
+     - id: man
+       npc: jerk
+    returningId: complied
+    location:
+     useCurrentLocation: true
+    transitionInfo:
+     inBed: true
+     lube: SOME
+
+ - id: agreedGetOnAllFoursMean
+   shortDesc: Get on all fours
+   longDesc: Get on all fours and prepare to have your asshole reamed.
+   textId: agreedGetOnAllFoursMean
+   effects:
+    - effect: $jerk.setTrousersOpen(true)
+    - effect: $jerk.addArousalHuge()$jerk.addArousalHuge()
+      condition: "!$jerk.arousalComfort"
+    - effect: $jerk.addWEnjoySmall() $w.addArousalMedium()
+      condition: $w.hasTrait("LIKES_ROUGH")
+    - effect: $jerk.reduceWEnjoyMedium() $w.reduceArousalMedium()
+      condition: '!$w.hasTrait("LIKES_ROUGH")'
+    - effect: $jerk.reduceWLikingSmall()
+      condition: '!$w.hasTrait("LIKES_ROUGH") && !$w.hasTrait("LOW_SELF_ESTEEM")'
+   sceneTransition:
+    condition: true
+    type: ANAL_SEX
+    maleNpcs:
+     - id: man
+       npc: jerk
+    returningId: complied
+    location:
+     useCurrentLocation: true
+    transitionInfo:
+     inBed: false
+     lube: NONE
+      
+ - id: agreedStartMo 
+   shortDesc: Let him have you
+   longDesc: Let him take you in his arms and have his way with you.
+   textId: agreedStartMo
+   effects:
+    - effect: $scene.addFlag("NO_ORAL") $scene.addFlag("BLOCK_ANAL")
+    - effect: $scene.addFlag("AGREED_INSEMINATION") $scene.addFlag("AGREED_BARE")
+      condition: $scene.hasFlag("HP_WANTS_INSEMINATE")
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: jerk
+    returningId: complied
+    location:
+     useCurrentLocation: true
+  
+ - id: refuse 
+   shortDesc: Refuse
+   longDesc: You won't do what he wants you to!
+   textId: refuse
+   finishScene: true
+
+ - id: comply
+   shortDesc: You comply
+   longDesc: Do as he desires
+   textId: comply
+   effects:
+    - effect: $jerk.addEnjoySmall() $jerk.addArousalSmall()
+   followUpActions:
+    agreedGetToKnees: $scene.hasFlag("HP_WANTS_ORAL")
+    agreedGetOnAllFours: '$scene.hasFlag("SEX_WORK_ANAL") && $jerk.getBehaviourNoFaking() != "MEAN"' 
+    agreedGetOnAllFoursMean: '$scene.hasFlag("SEX_WORK_ANAL") && $jerk.getBehaviourNoFaking() == "MEAN"' 
+    agreedStartMo: '!$scene.hasFlag("HP_WANTS_ORAL") && !$scene.hasFlag("SEX_WORK_ANAL")' 
+    
+ - id: refused
+   textId: refused
+   shortDesc: What now?
+   longDesc: You didn't fulfill his wishes. What's he going to do?
+   finishScene: true

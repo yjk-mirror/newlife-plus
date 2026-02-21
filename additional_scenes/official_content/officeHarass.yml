@@ -1,0 +1,115 @@
+# Office Harassment
+# Created by stochastic
+# Random event at work
+#
+# Boss NPC is the PC's boss. Requirements:
+# Boss is sleazy
+# One of the following is true: boss is the PC's partner OR boss & PC have the "dating" relationship status OR boss is not caring and does not have LIKE or
+# higher liking for the PC OR boss is a jerk/selfish and does not have CLOSE liking to the PC.
+#
+# Some elements are randomized, so playing the scene multiple times hopefully won't be too ridiculous.
+
+
+textFileName: officeHarass.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: BUSINESS
+ maleNpcs:
+  - id: boss
+    outfit: BUSINESS
+ location: 
+  wall: wall # String description of the location's wall
+  floor: floor # String description of the location's floor
+  hasBed: false 
+  isOutside: false 
+
+intro:
+ textId: introText
+ effects:
+  - effect: '$scene.setActiveMaleNpc($boss)'
+  - effect: '$scene.hideNpc($boss)'
+ followUpActions:
+  keepWaiting:
+
+actions:
+ - id: keepWaiting
+   shortDesc: Keep waiting
+   longDesc: Continue waiting
+   textId: keepWaitingText
+   followUpActions:
+    greetBoss:
+   
+ - id: greetBoss
+   shortDesc: Greet your boss
+   longDesc: Say hello to your boss
+   textId: greetBossText
+   followUpActions:
+    shySmile: '$w.hasTrait("SHY")'
+    sexySmile: '$boss.isWAttractionLust() || $boss.isWLoveCrush() || $boss.isPartner() || $w.hasTrait("FLIRTY")'
+    uncertainLook: '!$w.hasTrait("SHY") && !($boss.isWAttractionLust() || $boss.isWLoveCrush())'
+    causticRetort: '$w.hasTrait("BITCHY") || ($w.isHighStress() && !$boss.isWLikingLike())'
+    stayProfessional: '!$w.hasTrait("SHY") || $w.hasTrait("AMBITIOUS")'
+    resignedSigh: '!$w.hasTrait("SHY")'
+    
+ - id: shySmile
+   shortDesc: Smile shyly
+   longDesc: You're too shy to respond directly, so just smile slightly, and hope he'll see how uncomfortable you are
+   textId: shySmileText
+   followUpActions:
+    backToWork: '!$moreGroping'
+    lookShocked: '$moreGroping'
+    
+ - id: sexySmile
+   shortDesc: Smile sexily
+   longDesc: Give your boss a sexy smile, letting him know he's free to claim his "perks"
+   textId: sexySmileText
+   followUpActions:
+    backToWork:
+    
+ - id: uncertainLook
+   shortDesc: Look confused
+   longDesc: Give your boss a confused look, as you're uncertain what he means by "perks"
+   textId: uncertainLookText
+   followUpActions:
+    backToWork: '!$moreGroping'
+    lookShocked: '$moreGroping'
+    
+ - id: causticRetort
+   shortDesc: Give a caustic retort
+   longDesc: You get the hint and you don't like it. Let him know exactly what you think of his "perks"
+   textId: causticRetortText
+   followUpActions:
+    backToWork: '!$moreGroping'
+    lookShocked: '$moreGroping'
+   
+ - id: stayProfessional
+   shortDesc: Stay professional
+   longDesc: Stay professional and try not to respond, even though you have a pretty good idea of what he means by "perks"
+   textId: stayProfessionalText
+   followUpActions:
+    backToWork: '!$moreGroping'
+    lookShocked: '$moreGroping'
+    
+ - id: resignedSigh
+   shortDesc: Give a resigned sigh
+   longDesc: Respond with only a resigned sigh, as you have a pretty good idea of what he means by "perks"
+   textId: resignedSighText
+   followUpActions:
+    backToWork: '!$moreGroping'
+    lookShocked: '$moreGroping'
+   
+ - id: lookShocked
+   shortDesc: Look shocked
+   longDesc: Seriously?! This is how your own boss is going to treat you while at work?
+   textId: lookShockedText
+   followUpActions:
+    backToWork:
+   
+ - id: backToWork 
+   shortDesc: Get back to work
+   longDesc: It's probably time to get back to work 
+   textId: backToWorkText 
+   finishScene: true
+   

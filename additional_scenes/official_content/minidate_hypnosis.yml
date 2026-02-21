@@ -1,0 +1,61 @@
+# Preconditions for this scene:
+# Part of the minidate framework
+# $bf should be the boyfriend or husband
+
+textFileName: minidate_hypnosis.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: bf
+    outfit: CASUAL
+
+ location:
+  usePlayerHome: true
+
+
+
+intro:
+ textId: introText
+ followUpActions:
+  hypnosis1:
+  nohypnosis:
+
+
+actions:
+
+ - id: hypnosis1
+   shortDesc: Use the hypnosis app
+   longDesc: Tell him that you want to be hypnotized
+   textId: hypnosis1
+   followUpActions:
+    hypnosis2:
+
+ - id: hypnosis2
+   shortDesc: Stare at the spiral
+   longDesc: Stare at the spiral pattern
+   textId: hypnosis2
+   followUpActions:
+    hypnosis3:
+
+ - id: hypnosis3
+   shortDesc: Relax
+   longDesc: Obey the app and relax
+   textId: hypnosis3
+   followUpActions:
+    hypnosis4:
+
+ - id: hypnosis4
+   shortDesc: Listen to the voice
+   longDesc: Let the voice fill your mind
+   textId: hypnosis4
+   finishScene: true
+
+
+ - id: nohypnosis
+   shortDesc: Not interested
+   longDesc: Tell him you don't want to be hypnotized
+   textId: nohypnosis
+   finishScene: true

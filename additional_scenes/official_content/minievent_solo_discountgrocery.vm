@@ -1,0 +1,24 @@
+<introText>
+You go on a walk through the neighbourhood. You pass by an Aldi, the German discount grocery store. A big banner advertising German Week is hung up on the side of the store. They have stocked many German products for the event.
+
+#if ($w.hasTrait("POSH"))##
+You consider shopping for some schnitzel, but you quickly reconsider. The thought of wading through the slovenly crowds as they paw through shelves of off-brand food products looking for deals turns you off. You remind yourself that you don't shop at Aldi and continue on your walk.
+#elseif ($w.hasTrait("SULTRY"))##
+Curious, you enter the store to peruse their German Week goods. In the middle aisle, you find a great deal on German bikinis. They are only a fiver each. You sift through the bin of bikinis looking for a good colour, but you come away disappointed when you realize that they are only selling bikini bottoms.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))##
+You eagerly enter the store, looking for deals. Everything is off-brand but very cheap. You find some German wine at bargain basement prices, so you stock up on a couple of bottles for later.
+#elseif ($w.hasTrait("CUTE"))##
+Curious, you enter the store to peruse their German Week goods. You must have come late because there isn't much selection, but you come away with a good deal on a box of apple strudel from Bulgaria.
+#else## normal
+Curious, you enter the store to peruse their German Week goods. You must have come late because there isn't much selection, but you come away with a good deal on some meat for Turkish kebab.
+#end
+</introText>
+
+
+
+<sceneDescriptionText>
+You are taking a stroll through the neighbourhood.
+</sceneDescriptionText>
+
+<empty>
+</empty>

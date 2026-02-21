@@ -1,0 +1,315 @@
+# Preconditions for this scene:
+# Part of the minidate framework
+# $bf should be the boyfriend or husband
+# $ex should be someone you've slept with in the past
+
+# allow non-jerk and limit to non-friends
+
+textFileName: minidate_exlover.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: bf
+    outfit: CASUAL
+  - id: ex
+    outfit: CASUAL
+
+ location:
+  wall: wall
+  floor: hardwood floor
+  hasBed: false
+  isOutside: false
+
+
+
+intro:
+ textId: introText
+ followUpActions:
+  greetJerk: $ex.getPersonality() == "JERK"
+  introduce: '$ex.getPersonality() != "JERK"'
+
+
+actions:
+
+ - id: introduce
+   shortDesc: Greet him
+   longDesc: Greet him and introduce everyone to each other
+   textId: introduce
+   followUpActions:
+    smalltalk:
+
+ - id: smalltalk
+   shortDesc: Make smalltalk
+   longDesc: Have a totally not awkward conversation like normal "friends"
+   textId: smalltalk
+   finishScene: (!$ex.hasTrait("BOASTFUL"))
+   followUpActions:
+    flattered: $ex.hasTrait("BOASTFUL")
+    disgusted: $ex.hasTrait("BOASTFUL")
+
+ - id: greetJerk
+   shortDesc: Greet him
+   longDesc: Act casual and greet him 
+   textId: greetJerk
+   followUpActions:
+    bfangry: (!$bf.hasTrait("DOORMAT") && !$bf.hasTrait("LIKES_TO_SHARE"))
+    response: ($bf.hasTrait("DOORMAT") || $bf.hasTrait("LIKES_TO_SHARE"))
+    angryJerk:
+
+ - id: angryJerk
+   shortDesc: Get angry
+   longDesc: This is wrong and you should get angry about it
+   textId: angryJerk
+   finishScene: true
+
+ - id: bfangry
+   shortDesc: Let your partner respond
+   longDesc: See what your partner's response is
+   textId: bfangry
+   finishScene: true
+
+ - id: response
+   shortDesc: Let your partner respond
+   longDesc: See what your partner's response is
+   textId: response
+   finishScene: (!$ex.hasTrait("BOASTFUL"))
+   followUpActions:
+    flattered: $ex.hasTrait("BOASTFUL")
+    disgusted: $ex.hasTrait("BOASTFUL")
+
+ - id: flattered
+   shortDesc: You feel flattered
+   longDesc: flatteredDesc
+   textId: howYouFeelAboutEx
+   effects:
+   - effect: '#set($flattered=true)'
+     condition: true
+   finishScene: (!$bf.hasTrait("DOORMAT") && !$bf.hasTrait("LIKES_TO_SHARE"))
+   followUpActions:
+    excited: ($bf.hasTrait("DOORMAT") || $bf.hasTrait("LIKES_TO_SHARE"))
+    angry: ($bf.hasTrait("DOORMAT") || $bf.hasTrait("LIKES_TO_SHARE"))
+    vulnerable: ($bf.hasTrait("DOORMAT") || $bf.hasTrait("LIKES_TO_SHARE"))
+
+ - id: disgusted
+   shortDesc: You feel disgusted
+   longDesc: disgustedDesc
+   textId: howYouFeelAboutEx
+   effects:
+   - effect: '#set($disgusted=true)'
+     condition: true
+   finishScene: (!$bf.hasTrait("DOORMAT") && !$bf.hasTrait("LIKES_TO_SHARE"))
+   followUpActions:
+    excited: ($bf.hasTrait("DOORMAT") || $bf.hasTrait("LIKES_TO_SHARE"))
+    angry: ($bf.hasTrait("DOORMAT") || $bf.hasTrait("LIKES_TO_SHARE"))
+    vulnerable: ($bf.hasTrait("DOORMAT") || $bf.hasTrait("LIKES_TO_SHARE"))
+
+ - id: excited
+   shortDesc: You feel excited
+   longDesc: excitedDesc
+   textId: excited
+   effects:
+   - effect: '#set($excited=true)'
+     condition: true
+   followUpActions:
+    yesDance:
+    noDance:
+
+ - id: angry
+   shortDesc: You feel angry
+   longDesc: angryDesc
+   textId: angry
+   effects:
+   - effect: '#set($angry=true)'
+     condition: true
+   followUpActions:
+    yesDance:
+    noDance:
+
+ - id: vulnerable
+   shortDesc: You feel vulnerable
+   longDesc: vulnerableDesc
+   textId: vulnerable
+   effects:
+   - effect: '#set($vulnerable=true)'
+     condition: true
+   followUpActions:
+    yesDance:
+    noDance:
+
+ - id: yesDance
+   shortDesc: Agree to dance with him
+   longDesc: Agree to dance with him
+   textId: yesDance
+   followUpActions:
+    danceCloser:
+    stayDistant:
+
+ - id: noDance
+   shortDesc: Refuse to dance with him
+   longDesc: Refuse to dance with him
+   textId: noDance
+   finishScene: true
+
+ - id: danceCloser
+   shortDesc: Dance closer
+   longDesc: danceCloserDesc
+   textId: danceCloser
+   followUpActions:
+    noAssGrope:
+    assGrope:
+
+ - id: stayDistant
+   shortDesc: Stay distant
+   longDesc: Keep dancing apart
+   textId: stayDistant
+   followUpActions:
+    danceBeforeGrind:
+
+ - id: noAssGrope
+   shortDesc: Remove his hand
+   longDesc: He shouldn't be touching you so intimately
+   textId: noAssGrope
+   followUpActions:
+    danceBeforeGrind:
+
+ - id: assGrope
+   shortDesc: Keep dancing
+   longDesc: A little touching is fine. You can take care of yourself.
+   textId: assGrope
+   followUpActions:
+    noGrind:
+    grind:
+    heavyGrind:
+
+ - id: danceBeforeGrind
+   shortDesc: Dance
+   longDesc: Continue dancing
+   textId: danceBeforeGrind
+   followUpActions:
+    noGrind:
+    grind:
+    heavyGrind:
+
+ - id: noGrind
+   shortDesc: Move away
+   longDesc: You don't feel like grinding
+   textId: noGrind
+   followUpActions:
+    musicEnds:
+
+ - id: grind
+   shortDesc: Keep dancing
+   longDesc: A little touching is fine. You can take care of yourself.
+   textId: grind
+   followUpActions:
+    grindTouch:
+    grindNoTouch:
+
+ - id: heavyGrind
+   shortDesc: Grind back
+   longDesc: Be a little flirty and lean forward for a more intimate grind
+   textId: heavyGrind
+   followUpActions:
+    heavyGrindTouch:
+    heavyGrindNoTouch:
+
+ - id: grindTouch
+   shortDesc: Keep dancing
+   longDesc: Continue dancing and let him touch you
+   textId: grindTouch
+   followUpActions:
+    musicEnds:
+
+ - id: grindNoTouch
+   shortDesc: Push his hand away
+   longDesc: Grinding is fine but you don't want to be felt up
+   textId: grindNoTouch
+   followUpActions:
+    musicEnds:
+
+ - id: heavyGrindTouch
+   shortDesc: Keep grinding
+   longDesc: Continue grinding and let him touch you
+   textId: heavyGrindTouch
+   followUpActions:
+    musicEnds:
+
+ - id: heavyGrindNoTouch
+   shortDesc: Push his hand away
+   longDesc: Grinding is fine but you don't want to be felt up
+   textId: heavyGrindNoTouch
+   followUpActions:
+    musicEnds:
+
+ - id: musicEnds
+   shortDesc: Continue
+   longDesc: Continue
+   textId: musicEnds
+   followUpActions:
+    toilets:
+    sitDown:
+    
+ - id: toilets
+   shortDesc: Visit the lavatory
+   longDesc: Make an excuse to visit the lavatory
+   textId: toilets
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: ex
+    returningId: afterToilets
+    location:
+     wall: stall door
+     floor: dirty tile floor
+     hasBed: false
+     isOutside: false
+
+ - id: afterToilets
+   shortDesc: Not seen
+   longDesc: Not seen
+   textId: afterToilets
+   followUpActions:
+    sitDown:
+
+ - id: sitDown
+   shortDesc: Take a seat
+   longDesc: sitDownDesc
+   textId: sitDown
+   finishScene: $bf.hasTrait("DOORMAT")
+   followUpActions:
+    nobfsex: '!$bf.hasTrait("DOORMAT")'
+    alleyway: '!$bf.hasTrait("DOORMAT")'
+    
+ - id: nobfsex
+   shortDesc: Stay indoors
+   longDesc: You're not in the mood
+   textId: nobfsex
+   finishScene: true
+    
+ - id: alleyway
+   shortDesc: Go outside
+   longDesc: alleywayDesc
+   textId: alleyway
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT
+    maleNpcs:
+     - id: man
+       npc: bf
+    returningId: afterAlleyway
+    location:
+     wall: brick wall
+     floor: pavement
+     hasBed: false
+     isOutside: true
+    
+ - id: afterAlleyway
+   shortDesc: Not seen
+   longDesc: Not seen
+   textId: afterAlleyway
+   finishScene: true

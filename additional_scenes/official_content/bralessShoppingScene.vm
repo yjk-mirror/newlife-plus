@@ -1,0 +1,565 @@
+
+<sceneDescriptionText>
+#if($scene.isNpcHidden($m))
+You're in town with a local sleazebag and no bra.
+#else
+You're out in town, bra-free.
+#end
+</sceneDescriptionText>
+
+<introText>
+## Macro used for this scene - putting top back on when exposed or removed, with simple text that can fit into a sentence. 
+## It isn't really suited to more general purposes.
+## It's expected to be preceded by "you" or "You"
+#macro(putTopBackOn)##
+	#if($w.topStatus == "OFF")
+		$w.setTopStatus("WORN")##
+		put your $w.top.basicDesc back on##
+	#elseif($w.topStatus == "EXPOSED")
+		$w.setTopStatus("WORN")##
+		#if($w.top.topType == "BUTTONS")button your $w.top.basicDesc back up##
+		#elseif($w.top.topType == "SLEEVED")pull your $w.top.basicDesc back down##
+		#{else}pull your $w.top.basicDesc back up#end
+	#end
+#end
+##
+##
+You decide to go out shopping today... without a bra.
+
+It seemed like a nice idea, something fun and flirty. Express yourself a little, feel what it was like to let them hang free. It felt nice and soft to the touch through the $w.top.basicDesc with their natural texture and shape. It was empowering.
+
+#if($w.hasTrait("SHY"))
+But as you step onto the bus, it's like everyone who glances in your direction is staring. You're sure everyone can tell...every person who looks at you or makes eye contact causes your face flush with heat. You hadn't expected to feel so scrutinized!
+
+#elseif($w.hasTrait("FLIRTY"))
+As you step onto the bus, it's like everyone who glances in your direction is staring. You're sure everyone can tell... every person who looks at you or makes eye contact makes a rush of self satisfaction flow through you. You wink at a guy who was peeking at you, brazenly flirting. He blushes and looks away.
+
+#else
+As you step onto the bus, it's like everyone who glances in your direction is staring. You're sure everyone can tell... every person who looks at you or makes eye contact must notice! You don't let it bother you though... you are free to express yourself, after all!
+#end
+</introText>
+
+<rideBusText>
+
+#if($w.hasTrait("SHY"))
+When the bus stops downtown you step off with an anxious feeling in your stomach. You clasp your hands to your chest, self conscious about the way your breasts feel, hanging free like this. 
+
+#elseif($w.hasTrait("FLIRTY"))
+When the bus stops downtown you step off with a proud feeling swelling in you. You clasp your hands to your chest, liking the way it pushes your breasts together.
+#else
+When the bus stops downtown you step off, aware of the swing of your breasts and trying to get used to it. You clasp your hands to your chest in an effort to provide some support.
+#end
+
+#if($w.getBreasts() == "SMALL")
+Despite their smallish size, the weight is still present, as is the feeling of the fabric moving against your nipples without impediment. It's like a constant source of stimulation, and it makes you even more aware as your nipples now stiffen up enough that they can be seen through the fabric of your $w.top.basicDesc!
+#elseif($w.getBreasts() == "MEDIUM_SMALL")
+The slight weight of your breasts is ever present, as is the feeling of the fabric moving against your nipples without impediment. It's like a constant source of stimulation, and it makes you even more aware as your nipples now stiffen up enough that they can be seen through the fabric of your $w.top.basicDesc!
+#elseif($w.getBreasts() == "MEDIUM_LARGE")
+The weight of your breasts is ever present, as is the feeling of the fabric moving against your nipples without impediment. It's like a constant source of stimulation, and it makes you even more aware as your nipples now stiffen up enough that they can be seen through the fabric of your $w.top.basicDesc!
+#elseif($w.getBreasts() == "LARGE")
+The immense weight of your breasts is ever present, like they are pulling you to the ground. So too is the feeling of the fabric moving against your nipples without impediment. It's like a constant source of stimulation, and it makes you even more aware as your nipples now stiffen up enough that they can be seen through the fabric of your $w.top.basicDesc!
+#end
+</rideBusText>
+
+<conquerFearsText>
+#if($w.hasTrait("SHY"))
+Eventually, you manage to let your arms drop to your sides, wanting to appear a little more confident as you stride down the sidewalk. With each step your breasts swing, bouncing lightly with your movements. 
+
+#elseif($w.hasTrait("FLIRTY"))
+Eventually you let your arms drop to your sides, confidently striding down the sidewalk. With each step your breasts swing, bouncing lightly with your movements. 
+
+#else
+
+Eventually you let your arms drop to your sides, letting them hang free as you stride down the sidewalk. With each step your breasts swing, bouncing lightly with your movements. 
+#end
+
+They feel buoyant and perky, sensually swaying in time with your hips. You smile. It gets more and more freeing the longer you walk until you're proudly standing up straight, letting them be seen.
+</conquerFearsText>
+
+<doShoppingText>
+You go about your stroll, carrying your bags, and soon manage to forget that you've gone out braless at all because it feels so natural. You exit shop after shop with more bundles hanging off of your arms, humming happily to yourself, a smile resting on your lips.
+</doShoppingText>
+
+<finishShopText>
+As you turn a corner, you see a man standing nearby leaning against a wall. His eyes are watching you carefully, a crass grin on his face, leering openly. His gaze is fixed to your chest, you realize, and you feel yourself blushing. You look down for a second and notice that your nipples are showing through your $w.top.basicDesc, then you look up. You realize that the man has one hand down the front of his pants.
+</finishShopText>
+
+<stopAndStareText>
+You're not sure how to react. His hand is moving, up and down, and you can see the outline of his cock through the denim. He looks like a total sleaze! But...damn, it's kind of hot that he's masturbating to the view of your nipples through your $w.top.shortDesc! His eyes on your body, openly enjoying the sway of your loose breasts...it's arousing. You bite your lip, feeling your body heat and heart beat a little harder in your chest.
+
+#if($m.hasTrait("THICK_COCK"))
+Before you've had a moment to process your feelings, you accidentally catch his eye. He looks surprised for a moment before winking, his grin widening just a little as he nods at you. He knows that you know and he can tell that you're into it. He spreads his legs a little, jutting his hips out in your direction, teasing you. You can see through his pants that he's probably large. ##
+#else
+Before you've had a moment to process your feelings, you accidentally catch his eye. He looks surprised for a moment before winking, his grin widening just a little as he nods at you. He knows that you know and he can tell that you're into it. He spreads his legs a little, jutting his hips out in your direction, teasing you. You can see through his pants that he's rock hard. ##
+#end
+#if($w.hasTrait("LIKES_BIG"))
+Your mouth is already salivating at the thought of what his cock must look, or taste, like.
+#end
+	
+You hear him beckoning to you, calling you sweetheart in a cocksure tone of voice. He asks you if you'd like to go over to him.
+</stopAndStareText>
+
+<keepWalkingText>
+You can't believe that anyone would be so crass! You fold your arms over your chest, your face pinching into an expression of disgust and displeasure. How dare he. How dare he use the image of your free hanging breasts as jerk off material. And in public, no less!
+
+You hurry on past the alley, purposefully ignoring him. Your stride is long and fast. You feel strong. You will not be objectified by some creep! Your bundles sway while you walk, in tempo with the indignant beat of your heart.
+
+You decide that you have had enough shopping for today, and you head to the bus station again, on your way home.
+</keepWalkingText>
+
+<confrontText>
+How dare he! You frown, eyes narrowing as you look directly at him. Directly at his disgusting hand down his disgusting pants. You are not going to stand for this! You march over to him, feet stomping on the concrete with every step. He doesn't even look ashamed of himself when he notices, eyes meeting yours with a cocksure grin.
+
+He asks you what the trouble is, but he doesn't remove his hand from his pants or even stop slowly rubbing himself. The nerve! You tell him that you don't appreciate him using your image as jack off fodder. And especially in public! Who knows who could end seeing this sort of filth!? He keeps a straight face while you lecture him, yelling at him about responsibility and about how much of a creep loser he is.
+</confrontText>
+
+<noticeText>
+While you are shouting at him, you notice that he hasn't stopped, and in fact is actually rubbing himself harder now, faster. Oh, my god, is he getting off on you berating him? He smirks, and tells you to keep going. Tells you that he agrees with you, that he's disgusting and worthless and to please keep reaming him out for it. He deserves it.
+
+You stammer, and try to get back into the stride of the lecture, but it's more difficult now with him breathing hard and you realize suddenly that you've actually started participating in his humiliation fetish.
+</noticeText>
+
+<humiliatehimText>
+You feel a rush of power. He's getting off to all the lecturing and the admonishing. He looks like he would do anything you said right now, like he needs you in some disgusting, perverse way. You tell him so. You tell him you've never seen anyone more revolting, or pathetic, and he moans in response, nodding and telling you that he agrees with you. He says he is all of those things.
+
+You tell him that he deserves to be punished for it. He deserves to be humiliated in front of everyone, for everyone to find out what a nasty pervert he is. He's putting his head back against the wall as you talk, breathing heavier and grunting, making all sorts of disgusting noises as he jerks himself faster.
+</humiliatehimText>
+
+<humiliatehim2Text>
+You tell him that you want to see him cum in his pants. That you want to see him completely soil himself. That it would be a fitting punishment for what he was doing if he had to go through the rest of his day with wet, cum soaked jeans. You put your hands on your hips so that he can get a good eyeful of your breasts as you say these things, enjoying the way his pupils dilate, the way he pants like a dog over you.
+
+Yes, you like having this sort of power.
+
+He suddenly groans and thrusts his hips out, and you watch as a wet spot grows over his crotch, soaking his pants and making him whimper and shake. He looks so vulnerable like this. You laugh at him and tell him that he's really the most pathetic thing you've ever seen. You observe how badly he needs someone to put him in his place. Then you cross your arms over your chest again.
+</humiliatehim2Text>
+
+<humiliatehim3Text>
+You tell him that if you ever catch him doing this again, he won't like what you'll do about it. You tell him that he'd better clean up his act. Then you turn around and walk away, leaving him panting and shaking where you found him.
+
+You decide to head home after that. Your clit is throbbing just from watching him come undone without even laying a finger on him. He looked so small and pathetic, and you had felt so powerful that you could get him off just by yelling at him. You grin as you head back to the bus. You really do feel on top of the world today.
+
+Going out without a bra had been one of the best decisions ever!
+</humiliatehim3Text>
+
+<slaphimText>
+You are shocked and appalled that has the gall to be getting off on this, too! You glare at him, and stop the lecture. It clearly isn't doing any good. There's only one way to deal with assholes like this. You pull your hand back, putting all the force you can muster into it, and slap him right across the face.
+
+That, at least, seems to shake him a little. He looks a bit stunned, and he's stopped rutting against his own hand like a filthy animal at least. You cross your arms over your chest and tell him that if you ever catch him doing something like this again, you're going to call the cops.
+
+Then you turn around and storm off. Rage propels your steps. You decide to call it a day and go home for now. Maybe going out without a bra really hadn't been such a great idea.
+</slaphimText>
+
+<acceptinviteText>
+You swallow, feeling your body growing more aroused. He was clearly inviting you to join him.##
+#if($m.hasHair) His $m.hairColour hair fell in his face##
+#else His bare head gleams under the streetlights#end
+, giving him a roguish sort of handsomeness despite the sleazy attire and the unabashedly salacious gaze. In fact, his boldness was sort of arousing itself. You find yourself walking towards him, into the alley, and he watches you the entire way. Watches the way your hips move and your breasts bounce.
+
+He licks his lips as you approach. Before you know it, you're within reach of him. Your breathing starts to quicken, pulse hot in your veins. He tilts his head as you approach.
+</acceptinviteText>
+
+<acceptinvite2Text>
+#if($w.hasTrait("SHY"))
+He claims that you like it. That you must be getting hot, seeing him jerking it to the sight of your tits hanging free under your $w.top.basicDesc. He snickers a little, amused by your flushed cheeks and shaking nervousness. You take a deep breath. He smells like tobacco, strong and earthy. Musk. He stands up straight, off of the wall, and starts to walk towards you. You back up and before you know it you can feel the opposite wall of the ally on your back.
+
+He's boxing you in, resting one arm on the wall by your head, and leaning in towards you. He still has one hand down the front of his pants, jerking himself a little more slowly now, teasing you. You can feel the warmth of his breath hot on your face. You give a timid nod, unable to help your eyes moving down to his crotch. You want to touch it yourself. He slides closer to you, breathing down your neck. You moan when you feel his tongue on your skin.
+
+#elseif($w.hasTrait("FLIRTY"))
+He claims that you like it. That you must be getting hot, seeing him jerking it to the sight of your tits hanging free under your $w.top.basicDesc. He snickers a little, amused by your flirty smile and your clear interest. You draw in a deep breath. He smells like tobacco, strong and earthy. Musk. He stands up straight, off of the wall, and starts to walk towards you. You back up, continuing to keep eye contact, and before you know it you can feel the opposite wall of the ally on your back.
+
+He's boxing you in, resting one arm on the wall by your head, and leaning in towards you. He still has one hand down the front of his pants, jerking himself a little more slowly now, teasing you. You can feel the warmth of his breath hot on your face. You give a slow nod, unable to help your eyes moving down to his crotch. You want to touch it yourself. He slides closer to you, breathing down your neck. You moan when you feel his tongue on your skin.
+
+#else
+He claims that you like it. That you must be getting hot, seeing him jerking it to the sight of your tits hanging free under your $w.top.basicDesc. He snickers a little, amused by your curiosity. You take in a deep breath. He smells like tobacco, strong and earthy. Musk. He stands up straight, off of the wall, and starts to walk towards you. You back up and before you know it you can feel the opposite wall of the ally on your back.
+
+He's boxing you in, resting one arm on the wall by your head, and leaning in towards you. He still has one hand down the front of his pants, jerking himself a little more slowly now, teasing you. You can feel the warmth of his breath hot on your face. You give a little nod, unable to help your eyes moving down to his crotch. You want to touch it yourself. He slides closer to you, breathing down your neck. You moan when you feel his tongue on your skin.
+#end
+</acceptinvite2Text>
+
+<acceptinvite3Text>
+He asks if you want to see his cock, and his hand moves from the wall down to your waist. You let him touch you and it feels so good, so nice, so warm. He slides his fingers around your ass, giving it a firm squeeze. He tells you that he'll show you his if you show him yours. He calls you sweetheart. His lips continue their trail down your neck and it tingles, sending little bolts of pleasure through you, shivers down your spine.
+
+You nod, mute in agreement, letting the bundles of bags fall softly to the ground. ##
+#if($w.top.topType == "SLEEVED")Your hands move to the hem of your $w.top.basicDesc, inching it up. 
+#elseif($w.top.topType == "BUTTONS")Your hands move to your $w.top.basicDesc and start to undo the buttons. 
+#elseif($w.top.topType == "STRAPLESS" || $w.top.topType == "STRAPPY")Your hands move to your $w.top.basicDesc and start to lower it. 
+#{else}Your hands move to your $w.top.basicDesc and begin to unfasten it. 
+#end
+
+#if($w.hasTrait("SHY"))
+You can't believe you are doing this! Your eyes go to the alley entrance, nervous in case someone walks by and sees what you're doing, but there's nobody there. For now. ##
+#elseif($w.hasTrait("FLIRTY"))
+You are so excited that you are doing this! Your eyes go to the alley entrance, checking in case someone walks by and sees what you're doing, but there's nobody there. For now. ##
+#else
+You can't believe you are doing this! Your eyes go to the alley entrance, just in case someone walks by and sees what you're doing, but there's nobody there. For now. ##
+#end
+Your skin feels electrified as you##
+#if($w.top.topType == "SLEEVED") slowly pull at the bottom of the $w.top.basicDesc, lifting it up and letting your breasts finally fall free of their cage. ##
+#elseif($w.top.topType == "BUTTONS") unfasten the last button, letting your $w.top.basicDesc fall open and free your breasts. ##
+#elseif($w.top.topType == "ZIP") pull the zip all the way down, letting your $w.top.basicDesc fall#if($w.top.exposeRemoves) away#else to your waist#end and free your breasts. ##
+#{else} lower your $w.top.basicDesc to your waist, letting your breasts finally fall free of their cage. ##
+#end
+##
+The man looks down at them with lust in his eyes, licking his lips again. You swear there's a bit of drool at the corner of his mouth.##
+#if($w.hasTrait("FLIRTY"))
+You smile at him, giving your breasts a small bounce, just to watch his eyes widen more.
+#end
+</acceptinvite3Text>
+
+<acceptinvite4Text>
+#if($w.hasTrait("SENSITIVE_BREASTS"))
+He tells you your tits are nice. He likes them perky. He likes your cute little nipples. He leans down, dipping his head as one of his hands cups your right breast, squeezing then pulling it upwards to meet his lips. You moan out loud as you feel his mouth envelop your nipple, sucking it and making you ache. Your back arches, whimpering for him. It feels so good! This stranger's touch...it's so nice!
+$m.addWEnjoyTiny()##
+#else
+He tells you your tits are nice. He likes them perky. He likes your cute little nipples. He leans down, dipping his head as one of his hands cups your right breast, squeezing then pulling it upwards to meet his lips. It feels so good! This stranger's touch...it's so nice!
+#end
+
+#if($m.hasTrait("THICK_COCK"))
+He laughs and tells you that fair is fair... he'll gladly give you what you want, now. He takes one of your hands and pulls it downwards, lifting his own hand out of his pants and hastening to undo his belt buckle. You have to stifle a gasp as you see his cock come free of his jeans. It's huge! You can't believe it! God, what that would feel like inside of you...
+
+#elseif($m.hasTrait("SMALL_COCK"))
+He laughs and tells you that fair is fair... he'll gladly give you what you want, now. He takes one of your hands and pulls it downwards, lifting his own hand out of his pants and hastening to undo his belt buckle. You feel a little let down at its size... it's not very big. But that doesn't make this any less exciting.
+
+#else
+He laughs and tells you that fair is fair... he'll gladly give you what you want, now. He takes one of your hands and pulls it downwards, lifting his own hand out of his pants and hastening to undo his belt buckle. You see his cock come free of his jeans.
+#end
+</acceptinvite4Text>
+
+<acceptinvite5Text>
+He guides your hand to it and you wrap your fingers around its length. It feels so smooth, so hard in your grip, and you can't help giving it a tug. He makes a lewd sound, then smiles, moving his hands up, one around your back and the other to your left breast. You cry out when you feel him pinching your nipple, tugging on it and watching you squirm against the hard surface of the wall.
+
+He tells you how much of a slut you are for doing this. He grins, leering at you and running his hand down between your legs from behind, spreading them for him and making you gasp.
+#if($w.hasTrait("SENSITIVE_BREASTS"))
+	He pulls on your nipple, giving just enough of a tug to make your whole body ache with desire, and you're already shaking from it. You can feel your pussy start to moisten already as you keep moving your hand up and down his cock. He asks you if it feels good, tells you that he can tell you're just dying for it, that you're soaking through your panties for him.
+#else
+	He pulls on your nipple, giving a small tug. You can feel your pussy start to moisten already as you keep moving your hand up and down his cock. He asks you if it feels good, tells you that he can tell you're just dying for it, that you're soaking through your panties for him.
+#end
+</acceptinvite5Text>
+
+<acceptinvite6Text>
+He tells you that he wants to fuck you. He grins against your ear as his hand moves up and around, slipping down your front## 
+#if($w.pantiesStatus == "OFF") where he soon finds that a bra isn't the only underwear you've gone without.##
+#else and into your $w.panties.getBasicDesc().##
+#end
+You feel his fingers sliding in between your pussy lips, already slick with wetness. Oh, god, you want his cock so badly. It's throbbing in your hand as he moves his hips, rutting up against you like an impatient animal. You can hardly wait. He whispers in your ear, fingers exploring you and teasing you. He tells you that around the corner further into the alley, nobody will see the two of you. Want a little quickie? He calls you a slut again, observes how eager you are for it.
+
+He nods towards the alley, gesturing deeper in. You can feel your heart beating in you chest. Do you really want to fuck this guy? The sensation of aching between your legs is insistent, but you don't know this man! And it's in public!
+</acceptinvite6Text>
+
+<slaphim2Text>
+You are shocked and appalled that he has the gall to actually invite you over! You glare at him, and make a decision. You purse your lips, disgusted at his presumption, and march over, each step stomping on the concrete as you approach.
+
+He's still smirking at you, the asshole, and he hasn't bothered stopping what he was doing. Almost like he's flaunting it, lording over you how uncomfortable he's making you feel. There's really only one way to deal with assholes like this. You pull your hand back, putting all the force you can muster into it, and slap him hard across the face.
+</slaphim2Text>
+
+<slaphim3Text>
+That, at least, seems to shake him a little. He looks a bit stunned, and he's stopped rutting against his own hand like a filthy animal at least. You cross your arms over your chest and tell him that if you ever catch him doing something like this again, you're going to call the cops.
+
+Then you turn around and storm off. Rage propels your steps. You decide to call it a day and go home for now. Maybe going out without a bra really hadn't been such a great idea.
+</slaphim3Text>
+
+<runawayText>
+Your eyes widen in horror as you realize that he's inviting you over to him. The nerve! Fear starts to hammer it's rhythm into your chest. This guy isn't shy about jacking off in public, what else would he do? You don't even want to know. He creeps you out.
+
+You keep walking, picking up the pace a little, letting your steps carry you quickly away from the alley. You can't get the image out of your head of him, sleazy grin on his face, leering at you with his hand down his pants. You keep looking behind you as you sprint away from him, fearing that you might see him following, stalking you from a distance.
+</runawayText>
+
+<runaway2Text>
+Thankfully you don't see him again, and you get to the bus stop without further incident. You resolve to go home, praying silently that he doesn't follow you there. You're sure that you'll loose him on the bus, but maybe you're a little paranoid. The sight of him had spooked you a fair bit.
+
+But you're on the bus now, and it's going to be okay. You just need to relax.
+</runaway2Text>
+
+<followText>
+He casually heads down into the alley, not waiting to see if you were following, so you had to make a decision quickly. You decided to go for it, your feet moving after him, one step after the other. He was, of course, a horribly greasy slimeball of a man, but you just couldn't not want this. The idea of his hands on your body, of his eyes on your breasts... you wanted him to suck on them again.
+
+You round the corner into a small space, well away from the potential of prying eyes, and see him with his pants down around his knees, cock rather prominently displayed. It was in his hand, hard and long and standing proudly upright. He was moving his hand up and down, lazily watching you. He tilts his head as he stroked it. He asks you if you are going to come and play.
+</followText>
+
+<follow2Text>
+#if($w.hasTrait("SHY"))
+You blush deeper, embarrassed but eager. 
+#elseif($w.hasTrait("FLIRTY"))
+You blush deeper, getting excited and eager. 
+#else
+You blush, feeling more and more eager.
+#end
+#if(!$w.top.alsoLowerBody && $w.topStatus != "OFF")
+	#if($w.top.topType == "BUTTONS")Without thinking, you slip your $w.top.basicDesc off your shoulders, discarding it on the ground. ##
+	#{else}Without thinking, you pull your $w.top.basicDesc up over your head, discarding it on the ground. ##
+	#end
+	$w.setTopStatus("OFF")##
+#end
+Your heart is beating like a drum in your chest, thrumming through your whole body as you move towards him. You can feel the wet juices dripping down your legs already. You reach for his cock, hand curling around it again, and it feels just as good this time as it did before. You wonder what it would feel like rubbing against your skin, against your face or your tits.
+
+#if($m.hasTrait("THICK_COCK"))
+He's already moaning as you start to jerk him. He tells you that he likes dirty slutty girls like you. Your hand keeps moving up and down even as you get closer to him. You can feel his body heat against you, and you have the sudden urge to drop to you knees and take his massive cock in between your lips. You imagine what it would feel like on your tongue.
+
+#else
+He's already moaning as you start to jerk him. He tells you that he likes dirty slutty girls like you. Your hand keeps moving up and down even as you get closer to him. You can feel his body heat against you, and you have the sudden urge to drop to you knees and take his cock in between your lips. You imagine what it would feel like on your tongue.
+#end
+
+He asks you if you're thinking about blowing him.
+</follow2Text>
+
+<cantdothisText>
+#if($w.hasTrait("SHY"))
+You tell him that you don't think you can do this. You're too nervous, too shy, you don't know what you're doing. You want to, but it's too much. He tells you it's okay. It's okay if you don't think you can fuck him right now. His cock slips from your hand.
+
+#else
+You tell him that you don't think you can do this. You want to, but it's too much. He tells you it's okay. It's okay if you don't think you can fuck him right now. His cock slips from your hand.
+#end
+
+#if($w.pantiesStatus != "OFF")He starts to slip his fingers into your $w.panties.getBasicDesc(). #end##
+His fingers find your pussy lips, and he gently drags them along your cunt, sliding freely over the wetness. You moan, feeling a swell of pleasure rush through you. God, it feels so good. He tells you that he'll take care of you real good, that you don't have to worry about a thing. Slowly his fingers start to slide into your pussy, filling you little by little, and you feel your legs spread on their own for him. He keeps talking, telling you that he knows he's a stranger, and he knows that that's what makes this so exciting. He asks you, don't you want to be touched by a stranger?
+</cantdothisText>
+
+<fingeringText>
+You can't help but nod. It feels so good, you almost cant stand it. Eventually he slips a third finger into your warm cunt and you start to rock your hips against his hand. His thumb hovers over your clit, making you breathless and panting and wanting. How had this gross pervert manage to make you so vulnerable so quickly?
+
+You feel your body shaking as that sensation tightens in your core, that pleasure building towards an ecstatic climax. Are you really going to let this man make you cum? You whimper, panting and leaning back against the wall behind you, squirming for him as he keeps finger fucking you.
+</fingeringText>
+
+<fingering2Text>
+He tells you that you sound cute when you moan, and that just makes you moan for him more. He tells you that he's glad he found a real slut like you, that he wants to do all sorts of dirty things to you. He tells you that he wants to watch you cum for him.
+
+His words bring you closer and closer. Your hips rut against his hand, your clit rubbing on his thumb while his fingers stuff you full over and over again. God, if just his fingers feel this good what would his cock feel like? You feel yourself getting closer and closer, a rush of sensation racing through your body, making you feel hot and your vision go blurry and your heartbeat loud.
+
+Then suddenly you feel it, that rush of climax, tearing through you, and you cry out hands flat on the wall, your hips shaking and jerking while you ride out wave after wave of pleasure. Holy shit, you hadn't expected it to be this good.
+</fingering2Text>
+
+<fingering3Text>
+When your body finally settles down he slides his fingers out of you, and you watch him press them to his lips. First he inhales deeply, drinking in your scent, and then he pushes them into his mouth, making eye contact with you all the while as he sucks your pussy juices off of his fingers.
+
+Finally he smirks, pats you on the cheek, and tells you that you're a horny little slut and that he'd be up to play with you any time you want. He tucks his dick back into his pants. Then he turns around and starts walking off, leaving you panting and shaking in the ally. You suck in a deep breath as you watch him go, hardly believing that that had happened.
+</fingering3Text>
+
+<fingering4Text>
+After a few moments of catching your breath, and your body returning to normal, you fix your $w.top.basicDesc, pulling it back up over your torso and covering your breasts. You grip the bags you had brought with you and pull them close in front of your chest, and decide to head home for now.
+
+It had been quite an eventful outing.
+</fingering4Text>
+
+<righthereText>
+You consider his suggestion: going deeper into the alley was a sure way to avoid getting caught, after all. There was probably some sense to that. But, still, your eyes flit over to the side, taking in the street just a few paces away and the cars going by, and a rush of excitement bubbles through you. You kind of like the idea that you could get caught. It was naughty. It was dirty. It was hot.
+
+You tell him that you don't mind if he's too chicken to keep going right here. He laughs and says that he is surprised you were such a dirty little exhibitionist. Your hand tightens around his cock, feeling the hardness of his shaft, and you know that he's into it too. You lean forward, feeling emboldened by your decision, and seek his lips with your own.
+</righthereText>
+
+<righthere2Text>
+He presses his mouth against yours, and he tastes like brandy and cigars. You moan, pulling him in closer by his dick, and he groans in return. You feel a sharp stab of pain as he gives your nipples a pinch, and you feel some kind of fire awakened in you, desire and desperation. You want his cock, you want it in you, you want it now. His body pressed against yours has made you crazy, and you lift one leg to wrap around his waist, thrusting your hips towards him.
+
+You feel like an animal, desperate and in heat, and you like it. He seems to like it too, laughing and telling you what a good little slut you are. You feel one of his hands slip in between your legs, looking for your pussy lips.
+</righthere2Text>
+
+<caughtText>
+Then you hear a shout from the street, and you both turn to see a security guard approaching you with a yell. The man looks angry, waving his hand at you and telling you both that you're in public and you're being indecent. ##
+#if($w.hasTrait("SHY"))
+You feel your face flush a deep red, horrified that someone actually caught you. You hurriedly stand back up on your feet, arms moving to haphazardly shield your breasts from view.
+#elseif($w.hasTrait("FLIRTY"))
+You click your teeth, annoyed that someone had actually caught you, ruining the fun. You stand back up on your feet, arms moving to shield your breasts from view.
+#else
+You feel your face flush a deep red, a little embarrassed that someone actually caught you. You hurriedly stand back up on your feet, arms moving to shield your breasts from view.
+#end
+The man just laughs and tells the security guard that he couldn't help if it women wanted him so bad that they flung themselves at him. It was clearly not his fault. You wanted to protest, to say that he had been the one jacking off to the sight of passing strangers, but you realized that by now, you had participated too much for that to work.
+</caughtText>
+
+<caught2Text>
+You apologize to the security guard, and tell him that it wont happen again. Then without waiting for another word from either of them you #putTopBackOn, grab your things, and start sprinting out of the alley. You still feel that buzz of arousal, but it is thoroughly quashed by the shame of being caught.
+
+You decide that it's time to head home. You think that you have had enough excitement for one day, and head back to the bus stop.
+</caught2Text>
+
+<blowhimText>
+You look at him a little shocked. He says that he can tell... that you have that look about you. He puts a hand on your head, and you feel him start to push you downwards. Your legs bend, slowly lowering yourself to the ground, you knees hitting the hard concrete as he guides you downwards.
+
+#if($m.hasTrait("THICK_COCK"))
+With his cock directly in your face now you can get a good look at it. It's long and thick, so perfectly hard you can barely help yourself. It smells strong, the obscene scent only furthering your arousal. ## 
+#elseif($m.hasTrait("SMALL_COCK"))
+With his cock directly in your face now you can get a good look at it. It's on the small side#if($w.hasTrait("LIKES_BIG")), which is disappointing, but#else and#end it smells strong, the obscene scent only furthering your arousal. ##
+#else
+With his cock directly in your face now you can get a good look at it. It smells strong, the obscene scent only furthering your arousal. ##
+#end
+You shift where you're kneeling, squeezing your legs to try to get some pressure on your already throbbing clit. Your whole body is thrumming with desire. You part your lips, ready to take him, slipping out your tongue.
+</blowhimText>
+
+<blowhim2Text>
+You slide him into your mouth and relish the sound of him sighing and groaning in pleasure. God, that's hot! Your hands come to rest on his hips, as you pull yourself closer, letting his cock slide deeper into your mouth. It feels incredible, filling your throat and pushing down on your tongue. It tastes like sweat and musk, it's bitter tang absolutely perfect. You can't get enough of it!
+
+#if($w.hasTrait("SKILLFUL_TONGUE"))
+He tells you how good you are at it... tells you that you know how to suck a mean dick. You moan around it, moving your head back and forth on its length, feeling it filling up your mouth. God, you love sucking it. You love hearing his lewd grunts and groans... you start to move faster. His hand reaches down to pinch your nipple, playing with your tits and you gasp, whimpering a little around his dick.
+$m.addEnjoySmall()##
+#else
+You moan around it, moving your head back and forth on its length, feeling it filling up your mouth. God, you love sucking it. You love hearing his lewd grunts and groans... you start to move faster. His hand reaches down to pinch your nipple, playing with your tits and you gasp, whimpering a little around his dick.
+#end
+</blowhim2Text>
+
+<blowhim3Text>
+He sounds like he's getting closer. You can't believe how good this feels, how exciting. The smell is pungent, and you want to drink it in forever. You keep moving, forcing his cock deeper and deeper down your throat over and over like your life depends on it. He tells you he's close, he tells you that he's going to blow his load in your mouth, and asks you if you want to swallow it.
+</blowhim3Text>
+
+<takecontrolText>
+You blink, considering it. You do want to blow him. Your mouth is salivating at the thought, your curiosity going wild wondering what this big meaty cock would taste like, what it would feel like on your tongue. But, you think that this guy has driven this encounter for long enough.
+
+You feel a little bolder. You want to take what you want, not the other way around. You went out today without a bra on to feel more confident, dammit. You tell him that you'll suck him off if he asks you nicely.
+
+He looks a little surprised, but not upset about your assertion. He quirks a brow at you, still grinning like an eager teenager, and asks you to please suck his dick. You put your hands out and push him, turning you both around so that he's the one with his back to the wall.
+</takecontrolText>
+
+<takecontrol2Text>
+You tell him to keep his hands to himself or else you're leaving. He obeys.
+
+You slowly sink to your knees, until you can feel the concrete on your skin. With his cock directly in your face now you can get a good look at it. ##
+#if($m.hasTrait("THICK_COCK"))
+It's long and thick, so perfectly hard you can barely help yourself. It smells strong, the obscene scent only furthering your arousal. You shift where you're kneeling, squeezing your legs to try to get some pressure on your already throbbing clit. Your whole body is thrumming with desire. You part your lips, ready to take him, slipping out your tongue.
+#elseif($m.hasTrait("SMALL_COCK"))
+It's a little on the small side#if($w.hasTrait("LIKES_BIG")), which is disappointing, but#else and#end it smells strong, the obscene scent only furthering your arousal. You shift where you're kneeling, squeezing your legs to try to get some pressure on your already throbbing clit. Your whole body is thrumming with desire. You part your lips, ready to take him, slipping out your tongue.
+
+#else
+It smells strong, the obscene scent only furthering your arousal. You shift where you're kneeling, squeezing your legs to try to get some pressure on your already throbbing clit. Your whole body is thrumming with desire. You part your lips, ready to take him, slipping out your tongue.
+#end
+
+You slide him into your mouth and relish the sound of him sighing and groaning in pleasure. God, that's hot! Your hands come to rest on his hips, as you pull yourself closer, letting his cock slide deeper into your mouth. It feels incredible, filling your throat and pushing down on your tongue. It tastes like sweat and musk, it's bitter tang absolutely perfect. You can't get enough of it!
+</takecontrol2Text>
+
+<takecontrol3Text>
+#if($w.hasTrait("SKILLFUL_TONGUE"))
+You start to suck on it, enjoying the feeling of your lips wrapping around it, pulling it in and down your throat. You love to hear him start to moan, grunting and groaning and making increasingly lewd noises for you. He tells you that you got a good mouth on you, that you're a good cocksucking bitch. You hum with his cock in your mouth, enjoying the feeling of it, sending vibrations through it and making him shiver.
+$m.addEnjoySmall()##
+#else
+You start to suck on it, enjoying the feeling of your lips wrapping around it, pulling it in and down your throat. You love to hear him start to moan, grunting and groaning and making increasingly lewd noises for you. You hum with his cock in your mouth, enjoying the feeling of it, sending vibrations through it and making him shiver.
+#end
+
+He couldn't help himself from rutting his hips up into your mouth, from plunging deeper and deeper into your throat. You feel powerful... you are the one that is doing this to him. You are the one that was so desirable, so sexy that he couldn't help but touch himself. He's just a horny animal, and you have the control here.
+</takecontrol3Text>
+
+<cuminmouthText>
+You pull off of his dick long enough to tell him that you want him to cum down your throat. You want to swallow it. He bites his lip, excited. You start sucking it again, this time going as deep and as fast as you can to finally push him over the edge.
+
+#if($m.hasTrait("NASTY_SPERM"))
+Then he grunts, panting and groaning, rocking his dick into your face again and again, fucking deep down your throat. Finally he pushes in and moans, loud, not holding anything back, and you feel his warm cum pouring into your mouth. The taste is horribly bitter, and it coats your tongue as you rush to try to swallow it. You cough a little, a the taste lingering in your mouth. He is out of breath as he pulls out, a little bit of cum still dripping from the tip of his dick.
+
+#elseif($m.hasTrait("TASTY_SPERM"))
+Then he grunts, panting and groaning, rocking his dick into your face again and again, fucking deep down your throat. Finally he pushes in and moans, loud, not holding anything back, and you feel his warm cum pouring into your mouth. The taste is amazing! It coats your tongue as you rush to try to swallow it. You can't get enough of it! He is out of breath as he pulls out, a little bit of cum still dripping from the tip of his dick.
+
+#else
+Then he grunts, panting and groaning, rocking his dick into your face again and again, fucking deep down your throat. Finally he pushes in and moans, loud, not holding anything back, and you feel his warm cum pouring into your mouth. The taste is salty and bitter, and it coats your tongue as you rush to try to swallow it. He is out of breath as he pulls out, a little bit of cum still dripping from the tip of his dick.
+#end
+</cuminmouthText>
+
+<cuminmouth2Text>
+#if($m.hasTrait("NASTY_SPERM"))
+You close your lips around it and swallow it all back, trying to ignore the taste and looking up at him with a smirk on your face. He looks absolutely wrecked, shaking and panting and pressing his hands against the wall behind him. He says that you made him feel so good, that your mouth was so hot, and you let him get another eyeful of your tits as you slowly stand back up again.
+$m.reduceWEnjoySmall()
+#elseif($m.hasTrait("TASTY_SPERM"))
+You close your lips around it and swallow it all back, relishing the taste and looking up at him with a smirk on your face. He looks absolutely wrecked, shaking and panting and pressing his hands against the wall behind him. He says that you made him feel so good, that your mouth was so hot, and you let him get another eyeful of your tits as you slowly stand back up again.
+$m.addWEnjoySmall()
+#else
+You close your lips around it and swallow it all back, looking up at him with a smirk on your face. He looks absolutely wrecked, shaking and panting and pressing his hands against the wall behind him. He says that you made him feel so good, that your mouth was so hot, and you let him get another eyeful of your tits as you slowly stand back up again.
+#end
+
+You lean in and meet his lips with a kiss, letting him taste himself on your breath. He moans into your mouth and you feel a rush of self satisfaction. You tell him he has a nice dick. Then you pat him on the cheek and turn around, walking back out through the alley, and grabbing your things. You feel pleased with yourself.
+
+It was quite the exciting outing. You're ready to head home, now.
+</cuminmouth2Text>
+
+<cumontitsText>
+You pull off of his dick long enough to tell him that you want him to blow his load all over your tits. He blinks, and then grins, saying that he would be delighted. You go back to sucking him again, taking his dick in your mouth and putting out a hand to grab him by the balls, squeezing and massaging him with your hands and coaxing his dick closer towards climax.
+
+He starts moaning and groaning even louder, more desperately, and you love how his dick seems to get even harder in your mouth, his balls tightening in your hand. You keep milking him, right until he seems like he's about to blow his load, and then you pull off of him again, moving your hand up his shaft to jerk him onto your tits.
+</cumontitsText>
+
+<cumontits2Text>
+He shouts, and you watch as spurts of thick white cream shoots out of him, coating your tits with every twitch. He's panting, shaking, and you can feel his cum hot on your skin. It smells bitter, gleaming on you like pearls. You feel absolutely slutty, looking down at your tits and seeing them covered in this stranger's load.
+
+He looks down at you with a lazy smile, watching your breasts bounce and sway as you stand back up. You grin and tell him that he's a real man, cumming so much. He says that you're quite the lady.
+</cumontits2Text>
+
+<cumontits3Text>
+You tell him that you had a lovely time playing with his cock, and then you #putTopBackOn, feeling it stick on the now drying cum. You are going to need to change when you get home. You walk out of the alley, swaying your hips and hoping that he's watching, feeling very pleased with yourself.
+
+Today had been a very eventful day so far.
+</cumontits3Text>
+
+<dontwanttoText>
+You consider it. It's tempting. You really, really want to. But.... no, no this is a stranger! You can't imagine what came over you. You shake your head, pulling away from him. It had been easy to lose yourself to this fantasy, to get hot and bothered because this man thought you were sexy, but, you just couldn't actually go through with it.
+
+You tell him that you can't. You don't want to suck him off. You're sorry to lead him on. You feel so embarrassed that you made him think that you were going to do something sexual with him, and then let him down. He looks annoyed, like you wasted his time.
+</dontwanttoText>
+
+<dontwantto2Text>
+He tells you that he knew you were a bitch when he saw you and that he should have known better. You apologize again but he doesn't seem to care. He angrily stalks out of the alley, tucking himself back into his pants as he goes, muttering expletives under his breath. You wait for a few moments, #putTopBackOn and, feeling stupid, walk out as well.
+
+You find that all of your things that you'd dropped earlier were gone. Motherfucker has stolen your stuff! You clench your fists and run out of the alley, hoping to catch him, but he's gone. Well, shit.
+
+You decide to head home, resigned. That was more than enough excitement for one day.
+</dontwantto2Text>
+
+<swallowText>
+#if($m.hasTrait("NASTY_SPERM"))
+You keep going, and he pulls you in closer by your tits, hands rough and demanding. He grunts, panting and groaning, rocking his dick into your face again and again, fucking deep down your throat. Finally he pushes in and moans, loud, not holding anything back, and you feel his warm cum pouring into your mouth. The taste is horribly bitter, and it coats your tongue as you rush to try to swallow it.  He is out of breath as he pulls out, a little bit of cum still dripping from the tip of his dick.
+$m.reduceWEnjoySmall()
+#elseif($m.hasTrait("TASTY_SPERM"))
+You keep going, and he pulls you in closer by your tits, hands rough and demanding. He grunts, panting and groaning, rocking his dick into your face again and again, fucking deep down your throat. Finally he pushes in and moans, loud, not holding anything back, and you feel his warm cum pouring into your mouth. The taste is amazing! It coats your tongue as you rush to try to swallow it. You can't get enough of it! He is out of breath as he pulls out, a little bit of cum still dripping from the tip of his dick.
+$m.addWEnjoySmall()
+#else
+You keep going, and he pulls you in closer by your tits, hands rough and demanding. He grunts, panting and groaning, rocking his dick into your face again and again, fucking deep down your throat. Finally he pushes in and moans, loud, not holding anything back, and you feel his warm cum pouring into your mouth. The taste is salty and bitter, and it coats your tongue as you rush to try to swallow it. He is out of breath as he pulls out, a little bit of cum still dripping from the tip of his dick.
+#end
+
+Your mouth closes around the thick cream, swallowing it back as you look up at him in a daze. He smirks at you, tucking his dick back into his jeans. He tells you that you were a good suck, and that he'd be up to play with you anytime. Then he pats your cheek and turns around, walking out of the alley, leaving you on your knees.
+</swallowText>
+
+<swallow2Text>
+You wait for a few moments to catch your breath before you get back up again, leaning against the wall to steady yourself. You #putTopBackOn, fixing yourself and hoping that nobody notices the freshly fucked look about you.
+
+Walking back out of the alley you look for the things you had bought when you were shopping, only to find that they are gone! That asshole stole your stuff!! You mentally berate yourself for being so naive. Of course that sleazeball would rob you right after you sucked him off. You promise yourself that if you see him again you'll clock him good.
+
+Of course... his dick did feel incredible in your mouth. And you do still wonder what it would feel like in your ass or your pussy. You leave the alley feeling confused, but still horny. Oh well... better get about your day.
+</swallow2Text>
+
+<spitText>
+You wonder if you can. You think you can. You want to try. You start to pick up the pace, wanting to taste his load, wanting to make him cum in your mouth. He's panting already, groaning and telling you that he's close, and you can't help but moan along with him, turned on by how eager he is.
+
+You raise a hand to play with his balls, giving them coaxing squeezes and massages, letting your fingers caress them and then trail back up the shaft. He tastes so good, and you want more. You take him deeper, bobbing your head back and forth##
+#if($w.hasHair) as you feel his hands come to rest in your hair.
+#{else}.#end
+</spitText>
+
+<spit2Text>
+#if($m.hasTrait("NASTY_SPERM"))
+Finally he pushes in and moans, loud, not holding anything back, and you feel his warm cum pouring into your mouth. The taste is horribly bitter, and it coats your tongue as you rush to try to swallow it.
+$m.reduceWEnjoySmall()
+#elseif($m.hasTrait("TASTY_SPERM"))
+Finally he pushes in and moans, loud, not holding anything back, and you feel his warm cum pouring into your mouth. The taste is amazing! It coats your tongue as you rush to try to swallow it. You can't get enough of it! 
+$m.reduceWEnjoySmall()
+#else
+Finally he pushes in and moans, loud, not holding anything back, and you feel his warm cum pouring into your mouth. The taste is salty and bitter, and it coats your tongue as you rush to try to swallow it.
+#end
+Your stomach clenches without your control, violently rejecting the idea of swallowing. You find yourself sputtering, spitting it out as he pulls himself out of your mouth, and it spills over your chin and dribbles down your tits.
+
+He says you should have swallowed it, that if you were really a good little slut you would have. You lick your lips, trying to get whatever of it you can, and the taste washes over you, making you groan and pant. He's breathing hard as well, looking you over and commenting that it's alright, since it looks so nice on your titties.
+</spit2Text>
+
+<spit3Text>
+You smile, and he says he supposes that you're a good bitch. He tells you he would be down to play with you any time. Then he walks away, leaving you sputtering and catching your breath in the alley. You take a deep breath and then wipe the remaining cum from your face as you #putTopBackOn. It's gotten all sticky now, so you'll have to have a shower when you get home.
+
+As you leave the alley, you realize with a sinking feeling that all of your bags are gone! You frantically look around the for the strange man, but he is nowhere to be seen. Well, shit.
+
+With a resigned sigh you decide to head home for the day.
+</spit3Text>
+
+<titsText>
+You pull off of him long enough to tell him that you would rather he cum on your exposed tits. He grins and says that that can easily be arranged. You smile up at him as you open your mouth and take his whole cock back into your throat, bobbing your head back and forth. The taste of him rushes back to you and you moan, happy to feel him filling your mouth again.
+
+He says he's getting close. You can feel his cock getting even harder on your tongue, and you take your hand and reach out to fondle his balls as you suck. They feel so nice in your fingers, gently squeezing and massaging them, coaxing them to give up their nice white cream.
+</titsText>
+
+<tits2Text>
+Finally his panting and grunting sounds like he's going to blow, so you pull off and grab him by the shaft, working it over and over again until he's rutting his hips into your hand and spurting shot after shot of white over your breasts. Its hot, and the smell is pungent, and you can feel it sliding against your skin. You look down after he's done, seeing how it gleams like pearls.
+</tits2Text>
+
+<tits3Text>
+Then you slowly stand up, pleased with how wrecked and spent he looks. He's panting, gasping for breath, and telling you what a good nice mouth you have. You grin and thank him for the good time. You tell him that his cock is the best you've ever had. You #putTopBackOn as you turn around and walk out of the alley. It sticks against the cum, and you know you're going to need to wash it when you get home.
+
+You decide that that is quite enough for one day, and head back to the bus stop after you collect your bags.
+</tits3Text>

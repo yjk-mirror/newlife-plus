@@ -1,0 +1,22 @@
+<sceneDescriptionText>
+You feel the need to book another session with $m.name and submit once again to his hypnosis.
+</sceneDescriptionText>
+
+<introText>
+You want to get hypnotised again. You can't really remember all the details of what happened last time, and there's even a sense of trepidation about it, but one thing you're certain of is that you want another session.
+
+You have flyers for a couple of hypnotists... but no, only $m.name will do. For some reason you're sure of that.
+</introText>
+
+<hireEvilHypnoSd>
+Book $m.name
+</hireEvilHypnoSd>
+
+<hireEvilHypnoLd>
+Book a session with $m.name.
+</hireEvilHypnoLd>
+
+<hireEvilHypno>
+You call and book a session with $m.name. It turns out that he's free this very evening, almost as if he'd been expecting your call. 
+Within a few hours, there's the knock on the door that tells you he's arrived.
+</hireEvilHypno>

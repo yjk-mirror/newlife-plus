@@ -1,0 +1,13 @@
+<introText>
+$bf.getName() asks you to go stargazing with him. You suggest meeting up at a park, but he is dismissive of the idea, telling you that there's too much light. You end up needing to travel to a remote part of town and hike through a deserted park to a hill with enough darkness.
+
+You are amazed by how many stars you can see from this vantage point. $bf.getName() points out the different constellations and tells you the story of each one. Soon though, you begin mixing them up, and $bf.getName() starts droning on about meteors or something. You shiver in the inky darkness as he insists on explaining to you how the constellations are different in the southern hemisphere. Eventually he tires out as well and you are able to go home.
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are stargazing with $bf.getName().
+</sceneDescriptionText>
+

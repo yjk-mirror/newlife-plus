@@ -1,0 +1,17 @@
+<sceneDescriptionText>
+You're heading out to the shops.
+</sceneDescriptionText>
+
+<introText>
+You're on your way to the local shops when you spot a notice-board. Curiosity sends you closer and you see that it's full of ads for various alternative therapies. There's a tray of flyers beneath as well, so people convinced by a poster can walk away with contact details for the therapist.
+
+Skipping over posters advertising all-natural colonic irrigation and extended relief from period pain, your eye alights on a pair, side by side, that extol the benefits of hypnosis. Intriguing. 
+</introText>
+
+<inspectPosters>
+The first of the posters bright and friendly, offering helpful stress reduction by some fellow named $goodHypno.name. The other has a strange swirling pattern and just reads "$evilHypno.name, hypnotist, money is no object for you". You feel compelled to take one of his flyers. While you're at it, you might as well do the same with $scene.addPossessiveSuffix($goodHypno.name).
+</inspectPosters>
+
+<noteNumbers>
+You take both flyers. Hypnosis can be good for stress relief, or so you've heard. You can book a session on the weekends.
+</noteNumbers>

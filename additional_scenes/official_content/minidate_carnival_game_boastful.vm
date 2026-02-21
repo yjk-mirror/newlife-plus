@@ -1,0 +1,15 @@
+<introText>
+You meet $bf.getName() at a street festival. There are rides, games and street food.
+
+You come across a ball toss game that has some cute plush dolls as prizes. $bf.getName() brags that even though all these games are rigged, he watched a Channel 4 program on how to beat the system, and he was once able to win all the prizes and was kicked out.
+
+You demand that he win you the biggest doll. $bf.getName() plays game after game, but he isn't able to win anything.
+$bf.reduceNpcLikingTiny() $bf.reduceWLikingTiny()##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are going to a street festival with $bf.getName().
+</sceneDescriptionText>
+

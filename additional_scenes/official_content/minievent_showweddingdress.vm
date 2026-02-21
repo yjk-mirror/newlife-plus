@@ -1,0 +1,162 @@
+<introText_bf_m>
+$scene.hideNpc($bf)##
+$scene.hideNpc($gf)##
+#if($bf)#set($partner = $bf)#{else}#set($partner = $gf)#end##
+#set($friend = $m)##
+#set($friendPronoun = "he")##
+#set($friendPronounO = "him")##
+##
+You meet with $friend.getName() at your place to chat. 
+
+While you talk about how things are going in your lives, the conversation eventually drifts to the topic of your upcoming wedding. $friend.getName() listens to you ramble on about all the wedding preparations and how stressful it can be. $scene.capitalise($friendPronoun) comforts you by saying that as long as you show up at the wedding in a wedding dress, $friendPronoun is sure that the wedding will be fine. $scene.capitalise($friendPronoun) asks whether you've chosen your wedding dress yet. When you tell $friendPronounO that you have, $friendPronoun lights up and asks to see it.
+</introText_bf_m>
+
+<introText_bf_f>
+$scene.hideNpc($bf)##
+$scene.hideNpc($gf)##
+#if($bf)#set($partner = $bf)#{else}#set($partner = $gf)#end##
+#set($friend = $f)##
+#set($friendPronoun = "she")##
+#set($friendPronounO = "her")##
+##
+You meet with $friend.getName() at your place to chat. 
+
+While you talk about how things are going in your lives, the conversation eventually drifts to the topic of your upcoming wedding. $friend.getName() listens to you ramble on about all the wedding preparations and how stressful it can be. $scene.capitalise($friendPronoun) comforts you by saying that as long as you show up at the wedding in a wedding dress, $friendPronoun is sure that the wedding will be fine. $scene.capitalise($friendPronoun) asks whether you've chosen your wedding dress yet. When you tell $friendPronounO that you have, $friendPronoun lights up and asks to see it.
+</introText_bf_f>
+
+<sceneDescriptionText>
+You are at home, talking about your wedding with $friend.getName().
+</sceneDescriptionText>
+
+<refuseChangeIntoDress>
+You tell $friend.getName() that $friendPronoun will have to wait until the wedding to see it. $scene.capitalise($friendPronoun) is disappointed, but $friendPronoun understands. The conversation shifts to another topic, and the two of you go back to chatting away.
+</refuseChangeIntoDress>
+
+<changeIntoDress>
+You tell $friend.getName() to wait while you go and get changed into your wedding dress.
+</changeIntoDress>
+
+<finishedChangeIntoDress>
+#if(!$scene.hasFlag("SUCCESSFULLY_CHANGED_CLOTHES"))##
+You grow nervous and decide not to change into your wedding dress after all. You tell $friend.getName() that $friendPronoun will have to wait until the wedding to see it. $scene.capitalise($friendPronoun) is disappointed, but $friendPronoun understands. The conversation shifts to another topic, and the two of you go back to chatting away.
+#elseif($w.isNaked())##
+The thought of walking around naked in front of $friend.getName() makes you nervous, but you realize that you have to become comfortable with the idea of public nudity for your wedding. You work up the nerve and ignore the butterflies in your stomach. You step into the room, completely naked.
+#else##
+You look at yourself in the mirror, carefully adjusting how the dress hangs on your body so that it looks as perfect as possible. 
+
+You step into the room in your wedding dress.
+#end##
+</finishedChangeIntoDress>
+
+<regularResponse>
+$friend.getName() can't help but smile when $friendPronoun sees you. 
+
+"You look so beautiful," $friendPronoun gushes. "I've never seen you this way. You look positively radiant, like you're glowing."
+
+Filled with joy and confidence, you mimic walking down the aisle towards $friend.getName(), and you do a little twirl. $friend.getName() gives you a round of applause, and the two of you share a laugh before returning to your conversation.
+</regularResponse>
+
+<nakedResponse>
+$scene.addPossessiveSuffix($friend.getName()) eyes widen when $friendPronoun sees you. You stare straight ahead as you walk out into the middle of the room.
+
+"Is that what you're wearing?" $friendPronoun asks.
+
+You confirm to $friendPronounO that you're going to be naked during the wedding.
+
+## British memes, birthday suit joke, joke about short skirts, joke about things being expensive, something about nudists, something about not seeing the emperor's clothes, something to disarm the situation
+$friend.getName() looks away and stares into the distance in a shocked silence. After a while, $friendPronoun finally speaks. "A bit cheeky, ain't it?" $friendPronoun quips with a bit of a laugh.
+
+Being more at ease, you sit in a chair across from $friend.getName(). Despite being completely naked, you are able to return to your conversation.
+</nakedResponse>
+
+<nakedSleazyResponse>
+</nakedSleazyResponse>
+
+<sleazyResponse>
+$scene.addPossessiveSuffix($friend.getName()) eyes widen when $friendPronoun sees you. 
+
+"Wow! You look so sexy," $friendPronoun gushes. "$partner.getName() is so lucky to have you looking like this on your wedding night."
+
+$friend.getName() asks to see all the sides of the dress, so you do a little twirl for $friendPronounO. 
+
+"You look so hot in that dress, absolutely ravishing," $friendPronoun says. "You have to show me how you look in that dress when lying down."
+</sleazyResponse>
+
+<lieDownRefuse>
+You laugh off $scene.addPossessiveSuffix($friend.getName()) request. "You would need to put a ring on my finger first before you can see me doing that."
+
+You go back to chatting with $friend.getName() about other things.
+</lieDownRefuse>
+
+<lieDownPose>
+You laughingly agree to pose for $friend.getName(). You lie down on your bed, careful not to wrinkle your wedding dress.
+
+Standing over you from the foot of your bed, $friendPronoun says, "you look drop-dead gorgeous like that. $partner.getName() is so lucky to have you."
+
+You thank $friendPronounO for the compliment.
+
+"It's such a waste that you only wear a wedding dress for one day in your entire life. And only one person gets to enjoy seeing you wearing it. A woman should have the chance to wear her wedding dress more often," $friendPronoun jokes as $friendPronoun sits on the end of the bed.
+
+"I'm wearing it now, and it's not my wedding day."
+
+$friend.getName() sighs wistfully. "Are you really ready for married life? It's so sad that you'll be stuck sleeping with the same person for the rest of your life. It will be so boring after a while."
+
+You laugh at the comment.
+
+"Are you sure you don't need to get all those needs and desires out of your system before the wedding?" $friend.getName() places a hand suggestively on your knee. "It's your last chance to have some fun and some variety before your marriage."
+</lieDownPose>
+
+<sexRefuse>
+You laugh off $scene.addPossessiveSuffix($friend.getName()) joke. You get up from the bed, change back into your normal clothes, and go back to chatting with $friendPronounO about other things.
+</sexRefuse>
+
+<lieDownPoseSex>
+Your voice gets trapped in your throat. Your heart races. You know that you should say no. But some deep desire stops you.
+
+$friend.getName() crawls onto the bed with you.
+</lieDownPoseSex>
+
+
+<flirtyResponse>
+</flirtyResponse>
+
+<lastChanceResponse>
+$friend.getName() stares at you in wonder when $friendPronoun sees you. 
+
+"You look so beautiful," $friendPronoun gushes. "You look radiant. I've never seen you this way. You just seem so graceful and joyous."
+
+You walk over to $friend.getName() and give $friendPronounO a big hug. As you hold $friendPronounO, you notice that $friendPronoun has fallen silent and become sullen.
+
+"What's wrong?" you ask.
+
+"Nothing. I don't want to make things complicated."
+</lastChanceResponse>
+
+<lastChanceResponse2>
+"No, tell me," you say.
+
+"You seem so content and happy now with your wedding coming up. And sometimes, I wonder...I wonder how things will change between us. You'll be busy being married..."
+
+You see how vulnerable $friend.getName() is. You grab their hand and give it a comforting squeeze.
+
+$scene.capitalise($friendPronoun) continues, "...I look back at the times we've spent together. We've had some fun times. I wonder what would have happened if things happened differently between us."
+
+$scene.capitalise($friendPronoun) turns to face you. You stare deeply into $scene.addPossessiveSuffix($friend.getName()) wistful eyes.
+</lastChanceResponse2>
+
+<lastChanceResponseComfort>
+"Don't worry," you tell $friend.getName(). "I know things will be different between us. But we'll still be friends. That won't change."
+
+$scene.capitalise($friendPronoun) smiles, reassured by your words. You change back into your normal clothes and go back to chatting with $friendPronounO about other things.
+</lastChanceResponseComfort>
+
+<lastChanceResponseKiss>
+Something comes over you. A flood of emotion, a flash of memories of intimate moments you shared with $friend.getName(), a moment of insanity. You lean forward and kiss $friendPronounO on the lips.
+</lastChanceResponseKiss>
+
+<lastChanceResponseKissDone>
+You hold $scene.addPossessiveSuffix($friend.getName()) hand in yours. You aren't sure if what you've done is right or wrong. But you decide to worry about it another day.
+</lastChanceResponseKissDone>
+
+<empty>
+</empty>

@@ -1,0 +1,18 @@
+<introText>
+The two of you meet up outside. $bf.getName() notices a bike share nearby, so you decide to go for a ride.
+
+"Let's go," he yells as he speeds off in front. You have to chase after him. He bikes like a maniac, weaving through traffic, jumping onto sidewalks, and darting through traffic lights. You can barely keep up.
+
+You try your best, but he's too fast for you. You lose sight of him as he turns a corner. You panic and pedal faster, hoping to catch up with him. But you don't know this part of the city very well. You end up in a dead end street with no sign of him.
+
+You call his name, but no one answers. You check your phone, but you don't have any signal. You look around, but you don't recognize anything. You feel lost and #if($w.hasTrait("OUTGOING")||$w.hasTrait("AMBITIOUS")||$w.hasTrait("BITCHY"))annoyed#{else}scared#end. You wonder if he left you on purpose or if something happened to him. You wish you never agreed to this bike ride.
+
+You eventually wander into an area where you get reception and receive a text from $bf.getName() telling you that he's back at the bike share and asking where you are. You realize that he was so far ahead that you lost him and he already returned home. You return to the bike share and join him in a pub.
+$bf.reduceEnjoyTiny() $bf.reduceWLikingSmall()##
+#if(($w.getSkill("FITNESS") < 25) && $scene.percent(50)) $w.skillIncrease("FITNESS",1) #end##
+</introText>
+
+<sceneDescriptionText>
+You are taking a bike ride with $bf.getName().
+</sceneDescriptionText>
+

@@ -1,0 +1,18 @@
+Hi, this is the documentation for submitting content for Newlife.
+
+I expect to be improving & adding to this over future releases. Please ask in a blog comment or similar if you have questions about how this works.
+
+To submit content for Newlife you MUST agree to the submission agreement in the submissions_guide document. You should read this before starting work so that your time won't be wasted if you don't feel you can agree to it.
+
+The second document to look over is the writing guide, which contains a high-level overview of how to start a Newlife scene.
+
+It's also a good idea to contact me with a brief outline of what you want to write. That way I can let you know ahead of time if I feel your scene is fundamentally incompatible with the game.
+
+The full list of documents:
+Submissions Guide: Instructions on how to actually submit a completed scene to Newlife, including the submission agreement.
+Writing Guide: Overview guide with advice on how to write for Newlife.
+YML_Syntax_Guide: A guide to the yml scene-structure file's syntax.
+context_object_reference: Reference file of all methods available to objects in the Velocity context.
+enum_reference: Reference of all enum values that may be returned or checked by context object methods.
+exampleScene.yml: Structure file for an example scene. Copy this and the text file to the user_custom_scenes folder to run it in-game.
+exampleScene.vm: Text file for the example scene.

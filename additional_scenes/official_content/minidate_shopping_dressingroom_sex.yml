@@ -1,0 +1,110 @@
+# Preconditions for this scene:
+# Part of the minidate framework
+# $bf should be the boyfriend or husband
+
+textFileName: minidate_shopping_dressingroom_sex.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: bf
+    outfit: CASUAL
+
+ location:
+  wall: wall
+  floor: carpeted floor
+  hasBed: false
+  isOutside: false
+
+
+
+intro:
+ textId: introText
+ useDefaultActions: true
+
+defaultActions:
+    pushAwayKiss: ($numPushAway == 0)
+    pushAway: ($numPushAway > 0 && $numPushAway < 2)
+    pushAwayEnd: ($numPushAway >= 2)
+    firstObject: ($numObjections == 0)
+    object: ($numObjections > 0)
+    foolAround:
+    
+returningSections:
+ - id: finishSex
+   textId: finishSex
+   finishScene: true
+   
+actions: 
+
+
+ - id: pushAwayKiss
+   shortDesc: Quietly push him away
+   longDesc: Reject his advances by pushing him away but do it quietly so as to not make a scene
+   textId: pushAwayKiss
+   allowNpcActions: false
+   useDefaultActions: true
+   
+ - id: pushAway
+   shortDesc: Push his hands away
+   longDesc: Quietly let him know you don't like the idea
+   textId: pushAway
+   allowNpcActions: false
+   useDefaultActions: true
+
+ - id: pushAwayEnd
+   shortDesc: Push his hands away
+   longDesc: Quietly let him know you don't like the idea
+   textId: pushAwayEnd
+   allowNpcActions: false
+   finishScene: true
+
+ - id: firstObject
+   shortDesc: Tell him no
+   longDesc: Tell him that it's not appropriate to fool around in the changing room
+   textId: firstObject
+   effects:
+   # PC gains stress from fear of being embarrassed in public. Sultry doesn't care if she's caught. Relaxed just doesn't worry as much
+   # Of course a sultry PC would not be in the scene in the first place as they don't meet the pre-requisites, but I added the condition
+   # before re-checking them (oops!) and I might as well leave it here now it's done   -- SO
+    - effect: $w.changeStress(5)
+      condition: '!$w.hasTrait("SULTRY") && !$w.hasTrait("RELAXED")'
+   allowNpcActions: false
+   useDefaultActions: true
+   
+ - id: object
+   shortDesc: Tell him no
+   longDesc: Tell him that it's not appropriate to fool around in the changing room
+   textId: object
+   effects:
+   # Stress gain again, especially for shy characters as they're embarrassed in public.
+   # Relaxed gains stress in this action as she's actually been caught, not just worrying about it.
+   # Non-LSE characters will blame the man for this and refined ones will blame him a lot (even if LSE)
+    - effect: $w.changeStress(5)
+      condition: '!$w.hasTrait("SULTRY")'
+    - effect: $w.changeStress(5)
+      condition: $w.hasTrait("SHY")
+    - effect: $bf.reduceWLikingSmall()
+      condition: '!$w.hasTrait("LOW_SELF_ESTEEM") && !$w.hasTrait("SULTRY")'
+    - effect: $bf.reduceWLikingMedium()
+      condition: $w.hasTrait("REFINED")
+   allowNpcActions: false
+   finishScene: true
+
+ - id: foolAround
+   shortDesc: Go for it
+   longDesc: Fool around in the changing room
+   textId: foolAround
+   allowNpcActions: false
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT 
+    maleNpcs:
+     - id: man
+       npc: bf
+    returningId: finishSex
+    location:
+     useCurrentLocation: true
+   

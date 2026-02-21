@@ -1,0 +1,19 @@
+<introText>
+You meet up with $bf.getName() in a remote part of the city.
+
+He asks you to follow him. He leads you through some narrow alleyways and deserted streets. You ask him where he's going, and he just tells you it's a surprise.
+
+The two of you walk past a crumbling century-old factory and arrive at an old canal. 
+
+He looks down at his watch. "We're just in time," he says.
+
+He points down towards the end of the canal. You follow his finger and see a beautiful scene of the sun setting framed by some crumbling industrial buildings. The sun's orange glow shimmers in the canal waters.
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are in a cafe with $bf.getName().
+</sceneDescriptionText>
+

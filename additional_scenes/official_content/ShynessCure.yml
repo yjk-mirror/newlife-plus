@@ -1,0 +1,1097 @@
+# Created by Eulexia
+# Random event on weekends
+# Limited to once-per-game.
+#
+# Preconditions for this scene:
+# Male must not be her boss, disabled, limited to no random appearances or a relationship status beyond 'date'.
+# Male must not be Horse.
+# Female must be a party girl friend.  
+# Female must be dressed in a skirt-type garment.
+# PC must also be dressed in a skirt-type garment for the scene to fire.
+# PC must be shy.
+# DONE_EULEXIA_SHYNESS_CURE_SCENE game-flag is not set (i.e. the scene has not fired before this game) 
+
+textFileName: ShynessCure.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+ femaleNpcs:
+  - id: f
+    outfit: CASUAL
+ location: 
+  wall: wall # String description of the location's wall
+  floor: floor # String description of the location's floor
+  hasBed: false # Whether the location has a bed. If true, this allows makeout sub-scenes to transition to bedroom sex ones
+  isOutside: true # Whether the location counts as being outside. Affects some text in sex scenes such as using "ground" instead of "floor".
+
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($m)
+  - effect: $gd.setGameFlag("DONE_EULEXIA_SHYNESS_CURE_SCENE")
+  - effect: $scene.hideNpc($m) $scene.hideNpc($f)
+ followUpActions:
+  meetHer: 
+  refuseToMeet: 
+
+
+actions:
+ - id: refuseToMeet 
+   shortDesc: Blow her off
+   longDesc: Either you're too busy, or you like your shyness just fine.  
+   textId: refuseToMeet 
+   finishScene: true
+
+ - id: meetHer 
+   shortDesc: meetHerShort
+   longDesc: A cure for your shyness? Might as well at least find out what she's suggesting.
+   textId: meetHerText 
+   effects:
+    - effect: $scene.unHideNpc($f)
+   followUpActions:
+    trustHer:
+    trustHerNo:
+
+ - id: trustHer 
+   shortDesc: Yes
+   longDesc: Sure. You're not sure where this is going, but you're willing to trust her and find out.
+   textId: trustHer 
+   effects:
+    - effect: $f.addRelationshipFlag("ATTEMPTED_SHYNESS_CURE")
+   followUpActions:
+    givePantiesYes: $w.getPantiesStatus() != "OFF"
+    givePantiesCannot: $w.getPantiesStatus() == "OFF"
+    givePantiesLie: $w.getPantiesStatus() != "OFF"
+    givePantiesNo:
+
+ - id: trustHerNo 
+   shortDesc: No
+   longDesc: Tell her that unfortunately your trust only goes so far.
+   textId: TrustHerNo 
+   finishScene: true
+
+ - id: givePantiesYes 
+   shortDesc: GivePantiesYesShort
+   longDesc: GivePantiesYesLong
+   textId: GivePantiesYesText 
+   followUpActions:
+    GoWith:
+
+ - id: givePantiesNo 
+   shortDesc: GivePantiesNoShort
+   longDesc: GivePantiesNoLong
+   textId: GivePantiesNoText
+   finishScene: true
+
+ - id: givePantiesCannot 
+   shortDesc: GivePantiesCannotShort
+   longDesc: GivePantiesCannotLong
+   textId: GivePantiesCannotText 
+   followUpActions:
+    GoWith:
+
+ - id: givePantiesLie 
+   shortDesc: GivePantiesLieShort
+   longDesc: GivePantiesLieLong
+   textId: GivePantiesLieText 
+   followUpActions:
+    GoWith:
+
+ - id: GoWith 
+   shortDesc: GoWithShort
+   longDesc: GoWithLong
+   textId: GoWithText 
+   followUpActions:
+    Carnival: $scene.hasFlag("Carnival")
+    IceSkate: $scene.hasFlag("IceSkate")
+    Mall: $scene.hasFlag("Mall")
+
+ - id: Mall
+   shortDesc: Go to the mall
+   longDesc: MallLong
+   textId: MallText
+   followUpActions:
+    FlashCamera: $w.getPantiesStatus() == "OFF"
+    FlashCameraLP: $w.getPantiesStatus() != "OFF"
+    FlashTitsCamera:
+    RefuseFlash:
+
+ - id: FlashCamera
+   shortDesc: FCShort
+   longDesc: FCLong
+   textId: FCText
+   followUpActions:
+    PhotoMasturbate: true
+    RefuseMasturbate: true
+
+ - id: RefuseMasturbate
+   shortDesc: Refuse
+   longDesc: Refuse to masturbate for the camera. 
+   textId: RefuseMasturbateText
+   finishScene: true
+
+ - id: PhotoMasturbate
+   shortDesc: Masturbate
+   longDesc: Masturbate for the camera.
+   textId: PMText
+   followUpActions: 
+    PMOrgasm: true
+    PMStopOrgasm: $w.testWillEasy(0)
+
+ - id: PMOrgasm
+   shortDesc: Have an orgasm
+   longDesc: PMOrgasmLong
+   textId: PMOrgasmText
+   finishScene: true
+
+ - id: PMStopOrgasm
+   shortDesc: Stop masturbating
+   longDesc: Come to your senses and refuse to go all the way to having an orgasm in a dingy photo booth.
+   textId: PMStopOrgasmText
+   finishScene: $f.getBehaviour() == "MEAN" || $f.getBehaviour() == "COLD"
+   followUpActions:
+    StopOral: $w.testWillNormal(0)
+    AllowOral: true
+
+ - id: StopOral
+   shortDesc: Stop her
+   longDesc: You are pretty sure you know where she's going with this, and you aren't interested.
+   textId: StopOralText
+   finishScene: true
+
+ - id: AllowOral
+   shortDesc: Let her
+   longDesc: Well, if she insists...
+   textId: AllowOralText
+   finishScene: true
+
+ - id: FlashCameraLP
+   shortDesc: FCLPShort
+   longDesc: FCLPLong
+   textId: FCLPText
+   followUpActions:
+    FCStrip: true
+    FCRefuse: true
+
+ - id: FCStrip
+   shortDesc: Take off your clothes
+   longDesc: Get naked in the photobooth.
+   textId: FCStripText
+   followUpActions: 
+    Wait: true
+
+ - id: Wait
+   shortDesc: Wait here
+   longDesc: She's coming back, right?
+   textId: WaitText
+   finishScene: $f.getBehaviour() == "NICE" || $f.getBehaviour() == "AVG" || $f.getBehaviour() == "ROM"
+   followUpActions:
+    CallHelp: $scene.hasFlag("CALLHELPFAIL") != "true" && $f.getBehaviour() == "COLD"
+    SneakOut: $f.getBehaviour() == "COLD"
+    OhFuck: $f.getBehaviour() == "MEAN"
+
+ - id: OhFuck
+   shortDesc: OhFuckShort
+   longDesc: OhFuckLong
+   textId: OhFuckText
+   finishScene: $scene.hasFlag("OHFUCK_END")
+   followUpActions:
+    SneakOut: '$scene.hasFlag("OHFUCK_NOMONEY") && !$scene.hasFlag("OHFUCK_PHONE")'
+    OHFUCK_ORAL: '$scene.hasFlag("OHFUCK_ORAL") && !$scene.hasFlag("OHFUCK_PHONE")' 
+    OHFUCK_ANAL: '$scene.hasFlag("OHFUCK_ANAL") && !$scene.hasFlag("OHFUCK_PHONE")'
+    OHFUCK_IMPREG: '$scene.hasFlag("OHFUCK_IMPREG") && !$scene.hasFlag("OHFUCK_PHONE") '
+    OHFUCK_FUCK: '$scene.hasFlag("OHFUCK_FUCK") && !$scene.hasFlag("OHFUCK_PHONE")'
+    OHFUCK_REFUSE: '!$scene.hasFlag("OHFUCK_NOMONEY") && !$scene.hasFlag("OHFUCK_PHONE")'
+    OHFUCK_PHONEYES: $scene.hasFlag("OHFUCK_PHONE")
+    OHFUCK_PHONENO: $scene.hasFlag("OHFUCK_PHONE")
+
+ - id: OHFUCK_PHONEYES
+   shortDesc: Give him your number
+   longDesc: It's really the least you could do.
+   effects: 
+    - effect: $m.setContactable()
+   textId: OHFUCK_PHONEYES_TEXT
+   finishScene: true
+
+ - id: OHFUCK_PHONENO
+   shortDesc: Decline
+   longDesc: Well, technically this is the least you could do. Ungrateful, perhaps.
+   textId: OHFUCK_PHONENO_TEXT
+   finishScene: true
+
+ - id: OHFUCK_ORAL
+   shortDesc: Agree
+   longDesc: You'll do anything to get out of this jam.
+   textId: OHFUCK_ORAL_TEXT
+   sceneTransition:
+    condition: true
+    type: ORAL_SEX
+    transitionInfo:
+     position: STAND
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: OWhored
+
+ - id: OHFUCK_ANAL
+   shortDesc: Agree
+   longDesc: You'll do anything to get out of this jam.
+   textId: OHFUCK_ANAL_TEXT
+   sceneTransition:
+    condition: true
+    type: ANAL_SEX
+    location: 
+     wall: photobooth wall
+     floor: photobooth floor
+     hasBed: false
+     isOutside: false
+    transitionInfo:
+     lube: NONE
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: OWhored
+
+ - id: OHFUCK_IMPREG
+   shortDesc: Agree
+   longDesc: You'll do anything to get out of this jam.
+   textId: OHFUCK_IMPREG_TEXT
+   sceneTransition:
+    condition: true
+    type: STANDING_FRONT_SEX
+    location: 
+     wall: photobooth wall
+     floor: photobooth floor
+     hasBed: false
+     isOutside: false
+    maleNpcs: 
+     - id: man
+       npc: m
+    returningId: OWhored
+
+ - id: OHFUCK_FUCK
+   shortDesc: Agree
+   longDesc: You'll do anything to get out of this jam.
+   textId: OHFUCK_FUCK_TEXT
+   sceneTransition:
+    condition: true
+    type: STANDING_FRONT_SEX
+    location: 
+     wall: photobooth wall
+     floor: photobooth floor
+     hasBed: false
+     isOutside: false
+    maleNpcs: 
+     - id: man
+       npc: m
+    returningId: OWhored
+
+ - id: OHFUCK_REFUSE
+   shortDesc: Refuse
+   longDesc: You might be in trouble, but you're not willing to do that.
+   textId: OHFUCK_REFUSE_TEXT
+   followUpActions:
+    SneakOut: true
+
+ - id: CallHelp
+   shortDesc: Call for help
+   longDesc: See if you can get someone to help you, and hope they don't take advantage.
+   textId: CallHelpText
+   effects:
+    - effect: $scene.unHideNpc($m)
+   finishScene: $scene.hasFlag("PHOTO_END")
+   followUpActions:
+    Photo_Oral: $scene.hasFlag("PHOTO_ORAL")
+    Photo_Impreg: $scene.hasFlag("PHOTO_IMPREG")
+    Photo_Anal: $scene.hasFlag("PHOTO_ANAL")
+    Photo_Fuck: $scene.hasFlag("PHOTO_FUCK")
+    Photo_Humiliate: $scene.hasFlag("PHOTO_HUMILIATE")
+    SneakOut: $scene.hasFlag("PHOTO_NOHELP")
+    Photo_Refuse: $scene.hasFlag("PHOTO_ORAL") || $scene.hasFlag("PHOTO_IMPREG") || $scene.hasFlag("PHOTO_ANAL") || $scene.hasFlag("PHOTO_FUCK") || $scene.hasFlag("Photo_Humiliate")
+    Photo_GiveNumber: $scene.hasFlag("PHOTO_NUMBER")
+    Photo_NoNumber: $scene.hasFlag("PHOTO_NUMBER")
+
+ - id: Photo_GiveNumber
+   shortDesc: Give him your number
+   longDesc: It's really the least you could do.
+   textId: Photo_GiveNumberText
+   finishScene: true
+
+ - id: Photo_NoNumber
+   shortDesc: Decline
+   longDesc: Well, technically this is the least you could do. Ungrateful, perhaps.
+   textId: Photo_NoNumberText
+   finishScene: true
+
+ - id: Photo_Anal
+   shortDesc: Agree
+   longDesc: You'll do anything to get out of this jam.
+   textId: Photo_AnalText
+   sceneTransition:
+    condition: true
+    type: ANAL_SEX
+    location: 
+     wall: photobooth wall
+     floor: photobooth floor
+     hasBed: false
+     isOutside: false
+    transitionInfo:
+     lube: NONE
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: Whored
+
+ - id: Photo_Impreg
+   shortDesc: Agree
+   longDesc: You'll do anything to get out of this jam.
+   textId: Photo_ImpregText
+   sceneTransition:
+    condition: true
+    type: STANDING_FRONT_SEX
+    location: 
+     wall: photobooth wall
+     floor: photobooth floor
+     hasBed: false
+     isOutside: false
+    maleNpcs: 
+     - id: man
+       npc: m
+    returningId: Whored
+
+ - id: Photo_Oral
+   shortDesc: Agree
+   longDesc: You'll do anything to get out of this jam.
+   textId: Photo_OralText
+   sceneTransition:
+    condition: true
+    type: ORAL_SEX
+    transitionInfo:
+     position: STAND
+    maleNpcs:
+     - id: man
+       npc: m
+    returningId: Whored
+
+ - id: Photo_Refuse
+   shortDesc: Refuse
+   longDesc: You might be in trouble, but you're not willing to do that.
+   textId: Photo_RefuseText
+   followUpActions:
+    SneakOut: true
+
+ - id: Photo_Humiliate
+   shortDesc: Agree
+   longDesc: You'll do anything to get out of this jam.
+   textId: Photo_HumiliateText
+   finishScene: $scene.hasFlag("PHOTO_END")
+   followUpActions: 
+    SneakOut: true
+
+ - id: Photo_Fuck
+   shortDesc: Agree
+   longDesc: You'll do anything to get out of this jam.
+   textId: Photo_FuckText
+   sceneTransition:
+    condition: true
+    type: STANDING_FRONT_SEX
+    location: 
+     wall: photobooth wall
+     floor: photobooth floor
+     hasBed: false
+    maleNpcs: 
+     - id: man
+       npc: m
+    returningId: Whored
+
+ - id: SneakOut
+   shortDesc: Sneak out
+   longDesc: Try to sneak out.
+   textId: SneakOutText
+   finishScene: true
+
+ - id: FCRefuse
+   shortDesc: Refuse
+   longDesc: You're not getting naked in here. 
+   textId: FCRefuseText
+   finishScene: true
+
+ - id: RefuseFlash
+   shortDesc: Refuse to flash
+   longDesc: RFLong
+   textId: RFText
+   finishScene: true
+
+ - id: FlashTitsCamera
+   shortDesc: Flash your breasts
+   longDesc: FTLong
+   textId: FTText
+   followUpActions:
+    BraRemoval: $w.getBraStatus() != "OFF"
+    BreastFondle: $w.getBraStatus() == "OFF"
+    StopCamera: true
+
+ - id: BraRemoval
+   shortDesc: BraRemovalShort
+   longDesc: BraRemovalLong
+   textId: BraRemovalText
+   followUpActions:
+    StopCamera: true
+    BreastFondle: true
+
+ - id: BreastFondle
+   shortDesc: BreastFondleShort
+   longDesc: BreastFondleLong
+   textId: BreastFondleText
+   followUpActions:
+    BeFingeredPanties: $w.getPantiesStatus() != "OFF"
+    BeFingeredNoPanties: $w.getPantiesStatus() == "OFF"
+    StopCamera: true
+
+ - id: BeFingeredPanties
+   shortDesc: BeFingeredShort
+   longDesc: BeFingeredLong
+   textId: BeFingeredText
+   followUpActions: 
+    KissPussy: true
+    StormOut: true
+   finishScene: $f.getBehaviour() == "AVG" || $f.getBehaviour() == "NICE" || $f.getBehaviour() == "ROM"
+
+ - id: KissPussy
+   shortDesc: Kiss it
+   longDesc: KissPussyLong
+   textId: KissPussyText
+   followUpActions:
+    EatPussy: true
+    StormOut: true
+
+ - id: EatPussy
+   shortDesc: EatPussyShort
+   longDesc: EatPussyLong
+   textId: EatPussyText
+   finishScene: true
+
+ - id: StormOut
+   shortDesc: Storm out
+   longDesc: StormOutLong
+   textId: StormOutText
+   finishScene: true
+   
+ - id: BeFingeredNoPanties
+   shortDesc: BeFingeredNPShort
+   longDesc: BeFingeredNPLong
+   textId: BeFingeredNPText
+   followUpActions:
+    KeepFingered: true
+    Abort: true
+
+ - id: Abort
+   shortDesc: Stop this
+   longDesc: AbortLong
+   textId: AbortText
+   finishScene: true
+
+ - id: KeepFingered
+   shortDesc: KeepFingeredShort
+   longDesc: KeepFingeredLong
+   textId: KeepFingeredText
+   finishScene: true
+
+ - id: StopCamera
+   shortDesc: StopCameraShort
+   longDesc: StopCameraLong
+   textId: StopCameraText
+   finishScene: true
+
+ - id: Carnival 
+   shortDesc: CarnivalShort
+   longDesc: CarnivalLong
+   textId: CarnivalText 
+   followUpActions:
+    Upwards:
+
+ - id: IceSkate 
+   shortDesc: Go ice skating
+   longDesc: IceSkateLong
+   textId: IceSkateText
+   followUpActions:
+    SkatePantiesYes: ($w.getPantiesStatus() != "OFF" && $w.getBottom().getLength() == "THIGH")
+    SkatePantiesNo: ($w.getPantiesStatus() != "OFF" && $w.getBottom().getLength() == "THIGH")
+    Skate: $w.getPantiesStatus() == "OFF" || $w.getBottom().getLength() != "THIGH"
+
+ - id: SkatePantiesYes 
+   shortDesc: SkatePantiesYesShort
+   longDesc: SkatePantiesYesLong
+   textId: SkatePantiesYesText
+   followUpActions:
+    Skate: 
+
+ - id: SkatePantiesNo 
+   shortDesc: SkatePantiesNoShort
+   longDesc: SkatePantiesNoLong
+   textId: SkatePantiesNoText
+   finishScene: true
+
+ - id: Skate 
+   shortDesc: SkateShort
+   longDesc: SkateLong
+   textId: SkateText
+   followUpActions:
+    SkateCareful: (!$w.hasTrait("AMBITIOUS"))
+    SkateRisky: 
+    TripHer: $w.hasTrait("BITCHY")
+
+ - id: SkateCareful
+   shortDesc: Skate cautiously
+   longDesc: Play it safely, to ensure that you don't accidentally end up flashing anyone.
+   textId: SkateCarefulText 
+   followUpActions:
+    chaseHer: $scene.hasFlag("stormoff")
+    letItGo: ($scene.hasFlag("stormoff") && !$w.hasTrait("NICE"))
+    GoHome: (!$scene.hasFlag("stormoff"))
+
+ - id: SkateRisky
+   shortDesc: Push yourself
+   longDesc: Push yourself a little harder. 
+   textId: SkateRiskyText
+   followUpActions:
+    chaseHer: $scene.hasFlag("stormoff")
+    letItGo: ($scene.hasFlag("stormoff") && !$w.hasTrait("NICE"))
+    GoHome: (!$scene.hasFlag("stormoff"))
+   
+ - id: TripHer
+   shortDesc: Trip her
+   longDesc: Trip her, sending her to the ground. She's not going to like this, but it'll be hilarious, especially if she's wearing a short skirt.
+   textId: TripHerText
+   finishScene: (!$scene.hasFlag("stormoff"))
+   followUpActions:
+    chaseHer: $scene.hasFlag("stormoff")
+    letItGo: $scene.hasFlag("stormoff")
+
+ - id: chaseHer
+   shortDesc: Chase after her
+   longDesc: Chase after her and apologize. After all, she looks really angry, and you probably went a little too far. Might be time to mend some fences.
+   textId: chaseHerText
+   followUpActions:
+    NeverMind: (!$w.hasTrait("NICE"))
+    EatOut: false
+    SellPanties: 
+
+ - id: EatOut
+   shortDesc: Eat her out
+   longDesc: Eat her out
+   textId: EatOutText
+
+ - id: NeverMind
+   shortDesc: Never mind
+   longDesc: You've changed your mind. You don't want to make it up to her.
+   textId: NeverMindText
+   finishScene: true
+
+ - id: SellPanties
+   shortDesc: SellPantiesShort
+   longDesc: SellPantiesLong
+   textId: SellPantiesText
+   followUpActions:
+    spYes: true
+    spNo: true
+
+ - id: spYes
+   shortDesc: spYesShort
+   longDesc: spYesLong
+   textId: spYesText
+   finishScene: (!$m.isNpcAttractionOk() && !$m.hasTrait("SLEAZY"))
+   followUpActions: 
+    spFlashYes: true
+    spFlashNo: true
+  
+ - id: spFlashYes
+   shortDesc: spFlashYesShort
+   longDesc: spFlashYesLong
+   textId: spFlashYesText
+   followUpActions: 
+    SellThem: true
+    ChickenOut: true
+
+ - id: SellThem
+   shortDesc: Sell them
+   longDesc: SellThemLong
+   textId: SellThemText
+   finishScene: (!$scene.hasFlag("cumpanties") && !$scene.hasFlag("givenumber"))
+   followUpActions:
+    CumPanties: $scene.hasFlag("cumpanties")
+    CumPantiesNo: $scene.hasFlag("cumpanties")
+    GiveNumber: $scene.hasFlag("givenumber")
+    GiveNumberNo: $scene.hasFlag("givenumber")
+
+ - id: GiveNumber
+   shortDesc: Give him your number
+   longDesc: Give him your phone number. This will allow him to ask you out on dates. If you two hit it off you'll probably end up making up a fake story of how you met to tell your friends.
+   textId: GiveNumber
+   finishScene: true
+
+ - id: GiveNumberNo
+   shortDesc: Refuse
+   longDesc: Don't give him your phone number. After all, he tries to buy women's underwear on the street. 
+   textId: GiveNumberNo
+   finishScene: true
+
+ - id: CumPantiesNo
+   shortDesc: Refuse
+   longDesc: Absolutely not. That's disgusting. Especially right here on the street.
+   textId: CumPantiesNo
+   finishScene: true
+
+ - id: CumPanties
+   shortDesc: CumPantiesShort
+   longDesc: CumPantiesLong
+   textId: CumPantiesText
+   followUpActions:
+    CPSpurt: $scene.hasFlag("cumpantiesfupgrade") || $scene.hasFlag("cumpantiesupgrade")
+    CPSpurtNo: $scene.hasFlag("cumpantiesfupgrade") || $scene.hasFlag("cumpantiesupgrade")
+    WetFinish: (!$scene.hasFlag("cumpantiesfupgrade") && !$scene.hasFlag("cumpantiesupgrade"))
+
+ - id: CPSpurt
+   shortDesc: CPSpurtShort
+   longDesc: CPSpurtLong
+   textId: CPSpurtText
+   finishScene: true
+
+ - id: CPSpurtNo
+   shortDesc: CPSpurtNoShort
+   longDesc: CPSpurtNoLong
+   textId: CPSpurtNoText
+   finishScene: true
+
+ - id: WetFinish
+   shortDesc: Have your panties creamed
+   longDesc: It's too late to avoid it at this point--he's going to cum into your underwear.
+   textId: WetFinish
+   finishScene: true
+
+ - id: ChickenOut
+   shortDesc: Chicken out
+   longDesc: Okay, this was fun to think about, but you're not about to actually go through with it.
+   textId: ChickenOutText
+   finishScene: true
+
+ - id: spFlashNo
+   shortDesc: spFlashNoShort
+   longDesc: spFlashNoLong
+   textId: spFlashNoText
+   finishScene: true
+   
+ - id: spNo
+   shortDesc: Refuse
+   longDesc: spNoLong
+   textId: spNoText
+   finishScene: true
+
+ - id: letItGo
+   shortDesc: Let her go
+   longDesc: Let her go. You don't particularly care about her feelings, which was why you tripped her in the first place.
+   textId: letItGoText
+   finishScene: true
+
+ - id: Upwards
+   shortDesc: Onwards and upwards
+   longDesc: Short of jumping, it's not as though you have a choice here.
+   textId: UpwardsText
+   followUpActions:
+    SpreadTruth: $w.getPantiesStatus() == "OFF"
+    SpreadLie: $w.getPantiesStatus() != "OFF"
+    SpreadRefuse: 
+    SpreadHumiliate: $w.hasTrait("BITCHY")
+
+ - id: SpreadTruth
+   shortDesc: Flash the crowd
+   longDesc: SpreadTruthLong
+   textId: SpreadTruthText
+   followUpActions:
+    GoHome:
+
+ - id: SpreadLie
+   shortDesc: Flash the crowd
+   longDesc: SpreadLieLong
+   textId: SpreadLieText
+   followUpActions:
+    SpreadHumiliate: $w.hasTrait("BITCHY")
+    SpreadLieStrip: 
+
+ - id: SpreadLieStrip
+   shortDesc: Strip
+   longDesc: SpreadLieStripLong
+   textId: SpreadLieStripText
+   followUpActions:
+    GoHome:
+
+ - id: SpreadRefuse
+   shortDesc: Refuse
+   longDesc: SpreadRefuseLong
+   textId: SpreadRefuseText
+   finishScene: true
+
+ - id: SpreadHumiliate
+   shortDesc: Humiliate her
+   longDesc: SpreadHumiliateLong
+   textId: SpreadHumiliateText
+   finishScene: true
+
+ - id: GoHome
+   shortDesc: Go home
+   longDesc: GoHomeLong
+   textId: GoHomeText
+   followUpActions:
+    AllowTouchFirst: $m.isNpcAttractionOk() && $w.isArousalEnjoy() && $w.getPantiesStatus() == "OFF"
+    AllowTouchFirstLiar: $m.isNpcAttractionOk() && $w.isArousalEnjoy() && $w.getPantiesStatus() != "OFF"
+    DoNothingFirstLiar: $m.isNpcAttractionOk() && $w.getPantiesStatus() != "OFF"
+    DoNothingFirst: $m.isNpcAttractionOk() && $w.getPantiesStatus() == "OFF"
+    Object: $m.testWillNormal($temp) && $m.isNpcAttractionOk()
+    Rejected: (!$m.isNpcAttractionOk())
+
+ - id: Object
+   shortDesc: Object to this
+   longDesc: ObjectLong
+   textId: ObjectText
+   finishScene: true
+   
+ - id: Rejected
+   shortDesc: Go home
+   longDesc: RejectedLong
+   textId: RejectedText
+   finishScene: true
+
+ - id: AllowTouchFirstLiar
+   shortDesc: Let him touch you LIAR MODE
+   longDesc: AllowTouchFirstLiarLong
+   textId: AllowTouchFirstLiarText
+   followUpActions: 
+    AlleyBJ: $scene.hasFlag("blackmailbj")
+    AlleySex: $scene.hasFlag("blackmailsex")
+    GoHomeYes: $scene.hasFlag("blackmailhome") || $scene.hasFlag("politehome")
+    KissHer: $scene.hasFlag("distractkiss")
+    LiarRefuse: $m.testWillEasy(0)
+
+ - id: DoNothingFirstLiar
+   shortDesc: Do nothing
+   longDesc: Stand there with a stunned look on your face.
+   textId: DoNothingFirstLiarText
+   allowNpcActions: false
+   followUpActions: 
+    AlleyBJ: $scene.hasFlag("blackmailbj")
+    AlleySex: $scene.hasFlag("blackmailsex")
+    GoHomeYes: $scene.hasFlag("blackmailhome") || $scene.hasFlag("politehome")
+    KissHer: $scene.hasFlag("distractkiss")
+    LiarRefuse: $m.testWillEasy(0)
+
+ - id: AlleyBJ
+   shortDesc: Go into the alley with him.
+   longDesc: AlleyBJLong
+   textId: AlleyBJText
+   sceneTransition:
+    condition: true
+    type: ORAL_SEX # Standing makeout is always a returning transition
+    transitionInfo: 
+     position: STAND
+    maleNpcs:
+     - id: man
+       npc: m
+    # Returning ID. This marks the transition as a returning one and should always be set if transitioning to
+    # scenes that always return (like makeouts) and never be set when going to scenes that don't return (like HOME_DATE).
+    # When transitioning to another custom scene you need to decide if it'll return or not and set or not set an ID as appropriate.
+    # The returning ID must map to an entry under ReturningSections.
+    returningId: returnFromAlleyBJ
+    # Location info. Can either set useCurrentLocation to use this scene's location, usePlayerHome to use the pc's home or 
+    # define the location by hand with wall/floor/hasBed and isOutside - see the testing section for an example of this.
+
+ - id: AlleySex
+   shortDesc: Go into the alley with him
+   longDesc: AlleySexLong
+   textId: AlleySexText
+   sceneTransition: 
+    condition: true
+    type: STANDING_MAKEOUT
+    maleNpcs:
+     - id: man
+       npc: m
+    # Returning ID. This marks the transition as a returning one and should always be set if transitioning to
+    # scenes that always return (like makeouts) and never be set when going to scenes that don't return (like HOME_DATE).
+    # When transitioning to another custom scene you need to decide if it'll return or not and set or not set an ID as appropriate.
+    # The returning ID must map to an entry under ReturningSections.
+    returningId: returnFromAlleySex
+    # Location info. Can either set useCurrentLocation to use this scene's location, usePlayerHome to use the pc's home or 
+    # define the location by hand with wall/floor/hasBed and isOutside - see the testing section for an example of this.
+    location:
+     usePlayerHome: false # No need for any other location fields if we're using an existing one.
+     useCurrentLocation: false
+     wall: grimy brick wall
+     floor: filthy alley floor
+     hasBed: false
+
+ - id: KissHer
+   shortDesc: Kiss her.
+   longDesc: KissHerLong
+   textId: KissHerText
+   followUpActions: 
+    PostKissHomeDate: 
+    PostKissHomeAlone: $m.testWillHard(0)
+
+ - id: PostKissHomeDate
+   shortDesc: PostKissHomeDateShort
+   longDesc: PostKissHomeDateLong
+   textId: PostKissHomeDateText
+   sceneTransition:
+    condition: true # Always transition when this action is taken
+    type: HOME_DATE # Transition type. We don't need a location for this particular transition type as it always uses the pc's home.
+    # Male NPCs. A femaleNpcs section can also be defined similarly if needed.
+    maleNpcs:
+     - id: date # Should be recognised by the specific scene we're transitioning to.
+       npc: m # ID for a Male NPC in the context (i.e. this is the ID in this custom scene).
+
+ - id: PostKissHomeAlone
+   shortDesc: Go home alone
+   longDesc: PostKissHomeAloneLong
+   textId: PostKissHomeAloneText
+   finishScene: true
+
+ - id: LiarRefuse
+   shortDesc: Refuse
+   longDesc: Turn down the offer and go home.
+   textId: LiarRefuseText
+   finishScene: true
+
+ - id: AllowTouchFirst
+   shortDesc: Let him touch you
+   longDesc: AllowTouchLong
+   textId: AllowTouchFirstText
+   allowNpcActions: false
+   followUpActions: 
+    AllowTouch: $w.isArousalEnjoy() && !$w.isArousalOrgasm()
+    DoNothing: (!$w.isArousalOrgasm())
+    StopThis: $m.testWillHard(0) && !$w.isArousalOrgasm()
+    HaveOrgasm: $w.isArousalOrgasm()
+
+ - id: DoNothingFirst
+   shortDesc: Do nothing
+   longDesc: Stand there with a stunned look on your face.
+   textId: DoNothingFirstText
+   allowNpcActions: false
+   followUpActions: 
+    AllowTouch: $w.isArousalEnjoy() && !$w.isArousalOrgasm()
+    DoNothing: (!$w.isArousalOrgasm())
+    StopThis: $m.testWillHard(0) && !$w.isArousalOrgasm()
+    HaveOrgasm: $w.isArousalOrgasm()
+
+ - id: AllowTouch
+   shortDesc: Let him touch you
+   longDesc: AllowTouchLong
+   textId: AllowTouchText
+   allowNpcActions: true
+   followUpActions: 
+    AllowTouch: $w.isArousalEnjoy() && !$w.isArousalOrgasm()
+    DoNothing: (!$w.isArousalOrgasm())
+    StopThis: $m.testWillHard(0) && !$w.isArousalOrgasm()
+    HaveOrgasm: $w.isArousalOrgasm()
+
+ - id: DoNothing
+   shortDesc: Do nothing
+   longDesc: Stand there with a stunned look on your face.
+   textId: DoNothingText
+   allowNpcActions: true
+   followUpActions: 
+    AllowTouch: $w.isArousalEnjoy() && !$w.isArousalOrgasm()
+    DoNothing: (!$w.isArousalOrgasm())
+    StopThis: $m.testWillHard(0) && !$w.isArousalOrgasm()
+    HaveOrgasm: $w.isArousalOrgasm()
+
+ - id: HaveOrgasm
+   shortDesc: Have an orgasm 
+   longDesc: HaveOrgasmLong
+   textId: HaveOrgasmText
+   followUpActions: 
+    QuietOrgasm: (!$w.hasTrait("PASSIONATE_LOVER"))
+    LoudOrgasm: $w.hasTrait("PASSIONATE_LOVER")
+    FightItOrgasm: true
+
+ - id: QuietOrgasm
+   shortDesc: Quiet orgasm
+   longDesc: Try to stifle any cries and moans.
+   textId: QuietOrgasmText
+   allowNpcActions: true
+   followUpActions: 
+    AllowTouch: $w.isArousalEnjoy() && !$w.isArousalOrgasm()
+    DoNothing: (!$w.isArousalOrgasm())
+    StopThis: $m.testWillHard(0) && !$w.isArousalOrgasm()
+    HaveOrgasm: $w.isArousalOrgasm()
+
+ - id: LoudOrgasm
+   shortDesc: Loud orgasm
+   longDesc: Have a loud, screaming orgasm right here on the street. People will probably notice. 
+   textId: LoudOrgasmText
+   allowNpcActions: true
+   followUpActions: 
+    AllowTouch: $w.isArousalEnjoy() && !$w.isArousalOrgasm()
+    DoNothing: (!$w.isArousalOrgasm())
+    StopThis: $m.testWillHard(0) && !$w.isArousalOrgasm()
+    HaveOrgasm: $w.isArousalOrgasm()
+
+ - id: FightItOrgasm
+   shortDesc: Fight it!
+   longDesc: Try to resist having an orgasm. This is doomed to fail, but you can try all the same.
+   textId: FightItOrgasmText
+   allowNpcActions: true
+   followUpActions: 
+    AllowTouch: $w.isArousalEnjoy() && !$w.isArousalOrgasm()
+    DoNothing: (!$w.isArousalOrgasm())
+    StopThis: $m.testWillHard(0) && !$w.isArousalOrgasm()
+    HaveOrgasm: $w.isArousalOrgasm()
+
+ - id: SpitLubeFollowupYes
+   shortDesc: Open your mouth
+   longDesc: SpitLubeFollowupYesLong
+   textId: SpitLubeFollowupYesText
+   followUpActions: 
+    AllowTouch: $w.isArousalEnjoy() && !$w.isArousalOrgasm()
+    DoNothing: (!$w.isArousalOrgasm())
+    StopThis: $m.testWillHard(0) && !$w.isArousalOrgasm()
+    HaveOrgasm: $w.isArousalOrgasm()
+
+ - id: SpitLubeFollowupNo
+   shortDesc: Refuse
+   longDesc: SpitLubeFollowupNoLong
+   textId: SpitLubeFollowupNoText
+   followUpActions: 
+    AllowTouch: $w.isArousalEnjoy() && !$w.isArousalOrgasm()
+    DoNothing: (!$w.isArousalOrgasm())
+    StopThis: $m.testWillHard(0) && !$w.isArousalOrgasm()
+    HaveOrgasm: $w.isArousalOrgasm()
+
+ - id: StopThis
+   shortDesc: Put a stop to this
+   longDesc: StopThisLong 
+   textId: StopThisText
+   finishScene: true 
+
+ - id: GoHomeNo
+   shortDesc: Stay here for now
+   longDesc: You're doing just fine where you are.
+   textId: GoHomeNoText
+   allowNpcActions: true
+   followUpActions: 
+    AllowTouch: $w.isArousalEnjoy() && !$w.isArousalOrgasm()
+    DoNothing: (!$w.isArousalOrgasm())
+    StopThis: $m.testWillHard(0) && !$w.isArousalOrgasm()
+    HaveOrgasm: $w.isArousalOrgasm()
+   
+ - id: GoHomeAlone
+   shortDesc: Go home alone
+   longDesc: You've had your fun, but you're not going any further. 
+   textId: GoHomeAloneText
+   finishScene: true 
+
+ - id: GoHomeYes
+   shortDesc: Take him home
+   longDesc: Take him home with you. Sex is likely.
+   textId: GoHomeYesText
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT # Standing makeout is always a returning transition
+    maleNpcs:
+     - id: man
+       npc: m
+    # Returning ID. This marks the transition as a returning one and should always be set if transitioning to
+    # scenes that always return (like makeouts) and never be set when going to scenes that don't return (like HOME_DATE).
+    # When transitioning to another custom scene you need to decide if it'll return or not and set or not set an ID as appropriate.
+    # The returning ID must map to an entry under ReturningSections.
+    returningId: returnFromMakeout
+    # Location info. Can either set useCurrentLocation to use this scene's location, usePlayerHome to use the pc's home or 
+    # define the location by hand with wall/floor/hasBed and isOutside - see the testing section for an example of this.
+    location:
+     usePlayerHome: true # No need for any other location fields if we're using an existing one.
+
+returningSections:
+ - id: returnFromMakeout
+   textId: returnFromMakeoutText
+   finishScene: true
+ - id: returnFromAlleyBJ
+   textId: returnFromAlleyBJText
+   finishScene: true
+ - id: returnFromAlleySex
+   textId: returnFromAlleySexText
+   finishScene: true
+ - id: Whored
+   textId: WhoredText
+   finishScene: $scene.hasFlag("WHOREDEND")
+   followUpActions: 
+    SneakOut: true
+ - id: OWhored
+   textId: OWhoredText
+   finishScene: $scene.hasFlag("WHOREDEND")
+   followUpActions: 
+    SneakOut: true
+
+maleNpcActions:
+ - id: SpitLubeFollowup
+   textId: SpitLubeFollowup
+   condition: (!$w.isArousalComfort() || $w.hasTrait("BLOCK_ROUGH")) && ($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD")
+   weightDivisorConditions: 
+    - $scene.hasFlag("spitlubed")
+    - $scene.hasFlag("spitlubed")
+   followUpActions:
+    SpitLubeFollowupYes:
+    SpitLubeFollowupNo: $m.testWillHard($mouthtest)
+    StopThis: $m.testWillHard(0)
+ - id: SpitLube
+   textId: SpitLube
+   condition: (!$w.isArousalComfort() && !$w.hasTrait("BLOCK_ROUGH")) && (!$m.getBehaviour() == "MEAN" && !$m.getBehaviour() == "COLD")
+   weightDivisorConditions: 
+    - $scene.hasFlag("spitlubed")
+    - $scene.hasFlag("spitlubed")
+ - id: TakeHome
+   textId: TakeHome
+   condition: ($w.isArousalComfort())
+   weightDivisorConditions: 
+    - $m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD"
+    - $m.hasTrait("SLEAZY")
+   weightMultiplierConditions: 
+    - $m.hasTrait("IMPREGNATOR")
+    - $m.getBehaviour() == "ROM"
+   followUpActions: 
+    GoHomeNo: $m.testWillNormal(0)
+    GoHomeAlone: $m.testWillHard(0)
+    GoHomeYes: 
+ - id: SpreadLabia
+   textId: SpreadLabia
+   condition: (!$scene.hasFlag("penetrated")) && !$w.isArousalOrgasm()
+ - id: SlapPussy
+   textId: SlapPussy
+   condition: (!$scene.hasFlag("penetrated")) && !$w.isArousalOrgasm() && $m.getBehaviourNoFaking() == "MEAN" && !$w.hasTrait("BLOCK_ROUGH")
+ - id: StrokePussy
+   textId: StrokePussy
+   condition: (!$scene.hasFlag("penetrated")) && !$w.isArousalOrgasm()
+ - id: Piston
+   textId: Piston
+   condition: ($scene.hasFlag("penetrated")) && !$w.isArousalOrgasm()
+ - id: FingerCurl
+   textId: FingerCurl
+   condition: ($scene.hasFlag("penetrated")) && !$w.isArousalOrgasm()
+ - id: InsertFinger
+   textId: InsertFinger
+   condition: (!$scene.hasFlag("penetrated")) && !$w.isArousalOrgasm() && ($scene.hasFlag("insertblock") || $w.isArousalComfort())
+ - id: RubClit
+   textId: RubClit
+   condition: (!$w.isArousalOrgasm())
+   weightDivisorConditions:
+    - $scene.hasFlag("penetrated")
+ - id: LiftSkirt
+   textId: LiftSkirt
+   condition: ($m.getBehaviour() == "MEAN" || $m.getBehaviour() == "COLD") && ($w.getBottomStatus() == "WORN" || $w.getBottomStatus() == "DISHEVELED")
+ - id: GrabBreast
+   textId: GrabBreast
+   condition: (!$w.isArousalOrgasm())
+

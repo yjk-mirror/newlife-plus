@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<NotepadPlus>
+	<AutoComplete language="Velocity">
+		<Environment ignoreCase="no" startFunc="(" stopFunc=")" paramSeparator="," terminal="##" />
+		<KeyWord name="ACCEPT" />
+		<KeyWord name="ACQUAINTANCE" />
+		<KeyWord name="ACTS_OF_EVIL" />
+		<KeyWord name="AGREED_BARE" />
+		<KeyWord name="AGREED_ROUGH" />
+		<KeyWord name="AGREED_SHARE_WITH_PARTNER" />
+		<KeyWord name="ALL_ORGASMS" />
+		<KeyWord name="ALWAYS_ACCEPT_SEX" />
+		<KeyWord name="ALWAYS_CONDOMS" />
+		<KeyWord name="ALWAYS_FEMALE" />
+		<KeyWord name="ALWAYS_ROUGH" />
+		<KeyWord name="AMBITIOUS" />
+		<KeyWord name="ANAL" />
+		<KeyWord name="ANAL_ORGASMS" />
+		<KeyWord name="ANAL_PARTNERS" />
+		<KeyWord name="ANAL_SHAGS" />
+		<KeyWord name="ANKLES" />
+		<KeyWord name="ANXIETY" />
+		<KeyWord name="AROMANTIC" />
+		<KeyWord name="ASKED_BARE" />
+		<KeyWord name="AVERAGE" />
+		<KeyWord name="AVG" />
+		<KeyWord name="AWESOME_BABY_TOYS" />
+		<KeyWord name="BABY_CRAZY" />
+		<KeyWord name="BAD_DANCER" />
+		<KeyWord name="BEATINGS_GIVEN" />
+		<KeyWord name="BEAUTIFUL" />
+		<KeyWord name="BEHIND" />
+		<KeyWord name="BEST_JOB_PERFORMANCE" />
+		<KeyWord name="BIG" />
+		<KeyWord name="BIG_BALLS" />
+		<KeyWord name="BIG_COCK_HEAD" />
+		<KeyWord name="BIG_SHOPS" />
+		<KeyWord name="BIG_TV" />
+		<KeyWord name="BITCHY" />
+		<KeyWord name="BLOCK_ANAL" />
+		<KeyWord name="BLOCK_JUST_FRIENDS_REQUEST" />
+		<KeyWord name="BLOCK_PILL_SABOTAGE" />
+		<KeyWord name="BLOCK_REJECTIONS" />
+		<KeyWord name="BLOCK_REQ_STOP_ROUGH" />
+		<KeyWord name="BLOCK_ROUGH" />
+		<KeyWord name="BOASTFUL" />
+		<KeyWord name="BROKEN_CONDOMS" />
+		<KeyWord name="BUMP" />
+		<KeyWord name="BUTTONS" />
+		<KeyWord name="CAME_INSIDE" />
+		<KeyWord name="CAME_INSIDE_ANAL" />
+		<KeyWord name="CAME_IN_MOUTH" />
+		<KeyWord name="CARING" />
+		<KeyWord name="CHARM" />
+		<KeyWord name="CHARMING" />
+		<KeyWord name="CHEATING_LAST_CHANCE" />
+		<KeyWord name="CHILDCARE" />
+		<KeyWord name="CLEAR_HEAD" />
+		<KeyWord name="CLEVER_HANDS" />
+		<KeyWord name="CLINGY" />
+		<KeyWord name="COLD" />
+		<KeyWord name="COLD_HEARTED" />
+		<KeyWord name="COME_IN_MOUTH" />
+		<KeyWord name="CONCERTS_ATTENDED" />
+		<KeyWord name="CONDOMS" />
+		<KeyWord name="CONDOM_DAMAGING_SECRETIONS" />
+		<KeyWord name="CONDOM_SEX" />
+		<KeyWord name="CONSCIENTIOUS" />
+		<KeyWord name="COOKING_GEAR" />
+		<KeyWord name="COUPLE" />
+		<KeyWord name="CRUDE" />
+		<KeyWord name="CUNNING" />
+		<KeyWord name="CUTE" />
+		<KeyWord name="DANCE" />
+		<KeyWord name="DANCE_CONTEST_TORE_CLOTHING" />
+		<KeyWord name="DANCE_COUPON" />
+		<KeyWord name="DANCE_JUDGE" />
+		<KeyWord name="DANCE_STUDENT" />
+		<KeyWord name="DANCE_TEACHER" />
+		<KeyWord name="DANCE_TROPHY" />
+		<KeyWord name="DANCE_WOODEN_SPOON" />
+		<KeyWord name="DATE" />
+		<KeyWord name="DATES" />
+		<KeyWord name="DISHEVELED" />
+		<KeyWord name="DIVORCED" />
+		<KeyWord name="DOESNT_WANT_KIDS" />
+		<KeyWord name="DONE_DANCE_CONTEST" />
+		<KeyWord name="DONE_INNOCENT_BONDAGE_SCENE" />
+		<KeyWord name="DOORMAT" />
+		<KeyWord name="DOWN_TO_EARTH" />
+		<KeyWord name="DO_PROPOSAL" />
+		<KeyWord name="DRINKS_BOUGHT" />
+		<KeyWord name="DRINKS_TREATED" />
+		<KeyWord name="DULL" />
+		<KeyWord name="DVD_PLAYER" />
+		<KeyWord name="EARLY_TWENTIES" />
+		<KeyWord name="ELEGANT_ART" />
+		<KeyWord name="ENGAGED" />
+		<KeyWord name="EROTIC_ART" />
+		<KeyWord name="EXPOSED" />
+		<KeyWord name="FACE_TO_FACE" />
+		<KeyWord name="FASHION" />
+		<KeyWord name="FASHIONABLE" />
+		<KeyWord name="FAT" />
+		<KeyWord name="FECUND" />
+		<KeyWord name="FEEL_PUSSY" />
+		<KeyWord name="FEMININITY" />
+		<KeyWord name="FERTILITY_TREATMENT" />
+		<KeyWord name="FIFTIES" />
+		<KeyWord name="FINISHED_ANAL_SEX" />
+		<KeyWord name="FINISHED_SEX" />
+		<KeyWord name="FIRST_TIME_BLACKJACK" />
+		<KeyWord name="FIRST_TIME_CAME_INSIDE" />
+		<KeyWord name="FIRST_TIME_CAME_INSIDE_UNSAFE" />
+		<KeyWord name="FIRST_TIME_CONCERT" />
+		<KeyWord name="FIRST_TIME_COWGIRL" />
+		<KeyWord name="FIRST_TIME_DOGGY" />
+		<KeyWord name="FIRST_TIME_DRUNK" />
+		<KeyWord name="FIRST_TIME_ELECTRO_COUCH" />
+		<KeyWord name="FIRST_TIME_ENJOYABLE" />
+		<KeyWord name="FIRST_TIME_JERK_FRIEND_REPAIR" />
+		<KeyWord name="FIRST_TIME_MISSIONARY" />
+		<KeyWord name="FIRST_TIME_ORGASM" />
+		<KeyWord name="FIRST_TIME_SEX_SHOP_COUNTER" />
+		<KeyWord name="FIRST_TIME_STANDING_BEHIND" />
+		<KeyWord name="FIRST_TIME_STANDING_FRONT" />
+		<KeyWord name="FITNESS" />
+		<KeyWord name="FLAT" />
+		<KeyWord name="FLIRTY" />
+		<KeyWord name="FORGETFUL" />
+		<KeyWord name="FORTIES" />
+		<KeyWord name="FOUND_TREASURE" />
+		<KeyWord name="FRIENDLY" />
+		<KeyWord name="FRIEND_IMPREGNATOR_ADVICE" />
+		<KeyWord name="GIANT_TEDDY" />
+		<KeyWord name="GOOD_DANCER" />
+		<KeyWord name="GOT_PAST_TREASURE_RIVAL" />
+		<KeyWord name="GOURMET_COOKBOOK" />
+		<KeyWord name="GO_ON_PILL" />
+		<KeyWord name="GRIND" />
+		<KeyWord name="GROPE" />
+		<KeyWord name="GROPE_BREASTS" />
+		<KeyWord name="GYM_CHANGING_ROOM_THREESOMES" />
+		<KeyWord name="GYM_JERK" />
+		<KeyWord name="GYM_MEMBERSHIP" />
+		<KeyWord name="HAIR_TRIGGER" />
+		<KeyWord name="HALTERTOP" />
+		<KeyWord name="HANDJOB_PLEASURE" />
+		<KeyWord name="HANDSOME" />
+		<KeyWord name="HANDS_ORGASM" />
+		<KeyWord name="HANGOVERS_CURED" />
+		<KeyWord name="HARD_TO_PLEASE" />
+		<KeyWord name="HATES_CONDOMS" />
+		<KeyWord name="HAVE_CHILD" />
+		<KeyWord name="HAVE_MANY_KIDS" />
+		<KeyWord name="HAVE_SON" />
+		<KeyWord name="HAVE_THREE_KIDS" />
+		<KeyWord name="HELP_WITH_KIDS" />
+		<KeyWord name="HEROES_REWARDED" />
+		<KeyWord name="HIDE_TRAITS" />
+		<KeyWord name="HIGH_WILLPOWER" />
+		<KeyWord name="HOUSE_PARTIES" />
+		<KeyWord name="HOUSE_PARTY_COOLDOWN" />
+		<KeyWord name="HUGBOX" />
+		<KeyWord name="HUGE" />
+		<KeyWord name="ILL_FITTING" />
+		<KeyWord name="IMPREGNATOR" />
+		<KeyWord name="INFERTILE" />
+		<KeyWord name="INHIBIT_SABOTAGE" />
+		<KeyWord name="INNOCENT" />
+		<KeyWord name="INNOCENT_BONDAGE_NPC" />
+		<KeyWord name="INNOCENT_ENCOURAGED_LOSE_VIRGINITY" />
+		<KeyWord name="INNOCENT_NON_VIRGIN_QUESTION" />
+		<KeyWord name="INNOCENT_SALES_COLLEAGUE" />
+		<KeyWord name="INNOCENT_VIRGIN_QUESTION" />
+		<KeyWord name="INTERESTING" />
+		<KeyWord name="IRON_WILL" />
+		<KeyWord name="IS_HORSE" />
+		<KeyWord name="IVYS_PREGNANCY_ACCELERATION" />
+		<KeyWord name="JERK" />
+		<KeyWord name="JUST_FRIENDS" />
+		<KeyWord name="KETTLE" />
+		<KeyWord name="KISS" />
+		<KeyWord name="KISSING" />
+		<KeyWord name="KNEES" />
+		<KeyWord name="KNOWS_ABOUT_TREASURE" />
+		<KeyWord name="KNOWS_LIKES_TO_SHARE" />
+		<KeyWord name="LACY" />
+		<KeyWord name="LARGE" />
+		<KeyWord name="LATE_TEENS" />
+		<KeyWord name="LIED_CLAIMING_UNPROTECTED" />
+		<KeyWord name="LIGHT" />
+		<KeyWord name="LIKES_ANAL" />
+		<KeyWord name="LIKES_BARE" />
+		<KeyWord name="LIKES_BIG" />
+		<KeyWord name="LIKES_BIG_TITS" />
+		<KeyWord name="LIKES_CASUAL" />
+		<KeyWord name="LIKES_CUTE" />
+		<KeyWord name="LIKES_ELEGANT" />
+		<KeyWord name="LIKES_MED_TITS" />
+		<KeyWord name="LIKES_ORAL" />
+		<KeyWord name="LIKES_ROUGH" />
+		<KeyWord name="LIKES_SEXY" />
+		<KeyWord name="LIKES_SMALL_TITS" />
+		<KeyWord name="LIKES_TO_SHARE" />
+		<KeyWord name="LOCK_ALWAYS_ROUGH" />
+		<KeyWord name="LOCK_TRYING_FOR_BABY" />
+		<KeyWord name="LOST_ANAL_VIRGINITY" />
+		<KeyWord name="LOST_VIRGINITY" />
+		<KeyWord name="LOWCUT" />
+		<KeyWord name="LOWLIFE" />
+		<KeyWord name="LOW_RISE" />
+		<KeyWord name="LOW_SELF_ESTEEM" />
+		<KeyWord name="LOW_STANDARDS" />
+		<KeyWord name="LOW_WILLPOWER" />
+		<KeyWord name="LUBE" />
+		<KeyWord name="LYING" />
+		<KeyWord name="MAGIC_FINGERS" />
+		<KeyWord name="MARRIED" />
+		<KeyWord name="MATERNAL" />
+		<KeyWord name="MEAN" />
+		<KeyWord name="MEDIUM_LARGE" />
+		<KeyWord name="MEDIUM_SMALL" />
+		<KeyWord name="MET_HORSE" />
+		<KeyWord name="MET_LOWLIVES" />
+		<KeyWord name="MISANTHROPE" />
+		<KeyWord name="MODERATE" />
+		<KeyWord name="MONEY_EARNED" />
+		<KeyWord name="MONEY_SPENT_CLOTHES" />
+		<KeyWord name="MO_REJECTION" />
+		<KeyWord name="MUSCULAR" />
+		<KeyWord name="NASTY_SPERM" />
+		<KeyWord name="NICE" />
+		<KeyWord name="NONE" />
+		<KeyWord name="NOT_TRANSFORMED" />
+		<KeyWord name="NO_BEFRIEND" />
+		<KeyWord name="NO_CONDOMS" />
+		<KeyWord name="NO_MORE_GYM_THREESOMES" />
+		<KeyWord name="NO_ORAL" />
+		<KeyWord name="NO_PILL" />
+		<KeyWord name="NO_RANDOM_APPEARANCE" />
+		<KeyWord name="ODDLY_UNATTRACTIVE" />
+		<KeyWord name="OFF" />
+		<KeyWord name="OLD" />
+		<KeyWord name="ORAL" />
+		<KeyWord name="ORAL_PLEASURE" />
+		<KeyWord name="OUTGOING" />
+		<KeyWord name="OVERACTIVE_IMAGINATION" />
+		<KeyWord name="PARTNER_PHOTO" />
+		<KeyWord name="PARTY_GIRL" />
+		<KeyWord name="PARTY_GIRL_SALES_COLLEAGUE" />
+		<KeyWord name="PASSIONATE_LOVER" />
+		<KeyWord name="PAUNCHY" />
+		<KeyWord name="PC" />
+		<KeyWord name="PC_ORGASM" />
+		<KeyWord name="PC_OWES_FAVOUR" />
+		<KeyWord name="PERCEPTIVE" />
+		<KeyWord name="PHONE_FUN" />
+		<KeyWord name="PICKY" />
+		<KeyWord name="PILL" />
+		<KeyWord name="PILL_SABOTAGED" />
+		<KeyWord name="PLAIN" />
+		<KeyWord name="POSH" />
+		<KeyWord name="POSTERS" />
+		<KeyWord name="PREFERS_SEX" />
+		<KeyWord name="PREGNANCY_ACCELERATION_TREATMENT" />
+		<KeyWord name="PROPOSAL_NOT_YET" />
+		<KeyWord name="PSYCHIC" />
+		<KeyWord name="PULL_DOWN" />
+		<KeyWord name="QUIET" />
+		<KeyWord name="READY_SEX" />
+		<KeyWord name="REFINED" />
+		<KeyWord name="REFUSED_PROPOSAL" />
+		<KeyWord name="REFUSED_VIRGINITY_LOSS_REQUEST" />
+		<KeyWord name="REJECT" />
+		<KeyWord name="RELATIONSHIP_DURATION" />
+		<KeyWord name="RELAXED" />
+		<KeyWord name="REPAIRMAN" />
+		<KeyWord name="REPLACED_INNOCENT_FOR_BONDAGE" />
+		<KeyWord name="RISKY_INSEMINATIONS" />
+		<KeyWord name="ROM" />
+		<KeyWord name="ROMANTIC" />
+		<KeyWord name="RUDE" />
+		<KeyWord name="SALES_BOSS" />
+		<KeyWord name="SALES_GROPEY_CLIENT_HAD_MEETING" />
+		<KeyWord name="SALES_GROPEY_CLIENT_INVITED_HOME" />
+		<KeyWord name="SALES_PERVY_CLIENT" />
+		<KeyWord name="SALES_SLACKER_FRIENDSHIP_MEETS" />
+		<KeyWord name="SALES_SLACKER_FRIENDSHIP_NPC" />
+		<KeyWord name="SCARED_LOWLIVES" />
+		<KeyWord name="SEEN_DANCE_TROPHY" />
+		<KeyWord name="SEE_THROUGH" />
+		<KeyWord name="SELFISH" />
+		<KeyWord name="SENSITIVE_BREASTS" />
+		<KeyWord name="SENSITIVE_PUSSY" />
+		<KeyWord name="SEVERE" />
+		<KeyWord name="SEX" />
+		<KeyWord name="SEXUAL" />
+		<KeyWord name="SEX_ORGASMS" />
+		<KeyWord name="SEX_PARTNERS" />
+		<KeyWord name="SEX_TOY" />
+		<KeyWord name="SHOPPING_TRIPS" />
+		<KeyWord name="SHOWS_BUM" />
+		<KeyWord name="SHOWS_TUMMY" />
+		<KeyWord name="SHY" />
+		<KeyWord name="SIDE" />
+		<KeyWord name="SILK" />
+		<KeyWord name="SINGULAR" />
+		<KeyWord name="SITTING" />
+		<KeyWord name="SKILLFUL_TONGUE" />
+		<KeyWord name="SKINNY" />
+		<KeyWord name="SLEAZY" />
+		<KeyWord name="SLEEVED" />
+		<KeyWord name="SLIM" />
+		<KeyWord name="SMALL" />
+		<KeyWord name="SMALL_COCK" />
+		<KeyWord name="SNUG_PUSSY" />
+		<KeyWord name="SOPHISTICATED" />
+		<KeyWord name="SOUND_SYSTEM" />
+		<KeyWord name="SPA_VOUCHER" />
+		<KeyWord name="SPECIAL_RABBIT" />
+		<KeyWord name="STANDNG" />
+		<KeyWord name="STOPPED_SEX" />
+		<KeyWord name="STRANGER" />
+		<KeyWord name="STRAPLESS" />
+		<KeyWord name="STRAPPY" />
+		<KeyWord name="SULTRY" />
+		<KeyWord name="SUPPORT_PC_FINANCIALLY" />
+		<KeyWord name="TACITURN" />
+		<KeyWord name="TALENTED_TONGUE" />
+		<KeyWord name="TASTY_SPERM" />
+		<KeyWord name="TEDDIES" />
+		<KeyWord name="TESTING_TRAIT" />
+		<KeyWord name="TESTING_TRAIT2" />
+		<KeyWord name="TESTING_TRAIT3" />
+		<KeyWord name="TEST_FLAG" />
+		<KeyWord name="TEST_FLAG1" />
+		<KeyWord name="TEST_FLAG2" />
+		<KeyWord name="TEST_FLAG3" />
+		<KeyWord name="THICKSET" />
+		<KeyWord name="THICK_COCK" />
+		<KeyWord name="THIGH" />
+		<KeyWord name="THIN" />
+		<KeyWord name="THIRTIES" />
+		<KeyWord name="TIMES_CLUBBING" />
+		<KeyWord name="TIMES_MUGGED" />
+		<KeyWord name="TIMES_UNFAITHFUL" />
+		<KeyWord name="TITJOB" />
+		<KeyWord name="TITJOB_PLEASURE" />
+		<KeyWord name="TOLD_IVY_PREGNANT" />
+		<KeyWord name="TOLD_VIRGIN_NOPREG" />
+		<KeyWord name="TONED" />
+		<KeyWord name="TOUCH" />
+		<KeyWord name="TOUCH_COCK" />
+		<KeyWord name="TRADITIONAL" />
+		<KeyWord name="TREASURE_HUNTER" />
+		<KeyWord name="TREASURE_HUNTER_RIVAL" />
+		<KeyWord name="TROUNCED" />
+		<KeyWord name="TV" />
+		<KeyWord name="TWENTIES" />
+		<KeyWord name="UGLY" />
+		<KeyWord name="UNDRESS" />
+		<KeyWord name="UNLOVABLE" />
+		<KeyWord name="UNUSUAL_BODY_CHEMISTRY" />
+		<KeyWord name="VIGOROUS_LOVER" />
+		<KeyWord name="VOW_MASTER" />
+		<KeyWord name="WANTS_KIDS" />
+		<KeyWord name="WEEKS_EXTREME_STRESS" />
+		<KeyWord name="WEEKS_HIGH_STRESS" />
+		<KeyWord name="WEEKS_MAX_STRESS" />
+		<KeyWord name="WELCOME" />
+		<KeyWord name="WET_PUSSY" />
+		<KeyWord name="WOMANLY" />
+		<KeyWord name="WORN" />
+		<KeyWord name="ZIP" />
+		<KeyWord name="activeMaleNpc" />
+		<KeyWord name="addAlcoholLarge()" />
+		<KeyWord name="addAlcoholMedium()" />
+		<KeyWord name="addAlcoholSmall()" />
+		<KeyWord name="addArousalHuge()" />
+		<KeyWord name="addArousalLarge()" />
+		<KeyWord name="addArousalMedium()" />
+		<KeyWord name="addArousalSmall()" />
+		<KeyWord name="addArousalTiny()" />
+		<KeyWord name="addBastard" func="yes">
+			<Overload retVal="void" >
+				<Param name="int amount" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="addEnjoyLarge()" />
+		<KeyWord name="addEnjoyLargeNoNpc()" />
+		<KeyWord name="addEnjoyMedium()" />
+		<KeyWord name="addEnjoyMediumNoNpc()" />
+		<KeyWord name="addEnjoySmall()" />
+		<KeyWord name="addEnjoySmallNoNpc()" />
+		<KeyWord name="addEnjoyTiny()" />
+		<KeyWord name="addEnjoyTinyNoNpc()" />
+		<KeyWord name="addEnjoyVLarge()" />
+		<KeyWord name="addEnjoyVLargeNoNpc()" />
+		<KeyWord name="addFlag" func="yes">
+			<Overload retVal="void" >
+				<Param name="String flag" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="addNpcLikingGigantic()" />
+		<KeyWord name="addNpcLikingLarge()" />
+		<KeyWord name="addNpcLikingMassive()" />
+		<KeyWord name="addNpcLikingMedium()" />
+		<KeyWord name="addNpcLikingSmall()" />
+		<KeyWord name="addNpcLikingTiny()" />
+		<KeyWord name="addNpcLikingVLarge()" />
+		<KeyWord name="addNpcLikingVLargeUncapped()" />
+		<KeyWord name="addNpcLoveGigantic()" />
+		<KeyWord name="addNpcLoveLarge()" />
+		<KeyWord name="addNpcLoveMassive()" />
+		<KeyWord name="addNpcLoveMedium()" />
+		<KeyWord name="addNpcLoveSmall()" />
+		<KeyWord name="addNpcLoveTiny()" />
+		<KeyWord name="addNpcLoveVLarge()" />
+		<KeyWord name="addNpcLoveVLargeUncapped()" />
+		<KeyWord name="addPossessiveSuffix" func="yes">
+			<Overload retVal="String" >
+				<Param name="String subject" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="addRelationshipFlag" func="yes">
+			<Overload retVal="void" >
+				<Param name="String flag" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="addSexualActivity" func="yes">
+			<Overload retVal="void" >
+				<Param name="String activity" />
+				<Param name="boolean canCountAsCheating" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="addStat" func="yes">
+			<Overload retVal="void" >
+				<Param name="String stat" />
+			</Overload>
+			<Overload retVal="void" >
+				<Param name="String stat" />
+				<Param name="int amount" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="addTempTrait" func="yes">
+			<Overload retVal="void" >
+				<Param name="String trait" />
+				<Param name="int time" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="addTrait" func="yes">
+			<Overload retVal="void" >
+				<Param name="String trait" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="addWEnjoyLarge()" />
+		<KeyWord name="addWEnjoyMedium()" />
+		<KeyWord name="addWEnjoySmall()" />
+		<KeyWord name="addWEnjoyTiny()" />
+		<KeyWord name="addWEnjoyVLarge()" />
+		<KeyWord name="addWLikingGigantic()" />
+		<KeyWord name="addWLikingLarge()" />
+		<KeyWord name="addWLikingMassive()" />
+		<KeyWord name="addWLikingMedium()" />
+		<KeyWord name="addWLikingSmall()" />
+		<KeyWord name="addWLikingTiny()" />
+		<KeyWord name="addWLikingVLarge()" />
+		<KeyWord name="addWLikingVLargeUncapped()" />
+		<KeyWord name="addWLoveGigantic()" />
+		<KeyWord name="addWLoveLarge()" />
+		<KeyWord name="addWLoveMassive()" />
+		<KeyWord name="addWLoveMedium()" />
+		<KeyWord name="addWLoveSmall()" />
+		<KeyWord name="addWLoveTiny()" />
+		<KeyWord name="addWLoveVLarge()" />
+		<KeyWord name="addWLoveVLargeUncapped()" />
+		<KeyWord name="addWeightedItem" func="yes">
+			<Overload retVal="void" >
+				<Param name="String item" />
+				<Param name="int weight" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="age" />
+		<KeyWord name="allowAnal" />
+		<KeyWord name="allowedMoreFriends" />
+		<KeyWord name="alsoLowerBody" />
+		<KeyWord name="analVirgin" />
+		<KeyWord name="anxious" />
+		<KeyWord name="arousalClose" />
+		<KeyWord name="arousalComfort" />
+		<KeyWord name="arousalEnjoy" />
+		<KeyWord name="arousalOrgasm" />
+		<KeyWord name="attemptRemoveFromWardrobe" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="ClothingItem" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="basicDesc" />
+		<KeyWord name="bastard" />
+		<KeyWord name="behaviour" />
+		<KeyWord name="behaviourNoFaking" />
+		<KeyWord name="believesVirgin" />
+		<KeyWord name="bottom" />
+		<KeyWord name="bottomStatus" />
+		<KeyWord name="bra" />
+		<KeyWord name="braStatus" />
+		<KeyWord name="breakup" func="yes">
+			<Overload retVal="void" >
+				<Param name="boolean npcDecision" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="breasts" />
+		<KeyWord name="breastsDesc" />
+		<KeyWord name="breastsExposed" />
+		<KeyWord name="breastsSmallerThanPc" />
+		<KeyWord name="breastsLargerThanPc" />
+		<KeyWord name="capitalise" func="yes">
+			<Overload retVal="String" >
+				<Param name="String item" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="causePlayerOrgasm()" />
+		<KeyWord name="causePlayerOrgasmNotCheating()" />
+		<KeyWord name="changeAnxiety" func="yes">
+			<Overload retVal="void" >
+				<Param name="int modifier" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="changeMoney" func="yes">
+			<Overload retVal="void" >
+				<Param name="int modifier" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="changeRelationshipStatus" func="yes">
+			<Overload retVal="void" >
+				<Param name="String status" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="changeStress" func="yes">
+			<Overload retVal="void" >
+				<Param name="int modifier" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="charType" />
+		<KeyWord name="cheatedWith" />
+		<KeyWord name="cheatingSeverity" />
+		<KeyWord name="clearAlcohol()" />
+		<KeyWord name="clearMap()" />
+		<KeyWord name="clearPostSexFlags()" />
+		<KeyWord name="clearStress()" />
+		<KeyWord name="clothesDisarrayed" />
+		<KeyWord name="cockDesc" />
+		<KeyWord name="cockExposed" />
+		<KeyWord name="colour" />
+		<KeyWord name="condomSabotageOpportunity" func="yes">
+			<Overload retVal="void" >
+				<Param name="boolean inhibited" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="contactable" />
+		<KeyWord name="description" />
+		<KeyWord name="dislikesFigure" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String maleFigure" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="dislikesPlayersBreasts" />
+		<KeyWord name="drunk" />
+		<KeyWord name="endFriendship()" />
+		<KeyWord name="extremeStress" />
+		<KeyWord name="exposeRemoves" />
+		<KeyWord name="eyeAdj" />
+		<KeyWord name="eyeColour" />
+		<KeyWord name="figure" />
+		<KeyWord name="figureDesc" />
+		<KeyWord name="fixClothing()" />
+		<KeyWord name="floor" />
+		<KeyWord name="friend" />
+		<KeyWord name="getArticle" func="yes">
+			<Overload retVal="String" >
+				<Param name="String subject" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getDislikesBreasts" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="ContextFemaleNpc" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getLikesBreasts" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="ContextFemaleNpc" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getShortDesc" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String requestedRough" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getSkill" func="yes">
+			<Overload retVal="int" >
+				<Param name="String skill" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getStat" func="yes">
+			<Overload retVal="int" >
+				<Param name="String stat" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="girlOrWoman" />
+		<KeyWord name="hadChild" />
+		<KeyWord name="hadOrgasm" />
+		<KeyWord name="hadSex" />
+		<KeyWord name="hairColour" />
+		<KeyWord name="handAdj" />
+		<KeyWord name="hasActiveVow" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String vow" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="hasBed" />
+		<KeyWord name="hasCondom()" />
+		<KeyWord name="hasDoneCheatingActivity" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String activity" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="hasDoneSexualActivity" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String activity" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="hasFlag" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String flag" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="hasGameFlag" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String flag" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="hasRelationshipFlag" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String flag" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="hasStuff" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String stuff" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="hasTrait" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String trait" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="haveOrgasm()" />
+		<KeyWord name="haveOrgasmFromPc()" />
+		<KeyWord name="haveOrgasmNoNpc()" />
+		<KeyWord name="hideNpc" func="yes">
+			<Overload retVal="void" >
+				<Param name="ContextNpc npc" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="highStress" />
+		<KeyWord name="id" />
+		<KeyWord name="increaseKnowledge" func="yes">
+			<Overload retVal="void" >
+				<Param name="int amount" />
+				<Param name="int cap" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="informNotVirgin()" />
+		<KeyWord name="informVirgin()" />
+		<KeyWord name="informVirginUntilMarriage()" />
+		<KeyWord name="inseminatePlayer" func="yes">
+			<Overload retVal="void" >
+				<Param name="int modifier" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isNpcAttractionAttracted()" />
+		<KeyWord name="isNpcAttractionLust()" />
+		<KeyWord name="isNpcAttractionOk()" />
+		<KeyWord name="isNpcAttractionUnattracted()" />
+		<KeyWord name="isNpcHidden" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="ContextNpc npc" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isNpcRough" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="boolean allowBehaviourFaking" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isOlderThan" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String age" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="isSkillMaxed" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String skill" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="itThem" />
+		<KeyWord name="itThey" />
+		<KeyWord name="jacket" />
+		<KeyWord name="jacketBasicDesc" />
+		<KeyWord name="jacketHasButtons" />
+		<KeyWord name="jacketOpen" />
+		<KeyWord name="jacketWorn" />
+		<KeyWord name="jobTitle" />
+		<KeyWord name="knownPregnant" />
+		<KeyWord name="laceTop" />
+		<KeyWord name="lactating" />
+		<KeyWord name="latePreg" />
+		<KeyWord name="legwear" />
+		<KeyWord name="legwearWorn" />
+		<KeyWord name="length" />
+		<KeyWord name="likesFigure" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="String maleFigure" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="likesPlayersBreasts" />
+		<KeyWord name="makeFriend()" />
+		<KeyWord name="married" />
+		<KeyWord name="maxDrunk" />
+		<KeyWord name="maxStress" />
+		<KeyWord name="money" />
+		<KeyWord name="mum" />
+		<KeyWord name="naked" />
+		<KeyWord name="name" />
+		<KeyWord name="npcAttractionAttracted" />
+		<KeyWord name="npcAttractionLust" />
+		<KeyWord name="npcAttractionOk" />
+		<KeyWord name="npcAttractionUnattracted" />
+		<KeyWord name="npcLikingClose" />
+		<KeyWord name="npcLikingLike" />
+		<KeyWord name="npcLikingNeutral" />
+		<KeyWord name="npcLikingOk" />
+		<KeyWord name="npcLoveConfused" />
+		<KeyWord name="npcLoveCrush" />
+		<KeyWord name="npcLoveLove" />
+		<KeyWord name="npcLoveSome" />
+		<KeyWord name="onPill" />
+		<KeyWord name="outside" />
+		<KeyWord name="panties" />
+		<KeyWord name="pantiesStatus" />
+		<KeyWord name="partner" />
+		<KeyWord name="pcBehaviour" />
+		<KeyWord name="percent" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="int percentChance" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="performMakeoutAction" func="yes">
+			<Overload retVal="String" >
+				<Param name="String pcResponse" />
+				<Param name="List<String> moTypes" />
+				<Param name="String npcPosition" />
+				<Param name="String position" />
+				<Param name="boolean rough" />
+				<Param name="boolean allowBehaviourFaking" />
+				<Param name="boolean canCountAsCheating" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="personality" />
+		<KeyWord name="pickAndRemoveItem()" />
+		<KeyWord name="pickFromList" func="yes">
+			<Overload retVal="String" >
+				<Param name="List<String> list" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pickItem()" />
+		<KeyWord name="pickItemAndClearMap()" />
+		<KeyWord name="pregnancyStage" />
+		<KeyWord name="pregnant" />
+		<KeyWord name="processCondomRequest" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="boolean StrongRequest" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pussyExposed" />
+		<KeyWord name="putOnLegwear()" />
+		<KeyWord name="race" />
+		<KeyWord name="randomBoolean()" />
+		<KeyWord name="randomNumber" func="yes">
+			<Overload retVal="int" >
+				<Param name="int limit" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="reduceAlcoholLarge()" />
+		<KeyWord name="reduceAlcoholMedium()" />
+		<KeyWord name="reduceAlcoholSmall()" />
+		<KeyWord name="reduceArousalHuge()" />
+		<KeyWord name="reduceArousalLarge()" />
+		<KeyWord name="reduceArousalMedium()" />
+		<KeyWord name="reduceArousalSmall()" />
+		<KeyWord name="reduceArousalTiny()" />
+		<KeyWord name="reduceEnjoyLarge()" />
+		<KeyWord name="reduceEnjoyLargeNoNpc()" />
+		<KeyWord name="reduceEnjoyMedium()" />
+		<KeyWord name="reduceEnjoyMediumNoNpc()" />
+		<KeyWord name="reduceEnjoySmall()" />
+		<KeyWord name="reduceEnjoySmallNoNpc()" />
+		<KeyWord name="reduceEnjoyTiny()" />
+		<KeyWord name="reduceEnjoyTinyNoNpc()" />
+		<KeyWord name="reduceEnjoyVLarge()" />
+		<KeyWord name="reduceEnjoyVLargeNoNpc()" />
+		<KeyWord name="reduceNpcLikingGigantic()" />
+		<KeyWord name="reduceNpcLikingLarge()" />
+		<KeyWord name="reduceNpcLikingMassive()" />
+		<KeyWord name="reduceNpcLikingMedium()" />
+		<KeyWord name="reduceNpcLikingSmall()" />
+		<KeyWord name="reduceNpcLikingTiny()" />
+		<KeyWord name="reduceNpcLikingVLarge()" />
+		<KeyWord name="reduceNpcLikingVLargeUncapped()" />
+		<KeyWord name="reduceNpcLoveGigantic()" />
+		<KeyWord name="reduceNpcLoveLarge()" />
+		<KeyWord name="reduceNpcLoveMassive()" />
+		<KeyWord name="reduceNpcLoveMedium()" />
+		<KeyWord name="reduceNpcLoveSmall()" />
+		<KeyWord name="reduceNpcLoveTiny()" />
+		<KeyWord name="reduceNpcLoveVLarge()" />
+		<KeyWord name="reduceNpcLoveVLargeUncapped()" />
+		<KeyWord name="reduceWEnjoyLarge()" />
+		<KeyWord name="reduceWEnjoyMedium()" />
+		<KeyWord name="reduceWEnjoySmall()" />
+		<KeyWord name="reduceWEnjoyTiny()" />
+		<KeyWord name="reduceWEnjoyVLarge()" />
+		<KeyWord name="reduceWLikingGigantic()" />
+		<KeyWord name="reduceWLikingLarge()" />
+		<KeyWord name="reduceWLikingMassive()" />
+		<KeyWord name="reduceWLikingMedium()" />
+		<KeyWord name="reduceWLikingSmall()" />
+		<KeyWord name="reduceWLikingTiny()" />
+		<KeyWord name="reduceWLikingVLarge()" />
+		<KeyWord name="reduceWLikingVLargeUncapped()" />
+		<KeyWord name="reduceWLoveGigantic()" />
+		<KeyWord name="reduceWLoveLarge()" />
+		<KeyWord name="reduceWLoveMassive()" />
+		<KeyWord name="reduceWLoveMedium()" />
+		<KeyWord name="reduceWLoveSmall()" />
+		<KeyWord name="reduceWLoveTiny()" />
+		<KeyWord name="reduceWLoveVLarge()" />
+		<KeyWord name="reduceWLoveVLargeUncapped()" />
+		<KeyWord name="refusedCondom" />
+		<KeyWord name="relationship" />
+		<KeyWord name="relationshipNpcDesc" />
+		<KeyWord name="relationshipWDesc" />
+		<KeyWord name="removeCondom" />
+		<KeyWord name="removeFlag" func="yes">
+			<Overload retVal="void" >
+				<Param name="String flag" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="removeGameFlag" func="yes">
+			<Overload retVal="void" >
+				<Param name="String flag" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="removeLegwear()" />
+		<KeyWord name="removeRelationshipFlag" func="yes">
+			<Overload retVal="void" >
+				<Param name="String flag" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="removeTrait" func="yes">
+			<Overload retVal="void" >
+				<Param name="String trait" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="requestPullout" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="boolean strongRequest" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="risky" />
+		<KeyWord name="roughAgreed" />
+		<KeyWord name="safe" />
+		<KeyWord name="setActiveMaleNpc" func="yes">
+			<Overload retVal="void" >
+				<Param name="ContextMaleNpc maleNpc" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setActiveMaleNpcNoArousal" func="yes">
+			<Overload retVal="void" >
+				<Param name="ContextMaleNpc maleNpc" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setBottomStatus" func="yes">
+			<Overload retVal="void" >
+				<Param name="String status" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setBraStatus" func="yes">
+			<Overload retVal="void" >
+				<Param name="String status" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setContactable()" />
+		<KeyWord name="setGameFlag" func="yes">
+			<Overload retVal="void" >
+				<Param name="String flag" />
+			</Overload>
+		</KeyWord>
+				<KeyWord name="setJacketOpen" func="yes">
+			<Overload retVal="void" >
+				<Param name="boolean isOpen" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setJacketWorn" func="yes">
+			<Overload retVal="void" >
+				<Param name="boolean isWorn" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setOnPill" func="yes">
+			<Overload retVal="void" >
+				<Param name="boolean onPill" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setPantiesStatus" func="yes">
+			<Overload retVal="void" >
+				<Param name="String status" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setPcBehaviour" func="yes">
+			<Overload retVal="void" >
+				<Param name="String behaviour" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setShirtOpen" func="yes">
+			<Overload retVal="void" >
+				<Param name="boolean isOpen" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setShirtWorn" func="yes">
+			<Overload retVal="void" >
+				<Param name="boolean isWorn" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setTopStatus" func="yes">
+			<Overload retVal="void" >
+				<Param name="String status" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setTrousersOpen" func="yes">
+			<Overload retVal="void" >
+				<Param name="boolean isOpen" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setTrousersWorn" func="yes">
+			<Overload retVal="void" >
+				<Param name="boolean isWorn" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setUnContactable()" />
+		<KeyWord name="shirt" />
+		<KeyWord name="shirtBasicDesc" />
+		<KeyWord name="shirtOpen" />
+		<KeyWord name="shirtWorn" />
+		<KeyWord name="shortDesc" />
+		<KeyWord name="single" />
+		<KeyWord name="singularBasicDesc" />
+		<KeyWord name="singularShortDesc" />
+		<KeyWord name="skillIncrease" func="yes">
+			<Overload retVal="void" >
+				<Param name="String skill" />
+				<Param name="int amount" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="skinColour" />
+		<KeyWord name="skirt" />
+		<KeyWord name="stomachDesc" />
+		<KeyWord name="stomachExposed" />
+		<KeyWord name="strength" />
+		<KeyWord name="stripExceptLegwear()" />
+		<KeyWord name="stripNaked()" />
+		<KeyWord name="suspenderBelt" />
+		<KeyWord name="testWillEasy" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="int modifier" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="testWillHard" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="int modifier" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="testWillNormal" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="int modifier" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="testWillVeryHard" func="yes">
+			<Overload retVal="boolean" >
+				<Param name="int modifier" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="thighHigh" />
+		<KeyWord name="top" />
+		<KeyWord name="topStatus" />
+		<KeyWord name="topType" />
+		<KeyWord name="torsoDesc" />
+		<KeyWord name="trousers" />
+		<KeyWord name="trousersBasicDesc" />
+		<KeyWord name="trousersOpen" />
+		<KeyWord name="trousersWorn" />
+		<KeyWord name="tryingForBaby" />
+		<KeyWord name="unHideNpc" func="yes">
+			<Overload retVal="void" >
+				<Param name="ContextNpc npc" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="veryDrunk" />
+		<KeyWord name="virgin" />
+		<KeyWord name="wAttractionAttracted" />
+		<KeyWord name="wAttractionLust" />
+		<KeyWord name="wAttractionOk" />
+		<KeyWord name="wAttractionUnattracted" />
+		<KeyWord name="wLikingClose" />
+		<KeyWord name="wLikingLike" />
+		<KeyWord name="wLikingNeutral" />
+		<KeyWord name="wLikingOk" />
+		<KeyWord name="wLoveConfused" />
+		<KeyWord name="wLoveCrush" />
+		<KeyWord name="wLoveLove" />
+		<KeyWord name="wLoveSome" />
+		<KeyWord name="wall" />
+		<KeyWord name="wasFirstAnalLover" />
+		<KeyWord name="wasFirstLover" />
+		<KeyWord name="wearCondom()" />
+		<KeyWord name="wearCondomWithSabotageChance()" />
+		<KeyWord name="wearCondomWithSabotageChance" func="yes">
+			<Overload retVal="void" >
+				<Param name="boolean inhibited" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="wearingCondom" />
+		<KeyWord name="weightedMapEmpty" />
+	</AutoComplete>
+</NotepadPlus>

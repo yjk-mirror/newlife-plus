@@ -1,0 +1,51 @@
+# Scene written by splendidostrich
+#
+# Overview:
+# Compelled hypnosis scene that gets called when the PC has been hypnotised into hiring the evil hypnotist again.
+# The scene assumes it's taking place in the player's home.
+#
+# Scene access:
+# As a forced action on weekends. When the COMPELLED_HYPNOSIS_SESSION countdown reaches zero this should be the only available action.
+#
+# Preconditions:
+# m is the evil hypnotist
+# The PC must have had a session with him before and been hypnotised into booking another.
+# The countdown set by the COMPELLED_HYPNOSIS_SESSION stat must have reached zero (it should be decremented by 1 point each week)
+
+textFileName: compelledHypnosisSession.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+ location: 
+  usePlayerHome: true
+
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.hideNpc($m)
+ followUpActions:
+  hireEvilHypno: 
+
+actions:
+
+ - id: hireEvilHypno 
+   shortDesc: hireEvilHypnoSd
+   longDesc: hireEvilHypnoLd
+   textId: hireEvilHypno 
+   effects:
+    - effect: $gd.setGameFlag("HIRED_HYPNOTIST")
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: playersHomeHypnosis.yml
+    maleNpcs:
+     - id: m
+       npc: m
+    location:
+     useCurrentLocation: true 

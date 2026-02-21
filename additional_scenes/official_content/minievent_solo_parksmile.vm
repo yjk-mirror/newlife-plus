@@ -1,0 +1,28 @@
+<introText>
+You decide to visit the park. The weather is pleasant, so you sit on a bench where you can soak in the peaceful serenity of the trees. A man walking by notices you and calls out, "Why are you so sad? Cheer up! You should smile! It's a wonderful day."
+
+#if ($w.hasTrait("BITCHY"))##
+You scowl at him, and he scurries away.
+#else##
+#if ($w.hasTrait("POSH"))##
+You flash him a graceful smile. 
+#elseif ($w.hasTrait("SULTRY"))##
+You flash him an alluring smile. 
+#elseif ($w.hasTrait("CUTE"))##
+You flash him a cheery smile. 
+#else##
+You flash him a half-hearted smile. 
+#end
+
+"That's the spirit. You look so much better when you smile," the man says before walking on his way.
+#end##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are relaxing in the park.
+</sceneDescriptionText>
+
+<empty>
+</empty>

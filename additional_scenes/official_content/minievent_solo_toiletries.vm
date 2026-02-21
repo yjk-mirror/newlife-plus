@@ -1,0 +1,30 @@
+<introText>
+You go to the local ##
+#if ($w.hasTrait("DOWN_TO_EARTH"))##
+Superdrug ##
+#else##
+Boots ##
+#end##
+pharmacy to buy some toiletries. You wander through the aisles, looking to see what's on offer. 
+
+#if ($w.hasTrait("POSH"))##
+You peruse their collection of eye shadow palettes, trying to find one with a classy combination, but nothing catches your fancy today.
+#elseif ($w.hasTrait("SULTRY"))##
+You pick up some eye lashes and a package of fake nails. They look very alluring and seductive.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))##
+In the end, you decide to stay focused on your mission though. You leave the store with only some shampoo and toothpaste.
+#elseif ($w.hasTrait("CUTE"))##
+You come across some hand soaps in the shape of teddy bears. They're so cute that you can't help buying a handful.
+#else## normal
+You pick up some lip balm and moisturising cream. It's important to keep your body properly hydrated.
+#end
+</introText>
+
+
+
+<sceneDescriptionText>
+You are shopping for some toiletries.
+</sceneDescriptionText>
+
+<empty>
+</empty>

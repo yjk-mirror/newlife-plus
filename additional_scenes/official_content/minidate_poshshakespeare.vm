@@ -1,0 +1,16 @@
+<introText>
+$bf.getName() tells you to meet him at the park. 
+
+When you get there, you see that it is crowded with people sitting near a makeshift stage. You see your boyfriend waving to you from near the front. You make your way over to him. He has saved you a spot.
+
+You ask him what's going on. He explains that it's a Shakespeare in the Park event where the local theater stages scenes from some of Shakespeare's plays. You take your seat on the towel that $bf.getName() has laid out for you just as the actors come on stage.
+
+It is well acted and very enjoyable.
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are attending a Shakespeare in the Park event with $bf.getName().
+</sceneDescriptionText>

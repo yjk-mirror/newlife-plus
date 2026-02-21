@@ -1,0 +1,76 @@
+# Preconditions for this scene:
+# Part of the minievent framework
+
+textFileName: minievent_solo_sausageroll.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: wall
+  floor: ground
+  hasBed: false
+  isOutside: true
+
+
+intro:
+ textId: introText
+ followUpActions:
+  buySausageRoll: $w.money >= 1
+  buyVeganSausageRoll: $w.money >= 1
+  buySteakBake: $w.money >= 2
+  buyNothing: $w.money >= 1
+  noMoney: $w.money < 1
+  
+actions:
+ - id: buySausageRoll
+   shortDesc: A Sausage Roll
+   longDesc: Buy yourself a sausage roll
+   textId: buySausageRollText
+   effects:
+    - effect: $w.changeStress(-1)
+    - effect: $w.changeMoney(-1)
+    - effect: '#set( $eating = "true" )'
+   finishScene: true
+   
+   # Gives a better stress reduction because the vegan rolls are tastier than the meat ones.
+ - id: buyVeganSausageRoll
+   shortDesc: A Vegan Sausage Roll
+   longDesc: Buy yourself a vegan sausage roll
+   textId: buyVeganSausageRollText
+   effects:
+    - effect: $w.changeStress(-2)
+    - effect: $w.changeMoney(-1)
+    - effect: '#set( $eating = "true" )'
+   finishScene: true
+   
+   # Also very tasty, as long as you don't burn your mouth on one that's fresh out of the oven.
+   # I'm not writing that as a possibility here, because mouth-burning is the least erotic part
+   # of eating a Greggs' steak bake
+   # - SO
+ - id: buySteakBake
+   shortDesc: A Steak Bake
+   longDesc: Buy yourself a steak bake
+   textId: buySteakBakeText
+   effects:
+    - effect: $w.changeStress(-3)
+    - effect: $w.changeMoney(-2)
+    - effect: '#set( $eating = "true" )'
+   finishScene: true
+   
+ - id: buyNothing
+   shortDesc: Don't buy anything
+   longDesc: You don't need a snack that badly
+   textId: buyNothingText
+   finishScene: true
+   
+   # Stress here, because theres a difference between choosing to get nothing and your empty pockets not giving you a choice at all. 
+ - id: noMoney
+   shortDesc: No money!
+   longDesc: The baked goods here are quite cheap, but you still can't afford anything!
+   textId: noMoneyText
+   effects:
+    - effect: $w.changeStress(1)
+   finishScene: true

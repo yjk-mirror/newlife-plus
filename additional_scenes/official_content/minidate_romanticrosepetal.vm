@@ -1,0 +1,18 @@
+<introText>
+$bf.getName() sends you a message to meet him in town. When you get to the meeting point, he isn't there. 
+
+You begin to wonder what's delaying him when you receive a new message from him. He says that he's running late, and that he'll meet you at a shop around the corner, two blocks away.
+
+While walking toward there, you notice some red rose petals fallen on the pavement. You think nothing of it until you notice another one and another one. You wonder if someone was carrying a rose bush down the street.
+
+As you reach the second block, you are still seeing rose petals everywhere. It's like a trail that someone can follow.
+
+You turn the corner to the shop, and you see your boyfriend. He's standing there with a big bouquet of red roses. He's so romantic!
+$bf.addEnjoyTiny() $bf.addNpcLikingTiny() $bf.addWLikingTiny()##
+</introText>
+
+
+
+<sceneDescriptionText>
+You are meeting up with $bf.getName() in town.
+</sceneDescriptionText>

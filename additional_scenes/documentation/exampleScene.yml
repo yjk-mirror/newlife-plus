@@ -1,0 +1,191 @@
+# This is an example custom scene outline, written to show the possibilities for custom Newlife scenes.
+# Over time I expect to develop this example further based on feedback from writers. 
+
+# The scene outline is defined as a YML file. You can read more about YML syntax at https://en.wikipedia.org/wiki/YAML#Syntax
+# Please bear in mind that indentation is very important in YML and it's important that each entry has the correct indentation or the file will
+# likely be un-parsable. 
+
+# The text file name. Required. Must refer to a text file in the same directory.
+# This file must be in pseudo-xml format with velocity text contained within a series of top-level <tags>. See exampleScene.txt for
+# an example of this
+textFileName: exampleScene.vm
+
+# Scene description. Required. Must refer to a text section in the text file
+sceneDescriptionTextId: sceneDescriptionText
+
+# Testing Info. Used to setup the scene for testing in-game. To test a scene make sure to enable custom scene testing in the game options.
+# Then choosen the appropriate action on the weekday evening timeslot in any game.
+testingInfo:
+# Player outfit type. Must be a valid outfit type.
+ playerOutfit: CASUAL
+ # Male NPCs. ID can be any non-reserved String (not "npc", "activeMaleNpc", "gd", "w", or "scene"). Outfit must be a valid type.
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+ femaleNpcs:
+  - id: f
+    outfit: NIGHTWEAR
+# Location info.
+# In this case the Location is being defined here. It's also possible to use the player's home by setting usePlayerHome: true. 
+# For scene transitions Location info can use the current location as well, but this is not possible in scene testing as there's no parent
+# scene current location to use. If the player's home or current location is used then the 4 fields populated here will be ignored.
+ location: 
+  wall: test location wall # String description of the location's wall
+  floor: test location floor # String description of the location's floor
+  hasBed: true # Whether the location has a bed. If true, this allows makeout sub-scenes to transition to bedroom sex ones
+  isOutside: false # Whether the location counts as being outside. Affects some text in sex scenes such as using "ground" instead of "floor".
+
+# Intro section that's run when the scene first opens. Required. 
+# It takes the form of an Action definition without an actionId, shortDesc or longDesc. See the Actions section for more information on Action syntax
+intro:
+ textId: introText
+ effects:
+  - effect: $scene.setActiveMaleNpc($m) # Set the NPC as active. If your scene has only 1 male NPC then this should usually be done in the intro.
+ followUpActions:
+  getStarted: # Empty condition defaults to TRUE and means this action will always be available unless overridden by an NPC one.
+
+# Returning section handles returning to this scene from a sub-scene. Only needed if such a transition is defined somewhere here.
+# This is a list of Actions without short/long descs, like the intro section. The ID needs to be referenced when the 
+# scene transition is made. It also needs to be unique: it can't be a duplicate of another defined player-action.
+# It is permissible to set another scene transition, return to parent or finishScene in a returning section.
+returningSections:
+ - id: returnFromMakeout
+   textId: returnFromMakeoutText
+   followUpActions:
+    getStarted:
+    
+# This section is run when the player has chosen one of the default behaviour-change actions.
+# It's needed if one of your actions can set useBehaviourActions to true, but not otherwise.
+# It takes the form of an Action definition without an actionId, shortDesc or longDesc. See the Actions section for more information on Action syntax
+behaviourChange:
+ textId: behaviourChangeText
+ followUpActions:
+  getStarted: 
+
+# Actions is the core of the scene. It contains a list of all possible actions other than the Proceed and Finish ones used on scene transition
+# and completion.
+actions:
+ - id: getStarted # ID is required for all actions other than the intro. 
+   shortDesc: Get Started # Will either evaluate Velocity text in this section of the text file or use this directly if no such section exists.
+   longDesc: Welcome to the example custom scene! # Similar to the shortDesc.
+   textId: getStartedText # Reference to the text file for the text when this action's run.
+   followUpActions:
+    actionWithNpcActions:
+    kissAction:
+    actionWithoutFollowups:
+    actionWithEffects:
+    transitionToDate:
+    # The below action has a condition. Note that it's enclosed in double quotes. This is because ! is a special character in YAML
+    # so the YAML parse will fail if it isn't enclosed in quotes to show it's a string.
+    returningTransition: "!$m.hadOrgasm" # Typically makeout/sex transitions should be blocked if the man's already got off.
+    changeBehaviour:
+    returnToParentAction:
+    finishScene:
+    
+ - id: actionWithEffects
+   shortDesc: Do some Evil
+   longDesc: This action increases the "acts of evil" stat via an Effects section in the yml.
+   textId: actionWithEffectsText
+ # List of game effects for this action. These are passed to Velocity to evaluate. Any text output is ignored. This is intended to allow separation of the
+ # text (in the txt file) and changes to the scene's state.
+ # Effects is a list of effect items which are a 2-entry map. First key is effect and is what's passed to Velocity. The second key is
+ # the condition and is worked out as usual for conditions. A blank, empty or missing condition counts as True.
+   effects: 
+    - effect: $gd.addStat("ACTS_OF_EVIL") # Note that String values must be enclosed in quotes.
+      condition: true
+   followUpActions:
+    getStarted:
+       
+ - id: finishScene 
+   shortDesc: End Scene 
+   longDesc: finishSceneLongDesc 
+   textId: finishSceneText
+   finishScene: true # Ends the scene if the condition is met (in this case the condition is "true" which will always be met).   
+
+# This action prompts for a behaviour change. You must have a behaviourChange section if you're doing this.
+# Scenes that use behaviour will normally need to set useBehaviourActions in the intro so behaviour doesn't start off null.
+ - id: changeBehaviour 
+   shortDesc: Change your behaviour
+   longDesc: Change how you're behaving towards the active male NPC
+   textId: changeBehaviourActionText
+   useBehaviourActions: true # Uses the default behaviour-change actions as followups
+   
+ - id: transitionToDate
+   shortDesc: transitionToDateShortDesc # This is a key to the XML
+   longDesc: Transition to a date scene # This is not a key to the XML and so will be used directly. 
+   textId: transitionToDateText
+   # The scene transition section within an action defines a transition to another Newlife scene.
+   # This one is a 1-way transition (as is always the case for HOME_DATE) and so does not need to reference a returning section.
+   sceneTransition:
+    condition: true # Always transition when this action is taken
+    type: HOME_DATE # Transition type. We don't need a location for this particular transition type as it always uses the pc's home.
+    # Male NPCs. A femaleNpcs section can also be defined similarly if needed.
+    maleNpcs:
+     - id: date # Should be recognised by the specific scene we're transitioning to.
+       npc: m # ID for a Male NPC in the context (i.e. this is the ID in this custom scene).
+       
+ - id: returningTransition
+   shortDesc: Makeout
+   longDesc: Transition to a makeout scene. This is a returning transition. 
+   textId: returningTransitionText
+   sceneTransition:
+    condition: true
+    type: STANDING_MAKEOUT # Standing makeout is always a returning transition
+    maleNpcs:
+     - id: man
+       npc: m
+    # Returning ID. This marks the transition as a returning one and should always be set if transitioning to
+    # scenes that always return (like makeouts) and never be set when going to scenes that don't return (like HOME_DATE).
+    # When transitioning to another custom scene you need to decide if it'll return or not and set or not set an ID as appropriate.
+    # The returning ID must map to an entry under ReturningSections.
+    returningId: returnFromMakeout
+    # Location info. Can either set useCurrentLocation to use this scene's location, usePlayerHome to use the pc's home or 
+    # define the location by hand with wall/floor/hasBed and isOutside - see the testing section for an example of this.
+    location:
+     useCurrentLocation: true # No need for any other location fields if we're using an existing one.
+     
+ # This action uses the default actions defined below instead of specific follow-ups.
+ # Default actions will be used if the useDefaultActions entry maps to a Condition that evaluates to TRUE (as below).
+ # They'll also be used if useDefaultActions is missing or has an empty condition and no follow-ups are defined.
+ # In all cases, setting the scene to finish, return to parent, or transition to another scene will override any other actions.
+ # Actions required as follow-ups to an NPC action also override p ones.    
+ - id: actionWithoutFollowups
+   shortDesc: Default Actions
+   longDesc: This action uses the default actions instead of an action-specific set of followups
+   textId: actionWithoutFollowupsText
+   useDefaultActions: true # Can take a Condition.
+ - id: kissAction
+   shortDesc: kissActionSD
+   longDesc: kissActionLD
+   textId: kissActionText
+   useDefaultActions: true 
+ - id: actionWithNpcActions
+   shortDesc: npcActionSD
+   longDesc: Let the NPC take an action.
+   textId: actionWithNpcActionsText  
+   allowNpcActions: true 
+ - id: returnToParentAction
+   shortDesc: Return to Parent
+   longDesc: Return to the parent scene.
+   textId: returnToParentText
+   returnToParent: true  
+     
+# Default actions. Takes the form of a map with action_id: condition. Optional but must be present if any defined actions use the 
+# default actions instead of specific follow-up ones. 
+defaultActions:
+ getStarted: true
+# Male NPC actions. Required if any player actions allow an NPC one. In non-turn-based scenes it's usually ok to include the NPC's reaction in
+# the individual player-actions rather than them having their own section.
+# Male NPC actions can set the scene to finish, set scene transitions or set a return to the parent scene just like PC actions.
+# They can also set follow-up actions. If an NPC action sets follow-ups then these will override any follow-ups defined in the PC action that turn.
+maleNpcActions:
+ - id: testNpcAction1
+   textId: testNpcAction1
+   condition: true # Use $npc to reference the male NPC in question. This can also be done in the action's text.
+   weightMultiplierConditions: # Each entry that evaluates to true will double the action's weight
+    - true
+ - id: testNpcAction2
+   textId: testNpcAction2
+   condition: true 
+   weightDivisorConditions: # Each entry that evaluates to true will halve the action's weight
+    - true  
