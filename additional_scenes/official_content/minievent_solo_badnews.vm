@@ -1,0 +1,165 @@
+<introText>
+Your phone lights up with the email you've been waiting four days to receive.
+
+You know what it says before you've read past the first line. There's a register these things come in. A particular arrangement of words in the subject line, a particular we regret to inform, a particular after careful consideration, that tells you before the sentence is finished. You finish it anyway.
+
+You put the phone face-down on the table.
+
+Around you, the coffee shop continues. Two women at the window are laughing at something on a shared screen. The barista is steaming milk. Someone at the counter is ordering a toasted sandwich and asking about allergens, and the barista is explaining patiently, and all of this is taking a very long time. In the corner, a man in a fleece is working through something on a laptop with the expression of a person who is getting things done. Good for him. Somewhere in this building — you find yourself thinking about this, briefly — someone just got good news on their phone, and they are holding it together about that with exactly the same amount of effort you are holding it together about this.
+
+#if ($w.hasTrait("AMBITIOUS"))##
+$gd.addStat("STRESS_SMALL")##
+The first thing you do is the maths.
+
+Not grief — grief is for later, or possibly never, depending on how long you can keep it at bay with logistics. Right now it's triage. The plan had this in it somewhere, as a contingency you'd named and filed away: what if this one doesn't come through. You open the plan now. You hadn't expected to open it so soon.
+
+The next step is already there. It was always there. The plan doesn't not have a next step. You hold your cup with both hands and you do the maths, and the coffee goes cold, and the maths is correct, and it doesn't help at all, but it gives you somewhere to put the feeling while you work out what to do with your face.
+#elseif ($w.hasTrait("ROMANTIC"))##
+You had a version of this future. You hadn't meant to build it — it assembled itself from small things, idle things, nothing you'd put into words. But it was there. You'd been living in it quietly for the past three weeks, checking your email every morning, adding detail to something that hadn't happened yet. It was real in the way futures can be real before they are.
+
+Now it's not. You have to take it apart before you can think about what comes next, and you can't do that yet, not here, not with the barista steaming milk and the two women laughing. You set the phone face-down and sit with it for a moment and allow yourself to simply know that it's gone.
+
+That's the only honest thing you can do right now.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))##
+Right. Okay.
+
+Bad, yes. Genuinely bad — not the managed, rational kind of bad, the actual kind. You sit with that for exactly the amount of time it takes you to drink the last inch of your coffee, and then you put the cup down and begin, because the alternative to beginning is sitting here, and the sitting here isn't going to fix anything.
+
+You open a new note on your phone. The list has three items on it before you've consciously decided to start making one. This is the thing about lists: they give you somewhere to put it. The thing goes in the list. The list has edges. The edges are manageable.
+
+The barista is explaining allergens again. Some things continue.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))##
+You're three steps ahead before you've finished reading the email. By the time you put the phone down you've already lived, in some compressed and airless version, through two alternate futures: the one where this had gone differently, played forward in granular and specific detail — the first day, the first week, the thing you'd have said about it later — and the one you're now actually in, which your brain has also taken the liberty of playing forward, further than you asked it to, further than was necessary, as far as the places this leads.
+
+You come back to the coffee shop. The barista is steaming milk. You are sitting in the present.
+
+The present is worse for having seen the others. You know that. You'd have done it anyway.
+#else##
+You sit with it.
+
+The particular skill of receiving bad news in public — face level, shoulders level, breathing slow, betraying nothing to the room — is one you've practiced without meaning to. You're practicing it now. You take a breath that you hope looks like a normal breath. You pick up your cup. The coffee is lukewarm and you drink it anyway because it gives your hands something to do.
+
+The two women at the window are still laughing. The man with the laptop is still working through his thing. All of this is continuing.
+
+You sit with it until you can think about what to do next.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+You are in a coffee shop. You have just received an email you didn't want to receive.
+</sceneDescriptionText>
+
+
+<goHomeText>
+Fifteen minutes. You can do fifteen minutes.
+
+You pull on your jacket. You leave what remains of your coffee — there isn't much — and you gather your things with the careful deliberateness of someone who is not going to make a scene, because you are not going to make a scene. Not here. Not in front of people who have nothing to do with this.
+
+#if ($w.hasTrait("AMBITIOUS"))##
+On the way out you walk past the man in the fleece who is getting things done on his laptop. You don't look at his screen. You hold the door open for the woman coming in behind you. You walk out onto the pavement and the cold is immediate and useful and you put one foot in front of the other and by the time you reach the end of the street you are already revising the plan in your head. There's no stopping it. The plan is revising itself.
+
+This is how you cope. You've always known this. It doesn't feel good. It works.
+#elseif ($w.hasTrait("ROMANTIC"))##
+The street is flat and grey and people are walking through it with the self-contained purpose of people who have somewhere to be. You don't yet. You've just lost somewhere to be.
+
+You walk. There's a specific quality of absence after something you'd hoped for turns out not to be. The city is doing its city things around you — buses, pigeons, a delivery driver arguing with his satnav through a half-open van window — and none of it requires anything of you. You're grateful for that, briefly, without being sure why.
+
+The flat will be quiet. That's what you want right now. Quiet, and the door shut.
+#else##
+The pavement is cold and the sky is doing that flat white thing it does before it decides whether to rain. You walk without looking at your phone. The bad news has already arrived; nothing in the phone makes it worse, but you keep it in your pocket anyway.
+
+By the time you reach home, the sharpest part of it has worn to something blunter. Still bad. Manageable.
+
+You unlock the door. You go inside.
+#end
+</goHomeText>
+
+
+<stayAnotherCoffeeText>
+You go to the counter and order another flat white, because the alternative is making a decision about what to do next, and you're not ready to make that decision yet. The barista takes your order without comment. People do this all the time — order second coffees. It requires no explanation.
+
+#if ($w.hasTrait("DOWN_TO_EARTH"))##
+You take your coffee back to the table. You open the note on your phone — the list is still there — and you add two more items. One of them is actually useful. The other is the kind of thing you put on a list because writing it down makes you feel like you're doing something, which you recognise as psychological sleight of hand and do anyway, because it works.
+
+$gd.addStat("STRESS_TINY")##
+By the second coffee the list has six items and you've crossed one off. It wasn't the most important one. It was the easiest one, which is the correct one to start with. You've been doing this long enough to know that.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))##
+The coffee is hotter than the last one. You sit with it and you do not look at your phone. You have already seen the futures. There are no new futures to see. You are in the present now, which is this coffee shop, this table, this flat white, and the particular quality of an afternoon that has turned out differently than expected.
+
+You give yourself until the coffee cools to think about the next thing. Then you'll think about the next thing.
+
+$gd.addStat("STRESS_TINY")##
+It cools faster than you'd like.
+#else##
+You sit back down. You put the phone in your bag instead of on the table. You drink your coffee.
+
+$gd.addStat("STRESS_TINY")##
+The two women at the window finish their conversation and leave. The man in the fleece packs up his laptop and leaves. The coffee shop empties and refills around you, and by the time you stand up you feel, if not better, at least like someone who stayed and faced it rather than ran.
+
+That's something. You take it.
+#end
+</stayAnotherCoffeeText>
+
+
+<callSomeoneText>
+You look at your phone. There's a particular calculus to this: who do you actually want to talk to, right now, as opposed to who you're supposed to call, who would want to be told, who you'd feel guilty not telling. Those are different questions.
+
+You find the right name. You step outside.
+
+#if ($w.hasTrait("SHY"))##
+The phone rings four times and you're already composing the voicemail — casual, fine, nothing urgent — and then they pick up, and you open your mouth to be fine, and what comes out is: "I didn't get it."
+
+Which is true. Which is the actual thing. You hadn't planned to say the actual thing and here it is, out on the pavement in the cold.
+
+They say something back. You lean against the wall of the coffee shop and listen, and your shoulders come down slightly without you deciding to let them, and the pavement is cold and the sky is doing the flat white rain thing, and you talk for eleven minutes and it helps more than you expected and less than you needed and you knew that going in and called anyway.
+#elseif ($w.hasTrait("ROMANTIC"))##
+They answer on the second ring, which you note, because you note things like this. "Hey," you say. "Something went wrong. I just wanted to tell someone."
+
+That's the thing about calling — you're not looking for solutions. You know what the solutions are. You want someone to know that today was a specific kind of day, and to have them know it with you for a few minutes. That's not a small thing. You don't always know how to ask for it directly. Right now you've apparently managed it.
+
+They stay on the line. The cold is less, marginally, with someone in your ear. Eventually you say you should go, and you mean it, and you do.
+#else##
+It goes to voicemail. You don't leave one. You ring the next person on the unspoken list.
+
+They pick up. You don't do preamble. "Got some bad news," you say. "Nothing dramatic. I just needed a moment."
+
+They give you the moment. You stand on the pavement outside the coffee shop and receive it, and it's not the same as having the thing you wanted but it is a thing, and you take it, and when you go back inside your coffee is cold and the afternoon is still there but the shape of it is slightly different.
+#end
+</callSomeoneText>
+
+
+<fallApartText>
+You pick up your bag and your coffee and you walk to the back of the coffee shop, past the counter, to the corridor where the toilets are.
+
+This is not weakness. You've never thought of it as weakness. The public face is something you put on to make life navigable — it is a useful face, you are not ashamed of wearing it — but there are moments when the honest thing is to find four walls that don't belong to anyone you know and let the face go for a minute.
+
+You push the door. You're alone.
+
+#if ($w.hasTrait("AMBITIOUS"))##
+$gd.addStat("STRESS_SMALL")##
+You look at yourself in the mirror — not long, not dramatically, just for a moment — and you let yourself be a person who didn't get the thing. Who planned for it, prepared for it, did the work, and still didn't get the thing. That happens. You know that happens. You've always known that.
+
+The plan still exists. The next step is already there. But right now, for about ninety seconds, you stand here and be a person who is allowed to be bothered by this before she stops being bothered by it.
+
+You wash your hands. Dry them. Straighten up.
+
+The face goes back on. You push the door open. The coffee shop is still there.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))##
+$gd.addStat("STRESS_SMALL")##
+The futures recede slightly. This is the actual present: the slightly sticky tiled floor, the hand dryer that looks broken, the single square of frosted-glass window up near the ceiling letting in the same flat grey light.
+
+You breathe. In. Out. Not dramatically — you're in a coffee shop loo, not a film.
+
+In the adjacent future you'd built, the one you've already dismantled, you would never have seen this ceiling. You'd have been somewhere else, in a month from now, doing the next thing. You let that go again — you already let it go once, but things like this require more than once — and then you go back out.
+#else##
+$gd.addStat("STRESS_SMALL")##
+You stand at the sink for a minute. You run cold water. You look at your reflection in a general, unfocused way that doesn't ask anything of either of you.
+
+There it is.
+
+You feel the thing — not all of it, just enough to know it's there and real and that it won't eat you. It's just a bad thing that happened on a Tuesday afternoon in a Costa. Those exist. You've had worse. This is specifically bad, not categorically devastating, and there's a difference.
+
+You dry your hands. You go back out.
+#end
+</fallApartText>

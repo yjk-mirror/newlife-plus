@@ -1,0 +1,298 @@
+<sceneDescriptionText>
+You're in bed with $bf.getName(). Something has just happened that has made the room very quiet.
+</sceneDescriptionText>
+
+
+<introText>
+#if ($gd.hasGameFlag("MINIDATE_PARTNER_TOOSOON"))
+This has happened before. The look on his face is the same.
+
+#end
+It takes you a moment to understand what's changed.
+
+He was fine — you both were — and then he wasn't, and now he's still, and the room has gone the specific quiet of a situation that hasn't been acknowledged yet. $bf.getName() is looking at somewhere above your head. Not at you. At a fixed point on the ceiling that has apparently become very important.
+
+#if ($w.hasTrait("WET_PUSSY"))
+You'd been soaking since before they'd properly started. He'd noticed. He'd said something about it — half-flattering, half-surprised — and things had moved quickly after that. Quickly being, as it turns out, the operative word.
+#else
+You'd been properly into it. That much had been obvious.
+#end
+##
+The thing is, it had barely been any time at all.
+
+He opens his mouth. Closes it. Opens it again.
+
+"Sorry," he says. "That was — I just — " He stops.
+
+The ceiling seems to be offering no assistance.
+
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+There's a strange quality to this moment you couldn't have predicted: you understand it exactly. The shape of what happened, the physiological sequence, the specific loss of control — you know it from the inside. You used to be the one it happened to. The view from over here is something you're still getting used to.
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+Some distant part of you recognises this — not from experience exactly, more like an old map of a territory you no longer live in. You remember what it is to be overwhelmed quickly. You remember that it's not as simple as embarrassment.
+#end
+</introText>
+
+
+<beKindText>
+"Hey," you say. "It's fine."
+
+#if ($bf.getPersonality() == "ROMANTIC")##
+He turns his head to look at you properly for the first time since it happened. He looks mortified. Genuinely, uncomplicatedly mortified, in the way that only someone who cared too much could manage.
+
+"It's really not fine," he says.
+
+"It is," you say. "Come here."
+
+He doesn't argue. He comes here. And then he does something that takes you a moment to realise is intentional — he shifts, and his hand moves, and the conversation about what just happened becomes quietly secondary to the conversation his hands are now having with you instead. He's thorough about it. He takes his time. He's not trying to apologise — he's paying attention, which is different, and considerably more useful.
+
+By the time you're done, the earlier business has been entirely superseded. He lies back next to you with a look on his face that suggests he feels somewhat better about the whole thing.
+
+$bf.addNpcLoveTiny()##
+#elseif ($bf.getPersonality() == "JERK")##
+He looks at you. Something in his expression adjusts — not quite gratitude, more like: good, that's sorted. "Cheers," he says.
+
+He pats you once on the arm. Then he reaches for his phone.
+
+You watch the ceiling for a while.
+
+$bf.addWLikingTiny()##
+#elseif ($bf.getPersonality() == "CARING")##
+He exhales and looks at you with the expression of someone who has been handed a lifeline they weren't sure they deserved. "Are you sure?" he says. "Because you don't have to — "
+
+"I'm sure," you say.
+
+He nods, and then he asks what you want. Not rhetorically. He waits for an actual answer. You tell him, and he listens, which is the thing you'd forgot to notice you missed.
+
+$bf.addEnjoyTiny()##
+#else##
+"Are you sure?" he says. He looks uncertain in the specific way of someone who wants to believe you but suspects he might just be letting himself off the hook.
+
+"I'm sure," you say. And then: "You can make it up to me."
+
+He brightens considerably. "Yeah. Yes. I can do that." He seems to find the idea genuinely energising. He does his best.
+
+His best is, you have to admit, reasonably good.
+#end
+</beKindText>
+
+
+<laughItOffText>
+You try to hold it in for a moment.
+
+You don't quite manage.
+
+It comes out small at first — not mean, just a breath of a laugh that you can't keep from happening. Then a bit more.
+
+#if ($bf.getPersonality() == "ROMANTIC")##
+He stares at you. And then, to his credit, he starts laughing too. A real one, the embarrassed kind that goes high at the end. "I'm so sorry," he says, while laughing. "That has never — "
+
+"Stop talking," you say, laughing.
+
+"It hasn't," he insists. "You have to believe me."
+
+"I believe you," you say, which makes him laugh harder. He pulls you close and tucks his face into your neck. "That was terrible," he says, muffled. You can feel him shaking a bit. "I'm going to think about that at three in the morning for the next six months."
+
+"Longer," you say.
+
+"Longer," he agrees.
+
+It turns out to be one of the better moments you've had recently, actually. There's something in being able to laugh like this with someone.
+
+$bf.addNpcLoveTiny()##
+#elseif ($bf.getPersonality() == "JERK")##
+He does not laugh. He goes very still.
+
+"What's funny?" he says.
+
+"Nothing," you say, not convincingly. "Nothing, I just — "
+
+"Right," he says. His expression has closed over. He picks up his phone.
+
+The room is quite different now to what it was thirty seconds ago.
+#elseif ($bf.getPersonality() == "CARING")##
+He blinks. Then his shoulders drop, and the tension goes out of him, and he puts his face in his hands and makes a muffled sound that is also, actually, a laugh.
+
+"Oh god," he says. "I'm sorry. That was — awful."
+
+"A bit," you say, still grinning.
+
+"To be fair to me," he says, from behind his hands, "you were — " He stops. Starts again. "You were very — "
+
+"You don't have to explain," you say.
+
+"I just want it noted," he says. He drops his hands and looks at you. He's flushed and amused and slightly more relaxed than he's been since it happened. "For the record."
+
+"Noted," you say.
+
+He seems to find this adequate.
+
+$bf.addEnjoyTiny()##
+#else##
+He's quiet for a second. Then, carefully: "That's not helping."
+
+"Sorry," you say, not entirely sorry.
+
+He thinks about this. Then he exhales. "It was a bit funny," he allows.
+
+"A bit," you agree.
+
+He's still embarrassed, but the edge has come off it. You both lie there for a moment in the particular atmosphere of a thing that has been laughed at and therefore made slightly smaller. It doesn't fix everything, but it helps.
+#end
+</laughItOffText>
+
+
+<takeItAsComplimentText>
+#if ($w.hasTrait("SULTRY"))##
+You're quiet for a moment. Then: "You know what that means."
+
+He looks at you. "What."
+
+"That means I did that." You hold his gaze. "You lost it. Because of me."
+
+He opens his mouth. Closes it. He's gone rather red.
+
+"I'm not complaining," you say, which is not quite true — you are a little — "but I am noting it for the record. That was — " you consider the word — "impressive, actually. In a way."
+
+He seems to be processing several things at once. "That's a generous interpretation," he manages.
+
+"I'm a generous person," you say.
+
+The silence that follows has a different quality to the one before you spoke.
+
+#if ($bf.getPersonality() == "ROMANTIC" || $bf.getPersonality() == "CARING")##
+$bf.addNpcLoveTiny()##
+#elseif ($bf.getPersonality() == "JERK")##
+$bf.addWLikingTiny()##
+#end##
+#elseif ($w.hasTrait("FLIRTY"))##
+"I'm taking that as a compliment," you tell him.
+
+He blinks. "...what?"
+
+"You couldn't help yourself," you say. "I'm choosing to find that flattering."
+
+He stares at you for a long moment. "That's the most generous reading of what just happened that I've ever heard."
+
+"Thank you," you say. You mean it as a genuine response, which makes him laugh despite himself, which is what you were hoping for.
+
+The mood lightens. He's still embarrassed, but embarrassed and laughing is considerably better than just embarrassed.
+
+#if ($bf.getPersonality() == "ROMANTIC" || $bf.getPersonality() == "CARING")##
+$bf.addNpcLoveTiny()##
+#elseif ($bf.getPersonality() == "JERK")##
+$bf.addWLikingTiny()##
+#end##
+#else##
+You don't say it. You just let yourself think it.
+
+He lost control. He couldn't manage to hold on. And there's one explanation for that, and you were the cause of it, and that is — quietly, privately — not nothing.
+
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You spent a long time on the other side of this particular equation. Understanding what it is to be so overwhelmed by someone that your body makes decisions before you've made them. The fact that you can do that to someone now — that your body can do that — is the kind of thing you occasionally have to sit with.
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+There's a version of you, from a long time ago, that would have been on the other end of this situation. You barely remember that version. But this is what it was pointing toward, maybe.
+#end
+
+"It's fine," you tell him. And for you, it mostly is.
+
+#if ($bf.getPersonality() == "ROMANTIC" || $bf.getPersonality() == "CARING")##
+$bf.addNpcLoveTiny()##
+#elseif ($bf.getPersonality() == "JERK")##
+$bf.addWLikingTiny()##
+#end##
+#end
+</takeItAsComplimentText>
+
+
+<showDisappointmentText>
+You're trying. You're genuinely trying.
+
+#if ($w.hasTrait("BITCHY"))##
+"Right," you say.
+
+You hadn't meant it to come out quite that flat. Or, well — you had, but you'd planned to soften it somehow, and it came out before the softening arrived.
+
+"I — sorry," he says.
+
+"No, it's — " You stop. "It's fine." It isn't entirely fine. Your body is very much aware that it isn't fine. You pull the sheet up.
+
+#if ($bf.getPersonality() == "CARING")##
+He reads the room. He watches you for a moment and then says, carefully: "What do you need?"
+
+Something about the directness of it catches you off-guard. You look at him.
+
+"Tell me what you want," he says.
+
+You consider this. You tell him.
+
+He obliges. With considerably more attentiveness than the preceding portion of the evening had suggested he was capable of.
+
+$bf.addEnjoyTiny()##
+#elseif ($bf.getPersonality() == "JERK")##
+He pulls the sheet up on his side too. "Happens," he says.
+
+You're aware that several things you might like to say are not things that would be useful to say. You keep them to yourself. Mostly.
+
+$bf.addWLikingTiny()##
+#else##
+He's quiet for a moment. "I'll make it up to you," he says.
+
+"All right," you say.
+
+He tries. He does. He's not as skilled at reading what you actually want as you'd like, but he's making a genuine effort, and by the end of things you're prepared to call it adequate. More or less.
+#end##
+#elseif ($w.hasTrait("SHY"))##
+"It's fine," you say. Your voice comes out exactly right: neutral, unbothered. No trace.
+
+What you don't say is that you're still — you're still very much in a state. Everything that was happening before it stopped is still happening, biologically speaking. You're aware of it in a way that is increasingly difficult to think around.
+
+#if ($w.hasTrait("WET_PUSSY"))
+You're absolutely soaking. That hasn't changed. If anything.
+#end
+
+You don't know what to do with that. You don't ask. Asking would require explaining, and explaining would require acknowledging the state you're in, and that's — no.
+
+"It's fine," you say again, which is four times total, and probably one too many.
+
+He seems satisfied that it's fine. He seems unaware that it isn't, particularly, fine.
+
+You lie there in the specific quiet of someone who wanted something and has decided not to pursue it, and you stare at the ceiling, and the ceiling offers nothing useful.
+
+#if ($bf.getPersonality() == "JERK")##
+$bf.addWLikingTiny()##
+#end##
+#else##
+You try for a neutral expression. You get most of the way there.
+
+"It's fine," you say, with the particular intonation of someone for whom it is mostly but not entirely fine.
+
+He notices. "I'm sorry," he says. "I don't know what — "
+
+"Really," you say. "It happens."
+
+He doesn't look like he believes you believe that. He'd be right.
+
+#if ($bf.getPersonality() == "CARING")##
+He reaches over. Tentative. "Can I — " he starts.
+
+"Yes," you say, before he's finished.
+
+He nods. He puts the question of what just happened to one side and turns his attention to the more pressing present-tense problem. He's good at this, you remember. Better than you'd given him credit for in the frustration of the last thirty seconds.
+
+$bf.addEnjoyTiny()##
+#elseif ($bf.getPersonality() == "JERK")##
+He pats your shoulder. "You'll get over it," he says.
+
+He closes his eyes.
+
+$bf.addWLikingTiny()##
+#else##
+"Do you want me to — " he starts, gesturing vaguely in a way that could mean several things.
+
+"Maybe," you say.
+
+He does. It helps. Not perfectly, but enough that you end up staring at the ceiling feeling something closer to satisfied than you'd expected, given how the middle section of the evening went.
+#end##
+#end
+</showDisappointmentText>

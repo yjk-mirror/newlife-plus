@@ -1,0 +1,224 @@
+<introText>
+##
+#if ($gd.hasGameFlag("SOLO_JOB_INTERVIEW"))
+You've been through this before. You know the shape of it.
+
+##
+#end
+The coffee shop is one of those places with wooden tables and branded cups and too many people on laptops, which means you can sit here for as long as you need to without anyone asking you to buy something else. You've been here long enough to finish one drink and order a second one you're not entirely sure you want. The interview was ninety minutes ago.
+
+You are replaying it.
+
+It went well. That's the problem, in a way. Your answers were good — you knew the sector, you'd done the research, you'd prepared two examples for every competency question he was likely to ask. You gave them. He nodded at the right moments and made notes. And he also spent a noticeable proportion of the time looking at approximately your collarbone, and there was a question about long-term ambitions that felt less like a professional enquiry than something else, and when he said *we value culture fit highly* there was a register to it that the words themselves didn't technically have.
+
+That was the interview. Both of them. Running simultaneously, the whole ninety minutes, and you had to perform in both without being seen to perform in either.
+
+He was probably mid-forties. Decent suit, no ring, the particular energy of a man who has had a long time to get comfortable with his own authority. He asked if the commute was manageable and managed to say it in a way that made it about something other than the commute.
+
+You said yes, it was manageable.
+
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+Here is the thing, and you know this about yourself: you sat on that side of the table once. Not literally across from a woman in that particular office with that particular man — but in the category. You've been in interview panels. You've made decisions about candidates. And you understand with a precision that has nothing to do with instinct and everything to do with memory exactly what kind of calculation just happened across that desk.
+
+You didn't use to notice you were doing it. That's the part that keeps surfacing in the coffee shop with the second drink you're not sure you wanted. Not that men are like that — you knew that already, in the abstract — but the specific thing of understanding the mechanics from inside it and then finding yourself on the receiving end of them. Like being handed a translation key you didn't know you had.
+
+He looked at your CV twice. He looked at your neckline considerably more often than that. You know which one of those he'll remember.
+
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+You sit with it for a moment. The interview that was also a different kind of interview. It's not the first time you've navigated this — you have had enough time to get familiar with the shape of it — but it still carries a particular quality, this specific thing of being assessed on two registers and knowing you have no say in which one matters more.
+
+You finish the drink.
+
+##
+#end
+</introText>
+
+
+<sceneDescriptionText>
+You're sitting in a coffee shop after a job interview, turning it over.
+</sceneDescriptionText>
+
+
+<letItGoText>
+##
+#if ($w.hasTrait("AMBITIOUS"))
+You sit back and run it properly.
+
+The role is good — title, salary, sector, development trajectory. The interview panel was one person, which means there's presumably a broader team he isn't. The company has a glassdoor page that says nothing useful either way, which is actually slightly useful: if it were genuinely bad you'd know. You can evaluate culture fit in the first month, and you can leave after a year if the answer is what you suspect it might be, and you will have a year's worth of experience in a role that builds toward the next one.
+
+The question of whether this particular man is manageable is a question you will address when the variable is confirmed. There's no point calculating against an uncertain outcome.
+
+If they offer you the job, you'll take it. You'll be good at it. That is a separate issue from how today's interview made you feel, and you are capable of separating issues.
+
+You order another coffee and read the job spec again.
+##
+#elseif ($w.hasTrait("SHY"))
+The professional answer is: you did your best, and you'll see if they call.
+
+You tell yourself this in the coffee shop and it mostly works. You gave good answers. You stayed composed, which cost more than it looked, because you were acutely aware of where his eyes were going and you kept having to redirect your own attention away from that and back to the question he'd technically asked. Staying composed when you're also pretending not to notice something takes a particular kind of effort.
+
+If they call, you'll deal with the rest of it then. Maybe it was less obvious than it seemed. Maybe you're being overly sensitive, though even as you think that you know it isn't true.
+
+You look at your phone. No missed calls yet.
+##
+#else
+The professional answer is: the interview was fine, you performed well, and you'll see.
+
+You sit with that for a moment. It's mostly true. The work itself was solid — you knew the material, you made the case, you gave them what they asked for. The other thing — the secondary register, the eye contact directed at your neckline, the question that wasn't quite a question — that was there, and it was real, and you've decided, sitting here with a cooling coffee, not to make a decision about it until you know whether they're going to offer you the job.
+
+It's possible the job itself will answer the question.
+
+It's possible the doubt will still be there when they call, and you'll take it anyway.
+
+You put your phone face-down on the table and look at the window.
+##
+#end
+</letItGoText>
+
+
+<decidedToWorkItText>
+##
+#if ($w.hasTrait("SULTRY"))
+You wore that blouse on purpose. You sat that way on purpose. You are not about to spend an afternoon performing regret about choices you made with clear eyes in front of your mirror this morning.
+
+The world works the way it works. Men with hiring authority notice the things they notice, and you have always known this, and dressing for it is not the same as endorsing it — it's understanding the variable and choosing how to engage with it. He got a good first impression. You got a competent interview. If the job comes through, you'll do it well, and that will eventually matter more than how the first impression was formed.
+
+You finish the coffee without apology. If anything, it's efficient.
+##
+#elseif ($w.hasTrait("AMBITIOUS"))
+You're not entirely comfortable with it. That's worth noting honestly.
+
+But you're also not going to pretend you hadn't calculated it. You dressed deliberately. You sat a certain way. You know what those choices were about and so does your reflection. The question you're sitting with now isn't whether you did it — you did — but whether it was the right call, and the answer to that is: *probably*, given the specific role and the specific sector and the specific man on the other side of the desk.
+
+Uncomfortable pragmatism is still pragmatism. You'll evaluate whether the environment is survivable once you're in it.
+
+If they call, you'll go.
+##
+#elseif ($w.hasTrait("ROMANTIC"))
+You'd like to say it was all professional. The blouse, the way you sat, the small smile when he asked about your aspirations — you'd like to say those were just good interview technique.
+
+They were partly just good interview technique.
+
+You sit in the coffee shop and you're honest with yourself in the way that's slightly uncomfortable: you knew the dynamic was there and you didn't close it down. You could have. You let it run because you want the job, and wanting the job is allowed, and the interview was still also a genuine interview and you answered every question well.
+
+The two things can both be true. You're still sitting with which one feels worse.
+##
+#else
+You sit with it for a moment and then you make peace with it.
+
+You dressed for this. Not exclusively for him — you'd have worn the same thing regardless of who was interviewing you, because looking like you've made an effort is its own form of professionalism — but you're not going to pretend you didn't know how it would land. You knew. You sat a certain way because it worked, and it worked because you were aware of the situation and made a choice about it.
+
+That's not nothing. That's you navigating the room you were in, not the room you'd prefer.
+
+If they call, you'll answer.
+##
+#end
+</decidedToWorkItText>
+
+
+<feelsUsedText>
+##
+#if ($w.hasTrait("SHY"))
+The worst part was the attention itself.
+
+Not the job, not the subtext, not even the specific way he asked about culture fit. The worst part was sitting across from a man who was making a continuous private assessment of you that had nothing to do with the role, and knowing that assessment was happening, and not knowing how much of it was showing on your face, and spending the entire ninety minutes in a state of low-level alert that had nothing to do with the interview questions.
+
+You answered everything. You were composed. From the outside it probably looked fine.
+
+From the inside you spent the entire interview hoping he'd look at your CV.
+
+You sit in the coffee shop and you're tired in a specific way — the kind of tired that comes from performing normalcy while something uncomfortable is happening — and you think about the job and whether you could go back there for the probationary period and the answer that comes back is: maybe. Probably. But the fact that you're asking it at all says something.
+
+Your phone is in your bag. If they call, you'll think about it again then.
+##
+#elseif ($w.hasTrait("REFINED"))
+The role was a good one. Mid-level, good scope, the kind of company that's supposed to take its people seriously. You did your research. You wore the right thing — the professional right thing, deliberately calibrated to say *capable and serious* rather than anything else.
+
+He didn't receive the message you sent.
+
+You're sitting in the coffee shop and what you feel is offended, which is a more specific emotion than upset. Offended on behalf of the role, slightly, as if the job itself deserves better than to be allocated this way. Offended by the gap between what the interview was supposed to be and what it actually was. You gave a precise, well-prepared account of your professional competencies to a man who spent the session noticing your neckline, and you are supposed to what — be grateful if they call?
+
+You don't know if you'd take it. Even if they offered. The thought of spending six months building credibility in a room that started like that makes you tired before you've begun.
+
+You finish your coffee. There are other jobs.
+##
+#else
+You knew you were qualified when you walked in. That was the whole point.
+
+And you gave them the qualifications. You gave them exactly what the job spec asked for, across ninety minutes, with examples and figures and a clear articulation of what you'd bring to the role. All of that happened. It was real.
+
+And underneath it, there was a different conversation that you weren't consulted about.
+
+You sit in the coffee shop and the feeling isn't quite anger and isn't quite sadness — it's something more like contamination. Not of the job itself, maybe, but of the whole morning. The preparation, the research, the good answers. All of it shadowed by the other thing running underneath it, the thing he probably thought was subtle enough that you wouldn't notice.
+
+You noticed.
+
+If they call, you don't know what you'll do. You'll cross that when you get to it.
+##
+#end
+</feelsUsedText>
+
+
+<calledHimOutText>
+##
+#if ($w.hasTrait("BITCHY"))
+It was when he said *presence in the room* for the second time. You let the first one go. The second one — in the context of that particular pause, that particular redirect of attention — you did not.
+
+"That's an interesting metric," you said, with the exact pitch that means it isn't. "Could you say more about how you measure it?"
+
+He fumbled it beautifully. Said something about team dynamics, stakeholder confidence, communication style. All plausible. All delivered to approximately your chin, because he had stopped making eye contact with your neckline and had not yet worked out where to put his eyes instead.
+
+"Brilliant," you said, and wrote it down in your notebook. Slowly. He watched you write it down.
+
+You don't know if that cost you the job. You know it cost him something, and that the something was small but real, and you're sitting in the coffee shop with a flat white and not much regret.
+
+If they call, it means he thought the rest of the interview went well enough to get past it. That would be useful information about him.
+
+If they don't call, that's also useful information.
+##
+#elseif ($w.hasTrait("REFINED"))
+You waited until the right moment. These things require a right moment.
+
+It came when he asked whether you had experience managing upwards — reasonable question, reasonable framing — and then added, with the faint warmth of someone who thinks they're being encouraging, that he found people responded well to you.
+
+"Do they," you said. Not a question. A specific intonation.
+
+He caught it. You watched him catch it. There was a pause of perhaps two seconds while he ran the sentence back in his head and heard what you'd heard, and in those two seconds you looked at your notes with the slight composure of someone who is prepared to let the silence sit.
+
+"The question about managing upwards," you prompted, helpfully. "I have a good example."
+
+You gave the example. The interview continued. It may have been slightly more professional in the second half.
+
+You don't know if it helped your chances. It helped your regard for yourself, which is not nothing.
+##
+#elseif ($w.hasTrait("AMBITIOUS"))
+You did the calculation and then you said the thing.
+
+It was mild. Plausibly deniable on his end as well as yours. Something about being glad the role prioritised professional judgement, since that was really what you'd been preparing to discuss — said with a small, direct smile and then immediately followed by a very good answer to his previous question.
+
+He was slightly off-footed for about thirty seconds and then rallied. The interview was possibly better after that.
+
+You don't regret it, but you also don't know what it cost. That's the variable you're sitting with. If the job was on the line and you've just eliminated yourself from consideration, that's a real cost to something you actually wanted. If it wasn't on the line — if he's the kind of man who finds it clarifying to be told where the line is — then you may have just improved your position.
+
+One of those is true. You won't know until the call.
+##
+#else
+You said something.
+
+You're not entirely sure what possessed you in the moment — it arrived as a complete sentence, which was the best you could say for it. Something about looking forward to an environment where your work could speak for itself, delivered with a smile that had a certain quality to it. Not hostile. Specific.
+
+He blinked. He said, of course, absolutely, and then asked about your experience with CRM systems.
+
+You told him. It was a good answer. The interview continued.
+
+Now you're in the coffee shop turning it over and the honest answer is: you don't know. You don't know if it landed as a professional statement of preference or as something more pointed. You don't know if he heard it the way you meant it or the way it could have been taken or some third way you haven't thought of.
+
+You'll find out when they call. Or when they don't.
+##
+#end
+</calledHimOutText>
+
+
+<empty></empty>

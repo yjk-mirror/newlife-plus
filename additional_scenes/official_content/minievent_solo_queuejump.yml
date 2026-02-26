@@ -1,0 +1,71 @@
+# Preconditions for this scene:
+# Part of the minievent framework
+# Trigger: $eventType=="SOLO"
+# Content tags: VANILLA
+# Rarity: common (no weight modification)
+
+textFileName: minievent_solo_queuejump.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+  playerOutfit: CASUAL
+
+  location:
+    wall: beige-tiled supermarket wall
+    floor: scuffed linoleum floor
+    hasBed: false
+    isOutside: false
+
+
+intro:
+  textId: introText
+  followUpActions:
+    sayDirectly:
+    passiveAggressive:
+    sayNothing:
+    askCashier:
+
+
+actions:
+  - id: sayDirectly
+    shortDesc: Say something
+    longDesc: '"Excuse me, I was next."'
+    textId: sayDirectlyText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_CHALLENGED_QUEUE_JUMPER")
+        condition: "!$gd.hasGameFlag('SOLO_CHALLENGED_QUEUE_JUMPER')"
+      - effect: $gd.addStat("CHALLENGED_QUEUE_JUMPER")
+      - effect: $gd.addStat("SATISFACTION")
+    finishScene: true
+
+  - id: passiveAggressive
+    shortDesc: Move closer
+    longDesc: Don't say anything. Just make it physically undeniable that you were there first.
+    textId: passiveAggressiveText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_CHALLENGED_QUEUE_JUMPER")
+        condition: "!$gd.hasGameFlag('SOLO_CHALLENGED_QUEUE_JUMPER')"
+      - effect: $gd.addStat("CHALLENGED_QUEUE_JUMPER")
+    finishScene: true
+
+  - id: sayNothing
+    shortDesc: Let it go
+    longDesc: Say nothing. Absorb it. Get home and think about this for an hour.
+    textId: sayNothingText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_STAYED_SILENT_QUEUE")
+        condition: "!$gd.hasGameFlag('SOLO_STAYED_SILENT_QUEUE')"
+      - effect: $gd.addStat("STAYED_SILENT_QUEUE")
+    finishScene: true
+
+  - id: askCashier
+    shortDesc: Ask the cashier
+    longDesc: Involve someone with institutional authority. Let the till decide.
+    textId: askCashierText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_CHALLENGED_QUEUE_JUMPER")
+        condition: "!$gd.hasGameFlag('SOLO_CHALLENGED_QUEUE_JUMPER')"
+      - effect: $gd.addStat("CHALLENGED_QUEUE_JUMPER")
+      - effect: $gd.addStat("SATISFACTION")
+    finishScene: true

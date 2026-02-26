@@ -1,0 +1,71 @@
+# Preconditions for this scene:
+# Part of the minidate framework
+# $f should be a female friend
+# Triggered when $eventType=="FFRIEND"
+# The friend is asking the PC for relationship advice about a man she's been seeing.
+# His behaviour, described in detail, makes it increasingly clear what the honest advice is.
+# Player chooses how to respond: honestly, supportively, with a question, or by listening.
+
+textFileName: minievent_f_badadvice.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ femaleNpcs:
+  - id: f
+    outfit: CASUAL
+
+ location:
+  wall: exposed-brick cafe wall
+  floor: scuffed wooden floor
+  hasBed: false
+  isOutside: false
+
+
+
+intro:
+ textId: introText
+ followUpActions:
+  adviceHonest:
+  adviceSupportive:
+  adviceQuestion:
+  adviceListen:
+
+
+actions:
+ - id: adviceHonest
+   shortDesc: Be honest
+   longDesc: Tell her what you actually think. She might not want to hear it, but she's asked.
+   textId: adviceHonestText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_FFRIEND_ADVICE_GIVEN")
+      condition: "!$gd.hasGameFlag('SOLO_FFRIEND_ADVICE_GIVEN')"
+   finishScene: true
+
+ - id: adviceSupportive
+   shortDesc: Be supportive
+   longDesc: Don't name the thing. Be kind. Keep her hopes intact.
+   textId: adviceSupportiveText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_FFRIEND_ADVICE_GIVEN")
+      condition: "!$gd.hasGameFlag('SOLO_FFRIEND_ADVICE_GIVEN')"
+   finishScene: true
+
+ - id: adviceQuestion
+   shortDesc: Ask a question
+   longDesc: Ask the one question that might make her hear herself.
+   textId: adviceQuestionText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_FFRIEND_ADVICE_GIVEN")
+      condition: "!$gd.hasGameFlag('SOLO_FFRIEND_ADVICE_GIVEN')"
+   finishScene: true
+
+ - id: adviceListen
+   shortDesc: Just listen
+   longDesc: Say nothing much. She'll work it out, or she won't.
+   textId: adviceListenText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_FFRIEND_ADVICE_GIVEN")
+      condition: "!$gd.hasGameFlag('SOLO_FFRIEND_ADVICE_GIVEN')"
+   finishScene: true

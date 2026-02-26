@@ -1,0 +1,92 @@
+# minievent_solo_kerbcrawler.yml
+# Solo minievent: Kerb Crawler
+# Content tags: VANILLA, TRANSFORMATION
+# Rarity: rare (weightDivisorConditions: [true, true] — fires at 1/4 normal rate
+#              — to be set in minievent.yml dispatcher when wired in)
+#
+# She's waiting outside at night — for a taxi, a friend, anything — near a street
+# that has a reputation she didn't know about. A car slows. The window comes down.
+# The man asks a plausibly deniable question. She has to decide what to do with that.
+#
+# Flags set:
+#   SOLO_PROPOSITIONED_WAITING — always set on first occurrence, regardless of path
+#
+# Stress effects:
+#   All paths: $gd.addStat("STRESS") — one increment per scene
+#
+# Trait branches:
+#   SULTRY    — darkly funny; she says something that makes that clear; he drives
+#                away more embarrassed than she is; still faintly annoyed afterward
+#   ROMANTIC  — this punctures something; she stands there after the car goes;
+#                doesn't quite know what to call it
+#   BITCHY    — precise and public correction; exact same pace walking away
+#   SHY       — locked path only; she means to say something; the window closes;
+#                she will think about this on the bus home
+#
+# Transformation branches:
+#   !ALWAYS_FEMALE, FEMININITY < 50  — richest zone; she knows exactly what
+#                                      the assessment was and from which side;
+#                                      she used to take that reading for granted
+#   !ALWAYS_FEMALE, FEMININITY >= 50 — distance but not erasure; a particular edge
+#   ALWAYS_FEMALE                    — she's navigated this before, or not;
+#                                      no transformation frame
+
+textFileName: minievent_solo_kerbcrawler.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+  playerOutfit: GOING_OUT
+
+  location:
+    wall: dark brick wall of the building behind her
+    floor: wet pavement reflecting the orange of the street lamps
+    hasBed: false
+    isOutside: true
+
+
+intro:
+  textId: introText
+  effects:
+    - effect: $gd.setGameFlag("SOLO_PROPOSITIONED_WAITING")
+      condition: "!$gd.hasGameFlag('SOLO_PROPOSITIONED_WAITING')"
+  followUpActions:
+    correctHim:
+    laughOff:
+    leaveImmediately:
+    shyFreeze: $w.hasTrait("SHY")
+
+
+actions:
+  - id: correctHim
+    shortDesc: Make it very clear he has the wrong idea
+    longDesc: Tell him — quietly, precisely — that he's made a mistake. Let him sit with that.
+    textId: correctHimText
+    effects:
+      - effect: $gd.addStat("STRESS")
+    finishScene: true
+
+  - id: laughOff
+    shortDesc: Laugh it off and walk away
+    longDesc: Not worth your energy. Walk. Don't look back.
+    textId: laughOffText
+    effects:
+      - effect: $gd.addStat("STRESS")
+    finishScene: true
+
+  - id: leaveImmediately
+    shortDesc: Say nothing — just go
+    longDesc: The fastest route to this being over is already walking.
+    textId: leaveImmediatelyText
+    effects:
+      - effect: $gd.addStat("STRESS")
+    finishScene: true
+
+  - id: shyFreeze
+    shortDesc: Freeze — then leave
+    longDesc: She meant to say something. The window closed before she did.
+    condition: $w.hasTrait("SHY")
+    textId: shyFreezeText
+    effects:
+      - effect: $gd.addStat("STRESS")
+    finishScene: true

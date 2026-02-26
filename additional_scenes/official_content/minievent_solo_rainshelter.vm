@@ -1,0 +1,118 @@
+<introText>
+The rain arrives the way it sometimes does in this city — not gradually, but all at once, as if someone turned a tap. The sky goes dark in roughly the time it takes to register that it has, and then it's coming down hard enough to clear the pavement in seconds. People scatter. A woman with a buggy makes an urgent decision about the bus stop. A delivery cyclist gives up and stands under a tree that is not really providing any shelter.
+
+You duck under the awning of what used to be, judging by the faded lettering, a Foxtons. There's a strip of dry pavement about three feet wide beneath it, which is exactly enough room for two people if neither of them minded about it.
+
+The man arrives from the other direction at almost the same moment — early forties, jacket gone dark at the shoulders where he didn't make it in time, a takeaway cup he's still holding as though it might help. He looks at the awning. He looks at you. You've both arrived at the same small dry rectangle and the rain shows no sign of stopping.
+
+#if ($w.hasTrait("FLIRTY"))
+You're aware of him in the way you're aware of anyone sharing an unexpectedly small space — in a register that isn't purely spatial. He hasn't said anything yet. Neither have you. The rain is extremely loud.
+#elseif ($w.hasTrait("ROMANTIC"))
+There's a quality to it — the specific comedy of two strangers arriving at the same doorway at the same time, the city pressing pause on both of them at once — that you clock before you can stop yourself. You're annoyed at yourself for clocking it. It's rain and a man with a damp jacket. That's all.
+#elseif ($w.hasTrait("SHY"))
+You've positioned yourself with your back mostly to him and your attention firmly on the street, which is the right move. Then he shifts slightly on the pavement and you become aware that he's deciding whether to say something, which is somehow worse than him saying it.
+#elseif ($w.hasTrait("REFINED"))
+You register him with the part of your attention that isn't watching the rain. He's reasonably well-presented, apart from the shoulder situation. He doesn't say anything, which is the correct initial move. You're willing to wait and see what he does with it.
+#else
+He's not looking at you, which is the right call. You're both looking at the rain, which is impressive in the way natural disasters are impressive — impersonal, absolute, briefly interesting.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A closed estate agent. A shared awning. Rain that has no intention of stopping.
+</sceneDescriptionText>
+
+
+<saySomethingText>
+#if ($w.hasTrait("FLIRTY"))
+"Didn't check the weather," you say, which is a perfectly ordinary thing to say. The way you say it is slightly less ordinary. He registers this — a brief recalibration, a slight adjustment in how he's holding himself — and says, "No, me neither," and it's one of those situations where a completely neutral exchange has established something that wasn't there before.
+
+The rain continues. You continue. By the time it eases off — seven or eight minutes, a proper downpour with a definite end — you've had approximately four conversational exchanges, which is three more than you expected. His name is something ordinary. He works somewhere nearby. He says it was nice to talk to you in the specific way people say things they mean.
+#elseif ($w.hasTrait("ROMANTIC"))
+You say something about the weather — the obvious thing, because the obvious thing is sometimes actually what the situation requires. He laughs, which is a reasonable response to being stuck under an awning in a downpour.
+
+The conversation goes where conversations go when two people have nothing to do but wait: a little complaining, a little gallows humour about the forecast, a little of the specific shared solidarity of city life when the city inconveniences everyone at once. He's not especially interesting, but that's not the point. The point is the particular texture of talking to a stranger you'll never see again, with rain on the pavement and nowhere either of you needs to be.
+
+When it eases, you both step out and go your separate ways without ceremony. That's also the point.
+#elseif ($w.hasTrait("SHY"))
+He says it first — something about the weather, which is what people say — and you say "I know, yes," and that's the opening, and then it's done, you're talking, and you find to your mild surprise that it's easier than standing in silence. He doesn't push. He offers remarks and waits to see what you do with them.
+
+You do something with two or three of them. Your actual opinions, offered carefully. He receives them as if they're worth receiving, which they are, and you're aware that you've been talking to a stranger for seven minutes without it being a disaster.
+
+When the rain stops you both look at the sky at the same time, like something finally resolved.
+#else
+"Classic," you say, nodding at the sky. He makes a sound of agreement. That's enough to establish that both of you are willing to have this be a conversation rather than a silence, which is a low bar but a sufficient one.
+
+He has opinions about the weather app he checked this morning, which said nothing. You have opinions about this. The downpour is thorough and lengthy and by the end of it you know slightly more about him than you expected to and he knows slightly more about you. Nothing much. The usual things.
+
+The rain stops with roughly the same decisiveness with which it started. You both step out and go in separate directions.
+#end
+
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+
+On the way to wherever you were going — slightly damp at the edges despite the awning — you find yourself running back through the conversation. Not the content of it, but the architecture. He picked a low-stakes opener. He waited to see whether it landed. He calibrated his follow-up to how you responded. You watched all of it from the inside this time, which is a thing you're still not entirely used to.
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+
+A man in the rain, briefly. You're aware, somewhere at the back of things, that the encounter had a shape you recognise — an opener, a development, an ending. You've run that shape before. The view from this end is different.
+#end
+</saySomethingText>
+
+
+<phoneOutText>
+You fish your phone out and open something — the weather app, obviously, to see exactly how long this is going to take. The answer is not promising. A solid yellow patch on the radar that is directly above your current location and in no hurry.
+
+#if ($w.hasTrait("SHY"))
+He says, "Not looking good," and you say, "No," without looking up from the screen, which is the right amount of acknowledgement. He takes it and goes back to looking at the rain. You look at the radar again. The yellow patch hasn't moved.
+
+You stand there for eleven minutes. He doesn't try again. When the rain stops you both walk away at the same time in different directions and you feel two things simultaneously: relieved, and very slightly like you failed some kind of test you didn't ask to take.
+#elseif ($w.hasTrait("AMBITIOUS"))
+You're already rescheduling in your head. Meeting at two, dry cleaning that was supposed to happen at eleven, the thing you were actually on your way to. You work out what you can still make, what you can't, and feel the specific low-level frustration of lost time. The man next to you says something about the weather. You say "Mm" in a way that politely closes the door.
+#else
+He looks at the screen briefly — you don't turn it towards him but the app's cheerful map of yellow is visible — and says, "Right, then," to no one in particular. He produces his own phone. You stand there in your respective technological fortresses while the rain hammers everything outside, until it eventually stops.
+#end
+</phoneOutText>
+
+
+<offerSpaceText>
+The awning is not quite generous enough. He's got a foot of dry and the overspill is catching his left shoulder. You shift a little — not dramatically, just an adjustment — and say something like, "There's more room this side."
+
+He moves. Slightly surprised, or maybe just grateful. He says thanks. You say it's fine.
+
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+He takes the dryer spot under the awning's centre without making anything of it, and it takes you a moment to locate the specific feeling that comes next. Not discomfort. Something more precise than that.
+
+He extended this without thinking — the small automatic adjustment, the slight step to the side so that you get the better position. You know what this is. You used to do it. Not from duty, not from any particular consciousness of it — you just did it, the way you'd hold a door. It was part of how you moved through the world.
+
+Standing here on the other side of it, you're briefly aware of the fact that you're on the other side of it. The rain is very loud. He's looking at his phone. You look at the rain.
+
+The conversation is easy after that. He asks where you were headed. You tell him. He tells you. The rain runs out eventually, as rain does, and you both step out onto wet pavement and go in different directions.
+#else
+He takes the better spot without drama. The conversation finds its level from there — nothing much, the usual things two strangers say when they've exchanged a small courtesy and have time to fill. His name. Yours. Where you were headed. The general inadequacy of weather forecasting.
+
+When the rain stops you both step out and go your separate ways.
+#end
+</offerSpaceText>
+
+
+<makeARunForItText>
+You look at the rain. You look at the distance to wherever you're going. You make a decision.
+
+#if ($w.hasTrait("AMBITIOUS"))
+The maths is simple: standing here costs more than the soaking. You go.
+
+You are immediately, comprehensively wet. The rain doesn't increase or decrease for your benefit. You run the first bit and then stop running because it doesn't help and you're already as wet as you're going to get, and you walk the rest of the way with the focused expression of someone who has committed to a decision and isn't revisiting it.
+
+You arrive. You're wet. You deal with it.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+Right. You button your jacket up as far as it goes, tuck your phone away, and go. It's rain. You've been wet before.
+
+The man under the awning watches you leave with the expression of someone who considered this option and rejected it. You're too busy being rained on to care. By the time you reach your destination you're soaked through, which is simply a fact about the situation and not a cause for further drama.
+#else
+It seems better than standing still for an indefinite period under an awning with a stranger.
+
+The rain does not ease for your benefit. You get thoroughly wet — jacket, hair, the bag that you thought was more waterproof than it is. You're not running, exactly; there's no dignity in running, and you've already accepted the soaking, so you walk quickly with the particular posture of someone who has made peace with an outcome.
+
+You arrive at wherever you were going damp and slightly cold and glad, in a vague way, that you did something rather than nothing.
+#end
+</makeARunForItText>

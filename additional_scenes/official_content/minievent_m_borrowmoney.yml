@@ -1,0 +1,77 @@
+# minievent_m_borrowmoney.yml
+# Friend minievent (MFRIEND): male friend asks to borrow money
+# Content tags: VANILLA
+# Rarity: uncommon (weightDivisorConditions: [true])
+#
+# Triggered from minievent.yml dispatcher with $m mapped from $maleFriend
+#
+# Flags set:
+#   SOLO_LENT_MFRIEND_MONEY   — she agreed to lend the money
+#   SOLO_REFUSED_MFRIEND_MONEY — she declined
+#
+# NPC consequences:
+#   Lent warmly: +small liking (CARING: +small, others standard)
+#   Declined: -small liking (SELFISH: -medium)
+
+textFileName: minievent_m_borrowmoney.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+
+ location:
+  wall: painted brick wall of a corner pub
+  floor: worn wooden pub floor
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ followUpActions:
+  lendNoQuestions:
+  lendAskFirst:
+  declineGently:
+  declineFirm:
+
+
+actions:
+ - id: lendNoQuestions
+   shortDesc: Just say yes
+   longDesc: Don't make it a thing. You'll sort him out.
+   textId: lendNoQuestionsText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_LENT_MFRIEND_MONEY")
+      condition: "!$gd.hasGameFlag('SOLO_LENT_MFRIEND_MONEY')"
+   finishScene: true
+
+ - id: lendAskFirst
+   shortDesc: Yes — but what's it for?
+   longDesc: You'll lend it, but you want to know what you're actually funding here.
+   textId: lendAskFirstText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_LENT_MFRIEND_MONEY")
+      condition: "!$gd.hasGameFlag('SOLO_LENT_MFRIEND_MONEY')"
+   finishScene: true
+
+ - id: declineGently
+   shortDesc: You don't have it right now
+   longDesc: A soft no. Maybe it's even true.
+   textId: declineGentlyText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_REFUSED_MFRIEND_MONEY")
+      condition: "!$gd.hasGameFlag('SOLO_REFUSED_MFRIEND_MONEY')"
+   finishScene: true
+
+ - id: declineFirm
+   shortDesc: You don't lend money to friends
+   longDesc: It's a rule. It keeps friendships intact — or so goes the theory.
+   textId: declineFirmText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_REFUSED_MFRIEND_MONEY")
+      condition: "!$gd.hasGameFlag('SOLO_REFUSED_MFRIEND_MONEY')"
+   finishScene: true

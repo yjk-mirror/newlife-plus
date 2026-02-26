@@ -1,0 +1,63 @@
+# minievent_solo_turnerhead.yml
+# Solo minievent: Turned Head
+# Content tags: VANILLA, TRANSFORMATION (FEMININITY < 50 branch)
+# Rarity: common (no weight divisors)
+#
+# She's walking down the street. A man — watching her instead of where he was
+# going — walks into a lamppost, trips off a kerb, or drenches himself in coffee.
+# She saw the whole thing. The city involuntarily rearranged itself around her.
+#
+# Flags set:
+#   SOLO_TURNED_HEAD_WALKED  — kept walking (walkPast + winkAndWalk)
+#   SOLO_TURNED_HEAD_STOPPED — stopped to check on him (checkOnHim)
+
+textFileName: minievent_solo_turnerhead.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+  playerOutfit: CASUAL
+
+  location:
+    wall: red-brick shop frontage
+    floor: grey paving-stone pavement
+    hasBed: false
+    isOutside: true
+
+
+intro:
+  textId: introText
+  followUpActions:
+    walkPast:
+    checkOnHim:
+    winkAndWalk:
+
+
+actions:
+  - id: walkPast
+    shortDesc: Keep walking
+    longDesc: Pretend you didn't see a thing. Keep your pace, eyes forward.
+    textId: walkPastText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_TURNED_HEAD_WALKED")
+        condition: "!$gd.hasGameFlag('SOLO_TURNED_HEAD_WALKED')"
+    finishScene: true
+
+  - id: checkOnHim
+    shortDesc: Ask if he's alright
+    longDesc: Stop and check on him. It's the decent thing to do.
+    textId: checkOnHimText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_TURNED_HEAD_STOPPED")
+        condition: "!$gd.hasGameFlag('SOLO_TURNED_HEAD_STOPPED')"
+    finishScene: true
+
+  - id: winkAndWalk
+    shortDesc: Catch his eye, then go
+    longDesc: Let him know you saw. Then keep walking.
+    condition: '$w.hasTrait("SULTRY") || $w.hasTrait("FLIRTY")'
+    textId: winkAndWalkText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_TURNED_HEAD_WALKED")
+        condition: "!$gd.hasGameFlag('SOLO_TURNED_HEAD_WALKED')"
+    finishScene: true

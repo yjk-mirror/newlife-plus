@@ -1,0 +1,185 @@
+<introText>
+You hear it before you see it.
+
+Not the shouting — that's been going on for the last two minutes, audible since you came round the corner, the kind of raised male voices that could still be banter. It's the impact that tells you. A specific dull sound, wet and heavy, the sort that doesn't happen in banter. Then a shout that's different in quality from the ones before it.
+
+You stop.
+
+Outside the Wetherspoons — its orange sign throwing a yellow rectangle across the wet pavement — two men are in it properly now. One of them is up against the exterior wall. The other one is not, anymore. He's on the ground, one leg bent at an angle that looks uncomfortable, one arm down. The standing man is breathing hard and hasn't done anything else yet, which might mean it's over or might mean he's deciding.
+
+A ring of maybe eight people has formed in the way that crowds form: nobody chose to make a circle, but there it is. A woman near the front has her hand over her mouth. Two men in their twenties are recording on their phones. The door of the Wetherspoons is open and a member of staff is standing in it, not coming out.
+
+The man on the ground moves. He pushes himself up onto one elbow. He says something you can't quite catch. It could be anything.
+
+Whatever started this, it was already half-finished when you arrived.
+
+#if ($w.hasTrait("AMBITIOUS"))
+You're already noting the shape of it — what's happening, whether it's still escalating, what your options cost you and what they don't — before you've fully registered the sound of it. The man on the ground is moving. The standing man is staying where he is. This is decelerating. Probably.
+
+Your involvement here has no upside you can name. That thought comes quickly. You have it, and you know you're having it, and you leave anyway.
+#elseif ($w.hasTrait("BITCHY"))
+You take in the scene in about three seconds. Standing man, downed man, useless crowd, pub staff doing nothing in a doorway. Someone's already filming. The woman with her hand over her mouth isn't doing anything with it.
+
+There's a comment that wants to come out of you. You know this because you can already feel the shape of it forming.
+#elseif ($w.hasTrait("SHY"))
+You stop, and for three seconds you don't move at all.
+
+It's not fear exactly — it's the lag, the moment where your brain catches up to your body and your body hasn't decided yet what it's doing. People brush past you on the pavement. The crowd has grown by two or three since you arrived. You're standing at the edge of it.
+
+Your hands have done something. You notice them, vaguely, doing it — gripping the strap of your bag, both of them, without any instruction from you.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+In the first two seconds you've already constructed a version of what started this: something about a woman, you think, because there's always a woman, or money, or both at once, though actually it could be football — tonight's a match night, you're fairly sure — or it could be something that started days ago and this is just where it landed.
+
+You're right about at least one of these. You're also wrong about at least two.
+
+The man on the ground is pushing himself up on one elbow. Someone's already filming.
+#else
+The sound of it sits in your chest in a way you weren't expecting.
+
+The crowd is staying put. The pub staff member in the doorway is staying put. The man on the ground is moving — that's something — but he's not up yet, and the standing man is still standing, and nobody in the ring of people has gone anywhere or done anything.
+
+You have a moment to decide what you are in this situation.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+Two men are fighting outside a Wetherspoons. One of them is on the ground.
+</sceneDescriptionText>
+
+
+<walkAwayText>
+#if ($w.hasTrait("AMBITIOUS"))
+You turn and walk.
+
+You're around the corner before most of the crowd have registered you were there. This is not something you did wrong — the man on the ground was moving, which means he's not unconscious, which means the most acute danger has passed, which means your absence is not a material harm. You've run this. It checks out.
+
+The sound of it follows you for about a street and a half. Then the Friday night noise of everywhere else takes over and it doesn't.
+#elseif ($w.hasTrait("BITCHY"))
+You go. But not before you look at the pub staff member still standing in the doorway, doing nothing, and say, not loudly, "Are you going to call someone, or."
+
+It's not a question. He blinks at you.
+
+You don't wait for an answer. You're already moving. You have no idea if he does anything after you leave, which is, you suppose, the condition of all of it.
+#elseif ($w.hasTrait("SHY"))
+You go.
+
+Not fast — fast would look like something, would draw attention, would mean people turning to see what was moving — but steadily, keeping to the edge of the pavement, not looking back. Your hands are still doing the thing with the bag strap. You don't make them stop until you've put a street between yourself and the orange sign.
+
+The sound of it doesn't leave you immediately. It takes a few minutes.
+#else
+You keep moving.
+
+The crowd parts slightly as you pass its edge — or you find the gap, you're not entirely sure — and then you're past it, and the sounds are behind you, and the city opens up again on the other side.
+
+You don't look back. That's either a choice or just how you walk; you genuinely can't tell.
+#end
+
+$gd.addStat("STRESS_SMALL")
+</walkAwayText>
+
+
+<filmItText>
+You get your phone out.
+
+#if ($w.hasTrait("AMBITIOUS"))
+Two people are already filming. A third doesn't hurt. You get a clear shot of the standing man's face before he turns away, and a few seconds of the man on the ground pushing himself up. You're not sure what the footage is for — evidence, in theory, if someone later claims nothing happened — but it costs you thirty seconds and the decision feels justified by the same logic as not throwing away a receipt.
+
+You stop when it starts to look like it's over. You're there for under a minute total.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You film it and spend most of the time filming also wondering what you're doing. Is this help? It could be help. There's been more than one case where bystander footage was the only record that held up. Or it could be rubbernecking with extra steps. You're standing on a pavement filming a man on the ground while the part of you that constructs narratives is already framing this as an act of civic responsibility, which may or may not be what it actually is.
+
+You get a clear shot of both their faces before the standing man pulls his collar up and walks off toward the car park. He doesn't run. That's something.
+#else
+You hold the phone steady.
+
+The standing man is still standing. The man on the ground is getting his arm under himself. Two other phones are up around the edge of the crowd; you're the third, or the fourth. The footage is probably useless, or probably identical to whatever already exists, or probably ends up as nothing. Or it doesn't. You don't know yet.
+
+The standing man looks up, clocks the phones, says something low and emphatic, and walks off. Not running. Just gone.
+#end
+
+$gd.setGameFlag("SOLO_FILMED_STREET_FIGHT")
+$gd.addStat("STRESS_SMALL")
+</filmItText>
+
+
+<callPoliceText>
+You step back from the edge of the crowd, put your phone to your ear.
+
+999. Two rings. Police please.
+
+#if ($w.hasTrait("AMBITIOUS"))
+You give them the Wetherspoons name, the street, a description of both men, the current status — man down, standing man still present, small crowd, pub staff on site. The operator is efficient. You are efficient back. It takes ninety seconds.
+
+When you hang up, the standing man is already heading toward the car park. The man on the ground is sitting upright now. A woman from the crowd has crouched next to him, which you could not have predicted.
+
+The police will arrive in some number of minutes. You have given them everything useful you had. You keep walking.
+#elseif ($w.hasTrait("SHY"))
+The operator asks for your location. You give it — the pub name, the street, you stumble slightly on the postcode, you don't actually know the postcode, you apologise, the operator tells you not to worry about the postcode — and she takes down the description and asks if you can stay until a unit arrives.
+
+You say yes. You hadn't quite decided to, but there it is.
+
+You stand at the edge of the crowd for seven minutes that feel like they belong to someone else's evening. When the car arrives, you give your statement to an officer who looks younger than you and write your number down on a page in his notebook.
+
+He says it was good you called. You don't know if that's true. It was something.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You give the operator a description of both men and the location and then, because you've already been thinking about it, you mention that the standing man seemed to be heading toward the car park at the side of the building, which could mean a vehicle or could mean nothing.
+
+She asks if you can confirm whether anyone is in immediate danger. You look. The man on the ground is sitting up. The standing man is no longer visible. You say you don't think so, not right now.
+
+She says a unit is on its way. She doesn't say from where or when.
+#else
+You give them the address, the description — two men, one down and moving, one still on scene — and the standing man's clothing: dark jacket, jeans, whatever you caught in the orange light. The operator asks you to stay on the line. You do, for a couple of minutes, watching the standing man say something to no one in particular and walk away toward the side of the building.
+
+When you tell the operator he's left, she adjusts the call type. Officers are on their way.
+
+The man on the ground is sitting up now. Someone from the crowd has gone over to him. You hang up when the operator says there's nothing more you need to do.
+#end
+
+$gd.addStat("STRESS_SMALL")
+</callPoliceText>
+
+
+<askAroundText>
+You turn to the woman nearest to you at the edge of the crowd — mid-forties, shopping bags, looks like she stopped on her way to somewhere else.
+
+"Has anyone called the police?"
+
+#if ($w.hasTrait("BITCHY"))
+She looks at you like the question is mildly accusatory. Which it is, slightly.
+
+"I don't know," she says. "I only just—"
+
+"Right," you say, and take out your phone. You weren't going to do this and then you were. The woman doesn't move. You call 999 and give them the address and a description and don't look at her again while you're doing it.
+
+When you hang up, the standing man has walked off and two of the crowd have gone with him, which is strange. The man on the ground is sitting upright. The pub staff member has finally come out of the doorway, which is probably what it took.
+#elseif ($w.hasTrait("SHY"))
+She blinks at you, then looks at the man next to her, who shrugs.
+
+"Someone said they were going to," she says.
+
+"Someone said" is not the same as someone did, and you know this, and you are about to nod and leave it there when a woman two people along says, loudly, "I called. They said five minutes."
+
+That was three minutes ago, she adds.
+
+You stand at the edge of the crowd for another two minutes, not entirely sure why. The man on the ground has made it to sitting. The standing man has gone. When a police car comes round the corner from the direction of the high street, you leave before it stops.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You ask three people before you get a clear answer. The first shrugs. The second says yes, definitely, someone further back had a phone out. The third — a tall man in a high-vis jacket, which is an interesting detail, you are noting his high-vis jacket — says he already called five minutes ago.
+
+Five minutes ago the shouting hadn't started yet. Either his timeline is wrong or this started earlier than you thought, which would mean you walked into the end of something considerably longer.
+
+You are adding this to your reconstruction of events, which is now on its third revision.
+#else
+She's not sure. The man next to her thinks so — someone was definitely on their phone — but no one can confirm.
+
+You're about to do it yourself when a younger woman at the back of the group raises her hand slightly, the gesture you make when you've just done the thing in question. "Already on it," she says. "Two minutes ago."
+
+That might be two minutes. It might be more. People lose time in these things.
+
+The man on the ground is up on one elbow. The crowd has thinned slightly at the far edge as a few people drift back into their evenings. The standing man is nowhere you can see.
+
+You stay for another minute, because leaving immediately feels like it means something you don't want it to mean, and then you go.
+#end
+
+$gd.addStat("STRESS_SMALL")
+</askAroundText>

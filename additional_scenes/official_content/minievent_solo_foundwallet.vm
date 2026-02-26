@@ -1,0 +1,148 @@
+<introText>
+You almost go over on your ankle.
+
+It's a wallet — thick brown leather, lying face-down on the pavement just outside the Pret, where someone coming out the door has clearly not noticed it drop. You look up and down the street. A man in a suit is already twenty metres away, back turned, phone to his ear. Two women are talking outside the newsagent's. Neither of them is patting their pockets.
+
+You pick it up.
+
+Inside: a fold of twenties, maybe eighty quid in total. A Barclays debit card. A Boots Advantage card. A receipt from a restaurant called Osteria something, folded small and tucked into the card slot. And behind that, in the clear window where the Oyster card usually lives, a small photograph — a woman and a dog, taken somewhere outdoors. The woman is laughing at something off to the left of the frame. The dog looks very pleased with itself.
+
+No driving licence. No name anywhere obvious.
+
+It's started to drizzle. A Pret employee glances up from behind the counter, through the window glass, and clocks you standing there holding something. Then she looks back down at whatever she's doing.
+
+#if ($w.hasTrait("ROMANTIC"))
+You find yourself staring at the photograph longer than you mean to. Someone's whole afternoon is in this wallet. The receipt, the dog, the woman's laugh — you'll never know what she was laughing at. Whoever this belongs to is currently somewhere in the city not yet knowing it's gone, still having a normal day.
+
+The thought sits badly.
+#elseif ($w.hasTrait("AMBITIOUS"))
+Eighty quid. No name, no licence, no way to trace it back to anyone. The Pret employee clocked you picking it up, which is a consideration, but she's already looking at something else. The cards are useless — you'd never use someone else's bank card — but the cash is just cash.
+
+You run the numbers.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+Right. Someone's dropped their wallet.
+
+You look around once more, reflexively, for anyone who looks like they've just lost something. Nobody does. The drizzle picks up slightly.
+#else
+Eighty quid. A photograph of someone's dog. A receipt that tells you nothing except that they eat at Italian restaurants and probably earn more than you.
+
+The Pret employee isn't looking anymore.
+
+You stand there for a moment with the wallet in your hand.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+You're standing on the pavement outside Pret, holding someone else's wallet.
+</sceneDescriptionText>
+
+
+<handItInText>
+#if ($w.hasTrait("DOWN_TO_EARTH"))
+You push open the Pret door and walk straight to the counter.
+
+"Someone dropped this outside," you say, and put it down.
+
+The employee — the same one who clocked you — gives you a slightly surprised look, then takes it. "Oh, brilliant. I'll put it behind the till."
+
+That's that. You're back on the pavement in under a minute, drizzle and all.
+#elseif ($w.hasTrait("ROMANTIC"))
+You push open the Pret door. The woman behind the counter looks up.
+
+"Someone dropped this," you say, and slide the wallet across. "There's cash in it. And a photo — of a dog. Could you make sure whoever comes looking for it gets the photo back?"
+
+She blinks at you. "I'll, erm, make sure it goes in the safe."
+
+It's not exactly the reassurance you wanted, but it'll have to do. You step back out into the drizzle. Somewhere across the city, someone's afternoon is about to get considerably less ruined.
+#else
+You push open the Pret door and hand the wallet to the woman at the counter. She seems mildly impressed, or at least mildly less indifferent than she was a moment ago.
+
+"Someone's going to be dead relieved," she says.
+
+Probably. You step back outside. The drizzle has, if anything, intensified.
+#end
+$gd.addStat("ACTS_OF_KINDNESS")
+</handItInText>
+
+
+<takeToPoliceText>
+#if ($w.hasTrait("AMBITIOUS"))
+The police station takes nineteen minutes each way and involves a queue behind a man reporting a noise complaint. You fill out a short form. The officer — bored, not unkind — takes the wallet without ceremony and puts it in a tray.
+
+"We'll log it. If no one claims it after twenty-eight days, comes back to whoever found it."
+
+You did not know that. Eighty quid and a clear conscience in about six weeks, potentially. That's not the worst outcome you've ever engineered.
+#elseif ($w.hasTrait("ROMANTIC"))
+The police station takes the better part of half an hour. The officer who takes your statement writes down your name and number, and tells you the owner will be contacted if the wallet's registered anywhere.
+
+You ask, as you're leaving, whether they'll make sure the photo gets returned.
+
+He looks at you like you've asked something reasonable but slightly unusual. "We'll do our best," he says.
+
+It'll have to do.
+#else
+You walk to the police station, which is further than you remembered, and queue behind two other people. The officer who eventually takes the wallet seems genuinely slightly surprised that you've gone to the effort.
+
+"Most people just hand it to a shop," she says.
+
+"I know," you say, because you do.
+
+She writes your name down. The wallet disappears behind the counter. Outside, the drizzle has stopped, as if the city is briefly approving of you.
+#end
+$gd.addStat("ACTS_OF_KINDNESS")
+</takeToPoliceText>
+
+
+<takeTheCashText>
+#if ($w.hasTrait("AMBITIOUS"))
+You count the notes quickly, fold them, and pocket them. Then you flip the wallet shut, walk two streets over to the postbox on the corner, and push it through the slot.
+
+The cards can be cancelled. The Advantage card is useless to anyone else. The photograph will get back to whoever it belongs to, or it won't — that's not something you can control. But the owner gets their ID back and whatever minor administrative inconvenience you've saved them.
+
+The cash is eighty-three quid, which is a reasonable finder's fee.
+
+You do not feel bad about this. The calculus is clear enough.
+#elseif ($w.hasTrait("ROMANTIC"))
+You stand there for a long moment, looking at the photograph.
+
+Then you take the cash out — you count it twice, like that makes a difference — and put it in your pocket. You hold the wallet for another second, thinking about the woman laughing at something off to the left. Then you walk to the postbox around the corner and drop the wallet through.
+
+The cards can be cancelled. The photograph will get back to her. This is the version of this you can live with.
+
+The money sits in your pocket all the way home. It feels heavier than eighty quid should.
+#else
+You take the cash — seventy-nine quid, you count it properly — and fold it into your pocket. Then you close the wallet and walk until you find a postbox, which takes about three minutes, and drop it in.
+
+The cards are useless to you. Someone gets their wallet back, minus the cash. You tell yourself this is the reasonable middle ground.
+
+It might even be true.
+#end
+</takeTheCashText>
+
+
+<keepEverythingText>
+#if ($w.hasTrait("AMBITIOUS"))
+You count it. Eighty-three quid. The Boots Advantage card has points on it — eleven pounds something — but you'd never actually use someone else's Advantage card. That would be mad.
+
+You pocket the wallet whole and keep walking. The Pret employee didn't see you take it. Nobody did. The cards will get cancelled whenever whoever this is notices they've lost their wallet, which will probably happen in the next hour. That's their problem.
+
+Eighty-three quid is a decent afternoon.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You put the wallet in your bag and walk.
+
+You spend approximately forty-five seconds imagining the owner — some man in a suit, you've decided, very stressed, very important meeting — before you notice that the wallet has a photo of a woman and a dog in it, which suggests it might not be a stressed man in a suit, which means your entire mental reconstruction collapses.
+
+The cash is eighty quid. The dog in the photo is a spaniel of some kind.
+
+You are now never going to know what the woman was laughing at. This is your own fault.
+#else
+You put the wallet in your bag.
+
+The Pret employee wasn't looking. Nobody was. You walk the first hundred metres quite briskly and then slow down when you realise that briskness is a form of guilt and you're not doing that.
+
+Seventy-nine quid. A photograph of someone's dog.
+
+The city carries on around you, entirely uninterested.
+#end
+</keepEverythingText>

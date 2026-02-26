@@ -1,0 +1,83 @@
+# minievent_solo_mansplained.yml
+# Solo minievent: Mansplained
+# Content tags: VANILLA, TRANSFORMATION
+# Rarity: common (no weight divisors)
+#
+# She's in a shop — B&Q, Halfords, or electronics section of a supermarket —
+# looking for something she knows perfectly well how to use. A male member of
+# staff or a customer-turned-helper begins explaining it to her. Unprompted.
+# At length. He's not unkind. He just assumes she doesn't know.
+#
+# Flags set:
+#   SOLO_MANSPLAINED  — always set; marks the experience
+#
+# Lasting consequences:
+#   Stress +tiny on "let him finish" path — enduring has a small cost
+#   Stress -tiny on "demonstrate knowledge" path — satisfaction is real
+#
+# Trait branches:
+#   AMBITIOUS  — calculates the time cost; lets him finish because interrupting
+#                takes longer; she's done before he's finished; still feels it
+#   BITCHY     — the demonstration comes out more pointed than intended;
+#                he fumbles; she leaves before he recovers; not sorry exactly
+#   POSH       — handles it with effortless deflection that communicates
+#                everything; he doesn't realise he's been shut down
+#   REFINED    — more bothered by the assumption than the content;
+#                there's a vulgarity in presuming
+#
+# Transformation branches:
+#   !ALWAYS_FEMALE, FEMININITY < 50  — recognises the mechanism; used to operate it;
+#                                      knows exactly what he's not thinking
+#   !ALWAYS_FEMALE, FEMININITY >= 50 — wry distance; the recognition is there but familiar
+#   ALWAYS_FEMALE                    — the usual; she's been here before
+
+textFileName: minievent_solo_mansplained.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: aisle shelving stacked with boxed electrical fittings
+  floor: grey concrete warehouse floor
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $gd.setGameFlag("SOLO_MANSPLAINED")
+    condition: "!$gd.hasGameFlag('SOLO_MANSPLAINED')"
+ followUpActions:
+  letHimFinish:
+  demonstrateKnowledge:
+  redirectEfficiently:
+  askObviousQuestion:
+
+
+actions:
+ - id: letHimFinish
+   shortDesc: Nod and wait him out
+   longDesc: Smile, let him finish, take the item, leave. The path of least resistance.
+   textId: letHimFinishText
+   finishScene: true
+
+ - id: demonstrateKnowledge
+   shortDesc: Ask the follow-up question
+   longDesc: Ask something technical enough to make it clear you know exactly what you're doing.
+   textId: demonstrateKnowledgeText
+   finishScene: true
+
+ - id: redirectEfficiently
+   shortDesc: "Just need to know where it is, thanks"
+   longDesc: Cut him off politely. You just need the location, not the education.
+   textId: redirectEfficientlyText
+   finishScene: true
+
+ - id: askObviousQuestion
+   shortDesc: Ask a question you already know the answer to
+   longDesc: See how far he goes with it.
+   textId: askObviousQuestionText
+   finishScene: true

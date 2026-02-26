@@ -1,0 +1,64 @@
+# minievent_solo_badnews.yml
+# Solo minievent: Bad News
+# Content tags: VANILLA
+# Rarity: uncommon (weightDivisorConditions: [true])
+#
+# She's somewhere public — a coffee shop, a park bench — when her phone delivers
+# bad news. A rejection. A failed test. Something she'd been waiting on that
+# isn't going to happen. The world continues. Nobody knows.
+# She has to work out what to do with her face and the next twenty minutes.
+#
+# Flags set:
+#   SOLO_RECEIVED_BAD_NEWS   — always set; marks this moment as real
+
+textFileName: minievent_solo_badnews.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: cream-painted wall with framed coffee-brand prints
+  floor: scuffed wooden floorboards
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $gd.setGameFlag("SOLO_RECEIVED_BAD_NEWS")
+    condition: "!$gd.hasGameFlag('SOLO_RECEIVED_BAD_NEWS')"
+  - effect: $gd.addStat("STRESS_SMALL")
+ followUpActions:
+  goHome:
+  stayAnotherCoffee:
+  callSomeone:
+  fallApart:
+
+
+actions:
+ - id: goHome
+   shortDesc: Go home
+   longDesc: Process this somewhere private. The flat is fifteen minutes away.
+   textId: goHomeText
+   finishScene: true
+
+ - id: stayAnotherCoffee
+   shortDesc: Order another coffee
+   longDesc: Stay. Sit with it here until it settles, or until you run out of reasons not to move.
+   textId: stayAnotherCoffeeText
+   finishScene: true
+
+ - id: callSomeone
+   shortDesc: Call someone
+   longDesc: Find the first person you actually want to hear right now and ring them.
+   textId: callSomeoneText
+   finishScene: true
+
+ - id: fallApart
+   shortDesc: Find somewhere quieter
+   longDesc: A corner, a loo, anywhere the public can't see. Be honest with yourself for five minutes.
+   textId: fallApartText
+   finishScene: true

@@ -1,0 +1,159 @@
+<introText>
+The announcement comes the way they always do: a voice that sounds vaguely apologetic, saying a lot without saying anything. Delays on this line. No further information available at this time. Please await further announcements.
+
+Your phone shows one bar, then no bars. You try loading anything at all and it goes nowhere.
+
+The platform starts filling up behind you. There's a kind of resigned shuffle as people redistribute themselves and accept the situation, and you end up standing closer to a man than you'd normally choose — early thirties, jacket that suggests he works somewhere with a dress code, a paper coffee cup he's cradling with the dedication of someone who hasn't finished it yet. He glances at the departures board. The board says nothing useful. He looks at you.
+
+"Guess we're not going anywhere," he says. He says it like it's a small joke you're already in on, which you suppose you are.
+
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You know this opener. You know exactly what it is — the low-risk icebreaker, calibrated to be funny enough to land but innocuous enough to walk back if it doesn't. It costs nothing to try. You used to know that. You used to do the calculation without thinking about it.
+
+Standing here on the receiving end of it, you're aware of a particular kind of double vision: watching him and watching yourself watching him. He doesn't know you've run this play. He just knows the board says nothing useful and you're standing there.
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+There's something familiar about the way he says it — not him specifically, but the approach. The light, low-stakes opener that costs nothing and risks nothing. You've clocked it before. It's not threatening. It's just a man on a delayed platform deciding to be sociable.
+
+You notice he's reasonably good-looking, in a way that registers without particularly demanding anything from you.
+#else
+There's a certain gallows-humour delivery to it — he's not being weird about it, just the way strangers sometimes talk to each other when the city inconveniences everyone equally.
+#end
+
+#if ($w.hasTrait("SHY"))
+The platform is already more people than you wanted. You'd been managing it by fixing your attention on the far wall, on the tiles, on anything that wasn't a face. Now there's a face. He's waiting for a response, and the waiting is a kind of mild pressure, and you find yourself very still inside your own head.
+#elseif ($w.hasTrait("FLIRTY"))
+Your mouth does something before your brain has quite finished consulting. Not a proper answer — just a look, the kind that's technically neutral but technically isn't. He clocks it. Of course he does.
+#elseif ($w.hasTrait("REFINED"))
+The observation is not especially witty, but the alternative — staring at the board in silence two feet away from a person — is worse. You produce a brief, appropriate acknowledgement.
+#else
+You make a sound that means you heard him. It isn't unfriendly.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A suspended tube service. A crowded platform. Someone next to you has decided to be sociable.
+</sceneDescriptionText>
+
+
+<engageHimText>
+He takes it as the opening it is, which is fair enough because that's what it was.
+
+His name is — he tells you, and you retain it with approximately forty percent of your attention because you're still keeping half an eye on the board. He works in something to do with insurance or possibly risk management; the boundary between those two things is apparently blurry even to him. He asks what you do with the easy curiosity of someone who's decided this is a conversation now.
+
+#if ($w.hasTrait("FLIRTY"))
+You tell him. The platform is crowded enough that you're standing closer than you otherwise would, and you're both aware of it in the way that becomes its own small conversation. The departure board keeps not updating. Neither of you checks it particularly urgently after a while.
+
+By the time the PA crackles back to life — *service is now resuming, please allow passengers to exit first* — there's a moment where you're both aware that it's ending and neither of you moves immediately.
+
+He says he's heading southbound. He says it like a question. You have seven seconds to decide what to do with that.
+$w.addArousalTiny()
+$gd.setGameFlag("SOLO_MET_PLATFORM_MAN")
+#elseif ($w.hasTrait("REFINED"))
+He's more engaging than his opening suggested — the insurance-or-risk-management thing turns out to mask a dry and specific intelligence, and you find yourself having a genuine exchange about something you can't quite summarise afterwards. This is the slightly annoying part: you didn't come down here to discover that a man on a delayed platform is interesting. You had plans for this twenty minutes that involved your phone and not this.
+
+When the service resumes, he says it was good to talk to you. He means it, which is also slightly annoying.
+$gd.setGameFlag("SOLO_MET_PLATFORM_MAN")
+#elseif ($w.hasTrait("SHY"))
+Once you start, it's actually — fine. He doesn't push. He talks and you respond and it has a low-pressure rhythm to it that doesn't require you to perform. You say two or three things that are your actual opinions rather than just sounds that mean yes, and he receives them without making too much of it.
+
+When the service resumes you feel something you can't entirely name. Not bad. Just aware that something happened that you didn't plan for.
+$gd.setGameFlag("SOLO_MET_PLATFORM_MAN")
+#else
+You have a conversation. It goes where conversations go when two people are stuck somewhere with nothing else to do — a little work, a little where-are-you-from, a little what-do-you-think-about. He's not remarkable, but he's not trying to be. The delay is twenty-three minutes, and by the end of it you know more about risk management in the insurance sector than you expected to ever know.
+
+When the board updates, you both look at it with the mild surprise of people who'd stopped watching.
+$gd.setGameFlag("SOLO_MET_PLATFORM_MAN")
+#end
+
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+
+On the train, you think about how the whole thing worked. How he picked the right opener. How the conversation escalated at the right speed. How none of it was aggressive and all of it was directed. You know the mechanics. You were watching them from the inside this time, which is different. It was different.
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+On the train, you have the half-formed thought that you'd have assessed him the same way, years ago. Decided whether to bother talking to her. Made the calculation. It's a thought that comes and goes quickly and doesn't leave much residue.
+#end
+</engageHimText>
+
+
+<politeDeflectText>
+You produce your headphones from your bag with a deliberateness that is hopefully not too pointed. Phone out. Earbuds in. You don't put anything on — there's no signal — but he doesn't know that.
+
+#if ($w.hasTrait("SHY"))
+He pauses. You can feel the pause even without looking up. Then he says, "Fair enough," — quietly, to no one in particular — and that's the end of it. You look at your phone's blank screen for a full two minutes before you relax your shoulders.
+
+You're a little grateful and a little irritated at yourself for being grateful.
+$w.changeStress(1)
+#elseif ($w.hasTrait("REFINED"))
+He takes the signal with reasonable grace. There's a brief silence in which the headphones do their job, and then he shifts his attention to the person on his other side, who's also not interested. You'd almost feel sorry for him if the situation weren't entirely of his own making.
+
+You don't put anything on. There's nothing to put on. You stand there in silence watching your own lock screen and find it almost restful.
+#else
+He gets it. A minor adjustment in posture, a slight reorientation. He finds somewhere else to look. The platform continues to fill. A child across the track is explaining something very urgently to a woman who is clearly her mother, and the mother has the specific expression of someone who has heard this particular very urgent thing many times.
+#end
+
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You're aware that the headphones thing is such a well-understood signal that it functions as its own language. Women learn it. It gets passed on somehow, the knowledge that this is the move. You're using borrowed expertise in a situation you didn't used to need it.
+#end
+
+When the service resumes, you join the crowd flowing toward the carriages and don't look back.
+</politeDeflectText>
+
+
+<shutItDownText>
+You turn to face him properly. Not hostile — you're not doing him the kindness of looking hostile — just clear.
+
+"I'm fine not to talk, honestly. Thanks."
+
+#if ($w.hasTrait("BITCHY"))
+You say it the way you mean it: as information, not as apology. He blinks. Then he nods once, and turns to look at the board. There's a particular quality to the silence that follows — he's recalibrating. That's fine. He can recalibrate.
+#elseif ($w.hasTrait("SHY"))
+It takes you a moment to get the words out in the right order, and they're slightly more apologetic than you intended, but they land. He says, "Of course, sorry," and you immediately want to say it's fine, there's nothing to apologise for, which would undo the whole thing. You manage not to.
+
+You stand in the same two feet of space for the next eighteen minutes and it's fine. A bit too warm. Fine.
+$w.changeStress(1)
+#else
+The small social cost of saying this directly rather than deflecting is a very slightly awkward three seconds. He receives it without incident — "Sure, yeah, no worries" — and that's the end of it. The world didn't stop.
+#end
+
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You're aware that the calculation here was different than it would have been. That you didn't know, until recently, that this was something you might need to do — that a man talking to you on a platform could require a calculated response rather than just a response. You know it now. You know it from the inside, which is a particular kind of knowledge.
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+You've noticed that you're quite good at this — the polite but final thing. You weren't sure you would be, once. You are.
+#end
+
+When the board finally updates, you're already positioned near the yellow line.
+</shutItDownText>
+
+
+<trainArrivesText>
+You're in the middle of a sentence — or he is; you've started talking to him, somehow, in the way that happens on delayed platforms — when the board flips. Letters cycling, the destination reappearing. A shift in the air from the tunnel. The lights change.
+
+There's a mutual pause.
+
+"That's—" he starts.
+
+"Yeah," you say.
+
+The crowd begins to move. You move with it, because that's what you do when the crowd moves, and then you're in the carriage and the doors close and you can see him through the glass, still on the platform, on a different service, watching the train leave.
+
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You spend approximately four minutes constructing several different versions of how the conversation might have continued, including two that end badly and one that ends in a way you don't allow yourself to follow to its conclusion.
+#elseif ($w.hasTrait("ROMANTIC"))
+There's a particular quality to things that end before they've resolved — a fullness to the open question that a resolved thing doesn't have. You're aware this is probably an excess of significance to attach to a man on a platform you'll never see again.
+
+You attach it anyway.
+#else
+The conversation ended mid-sentence. You never found out where it was going.
+
+Which is probably fine. Which is most likely fine.
+#end
+
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+The thing you can't stop noticing, on the way home, is that you'll never know whether he was actually interesting or whether you were just reading the situation from both sides at once. You know the architecture of what he was doing. You don't know what it was doing to you, and whether those are the same question is something the train arriving early has saved you from finding out.
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+Something was being established, on that platform. You're fairly sure of that. The train has filed it under: unknown.
+#end
+</trainArrivesText>
+
+
+<empty></empty>

@@ -4,7 +4,7 @@
 # $bf is the PC's partner (can be null)
 # $gf is the PC's partner (can be null). The PC can only have one partner, so $gf, $bf or both will always be null.
 # $exlover is someone that the PC has slept with before (can be null)
-# Specifically, they must have done oral, anal or PIV sex. He must not have the no-random-appearances, disabled or trounced traits. 
+# Specifically, they must have done oral, anal or PIV sex. He must not have the no-random-appearances, disabled or trounced traits.
 # He must not be the PC's partner and their relationship cannot be Strangers either (as he then wouldn't remember her well enough to recognise)
 #
 # $maleFriend is a random male friend of the PC (can be null)
@@ -12,7 +12,6 @@
 #
 # $randomMale is a random male character (should not be $bf or $maleFriend)
 # $randomFemale is a random female character (should not be $gf or $femaleFriend)
-
 
 # The two random characters cannot be the PC's partner, one of her friends or have the disabled or no-random-appearances traits. Otherwise they're chosen completely at random.
 # In the unlikely situation that no such character exists then the event will not fire.
@@ -84,7 +83,7 @@ actions:
    textId: bfYesText
    allowNpcActions: true
    # Use the male NPC actions to choose a scene to transition to
-   
+
  - id: sayNo
    shortDesc: No
    longDesc: You have other things that you need to do.
@@ -97,7 +96,7 @@ actions:
    textId: gfYesText
    allowNpcActions: true
    # Use the male NPC actions to choose a scene to transition to
-   
+
  - id: sayNoGf
    shortDesc: No
    longDesc: You have other things that you need to do.
@@ -110,7 +109,7 @@ actions:
    textId: ffriendYesText
    allowNpcActions: true
    # Use the male NPC actions to choose a scene to transition to
-   
+
  - id: sayNoFFriend
    shortDesc: No
    longDesc: You have other things that you need to do.
@@ -123,26 +122,25 @@ actions:
    textId: mfriendYesText
    allowNpcActions: true
    # Use the male NPC actions to choose a scene to transition to
-   
+
  - id: sayNoMFriend
    shortDesc: No
    longDesc: You have other things that you need to do.
    textId: mfriendNoText
    finishScene: true
-      
+
  - id: soloEvent
    shortDesc: Find something to do
    longDesc: You should find something more interesting to do in your free time than just napping
    textId: soloEventText
    allowNpcActions: true
    # Use the male NPC actions to choose a scene to transition to
-   
+
  - id: soloNap
    shortDesc: Take a nap
    longDesc: You should use your free time to relax and rest up
    textId: soloNapText
    finishScene: true
-
 
 
 
@@ -214,6 +212,268 @@ maleNpcActions:
      # Not used
      useCurrentLocation: true
 
+ - id: solo_foundwallet
+   textId: empty
+   condition: $eventType=="SOLO"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_foundwallet.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_chugger
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_chugger.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_caferow
+   textId: empty
+   condition: $eventType=="SOLO"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_caferow.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_platformdelay
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_platformdelay.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_almostrecognised
+   textId: empty
+   condition: $eventType=="SOLO"
+   weightDivisorConditions:
+    - true
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_almostrecognised.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_latebus
+   textId: empty
+   condition: $eventType=="SOLO"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_latebus.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_phonesnatching
+   textId: empty
+   condition: $eventType=="SOLO"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_phonesnatching.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_kerbcrawler
+   textId: empty
+   condition: $eventType=="SOLO"
+   weightDivisorConditions:
+    - true
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_kerbcrawler.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_queuejump
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_queuejump.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_rainshelter
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_rainshelter.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_badnews
+   textId: empty
+   condition: $eventType=="SOLO"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_badnews.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_streetphotographer
+   textId: empty
+   condition: $eventType=="SOLO"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_streetphotographer.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_mansplained
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_mansplained.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_wrongorder
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_wrongorder.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_lostdog
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_lostdog.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_streetfight
+   textId: empty
+   condition: $eventType=="SOLO"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_streetfight.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_cornerstore
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_cornerstore.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_jobinterview
+   textId: empty
+   condition: $eventType=="SOLO"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_jobinterview.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_turnerhead
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_turnerhead.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: solo_workdrinks
+   textId: empty
+   condition: $eventType=="SOLO"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    transitionInfo:
+     ymlFile: minievent_solo_workdrinks.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
 
  # Below are friend events with a male
 
@@ -255,7 +515,73 @@ maleNpcActions:
      # Not used
      useCurrentLocation: true
 
- 
+ - id: mfriend_wronggirl
+   textId: empty
+   condition: $eventType=="MFRIEND"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: maleFriend
+    transitionInfo:
+     ymlFile: minievent_m_wronggirl.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: mfriend_borrowmoney
+   textId: empty
+   condition: $eventType=="MFRIEND"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: maleFriend
+    transitionInfo:
+     ymlFile: minievent_m_borrowmoney.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: mfriend_baddatedebief
+   textId: empty
+   condition: $eventType=="MFRIEND"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: maleFriend
+    transitionInfo:
+     ymlFile: minievent_m_baddatedebief.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: mfriend_eveningcall
+   textId: empty
+   condition: $eventType=="MFRIEND"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: m
+       npc: maleFriend
+    transitionInfo:
+     ymlFile: minievent_m_eveningcall.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+
  # Below are friend events with a female
 
  - id: genericdate_ffriend
@@ -296,7 +622,71 @@ maleNpcActions:
      # Not used
      useCurrentLocation: true
 
- 
+ - id: ffriend_gossip
+   textId: empty
+   condition: $eventType=="FFRIEND"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    femaleNpcs:
+     - id: f
+       npc: femaleFriend
+    transitionInfo:
+     ymlFile: minievent_f_gossip.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: ffriend_badadvice
+   textId: empty
+   condition: $eventType=="FFRIEND"
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    femaleNpcs:
+     - id: f
+       npc: femaleFriend
+    transitionInfo:
+     ymlFile: minievent_f_badadvice.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: ffriend_competition
+   textId: empty
+   condition: $eventType=="FFRIEND"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    femaleNpcs:
+     - id: f
+       npc: femaleFriend
+    transitionInfo:
+     ymlFile: minievent_f_competition.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+ - id: ffriend_crisis
+   textId: empty
+   condition: $eventType=="FFRIEND"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    femaleNpcs:
+     - id: f
+       npc: femaleFriend
+    transitionInfo:
+     ymlFile: minievent_f_crisis.yml
+    location:
+     # Not used
+     useCurrentLocation: true
+
+
  # Below are dating events with a female
 
  - id: genericdate_gf
@@ -376,7 +766,7 @@ maleNpcActions:
     location:
      # Not used
      useCurrentLocation: true
-     
+
  - id: poshdate
    textId: empty
    condition: '$eventType=="BF" && ($bf.hasTrait("LIKES_ELEGANT") || ($w.hasTrait("POSH") && ($bf.getPersonality() == "CARING" || $bf.hasTrait("CHARMING"))))'
@@ -424,8 +814,8 @@ maleNpcActions:
 
  - id: sleazydate
    textId: empty
-   # In its current form the sleazy date has the PC responding in a very sexual way by sending nudes back and so on, without the player getting a choice over what she does. 
-   # I've decided to limit this transition to sultry characters because of that. 
+   # In its current form the sleazy date has the PC responding in a very sexual way by sending nudes back and so on, without the player getting a choice over what she does.
+   # I've decided to limit this transition to sultry characters because of that.
    # Ideally it'd be extended to take several actions with choices appropriate to the PC's traits available at each stage (especially shy, refined, sultry, overactive imagination,
    # and interactions between the likes-big trait and the bf's size).
    # Any would-be writers reading this comment who enjoy the scene but aren't in a mood to start a full scene of their own could consider giving this a shot.  - SO
@@ -442,7 +832,7 @@ maleNpcActions:
      # Not used
      useCurrentLocation: true
 
-# Particularly un-athletic men won't bring their partner biking.  
+# Particularly un-athletic men won't bring their partner biking.
  - id: bike
    textId: empty
    condition: '$eventType=="BF" && $bf.figure != "FAT" && $bf.figure != "PAUNCHY" && $bf.figure != "SKINNY"'
@@ -597,4 +987,35 @@ maleNpcActions:
      ymlFile: minidate_cheating_sleepover.yml
     location:
      usePlayerHome: true
-     
+
+ - id: toosoon
+   textId: empty
+   condition: $eventType=="BF"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_toosoon.yml
+    location:
+     usePlayerHome: true
+
+ - id: wetnessrevealed
+   textId: empty
+   condition: $eventType=="BF"
+   weightDivisorConditions:
+    - true
+   sceneTransition:
+    condition: true
+    type: CUSTOM
+    maleNpcs:
+     - id: bf
+       npc: bf
+    transitionInfo:
+     ymlFile: minidate_wetnessrevealed.yml
+    location:
+     usePlayerHome: true

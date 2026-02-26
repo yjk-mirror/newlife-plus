@@ -1,0 +1,244 @@
+<introText>
+The bus is almost empty.
+
+That's the thing — it's almost empty. There are seats scattered throughout, a couple at the back where a teenager in a puffer jacket has his feet up, a row of singles down the right-hand side. Plenty of options. You've been sitting near the middle, coat pulled tight, watching the city lights smear past the window, and you are tired in the specific way you get tired on late buses: not quite asleep but not far from it either.
+
+He boards at the next stop.
+
+You hear him before you see him — the step-scuff of someone who's had a long evening and is managing their own feet with more attention than they'd usually need. He's in his forties, probably, in a slightly damp-looking fleece. He's been somewhere — a pub, a leaving do, someone's birthday, something — and whatever it was, it ran a bit later than intended. He has the look of a man who was, two hours ago, the life of a small party.
+
+Of all the seats on the bus, he takes the one directly across the aisle from you.
+
+You look at the window. He settles into his seat with the particular sighing comfort of someone who thinks he's earned it.
+
+Then he looks at you.
+
+"Good night?" he says.
+
+His voice is too big for the bus. Not aggressive — nothing like that. He's just used to talking at a volume calibrated for rooms with background noise. He's smiling. He seems genuinely pleased to have found someone to talk to. That's the thing about this kind: they're not trying anything. They're just drunk, and sociable, and making your commute longer by being both.
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+
+Something else slots into place, underneath the tiredness.
+
+You know this. Not him specifically, but this — the version of a man who gets comfortable on public transport late at night because the thought that someone else might not want to be talked to simply hasn't occurred to him. You've been that man. You've sat down next to strangers on night buses without registering that they might be doing a calculation about you the second you did.
+
+The calculation is: is this going to be fine, or is this going to require something from me?
+
+You're doing it right now. He isn't.
+
+That gap — the width of it, the specific texture of being on this side of it — sits somewhere between your ribs like something that hasn't quite decided whether to become anything yet.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A late-night bus. You are not alone.
+</sceneDescriptionText>
+
+
+<headphonesText>
+#if ($w.hasTrait("SHY"))
+You take your phone out. You put the earphones in. You find something — anything — and you set it playing.
+
+He's still talking.
+
+You can tell because you can see his mouth moving in the reflection of the window. The music covers the words, which is the point, but the mouth keeps going, and then there's a pause — he's asked you something, probably — and you keep your eyes on the window and your face arranged into the expression of someone very interested in the industrial units scrolling past.
+
+He tries once more. Slightly louder. The music is loud enough that you don't catch the words, just the tone, which is still cheerful, which is somehow worse.
+
+$gd.addStat("STRESS_SMALL")##
+
+Three stops. Four. You count them in the window glass, the familiar junctions ticking past, and somewhere around the fifth he seems to work out that you're not going to turn around, and the reflected mouth stops.
+
+The silence isn't comfortable. It's just quieter. You keep the music on until your stop, and then a stop after that to be safe, and when you finally pull the earphones out and stand up you don't look at him.
+
+You don't know if he even notices you've gone.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You pull out your phone and put your earphones in.
+
+He keeps talking for a bit — the audio cuts out so it's pantomime: his mouth shaping words you've elected not to hear, hands gesturing, eyebrows doing the work of punctuation. You've got ambient electronic something playing, chosen entirely at random, and it gives the scene a specific quality. Like watching a film where they've replaced the dialogue with the wrong soundtrack. He's saying something fairly animated now and the music is at a tender, melancholy moment.
+
+You do wonder what he's saying. Not enough to take the earphones out. Just enough that you invent it — something about a colleague, maybe, or the game, or a friend who did something funny. He's clearly found it worthwhile to say regardless of whether it's being received.
+
+$gd.addStat("STRESS_SMALL")##
+
+He stops eventually. Looks out his own window. Doesn't appear bothered.
+
+By your stop he seems to have forgotten you were ever there, which is the best possible outcome and also slightly strange. You file that away in the drawer of small weird things you've witnessed on public transport and don't tell anyone about.
+#else
+You put your earphones in.
+
+The music goes on. It doesn't matter what — something that fills the frequencies. You fix your eyes on the window and you let the lights happen outside it, the city thinning as the route moves outward, and you do not turn your head.
+
+He talks for a while. You know this because you can feel the pauses where he's waiting for a response, little silences with weight in them. You keep your face neutral and your eyes elsewhere.
+
+$gd.addStat("STRESS_SMALL")##
+
+Somewhere between the third and fourth stops he settles back into his seat and lets it go. He's not offended — you get the sense he's forgotten what he was going to say anyway, the way drunk people sometimes circle back to a thought and find it's wandered off without them.
+
+You ride out the rest of the journey with the music on. Not relaxing. Not ruined. Just a commute that cost a bit more attention than it should have.
+#end
+</headphonesText>
+
+
+<engagePolitelyText>
+#if ($w.hasTrait("FLIRTY"))
+"Not bad," you say, before you've quite decided to.
+
+He lights up — something in the vague, boozy face assembles itself into pleasure. He launches into something about where he's been: a work thing, someone's leaving do, the bar that used to be a different bar. You nod at the right intervals and ask the follow-up question when the pause indicates you should, and it works. He settles. He becomes almost pleasant. He tells you a story about the guy whose leaving do it was that is, in its way, quite funny, and you find yourself mildly entertained.
+
+Your stop arrives. You stand up, collect your bag, and he does the slightly elaborate thing of saying it was really nice to meet you.
+
+"You too," you say, which is not quite true but isn't entirely a lie either.
+
+On the pavement outside you spend a moment not sure what to make of that. It worked. He was fine. You got yourself home without incident.
+
+You're not sure why that feels like it cost something.
+#elseif ($w.hasTrait("SULTRY"))
+You let him finish his opener. Then you turn from the window and give him the level look you use when you've decided something is manageable.
+
+"It was alright," you say. "You?"
+
+He was not expecting an actual answer. He recovers — he's cheerful enough that recovery comes quickly — and tells you about his evening: a work drinks thing near the city centre, four or five pints, the Tube closed so he's on the bus. You make the appropriate sounds. You're watching the stop count at the front and managing the conversation the way you'd manage any minor administrative task: efficiently, with the minimum of investment required.
+
+He's harmless. That was obvious inside thirty seconds. What he is, more precisely, is a man who doesn't consider that talking to someone on a late bus might not be welcome — not out of malice, just the assumption that he's a reasonable thing to encounter. You've met a hundred of them.
+
+You give him enough to work with and no more. By the time your stop approaches he's talking about himself in the comfortable way of someone who's been pointed in the right direction, and you stand up with a brief nod. He says have a good night, and means it.
+
+The pavement is cold. You are annoyed at how little effort that took. You're annoyed that you know how to do that.
+#elseif ($w.hasTrait("ROMANTIC"))
+"It was alright," you say. "Quiet."
+
+He nods like this is information he needed. He has the particular quality of drunk contentment — not messy, just softened around the edges — and he starts telling you about his evening. A leaving do. A colleague of ten years. He got a bit sentimental, he says, and laughs at himself for it.
+
+"That's not embarrassing," you say, because it isn't.
+
+He seems genuinely pleased. He talks for a bit more — about the colleague, something they used to do at lunch, the way the office will be quieter now — and you listen, because it's a short journey and because there's something in it: the small record of a friendship ending in the practical way that work friendships end.
+
+Your stop. You stand up. He says he hopes your evening gets better, which makes you realise you must have looked tired, and you say it will, and you mean it.
+
+He doesn't remember your name. You don't know his. The bus carries him on somewhere.
+#else
+"Fine," you say. Brief. Factual.
+
+He takes this as encouragement, which it wasn't quite meant to be, but you let it happen. He's going to talk regardless; better to steer than to resist. You give him enough — a nod here, a short answer there — to keep him from escalating, and the conversation stays at the level of pleasantly forgettable small talk.
+
+He was at a work thing. The bus is slower than expected. The city at this hour looks different, doesn't it?
+
+You agree that the city at this hour does look different.
+
+By the time your stop arrives he's run out of momentum on his own. You stand, collect your bag, and he says something pleasant and general. You return something pleasant and general. The bus doors close.
+
+You walk home in the cold and let it pass out of you.
+#end
+</engagePolitelyText>
+
+
+<sharpShutdownText>
+#if ($w.hasTrait("BITCHY"))
+"I'm going to stop you there," you say.
+
+You don't raise your voice. You don't need to. You turn from the window and look at him directly, and your tone is the one that means this is not a discussion.
+
+He stops. He blinks. He hadn't expected that.
+
+"I'm tired. I'm not in the mood for conversation. Nothing personal."
+
+The last part is a lie, but it smooths it over slightly.
+
+There's a pause. Then he does the thing — the careful rearrangement of his expression into something wounded and slightly indignant. "I was only saying hello," he says. That particular flavour of injured dignity men produce when they've been told no before they've finished asking.
+
+"I know," you say. "Goodnight."
+
+You turn back to the window.
+
+He mutters something. Not at you, exactly — more at the general situation, the unfairness of it, the world that contains women who say no thank you to being spoken to on buses. You keep your eyes on the window and let him have it.
+
+He gets off two stops before you. He doesn't look back.
+
+You have won. You sit with that, and with the specific flatness that comes after winning something you shouldn't have had to fight. The cost is not the confrontation. The cost is the ten minutes of him performing his hurt feelings at the seat in front of him. You were the villain in his version of tonight.
+
+That's fine.
+#elseif ($w.hasTrait("SHY"))
+You open your mouth.
+
+You have a sentence ready. Something clean and clear — "I'd rather not chat, thanks." Six words. Manageable.
+
+What comes out is: "Oh, um." And then you look back at the window.
+
+He takes this as uncertain rather than terminal and tries again, slightly different approach: something about the bus route, where are you headed, long journey?
+
+"Not — not too far," you say. "Sorry. I'm a bit — I just." You gesture vaguely at nothing.
+
+He seems to sense, dimly, that this is not going well for him, and he eases back a fraction. He doesn't stop entirely — he makes one more attempt, something about the weather — but he's quieter now, and you manage to give one-word answers until he loses interest and your stop arrives.
+
+You wanted to say no clearly. You didn't quite. You get off the bus and stand on the pavement and feel the specific frustration of a person who said the right thing fifteen percent of the way and then ran out of road.
+
+Next time.
+#else
+You look at him.
+
+"Please don't," you say. Quiet. Even. Final.
+
+He opens his mouth. He closes it. The sentence he was about to say dissolves.
+
+"I'm not — I was just," he starts, and then stops, because you're still looking at him the same way, and there's nothing to work with there.
+
+"I know," you say. And you turn back to the window.
+
+He doesn't speak again. He shifts in his seat a bit — the fidget of someone slightly embarrassed but not wanting to show it — and then he settles, and the bus carries you both in silence to your respective stops.
+
+It wasn't dramatic. It didn't need to be. Two words, said clearly, and the whole encounter deflated like something with a slow puncture.
+
+You get off and walk home and the night is cold and quiet and belongs entirely to you.
+#end
+</sharpShutdownText>
+
+
+<nearDriverText>
+You pick up your bag.
+
+You stand up.
+
+He's mid-sentence — something about a restaurant, or a postcode, you weren't tracking it — and he stops when you stand, clearly uncertain whether you're getting off. The bus isn't near a stop yet. He watches you.
+
+You walk past him. Not fast. Not looking at him.
+
+"Alright," he says to your back. A short, slightly confused sound. Not hostile. Just recalibrating.
+#if ($w.hasTrait("SHY"))
+
+Your face is doing something. You're not sure what. You keep moving.
+
+The front section of the bus has a pair of seats across from the driver's cab. You take one of them. You sit down. You look at the road ahead through the windscreen.
+
+The driver hasn't acknowledged any of this. The bus moves. You breathe.
+
+From behind you, nothing. He's probably gone back to his phone, or to staring out his window, or to wherever drunk people go when the conversation they started has walked away from them. You don't look.
+
+Your stop arrives and you get off without looking back.
+
+Your legs feel slightly strange on the pavement. Like they've been doing something harder than walking. You let the night air do what it does and start heading home.
+#elseif ($w.hasTrait("AMBITIOUS"))
+
+You don't owe him an explanation or a look. The seat near the driver is empty. You take it.
+
+Problem resolved. Cost: standing up. Standing up costs nothing.
+
+You check your phone, answer two things you'd been ignoring, and spend the last four stops doing something useful. The driver's cab is warm from the engine. The road ahead is empty the way it only gets after midnight.
+
+From the back, nothing. He's found something else to occupy himself, or he's asleep, or he's worked out that this is over.
+
+You get off at your stop without incident. The walk home is cold and takes seven minutes and you use them to think about something else entirely.
+#else
+
+The front of the bus is quieter. The angle is different — you're looking forward at the street rather than sideways at your reflection. The driver is a solid, reassuring presence two metres away, uninterested in any of this.
+
+From behind you, after a few seconds: nothing. He's either decided to leave it or he's too drunk to work out what happened.
+
+You became briefly visible. You stood up in a moving vehicle on a nearly empty bus and walked past a man who was talking at you, and everyone in the bus saw you do it. There was a social cost to that. A small one, but real.
+
+You pay it. You'd pay it again.
+
+The street through the windscreen is wet and orange-lit, and at your stop you press the button and get off into the night.
+#end
+</nearDriverText>

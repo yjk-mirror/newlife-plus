@@ -1,0 +1,296 @@
+<sceneDescriptionText>
+$f.getName() is telling you about a man she's been seeing.
+</sceneDescriptionText>
+
+
+<introText>
+#if ($f.getCharType() == "INNOCENT")
+You're at the small tearoom $f.getName() likes, the one with the mismatched crockery and a blackboard menu that never quite changes. She's already ordered when you arrive — a pot of tea and two slices of lemon drizzle that she's positioned optimistically in front of you. She looks slightly flushed in the way that means she has something to say.
+
+It takes about four minutes.
+
+His name is Dan. He works in logistics, which she mentions twice as if that's the detail that matters. He's very funny, she says. He cancelled their first date the afternoon of, but he apologised. He cancels things sometimes, but it's because he's busy. He doesn't always text back, but he texted back last Tuesday, and it was a long message. He said she was "a good laugh," which she seems to be holding on to. He hasn't introduced her to any of his friends, but it's only been two months. He mentioned an ex in a way that $f.getName() is "not reading into."
+
+She looks at you across the teacups. Her lemon drizzle is untouched.
+
+"So," she says, "what do you think?"
+
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You already thought several things. In the forty-five seconds before she finished her first sentence, you mapped two versions of how this ends: one where Dan turns out to be fine and you feel terrible for doubting him, and one where he disappears without explanation in six weeks and $f.getName() calls you on a Sunday. You're currently giving even odds to both.
+
+The tea is going cold.
+#elseif ($w.hasTrait("ROMANTIC"))
+Something in you wants to say: he texted back last Tuesday and that counts for something, doesn't it?
+
+Something else in you knows it doesn't, actually. Not the way she needs it to.
+#else
+The tea is going cold. Dan sounds, from this description, like a man who is currently doing something completely unrelated to this conversation and has absolutely no idea it is happening.
+#end
+
+#elseif ($f.getCharType() == "SOPHISTICATED")
+You meet $f.getName() at the Italian place she always insists on — the one with no English on the menu and espresso served in cups the size of thimbles. She's already there when you arrive, which is unusual. She's on her second coffee.
+
+She doesn't waste time on preamble.
+
+His name is Marcus. He travels a lot for work, which she's fine with — she has her own life. He keeps things a bit vague about his schedule, but she's not clingy about it. There was one thing a few weeks ago, a dinner he'd said he'd come to and then didn't, but he had a reason and she's thought it through and she's satisfied with the reason. He's not great at introducing people in his life to each other, which she understands is just a personality style. She's done some reading on avoidant attachment, and she thinks he's probably that, which is workable. She's made a note of three things she wants to bring up with him at some point.
+
+She finishes her espresso and looks at you over the empty cup.
+
+"I just wanted to run it by someone," she says. Her tone is calm. The three things she wants to bring up are probably written in a notebook somewhere.
+
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You run it too, internally, at speed. The reading about avoidant attachment. The dinner he missed. The reason she's satisfied with. You imagine the notebook.
+
+You imagine the notebook having more pages than she's mentioned.
+#elseif ($w.hasTrait("AMBITIOUS"))
+She's thought it through. That's the thing — she clearly has, in considerable detail. The question is whether thinking something through and being right about it are the same operation. In your experience, they're not always.
+#else
+She's not asking for your opinion. You understood that by the third sentence. She's asking for confirmation that her analysis is sound. Those are different requests.
+#end
+
+#else
+## PARTY_GIRL
+You're at the big Costa near the shopping centre, the loud one with the good chairs. $f.getName() got here first and saved you a spot. There's a flat white in front of her, barely touched, which means she's been talking to someone on her phone rather than drinking it.
+
+She tells you about him the moment you sit down.
+
+His name's Josh. He's brilliant, she says. Well fit. She met him at a club night and they've been seeing each other since, sort of. He's not looking for anything serious, which she completely respects, obviously, she's not looking for anything serious either. He's a bit unpredictable with plans — like, he'll cancel, but then he'll make it up to her in a way that's actually better than the original plan. He was seeing someone else when they met but that's over now, she thinks. He's very charming. His mates are a bit much but she doesn't have to see them often.
+
+She looks at you, already smiling slightly, in the way that means she's decided.
+
+"He's not that bad, right? Like, it's fine?"
+
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You've already built Josh in your head. He's very charming in a way that requires a specific kind of maintenance. He cancels things and then makes it up in ways that reset the emotional ledger just often enough. You've met Josh, essentially. Not this Josh, but the shape of him.
+
+$f.getName() is waiting for you to agree that it's fine.
+#elseif ($w.hasTrait("SHY"))
+You pick up your coffee.
+
+She's still smiling. She wants the sentence finished. "It's fine" is an easier sentence to start than the one that begins with "well."
+#else
+Josh sounds like someone who's currently having a fine time and has not recently thought about $f.getName() at all. That's not an unkind assessment. It's just a likely one.
+#end
+#end
+</introText>
+
+
+<adviceHonestText>
+#if ($f.getCharType() == "INNOCENT")
+You put your teacup down.
+
+"I think," you say, and you choose the words carefully because she's listening very hard right now, "that a man who regularly cancels, doesn't text back, hasn't introduced you to anyone, and called you 'a good laugh' after two months is probably not as into this as you are."
+
+$f.getName() goes quiet.
+
+"I'm not saying he's a bad person," you say. "I'm saying the things you've described aren't the things someone does when they're keen."
+
+She looks at the lemon drizzle. She picks up her fork and puts it down again.
+
+"Maybe he just needs time," she says, finally.
+
+"Maybe," you say. You don't say anything else. It's not a conversation that needs more from you right now.
+
+The walk home is the part where you wonder if you should have said it differently. You probably shouldn't have. You said the true thing, and the true thing costs something in these situations — mostly to the person saying it.
+$f.reduceWLikingSmall()
+
+#elseif ($f.getCharType() == "SOPHISTICATED")
+"I think," you say, "the reading about avoidant attachment is doing a lot of work."
+
+$f.getName() doesn't react immediately. She sets the espresso cup down with more precision than it requires.
+
+"Meaning," she says.
+
+"Meaning it's become a framework that explains everything in a way that keeps it manageable. But there's a difference between understanding why someone behaves a certain way and deciding that's acceptable for you. Those aren't the same thing."
+
+There's a pause. She's thinking about it — actually thinking, which is more than most people would do.
+
+"I'm not saying he's not worth the effort," you add. "I'm saying the effort should be a choice you're making deliberately, not something that gets rationalised into looking like it isn't effort at all."
+
+She nods, once. She picks up the menu even though you've both already ordered. Then she puts it down.
+
+"I'll think about it," she says.
+
+She will. Whether she'll land in a different place is another question. But she's heard it.
+
+#else
+## PARTY_GIRL
+"Honestly?" you say.
+
+$f.getName() keeps smiling but the smile goes slightly still.
+
+"I think 'sort of seeing each other' and 'not that bad' are phrases that generally mean the same thing, and that thing is that it's probably not as solid as you want it to be."
+
+"I'm not saying it needs to be solid," she says immediately. "I said I'm not looking for—"
+
+"I know," you say. "I know you said that. I just want to make sure it's what you actually want, not something you've said to match what he said."
+
+She looks at her flat white for a long moment. When she looks back up, the smile is a bit different.
+
+"He's really charming," she says.
+
+"I believe you," you say.
+
+She knows. That's the thing — she probably knows. She just wanted to see if you'd say it, and now you have, and neither of you is sure if that's better or worse.
+$f.reduceWLikingSmall()
+#end
+</adviceHonestText>
+
+
+<adviceSupportiveText>
+#if ($f.getCharType() == "INNOCENT")
+"He sounds like someone worth getting to know better," you say. "Two months isn't that long. Some people are just slow to show up properly."
+
+$f.getName() visibly relaxes. She picks up her fork.
+
+"That's what I thought," she says. "He's been busy. He's got a lot going on."
+
+"Mm," you say. You drink your tea.
+
+The thing is, it might even be true. Dan might be going through something and $f.getName() might be exactly the kind of steady presence he eventually comes back to. You've seen stranger things work out.
+
+You don't mention that you've also seen this particular configuration go in the other direction. She didn't ask for the full picture, and the lemon drizzle is actually quite good.
+$f.addWLikingTiny()
+
+#elseif ($f.getCharType() == "SOPHISTICATED")
+"It sounds like you've thought it through pretty carefully," you say. "If you're comfortable with how it's going, that's what counts."
+
+$f.getName() gives a small nod, the kind that means she's received the thing she came here to receive.
+
+"I just wanted a second opinion," she says.
+
+"He might just be private," you say. "Not everyone finds it easy to integrate different parts of their life quickly. The fact that you're aware of the dynamics is probably more important than the dynamics themselves."
+
+She seems to find this satisfying. The conversation moves on. She orders another espresso. You talk about something else entirely for most of the next hour.
+
+You are, by the time you leave, not sure you said anything untrue. You're slightly less sure you said anything useful.
+$f.addWLikingTiny()
+
+#else
+## PARTY_GIRL
+"He sounds fun," you say. "If you're not looking for anything serious, that's kind of the right amount of complicated."
+
+$f.getName() brightens.
+
+"Exactly," she says. "Like, I know what it is. I'm fine with what it is."
+
+"Then you're fine," you say.
+
+She is, probably. For a while, probably. You top up your coffee and let her talk about the specific night they met, which takes about twelve minutes and involves several details that are not strictly relevant but which she is clearly fond of.
+
+It's a decent afternoon. You don't think much about Josh.
+$f.addWLikingTiny()
+#end
+</adviceSupportiveText>
+
+
+<adviceQuestionText>
+#if ($f.getCharType() == "INNOCENT")
+You wait for a moment after she finishes. Then you ask:
+
+"When was the last time he made a plan and kept it?"
+
+$f.getName() opens her mouth. Then she closes it. She's trying to locate the answer.
+
+You watch her working through it — going back through weeks of texts, rearranged evenings, the apology for the first date, the long message last Tuesday. She's looking for a specific plan that was made and kept. She's been looking for about fifteen seconds now.
+
+"There was..." she starts. Then, slower: "He said he'd call on Saturday and he... he did call, actually. Eventually."
+
+"That's good," you say, because it is.
+
+She's still thinking. The pot of tea has gone entirely cold. She picks it up anyway, finds it cold, puts it back.
+
+"He just needs time," she says. It sounds, this time, like she's testing whether she still believes it.
+
+You don't answer that. You don't need to.
+$f.addWLikingTiny()
+
+#elseif ($f.getCharType() == "SOPHISTICATED")
+You let her finish. Then you say:
+
+"The three things you want to bring up with him — when do you think you'll actually bring them up?"
+
+$f.getName() pauses.
+
+"When the right moment comes," she says.
+
+"Right. How many right moments have there been, so far?"
+
+The question sits there. She picks up the empty espresso cup, realises it's empty, sets it down. She's not going to answer immediately — she never answers anything immediately that she hasn't already prepared an answer for — but you can see it's reached something.
+
+"I'm being deliberate," she says eventually. "I don't want to rush it."
+
+"I know," you say. "I'm not asking to push you. I'm just asking so you know the answer."
+
+She looks at you for a moment. It's the look she gets when she's filing something away to think about later, when you're not there. Whether she does anything with it is her own business.
+
+The espresso comes. She thanks the waiter with the kind of composure that means she's already moved to a different conversation in her head.
+$f.addWLikingTiny()
+
+#else
+## PARTY_GIRL
+"If he said tomorrow he wanted to make it official," you ask, "what would you say?"
+
+$f.getName() laughs, short and a bit sharp. "I wouldn't — like, that's not where this is."
+
+"I know," you say. "But if he did."
+
+She picks up her flat white. She takes a sip, then another one, then she looks at the table.
+
+"I don't know," she says eventually. "I genuinely don't."
+
+"Okay," you say.
+
+"That's not — I'm not hung up on him," she says quickly. "I just haven't thought about it like that."
+
+"Right," you say. You're not going to make anything of it. You've made the point you were making, which is that the thing she says she wants and the thing she might actually want might not have a lot of overlap, and she's heard it without you having to say it directly, which is the better way to do this.
+
+She moves on fast, talks about something else, buys you both another coffee. But she's quieter than she was at the start.
+$f.addWLikingTiny()
+#end
+</adviceQuestionText>
+
+
+<adviceListenText>
+#if ($f.getCharType() == "INNOCENT")
+You say "mm" and "right" and "how long has this been going on?" in appropriate places. You refill her teacup. You eat the lemon drizzle, which is good, and offer her the last slice, which she takes.
+
+She talks for another twenty minutes. Dan fills all of it. He cancels, he apologises, he texts when he wants to, he is very funny.
+
+At the end, she seems lighter.
+
+"It helps, just saying it out loud," she tells you, as you're putting your coats on.
+
+You nod. It probably does help. Whether it helped in the way that actually helps is something only time will sort out — and time, in this case, is the particular shape of a man named Dan who is currently doing something completely elsewhere and will probably keep doing it for a while yet.
+
+You walk out into the afternoon together. She links her arm through yours.
+$f.addEnjoyTiny()
+
+#elseif ($f.getCharType() == "SOPHISTICATED")
+You listen. You ask one or two questions, practical ones, that let her fill in the outline without going anywhere near the thing neither of you has said.
+
+She's good at talking. She's built the whole picture coherently, with the gaps distributed so they don't cluster, so the overall structure looks load-bearing. You can see the work she's done on it.
+
+At the end she says, "Right, I think that's where I've got to," in the way that means she's arrived somewhere satisfying. Whether it's the right somewhere, you can't say.
+
+You split the bill. She insists on paying for the espressos because she had three and you only had one, which is typical of her.
+
+On the way out, she says: "It's good to have someone sensible to talk to." You take that as the compliment it is.
+$f.addEnjoyTiny()
+
+#else
+## PARTY_GIRL
+You let her talk.
+
+She talks for a long time. Josh is well fit. Josh is brilliant, actually. Josh said something last week that was so funny she replayed it three times. Josh doesn't always answer fast but when he does it's worth it. The thing about the ex is fine because it was ages ago. His mates are a bit much but she's only met them the once.
+
+Somewhere in the middle of all this she finishes her flat white and orders another. You've drunk two coffees. The Costa playlist cycles through the same four songs.
+
+She doesn't need you to say anything, you realise. She needed someone in the chair across from her while she said it. That's a different thing, and it's something you can do.
+
+"You're a good listener," she says, when the coffees are done.
+
+You are, when you decide to be. Whether Josh deserves this much conversation is a thought you keep to yourself.
+$f.addEnjoyTiny()
+#end
+</adviceListenText>

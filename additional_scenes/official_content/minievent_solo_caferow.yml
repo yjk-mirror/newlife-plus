@@ -1,0 +1,78 @@
+# minievent_solo_caferow.yml
+# Solo minievent: Café Row
+# Content tags: VANILLA
+# Rarity: uncommon (weightDivisorConditions: [true])
+#
+# She's in a Costa when the couple at the next table quietly implodes.
+# She can stay and watch, move tables, intervene, or leave.
+# The argument was already happening before she arrived.
+#
+# Flags set:
+#   SOLO_WITNESSED_CAFE_ROW    — always set; world texture flag
+#   SOLO_INTERVENED_CAFE_ROW   — only if she says something
+
+textFileName: minievent_solo_caferow.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: wall
+  floor: floor
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $gd.setGameFlag("SOLO_WITNESSED_CAFE_ROW")
+ followUpActions:
+  stayAndIgnore:
+  moveTables:
+  intervene:
+  leaveEntirely:
+
+
+actions:
+ - id: stayAndIgnore
+   shortDesc: Stay and ignore it
+   longDesc: Keep your eyes on your cup. This is none of your business.
+   textId: stayAndIgnoreText
+   finishScene: true
+
+ - id: moveTables
+   shortDesc: Move to another table
+   longDesc: Gather your things and relocate. Subtle as a foghorn.
+   textId: moveTablesText
+   finishScene: true
+
+ - id: intervene
+   shortDesc: Ask if everything's okay
+   longDesc: Say something. You can't not.
+   textId: interveneIntroText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_INTERVENED_CAFE_ROW")
+   followUpActions:
+    addressTheMan:
+    addressTheWoman:
+
+ - id: addressTheMan
+   shortDesc: Look at him
+   longDesc: Direct it at the man. He's the one talking.
+   textId: addressTheManText
+   finishScene: true
+
+ - id: addressTheWoman
+   shortDesc: Look at her
+   longDesc: Direct it at the woman. Give her the opening.
+   textId: addressTheWomanText
+   finishScene: true
+
+ - id: leaveEntirely
+   shortDesc: Just leave
+   longDesc: Finish your coffee, or don't. Either way, you're done here.
+   textId: leaveEntirelyText
+   finishScene: true

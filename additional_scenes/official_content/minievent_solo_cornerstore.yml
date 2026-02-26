@@ -1,0 +1,77 @@
+# minievent_solo_cornerstore.yml
+# Solo minievent: Corner Shop
+# Content tags: VANILLA, TRANSFORMATION (light, FEMININITY < 50)
+# Rarity: common (no weight divisors)
+#
+# She steps into a small corner shop she hasn't visited before.
+# The man behind the counter is cheerfully certain about who she is
+# and what she needs — and he is specifically, warmly wrong.
+#
+# Flags set:
+#   SOLO_CORNERSTORE_VISITED  — first visit flag
+#   SOLO_CORRECTED_CORNERSTORE — set if she corrects him
+#
+# Trait branches:
+#   POSH         — the class assumption stings in a particular way;
+#                  he's placed her on a shelf she doesn't belong on
+#   DOWN_TO_EARTH — genuinely can't work out what she did to give this impression
+#   CUTE         — charmed before she realises it's based on nothing; then annoyed at herself
+#   AMBITIOUS    — no patience for it; corrects the one inconvenient thing and exits
+#
+# Transformation branch:
+#   !ALWAYS_FEMALE, FEMININITY < 50 — she used to move through shops invisibly;
+#                                     now she is legible in ways she didn't choose
+
+textFileName: minievent_solo_cornerstore.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: shelves stacked with tinned goods and cleaning products
+  floor: worn linoleum floor
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ followUpActions:
+  goAlong:
+  correctOneThing:
+  askWhy:
+  browseSilently:
+
+
+actions:
+ - id: goAlong
+   shortDesc: Go along with it
+   longDesc: Take what he's pointing to. Don't correct him.
+   textId: goAlongText
+   finishScene: true
+
+ - id: correctOneThing
+   shortDesc: Correct one thing
+   longDesc: Just the most wrong assumption. Let the rest go.
+   textId: correctOneThingText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_CORRECTED_CORNERSTORE")
+      condition: "!$gd.hasGameFlag('SOLO_CORRECTED_CORNERSTORE')"
+   finishScene: true
+
+ - id: askWhy
+   shortDesc: Ask why he thinks that
+   longDesc: You want to know what he read to reach those conclusions.
+   textId: askWhyText
+   finishScene: true
+
+ - id: browseSilently
+   shortDesc: Browse and pay
+   longDesc: Get what you came for. Don't engage.
+   textId: browseSilentlyText
+   finishScene: true
+
+defaultActions:
+ goAlong: true

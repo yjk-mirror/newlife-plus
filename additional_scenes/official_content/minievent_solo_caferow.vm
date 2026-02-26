@@ -1,0 +1,214 @@
+<introText>
+You've been nursing your flat white for about ten minutes when you realise the couple at the next table aren't speaking quietly because they're being considerate. They're speaking quietly because whatever this is, it isn't for public consumption — and it's already too late for that.
+
+He has both hands around his mug as if it might escape. His shoulders are up around his ears. She's looking at the table. Not at him, not at you, not at the woman two tables over who has suddenly become very interested in her phone screen. At the table. At some specific point on the table that appears to contain the entire problem.
+
+"I'm not saying that," he says, in a voice that would like to be calmer than it is.
+
+She doesn't answer. That's worse.
+
+The barista has found something extremely urgent requiring his attention behind the espresso machine. The man near the window has tilted his laptop screen up an extra few degrees. You are the only person in this Costa who is not actively pretending this isn't happening.
+
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))##
+Your brain, entirely without your permission, has already begun.
+
+The posture of a man bracing. The way she looked at the table — like she'd put something there deliberately, something she wanted him to see but couldn't say out loud. Three years, minimum. The mug — his mug — is from home, not the Costa paper cup; he's been coming here long enough to bring his own. She ordered nothing. She came here to end something. He knew this was coming and convinced himself he didn't.
+
+You should stop. You're still going.
+
+The child — there's a child, you've decided, seven or eight, at school right now in the way that makes today the day you have these conversations. The money problem that started small and got covered up and got larger and didn't get covered up in time. The thing she found on his phone that wasn't what she thought but was adjacent to it in a way he can't explain without making it sound worse. The three years are right. You're almost certain.
+
+You could be completely wrong. You are sitting here constructing the interior lives of strangers from the angle of a man's shoulders and the temperature of someone else's grief.
+
+You do know, though. You know the shape of this.
+#elseif ($w.hasTrait("ROMANTIC"))##
+You recognise it. That specific register of argument — not the blowout kind, not the kind that ends with a door, but the quiet collapsing kind. The kind that takes a long time. You can tell from the way he's holding the mug. That's not anger. Anger is different; anger wants an audience. That's a man in the process of losing something he knows he's losing and can't stop.
+
+She's stopped blinking at a normal rate. You don't know how you've clocked that from six feet away, but you have.
+
+They were something, once. That's the part that gets you. Whatever they were, it took time to get to this table in this Costa on a Thursday afternoon, speaking too quietly to be polite.
+#else##
+The woman across from him says something, low and flat, that makes him set his mug down too hard. Coffee sloshes. He looks at it and doesn't apologise.
+
+You look out the window at nothing in particular, which is what you are going to continue doing.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+You are sitting in a Costa, minding your own business. Approximately.
+</sceneDescriptionText>
+
+
+<stayAndIgnoreText>
+You look at your coffee.
+
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))##
+The story unfolds in your peripheral vision. He says something. She does the thing where a very controlled person allows their face to change for exactly one second and then puts it back. There's the child. There's definitely the child. You can see the whole arc from here — the mediation appointment, the flat divided in two by an invisible line they'll both maintain perfectly until one of them can't anymore.
+
+You drink your coffee. You are being absolutely normal about this.
+#elseif ($w.hasTrait("ROMANTIC"))##
+You stay because leaving feels like a betrayal, which is absurd. You have no stake in this. You don't know these people. But you've chosen the seat facing them and now you're watching two people dismantle something that probably took years to build, and you can't make yourself look away, and eventually her voice catches on a word in a way she didn't plan, and you look at your coffee then, because that part wasn't for you.
+
+You sit with it for a while after. The Costa plays something upbeat through the speakers. It's a peculiar sort of cruelty, background music in a place where things end.
+#elseif ($w.hasTrait("BITCHY"))##
+You manage, heroically, to say nothing. You drink your coffee. You watch the woman two tables over absolutely staring at her phone. You note the barista's extraordinary commitment to the espresso machine.
+
+The argument has escalated to the stage where they're pretending it hasn't escalated. You know this stage. You've been in this stage. The whole café knows they're in this stage.
+
+You drink your coffee and do not say anything and this is a significant personal achievement.
+#else##
+You keep your eyes down and your coffee at mouth-level, which is a useful shield. The argument continues — not louder, worse: quieter. The specific quiet of something settling into permanence.
+
+You finish your drink. You've stopped actually tasting it. When you leave, you pull your jacket on facing the window, which feels like the least you can do.
+#end
+</stayAndIgnoreText>
+
+
+<moveTablesText>
+You weigh it up. The table by the window is free. It is also approximately eight feet from where you're currently sitting, which means crossing the eyeline of the couple at the next table while visibly gathering your belongings because of the couple at the next table.
+
+You do it anyway.
+
+#if ($w.hasTrait("SHY"))##
+It goes as badly as you expected. You stand up too fast, misjudge the chair, catch it before it scrapes but not before the man glances over. You smile at nothing. You carry your flat white to the window table with the specific energy of someone who is absolutely fine and had always planned to sit here, which fools no one, including the woman two tables over who has looked up from her phone to watch you relocate.
+
+You sit down. You don't look back.
+#elseif ($w.hasTrait("BITCHY"))##
+You pick up your coffee. You stand. You make deliberate, unhurried eye contact with the woman across from him — not him, her — in the way that communicates: I see you, I know what this is, I am removing myself because I have some decorum left.
+
+She looks back at you. Just for a second. Something passes between you that you couldn't put words to.
+
+You take the window table. The barista gives you a look that might be admiration.
+#else##
+You pick up your coffee, your jacket, your bag. You execute the move with as much dignity as the situation allows, which is approximately forty percent of the dignity you'd like. The man doesn't look up. The woman does, briefly, and then returns to whatever specific point on the table she's been addressing for the past ten minutes.
+
+The window table is fine. You can't hear them anymore. This is better.
+#end
+
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))##
+From this angle, you can only see his back. But you've already got everything you need. The child is at school. The money thing. The thing on the phone that wasn't what she thought but was adjacent. You're probably right about all of it.
+
+You finish your coffee watching the street outside and trying, with limited success, not to wonder how it ends.
+#end
+</moveTablesText>
+
+
+<interveneIntroText>
+You hear yourself clear your throat.
+
+The sound is quiet enough that it could be ignored. It isn't ignored. Both of them look at you. He with the expression of someone who has been caught doing something he can defend, if he could just think of the right defence. She with nothing — her face is perfectly level, the kind of level that takes effort.
+
+"Sorry," you say, which isn't the word you intended.
+
+You look between them. You have to pick one. You can feel the decision being made by something other than your brain.
+</interveneIntroText>
+
+
+<addressTheManText>
+You look at him.
+
+"Is everything alright?"
+
+The question lands in the specific way it always does when addressed to the wrong person at the wrong moment — not like a question, like an accusation. His jaw works once.
+
+#if ($w.hasTrait("BITCHY"))##
+"We're fine," he says.
+
+"Right," you say. The word is one syllable of complete disbelief. You hold his gaze for just long enough that he knows it, and then you look back at your coffee.
+
+He doesn't say anything else. Neither does she. The silence between them is different now — you've introduced a variable. You've made them a we in front of a stranger, which is its own kind of complication.
+
+You didn't mean to help. You're not sorry you did.
+#elseif ($w.hasTrait("ROMANTIC"))##
+He looks at her before he looks at you. That reflex — checking with her before speaking to a stranger — is automatic. It happens before he can decide it shouldn't.
+
+"We're fine," he says. "Thank you."
+
+The thank you is genuine. That's the part that stays with you. He means it. He's grateful someone noticed, even now, even in the middle of this. You nod and look away, and you don't look back, because some things that happen between people in public places aren't yours to hold onto.
+#else##
+"We're fine," he says. Flat. Daring you to argue.
+
+You don't argue. You give him the small, noncommittal nod that means: understood, this is yours, I'm putting it down. You return to your coffee.
+
+The argument doesn't restart. The silence that replaces it is a different kind of silence — weighted and exposed — and the three of you sit in it for a while, and eventually they leave, and you don't watch them go.
+#end
+</addressTheManText>
+
+
+<addressTheWomanText>
+You look at her.
+
+"Are you okay?"
+
+The framing matters. You know the framing matters. Asking her directly takes the question out of his hands.
+
+She blinks. Once. The face that has been perfectly level for the past ten minutes does something complicated for just a moment — not gratitude, not irritation, something in between that doesn't have a single word for it.
+
+#if ($w.hasTrait("BITCHY"))##
+"I'm fine," she says. Then, half a beat later: "Thank you."
+
+He's gone very still.
+
+You look at him then, just briefly, and you make it count — the specific look that says: you are in a Costa on a Thursday and a stranger just checked on your partner and she thanked that stranger. Think about what that means.
+
+You've probably made this worse. You are categorically unbothered.
+#elseif ($w.hasTrait("ROMANTIC"))##
+"I'm fine," she says.
+
+But she holds your gaze for just a second longer than she needs to, and you're close enough to see the exact moment she makes a decision. She picks up her bag from under her chair — slowly, deliberately — and sets it on the table between them. Like punctuation.
+
+You look back at your coffee. Whatever that was, it was already in motion. You just gave her a witness.
+#elseif ($w.hasTrait("SHY"))##
+"I'm fine," she says. "Really."
+
+You nod. Your face is doing something you can't control. You look back at your cup and your ears are warm and you've just inserted yourself into a stranger's crisis and all you have to show for it is a half-finished flat white and the sustained attention of an entire café pretending not to look.
+
+You drink your coffee. You don't intervene in things as a rule, and now you remember why.
+#else##
+"I'm fine," she says. "Thank you for asking."
+
+The thank you is real. You can't tell if it's gratitude for asking or gratitude for the interruption or gratitude for something else entirely. You nod and look away and leave the question where it fell.
+
+He says something to her after, very quietly. You can't hear it. You don't try to.
+#end
+</addressTheWomanText>
+
+
+<leaveEntirelyText>
+You've almost finished your coffee. Close enough.
+
+#if ($w.hasTrait("BITCHY"))##
+You pull on your jacket, stand up, and on your way past their table — without breaking stride, without looking at either of them directly — you say:
+
+"The flat's already half in your name anyway. Just saying."
+
+You have absolutely no idea what this argument is actually about. You are sixty percent certain you've hit something real anyway. You push through the door onto the street without looking back, and the cold air is excellent, and you feel fine.
+#elseif ($w.hasTrait("ROMANTIC"))##
+You put on your jacket. Button it slowly, because suddenly you need a moment before the street.
+
+What gets you, leaving, is the specificity of it. Not that they're arguing — people argue in cafés, it's a genre — but the smallness of the weapons they've chosen. The measured voice. The looking at the table. The mug from home. These are people who know each other well enough to know exactly where to put pressure and exactly how much force not to use.
+
+That takes time to learn. It takes more time to decide to use it.
+
+You step out into the cold. It's raining lightly. You don't have an umbrella and this feels appropriate.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))##
+You stand. You button your coat. You pick up your bag.
+
+The child is definitely real. Seven, maybe eight. The financial problem was about something they both agreed on at the time and one of them has since changed their mind about, which is worse than a straightforward lie because it can't be anyone's fault. The thing on the phone wasn't an affair but it was correspondence. The specific kind of correspondence you maintain when you haven't decided yet.
+
+You push the door open. Cold. The street is full of people who are fine.
+
+You'll never know if you were right. This is going to bother you for the rest of the day.
+#else##
+You gather your things. You don't look at them. You don't look at the woman with the phone, or the barista, or the man with the laptop.
+
+You push through the door into the cold.
+
+The argument follows you for about half a street — not the words, which you couldn't hear, but the register of it. The shape. You shake it off somewhere around the next corner, or at least you tell yourself you do.
+#end
+</leaveEntirelyText>
+
+
+<empty>
+</empty>

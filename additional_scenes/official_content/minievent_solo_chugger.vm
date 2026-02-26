@@ -1,0 +1,145 @@
+<introText>
+You see it happen first to someone else.
+
+A man in a yellow tabard peels away from the pavement — you clock the clipboard, the laminated badge, the open, weaponised smile — and intercepts a woman coming the other way. She takes one earbud out. She is already lost.
+
+You have maybe four seconds.
+
+But you've been distracted by a window display of trainers you don't need, and by the time you look up again the woman in the earbuds is nodding at something on the clipboard, and the man in the yellow tabard is already turning. Toward you. And you've met his eyes, which means the social contract has been invoked, which means you are, technically, already stopped.
+
+"Hi! Have you got two minutes?" He says it like it's a question. It isn't.
+
+His tabard says CHILDREN'S HEART FOUNDATION in large, cheerful letters, which is the worst possible thing it could say, because nobody is against children's hearts.
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You've used this technique yourself, more or less. Walk toward the mark, get the eye contact before they've decided to give it, make asking feel like it was their idea. It's not sinister — it's just social physics. You recognise it the way you'd recognise a chess opening.
+
+Recognising it doesn't make you immune to it.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A charity fundraiser on the high street. His clipboard is already out.
+</sceneDescriptionText>
+
+
+<donateQuicklyText>
+#if ($w.hasTrait("POSH"))
+"I'll make a one-off donation," you say, before he can open with his script. "I don't do direct debits."
+
+He looks slightly put out — this isn't how it's supposed to go — but he recovers and produces a card reader from his tabard pocket. You tap your card without looking at the amount. It doesn't matter; what matters is that you are now walking away, and he has been efficiently discharged.
+
+Behind you, he calls, "Thank you so much, that's incredibly—" and you are already out of earshot, or close enough.
+
+The one thing you won't do is let him make a performance out of your generosity.
+#elseif ($w.hasTrait("AMBITIOUS"))
+Three quid. Three quid and thirty seconds, and you're done.
+
+He does try to make it into something. He starts a sentence about impact and giving and the number of children per year — you nod twice, hand over the cash, and say "Keep the change" with the tone of someone who has already moved on. He does the smile again, the one designed to make you feel good about yourself. You're already looking at your phone.
+
+You'll take efficient over righteous.
+#else
+He gets through about forty seconds of his script before you hold up your hand.
+
+"I'll give you something now, cash, if we can skip to the end."
+
+He blinks. Then he smiles — slightly different smile, this one more genuine — and produces a card reader. You tap your card. He says thank you with what sounds like actual relief. Apparently most people either sign up or argue. You've given him something novel.
+
+He's still talking as you walk away. Something about impact. You let it happen.
+#end
+</donateQuicklyText>
+
+
+<refuseAndWalkText>
+#if ($w.hasTrait("BITCHY"))
+"No," you say.
+
+Not sorry, not thanks-but, not the apologetic shake of the head that these encounters seem to require. Just: no. Moving.
+
+He starts the sentence anyway — "It'll only take a minute—" — and you say, over your shoulder, "I said no." Still walking.
+
+There's a pause. Then, louder, aimed at your back: "Not even a minute of your time for sick children?"
+
+The pavement in front of you is very interesting. You keep your eyes on it and keep walking.
+#elseif ($w.hasTrait("POSH"))
+You give him the nod that means not today, done smoothly enough that it takes him a second to register it. You're four steps past him before he works out you haven't stopped.
+
+"Excuse me — if you've got just a moment—"
+
+You don't have a moment. You have an expression that says so.
+#else
+You don't stop, but you do the thing — the small regretful smile, the slight raise of the hand, the way of walking that says sorry, genuinely, another time — because it's easier than the alternative and you're not a monster.
+
+He calls after you anyway.
+#end
+</refuseAndWalkText>
+
+
+<refuseAndWalkRespondText>
+#if ($w.hasTrait("BITCHY"))
+You stop. You turn around. He's watching you, clipboard slightly lowered, waiting.
+
+"Yes," you say. "Even a minute of my time. I work hard for my money and I've already got two direct debits to charities I actually chose. So." You face forward again. "No."
+
+He says nothing. Sometimes being specific is the most devastating thing.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+You glance back.
+
+"I give at home," you say. Which is even true — you've got a standing order to somewhere. You think. "I'm just not your sort of donor."
+
+He starts to say something else and you shake your head, not unkindly. He lets it go.
+#else
+You stop walking, turn around, meet his eyes.
+
+"It's not about the charity," you say. "It's about the method." You gesture vaguely at the clipboard, the tabard, the laminated badge. "I'll donate online if I want to. I just won't be stopped on the street."
+
+He looks like he has a response to this. You've given him enough of your time to find out.
+
+He says something about face-to-face fundraising making a difference to sign-up rates, which is probably true, and you nod once and face forward again.
+#end
+</refuseAndWalkRespondText>
+
+
+<refuseAndWalkIgnoreText>
+He's still talking. You don't turn around. The pavement noise slowly swallows his voice, and by the time you reach the corner there's nothing left of him but the distant sense of having escaped something.
+
+A woman coming toward you clocks the yellow tabard behind you, does a fast calculation, and crosses to the other side of the street.
+
+Good call, you think.
+</refuseAndWalkIgnoreText>
+
+
+<stopAndArgueText>
+He asks his question. You stop. He looks pleased — this is the correct response.
+
+"I'm not signing a direct debit on the street," you say. Not unkindly, but clearly.
+
+"Of course." He has a very practised version of understanding. "Actually, we're not asking for—"
+
+"I know what you're asking for. I've seen the structure." You do know, actually; there's a whole industry around this, a whole script, and the script is designed to make you feel like you're only committing to something small when you're actually committing to twelve quid a month in perpetuity. "I'll donate to children's heart charities directly, on my own terms, if I decide to."
+
+He pivots. They always pivot — he says something about the difference individual giving makes, the specific number of children helped per year, the difficulty of sustainable funding without regular donors, all of which is true and none of which is the point.
+
+"I understand," you say. "I'm still not stopping to be sold to."
+
+Silence. He tries one more thing — something about just two minutes — and you hold up your hand.
+
+"Good luck," you say, and you mean it, and you walk.
+
+Behind you, he moves on. There's another woman coming down the street. She has her earbud in on the wrong side.
+</stopAndArgueText>
+
+
+<signUpShyText>
+He asks his question. You open your mouth to say — something. No. Sorry. I'm in a rush.
+
+He's already begun. He's very good at this: his clipboard comes out before you've decided anything, and he's talking about the Foundation and what they do and just to confirm your details are — and at some point your hand is holding a pen, and you're nodding, and the numbers he's reading back to you are your sort code and your account number and twelve pounds a month starting from next month.
+
+You say yes. You say thank you. You walk away with the pen still in your hand for about six steps before you notice.
+
+He's already turned toward the next person. He was charming and efficient and completely impervious to the look on your face, which is the look of someone who has done something and isn't entirely sure when they decided to do it.
+
+Twelve pounds a month is twelve pounds a month. Children's hearts are real. You try to feel good about this.
+
+You mostly feel like you should have said no.
+</signUpShyText>

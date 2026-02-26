@@ -1,0 +1,81 @@
+# minievent_solo_rainshelter.yml
+# Solo minievent: Rain Shelter
+# Content tags: VANILLA, TRANSFORMATION (light, FEMININITY < 50)
+# Rarity: common (no weight modification)
+#
+# She's out when a proper downpour arrives without warning. She ducks under the awning
+# of a closed shop. A man ducks under from the other direction at almost the same moment.
+# They are now sharing a small dry rectangle while rain hammers the pavement.
+#
+# Four player choices, each with a distinct outcome:
+#   saySomething     — she opens the conversation; flag SOLO_MET_RAIN_STRANGER set
+#   phoneOut         — phone out, signal closed; he may or may not take the hint
+#   offerSpace       — she offers to share more explicitly; transformation content here
+#   makeARunForIt    — she goes for it; arrives wherever she was going soaked
+#
+# Trait branches change what happens, not adjectives:
+#   FLIRTY:    opens her mouth before deciding to; one degree warmer than purely situational
+#   REFINED:   exactly the correct temperature; pleasant, neither inviting nor closed
+#   ROMANTIC:  notices the specific romance of it before she can stop herself
+#   SHY:       watches the rain; he decides whether to speak; she says yes to something
+#              she didn't quite follow
+#
+# Transformation content (earns it here — social reversal, insider knowledge):
+#   !ALWAYS_FEMALE, FEMININITY < 50: the small automatic chivalry when he moves to
+#   give her the dryer spot — she used to be the person who extended it;
+#   being on this side of it is still occasionally a surprise
+#
+# Flags set:
+#   SOLO_MET_RAIN_STRANGER — she engaged (talked or opened the conversation)
+
+textFileName: minievent_solo_rainshelter.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: shuttered estate agent window
+  floor: wet pavement under a striped shop awning
+  hasBed: false
+  isOutside: true
+
+
+intro:
+ textId: introText
+ followUpActions:
+  saySomething:
+  phoneOut:
+  offerSpace:
+  makeARunForIt:
+
+
+actions:
+ - id: saySomething
+   shortDesc: Say something
+   longDesc: Acknowledge the situation. It'd be strange not to.
+   textId: saySomethingText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_MET_RAIN_STRANGER")
+   finishScene: true
+
+ - id: phoneOut
+   shortDesc: Phone out
+   longDesc: Check the rain app. Be occupied. The universal signal.
+   textId: phoneOutText
+   finishScene: true
+
+ - id: offerSpace
+   shortDesc: Offer to share
+   longDesc: He's getting the worst of the overspill on one side. You could shift a little.
+   textId: offerSpaceText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_MET_RAIN_STRANGER")
+   finishScene: true
+
+ - id: makeARunForIt
+   shortDesc: Make a run for it
+   longDesc: The rain won't care. You'll be soaked either way if you stand here long enough.
+   textId: makeARunForItText
+   finishScene: true

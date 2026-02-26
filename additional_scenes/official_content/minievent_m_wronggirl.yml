@@ -1,0 +1,67 @@
+# minievent_m_wronggirl.yml
+# Friend minievent: Wrong Girl (male friend)
+# Content tags: VANILLA
+# Rarity: uncommon (weightDivisorConditions: [true])
+#
+# They're having coffee or a drink together. He's been slightly distracted.
+# He mentions a woman's name — Natalie — in passing, then carries on as if he hadn't.
+# She noticed. She decides how to handle it.
+#
+# Consequences:
+#   SOLO_MFRIEND_NEW_WOMAN    — always set on first encounter; world memory flag
+#   NPC liking +tiny          — placed inline in VM for warm/non-intrusive choices
+#   NPC liking -tiny          — placed inline in VM for the direct-press path
+
+textFileName: minievent_m_wronggirl.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+
+ location:
+  wall: exposed-brick cafe wall
+  floor: worn wooden cafe floor
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $gd.setGameFlag("SOLO_MFRIEND_NEW_WOMAN")
+    condition: "!$gd.hasGameFlag('SOLO_MFRIEND_NEW_WOMAN')"
+ followUpActions:
+  askAboutHer:
+  letItGo:
+  teaseHim:
+  gentleAcknowledge:
+
+
+actions:
+ - id: askAboutHer
+   shortDesc: Ask who she is
+   longDesc: You noticed. You want to know.
+   textId: askAboutHerText
+   finishScene: true
+
+ - id: letItGo
+   shortDesc: Let it go
+   longDesc: His business is his business.
+   textId: letItGoText
+   finishScene: true
+
+ - id: teaseHim
+   shortDesc: Tease him about it
+   longDesc: Keep it light. No pressure. Just let him know you caught it.
+   textId: teaseHimText
+   finishScene: true
+
+ - id: gentleAcknowledge
+   shortDesc: Let him know you noticed
+   longDesc: Not a question, not a joke. Just an acknowledgement — the door's open if he wants it.
+   textId: gentleAcknowledgeText
+   finishScene: true

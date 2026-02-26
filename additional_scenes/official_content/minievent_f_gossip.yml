@@ -1,0 +1,75 @@
+# minievent_f_gossip.yml
+# Friend (female) minievent: The Gossip
+# Content tags: VANILLA
+# Rarity: common (no weight divisors)
+#
+# $f is the female friend ($femaleFriend mapped from the dispatcher).
+# The friend has heard something and is bursting to tell it.
+# The telling reveals as much about the friend as about the subject.
+#
+# Flags set:
+#   SOLO_FFRIEND_GOSSIP_ENGAGED   — PC engaged or added to the gossip
+#   SOLO_FFRIEND_GOSSIP_DEFLECTED — PC redirected, pushed back, or called it out
+
+textFileName: minievent_f_gossip.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+  playerOutfit: CASUAL
+  femaleNpcs:
+    - id: f
+      outfit: CASUAL
+
+  location:
+    wall: exposed-brick cafe wall
+    floor: scuffed wooden cafe floor
+    hasBed: false
+    isOutside: false
+
+
+intro:
+  textId: introText
+  followUpActions:
+    engage:
+    redirect:
+    pushBack:
+    callItOut:
+
+
+actions:
+  - id: engage
+    shortDesc: Ask questions and join in
+    longDesc: You're curious, or just willing. Ask for more and be a proper participant.
+    textId: engageText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_GOSSIP_ENGAGED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_GOSSIP_ENGAGED')"
+    finishScene: true
+
+  - id: redirect
+    shortDesc: Change the subject
+    longDesc: Steer the conversation somewhere else — warmly, no confrontation.
+    textId: redirectText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_GOSSIP_DEFLECTED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_GOSSIP_DEFLECTED')"
+    finishScene: true
+
+  - id: pushBack
+    shortDesc: That doesn't sound right
+    longDesc: You're not sure this is accurate. Say so.
+    textId: pushBackText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_GOSSIP_DEFLECTED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_GOSSIP_DEFLECTED')"
+    finishScene: true
+
+  - id: callItOut
+    shortDesc: Say you're not comfortable with this
+    longDesc: Tell her directly that you'd rather not.
+    textId: callItOutText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_GOSSIP_DEFLECTED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_GOSSIP_DEFLECTED')"
+    finishScene: true

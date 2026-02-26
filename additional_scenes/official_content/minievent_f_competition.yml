@@ -1,0 +1,75 @@
+# minievent_f_competition.yml
+# Friend (female) minievent: The Competition
+# Content tags: VANILLA
+# Rarity: uncommon (weightDivisorConditions: [true] in dispatcher)
+#
+# $f is the female friend ($femaleFriend mapped from the dispatcher).
+# The friend keeps making comments — about clothes, about men looking, about other women —
+# calibrated so they could be read as compliments. They're not quite.
+#
+# Flags set:
+#   SOLO_FFRIEND_COMPETITION_CALLED  — PC named what was happening directly
+#   SOLO_FFRIEND_COMPETITION_IGNORED — PC played along, deflected, or left without naming it
+
+textFileName: minievent_f_competition.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+  playerOutfit: CASUAL
+  femaleNpcs:
+    - id: f
+      outfit: GOING_OUT
+
+  location:
+    wall: plate-glass shop window reflecting the high street
+    floor: polished tile floor of a mid-range clothing shop
+    hasBed: false
+    isOutside: false
+
+
+intro:
+  textId: introText
+  followUpActions:
+    callItOut:
+    playAlong:
+    deflectWarmly:
+    leaveEarly:
+
+
+actions:
+  - id: callItOut
+    shortDesc: Call it out — clearly, not aggressively
+    longDesc: Name what she's doing. Not a fight, just a fact stated plainly.
+    textId: callItOutText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_COMPETITION_CALLED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_COMPETITION_CALLED')"
+    finishScene: true
+
+  - id: playAlong
+    shortDesc: Play along — be charming, be winning
+    longDesc: Match her energy and give as good as you get. You can win this.
+    textId: playAlongText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_COMPETITION_IGNORED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_COMPETITION_IGNORED')"
+    finishScene: true
+
+  - id: deflectWarmly
+    shortDesc: Deflect — change the energy without naming it
+    longDesc: Steer things somewhere else, warmly. Don't confront it, just stop letting it land.
+    textId: deflectWarmlyText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_COMPETITION_IGNORED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_COMPETITION_IGNORED')"
+    finishScene: true
+
+  - id: leaveEarly
+    shortDesc: Find an excuse to leave
+    longDesc: You're tired, you've got something on. Wrap it up.
+    textId: leaveEarlyText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_COMPETITION_IGNORED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_COMPETITION_IGNORED')"
+    finishScene: true

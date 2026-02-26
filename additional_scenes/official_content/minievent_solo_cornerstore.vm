@@ -1,0 +1,272 @@
+<introText>
+##
+#if (!$gd.hasGameFlag("SOLO_CORNERSTORE_VISITED"))
+$gd.setGameFlag("SOLO_CORNERSTORE_VISITED")##
+The shop is the sort that's been in the same spot for thirty years without quite deciding what it is. Tins and cleaning products on one wall, a refrigerated cabinet humming along the other, a radio playing something unidentifiable just below the threshold of recognition. It smells of cardboard and the ghost of a thousand breakfasts.
+
+The man behind the counter is somewhere in his sixties, with a cardigan that has seen better years and the specific authority of someone who has operated from this position for long enough to have formed views about everyone who walks through the door.
+
+He looks up when you come in.
+
+"Ah," he says, as though you've confirmed something.
+
+He's immediately helpful — telling you where the milk is before you've asked, suggesting a particular brand of something you hadn't indicated you wanted, making the kind of cheerful small talk that assumes, with absolute confidence, a particular set of facts about your life. That you're a student, probably. That you're new to the area. That you live nearby and shop here after work and are the sort of person who buys the good stuff sometimes and the cheap stuff the rest of the time — mostly the cheap stuff, he thinks, but you know quality when you see it.
+
+##
+#if ($w.hasTrait("POSH"))
+The class assumption settles over you like a mildly wrong coat. He's placed you somewhere specific on a map he carries in his head — not at the bottom, he's not being unkind, but not where you actually are, either. The shelf he's put you on is just a shade too low and you are standing there with the particular discomfort of being correctly identified as a woman who's watching her pennies, which you are, in a general sense, except in a much more specific sense you grew up in a house with a gravel drive and you've never quite reconciled those two things and here he is cheerfully making it worse.
+
+You're not sure whether to be amused or quietly offended. Probably both.
+
+##
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+You look around, mildly puzzled, trying to reverse-engineer what you've done to give this impression. You're wearing your normal things. You haven't said anything, except "hello." You haven't reached for anything particularly telling. He seems very confident about all of this.
+
+You think he might do this with everyone.
+
+##
+#elseif ($w.hasTrait("CUTE"))
+It's the warmth that gets you first — the specific warmth of someone who has decided they already like you, based on nothing, before you've done anything to earn it. You're halfway to smiling back before you clock that the profile he's building has essentially nothing to do with you. He's smiling at a version of you he's invented from a single glance.
+
+The charm of it evaporates fast once you notice that. You're slightly annoyed at yourself for not noticing sooner.
+
+##
+#elseif ($w.hasTrait("AMBITIOUS"))
+You needed two things from this shop. He's already taken three minutes telling you things about your own life that aren't accurate. You do the maths on how much longer this will take and decide one surgical correction is worth it if it gets you out faster.
+
+##
+#else
+He's doing it in the most genuinely well-meaning way possible. He's not wrong in any way that matters. He's just very certain about several things that aren't true, and he's helpfully steering you toward things based on those certainties.
+
+##
+#end
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You used to move through shops like this without registering anything beyond the transaction. Just a person, picking up milk, invisible in the way most people are invisible to shop staff — filed immediately as *customer, standard, no further processing required.* You were furniture. It was fine.
+
+Now he's read you. Not wrongly, not unkindly, but he's done it immediately and thoroughly, assembled a brief from a single glance, and he's been helpful toward the person he's assembled. Some of what he's put together is almost right. None of it is right in the way it would have been right before.
+
+The specific quality of being legible to strangers in ways you didn't choose is something you are still getting used to.
+
+##
+#end
+#else
+$gd.setGameFlag("SOLO_CORNERSTORE_VISITED")##
+The shop is exactly as you left it last time — same tinned goods, same humming refrigerator cabinet, same radio at the same volume playing something that might be the same song.
+
+The man behind the counter looks up when you come in. Something shifts in his expression — the specific micro-adjustment of someone who recognises a face they've filed somewhere.
+
+"You were in before," he says, with the satisfied air of a man who prides himself on his memory. "Last few weeks."
+
+He has you placed, somewhere. You can see him pulling the file. He gets some of it right — approximately right, the neighbourhood of right — and some of it confidently wrong in ways that are subtly different from the confident wrongness of last time.
+
+##
+#if ($gd.hasGameFlag("SOLO_CORRECTED_CORNERSTORE"))
+He hasn't adjusted for the correction you gave him. He's incorporated it, mostly, but built a new set of assumptions on top of it. The structure of his theory of you has been revised and is still incorrect.
+
+##
+#end
+This is apparently just what he does. You have become a regular at a shop you've visited twice, and he has opinions about you.
+
+##
+#end
+</introText>
+
+
+<sceneDescriptionText>
+The corner shop's owner has decided several things about you. Most of them are wrong.
+</sceneDescriptionText>
+
+
+<goAlongText>
+##
+#if ($w.hasTrait("POSH"))
+You take the thing he's pointing at. It's not what you came in for, technically, but it's close enough, and the alternative is explaining yourself to someone who has already made up his mind.
+
+You pay. He wraps up the conversation with a cheery prediction about your evening that is about sixty percent accurate, which is more than you'd have expected.
+
+Outside, you stand on the pavement for a moment.
+
+The thing you bought is in your bag. It'll do. This is presumably how most of his customers operate — he reads them, they allow the reading, everyone goes home with roughly what they needed. The system works. You're not sure you like the part where you contributed to it.
+
+##
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+You take it. It's fine. It might actually be the better brand for this, he might be right about that part. You pay and he sends you off with the specific warmth of a man who considers this transaction to have gone very well.
+
+You walk out into the street and think, briefly, about what it was that tipped him off. You still can't work it out. Maybe there wasn't anything. Maybe he does a reading for everyone.
+
+You decide not to think about it further.
+
+##
+#elseif ($w.hasTrait("CUTE"))
+You take it without correcting him, because it's easier and also because some small part of you is still charmed against your will by the sheer confidence of the whole performance. He hands you the change with a pleased little nod, as if you've both done very well.
+
+Walking home you decide that being effortlessly classified by a man in a cardigan is not, actually, the worst thing that's happened today. It might even be the best thing. That's a slightly bleak reading of today. You don't look at it too hard.
+
+##
+#elseif ($w.hasTrait("AMBITIOUS"))
+You take it. Getting out of here faster is the goal and arguing won't achieve it. You pay, you leave, you're back on schedule inside three minutes.
+
+The whole thing will be entirely forgotten by the time you get where you're going, which is the right outcome.
+
+##
+#else
+You go along with it. The thing he hands you is roughly correct — near enough that it doesn't matter.
+
+He's pleased. You pay and leave with something that will do.
+
+##
+#end
+</goAlongText>
+
+
+<correctOneThingText>
+##
+#if ($w.hasTrait("POSH"))
+The student assumption is the one you can't leave alone. Everything else could go — the area, the budget, even the job — but being placed in student accommodation in this part of the city is a specific misidentification that you'd like resolved.
+
+"I'm not a student," you say, pleasantly.
+
+He looks briefly thrown, then recalibrates visibly and immediately, slotting you into a different but equally confident category. "Young professional," he says, with the air of a man who has just solved an equation. "I had it nearly right."
+
+He had you entirely wrong but in a different direction, and he's decided that's good enough. You decide it's also good enough. You pay and leave.
+
+##
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+"I'm not actually new to the area," you say, because that's the most simply untrue of the things he's said. "Been here a while."
+
+He takes this in with polite surprise. "Funny I haven't seen you before, then," he says, slightly reproachfully, as if you've been avoiding the shop on purpose.
+
+You explain, briefly, that you usually go elsewhere. He seems to decide this is forgivable and moves smoothly on, adjusting approximately nothing else about his theory of you. You pay, and he sees you off as though you've just admitted to being a long-lost local.
+
+##
+#elseif ($w.hasTrait("CUTE"))
+The thing he's most wrong about is the one that mattered for what you actually needed — he steered you past the correct shelf on his way to the thing he'd decided you wanted. You backtrack and get the right one.
+
+"Oh, that's — yeah, I needed that one actually," you say, which is not quite a correction so much as a clarifying amendment.
+
+He accepts this smoothly, as though it confirms a different theory he had that was only ever slightly more suppressed than the first one. You pay and he tells you the price of the thing you originally came for is better value, which is true, you do know that, you came in for it on purpose.
+
+##
+#elseif ($w.hasTrait("AMBITIOUS"))
+The job, specifically — he's assumed something about your schedule that isn't right, and it means he's pointed you at the wrong ready-meal aisle. You steer yourself back.
+
+"Different shifts," you say, which is not a full explanation but it's enough to get you to the right shelf.
+
+He nods, makes a note somewhere in his head, and recalibrates smoothly. You pay and leave in under ninety seconds. That's acceptable.
+
+##
+#else
+You correct one thing — not the most wrong thing, just the most easily fixed one. He nods and accepts the correction as if it's a minor update to a file he's been keeping on you. The rest of the file stands.
+
+You pay and go. The thing you corrected is already being incorporated into a slightly revised but still mostly inaccurate picture of who you are. You watched it happen in real time.
+
+##
+#end
+</correctOneThingText>
+
+
+<askWhyText>
+##
+#if ($w.hasTrait("POSH"))
+"What made you think I was a student?" you ask, and your voice does the thing it does when you're genuinely curious and also specifically not offended, which is the tone you've developed for situations where you are both things simultaneously.
+
+He looks slightly caught. Then he does something unexpected: he thinks about it properly, studies you for a second, and says, "Your coat. The way you came in — you looked like you were looking for something quick."
+
+You own three coats. This one isn't the good one, you'll admit that. It's the one you wear when it might rain. And you were looking for something quick, that's entirely true. None of that makes you a student.
+
+"I'm not a student," you say.
+
+"No," he says, after a beat, and seems to revise something. He doesn't say what he revises it to.
+
+##
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+"Sorry — why did you think I live just around the corner?" you ask, because that's the one you're most curious about. You live a twenty-minute walk away. You came here specifically because it was new.
+
+He shrugs. "You don't have a bag with you," he says. "People who pop in from further away carry bags."
+
+This is a reasonably sound inference. You just didn't bring one today. You tell him this and he nods, unsurprised by the explanation, filed it as a data point, moved on. He's good at this, in a small, warm, completely unreliable way.
+
+##
+#elseif ($w.hasTrait("CUTE"))
+"How did you get all that from one look?" you ask, which you intend to come out as slightly dry but it comes out as genuinely impressed, because it is, a little, even if most of it is wrong.
+
+He lights up at the question. "I've been doing this thirty years," he says. "You get a feel for people." He lists his reasoning with the pride of a man who considers himself something of a natural scientist of human behaviour.
+
+Some of his logic is actually sound. The parts where it stopped being sound are the parts where he filled in blanks with assumptions, which is where all the confident wrongness came from. You tell him he's sixty percent right and he says that's better than average, which may or may not be true.
+
+##
+#elseif ($w.hasTrait("AMBITIOUS"))
+"What made you think I was a nurse?" you ask, cutting straight to the most specific wrong thing.
+
+He pauses. Thinks. "The way you came in," he says. "Straight for what you needed. No browsing."
+
+"That's just being busy," you say.
+
+He considers this. "Nurses are busy," he says, unrepentant but amused. "So are a lot of people. You're right." He doesn't look particularly troubled by being wrong. He seems to regard it as an occupational hazard.
+
+You pay and leave, which you were going to do anyway. You've learned something about how he operates, which is a minor thing but feels useful in a small way.
+
+##
+#else
+"Why did you think that?" you ask, genuinely curious more than anything. You want to know what he read.
+
+He explains, with the comfortable confidence of someone who doesn't mind being questioned about his methods. His reasoning is occasionally quite sharp — he noticed a few true things — and then somewhere in the middle he started connecting them to conclusions that don't follow. The gap between observation and inference is where everything went wrong.
+
+"You're partially right," you tell him.
+
+"I usually am," he says, cheerfully, which is possibly the most honest thing he could have said.
+
+You pay and go.
+
+##
+#end
+</askWhyText>
+
+
+<browseSilentlyText>
+##
+#if ($w.hasTrait("POSH"))
+You don't engage with his running commentary. You navigate the shelves with the mild efficiency of someone who has decided this is a transaction, not an exchange, and move toward the counter only when you have what you need.
+
+He doesn't mind. He rings it up and gives you the amount and tells you something about yourself as he hands you the change, a parting observation based on what you've selected. He's not entirely wrong about what this says about you, which is somehow worse than if he were.
+
+You leave.
+
+##
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+You find what you came for yourself, take it to the counter, pay. He keeps talking. You respond with the minimum necessary — not unfriendly, just brief — and he seems to take this as confirmation of something he already knew about you, which you didn't intend but can't be bothered to correct.
+
+Change in your pocket. Done.
+
+##
+#elseif ($w.hasTrait("CUTE"))
+You meant to do this cleanly but you get slightly turned around near the back, because the shop is laid out in a way that only makes sense once you've been here a few times, and he notices and offers guidance, which means you're in a conversation now despite having specifically not wanted to be.
+
+You get what you came for. You pay. He sees you out with a small observation about the weather that is accurate and harmless, and you're not sure how you feel about that.
+
+##
+#elseif ($w.hasTrait("AMBITIOUS"))
+In and out in under two minutes. You take what you came for, pay, go. He's still saying something as the door closes behind you.
+
+##
+#else
+You browse. You find the thing. You pay. He tells you something about yourself during the transaction and you give him a polite non-response, and then you're outside on the pavement in the grey afternoon with your purchase in your hand.
+
+The shop recedes behind you. It was fine.
+
+##
+#end
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+
+The quiet part of it — the part you don't examine too closely — is that there's a version of this where you'd have been invisible. Just a person at the counter, no reading, no theory, nothing assembled. You were that, for a long time. You handed the money over and took the change and the shopkeeper's eyes slid off you immediately to the next customer.
+
+Now he's built a file. It's wrong, but it's there. You didn't ask for it. That's the thing. You just walked in.
+
+##
+#end
+</browseSilentlyText>
+
+
+<empty></empty>

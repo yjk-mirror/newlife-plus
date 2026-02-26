@@ -1,0 +1,69 @@
+# Preconditions for this scene:
+# Part of the minievent framework
+# Trigger: $eventType=="SOLO"
+# Content tags: VANILLA
+# Rarity: common (no weight modification)
+
+textFileName: minievent_solo_wrongorder.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+  playerOutfit: CASUAL
+
+  location:
+    wall: exposed-brick café wall with a handwritten specials board
+    floor: worn wooden floorboards
+    hasBed: false
+    isOutside: false
+
+
+intro:
+  textId: introText
+  followUpActions:
+    flagIt:
+    sayNothing:
+    walkOut:
+    escalate:
+
+
+actions:
+  - id: flagIt
+    shortDesc: Say something
+    longDesc: Catch his attention and explain what you actually ordered
+    textId: flagItText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_COMPLAINED_CAFE")
+        condition: "!$gd.hasGameFlag('SOLO_COMPLAINED_CAFE')"
+      - effect: $w.reduceStressTiny()
+    finishScene: true
+
+  - id: sayNothing
+    shortDesc: Leave it
+    longDesc: It's fine. Near enough. Not worth the energy.
+    textId: sayNothingText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_SILENT_WRONG_ORDER")
+        condition: "!$gd.hasGameFlag('SOLO_SILENT_WRONG_ORDER')"
+      - effect: $w.addStressTiny()
+    finishScene: true
+
+  - id: walkOut
+    shortDesc: Pay and leave
+    longDesc: Flag down whoever's nearest to take your money and go
+    textId: walkOutText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_SILENT_WRONG_ORDER")
+        condition: "!$gd.hasGameFlag('SOLO_SILENT_WRONG_ORDER')"
+      - effect: $w.addStressTiny()
+    finishScene: true
+
+  - id: escalate
+    shortDesc: Ask for a manager
+    longDesc: This is the second time he's looked at you like you're the problem
+    textId: escalateText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_COMPLAINED_CAFE")
+        condition: "!$gd.hasGameFlag('SOLO_COMPLAINED_CAFE')"
+      - effect: $w.reduceStressTiny()
+    finishScene: true

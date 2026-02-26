@@ -1,0 +1,74 @@
+# minievent_m_eveningcall.yml
+# Friend minievent: Evening Call (male friend)
+# Content tags: VANILLA
+# Rarity: uncommon (weightDivisorConditions: [true])
+#
+# He calls unexpectedly in the evening. His voice is slightly off.
+# He'd had a bad day and doesn't quite know how to say he wanted company.
+# She decides how to respond.
+#
+# Consequences:
+#   NPC liking +small  — she stayed and was genuinely present (invited over or stayed on phone)
+#   NPC liking +tiny   — she was warm but ended the call
+#   NPC liking neutral — she ended it plainly
+#   SOLO_MFRIEND_EVENING_CALL — world memory flag (set once on first encounter)
+
+textFileName: minievent_m_eveningcall.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: NIGHTWEAR
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+
+ location:
+  wall: soft-lit living room wall
+  floor: carpeted flat floor
+  hasBed: true
+  isOutside: false
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $gd.setGameFlag("SOLO_MFRIEND_EVENING_CALL")
+    condition: "!$gd.hasGameFlag('SOLO_MFRIEND_EVENING_CALL')"
+ followUpActions:
+  inviteOver:
+  stayOnPhone:
+  callTomorrow:
+  gentleEnd:
+
+
+actions:
+ - id: inviteOver
+   shortDesc: Invite him over
+   longDesc: Tell him to come round. You'll put the kettle on.
+   textId: inviteOverText
+   effects:
+    - effect: $m.addNpcLikingSmall()
+   finishScene: true
+
+ - id: stayOnPhone
+   shortDesc: Stay on the phone
+   longDesc: You're not going anywhere. Talk him through whatever it is.
+   textId: stayOnPhoneText
+   effects:
+    - effect: $m.addNpcLikingSmall()
+   finishScene: true
+
+ - id: callTomorrow
+   shortDesc: Call him tomorrow
+   longDesc: You can tell, but tonight you can't. You'll ring him in the morning.
+   textId: callTomorrowText
+   effects:
+    - effect: $m.addNpcLikingTiny()
+   finishScene: true
+
+ - id: gentleEnd
+   shortDesc: Say goodnight
+   longDesc: You need to sleep. He'll be fine.
+   textId: gentleEndText
+   finishScene: true

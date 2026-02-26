@@ -1,0 +1,95 @@
+<introText>
+You're halfway down the street when it happens.
+
+A man coming the other way has been looking at you — not subtly, not briefly — and then $scene.pickFromList(["walks directly into a lamppost with a resonant, hollow clang", "steps off the kerb at entirely the wrong moment and stumbles into the road, catching himself on a parked car", "walks into the edge of a sandwich board outside the newsagent's and upends his takeaway coffee down his own front"]). There is a small, absolute silence. Then the city carries on as if nothing occurred.
+
+He's not hurt. That's clear enough from the way he immediately looks around to check whether anyone saw.
+
+You saw.
+
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+There's a beat where you don't quite know how to place it. You've been on the watching side. More than once. Standing on a corner, on a platform, on a pavement exactly like this one, and catching yourself tracking someone across a street until something interrupted you — a kerb, a cyclist, a door you nearly walked through. You never stopped to think about what it felt like from the other direction. Now you know. It's not what you expected. It's stranger, and slightly more complicated, than you thought it would be.
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+The thought surfaces briefly — you used to know what that felt like, the involuntary tracking — and then it goes. Right now you're just a woman standing on a pavement watching a man collect himself after a lamppost got the better of him.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A city street on an ordinary afternoon, slightly disrupted.
+</sceneDescriptionText>
+
+
+<walkPastText>
+#if ($w.hasTrait("SULTRY"))
+You keep walking. Same pace, eyes forward, like you didn't notice a thing.
+
+You noticed. Obviously. And from the way he's gone very still on the pavement behind you, he knows you noticed. The whole situation had a kind of inevitability to it — the city tends to rearrange itself when you're moving through it. You've learned to carry that lightly.
+
+You don't look back.
+#elseif ($w.hasTrait("SHY"))
+You look away immediately and walk faster. Not sprint, obviously. Just — a brisk, purposeful pace that has nothing to do with wanting to be somewhere else as soon as possible.
+
+The problem with your face is that it does things. You can feel it doing things right now. The man did something embarrassing because he was looking at you, and now you're embarrassed on his behalf, which is irrational, but here you are, chin down, moving at speed through a Tuesday afternoon.
+
+You don't slow down until you've turned the corner.
+#else
+It is, briefly, very funny. A full-grown man and a lamppost, and you in the middle of it doing absolutely nothing. The city is chaotic and occasionally absurd and today it has deployed its absurdity in your general direction.
+
+You keep walking. There's not really anything else to do. Somewhere behind you he's probably pretending to check his phone.
+#end
+</walkPastText>
+
+
+<checkOnHimText>
+You stop and turn back.
+
+"Are you alright?"
+
+#if ($w.hasTrait("CUTE"))
+He's fine — that's obvious — but you check anyway, because what if he actually caught his knee on the kerb or twisted something? He's gone very red, which is at least a good sign. Red means embarrassed, and embarrassed means functional.
+
+"Fine," he manages. "Completely fine. Just — yeah."
+
+"Okay," you say, genuinely relieved. "Good."
+
+You mean it. The whole thing has nothing to do with anything except a man who was walking badly and a street that had a lamppost in it, and you're glad he's not hurt.
+
+He looks like he's going to say something else. You give him a small wave and head off before he gets the chance.
+#elseif ($w.hasTrait("FLIRTY"))
+He's already trying to look like a man who didn't just have that happen to him, which is not a look he's quite pulled off.
+
+"Completely fine," he says, straightening up. "Completely. Just. Fine."
+
+"Right," you say. You're trying not to smile. You're not entirely succeeding.
+
+"Sorry," he adds, which isn't something he needed to say to you specifically, but you appreciate it.
+
+"Don't be." You give him a moment to recover his dignity, then start walking again. You can feel him watching you go. Given the circumstances, he's earned it.
+#else
+He's already in the process of pretending none of it happened. He's doing the phone check. The classic.
+
+"Yeah, fine," he says, without looking up from his screen.
+
+"Okay," you say.
+
+There's a brief, slightly weighted pause in which both of you acknowledge the situation and then agree not to. You nod once, reasonably, and keep walking. He'll finish pretending to look at his phone in about thirty seconds and then carry on with his day.
+#end
+</checkOnHimText>
+
+
+<winkAndWalkText>
+#if ($w.hasTrait("SULTRY"))
+You let him catch your eye. Hold it for exactly one second. Then you wink — unhurried, deliberate, the kind of thing that takes practice or the absence of self-consciousness — and walk on.
+
+Behind you, you hear nothing. No sound of a second collision, at least, which suggests he's found a lamppost-free bit of pavement. Small mercies.
+
+The city does this occasionally. You've stopped being surprised by it.
+#elseif ($w.hasTrait("FLIRTY"))
+You don't entirely mean to. You look back because you can't quite help it, and he's right there looking at you — still pink, still trying to look like a man with his life completely together — and something in the situation just produces a wink. Quick, unstudied, a fraction too cheerful.
+
+His face does something complicated.
+
+You face forward and keep walking. That was either very smooth or completely ridiculous. Probably both. Either way, he'll have a story to tell later, and so, in a small way, will you.
+#end
+</winkAndWalkText>

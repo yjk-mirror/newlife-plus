@@ -1,0 +1,169 @@
+<introText>
+You're not even looking at her when it happens.
+
+A woman in a red coat is standing two steps ahead of you on the pavement outside H&M, scrolling through something, the phone at chest height the way people do when they're not thinking about it. A man on a bicycle comes through the gap between a parked delivery van and the kerb — not fast, almost lazily — and takes the phone clean out of her hand. She makes a sound that isn't quite a shout yet. By the time it becomes one, he's already threading through pedestrians twenty metres up the street, heading towards the corner.
+
+You caught his face for half a second. White, late twenties, dark green jacket, no helmet, the bike a heavy black thing that didn't look like it belonged to him.
+
+He turns the corner and is gone.
+
+The woman in the red coat is standing with her arm still slightly raised, the way it was when she was holding her phone. The people closest to her have stopped. The people further away haven't noticed yet and are still walking.
+
+#if ($w.hasTrait("AMBITIOUS"))
+The calculation runs before you've fully registered the situation. You have a description, a direction, three seconds of window before it closes entirely. Chasing is high-effort, low-probability, and you're in heels — no, you look down, trainers, fine, but still. Calling is fast and costs nothing except the next two minutes. Helping her is the one that gets remembered, if anyone's watching.
+
+There is no version of doing nothing that makes sense to you. Something else, then.
+#elseif ($w.hasTrait("BITCHY"))
+Before the woman's shout has finished, you're already turning toward where he went. Not because you've made a decision — you haven't — but because doing nothing while it's still possible to do something has always seemed fundamentally stupid to you, and that reflex is faster than thought.
+
+You have maybe three seconds before the options narrow to one.
+#elseif ($w.hasTrait("SHY"))
+You freeze.
+
+Not long. Two seconds, possibly three — long enough for the woman in the red coat to wheel around looking for help, and long enough for her eyes to find you and then read you, correctly, as someone who had just been standing right there and had not moved. She doesn't say anything. She doesn't need to.
+
+You need to do something now.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+In the two seconds after it happens, you've already constructed a complete biography. He's done this before — you can tell by the angle of approach, the gap he picked, the way he didn't speed up afterwards. He probably has a route. Probably does three or four a day. Probably sells them in bulk to someone who exports them somewhere. He's probably got a van. Or a lockup. Probably—
+
+The woman in the red coat is standing there with her arm still up.
+
+You blink. Right. The phone is gone. Three seconds.
+#else
+The whole thing takes about two seconds.
+
+You're standing close enough that you could have reached out and touched him as he went past. You didn't, because you didn't know it was going to happen, and nobody does. The woman is standing there, arm raised, phone gone, already starting to look around for what to do next.
+
+The bike is around the corner. He's gone.
+
+Three seconds, roughly, before this becomes something you didn't act on.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A woman's phone was just snatched from her hand on the high street. You saw it happen.
+</sceneDescriptionText>
+
+
+<chaseText>
+You run.
+
+People step aside or don't — two men with shopping bags don't move fast enough and you go between them, catching someone's arm, not stopping. The corner where he turned is thirty metres. You hit it in a few seconds and see him, further up than you expected, the black bike moving at a steady clip along a road with less foot traffic.
+
+He's faster than you on the straight. That's just physics. But there's a red light ahead and a bus pulled out from a stop, and he has to slow and swerve onto the pavement — and in that half-second you close ten metres, and he glances back.
+
+He sees you.
+
+For a moment it's just the two of you and the fact that you're close enough for him to be able to describe your face. Then he cuts left down a side street you weren't expecting, and by the time you reach it he's already at the far end and turning again.
+
+You stop. Hands on knees. A man walking a spaniel gives you a wide berth.
+
+He's gone. The phone is gone. But he had to look back. That's something — not a useful something, but something.
+
+$gd.addStat("ACTS_OF_COURAGE")
+#if ($w.getSkill("FITNESS") > 50)
+You catch your breath faster than you expected. Good to know.
+#end
+</chaseText>
+
+
+<callPoliceText>
+You have your mobile out before the shout has finished.
+
+999. Three rings. "Police please." Then: male, late twenties, dark green jacket, no helmet, black bicycle, heading north up the high street, turned left at the Primark corner — you name the street. White. Short hair. The operator is typing while you speak, asking you to repeat the turning.
+
+#if ($w.hasTrait("AMBITIOUS"))
+You give them everything in under ninety seconds and hang up. Efficient. There's not much more to give.
+
+The woman in the red coat is on her own phone now — someone else must have handed theirs over. She's still shaking slightly. You could go to her. You don't. The police have what they have; that's what they need.
+
+You keep walking.
+#elseif ($w.hasTrait("SHY"))
+The operator asks if you can stay at the scene. You say yes before you've quite decided to. The woman in the red coat looks over at you — someone on the phone, someone doing something — and there's a moment where you catch her eye, and you both know you were there when it happened, and you didn't move.
+
+You stay until a police car comes, ten minutes later. The officer takes your statement. It's a short statement. You had a clear look at his face, at least. That's what you say, because it's true.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You get the description out, including the detail that his jacket had a small logo on the chest — you think, you're not entirely sure, it was very quick — and the operator asks you to confirm what you're not sure about.
+
+You confirm what you are sure about and leave the rest. It's a discipline, sticking to what you know.
+
+She says a unit will be sent. She doesn't say when.
+#else
+The operator takes down everything you have. You stay on the line until they've got the description confirmed. Less than two minutes, all told. The woman in the red coat has found someone — a shopkeeper who came out from the sports shop next door — and they're talking, and she's got a phone in her hand that isn't hers.
+
+"Is there anything else you can tell us?" the operator says.
+
+There isn't. You tell her so and hang up.
+#end
+</callPoliceText>
+
+
+<doNothingText>
+You don't move.
+
+It's not a decision exactly. It just happens — the sound of her shout, the space where the bike was, the general reorganisation of people around the incident — and by the time you've processed all of it into something that could become an action, the moment has closed. The bike is around the corner. Calling 999 now, you're telling yourself, would be pointless; you'd give them a description and a direction that's two minutes stale.
+
+The woman in the red coat turns around.
+
+She's looking for someone who saw it. Her eyes go over the immediate crowd — the people who stopped, the people who weren't there and are gathering at a one-event remove — and then they find you. She looks at you for a second with the specific expression of someone who has correctly identified that you were standing right there. That you had a clear view. That you have, presumably, feet.
+
+She doesn't say anything. She doesn't need to.
+
+You look away first.
+
+$gd.addStat("MOMENTS_OF_INACTION")
+
+#if ($w.hasTrait("SHY"))
+You knew you were going to freeze. You always freeze. That doesn't make the pavement any easier to look at.
+
+The crowd clears around the woman in the red coat. Someone hands her a phone. You leave before you have to look at her again.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You spend the walk home constructing the alternative version of the last forty-five seconds in complete detail. In this version you move immediately. You call 999. You give a perfect description. The unit intercepts him two streets over and the woman in the red coat gets her phone back before the end of the afternoon.
+
+The version where you stood there is the version that happened.
+#else
+The crowd reconstitutes itself. People start moving again. You do too, because standing still is worse.
+
+The city continues doing what it was doing before, without any particular comment.
+#end
+</doNothingText>
+
+
+<helpVictimText>
+You cross to her.
+
+"I saw it," you say. "I was right there."
+
+The woman in the red coat looks at you — mid-thirties, mascara not quite running, the specific rigid look of someone who is refusing to cry in the middle of a high street. She nods once, sharply.
+
+"Did you see which way?"
+
+"North, then left at the corner. Dark green jacket, black bike, no helmet. White, late twenties."
+
+She's already holding out her hand. "Can I use your phone? Mine is—" She stops.
+
+You give her your phone. She calls someone — the police, you think, from the first two words — and you stand next to her while she talks, which feels like the right thing to do. The shopping continues around you both. A man from the sports shop next door has come out; he offers the use of the shop phone for a follow-up call and a place to sit down.
+
+#if ($w.hasTrait("AMBITIOUS"))
+You give your number for the witness statement and stay ten minutes. When she says "you really don't have to wait," you take it as the dismissal it is and go.
+
+The officer who takes your details is efficient and so are you. It adds fifteen minutes to your afternoon, which is actually less than you'd calculated.
+#elseif ($w.hasTrait("ROMANTIC"))
+You stay until the police come.
+
+She tells you her name — Naomi — and you tell her yours. She lost the phone at a bad time, she says, like there's a good time for this. She had photos on there from last weekend that she hadn't backed up yet.
+
+You don't say anything useful about that, because there isn't anything useful to say. You stand with her anyway.
+#elseif ($w.hasTrait("SHY"))
+You give your description to the officer who arrives seven minutes later, talking to a notepad rather than his face. He says you've been helpful. You think: maybe not as helpful as you could have been, thirty seconds earlier. But this is what you can give now, so you give it.
+#else
+She thanks you, briefly, once she's off the phone. The efficient kind of thanks that means she's already moving on to managing the next part of this.
+
+You give your name and number to the officer. He says they'll be in touch if they need anything further.
+
+They probably won't need anything further. But you gave them what you had.
+#end
+
+$gd.addStat("ACTS_OF_KINDNESS")
+</helpVictimText>

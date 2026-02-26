@@ -1,0 +1,78 @@
+# minievent_f_crisis.yml
+# Friend (female) minievent: The Crisis
+# Content tags: VANILLA
+# Rarity: uncommon (1 weight divisor)
+#
+# $f is the female friend ($femaleFriend mapped from the dispatcher).
+# The friend texts saying she needs to come up. She arrives visibly upset.
+# She doesn't explain immediately — the PC has to manage her state and choose how to respond.
+#
+# Flags set:
+#   SOLO_FFRIEND_CRISIS_SUPPORTED — always set when scene completes
+#
+# NPC liking:
+#   +small if PC stayed present and supportive (wait, ask, tea options)
+#   +tiny if PC was direct but warm (tellMe option)
+
+textFileName: minievent_f_crisis.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+  playerOutfit: CASUAL
+  femaleNpcs:
+    - id: f
+      outfit: CASUAL
+
+  location:
+    wall: magnolia-painted living room wall
+    floor: worn laminate floor
+    hasBed: false
+    isOutside: false
+
+
+intro:
+  textId: introText
+  followUpActions:
+    wait:
+    ask:
+    tea:
+    tellMe:
+
+
+actions:
+  - id: wait
+    shortDesc: Let her talk when she's ready
+    longDesc: Sit with her. Don't push. Be there — she'll say it when she can.
+    textId: waitText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_CRISIS_SUPPORTED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_CRISIS_SUPPORTED')"
+    finishScene: true
+
+  - id: ask
+    shortDesc: Ask what happened
+    longDesc: Gently, directly — you want to know where she is before you can be useful.
+    textId: askText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_CRISIS_SUPPORTED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_CRISIS_SUPPORTED')"
+    finishScene: true
+
+  - id: tea
+    shortDesc: Put the kettle on
+    longDesc: Don't say anything. Give her something warm to hold and somewhere to be.
+    textId: teaText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_CRISIS_SUPPORTED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_CRISIS_SUPPORTED')"
+    finishScene: true
+
+  - id: tellMe
+    shortDesc: Tell me what happened
+    longDesc: You need to know what you're dealing with. Say it plainly, but without pressure.
+    textId: tellMeText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_FFRIEND_CRISIS_SUPPORTED")
+        condition: "!$gd.hasGameFlag('SOLO_FFRIEND_CRISIS_SUPPORTED')"
+    finishScene: true

@@ -1,0 +1,65 @@
+# Preconditions for this scene:
+# Part of the minievent framework
+# Fires via $eventType=="SOLO"
+# Content tags: VANILLA, TRANSFORMATION (FEMININITY < 50 branch for !ALWAYS_FEMALE)
+# Rarity: uncommon (weightDivisorConditions: [true])
+
+textFileName: minievent_solo_latebus.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: scratched perspex window panel
+  floor: ribbed rubber bus floor
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ followUpActions:
+  headphones:
+  engagePolitely:
+  sharpShutdown:
+  nearDriver:
+
+
+actions:
+ - id: headphones
+   shortDesc: Headphones in, stare at window
+   longDesc: Signal closed. You are not here.
+   textId: headphonesText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_LATE_BUS_FROZE")
+      condition: "!$gd.hasGameFlag('SOLO_LATE_BUS_FROZE') && !$gd.hasGameFlag('SOLO_LATE_BUS_HANDLED')"
+   finishScene: true
+
+ - id: engagePolitely
+   shortDesc: Engage politely
+   longDesc: Manage this. Get to your stop in one piece.
+   textId: engagePolitelyText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_LATE_BUS_HANDLED")
+      condition: "!$gd.hasGameFlag('SOLO_LATE_BUS_HANDLED')"
+   finishScene: true
+
+ - id: sharpShutdown
+   shortDesc: Shut it down
+   longDesc: '"Please don''t." Two words. Final.'
+   textId: sharpShutdownText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_LATE_BUS_HANDLED")
+      condition: "!$gd.hasGameFlag('SOLO_LATE_BUS_HANDLED')"
+   finishScene: true
+
+ - id: nearDriver
+   shortDesc: Move near the driver
+   longDesc: Stand up. Walk past him. Sit closer to the front.
+   textId: nearDriverText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_LATE_BUS_HANDLED")
+      condition: "!$gd.hasGameFlag('SOLO_LATE_BUS_HANDLED')"
+   finishScene: true

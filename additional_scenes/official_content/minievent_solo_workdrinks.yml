@@ -1,0 +1,71 @@
+# minievent_solo_workdrinks.yml
+# Solo minievent: After-Work Drinks
+# Content tags: VANILLA
+# Rarity: common (no weightDivisorConditions)
+#
+# After-work drinks at the local pub. A colleague has been more attentive
+# than usual — topping up drinks, finding reasons to stand nearby.
+# Not overt; still work-adjacent. But not subtle either.
+#
+# Flags set:
+#   SOLO_WORKDRINKS_ATTENDED     — always set on first visit
+#   SOLO_WORKDRINKS_LINGERED     — stayed late; possibility was in the room
+#   SOLO_WORKDRINKS_RECIPROCATED — she let him see she was interested
+#   SOLO_WORKDRINKS_LEFT_EARLY   — made an excuse and left
+
+textFileName: minievent_solo_workdrinks.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: wood-panelled pub wall
+  floor: sticky hardwood floor
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $gd.setGameFlag("SOLO_WORKDRINKS_ATTENDED")
+    condition: "!$gd.hasGameFlag('SOLO_WORKDRINKS_ATTENDED')"
+ followUpActions:
+  stayLate:
+  makeAnExcuse:
+  nameItDirectly:
+  reciprocate:
+
+
+actions:
+ - id: stayLate
+   shortDesc: Stay longer
+   longDesc: You're not in any hurry. Another round won't hurt.
+   textId: stayLateText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_WORKDRINKS_LINGERED")
+   finishScene: true
+
+ - id: makeAnExcuse
+   shortDesc: Make an excuse and leave
+   longDesc: There's an early morning, a cat, a half-finished thing at home. Something clean and easy.
+   textId: makeAnExcuseText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_WORKDRINKS_LEFT_EARLY")
+   finishScene: true
+
+ - id: nameItDirectly
+   shortDesc: Say something
+   longDesc: Acknowledge what's happening without making it into a thing. Or making it into exactly as much of a thing as you choose.
+   textId: nameItDirectlyText
+   finishScene: true
+
+ - id: reciprocate
+   shortDesc: Let him see you're interested
+   longDesc: You can give him something to think about. You don't have to decide anything else tonight.
+   textId: reciprocateText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_WORKDRINKS_RECIPROCATED")
+   finishScene: true

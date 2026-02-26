@@ -1,0 +1,92 @@
+# minievent_solo_jobinterview.yml
+# Solo minievent: Job Interview
+# Content tags: VANILLA, TRANSFORMATION (FEMININITY < 50 branch)
+# Rarity: uncommon (weightDivisorConditions: [true] in dispatcher — fires occasionally but not every session)
+#
+# She's just come from a job interview. She was qualified. Her answers were decent.
+# The man interviewing her was interested in something other than her CV.
+# She's replaying it now, sitting somewhere quiet, working out how she feels.
+#
+# Flags set:
+#   SOLO_JOB_INTERVIEW — set on first occurrence; repeat-visit acknowledged in introText
+#
+# Stats modified (path-dependent):
+#   CAREER_PROGRESS: letItGo, decidedToWorkIt paths
+#   STRESS: feelsUsed, calledHimOut paths
+#
+# Trait branches:
+#   AMBITIOUS   — letItGo (calculates whether the job is worth it) or decidedToWorkIt (pragmatic, not pleased but same destination)
+#   SULTRY      — decidedToWorkIt (comfortable; she knows what she was doing)
+#   SHY         — feelsUsed (the attention was the worst of it; she's not sure she wants the job)
+#   REFINED     — feelsUsed or calledHimOut (finds the dynamic beneath the role; may have said so)
+#   BITCHY      — calledHimOut (she said something with a smile that wasn't entirely a smile)
+#
+# Transformation branch (introText only):
+#   !ALWAYS_FEMALE, FEMININITY < 50 — she sat on the other side of that table;
+#                                      she used to take that reading for granted;
+#                                      she didn't use to think about what it meant
+#                                      to be the one being assessed
+
+textFileName: minievent_solo_jobinterview.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+  playerOutfit: BUSINESS
+
+  location:
+    wall: pale grey wall of the coffee shop, condensation on the window behind her
+    floor: scuffed wooden floorboards
+    hasBed: false
+    isOutside: false
+
+
+intro:
+  textId: introText
+  followUpActions:
+    letItGo:
+    decidedToWorkIt:
+    feelsUsed:
+    calledHimOut:
+
+
+actions:
+  - id: letItGo
+    shortDesc: Be professional about it
+    longDesc: She performed well on the questions that mattered. She'll see if they call back.
+    textId: letItGoText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_JOB_INTERVIEW")
+        condition: "!$gd.hasGameFlag('SOLO_JOB_INTERVIEW')"
+      - effect: $gd.addStat("CAREER_PROGRESS")
+    finishScene: true
+
+  - id: decidedToWorkIt
+    shortDesc: Own it — she dressed for it
+    longDesc: She knows what she was doing. If that gets her the job, she's not going to pretend it doesn't.
+    textId: decidedToWorkItText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_JOB_INTERVIEW")
+        condition: "!$gd.hasGameFlag('SOLO_JOB_INTERVIEW')"
+      - effect: $gd.addStat("CAREER_PROGRESS")
+    finishScene: true
+
+  - id: feelsUsed
+    shortDesc: She's qualified. This reduces her.
+    longDesc: Even if she gets the role it'll be tainted. She goes home in a complicated mood.
+    textId: feelsUsedText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_JOB_INTERVIEW")
+        condition: "!$gd.hasGameFlag('SOLO_JOB_INTERVIEW')"
+      - effect: $gd.addStat("STRESS")
+    finishScene: true
+
+  - id: calledHimOut
+    shortDesc: She said something during the interview
+    longDesc: Direct, with a smile. She doesn't know if it helped her chances or ended them.
+    textId: calledHimOutText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_JOB_INTERVIEW")
+        condition: "!$gd.hasGameFlag('SOLO_JOB_INTERVIEW')"
+      - effect: $gd.addStat("STRESS")
+    finishScene: true

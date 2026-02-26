@@ -1,0 +1,68 @@
+# minidate_toosoon.yml
+# Partner minidate (BF): he finishes too quickly; she responds
+# Content tags: SEXUAL, TRANSFORMATION (FEMININITY < 50)
+# Rarity: uncommon (weightDivisorConditions: [true])
+#
+# Triggered from minievent.yml dispatcher with $bf mapped to $bf
+#
+# Flags set:
+#   MINIDATE_PARTNER_TOOSOON — first-time flag; repeat-visit varies intro
+#
+# NPC consequences (in VM text):
+#   ROMANTIC NPC + beKind/takeItAsCompliment: $bf.addNpcLoveTiny()
+#   CARING NPC + beKind or showDisappointment (handled well): $bf.addEnjoyTiny()
+#   JERK NPC + any: $bf.addWLikingTiny() (he's satisfied; she's not)
+
+textFileName: minidate_toosoon.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: NIGHTWEAR
+ maleNpcs:
+  - id: bf
+    outfit: CASUAL
+
+ location:
+  wall: pale bedroom wall
+  floor: carpeted bedroom floor
+  hasBed: true
+  isOutside: false
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $gd.setGameFlag("MINIDATE_PARTNER_TOOSOON")
+    condition: "!$gd.hasGameFlag('MINIDATE_PARTNER_TOOSOON')"
+ followUpActions:
+  beKind:
+  laughItOff:
+  takeItAsCompliment:
+  showDisappointment:
+
+
+actions:
+ - id: beKind
+   shortDesc: Make it okay
+   longDesc: He's embarrassed. Someone should absorb that, and you'd rather it be you.
+   textId: beKindText
+   finishScene: true
+
+ - id: laughItOff
+   shortDesc: Find the funny side
+   longDesc: It's a bit funny. Not cruel-funny, just — funny. And sometimes that's the only thing to do.
+   textId: laughItOffText
+   finishScene: true
+
+ - id: takeItAsCompliment
+   shortDesc: Take it as a compliment
+   longDesc: He lost control. You were the reason. There's something in that.
+   textId: takeItAsComplimentText
+   finishScene: true
+
+ - id: showDisappointment
+   shortDesc: You can't quite hide it
+   longDesc: You're not cruel about it. But you're also still worked up, and that's visible.
+   textId: showDisappointmentText
+   finishScene: true

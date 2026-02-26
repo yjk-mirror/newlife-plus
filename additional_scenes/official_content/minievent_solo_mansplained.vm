@@ -1,0 +1,229 @@
+<introText>
+You came in for one specific thing. You know what it is, you know what it does, and you know which one you need — you've been using this type for years, or looked it up on your lunch break, or simply have the basic adult competence required to read a product label. The aisle is long and slightly too bright and smells of plastic packaging and the particular optimism of flat-pack possibility.
+
+You've found the right section. You're reading the back of the box to confirm the spec.
+
+He materialises beside you. Member of staff, probably, or possibly just a man who has decided your uncertainty is legible from twenty feet away and has come to address it. He has the manner of someone who has been helpful all day and intends to continue.
+
+"Can I help you at all?" he says, and then, before you've answered: "These ones are a bit tricky if you haven't used them before."
+
+He takes the box from the display — not from your hands, technically — and begins explaining it to you. The explanation is thorough. He's not condescending, exactly. He's the version of this that's harder to object to: genuinely trying to be useful, under the sincere impression that you require it.
+
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You recognise the mechanism. Not him specifically — him in the general sense, the category. You've done this. You've stood next to someone in a shop and started explaining something to them because they had the look of someone who might not know, and the look you were reading was simply that they were a woman in a technical aisle. You did it without thinking. Probably more than once.
+
+The specific thing that makes it worse is that you weren't trying to be patronising either.
+
+He's still going. You hold the original box and watch him demonstrate the product with the quiet, attentive expression of someone being told something they already know in detail.
+
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+You've been on the other end of this dynamic before. Not this specific dynamic — the other one, the one where you were the one reaching for a product near a woman and deciding she looked uncertain. It was so automatic you barely noticed yourself doing it.
+
+He's explaining warranty coverage now. You watch him with patient attention and think, not for the first time, that the view from this side is clarifying in a specific way.
+
+##
+#else
+He's been doing this all day. You can tell. He has the energy of someone who has been helpful to four or five people already and is running on the momentum of it.
+
+##
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A man in the aisle has taken it upon himself to explain the product you've already decided to buy.
+</sceneDescriptionText>
+
+
+<letHimFinishText>
+##
+$w.addStressTiny()##
+#if ($w.hasTrait("AMBITIOUS"))
+You do the calculation in about two seconds: interrupting him will take longer than letting him finish. You will have to explain that you know, and then he'll have to adjust to knowing that you know, and there will be a small social negotiation, and all of that eats more time than just standing here for another ninety seconds while he reaches the end of his explanation. You are already mentally three steps ahead of where you are.
+
+He finishes. "Does that all make sense?" he says.
+
+"Perfect," you say. "Thank you so much."
+
+You take the box, smile, and go find the till.
+
+The ninety seconds sits with you for slightly longer than it should, in the way that small efficiently-absorbed indignities do.
+##
+#elseif ($w.hasTrait("REFINED"))
+You let him finish. It's the civilised choice — interrupting him would require making a fuss, and making a fuss is its own kind of unpleasantness. But the thing that bothers you is not the explanation. The explanation is fine. The thing that bothers you is what the explanation assumes: that you walked into this aisle without knowing what you were looking for, that your presence here was a question rather than a decision, that your competence required confirmation before it could be assumed.
+
+He finishes. "Any questions?"
+
+"No," you say pleasantly. "I think you've covered it."
+
+You take the box and go. The shop is too loud and the lighting is the kind of white that makes everything look slightly clinical. You buy the thing you came for.
+##
+#else
+You let him finish.
+
+He gets through the key features, the installation notes, and an unprompted opinion about a competing brand. You hold your box and nod in the appropriate places.
+
+"Any questions?" he says.
+
+"No, I think I'm good. Thanks."
+
+He seems satisfied. You take the box and move toward the till, and the aisle returns to being an aisle.
+
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You know the shape of what just happened. You've watched other people navigate it and assumed it was their problem, or not thought about it at all.
+
+Now you've navigated it yourself and it still isn't your problem, and it still cost you something, which are two facts that don't entirely resolve.
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+You've stood through worse. The city has worse. This was just a man in a shop who assumed something small and incorrect. You've long since stopped being surprised when that happens.
+
+You're more surprised, occasionally, that you ever expected otherwise.
+##
+#end
+##
+#end
+</letHimFinishText>
+
+
+<demonstrateKnowledgeText>
+##
+$w.reduceStressTiny()##
+You wait for a pause — he takes a breath between warranty and installation — and you ask the question.
+
+It is a technical question. Specific. The kind that would only be asked by someone who knew enough to know that the answer mattered.
+
+##
+#if ($w.hasTrait("BITCHY"))
+It comes out slightly sharper than you intended. Not unkind, exactly, but with the precision of someone who has been patient for forty-five seconds and is now indicating that they were doing you a favour.
+
+He stops. There's a brief recalibration — you watch it happen, the slight adjustment behind his eyes as the model he was working from stops fitting.
+
+"Right," he says. "Yeah, so in that case you'd want the — yeah." He answers the question. He answers it correctly and slightly more quickly than the rest of his explanation. "You clearly know what you're after."
+
+"I do," you say. "Thank you."
+
+You take the box. He moves on to someone else further down the aisle before you've reached the end of the section.
+
+You don't feel sorry about the sharpness. You feel, if anything, a small clean satisfaction, which you take with you to the till.
+##
+#elseif ($w.hasTrait("AMBITIOUS"))
+He pauses. Recalibrates. Answers the question — it's a good answer, actually, more specific than his opening explanation, because he's now treating you as someone who merits a specific answer. He's adjusted his assessment in real time and you can see it happening and it takes about four seconds.
+
+"Right," you say, before he can spin up another explanation at the new level. "That's exactly what I needed. Thanks."
+
+You take the box and go. The four seconds of recalibration was the part that made it worth it. Small, but worth it.
+##
+#elseif ($w.hasTrait("POSH"))
+He stops. There's a pause while he recalibrates — reclassifying you, reordering the conversation he thought he was having. He handles it well enough, answering the question with the particular slightly-too-enthusiastic effort of someone now trying to demonstrate that they were always prepared to have this conversation. He wasn't. But that's fine. Neither of you needs to say so.
+
+"Brilliant," you say. "That's exactly what I needed."
+
+You take your item with a small, courteous smile that contains no particular feeling, and go to find the till.
+##
+#else
+He pauses. Something behind his eyes briefly recalibrates.
+
+He answers the question. He answers it well — more precisely than his opening salvo, because he's now working with an updated understanding of who he's talking to. You can see him adjust.
+
+"Exactly right," you say. "Thanks."
+
+You pick up the box and move on. Behind you, he stands in the aisle for a moment before going to see if anyone else needs help.
+
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+The recalibration is the thing. Four seconds of someone updating their model, and the model before that update had been: woman in technical aisle, probably uncertain. You know that model. You built it yourself, without really deciding to.
+
+Watching it revise in real time is a specific kind of satisfaction. You take it with you.
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+You've gotten good at the technical question. Partly practice, partly that you know exactly what assumptions you're correcting. The correction feels less charged than it used to. Just a small, efficient thing.
+##
+#end
+##
+#end
+</demonstrateKnowledgeText>
+
+
+<redirectEfficientlyText>
+##
+#if ($w.hasTrait("POSH"))
+You wait for the natural break in his explanation — they always come, there's always a breath somewhere — and then: "Actually, I just need to know where I can find the fittings for this. Do you know which aisle?"
+
+It's delivered with the particular warmth that requests help without acknowledging that the previous help was not required. He doesn't know he's been redirected. He processes it as a natural shift in the conversation and points you toward aisle nine.
+
+"Wonderful," you say. "Thank you so much."
+
+He looks pleased. You take your box and go. No fuss, no awkwardness, nothing he'll be thinking about later. The deflection was so clean he may have experienced it as helpfulness.
+##
+#elseif ($w.hasTrait("AMBITIOUS"))
+You cut in cleanly: "Sorry — I just need to know which aisle has the fittings for this. Do you know?"
+
+He stops mid-explanation, pivots, tells you. Aisle seven.
+
+"Great," you say. "Thank you."
+
+Twelve seconds. You're already moving. There's a version of this conversation that would have taken another three minutes, and you didn't have three minutes, and now you have the information you actually needed. The rest of the explanation he was going to give doesn't matter because you already know it, and you're already done, and the till is at the far end of the store.
+##
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+"Ta," you say, pleasantly, and then: "Actually I just need to know where the fixings are — can you point me?"
+
+He blinks, nods, points. You thank him and go. No drama.
+
+The thing you needed is in aisle seven. You find it in about ninety seconds. The man with the explanation is nowhere to be seen by the time you get to the till.
+##
+#else
+"Actually," you say, when he pauses for breath, "I just need to know where the fixings are. Which aisle?"
+
+He tells you.
+
+"Brilliant. Thanks."
+
+You take your box and head for aisle seven. He stands in the space where the explanation was and reassesses his day.
+
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+The redirect is a skill you've had to acquire. It's not complicated, but it requires not being annoyed enough to want to prove the point, which is a specific kind of discipline.
+
+Today you had the discipline. That's not always how it goes.
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+Clean. Efficient. The world is full of men who want to help, and the city moves faster when you can accept the help you need and gently not accept the help you don't.
+##
+#end
+##
+#end
+</redirectEfficientlyText>
+
+
+<askObviousQuestionText>
+You let him finish. Then you ask a question.
+
+It is not a question you need answered. You know the answer to this question. You have known the answer to this question since before you arrived in this shop, because it is not a particularly complicated question and you are a person of ordinary adult competence who read the product page at home.
+
+You ask it anyway.
+
+He answers it. Thoroughly. He's glad you asked — you can tell; the explanation had been building toward more detail and now it has somewhere to go. He covers the answer and then, momentum carrying him forward, a related point. Then a slightly less related point. Then a brief digression about the difference between two models that are superficially similar but meaningfully distinct for reasons you had already identified when you chose between them.
+
+"That's so helpful," you say, when he reaches a natural conclusion. You mean none of it, but you mean all of none of it in a mild, comfortable way — you're not angry, you're not performing gratitude under protest, you're just a person who asked a question and received an answer and is now going to take her item to the till.
+
+##
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You spend the walk to the till imagining how many people he's explained this to today. Five? Seven? There's a version of this man who has given this exact explanation twelve times and is starting to optimise it, trimming the less-effective sections, leading with the information that generates the most satisfied nods. He may be getting better at this. He may have a gift for it. Somewhere there is a world in which this is what he was for, and he found it, and he's thriving.
+
+You buy your item and leave him to it.
+##
+#elseif ($w.hasTrait("AMBITIOUS"))
+You don't regret the question. It took two extra minutes and you gained nothing you didn't already have, which is a waste of two minutes, but there was something you were testing and you got the result: he went further because you asked. The question extended the explanation by a measurable amount, which tells you something about the mechanism, which you will file away for no particular future purpose.
+
+You buy your item. The afternoon is essentially intact.
+##
+#else
+You buy your item and leave the aisle to someone else.
+
+He's already found a new customer near the cable section. He's explaining something. The customer is nodding. It's going well.
+##
+#end
+</askObviousQuestionText>

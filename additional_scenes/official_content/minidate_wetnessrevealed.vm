@@ -1,0 +1,221 @@
+<sceneDescriptionText>
+$bf.getName() made a sound. You know why.
+</sceneDescriptionText>
+
+<introText>
+##
+#* ── SETUP: what they were doing ─────────────────────────────────────────── *#
+It had started simply enough — kissing on the sofa, his hands at your waist, his mouth warm and familiar against yours. Nothing deliberate. Just the two of you and an evening with no particular agenda.
+
+Then his hand moved.
+
+Not urgently. Not even intentionally, really — just a natural continuation of where things were going. His fingers slipped between your thighs and he paused.
+
+The sound he makes is small. Barely anything. But it stops the room.
+
+##
+#* ── WET_PUSSY TRAIT BRANCH ───────────────────────────────────────────────── *#
+#if ($w.hasTrait("WET_PUSSY"))##
+He found what you've been carrying around all day.
+
+You were like this before you got dressed. Before you texted him. Before you sat on the sofa and pretended you were going to watch television. Your body doesn't really observe occasion — it just arrives, quietly and without asking, and waits. You knew. He didn't. The gap between those two states has narrowed considerably.
+#else##
+You hadn't quite registered how wet you were until his fingers confirmed it. You were. Significantly. More than the situation had yet earned, by most accounts.
+#end##
+
+##
+$w.addArousalSmall()##
+$bf.addArousalTiny()##
+##
+#* ── NPC PERSONALITY: what he does with it ────────────────────────────────── *#
+#if ($bf.getPersonality() == "ROMANTIC")##
+He pulls back enough to look at you. Not triumphant — something quieter than that. His eyes move over your face like he's reading something and wants to get it right.
+
+"Hey," he says softly. That's all. Hey. Like he found you somewhere he wasn't quite expecting and is very glad he looked.
+#elseif ($bf.getPersonality() == "CARING")##
+He goes still. Not pulling away — just still, like the whole evening has suddenly required more attention than he was giving it. His hand doesn't move. His eyes find yours, checking.
+
+"Alright?" he asks. Quiet, careful. The question is doing more than one thing at once.
+#elseif ($bf.getPersonality() == "JERK")##
+He makes that sound again — satisfied, this time, low in his throat — and then he smiles. It's the smile that says he was right about something and intends to be right about it at some length.
+
+"Well," he says, like he's just won an argument you didn't know you were having.
+#else##
+He lifts his head. His eyes find yours with a kind of surprised attention, like you've said something interesting in a conversation he thought he already understood.
+#end##
+
+##
+#* ── PLAYER TRAIT: her internal state ────────────────────────────────────── *#
+#if ($w.hasTrait("SULTRY"))##
+You hold his gaze. Your breathing is perfectly even. You were already here before he arrived, and you are not in the least embarrassed about it, and the only question is whether he knows that yet.
+#elseif ($w.hasTrait("SHY"))##
+The back of your neck goes hot. You look away — at the ceiling, at his shoulder, anywhere that isn't his face — and the silence stretches in a way that does nothing to help.
+#elseif ($w.hasTrait("FLIRTY"))##
+Your mouth almost gets there before the rest of you does. You press it closed. Not quite in time, probably, because something in his expression tells you he saw whatever was about to happen.
+#elseif ($w.hasTrait("ROMANTIC"))##
+There's a beat where everything arranges itself into meaning. His hand. The look on his face. The specific fact that this is him, and this is now, and your body was already answering a question he only just thought to ask.
+#else##
+You don't say anything. The moment sits there between you, complete and a bit exposed, and you decide what to do with it.
+#end##
+
+##
+#* ── TRANSFORMATION BRANCH ───────────────────────────────────────────────── *#
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)##
+There's still a layer of this that catches you off-guard sometimes — the way your body makes decisions entirely without you. You used to think arousal was a more deliberate thing. More of a choice, or at least a sequence. Not this: not already there, already obvious, already answering for you before you've said a word.
+
+You are not, precisely, embarrassed. But you're aware that this body does things you wouldn't have predicted, and tonight is a good example of that.
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))##
+It's not strange anymore — the way your body runs ahead of your thoughts. But you notice it sometimes. Specifically in moments like this one, when the evidence is so immediate and so visible to someone else.
+#end##
+</introText>
+
+<leanIntoText>
+##
+You answer the only way that doesn't require words: you take hold of his shoulder and pull him back toward you.
+
+##
+#* ── NPC PERSONALITY ─────────────────────────────────────────────────────── *#
+#if ($bf.getPersonality() == "ROMANTIC")##
+He comes back slowly. That deliberateness is the thing — he's not rushing, he's attending. His hand stays where it is and he starts learning something, carefully, like he intends to understand it thoroughly. You feel the unhurried precision of it and stop thinking about anything else.
+
+He murmurs something against your throat. Not words, quite. Just acknowledgement. Just the sound of someone who is exactly where he wants to be and is making no attempt to conceal it.
+$bf.addNpcLoveTiny()##
+#elseif ($bf.getPersonality() == "CARING")##
+He comes back, and everything about him shifts a register. Slower. More considered. His focus narrows to you — specifically to what your body is telling him, which is quite a lot, without your needing to add anything.
+
+He asks nothing. He doesn't narrate. He just pays attention with a thoroughness that makes it hard to remember what you were doing before this.
+$bf.addEnjoyTiny()##
+#elseif ($bf.getPersonality() == "JERK")##
+He comes back with more certainty than he'd had before — that smile still there, that sense that you've just confirmed something he's been holding over you in his head. His hand moves and you feel it everywhere.
+
+He's not subtle about enjoying this. But then, he never is, and right now you're not particularly in a position to mind.
+$bf.addWLikingTiny()##
+#else##
+He comes back, closer than before, and his hand shifts just slightly — purposeful now in a way it wasn't before. The moment reassembles itself around that single fact: you are this wet, and he knows it, and neither of you is pretending otherwise.
+#end##
+
+##
+#* ── PLAYER TRAIT ────────────────────────────────────────────────────────── *#
+#if ($w.hasTrait("SULTRY"))##
+You tilt your head back and give him the full line of your throat. You have been waiting for this, in various senses, for longer than he knows.
+#elseif ($w.hasTrait("FLIRTY"))##
+You make a small sound you hadn't planned. Fine. He can have that one.
+#elseif ($w.hasTrait("ROMANTIC"))##
+You wrap your fingers into the fabric of his shirt and hold on. This was already yours — the feeling, the wanting — and now it's shared, and that matters to you in a way you don't feel like explaining.
+#else##
+You tip forward into him and let the whole thing happen. That's the decision, really. Everything else follows from there.
+#end##
+
+##
+#* ── TRANSFORMATION (low femininity, in action text for extra texture) ─────── *#
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)##
+There's still something arresting about the specific depth of it — the way this body wants things and shows the wanting so completely. But the arresting part lasts about three seconds before something else takes over entirely.
+#end##
+</leanIntoText>
+
+<sayItPlainlyText>
+##
+#* ── PLAYER TRAIT: what she says and how ─────────────────────────────────── *#
+#if ($w.hasTrait("SULTRY"))##
+You look at him, unhurried.
+
+"Does that surprise you?"
+
+The tone leaves no room for misunderstanding. You have been this way since before he touched you. Since before the sofa. You knew it and you let it happen and you are not remotely embarrassed about any of it, and the way you're looking at him makes sure he understands that.
+#elseif ($w.hasTrait("FLIRTY"))##
+You open your mouth to say something teasing — something you'd planned, more or less — and what actually comes out is: "That's what you do to me."
+
+Which was not the version. Not the slightly-removed, aren't-you-pleased-with-yourself version. The real one. You hear it land and feel slightly like you've done something you can't undo, which isn't unpleasant exactly.
+#elseif ($w.hasTrait("ROMANTIC"))##
+You put your hand over his — not stopping him, just steadying the moment — and look at him properly.
+
+"It's because of you," you say. "Specifically you. I need you to know that."
+
+It's slightly earnest. You're aware of that. But it's the truth, and you find you'd rather say it than not.
+#else##
+"I've been like this," you say, "since before you touched me."
+
+You're not sure that's exactly what you meant to say, but it covers it. His face does something interesting.
+#end##
+
+##
+#* ── NPC PERSONALITY: his response ──────────────────────────────────────────*#
+#if ($bf.getPersonality() == "ROMANTIC")##
+He goes quiet for a moment. Not the uncomfortable kind — the kind where he's deciding what to do with something he didn't expect and doesn't want to waste.
+
+Then he kisses you again. Slower. Like you've given him information that changes the approach, and he intends to use it properly.
+$bf.addNpcLoveTiny()##
+#elseif ($bf.getPersonality() == "CARING")##
+He doesn't turn it into a performance. He just holds your gaze for a moment, and whatever he's thinking arranges itself on his face into something warm and unguarded. Then he tilts his head and asks, low, "What do you need?"
+
+Which, given the circumstances, is a very good question.
+#elseif ($bf.getPersonality() == "JERK")##
+He likes that. You can see him liking it — the particular self-satisfaction of a man who has been told he is the reason for something, even though he would have assumed it anyway.
+
+"Yeah," he says. Like he already knew.
+
+He probably already knew. You said it anyway.
+$bf.addWLikingTiny()##
+#else##
+He looks at you for a moment with an expression that takes a second to read — surprised, yes, but also something that isn't quite pride and isn't quite tenderness but lands somewhere between.
+
+"Okay," he says quietly. And kisses you again.
+#end##
+</sayItPlainlyText>
+
+<goEmbarrassedText>
+##
+#* ── PLAYER TRAIT: how the embarrassment manifests ─────────────────────── *#
+#if ($w.hasTrait("SHY"))##
+You laugh — short, slightly strangled — and immediately look away. Your whole face has made a decision without you, and the decision is red.
+
+"Sorry," you say, which doesn't make any sense. You are not sorry. You are simply incapable of being looked at right now, or of having your face looked at, or of existing in the same room as someone who now knows this particular thing about you.
+
+He says your name. You continue looking at the middle distance to the left of his ear.
+#elseif ($w.hasTrait("REFINED"))##
+You exhale — a small, controlled sound — and shift slightly, like readjusting. Not moving his hand so much as reclassifying the moment.
+
+"Perhaps," you say, "we could — "
+
+You don't finish the sentence, which is unusual for you. The thing is: you're not ashamed of the wanting. That's not the problem. The problem is the evidence. The sheer, ungovernable, unignorable evidence. You have never found it comfortable to be quite so legible.
+#else##
+You laugh — and mean it, mostly — and press your palm against his chest.
+
+"Right," you say. "Okay. Moving on."
+
+He raises an eyebrow. He is not moving on. His hand has not moved.
+#end##
+
+##
+#* ── NPC PERSONALITY: what he does with your embarrassment ──────────────── *#
+#if ($bf.getPersonality() == "ROMANTIC")##
+He lets you have the redirect. But he moves his thumb, very slightly, and watches your face.
+
+"We don't have to move on," he says, softly. Like you're both deciding together and the decision is actually yours.
+#elseif ($bf.getPersonality() == "CARING")##
+He doesn't lean into it. He reads the room — he's always reading the room — and his expression shifts to something gentler. Not teasing. Not pressing.
+
+"We can slow down," he offers. His hand stays but stills. He's giving you the choice.
+$bf.addEnjoyTiny()##
+#elseif ($bf.getPersonality() == "JERK")##
+He laughs too — but not in the same direction as your laugh. His says: there's no moving on. His says: this information is his now.
+
+"Sure," he says. Smiling like he's agreed to something he has no intention of agreeing to.
+#else##
+He gives you about three seconds.
+
+Then: "You know I'm not going to pretend that didn't happen."
+
+Which is fair. It happened. It's happening. The evidence is fairly comprehensive.
+#end##
+
+##
+#* ── PLAYER TRAIT closing beat ───────────────────────────────────────────── *#
+#if ($w.hasTrait("SHY"))##
+You are still not quite looking at him. He waits. This is, you realise, actually worse than if he'd made a thing of it.
+#elseif ($w.hasTrait("REFINED"))##
+The composure reasserts itself, eventually. But it takes longer than you'd like, and he sees it taking longer, and that's the part you'll remember.
+#else##
+The embarrassment is real. So is everything else. Both of those things are true at the same time, and you stay exactly where you are.
+#end##
+</goEmbarrassedText>

@@ -1,0 +1,190 @@
+<introText>
+He's already framing something else when you walk past him — a gap between two market stalls, or the light on someone's coat, or nothing in particular — and you register the camera before you register him. A proper one. Not a phone. Black body, wide lens, the kind of strap that says he uses it enough to have bought a decent strap.
+
+He lowers it as you pass and says, "Excuse me."
+
+You slow. You shouldn't, but you do.
+
+"I'm doing a project." He's maybe twenty-five, slightly awkward in the way of someone who has rehearsed this speech and is watching it diverge from the script. "Street portraiture. Ordinary people, ordinary Saturday. Would you mind if I took your photo?"
+
+He gestures at the camera, as if to clarify which photo. Behind him, the market carries on: someone shouting prices at a veg stall, a dog straining at a lead, a child being dragged in the direction of not-the-toy-shop.
+
+He was here before you appeared. He'll be here after you leave. You're just the person who happened to slow down.
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+
+There's a version of yourself — not so far back — who would have been behind that camera, not in front of it. You'd have asked the same question. You'd have held the same nervous-but-trying-to-look-professional expression. You're not sure whether that makes this easier or stranger.
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+
+You've been on this side of enough casual male attention to have an instinct for when it's actually about the camera and when the camera is an excuse. This one, you think, is actually about the camera. Or mostly.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A young man with a DSLR on the pavement outside the market. He's asking if he can take your photo.
+</sceneDescriptionText>
+
+
+<agreeQuickText>
+#if ($w.hasTrait("SULTRY"))
+You say yes before he's quite finished asking. He blinks — apparently most people don't do that.
+
+"Okay." He straightens up a little. Raises the camera. "Just — if you could stay where you are—"
+
+You stay where you are. You've had worse ways to spend thirty seconds than standing in good light while someone tries to do you justice. He takes three shots, checks the screen, takes one more. His concentration is total.
+
+"Thank you," he says. He means it — you can tell the difference between professional gratitude and actual gratitude. He's already looking at the screen, turning slightly away, which is the right thing to do.
+
+You walk away. Four steps on, you find you're wondering which one he'll use.
+#elseif ($w.hasTrait("CUTE"))
+"Sure," you say, too quickly, and immediately feel slightly ridiculous about it. Like you've just agreed to something without knowing what.
+
+He positions himself. Raises the camera. "Whenever you're ready."
+
+You're not ready, you realise. You have no idea what your face is doing. You are very aware of your face. You smile, and then wonder if smiling is wrong, if this is the kind of project where smiling is wrong, and while you're wondering this he takes the photo.
+
+"Perfect," he says. He shows you the screen. You look uncertain and slightly startled and vaguely like someone caught in the middle of a thought, and you can't tell if that's good or bad or just what you look like.
+
+He thanks you and turns back to the market. You carry on. The whole walk home you'll be wondering what face you made.
+#else
+"Fine," you say. "Go ahead."
+
+He raises the camera quickly, like he's worried you'll change your mind. He takes two shots, shows you the screen — your expression is neutral, closed-off, faintly suspicious, which is probably accurate. He says thank you.
+
+Thirty seconds. He's already scanning the street for the next one.
+
+You walk away thinking about nothing in particular. Somewhere there's a photo of you that you'll never see. That's fine. That's what it is.
+#end
+</agreeQuickText>
+
+
+<agreeAndAskText>
+"What's the project?" you ask.
+
+He looks slightly surprised, then pleased — like you've asked the right question. He tells you: a personal series, two years in the making, documenting Saturday mornings in the city. Not posed. Not commercial. He shows you the screen on the back of the camera, scrolling through thumbnails with his thumb. An old man eating chips outside a Greggs. A girl with green hair asleep on a bench. Two men arguing over a folding table.
+
+"I show them occasionally," he says, "local exhibitions, that sort of thing. Nothing huge."
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+Local exhibitions. You let that sit for a moment.
+
+You're already somewhere else — an exhibition space, white walls, his prints in frames. Your face, large, among the ordinary Saturdays. Someone stops in front of it. Two months from now, a year from now, they see you in a Tesco and do a double-take. You don't notice because you never notice. You're buying bread or something.
+
+You say yes. You half-want to see if any of this will happen. You are fully aware that none of it probably will.
+
+He takes the photo. You look at the screen. It's good, actually — you look like someone caught in the middle of something real.
+
+"Thank you," he says.
+
+"Good luck with it," you say, meaning the exhibitions, meaning the ordinary Saturdays, meaning all of it in a vague and genuine way. You've already landed back in the actual world. The Tesco moment was lovely while it lasted.
+#elseif ($w.hasTrait("ROMANTIC"))
+Two years in the making. A whole city's worth of ordinary Saturdays, accumulated shot by shot.
+
+"All right," you say.
+
+He positions himself, takes his time. Three shots. He shows you the screen — you're looking slightly to the side, not quite at the lens, and it's a better photo than you expected. There's something honest about it.
+
+"It's a good project," you say.
+
+He smiles — it's a real one. "I think so."
+
+You walk away with the quiet feeling of having been briefly, genuinely seen. Not for anything in particular. Just as a person on a Saturday, in the middle of her ordinary life.
+#elseif ($w.hasTrait("AMBITIOUS"))
+Local exhibitions. Not nothing, but not anything significant either. You do a fast calculation — zero downside, possibly one of those things that becomes an anecdote — and say yes.
+
+He takes the photo efficiently. Shows you. You look like yourself, which is fine.
+
+"Thank you," he says.
+
+"Good luck with it," you say, and you mean it in a practical, there-are-worse-ways-to-spend-your-time sense. He seems to appreciate it. He's already turning back to the market before you've finished the sentence.
+
+You walk on. The photo exists somewhere on that camera. That's mildly interesting for about thirty seconds.
+#else
+The photographs are good — specific, unposed, each one catching someone mid-something. You look at them longer than you meant to.
+
+"Okay," you say. "That's a proper project."
+
+He almost visibly relaxes. He takes two shots, shows you the screen. You look fine. Present, at least.
+
+"Thank you," he says. "Genuinely — most people either say no without looking or ask if I'm going to use it for something creepy."
+
+"Are you?"
+
+"No," he says, entirely straightforwardly.
+
+You believe him. You walk away. At the corner you half-turn, and he's already framing something else.
+#end
+</agreeAndAskText>
+
+
+<refusePoliteText>
+#if ($w.hasTrait("POSH"))
+You give him a smile — the small, conclusive kind, the one that doesn't invite a follow-up.
+
+"Not today," you say. "Good luck with it."
+
+And you walk. He gets one step into a sentence and then seems to read the situation correctly, which you appreciate. Some people have that instinct and some don't. He does.
+
+Behind you, the market carries on. You'd wager he'll have his next subject in under a minute.
+#elseif ($w.hasTrait("SHY"))
+"Oh — no, sorry." The apology is reflexive, unnecessary, already out. "I'd rather not."
+
+He nods right away, doesn't push. "Of course. Thanks anyway."
+
+You walk on. Two steps and you're wondering if you should have said yes — it would have been over quickly, and now he's got nothing to show for stopping you. Thirty seconds of mild discomfort and you'd both have got on with your afternoons. But you said no and it's done and you're not going back.
+
+You don't go back.
+#else
+"No, thanks."
+
+He nods like he was prepared for this, which he probably was. He says thanks anyway, turns back to scan the street.
+
+You glance at him once, walking away. He's already raising the camera at something else — someone else, maybe, or the quality of the light through the stall awnings, or nothing you could identify. He was doing this before you appeared. He's doing it still.
+#end
+</refusePoliteText>
+
+
+<checkCameraText>
+#if ($w.hasTrait("BITCHY"))
+"Can I see your camera?" you say. "Before I answer."
+
+Something shifts in his expression — surprise, and then a kind of reassessment. He hands it over. You take it the way you'd take anything expensive belonging to a stranger: carefully, deliberately, making him watch.
+
+You scroll back. Market stalls. A man with a walking stick. A woman mid-laugh, clearly not expecting it. An elderly couple both reading different things at the same folding table.
+
+He's been at this a while. Ordinary Saturdays, like he said. Nothing sinister, nothing exploitative — the photos are genuinely good, actually, which you weren't expecting, which you don't mention.
+
+You hand it back.
+
+"No," you say.
+
+He looks faintly wrongfooted — you've seen his work and you're still saying no. Exactly.
+
+"Good luck with it," you add, and you mean it. You just weren't what his project needed today. Or his project wasn't what you needed.
+
+You walk away feeling unusually purposeful.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+"Before I answer — can I see some of them?"
+
+He hands the camera over without hesitation, which is its own data point. You scroll through. A woman arguing into her phone, completely oblivious. Two teenagers sharing something in a paper bag. An old man looking at a phone with the expression of someone who's received instructions he can't parse.
+
+You hand it back. In your head, a small, ridiculous thought: what if he already has good ones of you? From an angle you didn't notice. From twenty minutes ago. What if you've already been in this project without knowing, already on his screen, already framed in whatever light is interesting today?
+
+You look at his face. He looks at yours. You have absolutely no way of knowing.
+
+"No, thank you," you say.
+
+He nods, disappointed but not surprised. You walk away conscious of the back of your head.
+#else
+"Can I see your camera first?"
+
+He pauses — less than a second — then turns it around and hands it to you, screen first. He's scrolling through himself: a child on a market stall, a woman mid-laugh, an old man looking at the sky through a gap in the awnings. The composition on the last one is genuinely good.
+
+You hand it back. You look at him.
+
+The situation has shifted, slightly, in a way neither of you is quite naming. You asked to see his work before answering, and he let you, and now you've formed an opinion, and the question he asked has become less urgent. You're not a subject waiting to be photographed. You're a person who's just assessed someone's project.
+
+"No," you say. Not unkindly. "But it's a good project."
+
+He nods. He seems to mean it when he says thank you.
+#end
+</checkCameraText>

@@ -1,0 +1,153 @@
+<sceneDescriptionText>
+Your mobile is on the cushion beside you. $m.getName() called.
+</sceneDescriptionText>
+
+<introText>
+You were winding down. The telly was on without you really watching it, and you were somewhere between awake and not when your mobile buzzes on the sofa cushion.
+
+$m.getName().
+
+You almost let it ring out. Then you don't.
+
+"Hey." His voice comes through slightly compressed, the way voices always do through a speaker at low volume. It's fine. Normal. Except there's something slightly off about it — a flatness, or a pause before he says anything else, that doesn't fit the word.
+
+#if ($m.getPersonality() == "ROMANTIC")##
+He starts talking. Something about his day — a thing that went wrong at work, then a longer silence than the thing warrants, then something else, something smaller. He mentions it too briefly. You get the sense he almost hung up twice before this call connected. When you ask, actually ask, what's wrong, he tells you something true. Not everything. But something real, in the way he rarely does, in the way that means he thought about it before he said it.
+#elseif ($m.getPersonality() == "CARING")##
+He asks, before anything else, if it's a bad time. You say no. He pauses, then starts talking — slowly, like he's working out what he actually wants to say. Every so often he stops himself and asks again: "Is this alright? I can leave it." He's doing that thing where he worries more about whether he's imposing than about the thing itself. But he keeps talking, which means he needed to.
+#elseif ($m.getPersonality() == "JERK")##
+He doesn't say he needed to call. He launches into something — a story about someone who annoyed him, a complaint, another complaint. You listen. It takes a while to understand what's actually happening here. He's not telling you this because it's interesting. He's telling you because he needed to hear a voice that wasn't inside his own head. He won't say that. He'll never say that. But you can tell, and the telling takes the whole call.
+#else##
+He talks. It's not quite a vent — more like he picked up the phone and started saying things, and the things aren't quite ordered, and he knows it, and that's slightly embarrassing him. He's not asking for anything directly. He just called.
+#end##
+
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))##
+You find yourself filling in the blanks. You have a whole version of his evening already constructed — the commute, the thing that tipped it, the silence of his flat afterward. You're probably wrong about the details. You're probably right about the shape of it.
+#elseif ($w.hasTrait("SHY"))##
+You sit with the phone pressed to your ear and don't say much. Not because you don't have anything — because the right thing to say isn't obvious yet, and silence, right now, seems to be doing something.
+#elseif ($w.hasTrait("ROMANTIC"))##
+There's something about getting a call like this — late, without occasion, from someone who doesn't quite know what he's asking for. You don't name it. You don't need to.
+#else##
+You tuck your feet under you on the sofa and listen. Whatever it is, he called you.
+#end##
+</introText>
+
+<inviteOverText>
+"Come round," you say. "I'll put the kettle on."
+
+There's a pause.
+
+#if ($m.getPersonality() == "ROMANTIC")##
+He says something like he doesn't want to put you out. You tell him he's not. He says alright. You can hear, underneath the alright, that he's relieved — that he was hoping you'd say exactly that and didn't let himself hope too hard in case you didn't.
+
+He arrives twenty minutes later. You've boiled the kettle twice. He sits at your kitchen table with his hands wrapped around a mug and tells you more than he told you on the phone, and you sit across from him, and neither of you mentions the fact that he needed this.
+#elseif ($m.getPersonality() == "CARING")##
+He starts to say he doesn't want to impose. You say he's not imposing, you're inviting him. He says are you sure. You say yes. He says okay, and there's something in the way he says it — quieter, relieved — that makes you glad you asked.
+
+He shows up with milk and a packet of biscuits he didn't need to bring. He stays for two hours.
+#elseif ($m.getPersonality() == "JERK")##
+He says yeah, alright, like it was his idea. You don't correct him.
+
+He turns up with nothing, takes up most of the sofa, and talks for an hour and a half. He doesn't thank you when he leaves. You didn't expect him to. But he lingers at the door for a second longer than he needed to, and that's probably as close as he gets.
+#else##
+He says yeah, if you're sure. You say you're sure.
+
+He comes round. You make tea. He sits on the end of the sofa and slowly stops looking like someone who had a terrible day, and becomes someone who's just here instead.
+#end##
+
+#if ($w.hasTrait("AMBITIOUS"))##
+You'd had plans for the evening. Loose ones, but still. You let them go.
+#elseif ($w.hasTrait("FLIRTY"))##
+It's easy, this. Comfortable. You notice you're comfortable and don't try to make it something else.
+#end##
+</inviteOverText>
+
+<stayOnPhoneText>
+"I'm here," you say. "Go on."
+
+He does.
+
+#if ($m.getPersonality() == "ROMANTIC")##
+He talks for a long time. Not unbroken — there are silences, and you don't fill them immediately, and he seems to appreciate that. At some point he says something that's clearly the real thing, the thing underneath the rest of it, and then he goes quiet. You say something back. Not a solution. Just something true. He says thank you, in the way he says it when he means it, which isn't often.
+#elseif ($m.getPersonality() == "CARING")##
+He talks, and checks in, and talks, and checks in. At one point you tell him to stop asking if it's alright, it's alright, just tell you. He laughs — a small, tired one — and then he does. You listen properly. You ask things back. By the time he's done he sounds like himself again, which was the point.
+#elseif ($m.getPersonality() == "JERK")##
+He keeps going. You ask the occasional question, mostly to keep him from grinding to a halt. He never acknowledges that's what you're doing. By the end of the call he sounds lighter, looser, and he says "anyway" in the way people say it when they're wrapping up and have slightly forgotten they called you for a reason.
+
+"Yeah," you say. "Anyway."
+
+He hangs up. No thank you. No acknowledgement. You put the phone down and sit with the slightly odd feeling of having given something you weren't asked for and won't be thanked for, and finding it was worth it anyway.
+#else##
+He's mid-sentence for most of it. You're fine with that. You catch yourself thinking about something else once, twice, then pull yourself back. He doesn't seem to notice either way. When the call finally ends, he sounds better. Not fixed. Just better.
+#end##
+
+#if ($w.hasTrait("SHY"))##
+You're better at this on the phone than in person. There's something about not being seen that helps.
+#elseif ($w.hasTrait("BITCHY"))##
+He rambled. You still stayed.
+#end##
+</stayOnPhoneText>
+
+<callTomorrowText>
+"I'm knackered," you say. "Can I ring you tomorrow?"
+
+#if ($m.getPersonality() == "ROMANTIC")##
+He says yes, of course, sorry for calling late. He says it lightly but you can hear the small deflation underneath, the slight recalibration of how much he'd let himself hope this would go. It's not blame. He wouldn't blame you. But it's there, briefly, before he says goodnight.
+
+You lie in bed a bit longer than necessary, not quite asleep.
+#elseif ($m.getPersonality() == "CARING")##
+He says of course, go to sleep, he's sorry for ringing at this hour. You tell him not to be sorry. He says he'll talk to you tomorrow, and he sounds alright about it — more alright than you expected — but also just a little bit like he was hoping you'd say something different.
+
+You ring him in the morning. He doesn't mention last night. You make it easy for him not to.
+#elseif ($m.getPersonality() == "JERK")##
+He says yeah, fine, obviously. As if he'd only called to chat. As if this was a casual thing.
+
+"Tomorrow then," you say.
+
+"Sure."
+
+He hangs up first.
+#else##
+He says of course. No fuss. You say goodnight, he says goodnight, and that's it. Easy enough. You feel vaguely that you got away with something, and aren't sure why.
+#end##
+
+#if ($w.hasTrait("ROMANTIC"))##
+You lie there for a moment with the dark and the thought of him in his flat alone, and then you close your eyes.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))##
+You needed the sleep. He'll be fine. You'll ring him.
+#end##
+</callTomorrowText>
+
+<gentleEndText>
+"I need to sleep," you say. "But I'm glad you called."
+
+#if ($m.getPersonality() == "ROMANTIC")##
+A pause. Then: "Yeah." Quiet, but not disappointed. Or — not only disappointed. Something else is in it too, something like warmth, like being noticed, and you think that might be enough for tonight. It might be enough, that you picked up, and you said that, and now you're going to sleep.
+
+He says goodnight and the line goes.
+#elseif ($m.getPersonality() == "CARING")##
+He says of course, get some rest, and the ease of it — the uncomplicated ease — is genuinely nice. He doesn't need you to fix anything. He just needed the call. You gave him the call.
+
+"Goodnight," he says.
+"Goodnight," you say.
+#elseif ($m.getPersonality() == "JERK")##
+"Right," he says. Like he was done anyway. Like this was wrapping up on his terms.
+
+"Goodnight," you say.
+
+He says goodnight without quite doing it properly — the word's there but the sentiment's clipped, and you're used to that, and it's fine, and you put the phone down and go back to whatever you were doing before any of this.
+#else##
+"Yeah," he says. "Thanks."
+
+A simple one. You put the phone down and go to bed, and the evening closes over it like it was never interrupted.
+#end##
+
+#if ($w.hasTrait("POSH"))##
+You set the phone face-down on the nightstand. Some calls don't need to linger.
+#elseif ($w.hasTrait("CUTE"))##
+You're half asleep before the screen goes dark.
+#end##
+</gentleEndText>
+
+<empty>
+</empty>

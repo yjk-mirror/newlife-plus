@@ -1,0 +1,92 @@
+# minievent_m_baddatedebief.yml
+# Friend minievent: Bad Date Debrief (male friend)
+# Content tags: VANILLA
+# Rarity: common (no weight divisors)
+#
+# He wants to debrief a terrible date he just had. He's slightly too animated about it.
+# As he describes the woman, the PC starts forming a view about who's actually at fault.
+# The story reveals a lot — about him, about what he expected, about the gap.
+#
+# NPC personality determines what story she hears:
+#   JERK     — the woman did nothing wrong; he's complaining about insufficient interest
+#   ROMANTIC — he genuinely liked her and it didn't work out; confused, not cruel
+#   CARING   — he thought it was going well; genuinely open to feedback
+#   SELFISH  — every complaint is about how he was affected; the woman barely exists
+#   (AVERAGE — solid but unremarkable; thinks he was charming, probably wasn't)
+#
+# Consequences:
+#   SOLO_MFRIEND_DATE_DEBRIEF flag — always set
+#   NPC liking +tiny — supportive response (all personalities)
+#   NPC liking +tiny — honest pushback (CARING/ROMANTIC only)
+#   NPC liking -tiny — honest pushback (JERK/SELFISH only)
+
+textFileName: minievent_m_baddatedebief.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: m
+    outfit: CASUAL
+
+ location:
+  wall: scuffed pub wall with a chalkboard menu
+  floor: sticky wooden pub floor
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $gd.setGameFlag("SOLO_MFRIEND_DATE_DEBRIEF")
+    condition: "!$gd.hasGameFlag('SOLO_MFRIEND_DATE_DEBRIEF')"
+ followUpActions:
+  listenAgree:
+  listenPushBack:
+  beHonest:
+  askQuestion:
+
+
+actions:
+ - id: listenAgree
+   shortDesc: Listen and agree
+   longDesc: Support, not analysis. He clearly needs someone in his corner right now.
+   textId: listenAgreeText
+   effects:
+    - effect: $m.addNpcLikingTiny()
+   finishScene: true
+
+ - id: listenPushBack
+   shortDesc: Push back gently
+   longDesc: Something he said didn't quite add up. You're not going to let it go entirely.
+   textId: listenPushBackText
+   effects:
+    - effect: $m.addNpcLikingTiny()
+      condition: '$m.getPersonality() == "CARING" || $m.getPersonality() == "ROMANTIC"'
+    - effect: $m.reduceWEnjoyTiny()
+      condition: '$m.getPersonality() == "JERK" || $m.getPersonality() == "SELFISH"'
+   finishScene: true
+
+ - id: beHonest
+   shortDesc: Tell him what you actually think
+   longDesc: Even if that's not what he wants to hear.
+   textId: beHonestText
+   effects:
+    - effect: $m.addNpcLikingTiny()
+      condition: '$m.getPersonality() == "CARING" || $m.getPersonality() == "ROMANTIC"'
+    - effect: $m.reduceWEnjoyTiny()
+      condition: '$m.getPersonality() == "JERK" || $m.getPersonality() == "SELFISH"'
+   finishScene: true
+
+ - id: askQuestion
+   shortDesc: Ask the one question
+   longDesc: Don't say anything critical. Just ask the thing that makes him hear himself.
+   textId: askQuestionText
+   effects:
+    - effect: $m.addNpcLikingTiny()
+      condition: '$m.getPersonality() == "CARING" || $m.getPersonality() == "ROMANTIC"'
+    - effect: $m.reduceWEnjoyTiny()
+      condition: '$m.getPersonality() == "JERK" || $m.getPersonality() == "SELFISH"'
+   finishScene: true

@@ -1,0 +1,151 @@
+<introText>
+The plan was lunch or shopping — the usual vague arrangement that ends up being both, neither properly.
+You're in the changing area of a mid-range clothes shop, the kind with mirrors on three sides and staff who don't make eye contact. $f.getName() is outside the curtain, waiting while you try something on, and she's been talking the whole time.
+
+It started with the woman ahead of you in the queue — "she'd looked so much better in that colour a few years ago, but you know." Then a passing comment about a jacket you'd considered, not negative, exactly, just: "that's such a brave choice for your shape." Then, watching two men outside the window: "they definitely noticed you first, you could just tell." Each one arrives like an almost-compliment. Each one has a small hook in it.
+
+#if ($w.hasTrait("POSH"))##
+You recognised it by the second one. $f.getName() has been at this with other people before — you've watched it from the outside, found it amusing, even. From the inside it has less charm.
+#elseif ($w.hasTrait("BITCHY"))##
+By the third comment you already have a response queued. You haven't said it yet because you're deciding whether you want this to be a thing.
+#elseif ($w.hasTrait("CUTE"))##
+The first two you took at face value. The third one snags on something and you replay the previous two and feel a bit stupid for not clocking it sooner, and then annoyed at yourself for caring.
+#else##
+The comments have been landing in a way that's hard to name. Not offensive enough to push back on. Not quite kind enough to relax about. You're standing in a changing room trying on a top you no longer want to buy.
+#end##
+
+#if ($f.getCharType() == "PARTY_GIRL")##
+She's not doing it deliberately — that much is clear. $f.getName() does this the way she posts too many selfies: it's just where her attention goes, with no particular intent behind it. Which is its own kind of exhausting.
+#elseif ($f.getCharType() == "SOPHISTICATED")##
+$f.getName() is doing it with complete composure. No register shift, no tell. It arrives like conversation and lands like something else.
+#elseif ($f.getCharType() == "INNOCENT")##
+The genuinely disorienting thing is that $f.getName() means every word. There's no edge in her voice. She thinks she's being friendly, and the comments are still doing exactly what they're doing.
+#end##
+</introText>
+
+
+<callItOutText>
+You come out of the changing room without the top and set it on the return rail.
+
+#if ($f.getCharType() == "PARTY_GIRL")##
+"Can I say something?" you say, and you keep your voice level.
+
+$f.getName() turns from the rail she's been rifling through. "Yeah, of course."
+
+"The comments — the brave choice, the shape thing. I know you don't mean anything by them but they don't quite land as compliments."
+
+The look on her face is completely unguarded. Surprise, then a kind of rapid internal scrolling as she replays what she's said. "Oh god. Was I doing that?" She puts down the hanger she's holding. "I didn't even — I'm sorry."
+
+She means it. That's the strange part. She'll probably do it again in three weeks without remembering this conversation. But right now she means it, and the afternoon goes quiet in a way it wasn't before.
+$f.reduceNpcLikingTiny()##
+#elseif ($f.getCharType() == "SOPHISTICATED")##
+"I'm going to say something and I'd rather say it once than let it keep going."
+
+$f.getName() turns, perfectly unhurried. "Of course."
+
+"The comments. The shape comment, the men-noticing comment. I know you know what you're doing."
+
+A beat. She doesn't flinch. "I didn't mean anything by it."
+
+"I know," you say.
+
+And there it is — she smiles, and the smile is warm and genuine and absolutely impenetrable, and she says "I'll buy you a coffee," and somehow that is the end of it and somehow it is also worse than if she'd argued. You've named a thing and she's made it disappear, and the afternoon continues like it was always going to.
+$f.reduceNpcLikingTiny()##
+#elseif ($f.getCharType() == "INNOCENT")##
+You find the words on the walk to the till.
+
+"Some of those comments — the brave choice, what the men were looking at. I know you meant them nicely, but they've been landing a bit differently than I think you intended."
+
+$f.getName() stops walking.
+
+The expression that crosses her face is not defensiveness. It's genuine distress. "I was trying to be encouraging," she says, and her voice has gone small. "I didn't — I thought I was being supportive."
+
+You believe her. That's what makes this the most complicated version of this conversation. She wasn't performing support; she actually thought she was giving it. The gap between what she meant and what landed is not malice, just a particular kind of obliviousness that no one ever told her about.
+
+"I know," you say. "I'm not upset. I just wanted to say it."
+
+She nods. You reach the till. The afternoon doesn't quite recover.
+$f.reduceNpcLikingTiny()##
+#end##
+</callItOutText>
+
+
+<playAlongText>
+You emerge from the changing room and hang the top back.
+
+#if ($w.hasTrait("BITCHY"))##
+"You know," you say, considering the rail with mild interest, "I did wonder about your jacket — the cut does something a bit unforgiving across the back, but it's such a fun thing to try."
+
+You say it exactly as she says things: warm, curious, complete deniability.
+
+#if ($f.getCharType() == "PARTY_GIRL")##
+$f.getName() looks down at her jacket. "Wait, seriously?" You give her the same look she's been giving you — attentive, slightly concerned, leaving room for interpretation. She checks her reflection in the mirror and you watch the thought process behind her eyes and feel a small, mean satisfaction. The comments stop.
+#elseif ($f.getCharType() == "SOPHISTICATED")##
+$f.getName() glances down at herself, then back up at you. For exactly one second something moves across her face that isn't composed. Then she laughs — a real one, not the performed kind. "Touché," she says, and the afternoon shifts into something you could almost enjoy.
+#elseif ($f.getCharType() == "INNOCENT")##
+$f.getName() looks genuinely alarmed. "Really? Do you think so?" She pulls at the lapel, suddenly unsure. You feel a small internal wince — you've fired into the wrong target. She wasn't playing a game; you just made her feel bad about a jacket she liked. You spend the next few minutes talking her back out of it.
+#end##
+#elseif ($w.hasTrait("SULTRY"))##
+You let the next one arrive — "That shade's very you, I just wonder if something more neutral might be more versatile?" — and you pick it up smoothly and turn it.
+
+"You're probably right. Though I notice that's the second time you've steered me towards something that would make me look less noticeable. I'm going to take it as a compliment."
+
+#if ($f.getCharType() == "PARTY_GIRL")##
+$f.getName() blinks, processes, and then laughs and says "oh my god, no, I didn't mean — " and spends the next five minutes overcorrecting, and by the time she's done she's spent more energy on you than she has on herself all afternoon.
+#elseif ($f.getCharType() == "SOPHISTICATED")##
+$f.getName() smiles. "I've been caught," she says, and there's something that might be respect in her voice. "You're sharper than you look." You let that one go. You've already won.
+#elseif ($f.getCharType() == "INNOCENT")##
+$f.getName() looks briefly stricken. "I wasn't! I just thought — " You reassure her, and mean it, and the game is cancelled but only because it was never being played by her in the first place.
+#end##
+#else##
+The next comment arrives and you take it and offer one back — not cruel, just level: "That style's really interesting on you, I wasn't sure about the waist but it's grown on me."
+
+#if ($f.getCharType() == "PARTY_GIRL")##
+$f.getName() pulls at her hem, suddenly self-conscious, and you watch the pattern break. She doesn't do it again. She also doesn't notice what just happened, which is almost the point.
+#elseif ($f.getCharType() == "SOPHISTICATED")##
+$f.getName() pauses for a beat. Then: "Fair enough." She puts down the hanger she was holding. Something in the afternoon quietly re-settles.
+#elseif ($f.getCharType() == "INNOCENT")##
+$f.getName() looks pleased and smooths her waist and says "do you really think so?" and you say yes, of course, because you meant it and it wasn't a weapon, and the conversation just continues and none of your careful calibration was needed.
+#end##
+#end##
+</playAlongText>
+
+
+<deflectWarmlyText>
+The fourth comment — something about your hair, something about how some women can carry off that much volume and some can't, and you're the kind that can, which is lucky — arrives and you let it pass and then, carefully, you pick up a different thread entirely.
+$gd.addStat("STRESS_SMALL")##
+
+"Did you end up going to that thing last week? You mentioned it and then I forgot to ask."
+
+#if ($f.getCharType() == "PARTY_GIRL")##
+$f.getName() needs no encouragement. She's already pivoting: the thing was good, actually, she met someone, he was quite fit but a bit boring — and that's it, you're out. The comments stop because something more interesting has appeared. She doesn't notice she was doing them.
+#elseif ($f.getCharType() == "SOPHISTICATED")##
+$f.getName() pauses for a fraction of a second, and you see her clock the redirect, and she lets you make it. "I did, yes," she says, and the afternoon continues on different terms. You're not sure if you've bought goodwill or merely a ceasefire, but the comments stop.
+#elseif ($f.getCharType() == "INNOCENT")##
+$f.getName() brightens immediately. She'd actually been waiting to tell you about it; she just hadn't found the opening. She talks for ten minutes. The comments don't come back because she's got somewhere better to put her energy, and she wasn't trying to make you feel small in the first place. This is easier than it had any right to be.
+#end##
+
+You find what you came for — eventually — and pay and don't think about the hair comment. You don't think about it much.
+</deflectWarmlyText>
+
+
+<leaveEarlyText>
+$f.reduceNpcLikingTiny()##
+$gd.addStat("STRESS_SMALL")##
+You check your phone at a point that feels natural enough. "I've just remembered — I've got something on. I'm sorry, I should have flagged it."
+
+#if ($f.getCharType() == "PARTY_GIRL")##
+$f.getName() says "oh no, are you sure?" and looks genuinely disappointed — she'd been enjoying herself, the comments and all. You make approximate plans and extract, and the fresh air outside is a notable physical relief. She'll text later about that jacket you didn't buy. She will absolutely recommend the neutral option.
+#elseif ($f.getCharType() == "SOPHISTICATED")##
+$f.getName() nods in a way that is very slightly too understanding. "Of course," she says, and there's something in it — she knows. You leave not quite sure whether you've won or lost, which is probably the answer.
+#elseif ($f.getCharType() == "INNOCENT")##
+$f.getName() looks crestfallen. "Already? We've barely —" She recovers, tells you it's fine, makes you promise to reschedule. She walks you to the door still talking about the thing she'd been meaning to ask you. You leave feeling guilty, which is not what you were aiming for.
+#end##
+
+You get outside and take a slightly longer route home than necessary. It was one Tuesday. It happens.
+</leaveEarlyText>
+
+
+<sceneDescriptionText>
+You're out with $f.getName(). She's been in a particular kind of mood all afternoon.
+</sceneDescriptionText>

@@ -1,0 +1,108 @@
+<introText>
+You almost walk straight into it.
+
+A beagle — stumpy, rust-and-white, with the kind of face that has strong opinions about sandwiches — is sitting directly in the middle of the pavement as though it has been placed there by someone who wanted it to be your problem. Its tail is going. It is looking at you with the full and settled certainty that you, specifically, are going to sort this out.
+
+There's a red tag on its collar. You can see writing on the tag from here. The street is otherwise fairly quiet — a few houses, a parked van, a woman pushing a pram at some distance who does not appear to have noticed the dog, or has noticed it and decided to maintain plausible deniability.
+
+The dog shifts its weight and sits a little straighter.
+</introText>
+
+
+<sceneDescriptionText>
+A lost beagle is sitting on the pavement, looking at you with enormous confidence.
+</sceneDescriptionText>
+
+
+<callTheNumberText>
+You crouch down. The dog immediately puts both front paws on your knee, which you had not invited but which you accept.
+
+The tag reads: PICKLE. Then a mobile number.
+
+#if ($w.hasTrait("ROMANTIC"))
+You already know Pickle's whole story before you've straightened up — some family, probably a semi somewhere with a slightly broken gate, someone who searched the whole road last night and couldn't sleep. The number doesn't even ring twice before a woman answers.
+
+"Oh god. Oh, is she all right? She got out this morning, I've been absolutely frantic, where are you?"
+
+You give her the street name. She knows it. She'll be there in ten minutes. You stay with Pickle until a small red Corsa pulls up and a woman in her forties tumbles out of it still holding her car keys, and Pickle goes absolutely mental.
+
+You don't wait to be thanked. You were already going to be late.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+Back gate left open. Or a loud lorry and she bolted. Or someone rang the doorbell and she slipped out in the chaos. You've run through at least three scenarios by the time you've read the name — PICKLE — and found a signal.
+
+The number connects. You give the street name, the lamppost number (32, visible from where you're standing), a brief description of her current emotional state (fine, tail going, seems unbothered). The person on the other end sounds very relieved and slightly overwhelmed by the specificity.
+
+"We're five minutes away," they say.
+
+You wait. Pickle investigates your shoes with professional thoroughness.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+PICKLE. Mobile number.
+
+You dial. It rings four times. Someone answers, out of breath. You tell them the street, describe the dog. They say they're nearby and heading over. You say you'll wait by the lamp post. This takes about four minutes total.
+
+Pickle, for her part, sits on your foot while you wait. She seems fine.
+#elseif ($w.hasTrait("AMBITIOUS"))
+You do the mental calculation: you have somewhere to be, but it's not urgent, and the number's right there, and the dog is still looking at you.
+
+Fine.
+
+You dial. The owner picks up on the second ring and sounds like she's been crying a bit. You give the street and the tag name — Pickle — and she says she's ten minutes away. You say you'll wait. You wait. Pickle lies on your feet, which is unnecessary but you allow it.
+
+The owner arrives in a rush of apology and you wave it off and go on your way, four minutes behind where you planned to be, which turns out not to matter.
+#else
+PICKLE. And a mobile number.
+
+You dial. Someone answers — sounds relieved before you've finished your first sentence. You give the street name and they say they'll be there shortly. You wait. Pickle stays on your foot. The owner arrives in a small silver hatchback and Pickle behaves as though she hasn't seen another human being in years, which given her general energy seems plausible.
+#end
+
+$gd.addStat("HELPED_A_STRANGER")##
+</callTheNumberText>
+
+
+<waitWithItText>
+You step to the side of the pavement, out of the way of anyone who might come round the corner at pace, and crouch down next to her. Pickle — that's what the tag says, PICKLE — puts both paws on your knee without being asked.
+
+You wait. Pickle is unbothered. She smells of garden and whatever she's been investigating this morning. Her tail hasn't stopped.
+
+A woman comes around the corner at a half-jog, scanning the street ahead of her. She spots Pickle before she spots you. Her shoulders drop about three inches.
+
+"Pickle, you absolute— I'm so sorry, did she bother you? She just— the gate was open and she was gone before I—"
+
+You say it's fine. It genuinely is. Pickle is already attempting to climb her owner's leg.
+
+You carry on.
+
+$gd.addStat("HELPED_A_STRANGER")##
+</waitWithItText>
+
+
+<takeSomewhereText>
+You check the tag — PICKLE — and then look up the street. There's a vet's just off the main road; you've walked past it before.
+
+"Right," you tell Pickle. "Come on then."
+
+Pickle comes on then. She walks on a loose imaginary lead remarkably well for a dog who was apparently just wandering the street unattended.
+
+The vet's receptionist takes one look at you and the dog and says, "Ah. Lost one?" She scans Pickle's chip, finds the registration, and rings the owner while you fill out the brief form they push across the desk at you. The owner is apparently fifteen minutes away. You leave your name. You don't wait.
+
+Outside, the street looks exactly as it did before, which feels slightly wrong given the amount of admin that just happened.
+
+$gd.addStat("HELPED_A_STRANGER")##
+</takeSomewhereText>
+
+
+<keepWalkingText>
+You look at the dog. The dog looks at you. Her tail continues.
+
+There's a tag. There's a number on it. Whoever owns her is probably around here somewhere, wondering where she's got to. She's clearly fine. She's clearly fed. She's clearly the sort of dog who belongs to someone and knows it.
+
+You walk on.
+
+#if ($scene.randomBoolean())
+You do glance back once, at the corner. She's still sitting there, tail going, watching you go. She doesn't look betrayed. She looks as though she has every confidence that the next person will sort it.
+#else
+You don't look back. You've got things to do.
+#end
+
+By the time you reach the main road you've stopped thinking about it.
+</keepWalkingText>

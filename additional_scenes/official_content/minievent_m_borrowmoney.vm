@@ -1,0 +1,146 @@
+<sceneDescriptionText>
+You're with $m.getName() after whatever you came here to do, and the conversation has shifted.
+</sceneDescriptionText>
+
+
+<introText>
+It comes after a pause.
+
+You've been with $m.getName() for the better part of an hour — coffee that turned into a second round, or a drink at the pub after whatever was the original plan — and the conversation had been going fine. Normal. And then there was a pause, the kind that has a purpose, and he said he needed to ask you something.
+
+A few hundred quid. He says it in a way that suggests he's been deciding how to say it for longer than the pause itself.
+
+#if ($m.getPersonality() == "JERK")##
+He makes it sound like the most routine thing in the world — like he's asking if you've got a spare charger. "A few hundred," he says, "just for a bit, till things sort themselves out." He doesn't look embarrassed. He doesn't look anything much at all. If anything, there's a faint expectation in the way he's watching you, like the pause after an obvious question.
+
+You're aware, in some distant way, that you're about to feel strange for hesitating.
+#elseif ($m.getPersonality() == "SELFISH")##
+He frames it around himself, as he tends to. It's just cash flow, he says. Timing thing. Just how it's landed. He doesn't ask how you're placed, and it doesn't seem to occur to him to. He's watching you the way someone watches a cash point when it's processing — not unkindly, just waiting to see what comes out.
+#elseif ($m.getPersonality() == "CARING")##
+He doesn't make it easy on himself. He looks at his glass for a moment before he looks at you, and when he does he's already apologetic. He says he wouldn't ask if he had anyone else he trusted to ask. That last word sits there.
+
+You can tell it cost him something to get here. The number — a few hundred — is delivered quietly, like lowering something fragile onto a surface.
+#else##
+He says it plainly. A few hundred, if you could manage it, just for a bit. He doesn't elaborate, doesn't apologise excessively, doesn't sell it. He's looking at you in the neutral way of someone who has decided to ask and is now waiting on the outcome.
+
+There's nothing in his expression that tells you much. That's the thing.
+#end##
+</introText>
+
+
+<lendNoQuestionsText>
+#if ($m.getPersonality() == "JERK")##
+"Yeah, fine," you say, and the speed of it does something to his expression — a brief shift toward satisfaction that doesn't quite become anything. He says he'll sort it, obviously. Cheers, he says.
+
+The conversation moves on as if the moment weighed nothing. It didn't, you suppose. For him.
+#elseif ($m.getPersonality() == "SELFISH")##
+You tell him that's fine, you can do that.
+
+He nods — accepting, not particularly grateful. Says he'll pay you back obviously, as though the word "obviously" does the emotional work. Already he seems to be moving on from the ask to whatever's next, like it was a minor errand you've just agreed to run.
+
+$m.addWLikingTiny()##
+#elseif ($m.getPersonality() == "CARING")##
+"Yes," you say. "Don't worry about it."
+
+The relief on his face is so immediate it's almost uncomfortable to see. He starts to say something — you don't let him get far, wave it off, tell him it's fine. He says thank you in the way people say it when they mean something specific by it.
+
+$m.addNpcLikingSmall() $m.addWLikingTiny()##
+#else##
+"Sure," you say, "not a problem."
+
+He thanks you once, without overdoing it. You work out the logistics — transfer or cash, when, how — and then the conversation settles back into something ordinary, the request filed away in whatever drawer these things go in.
+
+$m.addWLikingTiny()##
+#end##
+</lendNoQuestionsText>
+
+
+<lendAskFirstText>
+You say you'll sort him out, but — what's it for?
+
+#if ($m.getPersonality() == "JERK")##
+He pauses. Not long, but long enough to be a choice. "Just a cash flow thing," he says. "Nothing major." He doesn't give you more than that, and his tone suggests that asking for more would be making this more than it needs to be.
+
+You let it go. There isn't really anywhere to push without changing the dynamic, and you've decided you're going to say yes. You just wanted to know.
+
+He says cheers like the question was a speed bump he's glad is behind him.
+#elseif ($m.getPersonality() == "SELFISH")##
+He tells you — it's an overlap thing, money in versus money out, bit of a gap. He explains it in the way people explain things they've been explaining to themselves for a week, running the same sentences until they're smooth. The picture it paints is vague and mildly inconvenient for him; the picture it paints of whether he's asked anyone else is left entirely blank.
+
+You say you can manage it. He moves on quickly.
+
+$m.addWLikingTiny()##
+#elseif ($m.getPersonality() == "CARING")##
+He hesitates, and then he tells you. Rent. He's short on rent — not by much, just enough. His flatmate moved out last month and the new person's not coming in until next. He looks at the table while he says it, and the specific texture of the embarrassment — mundane, structural, not dramatic at all — is somehow worse than if he'd said he'd lost his job or got into trouble.
+
+It's the kind of problem that shouldn't be embarrassing but is. You tell him not to worry about it, you'll sort it. He nods and doesn't say anything for a moment.
+
+$m.addNpcLikingSmall() $m.addWLikingTiny()##
+#else##
+He thinks about it briefly, then says: money coming in late this month, bill that landed awkward, bit of a gap between now and sorted. He gives you the facts without embellishment. It's a boring explanation. That's probably all it is.
+
+You tell him you can do it. He says thank you, and you believe he means it.
+
+$m.addWLikingTiny()##
+#end##
+</lendAskFirstText>
+
+
+<declineGentlyText>
+You tell him you're not really in a position right now. Things are a bit tight at the moment. Maybe he knows whether that's exactly true; maybe he doesn't.
+
+#if ($m.getPersonality() == "JERK")##
+He takes it fine, on the surface. "No worries," he says, and shifts to something else. But there's a small recalibration happening somewhere behind his eyes — you can sense it without being able to name it precisely — like he's quietly updating a figure. He'll find someone who says yes, and he'll remember who didn't.
+
+You feel the strange guilt of having refused something you technically weren't obliged to give.
+
+$m.reduceNpcLikingSmall()##
+#elseif ($m.getPersonality() == "SELFISH")##
+He says he gets it, of course, and he probably does, but the way he says it has a faint undertone — not quite accusation, more like puzzlement that you specifically can't help him, as if he'd budgeted for a yes from you and has to now revise the plan. He doesn't ask what's tight or whether there's anything he can do.
+
+He moves on. So do you.
+
+$m.reduceNpcLikingMedium()##
+#elseif ($m.getPersonality() == "CARING")##
+"Oh — no, no, of course. Don't worry." He means it. You can tell from the speed of it that he'd prepared himself for this possibility and has already made peace with it. He doesn't push, doesn't look hurt, just recalibrates quietly.
+
+What costs him more is that he'd had to ask at all. You can see that.
+
+$m.reduceNpcLikingSmall()##
+#else##
+He nods. Says he understands. The conversation carries on without much fuss, moves to something else within a minute or two. He doesn't make you feel bad about it.
+
+Whether he's fine or not fine is harder to read.
+
+$m.reduceNpcLikingSmall()##
+#end##
+</declineGentlyText>
+
+
+<declineFirmText>
+You tell him it's a rule you have. You don't lend money to friends — not because of him specifically, just as a general principle. Keeps things uncomplicated.
+
+#if ($m.getPersonality() == "JERK")##
+He looks at you for a second. "Right," he says. The word has no particular colour to it, but the pause before it does. He doesn't argue, doesn't press, doesn't say anything that could be quoted back to him. He just absorbs it, and then moves on, and the quality of the conversation shifts into something fractionally more surface-level.
+
+You made the right call. That doesn't make it entirely comfortable.
+
+$m.reduceNpcLikingSmall()##
+#elseif ($m.getPersonality() == "SELFISH")##
+"Fair enough," he says, and his face is entirely neutral in a way that takes mild effort to achieve. He's not going to argue with a policy. He does, in the following minutes, manage to mention once or twice that it's a shame the timing's worked out the way it has for him. He's not directing it at you. He just wants it noted.
+
+$m.reduceNpcLikingMedium()##
+#elseif ($m.getPersonality() == "CARING")##
+He nods, slowly. "No — that makes sense," he says. "Good rule." He looks like he's deciding whether he believes that, and arriving at: yes, probably.
+
+He's embarrassed more on your behalf than his. The fact that you had to invoke a rule to avoid a thing he'd been anxious about asking for — that sits visibly with him for a moment. But he doesn't make it your problem.
+
+$m.reduceNpcLikingSmall()##
+#else##
+He takes it straightforwardly. Says it's a sensible approach, he's heard it before. No argument. He thanks you for being direct about it, which you hadn't expected him to say.
+
+Whether he's privately disappointed or genuinely fine is not something you can tell.
+
+$m.reduceNpcLikingSmall()##
+#end##
+</declineFirmText>

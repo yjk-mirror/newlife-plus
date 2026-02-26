@@ -1,0 +1,69 @@
+# minievent_solo_foundwallet.yml
+# Solo minievent: Found Wallet
+# Content tags: VANILLA
+# Rarity: uncommon (weightDivisorConditions: [true])
+#
+# A wallet on the pavement outside Pret. Fat with cash, no obvious ID.
+# Four choices, four persistent flags. SOLO_STOLE_WALLET surfaces in later content.
+#
+# Flags set:
+#   SOLO_RETURNED_WALLET   — handed in to the Pret
+#   SOLO_REPORTED_WALLET   — took it to the police station
+#   SOLO_TOOK_WALLET_CASH  — kept the cash, posted the wallet
+#   SOLO_STOLE_WALLET      — kept everything
+
+textFileName: minievent_solo_foundwallet.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: shopfront
+  floor: pavement
+  hasBed: false
+  isOutside: true
+
+
+intro:
+ textId: introText
+ followUpActions:
+  handItIn:
+  takeToPolice:
+  takeTheCash:
+  keepEverything:
+
+
+actions:
+ - id: handItIn
+   shortDesc: Hand it in to Pret
+   longDesc: Take it inside and leave it at the counter. Safest thing.
+   textId: handItInText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_RETURNED_WALLET")
+   finishScene: true
+
+ - id: takeToPolice
+   shortDesc: Take it to the police station
+   longDesc: It'll take twenty minutes out of your day, but it's the proper thing to do.
+   textId: takeToPoliceText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_REPORTED_WALLET")
+   finishScene: true
+
+ - id: takeTheCash
+   shortDesc: Take the cash, post the wallet
+   longDesc: The money spends. The cards can be cancelled. You'll post it in a postbox so the owner can at least get their ID back.
+   textId: takeTheCashText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_TOOK_WALLET_CASH")
+   finishScene: true
+
+ - id: keepEverything
+   shortDesc: Keep everything
+   longDesc: Finders keepers.
+   textId: keepEverythingText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_STOLE_WALLET")
+   finishScene: true

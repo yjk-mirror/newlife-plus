@@ -1,0 +1,208 @@
+<introText>
+You've been standing here for nine minutes. Your phone says ten but you know it's nine because the last two felt like one. The street is one of those streets that's perfectly ordinary in daylight — terraced houses, a chicken shop at the far end with its lights still going, a bin that someone's pushed against the wall — and considerably less ordinary now, at this hour, in the specific way that streets sometimes aren't.
+
+You're waiting. For your cab. For your friend who said she'd be ten minutes twenty minutes ago. For whatever the city has decided is next. You've been looking at your phone.
+
+The car comes from the direction of the chicken shop. It's a dark saloon, nothing notable — the kind of car that no one ever remembers. It doesn't slow the way cars slow when there's traffic, or when someone's unsure of the turning. It slows the way a car slows when someone in it has decided to get a better look at something.
+
+The window comes down.
+
+He's probably your dad's age. He doesn't look at your face first.
+
+"You waiting for someone?" he says.
+
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You understand immediately. Not because of women's intuition or because the night is dangerous or because you'd been warned about this street, but because you know exactly what just happened. You know the speed of that assessment — the look from the car, the calculation, the window coming down. You know it the way you know it because you used to do the reading. Not like this. You never did it like this. But the logic of the look — the yes/no in under a second, the check of what she's wearing and where she's standing and whether the street is empty — you know that logic from the inside.
+
+You're on the other side of the glass now.
+
+He's still waiting for your answer, the engine idling. The question was designed to be plausibly nothing, the kind of thing you can't point to. That was deliberate too. You know that as well.
+
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+The question lands and you feel the particular shape of it — not surprise, exactly, but something adjacent to it. That specific click of understanding. You've been further from this side of things for a while now, and you know how to navigate it, and you will, and it's just that for half a second there's a flicker of the old vantage point. You remember what the calculation looks like from the other side. The moment passes.
+
+You know what this is. The question was never a question.
+
+##
+#else
+It takes you a second. Then you understand. The question that wasn't a question. The window that came down at exactly this kind of hour on exactly this kind of street because of the way you're standing and the way you're dressed and the fact that you're alone.
+
+The city does this, sometimes, after dark.
+
+##
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A car has slowed beside you on the street. The driver has asked a question that isn't a question.
+</sceneDescriptionText>
+
+
+<correctHimText>
+##
+#if ($w.hasTrait("BITCHY"))
+"No," you say. Your voice is perfectly level. "And you've made an error."
+
+It's quiet enough that anyone walking within ten metres would hear it clearly. You wait for that to register. You watch it register. His expression does something complicated — embarrassment fighting with whatever it is men like this have instead of self-awareness — and then the window goes up and the car moves off at exactly the speed of someone who doesn't want to look like they're fleeing.
+
+You turn and walk. Same pace you were planning to walk. You don't watch him go. There's no need.
+
+If there was anyone on the pavement, they heard. That was fine by you.
+##
+#elseif ($w.hasTrait("ROMANTIC"))
+"I'm not," you say. "Whatever you thought — I'm not."
+
+It comes out quieter than you intended, which is not how you wanted it. He looks at you for a second — recalibrating — and then the window goes up.
+
+The car turns at the end of the road.
+
+You stand there after, which you hadn't planned to do. The chicken shop light blinks at the far end. A woman across the street doesn't look up from her phone. Everything is as it was, and you're standing in the same spot, and there's something in the specific wrongness of those nine minutes — ten minutes, your phone says — that you don't quite have words for yet.
+
+You'll think of something on the way home. Something that explains why you still feel slightly cold.
+##
+#elseif ($w.hasTrait("SULTRY"))
+"You've got the wrong street," you say. Dry. Exact.
+
+There's a half-second where he processes this — where you can see him working out whether you mean what he thinks you mean — and then the understanding arrives and he has the grace to look mortified. The window goes up without another word. The car moves.
+
+You watch it go with your arms folded, which you hadn't been doing a minute ago.
+
+The thing is, it's almost funny. The absolute confidence of it — the slow-down, the window, the particular shape of that question. You would have found it funnier if you weren't now going to spend the next twenty minutes being irritated. The city has a great talent for punctuating perfectly ordinary evenings with things you didn't ask for.
+
+Your cab had better be close.
+##
+#else
+You look at him directly. "I think you've made a mistake," you say. Flat. Clear. Not loud.
+
+He takes a moment. Then the window goes up and the car moves off.
+
+You watch it reach the end of the road and turn, and then you look back at your phone. Your cab is four minutes away. The street is quiet again, in the way streets become quiet after something small and unpleasant has ended.
+
+You shift your weight and look at the time and wait.
+##
+#end
+</correctHimText>
+
+
+<laughOffText>
+##
+#if ($w.hasTrait("SULTRY"))
+You let out a short laugh. Not performed — actual. The specific laugh that means *really?*
+
+"On you go," you say.
+
+He doesn't say anything. The window goes up slightly faster than it came down and the car pulls away. You watch it go with your head tilted, and then you turn back to face the street.
+
+The thing about this city at night is that it is absolutely committed to reminding you it has its own agenda. You can be mildly entertained by that or you can be furious about it, and being mildly entertained is considerably less tiring.
+
+You're still going to be annoyed about this for the rest of the walk. You know yourself well enough to know that. You just won't let it show.
+##
+#elseif ($w.hasTrait("ROMANTIC"))
+Something comes out of you that's almost a laugh. It surprises you slightly.
+
+"No," you say, with a small shake of your head, and you start walking. You don't run. You don't hurry. You just walk.
+
+The car sits for a second and then moves off in the other direction.
+
+You keep going, and the laughter has already gone, and what's underneath it isn't quite anger and isn't quite sadness and isn't quite anything with a clean name. Just the particular weight of being assessed in that specific way on a perfectly ordinary evening when you were just standing there waiting.
+
+You walk with your hands in your pockets and tell yourself to leave it.
+##
+#elseif ($w.hasTrait("BITCHY"))
+You look at him for exactly one second, which is all the time this deserves. Then you laugh — a single, short, precise sound — and turn and walk.
+
+Behind you, the car idles for a moment and then moves off. You don't check.
+
+There's nothing particularly remarkable about that encounter except how little effort it took to end it. People like that rely on the other person not being sure how to respond. You were sure. Easy.
+##
+#else
+You shake your head and make a sound that might generously be called a laugh, and then you walk.
+
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You walk at a good clip, not looking back. The street stretches out ahead and the assessment is still running somewhere at the back of your head — the mechanics of it, how quickly it happened, how you'd been standing there for nine minutes and hadn't thought once about how you looked from the road. You think about it now.
+
+You'd never thought about it from here before. That's all. You think about it now.
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+You walk, and you let it settle, and it settles in the way things settle when you've had practice letting them settle. Still with a particular quality to it. Still something you'll carry for a few minutes.
+
+The street gets lighter ahead and you keep going.
+##
+#else
+The car moves off. The street goes quiet.
+
+You check your phone and keep walking, because that is what you do with things like this.
+##
+#end
+##
+#end
+</laughOffText>
+
+
+<leaveImmediatelyText>
+You don't answer. You turn and walk.
+
+Not fast — not in the particular way that would feel like running — but purposefully. There are better places to be than this pavement and you are already heading toward them.
+
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+The car idles behind you for a moment. You don't turn around. You know what he's doing — giving you one more second in case you change your mind, the same mechanical patience the assessment always had. You know the shape of this from the inside. You used to watch women walk away and think nothing of it. Now you're the one walking.
+
+The engine sound recedes. Then silence, or near enough.
+
+You get to the end of the road and don't look back. The street is ordinary again, the kind of ordinary that costs something to reinstate.
+
+You check your phone. Your cab is three minutes out. You put your phone away and stand somewhere more lit and wait.
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+The car idles for a beat and then moves off in the other direction. You hear it go but you don't look back, because looking back would give it weight it doesn't deserve, and you have spent enough energy already on this city's various attempts to be interesting after dark.
+
+You find a better spot to wait. The cab will come.
+##
+#else
+Behind you, the window goes up. The car moves off.
+
+You walk until you're somewhere better lit, and you wait there instead. Nine minutes of standing in the wrong place is quite enough. Ten, your phone says. Either way.
+##
+#end
+</leaveImmediatelyText>
+
+
+<shyFreezeText>
+## This action is only available to PCs with SHY trait
+You meant to say something.
+
+There was something good — the right thing, clean and clear — somewhere in your head, and the window was right there, and he was right there, and you had all the time in the world except that your mouth was not open and the sentence wasn't happening and the moment where it would have made sense kept extending past the point where it made sense.
+
+He looks at you. You look at him. The question sits between you unanswered.
+
+You're not sure what your face is doing. Something, probably.
+
+He makes a decision. The window goes up. The car pulls away.
+
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+You stand there for a second in the space where the response should have gone.
+
+The thing you'd wanted to say was good. It was the right amount of cold and the right amount of clear, and you had it ready, and your body simply did not cooperate. You've found that to be a recurring feature of your body lately — it has considered opinions about what it will and won't do in a crisis, and those opinions don't always match yours.
+
+You start walking. The bus stop is at the end of the road.
+
+On the bus home, going over it, you will tell yourself you didn't get the chance. That the window closed too fast. Both of those things will be true enough. Neither of them will be the whole story, and you will know that too, and you'll sit with your face reflected in the dark window and you'll think about the other side of the glass and what it meant to be on it, back when you were, and you'll get off at your stop and that will be that.
+##
+#else
+You stand there for a second.
+
+The thing you meant to say was there. It just — wasn't. Your body had a different plan, which was apparently no plan at all, just stillness, and now the car is gone and the window is up and the street is quiet and you are left here having handled nothing, except that you have in fact handled it because he's gone, just not in the satisfying way where you said the right thing.
+
+You start walking. You'll think about what you should have said on the bus home. You always do.
+##
+#end
+</shyFreezeText>
+
+
+<empty></empty>

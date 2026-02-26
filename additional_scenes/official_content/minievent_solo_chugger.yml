@@ -1,0 +1,77 @@
+# Preconditions for this scene:
+# Part of the minievent framework
+# Content tags: VANILLA
+# Rarity: common (no weight modification)
+
+textFileName: minievent_solo_chugger.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: wall
+  floor: pavement
+  hasBed: false
+  isOutside: true
+
+
+intro:
+ textId: introText
+ followUpActions:
+  donateQuickly:
+  refuseAndWalk:
+  stopAndArgue:
+  signUpShy: $w.hasTrait("SHY")
+
+
+actions:
+ - id: donateQuickly
+   shortDesc: Give him something
+   longDesc: Hand over a few quid and get this over with
+   textId: donateQuicklyText
+   effects:
+    - effect: $w.changeMoney(-3)
+    - effect: $gd.setGameFlag("SOLO_DONATED_CHUGGER")
+   finishScene: true
+
+ - id: refuseAndWalk
+   shortDesc: Keep walking
+   longDesc: Don't stop. Don't make eye contact. You were never here.
+   textId: refuseAndWalkText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_REFUSED_CHUGGER")
+   followUpActions:
+    refuseAndWalkRespond:
+    refuseAndWalkIgnore:
+
+ - id: stopAndArgue
+   shortDesc: Explain yourself
+   longDesc: Tell him exactly why you won't be signing anything today
+   textId: stopAndArgueText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_REFUSED_CHUGGER")
+   finishScene: true
+
+ - id: signUpShy
+   shortDesc: Sign up
+   longDesc: Your hand is already moving toward the clipboard
+   condition: $w.hasTrait("SHY")
+   textId: signUpShyText
+   effects:
+    - effect: $w.changeMoney(-5)
+    - effect: $gd.setGameFlag("SOLO_SIGNED_CHARITY_DD")
+   finishScene: true
+
+ - id: refuseAndWalkRespond
+   shortDesc: Say something back
+   longDesc: Turn around and give him an answer
+   textId: refuseAndWalkRespondText
+   finishScene: true
+
+ - id: refuseAndWalkIgnore
+   shortDesc: Keep going
+   longDesc: Pretend you can't hear him
+   textId: refuseAndWalkIgnoreText
+   finishScene: true

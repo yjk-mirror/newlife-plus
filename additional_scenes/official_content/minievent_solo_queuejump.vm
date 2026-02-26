@@ -1,0 +1,175 @@
+<introText>
+The queue has been moving at the pace of all queues, which is to say: slowly, and with particular attention to the person three spots ahead who cannot find their card.
+
+You are one person from the front. The woman in front of you has just started placing her items on the belt. You have mentally allocated approximately ninety more seconds to this errand before you can leave.
+
+He comes from the adjacent aisle — fifties, lanyard, canvas bag with something from the farmers' market in it. He walks the way people walk when they have somewhere to be that is more important than wherever you're going. He glances at you briefly, the way you'd glance at a lamppost: registering, not seeing.
+
+And then he steps into the gap between you and the woman in front.
+
+He does not apologise. He does not look back. He takes out his phone and begins scrolling, in the manner of a man who has conducted this precise manoeuvre so many times that it has ceased to register as anything at all.
+
+The beep of the till sounds very loud in the silence that follows.
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+There's something familiar about it — not the specific action, but the geometry of it. The unspoken assumption that no one is going to say anything, that the social awkwardness of calling it out outweighs the injustice of absorbing it. It's the same logic that makes certain things just work, if you're confident enough about them.
+
+You were confident about different things, once.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A supermarket checkout queue. One person from the front, until a moment ago.
+</sceneDescriptionText>
+
+
+<sayDirectlyText>
+#if ($w.hasTrait("POSH"))
+"Excuse me."
+
+You say it precisely the way you've said it to waiters who brought the wrong thing, to estate agents who underestimated you, to anyone who has briefly forgotten that you are a person who is present in the room. It is not loud. It is not rude. It is entirely, completely certain of itself.
+
+He looks up from his phone.
+
+"I was next," you say. Still the same register. He could be a waiter. He could be anyone.
+
+There's a beat — the beat where men like this calculate whether they're actually going to have to move — and then he steps back, just slightly, and makes a gesture with his free hand that means after you without conceding that he was wrong. You move forward without acknowledging the gesture.
+
+The cashier has been watching. She gives you a very small nod.
+
+You were always going to win this. That was never in question.
+#elseif ($w.hasTrait("BITCHY"))
+"Sorry" — you say it with the vowel stretched slightly, the apologetic tone deployed in the way a scalpel is deployed — "I was next."
+
+He looks up. You smile at him. The smile means: I have found you out and I am being extremely polite about it, which is the most aggressive thing I could do.
+
+"Oh," he says.
+
+"Yes," you say. "Oh."
+
+He moves. He does it quickly, with a faint performance of good humour — a shrug, a small half-laugh — that's meant to reframe this as him being gracious rather than caught. You don't help him with this. You step forward and put your basket on the belt.
+
+The woman behind you makes a sound that might be a muffled laugh. The man studies his phone like it contains an urgent dispatch.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+"Excuse me — I was next."
+
+No drama in it. It's information. He was behind you; now he isn't; this is a fact that should be corrected. You say it the way you'd say the bus is in five minutes: plainly, because plainness is what the situation needs.
+
+He does the thing where he processes whether this is worth disputing, and then he steps back. No apology. You weren't expecting one.
+
+"Cheers," you say, moving forward, and you mean it neutrally. He pockets his phone. The queue resolves itself without fanfare, which is the correct outcome.
+#else
+"Excuse me." Your voice comes out slightly smaller than you intended, but it comes out.
+
+He looks up from his phone. You meet his eyes for a fraction of a second too long.
+
+"I was here first," you say, and gesture — vaguely, slightly awkwardly — at where you were standing.
+
+He looks at the space, looks at you, and appears to decide that this is not worth fighting. He takes a step back. No apology. You nod, step forward, and put your basket on the belt.
+
+Your hands are very slightly steadier than expected. You were next. You said so. It worked.
+#end
+</sayDirectlyText>
+
+
+<passiveAggressiveText>
+#if ($w.hasTrait("SHY"))
+You don't say anything. But you move.
+
+You step forward — not aggressively, just to your original position — until you're standing close enough that the fact of where you were is physically obvious. The geometry speaks for itself. You are twelve inches from his shoulder. You look at the till. You put your basket down on the belt with a small, deliberate sound.
+
+He looks up from his phone.
+
+You look at the till.
+
+He looks at you.
+
+You look at the till.
+
+He shifts. Just slightly. Not a concession — not an apology — but a shift. The space between you adjusts. The claim is registered.
+
+You have not said a word. You are shaking very slightly in a way that won't show. The cashier starts scanning your items. It's fine. This is fine. You handled it.
+#elseif ($w.hasTrait("POSH"))
+Moving forward was the obvious choice. You were there; he slotted in front; the correction is simply to reclaim the space.
+
+You step up to your original position — directly beside him, basket in hand — and wait. You don't look at him. You look at the till. You radiate the specific energy of someone who has better things to do than make a scene, but whose presence makes a scene entirely redundant.
+
+He's still on his phone. But he's shifted about three inches to the left, which is an admission of sorts, and you take it.
+
+When the till opens, you move forward first. He lets you. This is how these things are supposed to work, and both of you know it.
+#else
+You don't say anything.
+
+You do, however, step back up to where you were standing — close enough that the geography is unambiguous, that anyone watching can see the sequence of events laid out spatially. You put your basket down on the end of the belt with the small purposeful sound of someone making a point without making a point.
+
+He notices. You can tell he notices. He doesn't look up from his phone, but his thumb stops scrolling for a second.
+
+Neither of you says anything. The queue moves forward. He goes first, because he's already ahead and because this was never going to fully resolve itself, but the woman behind you has witnessed everything and gives you a look that means: yes, I saw that, you were right, well done.
+
+It's not nothing.
+#end
+</passiveAggressiveText>
+
+
+<sayNothingText>
+You don't say anything.
+
+You think: I should say something. You think this very clearly and very specifically, and the moment in which saying something would have been natural passes, and then the moment in which it would have been merely acceptable passes, and then the cashier starts scanning his items and the window has gone.
+
+He doesn't look back. He wouldn't.
+#if ($w.hasTrait("SHY"))
+You stand there with the thing you should have said fully formed in your head — Excuse me, I was next, four words, that's all — and you watch him finish his transaction and pick up his bag and leave without once having registered that anything happened.
+
+On the bus home, you refine it. You find the better version: not aggressive, just clear. A small civilised correction. You run it several times. It gets cleaner with each iteration. By the time you're three stops from home, you've got a version that's quite good, actually — precise, unassailable, exactly the right tone.
+
+You don't feel better about this.
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+You stand in your slightly-wrong position and watch him pay and think about what would have happened if you'd said something. He'd have turned. He'd have done the thing — the bemused look, the slight smile, the suggestion that he'd just stepped in for a second — and you'd either have had to escalate or back down, and either option plays badly in front of the woman with the pasta behind you.
+
+Or maybe he'd have just apologised and moved. Fifty-fifty, maybe less. It didn't seem worth the odds at the time.
+
+This is what you tell yourself on the walk home. It's not entirely convincing.
+#else
+He pays. He goes. You step forward and load your items onto the belt. The cashier scans them without comment. The fluorescent light does what fluorescent lights do.
+
+Outside, you carry the whole thing home with you like something in your pocket. Not anger, exactly. More like the low-grade specific irritation of knowing you could have said something and didn't, and that the universe has once again sorted itself out in a way that slightly doesn't reflect your preferences.
+
+He'll do it again tomorrow. He's already done it today to someone else. You know this. It doesn't really help.
+#end
+</sayNothingText>
+
+
+<askCashierText>
+The cashier is a woman in her thirties with the expression of someone who has seen everything this particular postcode has to offer. She's mid-scan when you catch her eye.
+
+"Excuse me," you say. "I was next in the queue."
+
+You say it to her, not to him, which is the correct move. You are not accusing anyone of anything. You are simply reporting a fact to the relevant authority and allowing the institution to adjudicate.
+#if ($w.hasTrait("POSH"))
+She looks at him. She looks at you. The expression on her face is a very brief but very precise calculation, and then she says, "Did you want to go ahead, love?" — directed at you, which means she has already reached a verdict.
+
+He looks up from his phone. His eyes move from her to you to the queue behind you, where three people have now silently assembled, all of whom witnessed this. The calculus is not in his favour.
+
+"No, no, go ahead," he says, in the tone of someone making a magnanimous decision that was not his to make. He steps aside.
+
+The cashier gives him a scan-and-beep that contains no warmth whatsoever. You pay, you thank her, you leave.
+#elseif ($w.hasTrait("BITCHY"))
+She looks up. She looks at him. She looks at you. The look says: I don't get paid enough for this, but also, I have seen him before.
+
+"Were you waiting first?" she asks you, which is not quite the same as telling him off, but which makes him have to answer.
+
+"I was," you say. Pleasantly. You don't look at him.
+
+He mutters something about just grabbing one thing. She gives him a look and then gives you a nod, and you step forward to the belt. He is processed after you in silence.
+
+Involving the institution was the right call. Some things need a referee.
+#else
+She looks between the two of you. He's looking at his phone and hasn't heard, or is performing not-hearing.
+
+"Do you want to go in front, love?" she says to you, which is the closest she can get to a ruling without escalating anything.
+
+You say yes. You step forward. He doesn't protest — if he heard, he's choosing not to have heard — and the whole thing resolves without drama, which is the best possible outcome and still somehow not entirely satisfying.
+
+You thank her. She gives you the nod of a woman who has done this at least twice today.
+#end
+</askCashierText>

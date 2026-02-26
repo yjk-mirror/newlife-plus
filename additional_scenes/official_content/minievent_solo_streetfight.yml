@@ -1,0 +1,77 @@
+# minievent_solo_streetfight.yml
+# Solo minievent: Street Fight Outside a Pub
+# Content tags: VANILLA
+# Rarity: uncommon (weightDivisorConditions: [true])
+#
+# Two men fighting outside a Wetherspoons on a Friday or Saturday evening.
+# She's walking past when it starts — shouting, then impact, then a circle forming.
+# Someone ends up on the ground. Standing still becomes its own decision.
+#
+# Flags set:
+#   SOLO_WITNESSED_STREET_FIGHT  — always set
+#   SOLO_FILMED_STREET_FIGHT     — filmed it on her phone (consequence chain sub-flag)
+#
+# Stats:
+#   STRESS_SMALL added on all paths (in VM prose)
+
+textFileName: minievent_solo_streetfight.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: grimy pub exterior, its sign lit orange against the dark
+  floor: wet pavement outside a Wetherspoons
+  hasBed: false
+  isOutside: true
+
+
+intro:
+ textId: introText
+ followUpActions:
+  walkAway:
+  filmIt:
+  callPolice:
+  askAround:
+
+
+actions:
+ - id: walkAway
+   shortDesc: Walk quickly the other way
+   longDesc: Not your fight. Not your business. You were never here.
+   textId: walkAwayText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_WITNESSED_STREET_FIGHT")
+      condition: "!$gd.hasGameFlag('SOLO_WITNESSED_STREET_FIGHT')"
+   finishScene: true
+
+ - id: filmIt
+   shortDesc: Film it on your phone
+   longDesc: Someone should be documenting this. In case it matters later.
+   textId: filmItText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_WITNESSED_STREET_FIGHT")
+      condition: "!$gd.hasGameFlag('SOLO_WITNESSED_STREET_FIGHT')"
+    - effect: $gd.setGameFlag("SOLO_FILMED_STREET_FIGHT")
+      condition: "!$gd.hasGameFlag('SOLO_FILMED_STREET_FIGHT')"
+   finishScene: true
+
+ - id: callPolice
+   shortDesc: Call 999
+   longDesc: Someone's on the ground. The queue can take a minute; make the call anyway.
+   textId: callPoliceText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_WITNESSED_STREET_FIGHT")
+      condition: "!$gd.hasGameFlag('SOLO_WITNESSED_STREET_FIGHT')"
+   finishScene: true
+
+ - id: askAround
+   shortDesc: Ask if anyone's called the police
+   longDesc: There's a small crowd. Surely someone's already done something.
+   textId: askAroundText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_WITNESSED_STREET_FIGHT")
+      condition: "!$gd.hasGameFlag('SOLO_WITNESSED_STREET_FIGHT')"
+   finishScene: true

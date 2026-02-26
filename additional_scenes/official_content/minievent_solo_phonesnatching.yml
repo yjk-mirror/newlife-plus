@@ -1,0 +1,74 @@
+# minievent_solo_phonesnatching.yml
+# Solo minievent: Phone Snatching
+# Content tags: VANILLA
+# Rarity: uncommon (weightDivisorConditions: [true])
+#
+# Walking along the high street, she watches a cyclist snatch a woman's phone
+# three feet from where she's standing. She has three seconds to decide.
+#
+# Flags set:
+#   SOLO_CHASED_PHONE_THIEF   — ran after the cyclist (FITNESS > 30 required)
+#   SOLO_CALLED_POLICE_THEFT  — rang 999 with direction and description
+#   SOLO_HELPED_THEFT_VICTIM  — went to the victim, helped her call it in
+#   SOLO_WITNESSED_THEFT_FROZE — stood there and did nothing
+
+textFileName: minievent_solo_phonesnatching.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: shopfront glass
+  floor: paved high street pavement
+  hasBed: false
+  isOutside: true
+
+
+intro:
+ textId: introText
+ followUpActions:
+  chaseThief: '$w.getSkill("FITNESS") > 30'
+  callPolice:
+  doNothing:
+  helpVictim:
+
+
+actions:
+ - id: chaseThief
+   shortDesc: Chase him on foot
+   longDesc: He's on a bike, but he has to thread through pedestrians. You're fast enough to at least try.
+   condition: '$w.getSkill("FITNESS") > 30'
+   textId: chaseText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_CHASED_PHONE_THIEF")
+      condition: "!$gd.hasGameFlag('SOLO_CHASED_PHONE_THIEF')"
+   finishScene: true
+
+ - id: callPolice
+   shortDesc: Call 999
+   longDesc: You caught a clear look at him. Direction, description — give them what you have.
+   textId: callPoliceText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_CALLED_POLICE_THEFT")
+      condition: "!$gd.hasGameFlag('SOLO_CALLED_POLICE_THEFT')"
+   finishScene: true
+
+ - id: doNothing
+   shortDesc: It happened too fast
+   longDesc: It was over before you'd even processed it. There was nothing you could have done.
+   textId: doNothingText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_WITNESSED_THEFT_FROZE")
+      condition: "!$gd.hasGameFlag('SOLO_WITNESSED_THEFT_FROZE')"
+   finishScene: true
+
+ - id: helpVictim
+   shortDesc: Go to the victim
+   longDesc: The phone is gone. She needs a witness statement and someone to help her get there.
+   textId: helpVictimText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_HELPED_THEFT_VICTIM")
+      condition: "!$gd.hasGameFlag('SOLO_HELPED_THEFT_VICTIM')"
+   finishScene: true

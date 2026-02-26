@@ -1,0 +1,170 @@
+<introText>
+The wrong thing arrives.
+
+Not a different size, not an approximation — the wrong thing entirely. You ordered the chicken and avocado wrap. What's in front of you is a coronation chicken baguette, which is what the table behind you ordered, and you know this because the man at the table behind you is currently looking at his phone and waiting for something that is not here.
+
+The waiter has already turned away. He's halfway across the room, threading between tables with the efficiency of someone who has twelve covers and no interest in being corrected.
+
+You sit with the baguette for a moment.
+
+The café — independent, the kind that puts its specials on a blackboard in chalk — is at full lunch capacity. The person at the next table is eating what looks like your wrap. Nobody is looking at you. The room is conducting its business.
+
+The waiter reaches the counter. Picks up another plate. Turns.
+</introText>
+
+
+<sceneDescriptionText>
+A café at lunch, with someone else's order in front of you.
+</sceneDescriptionText>
+
+
+<flagItText>
+#if ($w.hasTrait("POSH"))
+You wait until he passes close enough. Then: "Excuse me."
+
+Not loud. It doesn't need to be loud. You've used this register in better restaurants than this and it has never failed to stop a waiter. He slows. Turns. You gesture, briefly, at the baguette.
+
+"I ordered the chicken and avocado wrap. This isn't it."
+
+He looks at the plate. Then at you. His expression goes through something — a small, half-formed recalibration — and then he says, "Are you sure that's not what you ordered?"
+
+The pause that follows is quite long.
+
+"I'm certain," you say. Your tone doesn't change. You've told him what you ordered. He's welcome to check. You'll wait.
+
+He checks. He comes back with the wrap. He sets it down without quite meeting your eyes. He doesn't apologise. He is, you suspect, constitutionally incapable of it. You eat your wrap and leave him to the rest of his lunchtime.
+#elseif ($w.hasTrait("BITCHY"))
+You catch his eye when he passes. "This isn't mine."
+
+He stops. He looks at the baguette. He looks at you with the expression of a man who has heard this before and has strong feelings about whether customers are ever actually right.
+
+"What did you order?"
+
+You tell him. He does the thing — the slight raise of an eyebrow, the almost-imperceptible tilt of the head — that means: are you sure about that?
+
+You're sure.
+
+"Let me check with the kitchen," he says, in a tone that suggests the kitchen will back him up.
+
+The kitchen does not back him up. He returns with your wrap and sets it down without ceremony. He doesn't say anything. You don't say anything either. The two of you have reached an understanding, which is that he was wrong and he knows you know it and he'd very much like you to eat your lunch and leave.
+
+You eat your lunch and leave.
+#elseif ($w.hasTrait("SHY"))
+You flag him down when he passes. He stops, impatient in a way he's not quite making obvious.
+
+"Sorry," you say, "I think this might be the wrong order?"
+
+The apology was not necessary. You know it wasn't necessary. It comes out anyway.
+
+He looks at the baguette. "What did you order?"
+
+You tell him. He looks at you with an expression that could be reading as: are you sure? Or it could just be a face. You're not certain. You tell him again, slightly more quietly, as if volume is the issue.
+
+"I'll check," he says.
+
+He comes back with the wrap. Sets it down. "Sorry about that," he says, in the tone of someone who is not especially sorry but has run out of other options. You thank him more than is required. He's already walking away.
+
+You eat your wrap. It's fine. You did the thing. It was harder than it should have been, but you did it.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+You flag him down on his next pass.
+
+"This is wrong," you say. No drama. "I ordered the chicken and avocado. This is coronation chicken."
+
+He looks at it. He does, briefly, the thing where he implies with his expression that this might somehow be a matter of interpretation.
+
+"I'll get it swapped," he says, eventually.
+
+"Cheers," you say, and wait. He brings the right thing. You eat your lunch. The baguette goes back to the kitchen or to the table behind you or wherever it belongs.
+
+It wasn't complicated. It never is.
+#else
+You manage to catch his eye as he goes past and tell him, quickly, what happened. He listens with the expression of a man who is already building his response.
+
+"Are you sure that's not what you ordered?"
+
+You say yes, you're sure.
+
+He does the thing with his face — the slight sceptical elevation of one eyebrow — and you say it again, more clearly this time: chicken and avocado wrap. That is what you ordered. This baguette is not it.
+
+He checks with the kitchen. He comes back with the right order. He doesn't apologise. He sets it down and moves away.
+
+You sit with your actual lunch and try to decide whether you feel vindicated or just relieved. Probably both. Mostly you're hungry.
+#end
+</flagItText>
+
+
+<sayNothingText>
+You look at the baguette.
+
+You consider the waiter, now on the far side of the room. You consider what you'd have to do: catch his attention, explain, wait for him to come back, go through whatever version of that conversation the afternoon has in store. You consider how full the café is and how busy he looks and whether any of this is really worth it.
+
+#if ($w.hasTrait("SHY"))
+The conversation, as you play it out in your head, does not go especially well. There's a version where he looks at you like you've made a mistake and you have to argue the point without seeming like you're making a fuss, and another version where he just shrugs, and neither of them ends with you feeling better than you do right now.
+
+You open the baguette. Coronation chicken. You don't like coronation chicken especially but it's not inedible. You eat. You tell yourself that sometimes this is the sensible option.
+
+You don't entirely believe yourself.
+#elseif ($w.hasTrait("AMBITIOUS"))
+You've got half an hour and you need to eat something. The baguette is food. The conversation would take ten minutes minimum, optimistically, and there's no guarantee it ends with you getting what you ordered anyway.
+
+You open the baguette and eat it fast and efficiently and don't think about it again until you're walking back to wherever you need to be, at which point you think: I should have said something. Then you think about other things instead.
+#else
+The moment in which saying something would have been easy passes. Then the moment in which it would have been merely awkward passes. Then he's halfway across the room and there's a whole table between you, and.
+
+Well.
+
+You unwrap the baguette. Coronation chicken. You eat about half of it before you stop and look at it and feel the specific mild dissatisfaction of someone who stayed quiet when they didn't need to. The food is fine. The coffee is fine. The bill, when it comes, is for things you didn't order, and you pay it anyway.
+#end
+</sayNothingText>
+
+
+<walkOutText>
+You look at the baguette. You look at the waiter, still making rounds on the other side of the room. You calculate the cost-benefit in about four seconds.
+
+You pull out your card and flag down the nearest person behind the counter — not the waiter, someone else, someone who doesn't have a narrative investment in the outcome. You tell her you need to pay and leave. She processes it without asking questions. You leave the baguette untouched on the table, which feels either principled or petty, you're not certain which.
+#if ($w.hasTrait("POSH"))
+Outside on the pavement you pull your coat straight and decide on principled, which is more accurate anyway. You didn't come here for a coronation chicken baguette, and you don't see why you should pretend otherwise.
+
+There's a Pret around the corner. You know what they'll give you there.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+It's a fiver for a coffee you drank and a baguette you didn't touch. You've wasted worse. You find a sandwich somewhere else and eat it on the go and don't spend any more time on it.
+#else
+You don't feel especially righteous about it. The baguette didn't deserve your feelings. The whole thing didn't deserve your feelings. But here you are on the pavement with both of them anyway, heading somewhere you can actually get what you want.
+#end
+</walkOutText>
+
+
+<escalateText>
+The waiter comes past again. You stop him.
+
+"Excuse me — this isn't what I ordered." You tell him what you ordered. He does the thing. The face. The slight raised eyebrow that means he's considering whether you're mistaken.
+
+"I'll have a look," he says, and comes back thirty seconds later with the expression of a man who has decided the kitchen probably got it wrong but who would like to preserve some ambiguity on the point.
+
+"Could I speak to whoever's managing today?" you say.
+#if ($w.hasTrait("POSH"))
+You say it the same way you'd say anything else — as a reasonable request being made of someone capable of fulfilling it. No elevation in your voice. No hostility. Just the specific clarity of a woman who has decided that this particular person has used up his margin.
+
+He goes. The manager — a woman, mid-thirties, the look of someone who spends most of her lunch service putting out fires — comes over. You tell her what happened, concisely. She apologises directly, with the kind of specificity that suggests she means it, or at least knows what meaning it looks like. The right food arrives in four minutes. The coffee is comped.
+
+You didn't want a performance. You just wanted your lunch.
+#elseif ($w.hasTrait("BITCHY"))
+He doesn't love this request. His face does something complicated.
+
+"Is there a problem?" he says, which is technically the same question but with a different emphasis.
+
+"The problem," you say, very pleasantly, "is that I asked for my order to be corrected and your response was to question whether I'd placed the right order. I'd like to speak to your manager."
+
+A beat.
+
+He goes. The manager is apologetic in a genuine way, which is different from how the waiter was apologetic in not a genuine way. The right food comes. She takes something off the bill. The waiter does not come back to your table.
+#else
+He seems slightly surprised. He goes.
+
+The manager is a woman who has the manner of someone that things have gone wrong in front of, many times, and who has developed a practical approach to the resolution. She apologises. Not in the way the waiter implied she might — not the half-apology that puts the burden back on you — but straightforwardly. The right order comes. Something comes off the bill.
+
+You thank her. The waiter avoids your eyeline for the rest of your time here, which is the closest you're going to get to an acknowledgement that you were right all along.
+
+You were right all along. It turns out to be enough.
+#end
+</escalateText>

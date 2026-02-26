@@ -1,0 +1,65 @@
+# Preconditions for this scene:
+# Part of the minievent framework
+# $eventType=="SOLO"
+# Content tags: VANILLA
+# Rarity: uncommon (weightDivisorConditions: [true])
+
+textFileName: minievent_solo_streetphotographer.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: brick shopfront
+  floor: flagstone pavement
+  hasBed: false
+  isOutside: true
+
+
+intro:
+ textId: introText
+ followUpActions:
+  agreeQuick:
+  agreeAndAsk:
+  refusePolite:
+  checkCamera:
+
+
+actions:
+ - id: agreeQuick
+   shortDesc: Let him take it
+   longDesc: Say yes. It's thirty seconds, and then you're gone.
+   textId: agreeQuickText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_PHOTOGRAPHED_STREET")
+      condition: "!$gd.hasGameFlag('SOLO_PHOTOGRAPHED_STREET')"
+   finishScene: true
+
+ - id: agreeAndAsk
+   shortDesc: Yes — but ask what it's for
+   longDesc: You'll say yes, but you want to know what you're agreeing to first.
+   textId: agreeAndAskText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_PHOTOGRAPHED_STREET")
+      condition: "!$gd.hasGameFlag('SOLO_PHOTOGRAPHED_STREET')"
+   finishScene: true
+
+ - id: refusePolite
+   shortDesc: No, thank you
+   longDesc: Decline without making anything of it. Just no.
+   textId: refusePoliteText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_REFUSED_PHOTOGRAPHER")
+      condition: "!$gd.hasGameFlag('SOLO_REFUSED_PHOTOGRAPHER')"
+   finishScene: true
+
+ - id: checkCamera
+   shortDesc: Ask to see his camera
+   longDesc: Before you answer, you want to see who else is in it.
+   textId: checkCameraText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_REFUSED_PHOTOGRAPHER")
+      condition: "!$gd.hasGameFlag('SOLO_REFUSED_PHOTOGRAPHER')"
+   finishScene: true

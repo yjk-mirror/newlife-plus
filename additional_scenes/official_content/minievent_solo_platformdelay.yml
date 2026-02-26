@@ -1,0 +1,87 @@
+# minievent_solo_platformdelay.yml
+# Solo minievent: Platform Delay
+# Content tags: VANILLA, TRANSFORMATION
+# Rarity: common (no weight modification)
+#
+# The tube is suspended. Indefinite delay. No signal. The platform gets crowded.
+# A man next to her starts talking — pleasantly, without aggression — and she has
+# nowhere easy to move.
+#
+# Four player choices, each with a distinct outcome:
+#   engageHim          — she talks back; it goes somewhere
+#   politeDeflect      — headphones in, phone out; may or may not work
+#   shutItDown         — direct; he gets it; small cost either way
+#   trainArrives       — the tube appears mid-conversation; she never finds out
+#
+# Trait branches change what happens, not adjectives:
+#   SHY:     crowd already bad; conversation makes it worse; she does what she
+#            didn't want to; exits politely, ends up flustered
+#   FLIRTY:  can't quite help it; flag SOLO_MET_PLATFORM_MAN set; something is
+#            established that wasn't there before
+#   REFINED: the situation is an affront; his small talk is endured with effort;
+#            she notices things about him she didn't mean to
+#
+# Transformation content (this scene earns it):
+#   !ALWAYS_FEMALE, FEMININITY < 50: reads the conversational script from the inside;
+#   knows what he wants before he's decided; specific dissonance of the recognised pattern
+#   !ALWAYS_FEMALE, FEMININITY >= 50: same awareness, less raw; knowledge not memory
+#   ALWAYS_FEMALE: no transformation frame
+#
+# Flags set:
+#   SOLO_MET_PLATFORM_MAN   — she engaged; something was established
+#   SOLO_PLATFORM_DEFLECTED — she deflected him (successfully or not)
+#   SOLO_PLATFORM_SHUTDOWN  — she shut it down directly
+
+textFileName: minievent_solo_platformdelay.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: tiled platform wall
+  floor: platform concrete
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ followUpActions:
+  engageHim:
+  politeDeflect:
+  shutItDown:
+  trainArrives:
+
+
+actions:
+ - id: engageHim
+   shortDesc: Talk to him
+   longDesc: He seems harmless enough. You can hold a conversation for ten minutes.
+   textId: engageHimText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_MET_PLATFORM_MAN")
+   finishScene: true
+
+ - id: politeDeflect
+   shortDesc: Headphones in
+   longDesc: Fish out your headphones, check your phone. The universal signal.
+   textId: politeDeflectText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_PLATFORM_DEFLECTED")
+   finishScene: true
+
+ - id: shutItDown
+   shortDesc: Be direct
+   longDesc: Tell him politely but clearly that you'd prefer not to chat.
+   textId: shutItDownText
+   effects:
+    - effect: $gd.setGameFlag("SOLO_PLATFORM_SHUTDOWN")
+   finishScene: true
+
+ - id: trainArrives
+   shortDesc: The train arrives
+   longDesc: The PA crackles. The lights in the tunnel shift. It's over before it started.
+   textId: trainArrivesText
+   finishScene: true

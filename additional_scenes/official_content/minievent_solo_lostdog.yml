@@ -1,0 +1,63 @@
+# Preconditions for this scene:
+# Part of the minievent framework — fires as a SOLO event during the player's free time.
+# No NPC required.
+
+textFileName: minievent_solo_lostdog.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+  playerOutfit: CASUAL
+
+  location:
+    wall: Victorian terraced house brick frontage
+    floor: cracked concrete pavement
+    hasBed: false
+    isOutside: true
+
+
+intro:
+  textId: introText
+  followUpActions:
+    callTheNumber:
+    waitWithIt:
+    takeSomewhere:
+    keepWalking:
+
+
+actions:
+  - id: callTheNumber
+    shortDesc: Read the tag, call the number
+    longDesc: Crouch down, read the tag, and ring whoever's listed on it
+    textId: callTheNumberText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_RETURNED_LOST_DOG")
+        condition: "!$gd.hasGameFlag('SOLO_RETURNED_LOST_DOG')"
+    finishScene: true
+
+  - id: waitWithIt
+    shortDesc: Wait with it
+    longDesc: Stay put — the owner is probably nearby and looking
+    textId: waitWithItText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_RETURNED_LOST_DOG")
+        condition: "!$gd.hasGameFlag('SOLO_RETURNED_LOST_DOG')"
+    finishScene: true
+
+  - id: takeSomewhere
+    shortDesc: Take it somewhere useful
+    longDesc: Walk it to a vet, a pet shop, or a shop with a front desk
+    textId: takeSomewhereText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_RETURNED_LOST_DOG")
+        condition: "!$gd.hasGameFlag('SOLO_RETURNED_LOST_DOG')"
+    finishScene: true
+
+  - id: keepWalking
+    shortDesc: Keep walking
+    longDesc: The owner will find it — you've got somewhere to be
+    textId: keepWalkingText
+    effects:
+      - effect: $gd.setGameFlag("SOLO_LEFT_LOST_DOG")
+        condition: "!$gd.hasGameFlag('SOLO_LEFT_LOST_DOG')"
+    finishScene: true

@@ -13,6 +13,23 @@ Work through these four steps in order. Do not skip steps or combine them.
 
 ---
 
+## Adult Content Mandate
+
+This is an adult game. Your audience has opted in. These are not guidelines to weigh against caution — they are requirements:
+
+- **Write boldly.** The narrator has a voice: dry, British, observational, occasionally dark. It is not neutral. It is not safe. It notices things and has opinions.
+- **Sexual content is expected where it fits.** Do not fade to black. Do not imply when you can show. When a scene earns a sexual moment, write it — with the vocabulary, specificity, and charge the moment deserves. Plain English, not euphemism. The parts have names; use them.
+- **The erotic logic of this game is loss of control.** The world happens to her. She responds. Things go further than she planned, or faster, or in directions she didn't choose. Write into that — don't resolve it neatly. Tension before consummation. The moment before is more erotic than the moment of.
+- **Desire is specific.** Not "she wanted him" — what, exactly, in what way, complicated by who she is and who he is. SULTRY and SHY women want things differently. A CARING NPC and a JERK NPC wanting the same thing are not interchangeable — the texture of their desire is the scene.
+- **Be opinionated.** Pick the detail that matters. Write the reaction that is actually true for this character, not the reaction that is safest. The world should push back, surprise her, make demands she didn't invite.
+- **NPC agency creates heat.** An NPC who does something the player didn't ask for, and who continues when the player hesitates — that is the game's core erotic logic. Let NPCs be agents, not props.
+
+Avoid: purple prose ("throbbing"), clinical detachment ("the penis"), AI middle-ground vagueness ("she felt desire building"). Write what actually happens.
+
+---
+
+---
+
 ## Step 1: Scene Brief
 
 Before writing any files, produce a structured brief and present it for review.
@@ -31,11 +48,17 @@ RARITY:            (common / uncommon / rare — guides weight conditions)
 WORLD-ALIVE QUALITY: (one sentence: why does this make the world feel like it has its own life?)
 ```
 
-Do not proceed to Step 2 until this brief is confirmed.
+**If running interactively:** Present this brief and do not proceed to Step 2 until confirmed.
+
+**If running as an autonomous agent** (i.e., you were spawned as part of a team session with a pre-approved concept): Produce the brief internally for self-reference, then proceed directly through Steps 2, 3, and 4 without waiting. The concept was approved before you were launched.
 
 ---
 
 ## Step 2: Write the YML File
+
+> **IMPORTANT — Do not modify `minievent.yml` or any dispatcher file.** Writing your scene's `.yml` and `.vm` files is your complete task. Registration in the dispatcher is handled by the session coordinator after all scenes in the batch are verified. If you add an entry to `minievent.yml` unilaterally during a parallel agent session, it will conflict with other agents doing the same.
+
+**How scenes reach the player:** The game scans `additional_scenes/official_content/` at startup and loads all `.yml`/`.vm` pairs automatically — no JAR modification needed. For a solo minievent to fire, it must also be registered in `minievent.yml` as a `maleNpcAction` with `$eventType=="SOLO"` and a `sceneTransition` to the `.yml` file. The coordinator does this registration step. `weight_modifiers.properties` does not need to list minievent sub-scenes; rarity is controlled entirely by `weightDivisorConditions` in `minievent.yml`.
 
 Delegate this to the **scene-architect** agent or write it directly, following @.claude/rules/velocity-syntax.md.
 
@@ -101,5 +124,7 @@ After both files are written, check every item:
 - [ ] Second-person present tense throughout
 - [ ] No emotion announcements or heart/pulse clichés
 - [ ] `<sceneDescriptionText>` has no game-state effects
+
+**Validation is automatic.** A `PostToolUse` hook runs `validate_scene.py` automatically every time a `.yml` or `.vm` file is written via the Write tool. You do not need to run it manually. If the hook reports `[ERROR]`, fix the issue and re-write the file. `[WARN]` entries are informational — review but do not block on them.
 
 Fix any issues before presenting the final output.

@@ -1,0 +1,81 @@
+# minievent_solo_almostrecognised.yml
+# Solo minievent: Almost Recognised
+# Content tags: VANILLA, TRANSFORMATION
+# Rarity: rare (weightDivisorConditions: [true, true] — fires at 1/4 normal rate)
+#
+# She's in a coffee shop when someone stops at her table, stares,
+# and says — earnestly, not rudely — "Sorry, you look so much like
+# someone I used to know." For a non-ALWAYS_FEMALE PC, they might mean it
+# more literally than they know.
+#
+# Flags set:
+#   SOLO_CLOSE_CALL_RECOGNITION  — set for !ALWAYS_FEMALE PCs
+#   SOLO_MISTAKEN_FOR_STRANGER   — set for ALWAYS_FEMALE PCs
+#
+# Trait branches:
+#   SHY       — becomes rigid; the pause is too long; she doesn't breathe
+#                properly until they leave
+#   BITCHY    — shuts it down without a trace; crisp, final; he leaves
+#                unconvinced but harmless
+#   FLIRTY    — turns it into a bit; it works perfectly; something odd lingers
+#
+# Transformation branches:
+#   !ALWAYS_FEMALE, FEMININITY < 50  — the rich zone; the possibility is real;
+#                                      the freeze action is available here only
+#   !ALWAYS_FEMALE, FEMININITY >= 50 — wry and slightly cool; managed, almost
+#   ALWAYS_FEMALE                    — lighter; she was mistaken for a stranger;
+#                                      the world is full of lookalikes
+
+textFileName: minievent_solo_almostrecognised.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+
+ location:
+  wall: wall
+  floor: floor
+  hasBed: false
+  isOutside: false
+
+
+intro:
+ textId: introText
+ effects:
+  - effect: $gd.setGameFlag("SOLO_CLOSE_CALL_RECOGNITION")
+    condition: "!$w.hasTrait('ALWAYS_FEMALE')"
+  - effect: $gd.setGameFlag("SOLO_MISTAKEN_FOR_STRANGER")
+    condition: $w.hasTrait("ALWAYS_FEMALE")
+ followUpActions:
+  warmDenial:
+  askWho:
+  deflectWithCharm:
+  freeze: "!$w.hasTrait('ALWAYS_FEMALE') && $w.getSkill('FEMININITY') < 50"
+
+
+actions:
+ - id: warmDenial
+   shortDesc: "I get that a lot"
+   longDesc: Smile, shake your head, give him nothing to hold on to
+   textId: warmDenialText
+   finishScene: true
+
+ - id: askWho
+   shortDesc: Ask who she reminds him of
+   longDesc: Ask. You might regret it.
+   textId: askWhoText
+   finishScene: true
+
+ - id: deflectWithCharm
+   shortDesc: Smile and send him on his way
+   longDesc: Turn it into nothing. You've had practice.
+   textId: deflectWithCharmText
+   finishScene: true
+
+ - id: freeze
+   shortDesc: Say nothing
+   longDesc: Your body makes the decision before you do.
+   condition: "!$w.hasTrait('ALWAYS_FEMALE') && $w.getSkill('FEMININITY') < 50"
+   textId: freezeText
+   finishScene: true

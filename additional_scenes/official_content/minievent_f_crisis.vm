@@ -1,0 +1,270 @@
+<introText>
+Your phone buzzes at half nine.
+
+*outside can i come up*
+
+No punctuation. That's not how $f.getName() texts.
+
+You buzz her in. By the time she's climbed the stairs and knocked — she always knocks, even though you've told her she doesn't have to — you can already tell from the sound of it that something has happened. She knocks like someone who isn't sure they should have come.
+
+She looks fine, technically. Hair done, coat on properly, nothing obviously wrong with her face. But she's holding her bag in both hands in front of her like a shield, and when you step back to let her in she says "hi" in a voice that does a reasonable impression of normal without quite getting there.
+
+She sits on your sofa. The city hum goes on outside.
+
+#if ($f.getCharType() == "INNOCENT")
+She puts her bag down on the floor beside her feet. Looks at it. Then looks up at you with the expression of someone who has been rehearsing something in the lift and has now forgotten how it started.
+
+"Sorry," she says. "For just — turning up."
+
+She's not going to volunteer what happened. You can see the whole sentence sitting just behind her eyes, waiting for something to dislodge it.
+#elseif ($f.getCharType() == "PARTY_GIRL")
+She gets her phone out immediately — the reflex of it — and then puts it face-down on the cushion beside her without looking at it. Which tells you quite a lot.
+
+"God, sorry," she says, in the bright, clipped voice she uses when she's fine. "Total drama, ignore me. Have you eaten? I'm fine, I just — I needed to get out of my flat."
+
+She's doing the thing where she says two contradictory sentences very close together and hopes you don't notice.
+#elseif ($f.getCharType() == "SOPHISTICATED")
+She sits down, crosses her legs, looks around your flat with the detached air of someone visiting a country she's been to before. Then she says, "I'm fine," which is the thing she says when she's working out whether she is or not.
+
+She isn't.
+
+"There's been a situation," she says carefully, like the word is a container she's chosen for its sturdiness. "I'm processing it."
+
+She's processing it in the way you process a thing by sitting extremely still and deciding that what you feel about it is not, technically, the point.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+$f.getName() is on your sofa. Something has happened. She hasn't said what yet.
+</sceneDescriptionText>
+
+
+<waitText>
+You sit down. Not across from her — beside her, at a reasonable distance, the way you'd sit with someone on a bus if you wanted them to know you were there without crowding them.
+
+You don't say anything.
+
+#if ($w.hasTrait("SHY"))
+Silence is familiar territory. You've spent enough of your life in it to know it's not the same thing as absence. You settle into the sofa and let the quiet be something she can use.
+#elseif ($w.hasTrait("ROMANTIC"))
+You find yourself noticing small things. The way she's still holding her bag strap even though she set the bag down. The sound of a car outside doing a three-point turn, badly. The fact that she came here specifically, not anywhere else.
+#elseif ($w.hasTrait("AMBITIOUS"))
+You resist the urge to move the thing along. She'll talk when she talks. Pushing it won't help — you know that about her.
+#else
+You've learned, over the years, that some people need you to ask and some people need you not to. $f.getName() needs you not to.
+#end
+
+#if ($f.getCharType() == "INNOCENT")
+It takes about four minutes. Then she says his name — just the name, like it's self-explanatory — and then she says "he ended it," in that particular flat voice people use when they haven't finished being surprised yet.
+
+She doesn't cry. She looks at her hands.
+
+"I knew it was coming," she says. "I don't know why that makes it worse."
+
+$f.addEnjoyTiny() $f.addNpcLikingSmall() $f.addWLikingTiny()##
+#elseif ($f.getCharType() == "PARTY_GIRL")
+She talks. About her evening, about something funny that happened earlier in the week, about a girl from work she's been meaning to tell you about. Her voice gets lighter as she goes, not heavier. She's putting distance between herself and whatever she came here carrying.
+
+You let it happen. It's not nothing, what she's doing. She needed somewhere to do it.
+
+The thing she actually came about — whatever it is — stays where she put it. Maybe it surfaces later. Maybe it surfaces in three weeks and you piece it together from context. That's how it goes with her, sometimes.
+
+$f.addEnjoyTiny() $f.addNpcLikingSmall() $f.addWLikingTiny()##
+#elseif ($f.getCharType() == "SOPHISTICATED")
+The silence goes on longer than you expect. She uncrosses and recrosses her legs. Looks at the window.
+
+Then she says: "I've been offered the position. The one in Edinburgh."
+
+A beat.
+
+"I don't know if I'm going to take it."
+
+That's not nothing. That's the thing. You can hear it — the particular weight of a decision that changes the shape of things.
+
+$f.addEnjoyTiny() $f.addNpcLikingSmall() $f.addWLikingTiny()##
+#end
+
+You stay until she's ready to go. She leaves looking like someone whose bag has gotten slightly lighter. Not fixed — nothing got fixed — but something shifted. That's what you were here for.
+</waitText>
+
+
+<askText>
+"What happened?"
+
+You keep your voice level. It's not a demand. It's the first door you're opening.
+
+#if ($w.hasTrait("BITCHY"))
+You've never been good at circling. Neither has she, usually, which is part of why you get on. Tonight she looks at you like she's grateful someone just went ahead and asked.
+#elseif ($w.hasTrait("ROMANTIC"))
+You say it the way you'd say it to someone standing in the rain — gently, but clearly. An invitation, not a push.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+No preamble. You're not the sort to wrap a question in cushioning it doesn't need. She's your friend and something's wrong and you want to know what.
+#elseif ($w.hasTrait("SHY"))
+It costs you something, asking first. You're better at waiting. But she's sitting there making the face she makes when the sentence is ready and the starting isn't, and someone has to go first.
+#else
+It comes out gentler than you meant it, which is probably right.
+#end
+
+#if ($f.getCharType() == "INNOCENT")
+She exhales. Like she's been holding her breath since the text.
+
+"Me and $scene.pickFromList(["Jamie", "Tom", "Dan", "Matt"])," she says. "He's — we're not. Anymore."
+
+She says it carefully, like she's testing whether it's real by saying it out loud.
+
+"He said he wasn't feeling it anymore." She looks at her hands. "He said it really nicely. I can't even be properly angry about it because he was so — he was really nice about it." She makes a small, baffled sound. "Which is honestly the worst part."
+
+You sit with that. There's nothing to solve. You both know that.
+
+$f.addEnjoyTiny() $f.addNpcLikingSmall() $f.addWLikingTiny()##
+#elseif ($f.getCharType() == "PARTY_GIRL")
+"Oh, nothing," she says immediately. "Genuinely, don't worry about it. Work stuff. It's boring."
+
+She's not lying, exactly. There is something at work — you can tell by the way she landed on it too fast. But there's something else underneath that she's not going to name just yet. Maybe she can't. Maybe she doesn't know how.
+
+"I just needed out of my own head," she says, which is true. "You're good at that. Making me get out of my own head."
+
+You take the compliment. You take the work story too, because that's what she's offering. The other thing — whatever it is — is still there. You'll know what it is eventually. You usually do.
+
+$f.addEnjoyTiny() $f.addNpcLikingSmall() $f.addWLikingTiny()##
+#elseif ($f.getCharType() == "SOPHISTICATED")
+She pauses. She's deciding how much.
+
+"My mother rang," she says finally. "She's — there's a health thing. It may or may not be serious. We don't know yet."
+
+She says this in the same tone she'd use to describe a difficult client. Controlled, informative, with the volume turned all the way down on the part that matters.
+
+"She said don't fuss," she adds. "So I'm not fussing."
+
+She's fussing internally. Every line of her is fussing. She just doesn't have a vocabulary for that version of herself.
+
+$f.addEnjoyTiny() $f.addNpcLikingSmall() $f.addWLikingTiny()##
+#end
+
+You stay with her until she's done talking, which takes a while. By the time she leaves she's a bit more herself. Not sorted. Not even close to sorted. But out of her own head long enough to breathe.
+</askText>
+
+
+<teaText>
+"I'll put the kettle on," you say.
+
+You don't wait for an answer.
+
+In the kitchen you fill it, set it on the base, get two mugs out of the cupboard. The everyday choreography of it. You can hear her in the sitting room — a small sound of her settling, the sofa shifting, the particular quiet of someone sitting still in someone else's flat trying to locate themselves.
+
+#if ($w.hasTrait("DOWN_TO_EARTH"))
+You get the milk out. Check it's not off — it's not. Put it back. The kettle starts its low rumble and you lean against the counter and let it.
+#elseif ($w.hasTrait("ROMANTIC"))
+You find yourself being very deliberate about the mugs. The good ones, not the ones with the chipped rims. It's a small thing. It feels important anyway.
+#elseif ($w.hasTrait("POSH"))
+You have actual tea, not teabags left in too long. You make it properly. Whatever she's dealing with, she's not dealing with it while drinking something terrible.
+#else
+The kettle noise fills the flat. You let it.
+#end
+
+You make two cups and carry them through. You set hers on the little table beside the sofa — close enough to reach, not pushed at her — and sit down with your own.
+
+She looks at it. Then she picks it up with both hands.
+
+#if ($f.getCharType() == "INNOCENT")
+"Thank you," she says quietly. Not for the tea, specifically. For all of it.
+
+She drinks. You drink. After a while she starts talking — haltingly at first, then less so. He ended it three days ago and she's been keeping it together at work and in her flat and now she's finally somewhere she doesn't have to.
+
+"I didn't want to bother you," she says, at some point.
+
+"You're not bothering me," you say.
+
+She nods like she almost believes it.
+
+$f.addEnjoyTiny() $f.addNpcLikingSmall() $f.addWLikingTiny()##
+#elseif ($f.getCharType() == "PARTY_GIRL")
+She wraps both hands around the mug and pulls her knees up to her chest.
+
+"I love you," she says, which is something she says, but right now it means something specific.
+
+She doesn't say what happened. She talks about other things — the mug, how she likes your flat, something that happened on the bus on the way here. But she drinks the whole cup, and somewhere in the middle of the second thing she was telling you, the tight line around her jaw lets go a little.
+
+Something happened tonight that she's not ready to name. That's all right. She came here anyway. That's the bit that matters.
+
+$f.addEnjoyTiny() $f.addNpcLikingSmall() $f.addWLikingTiny()##
+#elseif ($f.getCharType() == "SOPHISTICATED")
+She holds the mug in both hands. Looks at it.
+
+"You didn't ask," she says. It's an observation, not a criticism.
+
+"I can," you say. "If you want."
+
+A pause. She makes a decision.
+
+"My mother's ill." The word lands flat and heavy, the way she says things when she's decided they have to be said plainly. "We don't know how ill yet. Tests next week."
+
+She takes a sip of tea.
+
+"She told me not to worry about it, which is exactly the sort of thing she says." A small pause. "I'm worried about it."
+
+$f.addEnjoyTiny() $f.addNpcLikingSmall() $f.addWLikingTiny()##
+#end
+
+She leaves about an hour later. The mugs go in the sink. The sofa holds the shape of her for a moment, then doesn't.
+</teaText>
+
+
+<tellMeText>
+"I need you to tell me what happened."
+
+She looks up.
+
+#if ($w.hasTrait("BITCHY"))
+"Not because I'm being nosy. Because I can't help if I don't know what I'm dealing with, and I want to actually help."
+
+She blinks. That lands.
+#elseif ($w.hasTrait("SHY"))
+It comes out plainer than you intended — you'd meant to soften it, but somewhere between intention and speech it got direct. It's not wrong, though. And she knows you well enough to hear it right.
+#elseif ($w.hasTrait("AMBITIOUS"))
+You keep your voice level. "I'm not going to be able to do anything useful if I'm guessing. So tell me."
+#else
+You say it carefully. Not a demand — more like: I'm here, I'm paying attention, and vague reassurances only go so far. Give me something to work with.
+#end
+
+#if ($f.getCharType() == "INNOCENT")
+She opens her mouth. Closes it. Then:
+
+"He broke up with me."
+
+Said like that, finally out loud, something in her posture gives a little. The sentence was holding her up and now it's done its job.
+
+"Three days ago," she adds. "And I've been — I've just been getting on with things. And I thought I was fine and then tonight I just wasn't."
+
+She wasn't fine. She's been very carefully not fine for three days and she came here when she couldn't keep doing it alone.
+
+$f.addEnjoyTiny() $f.addNpcLikingTiny() $f.addWLikingTiny()##
+#elseif ($f.getCharType() == "PARTY_GIRL")
+Something shifts in her face — not relief exactly, more like being found out. She was relying on you not pushing.
+
+"It's not a big thing," she says immediately. "Genuinely. It's — there's something at work. With $scene.pickFromList(["Mia", "Jade", "Priya", "Chloe"])."
+
+That's the first layer. You wait.
+
+She picks at the sleeve of her coat. "She told some people something I told her. That I told her in confidence." A pause. "And now everyone knows."
+
+And under that, probably, is whatever the something was. You don't get that part tonight. But you got further than you would have if you hadn't asked.
+
+$f.addEnjoyTiny() $f.addNpcLikingTiny() $f.addWLikingTiny()##
+#elseif ($f.getCharType() == "SOPHISTICATED")
+She looks at you for a moment with an expression that is, very briefly, unguarded.
+
+"My mother," she says. "She rang me this afternoon. She's been unwell — she didn't tell me, she's been managing it herself for two months, and she only rang because the consultant said she should." She pauses. "Tests. We don't know yet."
+
+She says the last part matter-of-factly, the way she says things when the matter-of-fact version is all she has to offer.
+
+"I haven't told anyone," she says. "I wasn't going to. And then I was just in my flat and I couldn't." A small pause. "So. Now you know."
+
+$f.addEnjoyTiny() $f.addNpcLikingTiny() $f.addWLikingTiny()##
+#end
+
+You stay with her. Not long after she starts talking, she stops needing to be prompted. By the time she goes home she looks wrung out and slightly lighter, the way people look when they've put something down they've been carrying too long.
+
+What happened happened before she texted you. You were just the place she brought it.
+</tellMeText>

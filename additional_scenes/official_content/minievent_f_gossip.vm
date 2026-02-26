@@ -1,0 +1,163 @@
+<introText>
+#if ($f.getCharType() == "INNOCENT")
+$f.getName() gets to it before you've even finished your coffee.
+
+"Oh, I've been meaning to tell you this all week — so you know $scene.pickFromList(["that woman from her old work", "the one who used to go to that spin class with us", "that girl from the hen do last summer"]), right? Okay, so apparently—"
+
+She's leaning forward already, elbows on the table, completely lit up. There is absolutely no malice in her face. She thinks this is genuinely interesting information that you will also find genuinely interesting. That's almost the unsettling part.
+
+The thing she's about to tell you — and she does tell you, at some pace — is about someone you barely know, and it's the kind of information that would make that person's life briefly worse if it got around. $f.getName() seems unaware of this dimension entirely. She's just sharing.
+#elseif ($f.getCharType() == "SOPHISTICATED")
+$f.getName() sets down her flat white and gives you the specific look that means she's been holding something back.
+
+"I probably shouldn't say anything," she starts, which in her vocabulary means the opposite, "but given the context, I think you should probably know—"
+
+What follows is thorough. She's clearly been thinking about how to phrase it. She uses words like "apparently" and "according to" and "not that it's anyone's business, but" in a way that constructs a very precise deniability. The framing is: she's sharing information. This is you being kept in the loop. She would be surprised — genuinely, not performatively — to be told this was unkind.
+
+The gap between what she thinks she's doing and what she's actually doing is quite wide. She's looking at you like someone who has done the responsible thing.
+#else
+$f.getName() drops it into a gap in the conversation like it's nothing.
+
+"Oh, did you hear about $scene.pickFromList(["that bloke Sarah's been seeing", "what happened with those two from the pub quiz", "that whole thing with — you know the one"])?"
+
+She doesn't wait for an answer before continuing. She's already on to the next part, which is the actual contents, delivered at a normal social volume in a cafe where the tables are quite close together. Whether the information is accurate hasn't visibly occurred to her. It's the kind of thing that gets passed along because it was passed to her, and now it's being passed to you.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+You and $f.getName() are at a cafe table. She's just started on something she's clearly been waiting to say.
+</sceneDescriptionText>
+
+
+<engageText>
+#if ($f.getCharType() == "INNOCENT")
+You ask the obvious follow-up question, which $f.getName() is visibly delighted by.
+
+"Right? That's exactly what I thought." She leans further forward. "And then apparently — okay so this is the part that's actually insane—"
+
+The two of you go back and forth on it for a while. You add a small thing you half-remember hearing from somewhere else, which $f.getName() receives like it's evidence in a trial. You are both being terrible about this and it doesn't feel terrible at all, which is its own small observation about how these things spread.
+#elseif ($f.getCharType() == "SOPHISTICATED")
+You ask a clarifying question, which $f.getName() answers with what feels like a prepared answer.
+
+"I know, exactly — and I think the thing that's interesting about it is what it says about the whole situation, not just the surface-level thing." She's warming up now. She gestures with her coffee cup. "Because if you think about the background context—"
+
+She's well into it. You follow, and add a point of your own, which she takes seriously and builds on. The conversation has the texture of analysis. It doesn't feel like gossip. That, you think, is precisely what makes it gossip.
+#elseif ($w.hasTrait("FLIRTY"))
+You give $f.getName() a look that says go on, then, and she does.
+
+It turns into one of those conversations where you're both half-laughing at your own willingness to engage with it. You contribute a couple of things you've heard — tangential, probably not helping — and $f.getName() files them away with obvious satisfaction.
+
+By the end of it you feel vaguely complicit and vaguely entertained. The complicity is probably the point.
+#else
+You lean in.
+
+$f.getName() gives you everything she has. You ask two follow-up questions, both of which she has answers to. Whether those answers are accurate is harder to say, but the conversation has momentum now, and there's something specific and slightly guilty about being the person she chose to tell this to.
+
+The rest of the coffee gets cold while you work through it.
+#end
+$f.addNpcLikingTiny()
+$gd.addStat("GOSSIP_ENGAGED")
+</engageText>
+
+
+<redirectText>
+#if ($w.hasTrait("SHY"))
+You let her finish the sentence she's on, and then — before she can get to the next one — you say, "Oh, that reminds me," and pull something out of nowhere. It's a bit clumsy. The pivot is visible.
+
+$f.getName() blinks, then goes along with it. Either she didn't notice or she's being generous. You're not sure which would make you feel better.
+
+The conversation moves on. You don't go back to the other thing. Neither does she.
+#elseif ($w.hasTrait("REFINED"))
+You wait for a pause and say, lightly, "Anyway — how's the thing with your sister going? You mentioned it last week."
+
+It's a clean redirect. $f.getName() looks mildly surprised, then takes the offered subject and runs with it. She talks about her sister for the next ten minutes. The previous topic dissolves.
+
+You don't have to explain yourself. You just stopped the current.
+#else
+You ask about something she mentioned last time — something happening in her own life, something she seemed to want to talk about. She brightens immediately and follows you there without complaint.
+
+Whether she noticed the redirect is unclear. She's talking about herself now, which is where most conversations eventually end up anyway. The other thing has been neatly left on the table behind you.
+#end
+</redirectText>
+
+
+<pushBackText>
+#if ($f.getCharType() == "INNOCENT")
+"I'm not sure that's actually what happened," you say.
+
+$f.getName() looks briefly surprised, then uncertain. "Really? That's — I mean, that's what I heard."
+
+"Where did you hear it from?"
+
+She thinks. The chain of transmission is, it turns out, somewhat long and indirect. She's aware of this now in a way she wasn't thirty seconds ago. "I mean, it might be a bit garbled," she says, with slightly less certainty than she had going in.
+
+The conversation loses its momentum. She seems less deflated than recalibrated — like someone who has bumped into a fact and accepted it.
+#elseif ($f.getCharType() == "SOPHISTICATED")
+"I don't think that's quite right," you say.
+
+$f.getName() pauses. "How do you mean?"
+
+"I just — I've heard a different version. I think some of the details might have got mixed up along the way."
+
+She listens to this with the careful expression she deploys when she's reassessing. Then she says, "Hm. Maybe." It's not a concession exactly, but it's not a dismissal either. She moves on to another subject after a moment, with less momentum than she had.
+
+Whether she's going to revise what she tells the next person is genuinely unclear.
+#elseif ($w.hasTrait("BITCHY"))
+"That doesn't track," you say. "Where did that even come from?"
+
+$f.getName() blinks. "I just — someone told me—"
+
+"Yeah, but does it actually make sense? Because when you put those two things together—" You lay it out for her briefly. The logic doesn't hold. She can see that. She's doing the face of someone who has just noticed they've been repeating something that doesn't hold together.
+
+"Okay, fair," she says, with slightly more dignity than the moment calls for.
+#else
+"I'm not sure that's the whole story," you say, carefully.
+
+$f.getName() pauses. "What do you mean?"
+
+You explain what you mean — not combatively, just questioning — and she sits with it for a moment. She doesn't fully concede but she reconsiders, which is probably all you could reasonably expect. By the time she's moved on to something else, the subject has lost most of its air.
+#end
+</pushBackText>
+
+
+<callItOutText>
+#if ($f.getCharType() == "INNOCENT")
+"Can I say something?" you start, and $f.getName() looks at you, open, a little uncertain.
+
+"I just — I'm not really comfortable talking about this. It's not about you, I just feel like it's the kind of thing that could get back to her, and I'd feel weird having been part of that."
+
+There's a pause. $f.getName() looks genuinely taken aback — not defensive, just surprised, like you've pointed out something she hadn't thought to consider. "Oh," she says. "Yeah. Yeah, no, that's fair."
+
+She means it, which makes it both better and slightly worse. She just hadn't thought about it in those terms. The conversation moves on, but the previous ease has a small gap in it now. You both work around it without saying so.
+#elseif ($f.getCharType() == "SOPHISTICATED")
+"I'm going to be honest," you say, "I'm not sure I want to know this."
+
+$f.getName() looks at you for a moment. "Right," she says, in a tone that is carefully neutral.
+
+"It's not a criticism. I just — I think if this got back to her and I'd been one of the people it passed through, I'd feel strange about that."
+
+She nods slowly. "No, absolutely. Fair enough." The words are gracious. The microexpression underneath them is something else — a brief recalibration, a small noting of the fact that you didn't play along the way she expected. She's not going to bring it up again. Neither of you are going to pretend that moment didn't have a slight edge.
+
+The rest of the coffee is fine. Friendly, even. But a small thing has been established between you that wasn't there before.
+#elseif ($w.hasTrait("BITCHY"))
+"I'm really not into this," you say, flatly.
+
+$f.getName() stops. There's a brief, uncomfortable pause.
+
+"Okay," she says.
+
+"Not having a go," you add, which is technically true. "It just feels like the kind of thing that spreads and she ends up worse off for it and we don't even know if it's accurate."
+
+She looks like someone who has received a point they didn't ask for and isn't quite sure what to do with it. "Right," she says eventually. "Fair."
+
+The conversation finds its feet again after a minute or two, but slowly. She's quieter than before. You may have been right and also slightly cost yourself something, and both things can be true.
+#else
+You say, as evenly as you can manage, that you're not really comfortable.
+
+$f.getName() looks surprised. Then, after a moment, "No, that's — yeah. Sorry." She means it, sort of. But the conversation stumbles for a bit after that. She was expecting you to receive this the way these things usually get received, and the gap between expectation and reality is something both of you are now navigating around.
+
+By the time you leave she's warm again. But something registered, in both directions.
+#end
+$f.reduceWEnjoyTiny()
+</callItOutText>

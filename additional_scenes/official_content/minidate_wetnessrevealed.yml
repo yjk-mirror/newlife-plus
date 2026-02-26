@@ -1,0 +1,65 @@
+# minidate_wetnessrevealed.yml
+# Partner minidate — fires as a BF date event
+# Content tags: SEXUAL, TRANSFORMATION (FEMININITY < 50)
+# Rarity: uncommon (1 weightDivisorCondition — applied at dispatcher level)
+#
+# They are making out and his hand finds its way between her legs.
+# He makes a sound. She is already extremely wet.
+# The attention has shifted entirely to that fact.
+#
+# Player choices:
+#   leanInto     — pull him closer, enjoy his reaction, let the moment deepen
+#   sayItPlainly — put words to it; tell him directly what he does to her
+#   goEmbarrassed — laugh, deflect, redirect; the embarrassment is part of the charge
+#
+# Consequences (all in VM text, inline near prose):
+#   $w.addArousalSmall()           — introText (being found out is itself arousing)
+#   $bf.addArousalTiny()           — introText
+#   ROMANTIC bf + leanInto:        $bf.addNpcLoveTiny()
+#   CARING bf + leanInto:          $bf.addEnjoyTiny()
+#   JERK bf + leanInto:            $bf.addWLikingTiny()
+#   ROMANTIC bf + sayItPlainly:    $bf.addNpcLoveTiny()
+#   JERK bf + sayItPlainly:        $bf.addWLikingTiny()
+#   CARING bf + goEmbarrassed:     $bf.addEnjoyTiny()
+
+textFileName: minidate_wetnessrevealed.vm
+
+sceneDescriptionTextId: sceneDescriptionText
+
+testingInfo:
+ playerOutfit: CASUAL
+ maleNpcs:
+  - id: bf
+    outfit: CASUAL
+ location:
+  usePlayerHome: true
+  hasBed: true
+  isOutside: false
+
+
+intro:
+ textId: introText
+ followUpActions:
+  leanInto:
+  sayItPlainly:
+  goEmbarrassed:
+
+
+actions:
+ - id: leanInto
+   shortDesc: Pull him closer
+   longDesc: Don't say anything. Just pull him closer and let him have the full picture.
+   textId: leanIntoText
+   finishScene: true
+
+ - id: sayItPlainly
+   shortDesc: Tell him
+   longDesc: Put it into words. Tell him exactly what he does to you.
+   textId: sayItPlainlyText
+   finishScene: true
+
+ - id: goEmbarrassed
+   shortDesc: Laugh it off
+   longDesc: Deflect. Laugh. Try to redirect the whole situation somewhere you have more composure.
+   textId: goEmbarrassedText
+   finishScene: true

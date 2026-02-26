@@ -1,0 +1,212 @@
+<introText>
+You're on your second coffee. The place is the kind of Costa that's too warm in winter and inexplicably cold in summer, with a queue that never quite clears and a corner table you have claimed entirely without drama. The afternoon is sliding by in a reasonably inoffensive way.
+
+He comes in from outside — middling height, late thirties, in a coat that needs a button replaced. He's scanning for a seat when he stops. Not at the door. In the middle of the floor. Looking at you.
+
+It takes him a second. Then he crosses the room and stops a careful distance from your table — the distance people maintain when they're not sure they're right about something.
+
+"Sorry," he says. He has the particular expression of someone who knows they might be about to embarrass themselves. "You look so much like someone I used to know."
+
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+The thought arrives before you can stop it: *I might be.*
+
+You keep your face still. It costs something to do that — the sort of something you've learned to pay without letting it show. He's still looking at you with that uncertain, earnest expression, the kind that means he genuinely isn't sure, that he's running a comparison against some internal photograph and the resemblance is real enough to make him stop but not certain enough to commit to.
+
+You don't know if he knew you. You have no idea whether he does. That's the particular quality of this moment: you have no information, and he has some, and you cannot find out which without giving him more.
+
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+There's a half-second where your body does a thing it almost never does anymore — a kind of internal flinch, instinctive, gone before it fully registers. Then you're back.
+
+You know how to handle this now. It's been long enough. The question is just whether this one is the sort of passing resemblance that dissolves on second look, or something that's going to take a little more managing.
+
+He's looking at you with the particular blankness of someone whose pattern-matching has surprised them. He doesn't look certain. That's the important part.
+
+##
+#else
+You're used to people occasionally thinking you look like someone. It happens. The city is full of near-faces, slight doubles, women who share a jawline or a way of holding their head.
+
+He looks genuinely flustered by it, which is rather sweet in a mild sort of way.
+
+##
+#end
+</introText>
+
+
+<sceneDescriptionText>
+A man has stopped at your table in the Costa, convinced you resemble someone he used to know.
+</sceneDescriptionText>
+
+
+<warmDenialText>
+##
+#if ($w.hasTrait("SHY"))
+"I — yeah." Your voice comes out steadier than you expected. "I get that a lot, apparently."
+
+It isn't quite true. But it's the right shape of sentence for this situation and you needed one quickly, so there it is.
+
+He lingers for just a moment too long — two seconds, maybe three — as though he's giving you a chance to change your answer. Then he seems to decide. "Sorry to bother you," he says, and moves off to find his seat.
+
+You look back down at your coffee.
+
+Your hands are fine. You're fine. You wait until he's definitely not watching before you let out a breath.
+##
+#elseif ($w.hasTrait("BITCHY"))
+"I do," you say. Brisk, pleasant, final.
+
+It's the particular tone that means *this conversation is over and you've been given a graceful exit so please use it.* Some people don't catch it. He does. He blinks, then gives a half-smile and a small nod, and goes to join the queue without another word.
+
+You watch him for long enough to confirm he's not going to turn around. He doesn't.
+##
+#elseif ($w.hasTrait("FLIRTY"))
+"I get that all the time," you say, and give him the version of the smile that means *interesting but no.* "Very common face, apparently."
+
+He laughs, slightly disarmed. "She'd have hated hearing that."
+
+"Then she and I have very different taste in compliments," you say, and look back down at your cup in a way that clearly ends the conversation but doesn't leave him feeling bad about having started it. He goes to queue for his coffee.
+
+Easy. It was always going to be easy. You'd be mildly bothered by how easy it was if you were in the mood to be bothered by things.
+##
+#else
+"I get that a lot," you say, with a small, apologetic smile that means it, or performs meaning it well enough to be indistinguishable.
+
+He seems relieved to have an exit. "Sorry for interrupting," he says, and moves off toward the counter.
+
+You return to your coffee. The afternoon resumes.
+##
+#end
+</warmDenialText>
+
+
+<askWhoText>
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+It is almost certainly a mistake to ask. You ask anyway.
+
+"Who do I remind you of?"
+
+Something shifts in his expression — surprise that you've asked, and then the particular look of someone trying to describe someone they knew well enough to have them stored in more than photographs.
+
+"Old friend," he says. "From about — god, ten years ago now. More. We lost touch." He pauses. "It's the jawline, I think. And something around the eyes." He's studying you with the careful, slightly apologetic attention of someone trying to resolve a comparison they can't quite complete. "He'd have been about your age now. Maybe a year or two older." A small, helpless laugh. "Different hair, obviously. Different — everything. You're much better-looking than he was."
+
+*He.*
+
+You hear it and you make no sign that you've heard it. You smile at the right moment and you say, "Well, I hope he's well," in the sort of voice that asks nothing further, and he says he hopes so too and then he goes to queue and you look back down at your coffee.
+
+The name didn't come. You don't know if that's lucky.
+
+What you do know is that somewhere in this man's memory your former self is still walking around, archived under *old friend, lost touch*, and that the version of you he's filed away is still alive in there and didn't recognise you and never will. The city just handed you that. For free. Without asking.
+
+Your coffee has gone slightly cold. You drink it anyway.
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+"Who do I remind you of?" you ask, curious enough now. Wry, easy — the question of someone who's genuinely wondering, not someone for whom the answer carries any particular weight.
+
+"Someone I used to know," he says. "Years ago. We lost touch." He seems slightly embarrassed by the admission. "It's something around the eyes. The way you're sitting, maybe." He gives a small, self-deprecating laugh. "He'd be horrified to know I said that — he'd have taken it very badly, being compared to a pretty woman."
+
+The pronoun makes the moment mildly ironic in a way you choose not to share. You give him a sympathetic smile instead. "Well," you say, "tell him I said he should take it as the compliment it is."
+
+He laughs, genuinely, and thanks you, and moves off to queue.
+
+You sit with that for a moment. Your former self, drifting around in a stranger's memory, entirely unaware that he just walked past her on his way to order a flat white.
+
+It's a slightly odd sensation. You don't have a better word for it than that.
+##
+#elseif ($w.hasTrait("OVERACTIVE_IMAGINATION"))
+"Who do I remind you of?" you ask, before you've quite decided to.
+
+"A girl I used to know at uni," he says. "Same hair. Same — " he gestures vaguely at your general region. "She moved away. I never — we just lost touch, the way you do."
+
+You nod, appropriately. He thanks you for humoring him, and goes off to find a seat.
+
+You spend the next five minutes constructing her life in your head — the girl you looked like, who went somewhere and became someone else and possibly still sometimes thinks about the friend she lost touch with without knowing that he once thought about her in a Costa in this city while standing next to a stranger who could have been her double. It's a good sad little story. You're slightly annoyed at yourself for caring about it.
+##
+#else
+"Who is it?" you ask, genuinely curious.
+
+He thinks for a second. "Someone from work," he says. "Ages ago. We fell out of touch." He studies you for one more moment. "Something around the eyes. And the way you're holding your mug." He laughs, a little embarrassed. "Sorry. I know that's strange."
+
+"Not really," you say. "The world's full of near-misses."
+
+He seems cheered by this philosophical position, thanks you, and goes off to queue.
+
+You finish your coffee. The afternoon continues in its appointed direction.
+##
+#end
+</askWhoText>
+
+
+<deflectWithCharmText>
+##
+#if ($w.hasTrait("SHY"))
+"Oh — that's always lovely to hear," you manage, which is not quite right but it's close enough. You give him a smile and then look back down at your cup, which is the universal signal for *this is the end of the exchange* that most people read correctly.
+
+He reads it correctly. "Sorry to interrupt," he says, and moves on.
+
+You sit with the exact pitch of that exchange for a little longer than it deserves. You handled it. You were almost smooth. He left. Everything is fine.
+
+You look back down at your coffee and find that your hands are around the mug quite tightly, which you release.
+##
+#elseif ($w.hasTrait("BITCHY"))
+You look at him pleasantly for one second, let the silence run for exactly long enough, and then say, "She's very lucky. Enjoy your coffee."
+
+He blinks. Then laughs — the laugh of someone who has been out-manoeuvred in a way they find faintly impressive — and goes to join the queue. He's still smiling.
+
+You return to your coffee. The encounter has taken approximately twelve seconds. You feel nothing about it except mild satisfaction at the efficiency.
+##
+#elseif ($w.hasTrait("FLIRTY"))
+"She's a lucky woman," you say, with the exact smile that you've learned makes most conversations go the way you want them to go.
+
+He lights up slightly. "You're very kind."
+
+"I really am," you agree, pleasantly. "Good luck finding your seat."
+
+He laughs all the way to the queue. The whole thing took thirty seconds and required nothing of you. You're good at this now — the redirections, the warm exits, the leaving people feeling like the conversation was their idea.
+
+The afternoon is exactly as it was. You drink your coffee and note, somewhere around the edges of the moment, that there isn't much to note. Which is, of course, the point.
+##
+#else
+You give him a warm, deflecting smile and a small shake of your head, the combination that means *you're sweet and this is over.* He takes the cue, apologises for interrupting, and goes off to queue.
+
+You return to your coffee. Outside, a bus goes past. Someone's phone rings at the counter and they step away to answer it.
+
+The afternoon resumes, undisrupted.
+##
+#end
+##
+#if (!$w.hasTrait("ALWAYS_FEMALE") && $w.getSkill("FEMININITY") < 50)
+
+You've gotten very good at the clean exit. You've had to.
+##
+#elseif (!$w.hasTrait("ALWAYS_FEMALE"))
+
+It still costs a small amount. Not much. You barely notice it anymore.
+##
+#end
+</deflectWithCharmText>
+
+
+<freezeText>
+## This action is only available to !ALWAYS_FEMALE PCs with FEMININITY < 50
+You don't say anything.
+
+This is not a decision. Your mouth is simply not open and no sound is coming out of it and that is what is happening. He has looked at you and said that thing and some part of your processing has gone briefly offline, and the part that's still running is watching the gap in the conversation stretch out and becoming dimly aware that the gap is now too long to fill without explanation.
+
+He waits. He has the patient, slightly concerned expression of someone who's wondering if they've said something wrong.
+
+You watch him reach a conclusion without you.
+
+"Sorry," he says. "You really do look like her. I mean — him." He seems flustered now. "Sorry — I got confused, I don't know why I said — sorry to bother you."
+
+He moves away toward the counter.
+
+You look back down at your coffee. The surface of it is flat and still and in no way remarkable, and you concentrate on it for a second.
+
+He thought he recognised you. He was right to think so and wrong in every specific and he's already decided he was wrong and that's — that's the thing. That's what just happened. He decided he was wrong on your behalf, without you having to do anything, because you couldn't do anything, because your body had a considered opinion about this and expressed it by not moving.
+
+You sit there until your coffee is finished. Then you leave.
+</freezeText>
+
+
+<empty></empty>

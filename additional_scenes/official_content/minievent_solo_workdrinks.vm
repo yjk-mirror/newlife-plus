@@ -1,0 +1,132 @@
+<introText>
+#if ($gd.hasGameFlag("SOLO_WORKDRINKS_ATTENDED"))
+The same pub, the same approximate crowd. The same person finding a reason to stand near her.
+
+#end
+It's the Feathers, or something near enough — sticky carpet, a fruit machine nobody's using, draught lager at prices that suggest the landlord is doing his genuine best. Half a dozen colleagues have commandeered the corner by the window, coats piled on the bench seat, a round already bought by someone who got here first and is now basking in the social credit.
+
+The week is over. That's the thing that everyone is actually celebrating.
+
+You have a glass of something — white wine, not particularly cold — and you're standing in that comfortable way that pub crowds allow, half in a conversation about the Henderson account, half watching the room. Someone at the bar is trying to split the bill on their phone. The fruit machine briefly becomes interesting and then stops.
+
+He's been there for most of the last half hour. That in itself is nothing — he works here too, of course he came for drinks. But you've clocked the pattern of it: the way he positioned himself when the group shifted, the glass of wine that appeared in your hand before you'd noticed yours was empty, the brief private moment he managed to create twice now in a crowd of eight people, which takes a particular kind of social engineering.
+
+He's not being obvious. He would probably say, if pressed, that he's just being friendly. People would believe him. You're not sure you would.
+
+#if ($w.hasTrait("FLIRTY"))
+The problem — if it's a problem — is that you've been warm and engaged since you got here, the way you always are at these things, and you are only now noticing that he's been receiving all of that very specifically. Your own warmth reflected back at you, recalibrated. You were not, consciously, doing anything. And yet.
+#elseif ($w.hasTrait("AMBITIOUS"))
+You're aware of the professional geometry of this. Colleagues. Not direct reports, not a manager — same level, near enough — but still colleagues. The pub is not the office, but Monday morning it is, and whatever happens tonight will be at work on Monday in some form, even if nothing happens. Especially if nothing happens.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+You notice, and you file it away without particular drama. He's a colleague being attentive. You've had a long week. The wine is fine, the company is fine, and there's nothing requiring a decision yet.
+#elseif ($w.hasTrait("REFINED"))
+There's a specific discomfort in mixing contexts that are supposed to stay separate. He's a colleague. The pub is still, however slightly, work-adjacent. You find yourself holding that line carefully, the way you always do in situations that want you to blur it.
+#else
+You notice, and notice that you've noticed, which is how you know it's something. He hasn't said anything explicit. He won't — this is still work, in the broad sense — but the attention has a texture to it.
+#end
+
+Someone calls for another round. The moment disperses into group logistics, and you have a second or two to decide what you want to do with the rest of this evening.
+</introText>
+
+
+<sceneDescriptionText>
+You're at after-work drinks at the Feathers. A colleague has been finding reasons to stand near you all evening.
+</sceneDescriptionText>
+
+
+<stayLateText>
+You don't go for the coat.
+
+By half past eight the group has thinned to four people, and by nine it's down to three, and then two, and the third person — Kieran from accounts, who was carrying the conversation — says something about an early start and pulls on his jacket, and then it's just you and him at the corner table with the dregs of a bottle of wine and the fruit machine making its ambient noises.
+
+The conversation has changed. This is the thing that happens when the professional scaffolding comes down — the reference points shift, the subjects get more specific, the pauses become a different kind of pause. He tells you something about a holiday he's half-planning. You tell him something you wouldn't have bothered saying at three o'clock this afternoon. Neither of you are performing anything.
+
+#if ($w.hasTrait("FLIRTY"))
+You've been — and you're aware of this — yourself, in the full sense. Not the version of yourself that navigates open-plan offices and calendar invites. He's been listening to the parts of you that don't usually come out at this hour on a Thursday, and you're not sure when that happened or whether it was entirely accidental.
+#elseif ($w.hasTrait("AMBITIOUS"))
+You've kept a thread of it conscious — the professional distance, the calculation of what this is. But the thread's gone thinner as the evening went on, and you're aware that the decision you're not quite making is still a decision. You know what Monday will look like either way. You've been choosing this, one glass at a time.
+#else
+Nothing happens. That's the honest account. Nothing happens, but the possibility was in the room all evening, and you both knew it, and not doing something is still a choice.
+#end
+
+Last orders at the bar. He offers to split a taxi.
+
+You walk instead — the air after a warm pub has that particular quality, slightly too cold, the pavements still damp from the afternoon. You think about the way the evening shifted. Not about what it means. Just about the shape of it.
+</stayLateText>
+
+
+<makeAnExcuseText>
+You find one easily enough. Early start — true, actually. Train to catch before the next one gets too late — also true. You make it light and general, aimed at the table rather than at him specifically, and you get your coat from the pile without ceremony.
+
+#if ($w.hasTrait("REFINED"))
+The right call. You know it as you make it. The pub is not quite the office, but it's not quite not the office either, and you've never found anything useful at the intersection.
+
+You're on the pavement in under two minutes. The air is cold and clean and you walk to the station at a normal pace, not brisk, not deliberate. It was a pleasant evening. That's all it needed to be.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))
+You needed the sleep more than the conversation, honestly. You'd started calculating how many hours between now and your alarm, and anything below seven is when you start making bad decisions. The train is on time. You eat a cereal bar on the way home.
+
+Monday is fine. It'll be fine.
+#else
+On the pavement you pause for a second longer than you need to, which you notice and find mildly annoying. You chose to leave. That's a complete sentence.
+
+The walk to the station takes ten minutes. You spend roughly four of them not thinking about how the evening might have gone, which means you spend roughly four of them thinking about it. Monday will be unremarkable. He will be normal. This will be nothing.
+
+You're fairly sure about that.
+#end
+</makeAnExcuseText>
+
+
+<nameItDirectlyText>
+There's a gap in the conversation — Kieran has gone to the bar, and it's briefly just you and him, and something in the quality of the moment makes the sentence easy.
+
+#if ($w.hasTrait("BITCHY"))
+"You know you've been very attentive this evening," you say. Not warmly, not coldly. Just stating it.
+
+He looks at you. Caught, clearly, but recovering reasonably fast. "I've been friendly," he says.
+
+"Yes," you say.
+
+The pause does the work you meant it to do. He seems to decide something, and then Kieran comes back with the drinks, and the moment closes. He's slightly more careful with himself for the rest of the evening. You find this satisfying in a way that doesn't require analysis.
+#elseif ($w.hasTrait("SULTRY"))
+"You've been very attentive this evening," you say. You're not smiling particularly, but you're meeting his eye in a way that makes the sentence mean something precise.
+
+He considers how to answer this. You wait. That's the point — you're not asking a question that needs saving. You're making an observation.
+
+"Have I," he says eventually. Not a denial.
+
+"Mm," you say, and look back at the room.
+
+The evening continues, and the conversation is easier for having had it — not because anything changed, but because certain things are now accurate between you. You've named it. What happens next is a separate question.
+#else
+You catch a moment when the group noise covers you both.
+
+"I've noticed," you say, which is oblique enough to be deniable but specific enough that he knows exactly what it means.
+
+He meets your eye. Recovers his glass. "Good," he says, which is also oblique, and also specific.
+
+That's the whole of it. The conversation folds back into the group. But you've named it — whatever it was — and the acknowledgement sits between you for the rest of the evening like a small cleared space.
+#end
+</nameItDirectlyText>
+
+
+<reciprocateText>
+You decide, clearly enough, that you're interested.
+
+#if ($w.hasTrait("FLIRTY"))
+The decision doesn't feel like a decision, which is the thing about being you in a pub on a Friday. You're warm, you're present, and somewhere in the last twenty minutes you stopped managing the warmth quite as carefully and let it be directed. He was already paying attention. Now he knows he's got it right.
+
+You're not sure exactly when it shifted. But you know that when you laugh at something he says, it lands differently than it did an hour ago, and you both feel that.
+#elseif ($w.hasTrait("SULTRY"))
+You make it a choice because everything is cleaner when it's a choice. You turn toward him a fraction more than the conversation requires. You hold a look about two seconds longer than necessary. The response is immediate — he's been watching for permission — but you've already looked away.
+
+You give him enough. Not everything. Just enough to make the next move his.
+#else
+It's not dramatic. You just stop doing the thing where you manage the distance. You let the conversation get a bit closer than work conversations get. When there's a moment of eye contact, you don't cut it off.
+
+He notices. Of course he notices.
+#end
+
+You leave with the group at the end of the evening, when numbers give you cover, and you walk to the station thinking about nothing in particular. But the walk has that quality — dry mouth, awareness of your own footsteps on the pavement — that comes from knowing you've opened something. Not closed it. Just opened it.
+
+Monday will be interesting.
+</reciprocateText>

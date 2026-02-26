@@ -1,0 +1,338 @@
+<introText>
+He's already on his second pint when you arrive.
+
+You can tell because he starts talking before you've sat down — jacket still half-on, bag not properly under the table — and he has the look of someone who's been holding this in since the Uber home and has been waiting for a human being to aim it at.
+
+"She was just — " he says, and then pauses to find the word, gesturing with his glass. "Distant. The whole time. Like she'd already decided."
+
+You get your coat off. Order something. He doesn't notice — he's already into the second paragraph.
+
+#if ($m.getPersonality() == "JERK")
+His name for her is "this woman", deployed with a specific inflection — not cruel exactly, but the kind of clinical distance men use when they've decided someone isn't worth a second thought. She'd met him on the app. She'd agreed to come out. And then, apparently, she'd spent the whole dinner being underwhelmed.
+
+"She barely asked me anything," he says. "I was doing all the work."
+
+He says this without irony. As he describes it — the restaurant he'd chosen, the thing he'd said about his job that was genuinely funny, the moment he'd suggested they get another drink and she'd checked her watch — a picture forms. Not the one he's painting. A woman on a date, deciding fairly early that this wasn't going anywhere, trying to be polite about it.
+
+He seems to think the interesting question is why she wasn't more impressed.
+
+"I just don't get it," he concludes, and takes a long pull of his pint. He's looking at you like you should be as baffled as he is.
+#elseif ($m.getPersonality() == "ROMANTIC")
+He's not angry. That's the thing you notice first — he's sad about it, which is almost worse to sit with.
+
+Her name was Caitlin. He mentions this three times without seeming to notice. She'd been funny in her messages, a bit wry, the kind of back-and-forth you don't always get. He'd been looking forward to it.
+
+"We got on," he says, and the past tense lands quietly. "At least, I thought we did. She was laughing. We talked about — I don't know, loads of stuff. And then when I suggested we go somewhere else, she said she had work in the morning."
+
+He sets his glass down.
+
+"That's probably just — she had work in the morning. Right?"
+
+The question isn't rhetorical. He's genuinely asking. He really did like her, you think, and something in the telling suggests she probably wasn't lying about work — she just didn't like him quite enough to stay, and he can't figure out where the gap appeared. He's been running the evening back through his head, trying to find the thing he said wrong.
+#elseif ($m.getPersonality() == "CARING")
+"Can I ask you something?" he says, about thirty seconds after you've sat down, which means the question has been ready since before you got here.
+
+"Of course," you say.
+
+He nods, slow. "When a date's going well — from a woman's perspective — what does that look like? Like, what are the signs?"
+
+He's not being rhetorical. He's asking because he genuinely wants to know, and because something went wrong last night and he can't locate it. His name for her is Sophie. He mentions specific things she said — a joke she made about her commute, a story about her sister. He was paying attention.
+
+"I thought it was going well," he says. "And then at the end she just — there was no second date energy. I don't know what I missed."
+
+He looks at you with an expression that is mildly unusual in your experience: a man who has decided that the explanation might involve something he did, and who actually wants to find out what that is.
+#elseif ($m.getPersonality() == "SELFISH")
+The date, as he tells it, happened entirely to him.
+
+She was fine. He doesn't dwell on her much — she doesn't quite come into focus as a person in his telling. What he dwells on is the restaurant he'd booked, which was good, and the fact that he'd dressed well, which he'd made an effort for, and the specific conversational territory he'd covered, which reflected well on him. The bottle of wine was his call and it was a good call.
+
+"She wasn't — I mean, she was nice enough," he says, with the inflection of someone describing adequate weather. "But I don't know, I felt like I was carrying it a bit. I'd set everything up and she was just... there."
+
+His complaint, you gradually understand, is not that the date went badly. It's that he didn't come away from it feeling like he'd had a very good evening. The fact that the woman was present seems mostly incidental. He's performing a post-mortem on his own performance and she's the uncooperative variable.
+
+"Do you think it was the restaurant choice?" he asks. "Maybe I should have done something more casual first."
+
+He's looking at you attentively, waiting for your read on the situation — meaning: his situation, specifically, and what he should optimise next time.
+#else
+"She was perfectly nice," he says, "I just didn't feel like she was really — there. You know? Like she was going through the motions."
+
+He looks like he might have a few blind spots about how the evening went from her side of the table, but it's hard to tell. He's being fair-ish about it, you think. He's just frustrated, and slightly baffled, and hoping that describing it out loud will make it make sense.
+
+It's his second pint. He keeps rotating the glass between his hands.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+$m.getName() is doing a post-mortem on a date that, from the sound of it, only one of them had a bad time on.
+</sceneDescriptionText>
+
+
+<listenAgreeText>
+#if ($m.getPersonality() == "JERK")
+"That's rough," you say. "Some people just decide before they've given it a chance."
+
+He points at you. "Exactly. That's exactly it."
+
+It is not exactly it, but this is not the moment to say so, and you've decided it's not your job to. He's your friend, not his date. You ask him if he wants another and he says yes, and by the time the drinks come he's moved on to something else — the weekend, work, something that happened on the way here. The date is filed under experiences that confirm his existing model of the world, and he seems lighter for having processed it.
+
+Whether that's good for him longer term is not tonight's question.
+#elseif ($m.getPersonality() == "ROMANTIC")
+"Sometimes the timing is just off," you say. "It doesn't mean you read it wrong."
+
+He exhales. "Yeah."
+
+"You can't always know from one evening."
+
+He nods, turns his glass. "Yeah, I know. I just — when it feels like something it usually is something, you know? Like, I'm not usually wrong about that."
+
+"Maybe you're not wrong," you say, which is careful enough to be true. Maybe she was just knackered. Maybe there will be a message tomorrow. He wants that to be possible, and you're not going to close the door on it tonight.
+
+He looks a bit better. Not healed, but better. He asks about your week.
+#elseif ($m.getPersonality() == "CARING")
+"I think you read it fine," you say. "These things don't always go the way you expect them to."
+
+He nods, but he's still chewing on it. "Right. I just — I want to know if I'm missing something systematic, you know? Not just the one-off bad luck. Like, is there a thing I do."
+
+"Not that I've noticed," you say.
+
+This seems to land well. He asks a few more questions — not self-pitying, just genuinely trying to understand — and you answer them honestly enough that he seems satisfied, or at least less preoccupied. He thanks you for listening, which he says in a way that sounds like he means it, and then asks if you want to get food.
+#elseif ($m.getPersonality() == "SELFISH")
+"Maybe keep it more casual next time," you say. "Lower the stakes."
+
+He latches onto this. "That's what I was thinking. Less curated. Just a drink, let it breathe."
+
+He's already moved on to optimising the approach. You watch him think through it — the preferred venues, the openers, the pacing. He doesn't ask you about your life for the rest of the evening, but that's not unusual. He seems genuinely cheered up, which was presumably the point.
+
+You finish your drink. The woman from the date continues not to exist as a person in the narrative.
+#else
+"It happens," you say. "Not every date has to go somewhere."
+
+He shrugs, nods, takes a drink. "Yeah. Yeah, I know." He seems to mean it. The conversation moves on.
+#end
+</listenAgreeText>
+
+
+<listenPushBackText>
+#if ($m.getPersonality() == "JERK")
+"Hang on," you say. "When you say she wasn't asking you anything — were you asking her things?"
+
+He looks at you like you've said something slightly strange. "I mean — yeah. I was making conversation."
+
+"What did she do, outside work?"
+
+A pause. "She was... she was doing something with design. Or maybe marketing. It came up early."
+
+"Did you ask about it?"
+
+The pause is longer this time. He's replaying something. "I talked about the agency," he says, which is not the same thing as yes, and somewhere behind his expression he seems to be registering this, dimly, before his jaw sets slightly and he says: "She was still distant. Even before that."
+
+You don't push further. You've planted the thing. Whether it grows is up to him.
+#elseif ($m.getPersonality() == "ROMANTIC")
+"I'm sure you didn't do anything wrong," you say, carefully, "but — just to check — she was laughing all night and seemed engaged, and then she said she had work in the morning. Is it possible she just... had work in the morning?"
+
+He opens his mouth, then closes it.
+
+"I mean," he says.
+
+"I'm not saying it went badly," you say. "I'm saying you might be looking for a gap that isn't there."
+
+He sits with this. You can see him running the evening through the revised frame — same events, different interpretation. He's not there yet, but the possibility is now visible to him.
+
+"You think I should message her," he says.
+
+"I think you should message her," you say.
+#elseif ($m.getPersonality() == "CARING")
+"Can I say something that might be slightly annoying?" you ask.
+
+"Yes," he says immediately, which is the right answer.
+
+"I think you were so focused on whether you were doing the right things that you might not have left much space for her to just — be there. Does that make sense?"
+
+He frowns, thinking about it properly. "Like I was performing."
+
+"Not badly. Just — a lot."
+
+He nods slowly. "Yeah. Yeah, I can see that." He looks like someone who has found the thing they were looking for, which is its own kind of relief. "That's actually really helpful."
+
+He means it. You can tell.
+#elseif ($m.getPersonality() == "SELFISH")
+"What did she do for work?" you ask.
+
+He thinks. "Something in..." He trails off. "She mentioned it. I think it was something creative?"
+
+"And what did she think about the restaurant?"
+
+Another pause. "I didn't really — we talked about other stuff."
+
+You let this sit. He picks up his glass, sets it down. He's not making the connection you're inviting him to make — that the restaurant was chosen entirely for him, that the whole evening was optimised for his comfort — but he's slightly less expansive than he was a moment ago, which is something.
+
+"Anyway," he says, and redirects to something else.
+#else
+"What did she actually say when she left?" you ask.
+
+He thinks. "She said she had a good time."
+
+"Right."
+
+"I know, I know." He rubs the back of his neck. "Maybe I'm reading into it."
+
+"Maybe," you say, which is noncommittal enough to let him work it out himself. He seems slightly less certain than he did, which probably counts as something.
+#end
+</listenPushBackText>
+
+
+<beHonestText>
+#if ($m.getPersonality() == "JERK")
+"Can I tell you what I actually think?" you say.
+
+He spreads his hands: go on.
+
+"I think she was on the date, and it wasn't what she was hoping for, and she was polite about it. I think the story you're telling — where she'd already decided, where she wasn't giving it a chance — I think that might be easier to believe than the alternative."
+
+Silence.
+
+"Which is?" he says, and his voice has gone flat.
+
+"That she gave it a chance and made a different call than you wanted her to."
+
+He looks at his pint for a moment. When he looks back up, his expression is closed in a way it wasn't before.
+
+"Fair enough," he says, in a tone that means something nearer to the opposite.
+
+You don't take it back. It needed saying, and you've said it. Whether he hears it is his business.
+#elseif ($m.getPersonality() == "ROMANTIC")
+"Honestly?" you say. "I think she liked you."
+
+He blinks. That was clearly not the direction he expected this to go.
+
+"I think she liked you, she was tired, she left at a reasonable hour because she had work, and now you're here dismantling an evening that probably went fine."
+
+He stares at you. "Then why hasn't she messaged?"
+
+"It's been," you check the time, "fourteen hours. At most."
+
+Something shifts in his face — the tension of someone who's been braced for bad news discovering the bad news might not be the bad news. "So I should just — "
+
+"Message her," you say. "Tonight. Something low-pressure."
+
+He picks up his phone. You finish your drink.
+#elseif ($m.getPersonality() == "CARING")
+"Honestly, I think you overthought it," you say. "And I think she could probably tell you were overthinking it."
+
+He doesn't look defensive. He looks like he was waiting for someone to say something concrete.
+
+"What should I have done differently?"
+
+"Less structure," you say. "You wanted it to go a certain way and she could feel that. First dates aren't auditions. They're just — you're two people in a room, and the best thing is if it feels like that."
+
+He writes this down on his phone. Literally writes it down. You're not sure whether that's endearing or proof of the problem, but he seems genuinely grateful, and asks if you want another round.
+#elseif ($m.getPersonality() == "SELFISH")
+"I'll be honest with you," you say. "It sounds like you spent most of the night talking about yourself."
+
+He looks at you. "I was being interesting."
+
+"I know. But interesting and interested aren't the same thing."
+
+He picks up his pint. Sets it down. You can see the idea working against some resistance inside him — the revision it would require, the concession it asks for.
+
+"I asked her things," he says finally.
+
+"What did she say?"
+
+A long pause. "I can't — there was a lot going on."
+
+You don't pursue it. You've said the thing. He'll either think about it or he won't, but at least you're not sitting here nodding.
+#else
+"If I'm honest," you say, "it sounds a bit like she just wasn't feeling it, and she was being polite. Which is a reasonable thing for a person to do."
+
+He makes a face. "Yeah. Yeah, probably."
+
+He's not thrilled, but he's not devastated either. The evening rearranges itself in his head into something simpler and less personal. He drains his glass and asks if you want another.
+#end
+</beHonestText>
+
+
+<askQuestionText>
+#if ($m.getPersonality() == "JERK")
+He's just finished saying — again — that she gave nothing back, that it was all one-sided, that he couldn't understand why she'd even agreed to go out.
+
+You let the silence sit for a second. Then: "What do you think she was hoping for, on the date?"
+
+He opens his mouth. Closes it.
+
+It's not a hard question. It's the same question he's been asking about himself, flipped one hundred and eighty degrees. He's been so fluent in what he wanted from the evening that the equivalent question about her has apparently not occurred to him.
+
+"I mean," he says.
+
+You wait.
+
+He rotates his glass. "Someone to — I don't know. Connect with, probably. Same as me."
+
+"Yeah," you say.
+
+The implication hangs there. You don't help it along. He sits with it for a moment, and then changes the subject, and you let him, because you've asked the question and that's enough.
+#elseif ($m.getPersonality() == "ROMANTIC")
+He's describing the exact moment she checked her watch — not accusatory, just confused, like a detail he can't make fit.
+
+You wait for him to finish, then: "Did she seem like she was having a bad time, or did she seem like she was having a good time and managing it?"
+
+He stops. Replays it.
+
+"She was laughing," he says, slowly. "She wasn't — she didn't seem uncomfortable."
+
+"Right," you say.
+
+"So maybe she just..." He trails off, arriving somewhere himself. "Maybe she was just tired."
+
+"Maybe," you say.
+
+He looks almost relieved. The version where she left because the date was fine but she was knackered is considerably easier to inhabit than the version where it went wrong and he can't find where. He picks up his phone, thinks about it, puts it back down. Probably the right instinct for tonight.
+#elseif ($m.getPersonality() == "CARING")
+He's wondering aloud whether he'd said something off — a joke that didn't land, something about an ex — and you listen until there's a natural pause, and then:
+
+"When you picture the date from her side — what do you think her evening felt like?"
+
+He doesn't answer immediately. He actually sits back and thinks about it, which is not something everyone would do.
+
+"Probably... fine?" he says. "Maybe slightly formal. I think I might have been a bit formal."
+
+"There you go," you say.
+
+He laughs, slightly at himself. "I should have just relaxed."
+
+"Probably," you say. "But you were nervous because you actually liked her, which isn't the worst reason to be an idiot."
+
+He laughs properly at that. The debrief has become something closer to a plan.
+#elseif ($m.getPersonality() == "SELFISH")
+He's been talking for a while. The woman from the date has been in the story mainly as an audience that failed to appreciate what it was watching.
+
+You wait for him to get to the end of a sentence, then: "What do you think she told her friends about it, after?"
+
+He blinks.
+
+It's not an accusation. It's just a question. But it requires him to model another person's experience, which is apparently an unusual angle. He's quiet for a moment.
+
+"I mean," he says. "Hopefully that she had a nice time."
+
+"Mm," you say.
+
+He looks at you. You look back, pleasantly. He rotates his glass.
+
+"I'm not great at this, am I," he says finally. It's not quite a question.
+
+You don't answer it. You don't need to.
+#else
+He's said his piece and wound down and is now looking at you in a way that means he's ready for the verdict.
+
+"What do you think she'd say if someone asked her how the date went?" you say.
+
+He thinks about it. "Probably... that it was fine? Nothing special."
+
+"Yeah," you say.
+
+He makes a face. "Right. Okay."
+
+He seems to have got there himself, which was the point. He flags down the bar for another round.
+#end
+</askQuestionText>

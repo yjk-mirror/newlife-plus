@@ -1,0 +1,265 @@
+<introText>
+#if ($scene.randomBoolean())##
+The two of you have been in here long enough that your cups have gone from hot to drinkable to only technically warm.
+#else##
+It's that specific late-afternoon lull — the coffee shop half-empty, the light going flat outside, neither of you in any hurry to be somewhere else.
+#end
+
+$m.getName() has been slightly elsewhere for most of it. Not rude — he's asking the right questions, laughing at the right moments — but there's something running in the background. His phone has been face-up on the table since you sat down. He's checked it twice.
+
+You've been telling him something about your week — it doesn't matter what, some mild complaint about something that annoyed you — when he says:
+
+"Yeah, Natalie was saying something similar, actually, about the — anyway, it's the same thing, isn't it."
+
+He keeps talking. He moves straight on. He does not explain who Natalie is.
+
+You don't know a Natalie. He's never mentioned a Natalie. The name sits in the middle of the sentence like it belongs there, and he's already past it, on to whatever point he was building toward, and you find yourself suddenly paying quite close attention to his face.
+
+#if ($w.hasTrait("OVERACTIVE_IMAGINATION"))##
+Your brain does the thing it does.
+
+The phone face-up. The distraction. The name dropped so naturally into the sentence that it obviously wasn't meant to land the way it did — which means he says it enough that it's stopped sounding significant to him. The specific way his eyes went just slightly sideways when he said it, not to you, not to the table, but somewhere internal.
+
+You know exactly nothing about this woman. This is not stopping you.
+#elseif ($w.hasTrait("ROMANTIC"))##
+There it is. The small involuntary thing — the way his voice changed register for just that syllable, fractionally warmer, then normalised again before he noticed it himself. He probably didn't notice it himself.
+
+You're looking at him now with slightly more attention than you were before.
+#elseif ($w.hasTrait("FLIRTY"))##
+You file it away. Not with any particular agenda — just that you are constitutionally incapable of missing a detail like that, and it would feel wasteful to let it sit there unexamined.
+
+He keeps talking. You nod in what you hope are the right places.
+#else##
+You let him finish his sentence. Then you sit with the name for a moment, turning it over.
+
+Natalie. Said easily, which means said often. And then the subject change so smooth he probably didn't notice he'd made one.
+
+You did, though.
+#end
+</introText>
+
+
+<sceneDescriptionText>
+You're having coffee with $m.getName(). He's mentioned someone called Natalie. He hasn't explained who she is.
+</sceneDescriptionText>
+
+
+<askAboutHerText>
+"Who's Natalie?"
+
+You say it directly, which is the only register you know for this kind of question. No wind-up, no cushioning. Just the question.
+
+He looks at you.
+
+#if ($m.getPersonality() == "ROMANTIC")##
+There's a beat — a very specific beat, the kind that contains a decision — and then he says: "She's — we've been seeing each other. A bit. It's early."
+
+He picks up his cup. Puts it down again without drinking from it.
+
+"I didn't mean to say her name," he says. "Or — I don't know. Maybe I did. I haven't told anyone yet."
+
+$m.addNpcLoveTiny()##
+You can tell, looking at him, that this is true. He's not embarrassed about her specifically; he's embarrassed about how much he was thinking about her while he was supposed to be here. That's a different thing.
+
+"How early?" you say.
+
+"Early," he says. And then, despite himself: "She's good though."
+
+He looks slightly mortified by his own face. You let him be mortified. It's a bit endearing.
+#elseif ($m.getPersonality() == "JERK")##
+He gives you a look — not quite annoyed, but adjacent to it. The kind of look that says: I wasn't inviting this question.
+
+$m.reduceWEnjoyTiny()##
+"Just someone I know," he says.
+
+"Right," you say.
+
+"Why, are you keeping a list?"
+
+There it is. The deflection with edges. He's smiling when he says it — it sounds like a joke — but the smile doesn't quite reach his eyes, and what it actually means is: this is not a direction we're going. He's made it about you, about your interest in his business, to put you on the defensive. It's a neat trick. You've seen it before.
+
+"Forget I asked," you say, pleasantly enough.
+
+He moves on, cheerfully. The name doesn't come up again.
+#elseif ($m.getPersonality() == "CARING")##
+He blinks. Caught.
+
+"Oh — Natalie. She's, erm." He laughs at himself. "She's someone I've been spending time with. Recently. I didn't realise I'd said her name."
+
+$m.addNpcLikingTiny()##
+He looks slightly flustered in the way that someone genuinely warm gets when their own feelings surprise them.
+
+"Is it obvious?" he says.
+
+"Little bit," you say.
+
+"Right." He's smiling now, but at the table more than at you — that specific smile of a man who's caught himself looking forward to something and doesn't quite know what to do with it yet. "She's — yeah. She's good. I like her."
+
+He says it plainly, and the plainness of it is what makes it land.
+#else##
+He shrugs, easy.
+
+"Oh — just someone I know. We've been out a couple of times."
+
+"Anyone I know?"
+
+"Doubt it." He picks up his cup. "It's nothing."
+
+$m.reduceWEnjoyTiny()##
+He delivers this with the specific confident carelessness of a man who has decided that the topic is closed. You get the impression he knows that you know it's not nothing, and that he's decided to maintain the position anyway.
+
+"Fair enough," you say.
+
+He nods, once, and changes the subject with the fluency of someone who's been waiting to do it.
+#end
+</askAboutHerText>
+
+
+<letItGoText>
+You let it pass.
+
+He keeps talking. You keep listening. The name sits in the middle of what he said and neither of you touches it.
+
+#if ($w.hasTrait("SHY"))##
+It's not your place to ask. You know that. You're curious — you'd have to be made of stone not to be curious — but asking would mean a conversation that requires a particular kind of ease, and that ease doesn't always come naturally to you. So you let the current of the conversation carry you somewhere else, and you sit with the not-knowing, which is fine. People are allowed to have things they haven't said out loud yet.
+#elseif ($w.hasTrait("AMBITIOUS"))##
+It's not strategically interesting. He's your friend, not a line item. Whatever is going on in his life, it will become relevant or it won't, and pushing on something he clearly hasn't volunteered isn't going to make either of you feel better about the afternoon.
+
+You file the name. That's all.
+#elseif ($w.hasTrait("DOWN_TO_EARTH"))##
+None of your business, is it. He'll tell you when he wants to tell you. That's how it works.
+
+You drink your coffee and he says something that makes you laugh and the afternoon continues without incident.
+#else##
+There's something quietly satisfying about choosing not to ask. He's working up to something — or not — and either way it's his timeline, not yours. You'd rather hear it properly, when he's ready, than press him into saying half of something now.
+
+You drink your coffee. He seems, if anything, marginally more relaxed.
+#end
+$m.addNpcLikingTiny()
+</letItGoText>
+
+
+<teaseHimText>
+You wait until there's a pause in what he's saying.
+
+"So," you say. "Natalie."
+
+#if ($m.getPersonality() == "ROMANTIC")##
+He goes slightly pink. Actually slightly pink. It's excellent.
+
+"I wasn't — I didn't mean to say that out loud."
+
+"And yet," you say.
+
+He puts his face in one hand for a second, which tells you everything you need to know about how this is going.
+
+$m.addNpcLikingTiny()##
+"She's just — we've been talking," he says, from behind his hand. "A lot. It's been — I don't know what it is yet."
+
+"You've mentioned her," you point out.
+
+"I mentioned her once," he says, looking up. "To you. That's the first time I've said her name out loud to anyone."
+
+He looks faintly horrified by this information. You take a sip of your coffee and decide you are going to be extremely kind to him about this, which in practice means saying nothing for about four seconds and letting him arrive at his own conclusions.
+
+"She's good," he says, finally. He sounds slightly helpless. "She's really good."
+#elseif ($m.getPersonality() == "JERK")##
+He looks at you. His expression recalibrates from whatever it was doing to something more studied.
+
+"What about her?"
+
+"Nothing," you say, with a smile. "Didn't say a word."
+
+$m.addWLikingTiny()##
+He watches you for a moment — trying to decide whether this is a thing — and then something settles in him.
+
+"You're a nightmare," he says, but he's almost smiling now. When he's not on the defensive he can be decent company, and you know how to handle him better than he'd like to admit.
+
+The subject changes, but on easier terms than it would have if you'd pushed.
+#elseif ($m.getPersonality() == "CARING")##
+He laughs — quick, embarrassed, genuine.
+
+"Was it that obvious?"
+
+"Reasonably obvious," you say.
+
+$m.addNpcLikingTiny()##
+"Right." He's grinning now, the kind of grin he does when he's been caught being himself. "Her name came out and I just — kept talking. Like that was fine."
+
+"It's fine," you say.
+
+"She's — we've been spending a lot of time together," he says, and you can see him deciding, mid-sentence, that this is okay to say. "More than I was expecting to. She suggested this thing last week and I just — said yes before I'd finished thinking about it."
+
+He's still smiling. He looks a little surprised at himself.
+#else##
+He gives you a look. Half amused, half caught.
+
+"Don't start," he says.
+
+"I haven't said anything."
+
+"You've got the face."
+
+$m.addNpcLikingTiny()##
+You do have the face. You know you have the face. He knows you know. The two of you sit with this for a moment and then he shakes his head and looks away, still almost-smiling.
+
+"She's just someone I've been seeing," he says. "Nothing definitive."
+
+"Sure," you say.
+
+He signals for another coffee. The subject changes. The name doesn't come back up, but the atmosphere is marginally warmer than it was before, and you both know why.
+#end
+</teaseHimText>
+
+
+<gentleAcknowledgeText>
+You leave a small pause after he finishes his point. Then:
+
+"She sounds interesting."
+
+You say it calmly, without weight — not a question, not an opening move. Just an observation. If he wants the door, it's open. If he doesn't, it closes cleanly.
+
+$m.addNpcLikingTiny()##
+#if ($m.getPersonality() == "ROMANTIC")##
+He looks at you — really looks — and something in him seems to land.
+
+"She is," he says, quietly. Then, as if deciding: "She's — I've been thinking about her a lot, actually. More than I'm used to thinking about anyone."
+
+He says it with the candour of a man who doesn't know how to say something small — it always comes out at the full volume it is inside him.
+
+"I don't really know what to do with it yet," he says.
+
+"You don't have to know yet," you say.
+
+He nods. He seems genuinely lighter for having said it out loud. You drink your coffee and the conversation moves on, but something has shifted: he's more present, now. Actually here.
+#elseif ($m.getPersonality() == "JERK")##
+He glances at you. You've given him nothing to push against, which means he can't do the deflection he was preparing for.
+
+"Yeah," he says, after a moment. "She's — yeah."
+
+And that is apparently all he's prepared to offer. But you can tell, from the way his jaw works once and then relaxes, that he appreciated being asked without being pressed. He'd never say that. He doesn't need to.
+
+The afternoon continues. He's marginally less elsewhere than he was before.
+#elseif ($m.getPersonality() == "CARING")##
+He blinks. Looks at his cup. Then back at you.
+
+"She is, actually," he says, and you can hear the thing opening up — the decision being made to say it rather than carry it home unsaid. "I didn't know how to bring her up without it being a whole thing."
+
+"It doesn't have to be a whole thing," you say.
+
+"No," he agrees, and seems relieved by that. "Her name's Natalie. We met at — god, it's a boring story, I'll tell you another time. But she's." He stops. Shakes his head at himself. "She's good. She makes me want to be on time, which is new."
+
+You laugh, and he laughs, and that's enough for now.
+#else##
+He pauses. Looks at you properly for the first time in about ten minutes.
+
+"She is," he says, after a moment.
+
+He leaves it at that. You leave it at that too. There's a version of this where he'd deflect, or where you'd press, but neither of you does either of those things, and the result is a small, tidy moment — him knowing that you know, you knowing that he knows you know, the name sitting between you without any weight put on it.
+
+He finishes his coffee. He seems, you notice, slightly less distracted than he has been all afternoon.
+#end
+</gentleAcknowledgeText>
+
+
+<empty></empty>
